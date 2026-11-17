@@ -54,7 +54,6 @@ Add-Type -AssemblyName System.IO.Compression, System.IO.Compression.FileSystem
 # The zips have manifest.json at their root. Entries are named with "/" as zip requires
 # (Windows PowerShell's CreateFromDirectory writes "\", which Firefox rejects).
 foreach ($pair in @(
-  @("chromium", "mdm-chromium.zip"), @("firefox", "mdm-firefox.xpi"), @("chrome-store", "mdm-chrome-store.zip"),
   @("chromium", "sdm-chromium.zip"), @("firefox", "sdm-firefox.xpi"), @("chrome-store", "sdm-chrome-store.zip")
 )) {
   $dir = (Resolve-Path (Join-Path $out $pair[0])).Path
@@ -68,4 +67,4 @@ foreach ($pair in @(
     }
   } finally { $archive.Dispose() }
 }
-"built $out (chromium, firefox, safari, chrome-store, mdm-chromium.zip, mdm-firefox.xpi, mdm-chrome-store.zip; version $version)"
+"built $out (chromium, firefox, safari, chrome-store, sdm-chromium.zip, sdm-firefox.xpi, sdm-chrome-store.zip; version $version)"

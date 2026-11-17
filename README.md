@@ -1,81 +1,59 @@
-# Mister Download Manager
+# Sedot Download Manager (SDM)
 
 <p align="center">
-  <img src="docs/images/logo.png" alt="Mister Download Manager's logo" width="160">
+  <img src="crates/app/assets/icons/app/sdm-128.png" alt="Sedot Download Manager's logo" width="128">
 </p>
 
-<h3 align="center">Downloads faster than IDM. Free, forever.</h3>
+<h3 align="center">Downloads faster than IDM. Modern, Free, and Open Source.</h3>
 
-<p align="center">🌐 <a href="https://misterdownloadmanager.com"><b>misterdownloadmanager.com</b></a>: the official website, with the downloads, help and news</p>
-
-<p align="center">
-  <a href="https://github.com/anefzaoui/misterdownloadmanager/releases/latest"><img src="https://img.shields.io/badge/Download%20for-Windows-2a78d6?style=flat-square&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiPjxwYXRoIGQ9Ik0yIDMuNWw4LjUtMS4ydjguMkgyek0xMS41IDIuMkwyMiAuOHY5LjdIMTEuNXpNMiAxMS41aDguNXY4LjJMMiAxOC41ek0xMS41IDExLjVIMjJ2OS43bC0xMC41LTEuNHoiLz48L3N2Zz4%3D" alt="Download for Windows" height="34"></a>
-  <a href="https://github.com/anefzaoui/misterdownloadmanager/releases/latest"><img src="https://img.shields.io/badge/Download%20for-macOS-2a78d6?style=flat-square&logo=apple&logoColor=white" alt="Download for macOS" height="34"></a>
-  <a href="https://github.com/anefzaoui/misterdownloadmanager/releases/latest"><img src="https://img.shields.io/badge/Download%20for-Linux-2a78d6?style=flat-square&logo=linux&logoColor=white" alt="Download for Linux" height="34"></a>
-</p>
+<p align="center">🌐 <a href="https://github.com/bestattraction/sedotdownloadmanager"><b>github.com/bestattraction/sedotdownloadmanager</b></a>: the official repository, downloads, and documentation</p>
 
 <p align="center">
-  🧩 <b>Browser extension:</b><br>
-  <a href="https://addons.mozilla.org/firefox/addon/mister-download-manager/"><img src="https://img.shields.io/badge/Add%20to-Firefox-2a78d6?style=flat-square&logo=firefoxbrowser&logoColor=white" alt="Add to Firefox" height="34"></a>
-  <a href="https://chromewebstore.google.com/detail/mister-download-manager/ejoleppdfgjdndddcjoehopknmlglojp"><img src="https://img.shields.io/badge/Add%20to-Chrome-2a78d6?style=flat-square&logo=googlechrome&logoColor=white" alt="Add to Chrome" height="34"></a><br>
-  <sub>The Chrome Web Store's is for
-  <img src="docs/images/browsers/edge.png" width="16" height="16" alt=""> Edge,
-  <img src="docs/images/browsers/brave.png" width="16" height="16" alt=""> Brave,
-  <img src="docs/images/browsers/opera.png" width="16" height="16" alt=""> Opera, Vivaldi and Helium too (<a href="docs/browser-integration.md">how</a>).</sub>
+  <a href="https://github.com/bestattraction/sedotdownloadmanager/releases/latest"><img src="https://img.shields.io/badge/Download%20for-Windows-2a78d6?style=flat-square&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiPjxwYXRoIGQ9Ik0yIDMuNWw4LjUtMS4ydjguMkgyek0xMS41IDIuMkwyMiAuOHY5LjdIMTEuNXpNMiAxMS41aDguNXY4LjJMMiAxOC41ek0xMS41IDExLjVIMjJ2OS43bC0xMC41LTEuNHoiLz48L3N2Zz4%3D" alt="Download for Windows" height="34"></a>
+  <a href="https://github.com/bestattraction/sedotdownloadmanager/releases/latest"><img src="https://img.shields.io/badge/Download%20for-macOS-2a78d6?style=flat-square&logo=apple&logoColor=white" alt="Download for macOS" height="34"></a>
+  <a href="https://github.com/bestattraction/sedotdownloadmanager/releases/latest"><img src="https://img.shields.io/badge/Download%20for-Linux-2a78d6?style=flat-square&logo=linux&logoColor=white" alt="Download for Linux" height="34"></a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/anefzaoui/misterdownloadmanager/stargazers"><img src="https://img.shields.io/github/stars/anefzaoui/misterdownloadmanager?style=social&label=Star%20MDM" alt="Star Mister Download Manager on GitHub" height="28"></a><br>
-  <sub>⭐ <b>Like it? Give it a star.</b> MDM has no ads and no marketing budget: stars are how people find it.</sub>
+  🧩 <b>Browser Extension:</b><br>
+  Available for Chromium (Chrome, Edge, Brave, Opera, Vivaldi) and Firefox. See <a href="#browser-extension-guide">Browser Extension Guide</a> below.
 </p>
 
 <p align="center">
-  Windows 10 and 11 (x64, ARM64, 32-bit) · Linux (Ubuntu, Debian, Mint, Fedora, openSUSE, Arch and more; x86-64 and ARM64) · macOS (Apple Silicon and Intel, experimental)<br>
-  86 languages · no ads, no trial, no sign-up
+  <a href="https://github.com/bestattraction/sedotdownloadmanager/stargazers"><img src="https://img.shields.io/github/stars/bestattraction/sedotdownloadmanager?style=social&label=Star%20SDM" alt="Star Sedot Download Manager on GitHub" height="28"></a><br>
+  <sub>⭐ <b>Like it? Give it a star.</b> SDM has no ads and no marketing budget: stars help others find it.</sub>
+</p>
+
+<p align="center">
+  Windows 10 and 11 (x64, ARM64, 32-bit) · Linux (Ubuntu, Debian, Mint, Fedora, Arch) · macOS<br>
+  86 languages · modern readable typography (Inter & Segoe UI) · no ads, no trial, no sign-up
 </p>
 
 <table align="center">
   <tr>
     <td align="center" width="210"><img src="docs/images/icons/faster.png" width="76" alt=""><h1>5×</h1><b>Faster</b><br><sub>a 1 GB file: 1 s instead of 5.5 s</sub></td>
     <td align="center" width="210"><img src="docs/images/icons/languages.png" width="76" alt=""><h1>+46</h1><b>More languages</b><br><sub>86 instead of IDM's 40</sub></td>
-    <td align="center" width="210"><img src="docs/images/icons/free.png" width="76" alt=""><h1>100%</h1><b>Cheaper (free!)</b><br><sub>no licence, no trial, ever</sub></td>
-    <td align="center" width="210"><img src="docs/images/icons/torrent.png" width="76" alt=""><h1>Torrent</h1><b>Supported fully</b><br><sub>magnet links, .torrent files, seeding</sub></td>
+    <td align="center" width="210"><img src="docs/images/icons/free.png" width="76" alt=""><h1>100%</h1><b>Free & Open Source</b><br><sub>no licence, no trial, ever</sub></td>
+    <td align="center" width="210"><img src="docs/images/icons/torrent.png" width="76" alt=""><h1>Torrent</h1><b>Supported fully</b><br><sub>magnet links, .torrent files, tray options</sub></td>
   </tr>
 </table>
 
 <p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/images/main-dark.webp">
-    <img src="docs/images/main-light.webp" alt="Mister Download Manager's main window: categories, toolbar and a list of downloads" width="920">
-  </picture>
+  <a href="https://github.com/bestattraction/sedotdownloadmanager/releases/latest"><img src="https://img.shields.io/github/v/release/bestattraction/sedotdownloadmanager?logo=github" alt="Latest release"></a>
+  <a href="https://github.com/bestattraction/sedotdownloadmanager/releases"><img src="https://img.shields.io/github/downloads/bestattraction/sedotdownloadmanager/total?logo=github" alt="Downloads"></a>
+  <a href="https://github.com/bestattraction/sedotdownloadmanager/stargazers"><img src="https://img.shields.io/github/stars/bestattraction/sedotdownloadmanager?logo=github" alt="GitHub stars"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/bestattraction/sedotdownloadmanager" alt="GPL-3.0 license"></a>
 </p>
 
-<p align="center">
-  <a href="https://github.com/anefzaoui/misterdownloadmanager/releases/latest"><img src="https://img.shields.io/github/v/release/anefzaoui/misterdownloadmanager?logo=github" alt="Latest release"></a>
-  <a href="https://github.com/anefzaoui/misterdownloadmanager/releases"><img src="https://img.shields.io/github/downloads/anefzaoui/misterdownloadmanager/total?logo=github" alt="Downloads"></a>
-  <a href="https://github.com/anefzaoui/misterdownloadmanager/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/anefzaoui/misterdownloadmanager/ci.yml?logo=github&label=ci" alt="CI"></a>
-  <a href="https://github.com/anefzaoui/misterdownloadmanager/stargazers"><img src="https://img.shields.io/github/stars/anefzaoui/misterdownloadmanager?logo=github" alt="GitHub stars"></a>
-  <a href="https://addons.mozilla.org/firefox/addon/mister-download-manager/"><img src="https://img.shields.io/amo/v/mister-download-manager?logo=firefoxbrowser&label=Firefox%20add-on" alt="Firefox add-on"></a>
-  <a href="https://chromewebstore.google.com/detail/mister-download-manager/ejoleppdfgjdndddcjoehopknmlglojp"><img src="https://img.shields.io/chrome-web-store/v/ejoleppdfgjdndddcjoehopknmlglojp?logo=googlechrome&label=Chrome%20Web%20Store" alt="Chrome Web Store"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/github/license/anefzaoui/misterdownloadmanager" alt="GPL-3.0 license"></a>
-</p>
-
-| 🚀 [Download](#download) | ⚡ [Why switch](#why-switch-from-idm) | 🖼️ [Screenshots](#screenshots) | ✨ [Getting started](docs/getting-started.md) | 📜 [Help and tutorials](docs/README.md) |
-| --- | --- | --- | --- | --- |
+| 🚀 [Download](#download) | 🧩 [Extension Guide](#browser-extension-guide) | ⚡ [Why switch](#why-switch-from-idm) | 📜 [Help & Docs](docs/README.md) |
+| --- | --- | --- | --- |
 
 ## Why switch from IDM?
 
-**Same window you know. Your downloads finish sooner. And it costs nothing.**
-
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/images/races-dark.svg">
-    <img src="docs/images/races-light.svg" alt="Three races. A big 1 GB file: Mister Download Manager 1 second, IDM 5.5 seconds, 5 times faster. A small file: instantly versus 3.1 seconds, over 100 times faster. A shaky connection: 1.6 seconds versus 5.4 seconds, 3 times faster." width="880">
-  </picture>
-</p>
+**Same workflow you know. Your downloads finish sooner. And it costs nothing.**
 
 <!-- compare:start -->
-| | Mister Download Manager | IDM 6.42 |
+| | Sedot Download Manager (SDM) | IDM 6.42 |
 | --- | --- | --- |
 | Download a big file (1 GB) | **1 second** | 5.5 seconds |
 | Download a small file | **instantly** | 3.1 seconds |
@@ -83,88 +61,89 @@
 | Wait before a download starts | **instantly** | 3.1 seconds |
 | Price | **Free, forever** | Paid, after a 30-day trial |
 | Ads, nag screens, sign-up | **None** | Registration needed |
-| Open source | **Yes** (GPL) | No |
+| Open source | **Yes** (GPL-3.0) | No |
 <!-- compare:end -->
 
-Nothing new to learn: the toolbar, the categories, the list of downloads, the progress window and
-the browser button are where you expect them. Measured on the same computer, same files, both
-programs at their default settings ([how we measured](#the-benchmark-in-detail)).
+Nothing new to learn: the toolbar, categories, list of downloads, progress window, and video download hover buttons are exactly where you expect them.
+
+---
+
+## Browser Extension Guide
+
+The **Sedot Download Manager Extension** integrates seamlessly with your web browser to automatically capture downloads, torrent links, and video streams.
+
+### 1. Installation
+
+#### For Chromium Browsers (Google Chrome, Microsoft Edge, Brave, Opera, Vivaldi):
+1. Download `sdm-chromium.zip` from [Releases](https://github.com/bestattraction/sedotdownloadmanager/releases) (or find it in your SDM installation folder under `extension/chromium`).
+2. Unzip the file to a folder of your choice.
+3. Open your browser and navigate to the Extensions management page:
+   - Chrome / Brave: `chrome://extensions`
+   - Edge: `edge://extensions`
+   - Opera: `opera://extensions`
+4. Enable **Developer mode** using the toggle in the upper-right corner.
+5. Click **Load unpacked** and select the unzipped `chromium` folder.
+6. Click the Extensions (puzzle piece) icon in your browser toolbar and pin **Sedot Download Manager**.
+
+#### For Mozilla Firefox:
+1. Download `sdm-firefox.xpi` from [Releases](https://github.com/bestattraction/sedotdownloadmanager/releases).
+2. Open Firefox and go to `about:debugging#/runtime/this-firefox`.
+3. Click **Load Temporary Add-on...** and choose `manifest.json` from the unpacked folder or select `sdm-firefox.xpi`.
+
+---
+
+### 2. Key Extension Features & How to Use
+
+#### 🎥 Video Download Hover Button
+- **Hover to Reveal**: When you hover your mouse over a video player on supported platforms (YouTube, Vimeo, TikTok, Instagram, Twitter/X, Facebook, and standard HTML5 web players), a sleek "Download video" badge appears at the top-right corner outside the video frame.
+- **Auto-Hide in Fullscreen**: Whenever you enter fullscreen mode, the download button automatically hides so your video viewing is completely uninterrupted.
+- **Draggable Position**: Prefer the button in another corner? Simply click and drag the handle of the button to any position on your screen. SDM remembers your preferred position across all websites.
+- **Quality & Audio Selector**: Click the dropdown arrow on the button to choose from available video resolutions (e.g., 4K, 1440p, 1080p, 720p, 480p) or download audio-only (MP3 / M4A).
+- **Categorization**: When capturing a video, you can specify the target category (Video, Music, General) directly from the dialog.
+
+#### ⚡ Intercepting Downloads & Alt + Click
+- **Automatic Interception**: Clicking file download links (ZIP, RAR, EXE, ISO, PDF, MP4, etc.) automatically routes the transfer to SDM for multi-segmented acceleration.
+- **Alt + Click Bypass**: Hold the `Alt` key while clicking a download link to send it directly to SDM.
+
+#### 🖱️ Context Menus
+- **Download Link**: Right-click any link, image, or audio/video to select **Download with Sedot Download Manager**.
+- **Download All Links**: Right-click anywhere on a webpage and choose **Download all links with SDM** to batch grab multiple files, images, or media items in a single pass.
+
+#### 🧲 Torrent & Magnet Links
+- Clicking `magnet:` links or `.torrent` files sends them directly to SDM's built-in BitTorrent engine without requiring external torrent clients.
+
+---
 
 ## Download
 
-<p align="center">
-  <a href="https://github.com/anefzaoui/misterdownloadmanager/releases/latest"><img src="https://img.shields.io/badge/Download%20for-Windows-2a78d6?style=flat-square&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiPjxwYXRoIGQ9Ik0yIDMuNWw4LjUtMS4ydjguMkgyek0xMS41IDIuMkwyMiAuOHY5LjdIMTEuNXpNMiAxMS41aDguNXY4LjJMMiAxOC41ek0xMS41IDExLjVIMjJ2OS43bC0xMC41LTEuNHoiLz48L3N2Zz4%3D" alt="Download for Windows" height="34"></a>
-  <a href="https://github.com/anefzaoui/misterdownloadmanager/releases/latest"><img src="https://img.shields.io/badge/Download%20for-macOS-2a78d6?style=flat-square&logo=apple&logoColor=white" alt="Download for macOS" height="34"></a>
-  <a href="https://github.com/anefzaoui/misterdownloadmanager/releases/latest"><img src="https://img.shields.io/badge/Download%20for-Linux-2a78d6?style=flat-square&logo=linux&logoColor=white" alt="Download for Linux" height="34"></a>
-</p>
+On the [Releases page](https://github.com/bestattraction/sedotdownloadmanager/releases/latest), pick the appropriate package for your system:
 
-On the [download page](https://github.com/anefzaoui/misterdownloadmanager/releases/latest), pick
-one:
-
-| File | Choose it when |
+| File | Description |
 | --- | --- |
-| **`...-setup.exe`** | **Not sure? Take this one.** It installs MDM, connects it to your browser and asks your language. |
-| `...-portable.zip` | You want MDM on a USB stick or without installing: unzip and run. Everything stays in its folder. |
-| `...-x64.zip` | You want the plain programs without an installer. |
-| `...-setup-arm64.exe`, `...-portable-arm64.zip`, `...-arm64.zip` | The same three for **Windows on ARM** (Snapdragon and other ARM PCs). |
-| `...-setup-x86.exe`, `...-portable-x86.zip`, `...-x86.zip` | The same three for **32-bit Windows 10**. There, choose your own ffmpeg in **Helpers** for the best video qualities: none is built for it that MDM can check. |
-| `...-extension-chromium.zip` | You want to add the browser extension by hand (Chrome, Edge, Brave, Opera, Vivaldi). From the stores is easier: [Add to Chrome](https://chromewebstore.google.com/detail/mister-download-manager/ejoleppdfgjdndddcjoehopknmlglojp), [Add to Firefox](https://addons.mozilla.org/firefox/addon/mister-download-manager/). |
-
-The ARM64 and 32-bit files come with every release after 0.5.2; **Check for updates** keeps each
-copy on its own processor's files.
+| **`SedotDownloadManager-...-setup.exe`** | **Recommended for Windows.** Installs SDM, configures browser native messaging host, and sets up shortcuts. |
+| `SedotDownloadManager-...-portable.zip` | Portable edition for USB drives or running without installation. All data is kept in a local `data` folder. |
+| `SedotDownloadManager-...-x64.zip` | Standalone binaries archive without installer. |
+| `sdm-chromium.zip` | Extension package for Chrome, Edge, Brave, and other Chromium browsers. |
+| `sdm-firefox.xpi` | Extension package for Mozilla Firefox. |
 
 > [!NOTE]
-> Windows may say *"Windows protected your PC"* the first time, because this early version isn't
-> code-signed yet. Click **More info**, then **Run anyway**.
+> If Windows displays *"Windows protected your PC"* on first launch, click **More info**, then **Run anyway** (as community open-source builds are not yet EV code-signed).
 
-Or with [WinGet](https://learn.microsoft.com/windows/package-manager/winget/), Windows' package
-manager: in a terminal, the first line installs MDM and the second updates it.
+---
 
-```
-winget install AhmedNefzaoui.MisterDownloadManager
-winget upgrade AhmedNefzaoui.MisterDownloadManager
-```
+## Helper Modules (yt-dlp & ffmpeg)
 
-### On Linux
+For video extraction and merging of high-resolution video streams:
+- SDM automatically checks for missing or updated helper modules every 2 weeks.
+- You can manually check for module updates at any time by navigating to **Help → Check for tools updates (yt-dlp, ffmpeg)...**.
 
-MDM runs on Linux too, tested on Ubuntu 24.04, Debian 12 and Fedora with GNOME, KDE Plasma, Xfce
-and Cinnamon, on X11 and in Wayland sessions: the tray, dark mode, browser integration (Ubuntu's
-Snap Firefox included) and the packages' installs. Not there yet: screen readers (Orca) don't
-read its windows, and Flatpak browsers can't reach it ([more](docs/getting-started.md#on-linux)).
-Up to version 0.2.4, the files' names end in `-experimental`.
+---
 
-| File | For |
-| --- | --- |
-| `...-linux-x86_64.deb` | Ubuntu, Debian, Mint, Pop!_OS: `sudo apt install ./<file>.deb`. |
-| `...-linux-x86_64.rpm` | Fedora, openSUSE, RHEL: `sudo dnf install ./<file>.rpm`. |
-| `...-linux-x86_64.AppImage` | Any Linux. Make it executable and run it. |
-| `...-linux-x86_64.tar.gz` | The plain programs, for any distribution. |
-| `...-linux-arm64.*` | The same four for 64-bit ARM computers, from the release after 0.5.2 (built and tested on GitHub's ARM machines). |
+## Licence & Attribution
 
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/images/main-linux-dark.webp">
-    <img src="docs/images/main-linux.webp" alt="Mister Download Manager's main window on Ubuntu's GNOME desktop" width="620">
-  </picture>
-</p>
+Sedot Download Manager is free software licensed under the [GNU General Public License, version 3 (GPL-3.0)](LICENSE) or later.
 
-### On a Mac? Be the first to try it
-
-Fresh builds for **macOS** (Apple Silicon and Intel) are on the same download page, marked
-`-experimental`: we haven't tried them on a Mac ourselves yet. Give them a go and
-[tell us how it went](https://github.com/anefzaoui/misterdownloadmanager/issues/new/choose); you'll
-help make them as solid as the Windows and Linux versions.
-
-| File | For |
-| --- | --- |
-| `...-macos-arm64-experimental.dmg` | Mac with Apple Silicon (M1 or later). Open it and drag MDM to Applications. The first time, right-click the app and choose **Open**. |
-| `...-macos-x86_64-experimental.dmg` | Mac with an Intel processor, the same way. |
-
-## 🌍 In your language
-
-Every language Windows 11 offers, **86 in all**. MDM asks on its first start, and you can change
-it any time in **View → Language**. Arabic, Hebrew, Persian, Urdu and Uyghur get a fully mirrored,
-right-to-left window.
+Built with Rust, egui, librqbit, yt-dlp, and ffmpeg. Bundled icons and artwork retain their respective licenses, detailed in [ATTRIBUTION.md](ATTRIBUTION.md).
 
 <!-- languages:start -->
 <p align="center">
@@ -454,72 +433,25 @@ Linux, and some corners are still "good enough for now".
 - Not yet: code signing. The macOS builds are untested; on Linux, screen readers (Orca) and
   Flatpak browsers aren't supported yet.
 
-Bug reports are welcome in
-[Issues](https://github.com/anefzaoui/misterdownloadmanager/issues/new/choose): **Help → Report a problem**
-in the app fills in your version and system. Ideas are welcome in
-[Discussions](https://github.com/anefzaoui/misterdownloadmanager/discussions/categories/ideas). Pull requests are accepted under the same licence: start with [CONTRIBUTING.md](CONTRIBUTING.md).
-
-## Made possible by these amazing humans
-
-Everyone who sent a pull request, opened an issue or joined a conversation here: thank you. People
-with pull requests first, then issues, then comments; [the website](https://misterdownloadmanager.com/contributors.html)
-shows what each one did.
-
-<!-- contributors:start (python tools/contributors.py readme) -->
-<p>
-<a href="https://github.com/AzureKnigh7" title="AzureKnigh7"><img src="art/contributors/azureknigh7.png" width="48" height="48" alt="AzureKnigh7"></a>
-<a href="https://github.com/specailm5" title="specailm5"><img src="art/contributors/specailm5.png" width="48" height="48" alt="specailm5"></a>
-<a href="https://github.com/osunday" title="osunday"><img src="art/contributors/osunday.png" width="48" height="48" alt="osunday"></a>
-<a href="https://github.com/SwiftyPop" title="SwiftyPop"><img src="art/contributors/swiftypop.png" width="48" height="48" alt="SwiftyPop"></a>
-<a href="https://github.com/mfat" title="mfat"><img src="art/contributors/mfat.png" width="48" height="48" alt="mfat"></a>
-<a href="https://github.com/praveenkumar2K06" title="praveenkumar2K06"><img src="art/contributors/praveenkumar2k06.png" width="48" height="48" alt="praveenkumar2K06"></a>
-<a href="https://github.com/shreeramncity" title="shreeramncity"><img src="art/contributors/shreeramncity.png" width="48" height="48" alt="shreeramncity"></a>
-<a href="https://github.com/AwesomeIronman" title="AwesomeIronman"><img src="art/contributors/awesomeironman.png" width="48" height="48" alt="AwesomeIronman"></a>
-<a href="https://github.com/Maldo-0750" title="Maldo-0750"><img src="art/contributors/maldo-0750.png" width="48" height="48" alt="Maldo-0750"></a>
-<a href="https://github.com/Twig6943" title="Twig6943"><img src="art/contributors/twig6943.png" width="48" height="48" alt="Twig6943"></a>
-<a href="https://github.com/ADIxxDEV" title="ADIxxDEV"><img src="art/contributors/adixxdev.png" width="48" height="48" alt="ADIxxDEV"></a>
-<a href="https://github.com/crse" title="crse"><img src="art/contributors/crse.png" width="48" height="48" alt="crse"></a>
-<a href="https://github.com/dhrubo11" title="dhrubo11"><img src="art/contributors/dhrubo11.png" width="48" height="48" alt="dhrubo11"></a>
-<a href="https://github.com/Drigva" title="Drigva"><img src="art/contributors/drigva.png" width="48" height="48" alt="Drigva"></a>
-<a href="https://github.com/EnderDobra" title="EnderDobra"><img src="art/contributors/enderdobra.png" width="48" height="48" alt="EnderDobra"></a>
-<a href="https://github.com/farjanatech" title="farjanatech"><img src="art/contributors/farjanatech.png" width="48" height="48" alt="farjanatech"></a>
-<a href="https://github.com/gowzee" title="gowzee"><img src="art/contributors/gowzee.png" width="48" height="48" alt="gowzee"></a>
-<a href="https://github.com/husnainahmedrana" title="husnainahmedrana"><img src="art/contributors/husnainahmedrana.png" width="48" height="48" alt="husnainahmedrana"></a>
-<a href="https://github.com/justnxhom" title="justnxhom"><img src="art/contributors/justnxhom.png" width="48" height="48" alt="justnxhom"></a>
-<a href="https://github.com/mayankmohan1992" title="mayankmohan1992"><img src="art/contributors/mayankmohan1992.png" width="48" height="48" alt="mayankmohan1992"></a>
-<a href="https://github.com/Mpsp4321" title="Mpsp4321"><img src="art/contributors/mpsp4321.png" width="48" height="48" alt="Mpsp4321"></a>
-<a href="https://github.com/sadatdaniel" title="sadatdaniel"><img src="art/contributors/sadatdaniel.png" width="48" height="48" alt="sadatdaniel"></a>
-<a href="https://github.com/SHURmanizer" title="SHURmanizer"><img src="art/contributors/shurmanizer.png" width="48" height="48" alt="SHURmanizer"></a>
-<a href="https://github.com/Uyaii" title="Uyaii"><img src="art/contributors/uyaii.png" width="48" height="48" alt="Uyaii"></a>
-<a href="https://github.com/Volcanify" title="Volcanify"><img src="art/contributors/volcanify.png" width="48" height="48" alt="Volcanify"></a>
-<a href="https://github.com/Zekidt" title="Zekidt"><img src="art/contributors/zekidt.png" width="48" height="48" alt="Zekidt"></a>
-<a href="https://github.com/Stark-0505" title="Stark-0505"><img src="art/contributors/stark-0505.png" width="48" height="48" alt="Stark-0505"></a>
-<a href="https://github.com/dr-strange15" title="dr-strange15"><img src="art/contributors/dr-strange15.png" width="48" height="48" alt="dr-strange15"></a>
-</p>
-<!-- contributors:end -->
-
-## ⭐ Star history
-
-If MDM saves you time, a star is the quickest way to say so, and it helps the next person find
-a free download manager. [Star it on GitHub](https://github.com/anefzaoui/misterdownloadmanager/stargazers).
-
-<a href="https://star-history.com/#anefzaoui/misterdownloadmanager&Date">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=anefzaoui/misterdownloadmanager&type=Date&theme=dark">
-    <img src="https://api.star-history.com/svg?repos=anefzaoui/misterdownloadmanager&type=Date" alt="Mister Download Manager's GitHub stars over time" width="600">
-  </picture>
-</a>
-
-## Support MDM
-
-MDM is free and always will be. If it saves you time, you can support its creator on
-[GitHub Sponsors](https://github.com/sponsors/anefzaoui). It's optional: nothing in the app
-changes or unlocks, and there is no paid edition.
+Bug reports and feature requests are welcome in
+[Issues](https://github.com/bestattraction/sedotdownloadmanager/issues).
 
 ## Licence and credits
 
-Copyright (c) 2026 Ahmed Nefzaoui. Mister Download Manager is free software under the
+Sedot Download Manager is free software under the
 [GNU General Public License, version 3](LICENSE) or (at your option) any later version.
+
+Built on [egui](https://github.com/emilk/egui) through
+[storytold's forks](https://github.com/storytold/egui) and
+[storytold/craft-libs](https://github.com/storytold/craft-libs) (MIT OR Apache-2.0),
+[librqbit](https://github.com/ikatson/rqbit) (Apache-2.0),
+[zip](https://github.com/zip-rs/zip2) (MIT), and [yt-dlp](https://github.com/yt-dlp/yt-dlp)
+(Unlicense, run as a separate program; as are 7-Zip for 7z and RAR archives, and
+[HatchZip](https://github.com/xevrion/hatchzip) (MIT OR Apache-2.0) when installed). Flags from
+[flag-icons](https://github.com/lipis/flag-icons) (MIT); pictures drawn with
+[rough.js](https://roughjs.com/) (MIT) in [Patrick Hand](https://fonts.google.com/specimen/Patrick+Hand)
+(SIL OFL) and [Vega-Lite](https://vega.github.io/vega-lite/) (BSD-3). Bundled icons and artwork
+keep their own licences, listed in [ATTRIBUTION.md](ATTRIBUTION.md).
 
 Built on [egui](https://github.com/emilk/egui) through
 [storytold's forks](https://github.com/storytold/egui) and

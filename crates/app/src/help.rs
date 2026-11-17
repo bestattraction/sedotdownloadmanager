@@ -12,11 +12,10 @@ use crate::dialogs::{Outcome, window};
 use crate::winui::{self, ButtonKind, r};
 
 /// The repository: problem reports, releases, source, licences.
-pub const REPO: &str = "https://github.com/anefzaoui/misterdownloadmanager";
-/// The creator's GitHub Sponsors page: Help → Support MDM, About's last line. The website, the
-/// extension's popup and the repository's Sponsor button (.github/FUNDING.yml) point there too.
-pub const SPONSORS: &str = "https://github.com/sponsors/anefzaoui";
-const LATEST: &str = "https://api.github.com/repos/anefzaoui/misterdownloadmanager/releases/latest";
+pub const REPO: &str = "https://github.com/bestattraction/sedotdownloadmanager";
+/// Project home page and repository.
+pub const SPONSORS: &str = "https://github.com/bestattraction/sedotdownloadmanager";
+const LATEST: &str = "https://api.github.com/repos/bestattraction/sedotdownloadmanager/releases/latest";
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");
 pub const COMMIT: &str = env!("MDM_COMMIT");
 /// While MDM runs, the automatic check comes again this often (it also checks at every start).
@@ -72,7 +71,11 @@ pub fn page_url(doc: &str, lang: &str) -> String {
 /// person at the browser.
 pub fn open_page(doc: &str) {
     if !crate::offscreen() {
-        crate::launch::open(page_url(doc, crate::i18n::code()));
+        if doc.is_empty() {
+            crate::launch::open(REPO);
+        } else {
+            crate::launch::open(page_url(doc, crate::i18n::code()));
+        }
     }
 }
 
@@ -806,18 +809,6 @@ impl About {
                     "credits",
                 ) {
                     crate::launch::open(format!("{REPO}/blob/main/ATTRIBUTION.md"));
-                }
-                // Its own row under them: the creator's Sponsors page (Help → Support MDM).
-                y += 22.0;
-                if winui::link(
-                    ui,
-                    &p,
-                    o.x + 80.0,
-                    y,
-                    "Support MDM on GitHub Sponsors",
-                    "support",
-                ) {
-                    support();
                 }
                 // The last row ends above OK (at 204 when it fits as planned).
                 crate::dialogs::grow_px(ui.ctx(), "about", y + 12.0 - (o.y + 194.0));

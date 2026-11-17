@@ -21,7 +21,11 @@ $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 $dist = Join-Path $root "target\dist"
 $target = @{ x64 = "x86_64-pc-windows-msvc"; arm64 = "aarch64-pc-windows-msvc"; x86 = "i686-pc-windows-msvc" }[$Arch]
-$bin = Join-Path $root "target\$target\release"
+$bin = if (Test-Path (Join-Path $root "target\$target\release\sdm.exe")) {
+  Join-Path $root "target\$target\release"
+} else {
+  Join-Path $root "target\release"
+}
 # The files' names: x64's as before, the others with their processor.
 $suffix = if ($Arch -eq "x64") { "" } else { "-$Arch" }
 
@@ -72,13 +76,13 @@ function New-Zip([string]$name, [bool]$portable) {
   }
   New-Item -ItemType Directory -Force (Join-Path $stage "extension") | Out-Null
   Copy-Item (Join-Path $root "target\extension\chromium") (Join-Path $stage "extension\chromium") -Recurse
-  Copy-Item (Join-Path $root "target\extension\mdm-firefox.xpi") (Join-Path $stage "extension")
+  Copy-Item (Join-Path $root "target\extension\sdm-firefox.xpi") (Join-Path $stage "extension")
   Copy-Item (Join-Path $root "LICENSE") (Join-Path $stage "LICENSE.txt")
   Copy-Item (Join-Path $root "ATTRIBUTION.md") (Join-Path $stage "ATTRIBUTION.txt")
   if ($portable) {
     New-Item -ItemType Directory -Force (Join-Path $stage "data") | Out-Null
     Set-Content -Encoding utf8 (Join-Path $stage "data\README.txt") @"
-This folder makes Mister Download Manager portable: the download list and settings are kept
+This folder makes Sedot Download Manager portable: the download list and settings are kept
 here instead of in your profile, and nothing is written to the registry. Delete the folder to
 use the profile instead. Browser integration needs the installer.
 "@
@@ -108,11 +112,11 @@ use the profile instead. Browser integration needs the installer.
   }
 }
 Add-Type -AssemblyName System.IO.Compression, System.IO.Compression.FileSystem
-New-Zip "MisterDownloadManager-$version-portable$suffix" $true
-New-Zip "MisterDownloadManager-$version-$Arch" $false
+New-Zip "SedotDownloadManager-$version-portable$suffix" $true
+New-Zip "SedotDownloadManager-$version-$Arch" $false
 Remove-Item -LiteralPath (Join-Path $dist "stage") -Recurse -Force
 
-$files = Get-ChildItem $dist -File | Where-Object { $_.Name -like "MisterDownloadManager-$version-*" }
+$files = Get-ChildItem $dist -File | Where-Object { $_.Name -like "SedotDownloadManager-$version-*" }
 $files | ForEach-Object { "{0}  {1}" -f (Get-FileHash $_.FullName -Algorithm SHA256).Hash.ToLower(), $_.Name } |
   Set-Content -Encoding ascii (Join-Path $dist "SHA256SUMS.txt")
 $files | ForEach-Object { "{0}  {1:N1} MB" -f $_.Name, ($_.Length / 1MB) }

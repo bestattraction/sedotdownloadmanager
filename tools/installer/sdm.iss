@@ -22,7 +22,11 @@
   #define Arch "x64"
 #endif
 #ifndef Bin
-  #define Bin Root + "\target\x86_64-pc-windows-msvc\release"
+  #if FileExists(Root + "\target\release\sdm.exe")
+    #define Bin Root + "\target\release"
+  #else
+    #define Bin Root + "\target\x86_64-pc-windows-msvc\release"
+  #endif
 #endif
 
 [Setup]
@@ -31,11 +35,11 @@ AppId={{667DB4D8-32C2-4487-A0E5-5825BF29778C}
 AppName={#AppName}
 AppVersion={#AppVersion}
 AppVerName={#AppName} {#AppVersion}
-AppPublisher=Ahmed Nefzaoui
-AppPublisherURL=https://github.com/anefzaoui/misterdownloadmanager
-AppSupportURL=https://github.com/anefzaoui/misterdownloadmanager/issues
-AppUpdatesURL=https://github.com/anefzaoui/misterdownloadmanager/releases
-AppCopyright=Copyright (C) 2026 Ahmed Nefzaoui
+AppPublisher=Sedot Download Manager
+AppPublisherURL=https://github.com/bestattraction/sedotdownloadmanager
+AppSupportURL=https://github.com/bestattraction/sedotdownloadmanager/issues
+AppUpdatesURL=https://github.com/bestattraction/sedotdownloadmanager/releases
+AppCopyright=Copyright (C) 2026 Sedot Download Manager
 DefaultDirName={autopf}\{#AppName}
 DisableProgramGroupPage=yes
 PrivilegesRequired=lowest
@@ -65,9 +69,9 @@ UninstallDisplayName={#AppName}
 OutputDir={#Root}\target\dist
 ; x64's keeps the name it had before there were others: MDM's Update now looks for it by name.
 #if Arch == "x64"
-OutputBaseFilename=MisterDownloadManager-{#AppVersion}-setup
+OutputBaseFilename=SedotDownloadManager-{#AppVersion}-setup
 #else
-OutputBaseFilename=MisterDownloadManager-{#AppVersion}-setup-{#Arch}
+OutputBaseFilename=SedotDownloadManager-{#AppVersion}-setup-{#Arch}
 #endif
 ; A 64 MB dictionary (#25): an 8 MB one (lzma2/max) only finds what repeats close by in the
 ; solid archive. A few MB smaller; building needs about 750 MB of memory, installing 64 MB.
@@ -79,7 +83,7 @@ ChangesAssociations=yes
 ; fallback for anything else holding the files (a browser running the host).
 CloseApplications=yes
 VersionInfoVersion={#AppVersion}
-VersionInfoCompany=Ahmed Nefzaoui
+VersionInfoCompany=Sedot Download Manager
 VersionInfoDescription={#AppName} setup
 VersionInfoProductName={#AppName}
 #ifdef Sign
@@ -106,7 +110,7 @@ lang_en.KeepData=Also delete your download list and settings?%n%nYour downloaded
 ; languages show Setup's own message, that this Windows isn't supported.
 #if Arch == "x86"
 [Messages]
-lang_en.WindowsVersionNotSupported=This is the setup for 32-bit Windows, and this computer runs 64-bit Windows. Download MisterDownloadManager-{#AppVersion}-setup.exe instead (or MisterDownloadManager-{#AppVersion}-setup-arm64.exe on a Windows on ARM PC).
+lang_en.WindowsVersionNotSupported=This is the setup for 32-bit Windows, and this computer runs 64-bit Windows. Download SedotDownloadManager-{#AppVersion}-setup.exe instead (or SedotDownloadManager-{#AppVersion}-setup-arm64.exe on a Windows on ARM PC).
 #endif
 
 [Tasks]
@@ -123,7 +127,7 @@ Source: "{#Bin}\misterdownloadmanager-mcp.exe"; DestDir: "{app}"; Flags: ignorev
 ; The extension, for "Load unpacked" (Chromium) and about:debugging (Firefox) until it is in
 ; the stores.
 Source: "{#Root}\target\extension\chromium\*"; DestDir: "{app}\extension\chromium"; Flags: ignoreversion recursesubdirs
-Source: "{#Root}\target\extension\mdm-firefox.xpi"; DestDir: "{app}\extension"; Flags: ignoreversion
+Source: "{#Root}\target\extension\sdm-firefox.xpi"; DestDir: "{app}\extension"; Flags: ignoreversion
 Source: "{#Root}\LICENSE"; DestDir: "{app}"; DestName: "LICENSE.txt"; Flags: ignoreversion
 Source: "{#Root}\ATTRIBUTION.md"; DestDir: "{app}"; DestName: "ATTRIBUTION.txt"; Flags: ignoreversion
 

@@ -311,8 +311,6 @@ enum Cmd {
     CheckHelperUpdates,
     About,
     TellFriend,
-    /// Help → Support MDM: the creator's GitHub Sponsors page in the browser.
-    Support,
     Exit,
     Stop,
     Remove,
@@ -7693,7 +7691,6 @@ impl App {
                 }
             }
             Cmd::About => self.about = Some(crate::help::About),
-            Cmd::Support => crate::help::support(),
             Cmd::TellFriend => {
                 if self.tell_friend.is_none() {
                     self.tell_friend = Some(crate::help::TellFriend::new());
@@ -8428,8 +8425,6 @@ impl App {
                 Sep,
                 I("&About Sedot Download Manager", Cmd::About, true, false),
                 I("Tell a &friend", Cmd::TellFriend, true, false),
-                // MDM's, not IDM's: the creator's GitHub Sponsors page, asked for only.
-                I("Support SD&M", Cmd::Support, true, false),
             ],
         };
         // View → Theme (MDM's, #45), after Always dark; then Draw with (#89, #206), where wgpu is
