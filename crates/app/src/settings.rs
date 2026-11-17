@@ -337,6 +337,8 @@ pub struct Settings {
     pub update_check: bool,
     /// When the weekly check last ran (Unix seconds; 0: never).
     pub update_checked: i64,
+    /// When the helpers (yt-dlp, ffmpeg) update check last ran (every 2 weeks; 0: never).
+    pub helpers_checked: i64,
     /// The user's categories (D-021), after IDM's and Torrents.
     pub custom_categories: Vec<crate::model::CustomCategory>,
     /// The built-in categories the user renamed, gave other file types or deleted (#93); the
@@ -529,6 +531,7 @@ impl Default for Settings {
             torrent_stop_minutes: 1440,
             update_check: true,
             update_checked: 0,
+            helpers_checked: 0,
             custom_categories: Vec::new(),
             builtin_categories: Vec::new(),
             drop_target: false,

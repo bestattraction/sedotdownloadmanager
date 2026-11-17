@@ -906,16 +906,20 @@ fn add_script_fallback(ctx: &egui::Context) {
     });
 }
 
-/// The interface font: Segoe UI as IDM has it on Windows, the system's own elsewhere.
+/// The interface font: Inter or Segoe UI on Windows, the system's own elsewhere.
 fn ui_font() -> Option<Vec<u8>> {
     #[cfg(windows)]
-    return read_font(&font_dir().join("segoeui.ttf"));
+    return ["Inter-Regular.ttf", "Inter.ttf", "segoeui.ttf"]
+        .iter()
+        .find_map(|f| read_font(&font_dir().join(f)));
     #[cfg(target_os = "macos")]
-    return ["SFNS.ttf", "Helvetica.ttc"]
+    return ["Inter.ttf", "SFNS.ttf", "Helvetica.ttc"]
         .iter()
         .find_map(|f| read_font(&font_dir().join(f)));
     #[cfg(not(any(windows, target_os = "macos")))]
-    return fc_font("sans-serif").map(|(_, bytes)| bytes);
+    return fc_font("Inter, sans-serif")
+        .or_else(|| fc_font("sans-serif"))
+        .map(|(_, bytes)| bytes);
 }
 
 /// The script fonts for `code` (every language's with `all`): (key, bytes), in fallback order.

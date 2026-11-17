@@ -949,7 +949,7 @@
   --ok: #0078d4; --warn: #8a5300; --err: #c42b1c; --warn-dot: #F7B500;
   --bg: #fcfcfb; --bg2: #eef1f5; --bd: #c4ccd8; --tx: #111318; --tx2: #5f6676; --hov: rgba(0, 120, 212, .12);
   --sh: 0 1px 2px rgba(17, 19, 24, .18), 0 6px 14px rgba(17, 19, 24, .18);
-  --font: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, Roboto, "Noto Sans", sans-serif;
+  --font: "Inter", "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, Roboto, "Noto Sans", sans-serif;
 }
 /* Windows (the system) in dark mode, not the page: SDM's navy board; modern blue brand theme. */
 @media (prefers-color-scheme: dark) {

@@ -308,6 +308,7 @@ enum Cmd {
     Shortcuts,
     ReportProblem,
     CheckUpdates,
+    CheckHelperUpdates,
     About,
     TellFriend,
     /// Help → Support MDM: the creator's GitHub Sponsors page in the browser.
@@ -7685,6 +7686,12 @@ impl App {
                     self.updates = Some(crate::help::Updates::check(&self.rt, ctx));
                 }
             }
+            Cmd::CheckHelperUpdates => {
+                if self.helpers.is_none() {
+                    self.helpers = Some(crate::helpers::Helpers::manual_check(&self.rt, ctx));
+                    self.raise_helpers = true;
+                }
+            }
             Cmd::About => self.about = Some(crate::help::About),
             Cmd::Support => crate::help::support(),
             Cmd::TellFriend => {
@@ -8412,6 +8419,12 @@ impl App {
                 I("&Report a problem", Cmd::ReportProblem, true, false),
                 Sep,
                 I("Check for &updates...", Cmd::CheckUpdates, true, false),
+                I(
+                    "Check for &tools updates (yt-dlp, ffmpeg)...",
+                    Cmd::CheckHelperUpdates,
+                    true,
+                    false,
+                ),
                 Sep,
                 I("&About Sedot Download Manager", Cmd::About, true, false),
                 I("Tell a &friend", Cmd::TellFriend, true, false),
@@ -10973,22 +10986,28 @@ impl App {
             return;
         }
         let now = chrono::Utc::now().timestamp();
+        let two_weeks = 14 * 86400;
+        let due = self.settings.helpers_checked == 0
+            || (now - self.settings.helpers_checked >= two_weeks);
         let first = self.helpers_checked_this_run.is_none()
             && self.started.elapsed() >= Duration::from_secs(3);
         let again = self
             .helpers_checked_this_run
-            .is_some_and(|t| now - t >= 12 * 3600);
+            .is_some_and(|t| now - t >= two_weeks);
 
-        if (first || again)
+        if crate::helpers::worth_asking() {
+            if first && self.helpers.is_none() {
+                self.helpers_checked_this_run = Some(now);
+                self.helpers = Some(crate::helpers::Helpers::new());
+                self.raise_helpers = true;
+            }
+        } else if ((first && due) || again)
             && (!crate::offscreen() || std::env::var_os("MDM_UPDATE_FEED").is_some())
         {
             self.helpers_checked_this_run = Some(now);
-            if crate::helpers::worth_asking() {
-                if self.helpers.is_none() {
-                    self.helpers = Some(crate::helpers::Helpers::new());
-                    self.raise_helpers = true;
-                }
-            } else if let Some(dir) = mdm_tools::tools_dir() {
+            self.settings.helpers_checked = now;
+            self.dirty = true;
+            if let Some(dir) = mdm_tools::tools_dir() {
                 let slot = self.helper_update_slot.clone();
                 let net = crate::settings::own_net();
                 let ctx_clone = ctx.clone();

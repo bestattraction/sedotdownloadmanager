@@ -52,20 +52,20 @@ pub fn tahoma_title() -> FontId {
     )
 }
 
-/// Tahoma (IDM's dialogs), Tahoma Bold and Arial Bold from Windows' fonts folder. A family
-/// whose file isn't there (macOS, Linux) is the interface font's, so drawing with it never fails.
+/// Modern clean UI fonts: prefer Inter or Segoe UI, falling back to Tahoma / Arial.
+/// A family whose file isn't there (macOS, Linux) is the interface font's, so drawing with it never fails.
 pub fn install_fonts(defs: &mut egui::FontDefinitions, font_dir: Option<&std::path::Path>) {
     let ui = defs
         .families
         .get(&FontFamily::Proportional)
         .cloned()
         .unwrap_or_default();
-    for (family, file) in [
-        ("tahoma", "tahoma.ttf"),
-        ("tahoma-bold", "tahomabd.ttf"),
-        ("arial-bold", "arialbd.ttf"),
+    for (family, files) in [
+        ("tahoma", &["Inter-Regular.ttf", "Inter.ttf", "segoeui.ttf", "tahoma.ttf"][..]),
+        ("tahoma-bold", &["Inter-Bold.ttf", "Inter-SemiBold.ttf", "segoeuib.ttf", "tahomabd.ttf"][..]),
+        ("arial-bold", &["Inter-Bold.ttf", "Inter-SemiBold.ttf", "segoeuib.ttf", "arialbd.ttf"][..]),
     ] {
-        let fonts = match font_dir.and_then(|d| crate::theme::read_font(&d.join(file))) {
+        let fonts = match font_dir.and_then(|d| files.iter().find_map(|f| crate::theme::read_font(&d.join(f)))) {
             Some(bytes) => {
                 defs.font_data.insert(
                     family.into(),

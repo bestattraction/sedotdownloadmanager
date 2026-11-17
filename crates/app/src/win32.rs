@@ -8084,8 +8084,8 @@ fn classic_font_file(family: &egui::FontFamily) -> Option<&'static str> {
     match family {
         egui::FontFamily::Proportional | egui::FontFamily::Monospace => Some("segoeui.ttf"),
         egui::FontFamily::Name(name) => match &**name {
-            "tahoma" => Some("tahoma.ttf"),
-            "tahoma-bold" => Some("tahomabd.ttf"),
+            "tahoma" => Some("segoeui.ttf"),
+            "tahoma-bold" => Some("segoeuib.ttf"),
             "arial-bold" => Some("arialbd.ttf"),
             _ => None,
         },

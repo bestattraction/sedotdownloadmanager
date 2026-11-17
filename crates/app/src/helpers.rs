@@ -36,6 +36,9 @@ struct Job {
 pub enum HelperMode {
     Initial,
     Update { name: &'static str, version: String },
+    Checking,
+    UpToDate,
+    CheckError(String),
 }
 
 pub struct Helpers {
@@ -43,6 +46,7 @@ pub struct Helpers {
     /// Once Yes was pressed.
     job: Option<Job>,
     mode: HelperMode,
+    check_slot: Option<Arc<Mutex<Option<HelperMode>>>>,
 }
 
 /// Whether to offer the helpers at this start: never asked, and one of them is missing (ffmpeg
@@ -61,6 +65,7 @@ impl Helpers {
             dir: mdm_tools::tools_dir(),
             job: None,
             mode: HelperMode::Initial,
+            check_slot: None,
         }
     }
 
@@ -69,6 +74,68 @@ impl Helpers {
             dir: mdm_tools::tools_dir(),
             job: None,
             mode: HelperMode::Update { name, version },
+            check_slot: None,
+        }
+    }
+
+    pub fn manual_check(rt: &tokio::runtime::Handle, ctx: &egui::Context) -> Self {
+        let dir = mdm_tools::tools_dir();
+        let slot = Arc::new(Mutex::new(None));
+        let checking_slot = slot.clone();
+        let ctx_clone = ctx.clone();
+        let dir_clone = dir.clone();
+        rt.spawn(async move {
+            let Some(dir) = dir_clone else {
+                *checking_slot.lock().unwrap() =
+                    Some(HelperMode::CheckError("Tools directory not found".into()));
+                ctx_clone.request_repaint();
+                return;
+            };
+            if worth_asking() {
+                *checking_slot.lock().unwrap() = Some(HelperMode::Initial);
+                ctx_clone.request_repaint();
+                return;
+            }
+            let net = crate::settings::own_net();
+            match mdm_tools::check_ytdlp_update(&dir, &net).await {
+                Ok(Some(version)) => {
+                    *checking_slot.lock().unwrap() =
+                        Some(HelperMode::Update { name: "yt-dlp", version });
+                    ctx_clone.request_repaint();
+                    return;
+                }
+                Err(e) => {
+                    *checking_slot.lock().unwrap() = Some(HelperMode::CheckError(e.to_string()));
+                    ctx_clone.request_repaint();
+                    return;
+                }
+                Ok(None) => {}
+            }
+            #[cfg(windows)]
+            {
+                match mdm_tools::ffmpeg::check_ffmpeg_update(&dir, &net).await {
+                    Ok(Some(version)) => {
+                        *checking_slot.lock().unwrap() =
+                            Some(HelperMode::Update { name: "ffmpeg", version });
+                        ctx_clone.request_repaint();
+                        return;
+                    }
+                    Err(e) => {
+                        *checking_slot.lock().unwrap() = Some(HelperMode::CheckError(e.to_string()));
+                        ctx_clone.request_repaint();
+                        return;
+                    }
+                    Ok(None) => {}
+                }
+            }
+            *checking_slot.lock().unwrap() = Some(HelperMode::UpToDate);
+            ctx_clone.request_repaint();
+        });
+        Helpers {
+            dir,
+            job: None,
+            mode: HelperMode::Checking,
+            check_slot: Some(slot),
         }
     }
 
@@ -92,6 +159,7 @@ impl Helpers {
                     list.push("ffmpeg");
                 }
             }
+            HelperMode::Checking | HelperMode::UpToDate | HelperMode::CheckError(_) => return,
         }
         if list.is_empty() {
             return;
@@ -142,12 +210,20 @@ impl Helpers {
     /// Open while shown (after Yes too, with the downloads' progress); Closed on Not now, Close
     /// or the window's X.
     pub fn show(&mut self, ctx: &egui::Context, rt: &tokio::runtime::Handle) -> Outcome<()> {
+        let new_mode = self
+            .check_slot
+            .as_ref()
+            .and_then(|slot| slot.lock().unwrap().take());
+        if let Some(mode) = new_mode {
+            self.mode = mode;
+            self.check_slot = None;
+        }
         let (running, failed) = match &self.job {
             Some(job) => {
                 let s = job.state.lock().unwrap();
                 (!s.done, s.error.is_some())
             }
-            None => (false, false),
+            None => (matches!(self.mode, HelperMode::Checking), false),
         };
         if running {
             ctx.request_repaint_after(std::time::Duration::from_millis(150));
@@ -160,6 +236,8 @@ impl Helpers {
         let title = match &self.mode {
             HelperMode::Update { .. } => "Update video download module",
             HelperMode::Initial => "Get ready for video downloads",
+            HelperMode::Checking => "Checking for module updates",
+            HelperMode::UpToDate | HelperMode::CheckError(_) => "Video download modules",
         };
         window(
             ctx,
@@ -219,6 +297,18 @@ impl Helpers {
                     "Two free helpers make it work. Get them now, and saving a video is one click away when you find one.",
                 )
                 .to_owned(),
+            ),
+            HelperMode::Checking => (
+                crate::i18n::t("Checking for module updates...").to_owned(),
+                crate::i18n::t("Checking yt-dlp and ffmpeg for newer versions...").to_owned(),
+            ),
+            HelperMode::UpToDate => (
+                crate::i18n::t("Video download modules are up to date").to_owned(),
+                crate::i18n::t("yt-dlp and ffmpeg are up to date and ready to use.").to_owned(),
+            ),
+            HelperMode::CheckError(err) => (
+                crate::i18n::t("Could not check for module updates").to_owned(),
+                crate::i18n::fmt(crate::i18n::t("Error: {error}"), &[("error", err)]),
             ),
         };
         let extra = winui::banner(
@@ -419,6 +509,12 @@ impl Helpers {
             crate::i18n::t(
                 "Check your connection, then try again, or get them later from the video window.",
             )
+        } else if matches!(self.mode, HelperMode::UpToDate) {
+            crate::i18n::t("Both modules are installed and ready to download and merge videos.")
+        } else if matches!(self.mode, HelperMode::Checking) {
+            crate::i18n::t("Connecting to releases server to check for updates...")
+        } else if let HelperMode::CheckError(_) = &self.mode {
+            crate::i18n::t("Could not reach update server. Check your network connection.")
         } else {
             crate::i18n::t("Not now? Get them later from Tasks → Download video from a page.")
         };
@@ -439,44 +535,91 @@ impl Helpers {
         );
         let y = y + 28.0 + 16.0 * lines.saturating_sub(1) as f32;
         if self.job.is_none() {
-            let yes_label = match &self.mode {
-                HelperMode::Update { .. } => "Update now (recommended)",
-                HelperMode::Initial => "Yes, download them (recommended)",
-            };
-            // As wide as their labels in this language (#192), the row ending where it ends in
-            // English.
-            let [not_now_at, yes_at] = winui::button_row(
-                &p,
-                &[
-                    ("Not now", 196.0, 90.0),
-                    (yes_label, 292.0, 212.0),
-                ],
-                6.0,
-                16.0,
-                360.0,
-            )[..] else {
-                unreachable!("two buttons")
-            };
-            let not_now = winui::button(
-                ui,
-                r(o, not_now_at.0, y, not_now_at.1, 25.0),
-                "Not now",
-                ButtonKind::Normal,
-                false,
-                None,
-            );
-            let yes = winui::button(
-                ui,
-                r(o, yes_at.0, y, yes_at.1, 25.0),
-                yes_label,
-                ButtonKind::Accent,
-                false,
-                None,
-            );
-            if yes.clicked() || winui::enter_pressed(ui) {
-                *answer = Some(true);
-            } else if not_now.clicked() {
-                *answer = Some(false);
+            match &self.mode {
+                HelperMode::UpToDate | HelperMode::CheckError(_) => {
+                    let [close_at] = winui::button_row(
+                        &p,
+                        &[("Close", 414.0, 90.0)],
+                        6.0,
+                        16.0,
+                        360.0,
+                    )[..] else {
+                        unreachable!()
+                    };
+                    let close = winui::button(
+                        ui,
+                        r(o, close_at.0, y, close_at.1, 25.0),
+                        "Close",
+                        ButtonKind::Normal,
+                        false,
+                        None,
+                    );
+                    if close.clicked() || winui::enter_pressed(ui) {
+                        *answer = Some(false);
+                    }
+                }
+                HelperMode::Checking => {
+                    let [cancel_at] = winui::button_row(
+                        &p,
+                        &[("Cancel", 414.0, 90.0)],
+                        6.0,
+                        16.0,
+                        360.0,
+                    )[..] else {
+                        unreachable!()
+                    };
+                    let cancel = winui::button(
+                        ui,
+                        r(o, cancel_at.0, y, cancel_at.1, 25.0),
+                        "Cancel",
+                        ButtonKind::Normal,
+                        false,
+                        None,
+                    );
+                    if cancel.clicked() {
+                        *answer = Some(false);
+                    }
+                }
+                HelperMode::Initial | HelperMode::Update { .. } => {
+                    let yes_label = match &self.mode {
+                        HelperMode::Update { .. } => "Update now (recommended)",
+                        HelperMode::Initial => "Yes, download them (recommended)",
+                        _ => "",
+                    };
+                    let [not_now_at, yes_at] = winui::button_row(
+                        &p,
+                        &[
+                            ("Not now", 196.0, 90.0),
+                            (yes_label, 292.0, 212.0),
+                        ],
+                        6.0,
+                        16.0,
+                        360.0,
+                    )[..] else {
+                        unreachable!("two buttons")
+                    };
+                    let not_now = winui::button(
+                        ui,
+                        r(o, not_now_at.0, y, not_now_at.1, 25.0),
+                        "Not now",
+                        ButtonKind::Normal,
+                        false,
+                        None,
+                    );
+                    let yes = winui::button(
+                        ui,
+                        r(o, yes_at.0, y, yes_at.1, 25.0),
+                        yes_label,
+                        ButtonKind::Accent,
+                        false,
+                        None,
+                    );
+                    if yes.clicked() || winui::enter_pressed(ui) {
+                        *answer = Some(true);
+                    } else if not_now.clicked() {
+                        *answer = Some(false);
+                    }
+                }
             }
         } else {
             let [again_at, close_at] = winui::button_row(

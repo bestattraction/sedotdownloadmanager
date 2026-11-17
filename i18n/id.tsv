@@ -1510,6 +1510,15 @@
 #. window title in helpers.rs
 #. title of the first start's window that offers yt-dlp and ffmpeg
 	Get ready for video downloads	Bersiap untuk mengunduh video
+	Update video download module	Perbarui modul unduh video
+	Checking for module updates	Memeriksa pembaruan modul
+	Checking for module updates...	Memeriksa pembaruan modul...
+	Connecting to releases server to check for updates...	Menghubungi server rilis untuk memeriksa pembaruan...
+	Video download modules are up to date	Modul unduh video sudah yang terbaru
+	yt-dlp and ffmpeg are up to date and ready to use.	yt-dlp dan ffmpeg sudah versi terbaru dan siap digunakan.
+	Both modules are installed and ready to download and merge videos.	Kedua modul terpasang dan siap untuk mengunduh serta menggabungkan video.
+	Could not check for module updates	Gagal memeriksa pembaruan modul
+	Could not reach update server. Check your network connection.	Tidak dapat menghubungi server pembaruan. Periksa koneksi internet Anda.
 #. button in the Options window
 	Get System	Dapatkan sistem
 #. text in the Add torrent window
@@ -5187,6 +5196,7 @@ menu	C&ustomize URL List...	K&ustomisasi Daftar URL...
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #. the trailing ... means it opens a window: keep it
 menu	Check for &updates...	Periksa &pembaruan...
+menu	Check for &tools updates (yt-dlp, ffmpeg)...	Periksa pembaruan ala&t (yt-dlp, ffmpeg)...
 #. menu command in the main window
 #. View → Theme: SDM's own look, the default (IDM's layout, Windows 11's controls)
 menu	Classic	Klasik

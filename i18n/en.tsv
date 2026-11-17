@@ -1558,6 +1558,15 @@
 #. window title in helpers.rs
 #. title of the first start's window that offers yt-dlp and ffmpeg
 	Get ready for video downloads	Get ready for video downloads
+	Update video download module	Update video download module
+	Checking for module updates	Checking for module updates
+	Checking for module updates...	Checking for module updates...
+	Connecting to releases server to check for updates...	Connecting to releases server to check for updates...
+	Video download modules are up to date	Video download modules are up to date
+	yt-dlp and ffmpeg are up to date and ready to use.	yt-dlp and ffmpeg are up to date and ready to use.
+	Both modules are installed and ready to download and merge videos.	Both modules are installed and ready to download and merge videos.
+	Could not check for module updates	Could not check for module updates
+	Could not reach update server. Check your network connection.	Could not reach update server. Check your network connection.
 #. button in the Options window
 	Get System	Get System
 #. text in the Add torrent window
@@ -5316,6 +5325,7 @@ menu	C&ustomize URL List...	C&ustomize URL List...
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #. the trailing ... means it opens a window: keep it
 menu	Check for &updates...	Check for &updates...
+menu	Check for &tools updates (yt-dlp, ffmpeg)...	Check for &tools updates (yt-dlp, ffmpeg)...
 #. menu command in the main window
 #. View → Theme: SDM's own look, the default (IDM's layout, Windows 11's controls)
 menu	Classic	Classic
