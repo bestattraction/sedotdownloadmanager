@@ -37,7 +37,7 @@
   const INSET = 8;
   const DRAG_PX = 4;
   // Our app icon (extension/icons/icon-48.png, as data: no extension file is exposed to pages).
-  const LOGO = "data:image/png;base64,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";
+  const LOGO = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAALT0lEQVR4nMVae3CU1RX/nXu/zeZlwiO8CS8VGerQUooPUKeCz6qVqgFqX1qnY9Wxj2ntjH9UZMbOOFP/cNTB0WrFytBC8IGlWCoCf1gFjY8KCgpIAsQQCXnuZje7372nc+5+myzJfsmCZDwzd77k++4997zPufcsoQBgZgJAtYA8hx1qAJZtiUiepw9C+Apmha8JVjCrQHihEPqRmRUR2eDvYgCzjiVwbn0cVb7FsDDlKdjqMpyYVIIDAPYRUXd/WgasCeNcFjDziI/b8KPf1qFmV4ud05igkXGQ0+9wAAEoA2NiMbfPr1J73m/lDXNHYg0RnRCaVuZhYoAGshOZ+ZI/vIeH19ZjYWMCgC9fjZPHMNEfABGgnWjHlwDLpuCdR+fjfiLalo+JkxjIqoqZb/zeG/bp175QY+H7VmUMJutRw+3IHGzAVkjVnlo8wbZuXqTujnq0rr85UR7iF1yz1byypUGPUSptmEiHiVz4UgQ23MtcwSAbawJbRn7jDuYosDEmoi+fbNq3Xa1vFk3kMuFkK55O7sGVv99lHtlyRI/RlDaWSbNMyzcYsAbwexSxARQztCASTkLWyDeZI3M5WGudVeafL3sbS1po2d6oR9zztv8IM1cROVqpl4GltVAg4k/azK1/q1cXw09by9DO3PMMIQBp4FujOXnX+bZ9YjH7Nk0wwozvpOYWE4tqMn/LO/kmc2xKiaP6slZwCC6HM2QILWRSdm2DN/edFvxMRPFgYD2ekz6RYebor/5rlh+PESuysDY8UooEYEC/nq06bpup2x+ah7a3jtnohkO2/D9HubQpRp6kIeiMcRijSMQ/oZz9xZOo++ZpFL9sYiQ5KorU6s/MiNubuJgch/n9SxSkCGiPgZ/+xF/GzE8RUUxolzBKwZxZu760cygNCgwr1C7FbkuKLC8YF03Kq1FR+NdPVTLiHSnrbW/k4pcOcdmWI7bMMuHKao4vnUHxyyeqZGVU+bnoFozTyZKiHk76IsewXZ2dExmf3jvOswGcD2BnLaC8bHnQmMDMpm5UsvUHjTOygSaRKtGijalJl4tEp6v45ZMpWVmkfBlLpiMmoyXheZYtjS1V6VwcsTT0tqOmpPZzW7a9kUsFl0jYDBIJWOyGDR9LRso+bsN5wsBJiay+C1XdNkKwSUaILBxfslFKGGA09ihvTScq1nxqKyaVWf+Kyar7lrN17LuTVLI8AlNV4qzbLYunobc32uIXD5ryNxpt6ZGY8pyzCvjWTaOi8CyTec3cbRQdjZkx8l9tbQ4DbKEkpmUcZyACIcOmgOeujmB0MWHdZwY7vrBo7LSMNKgxTd7zHah4fq9fUV1u/cWTVff103VctLWp3pZuPWpLGzopAhvIRsIQgSdUEF02QWPZTI2UZSzfnAZFQhiR6MUSmfpKmZxSwgBStznkAyUvljX2LMLSczRKPeCGaQodPYw3v2B69ZDB1iMWn7f7jBToSBt5q9tRsXqvqXDITA7RGjy1UtHiao3vT1d02SSFkVHqVcSUSh+H2xnKy0TTAWrIhtwBDGSrBNFCPx+QTGzSwEVjlSM+C5VRwnXTZSh0p4Gdxyz985DBlgaLva2G0RMk1QjxzFFEV03xcMN0TQsmKpRHBgrYU8DC8YTDLTbDQH8OHH391uTlsJ8GjGg7ArxebzD/7z24bprCddM1vj1OOYcWKI0Ai6qVG2kD1H1p6ZWDRtSNG8/WdMF4hageSDQz8MFxi82HLDYdMth9wrq9fBFomAZCGbD5NeDWEpDwgbpGg7rDBivfTuP8KoVrpylcP8PDhRP6CIxo4OIJyo18kBIGmy02fW6wud7gf8ctkJLwFlCUDez5uBX6ctTgobY/h+LE+TjIPES1SiRkgT3NFnsaDf68y8e5owlXT9W48RyNBZMyfpILSR94u8li4wEfW+oN9p2QbM6AR45or7hPfqHJYEgN9DIQHpDdJjiZGWMZ+1sY+5stntiZwugRohWNG87R0ETYdMB30m5uy4RLkbSkUF0i+FypkN9kBjAwkLZ+JhSMAgvm7HSHKFD9eVUaf7q0CJVRIBJY0I+/4WHJTA8PvJnC7mPW7Soa9MPK0FAG+m06UAM5RdQpgkQMmwYeW1yERVPyeCuAMSVFuGh1wkW10zrW8VAaCIlChUDm8AGMKyVXEsg+mRwcxAUSBigTHiWqDVb34HR8wOZGodM8NYotS80vWTvI3lnorXVctv8KGrDDpIHs+sF4d/x8RfwoLA/kqSUCM8iVavgu4aCDoj8s1NusmeebcNoaCP6XUsZI7A5jYiD+k4mzQDqRv1h0IO8jIqWwRDZYLTRIFHLCsEBVOWHueA8dycx30QbnzmGgXAgIgZIIcPE03Zvsue+A5KCymPDBMYOWGIOCujIvfTkSLCwPBEIxPYwl53q4+4IohoL+DixQXaHw1u3loWtWvZtCXYOfUUA+S+iXAxzuvBz2G3JOkIzZlmTcs6EbS9bG0RTLYJfCrfcYUYBzZufJmnSQfZvjjJvWxnFPbdztIXv1nU1yRq+DhDIwxJCypYyw8cMULlrViS0H0q5wyy4VJx8KcuN/RAOvH0zjwlWdePnDFHQZ9dnWYCMvA7l5YJDh+wyvFDjcbnDNs1344+uJ3uhUSGkQnB7dePCNBK56JoaGVuNwGkkiBdCQe1AYWO8Oxb0kK7n70eTGQ691Y9HTXTjYat2BRAgMCyDyTebUt1tc+UwXVv6rG0pLUUgOZyF7h2vAXYUVKgGGNRlbFZPa8WkKFz7WgX98lHIEihXk3jBko458e3FPChc81oGte1NuratGTeH79o/TJ2sguDIseEhF6QO6mHAiYfHD1V24++U4Er5cpfVVnGIucoj5zatx3PLXLhyPWbfG909jz7BMLI5/utWoO3IqQEWBJ7cnsLM+jWeXlWPuxAz6Pc0Gd6yL4Z0DaeeoQrNcy5wyZK8qMygceNKQEpg6MtJSSnG0WpJrwKBwOAXcwb2AmMUHDT4WPtqOJ2rKEfUIv1wXQyxp4ZWpwg4ueUBuM9kylSgfEyqiLfKupgbwgoYaplRi//gy7mw8ripImdBsP1QtJKVypDhzfr5jbVfmpSZEislJfajelA3ZWC6kYRWNKzaJOeP1Z9n3ouPskn3zqyO76xrsApIb/7wH48zlVm8NMBgR2YpNIM1Iy7rBmOfge/ZQn2cGI4J5k+kTALvlRQ1gPWll1qxfr4ko8f6R1Pr1HyUWtrbJta/juS/5BFY3a6I22auUMw2Wgb3NRrtegtRC2f1dIcmoqCT6+fziDYqoa8WKTJPDedn6mhpLYJo7GWtunZP8yePbi7+jOSkad3nW0esDTy4/K3HnwpIeY0H6DPcpjQUE5wvvJiO3v9BZmhtwlFifieqls3nPJTMiz3GOdTgGRAtB26aVme/b09Tx0vbd3khdkunSSOLzNHDTN4vcLbOWu/wzDDoQyA/mRPw7i4BEKohsQny31gtno+svyyvuI6Lm3BZTbxgN+mPyYUePz3ddu6rjyW171UhQ0noRgkkx3fZCZ8nvrijrkc7ZmW4UWwBFHvHjO+LRZLdlr4jYTzOMjepLZ1HXxl+U36uJ/t2/yXdSOS0fpJUZJdcNPHFvbdfD698vmfdlR+bKYXNdMrK5LukNT5sb2URFUuX5PREaXalw8xz66KlbK+5XRJsfCOz+JJrz4REHWbnSaWTMrkM9t63e2XPLuw3+7OYYyuO+87FhASV3rJ7FuFKOz5vi7fvpgpIXL5kRWU1ETVjBCisLaHSH/NTgLGnr7G0yM4922CrjW23PMBsKSvzAVo/yWmaN1/slgRNRR39aTv3HHsL51wQrVnyFH3vkgiCplVZsTaatM5wg5YF7AraQn9v8Hwpnr5yclKWjAAAAAElFTkSuQmCC";
 
   const t = (key, ...subs) =>
     ext.i18n.getMessage(key, subs) || (FALLBACK[key] || key).replace(/\$(\d)/g, (_, n) => subs[n - 1] ?? "");
@@ -56,11 +56,11 @@
     video_drag_dots: "Drag the dots to move it along the edge",
     video_tip: "Download $1",
     video_tip_best: "Download the best quality",
-    video_sending: "Sending to MDM...",
-    video_added: "Added to MDM",
+    video_sending: "Sending to SDM...",
+    video_added: "Added to SDM",
     video_show: "Show",
-    video_no_answer: "MDM didn't answer",
-    video_get_mdm: "Get MDM",
+    video_no_answer: "SDM didn't answer",
+    video_get_mdm: "Get SDM",
     video_retry: "Retry",
     video_turn_on: "Turn on",
     video_best: "best",
@@ -895,7 +895,8 @@
   const ASK_MS = 5000;
   const answered = () => allowed !== null && Date.now() - askedAt < ASK_MS;
   let place = { x: 1, y: 0 }; // where on the edge: fractions of the room, top right by default
-  let chosen = false; // the user put it where it is (dragged it, on this site): theirs, never moved for a page's control
+  let userOffset = null; // custom drag offset { dx, dy } relative to top-right
+  let chosen = false; // the user put it where it is (dragged it, on this site)
   let auto = { v: null, at: null, t: 0 }; // the spot found for this video, kept for a moment
   const AUTO_MS = 400;
   // Where it is on the screen, while the pointer is on it (#560): { v, left, top, w, end }.
@@ -944,17 +945,17 @@
 :host(:-webkit-full-screen) { display: none !important; }
 * { box-sizing: border-box; }
 .pill, .menu, .tip, .guide {
-  --go: #57cc5a; --go-hi: #47b94a; --go-ink: #08200b; --stamp: #1b7a26; --accent: #1b7a26;
-  --ok: #1b7a26; --warn: #8a5300; --err: #c42b1c; --warn-dot: #F7B500;
-  --bg: #fcfcfb; --bg2: #eef1f5; --bd: #c4ccd8; --tx: #111318; --tx2: #5f6676; --hov: rgba(87, 204, 90, .16);
+  --go: #0078d4; --go-hi: #0068b5; --go-ink: #ffffff; --stamp: #0078d4; --accent: #0078d4;
+  --ok: #0078d4; --warn: #8a5300; --err: #c42b1c; --warn-dot: #F7B500;
+  --bg: #fcfcfb; --bg2: #eef1f5; --bd: #c4ccd8; --tx: #111318; --tx2: #5f6676; --hov: rgba(0, 120, 212, .12);
   --sh: 0 1px 2px rgba(17, 19, 24, .18), 0 6px 14px rgba(17, 19, 24, .18);
   --font: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, Roboto, "Noto Sans", sans-serif;
 }
-/* Windows (the system) in dark mode, not the page: MDM's navy board; the green stays. */
+/* Windows (the system) in dark mode, not the page: SDM's navy board; modern blue brand theme. */
 @media (prefers-color-scheme: dark) {
   .pill, .menu, .tip, .guide {
-    --accent: #7fe07f; --ok: #7fe07f; --warn: #ffd36b; --err: #ff99a4;
-    --bg: #0c1a33; --bg2: #081226; --bd: #2a3d63; --tx: #f2f5fb; --tx2: #b7c3da; --hov: rgba(87, 204, 90, .18);
+    --accent: #4cc2ff; --ok: #4cc2ff; --warn: #ffd36b; --err: #ff99a4;
+    --bg: #0c1a33; --bg2: #081226; --bd: #2a3d63; --tx: #f2f5fb; --tx2: #b7c3da; --hov: rgba(76, 194, 255, .16);
     --sh: 0 2px 4px rgba(0, 0, 0, .45), 0 8px 16px rgba(0, 0, 0, .45);
   }
 }
@@ -1004,7 +1005,7 @@ button:focus-visible { outline: none; }
 .pill[data-state="sending"] .icon .spin, .pill[data-state="sent"] .icon .i-sent,
 .pill[data-state="warn"] .icon .i-warn, .pill[data-state="err"] .icon .i-err,
 .pill[data-state="off"] .icon .i-off, .pill[data-state="drm"] .icon .i-drm { display: block; }
-.spin { width: 14px !important; height: 14px !important; border-radius: 50%; border: 2px solid rgba(8, 32, 11, .25); border-top-color: var(--go-ink);
+.spin { width: 14px !important; height: 14px !important; border-radius: 50%; border: 2px solid rgba(0, 80, 180, .25); border-top-color: var(--go-ink);
   animation: spin .8s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 @keyframes shimmer { from { background-position: 100% 0; } to { background-position: -100% 0; } }
@@ -1045,14 +1046,11 @@ button:focus-visible { outline: none; }
 .tip.on { display: block; }
 .tip .what { display: block; font-weight: 600; }
 .tip .how { display: block; color: var(--tx2); }
-/* While dragging: the edge it slides along and the spots it snaps to. */
-.guide { position: absolute; left: 0; top: 0; display: none; pointer-events: none; }
-.guide.on { display: block; }
-.line { position: absolute; }
-.line.h { height: 0; border-top: 1.5px dashed rgba(255, 255, 255, .75); }
-.line.v { width: 0; border-inline-start: 1.5px dashed rgba(255, 255, 255, .75); }
-.snap { position: absolute; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%;
-  border: 2px solid #fff; background: var(--go); }
+/* While dragging: guide lines and dots hidden per user request */
+.guide { display: none !important; }
+.guide.on { display: none !important; }
+.line { display: none !important; }
+.snap { display: none !important; }
 /* The list: paper white (MDM's navy board in dark mode), one line per quality. */
 .menu {
   position: absolute; width: 318px; max-width: calc(100vw - 16px); padding: 4px; border-radius: 6px;
@@ -1629,23 +1627,22 @@ button:focus-visible { outline: none; }
       return;
     }
 
-    if (dragging) {
-      const at = dragging.at;
-      const left = r.left + INSET + at.x * roomX;
-      const visTop = Math.max(r.top, 0) + INSET;
-      const visBottom = Math.min(r.bottom, innerHeight) - INSET - h;
-      const top = Math.min(Math.max(r.top + INSET + at.y * roomY, visTop), Math.max(visTop, visBottom));
-      root.style.setProperty("transform", `translate(${Math.round(left)}px, ${Math.round(top)}px)`, "important");
-      pinned = { v: video, left, top, w, end: at.x > 0.5 };
-      if (menuOpen) placeMenu(top, left, w);
-      placeTip(left, w);
-      if (dragging.moved) drawGuide(r, w, h, roomX, roomY, left, top);
-      return;
+    if (dragging) return;
+
+    // Default position: OUTSIDE, ABOVE video at top-right
+    const baseLeft = r.right - w;
+    const baseTop = r.top - h - 6;
+
+    let left = baseLeft;
+    let top = baseTop;
+
+    if (chosen && userOffset) {
+      left = baseLeft + userOffset.dx;
+      top = baseTop + userOffset.dy;
     }
 
-    // Default & forced position: OUTSIDE, ABOVE video at top-right
-    const left = Math.max(4, Math.min(innerWidth - w - 4, r.right - w));
-    const top = r.top - h - 4;
+    left = Math.max(4, Math.min(innerWidth - w - 4, left));
+
     root.style.setProperty("transform", `translate(${Math.round(left)}px, ${Math.round(top)}px)`, "important");
     pinned = { v: video, left, top, w, end: true };
     if (menuOpen) placeMenu(top, left, w);
@@ -1670,46 +1667,16 @@ button:focus-visible { outline: none; }
     if (tip.classList.contains("on")) tip.style.left = towardEnd(left, w) ? `${w - tip.offsetWidth}px` : "0";
   }
 
-  // While dragging: the edge it slides along (through the button's middle, from one end of the
-  // video's edge to the other) and the spots it snaps to on it (its ends and its middle), from
-  // the video's rectangle `r`, in the button's own coordinates (it sits at `left`, `top`).
-  function drawGuide(r, w, h, roomX, roomY, left, top) {
-    const edge = edgeOf(dragging.at);
-    const across = edge === "top" || edge === "bottom";
-    const x0 = r.left + INSET - left;
-    const y0 = r.top + INSET - top;
-    const at = across ? y0 + h / 2 + (edge === "bottom" ? roomY : 0) : x0 + w / 2 + (edge === "right" ? roomX : 0);
-    const len = across ? r.width - 2 * INSET : r.height - 2 * INSET;
-    const line = document.createElement("i");
-    line.className = `line ${across ? "h" : "v"}`;
-    Object.assign(line.style, across
-      ? { left: `${x0}px`, top: `${at - 1}px`, width: `${len}px` }
-      : { left: `${at - 1}px`, top: `${y0}px`, height: `${len}px` });
-    const spots = [0, 0.5, 1].map((f) => {
-      const s = document.createElement("i");
-      s.className = "snap";
-      Object.assign(s.style, across ? { left: `${x0 + f * len}px`, top: `${at}px` } : { left: `${at}px`, top: `${y0 + f * len}px` });
-      return s;
-    });
-    guide.replaceChildren(line, ...spots);
-    guide.classList.add("on");
-  }
+  // While dragging: no dots or guide lines on video per user request.
+  function drawGuide() {}
 
-  // The edge nearest a free spot (fractions).
   function edgeOf(at) {
     const d = { left: at.x, right: 1 - at.x, top: at.y, bottom: 1 - at.y };
     return Object.keys(d).reduce((a, b) => (d[a] <= d[b] ? a : b));
   }
 
-  // Snap a free spot (fractions, after a drag) to the nearest edge: into a corner, or the edge's
-  // middle, when close to one; else where it was dropped along it.
   function snap(at) {
-    const edge = edgeOf(at);
-    const c = (n) => (n < 0.08 ? 0 : n > 0.92 ? 1 : Math.abs(n - 0.5) < 0.06 ? 0.5 : n);
-    if (edge === "left") return { x: 0, y: c(at.y) };
-    if (edge === "right") return { x: 1, y: c(at.y) };
-    if (edge === "top") return { x: c(at.x), y: 0 };
-    return { x: c(at.x), y: 1 };
+    return at;
   }
 
   // ---- showing and hiding ---------------------------------------------------------------------
@@ -1796,12 +1763,11 @@ button:focus-visible { outline: none; }
     return { r: lastRect, at: chosen ? place : (auto.v === video && auto.at) || place, d, since: now };
   }
 
-  // While shown: follow the video (scrolling, layout) and fade when the pointer rests (IDLE_MS)
-  // or at once when it leaves the video.
+  // While shown: follow the video (scrolling, layout), keep visible unless fullscreen or off-screen.
   function tick() {
     raf = 0;
     if (!video) return hide(true);
-    if (isFullscreen()) return hide(true);
+    if (hideFullscreen && isFullscreen()) return hide(true);
     const onButton = root.matches(":hover");
     const h = pill.offsetHeight || 30;
     if (!video.isConnected || !eligible(video)) {
@@ -1812,8 +1778,8 @@ button:focus-visible { outline: none; }
         (onButton ||
           (pointer.x >= r.left - INSET &&
             pointer.x <= r.right + INSET &&
-            pointer.y >= r.top - h - 20 &&
-            pointer.y <= r.bottom));
+            pointer.y >= r.top - h - 16 &&
+            pointer.y <= r.bottom + INSET));
       if (!held || !(onButton || menuOpen || dragging || keyboardOn() || (over && Date.now() - held.since < HOLD_MS))) {
         const was = held;
         held = null;
@@ -1827,12 +1793,15 @@ button:focus-visible { outline: none; }
     }
     held = null;
     const r = getPlayerRect(video);
+    const w = pill.offsetWidth || 150;
+    const curTop = pinned ? pinned.top : r.top - h - 6;
+    const curLeft = pinned ? pinned.left : r.right - w;
     const over =
       onButton ||
-      (pointer.x >= r.left - INSET &&
-        pointer.x <= r.right + INSET &&
-        pointer.y >= r.top - h - 20 &&
-        pointer.y <= r.bottom);
+      (pointer.x >= Math.min(r.left - INSET, curLeft - 10) &&
+        pointer.x <= Math.max(r.right + INSET, curLeft + w + 10) &&
+        pointer.y >= Math.min(r.top - h - 20, curTop - 10) &&
+        pointer.y <= Math.max(r.bottom + INSET, curTop + h + 10));
     if (!onButton && !menuOpen && !dragging && !keyboardOn() && (!over || Date.now() - lastMove > IDLE_MS)) {
       return hide();
     }
@@ -1883,9 +1852,9 @@ button:focus-visible { outline: none; }
       if (allowed && !placed) {
         placed = true;
         try {
-          const { positions } = await ext.storage.local.get({ positions: {} });
-          if (positions[host]) {
-            place = snap(positions[host]);
+          const { userOffsets } = await ext.storage.local.get({ userOffsets: {} });
+          if (userOffsets && userOffsets[host]) {
+            userOffset = userOffsets[host];
             chosen = true;
           }
         } catch {
@@ -2332,15 +2301,19 @@ button:focus-visible { outline: none; }
   go.addEventListener("pointerdown", (e) => {
     if (e.button !== 0 || !video || !e.isTrusted) return;
     tipOff();
-    const { r, roomX, roomY } = rects();
+    const { r, w, h } = rects();
+    const curLeft = pinned ? pinned.left : (r.right - w);
+    const curTop = pinned ? pinned.top : (r.top - h - 6);
     dragging = {
       id: e.pointerId,
       startX: e.clientX,
       startY: e.clientY,
-      // Where in the button it was taken.
-      dx: e.clientX - (r.left + INSET + (chosen ? place : auto.at || place).x * roomX),
-      dy: e.clientY - (r.top + INSET + (chosen ? place : auto.at || place).y * roomY),
-      at: chosen ? place : auto.at || place,
+      curLeft,
+      curTop,
+      dx: e.clientX - curLeft,
+      dy: e.clientY - curTop,
+      left: curLeft,
+      top: curTop,
       moved: false,
     };
     go.setPointerCapture(e.pointerId);
@@ -2354,13 +2327,15 @@ button:focus-visible { outline: none; }
       closeMenu();
       pill.classList.add("dragging");
     }
-    const { r, roomX, roomY } = rects();
-    const c = (n) => Math.min(1, Math.max(0, n));
-    dragging.at = {
-      x: roomX ? c((e.clientX - dragging.dx - r.left - INSET) / roomX) : 0,
-      y: roomY ? c((e.clientY - dragging.dy - r.top - INSET) / roomY) : 0,
-    };
-    position();
+    const { w } = rects();
+    const left = e.clientX - dragging.dx;
+    const top = e.clientY - dragging.dy;
+    dragging.left = left;
+    dragging.top = top;
+    root.style.setProperty("transform", `translate(${Math.round(left)}px, ${Math.round(top)}px)`, "important");
+    pinned = { v: video, left, top, w, end: true };
+    if (menuOpen) placeMenu(top, left, w);
+    placeTip(left, w);
   });
   const endDrag = (e) => {
     if (!dragging || e.pointerId !== dragging.id) return;
@@ -2373,11 +2348,15 @@ button:focus-visible { outline: none; }
       if (e.type === "pointerup" && !pill.classList.contains("bare")) download();
       return;
     }
-    place = snap(d.at);
+    const { r, w, h } = rects();
+    const baseLeft = r.right - w;
+    const baseTop = r.top - h - 6;
+    userOffset = {
+      dx: d.left - baseLeft,
+      dy: d.top - baseTop,
+    };
     chosen = true;
-    // It snaps to its spot although the pointer is still on it (#560's pin is for a video
-    // that changes under a still pointer, not for the user's own move).
-    pinned = null;
+    pinned = { v: video, left: d.left, top: d.top, w, end: true };
     position();
     lastMove = Date.now();
     // Remembered per site, not in a private window (it would keep the site's name), and the
@@ -2385,13 +2364,13 @@ button:focus-visible { outline: none; }
     if (ext.extension?.inIncognitoContext) return;
     try {
       ext.storage.local
-        .get({ positions: {} })
-        .then(({ positions }) => {
-          delete positions[host];
-          positions[host] = place;
-          const sites = Object.keys(positions);
-          for (const s of sites.slice(0, Math.max(0, sites.length - 200))) delete positions[s];
-          return ext.storage.local.set({ positions });
+        .get({ userOffsets: {} })
+        .then(({ userOffsets }) => {
+          userOffsets = userOffsets || {};
+          userOffsets[host] = userOffset;
+          const sites = Object.keys(userOffsets);
+          for (const s of sites.slice(0, Math.max(0, sites.length - 200))) delete userOffsets[s];
+          return ext.storage.local.set({ userOffsets });
         })
         .catch(() => {});
     } catch {

@@ -1,4 +1,4 @@
-# Mister Download Manager in Georgian (ქართული): tools/i18n/translate.py
+# Sedot Download Manager in Georgian (ქართული): tools/i18n/translate.py
 # writes the rows marked '#, machine'; a native speaker deletes that line after checking.
 # context	source	translation (craft-i18n format, rows as in en.tsv)
 @id	language.name	ქართული
@@ -11,7 +11,7 @@
 #. never shown for a single download
 #. {n} = a number (keep the braces as they are)
 #, machine
-@plural	Are you sure you want to delete {n} download from Mister Download Manager list of downloads?|Are you sure you want to delete these {n} downloads from Mister Download Manager list of downloads?	გსურთ Mister Download Manager-ის ჩამოტვირთვების სიიდან {n} ჩამოტვირთვის წაშლა?|გსურთ Mister Download Manager-ის ჩამოტვირთვების სიიდან ამ {n} ჩამოტვირთვის წაშლა?
+@plural	Are you sure you want to delete {n} download from Sedot Download Manager list of downloads?|Are you sure you want to delete these {n} downloads from Sedot Download Manager list of downloads?	გსურთ Sedot Download Manager-ის ჩამოტვირთვების სიიდან {n} ჩამოტვირთვის წაშლა?|გსურთ Sedot Download Manager-ის ჩამოტვირთვების სიიდან ამ {n} ჩამოტვირთვის წაშლა?
 #. count in the Add torrent window
 #. while a magnet link's file list is fetched; {n} = peers that answered
 #. {n} = a number (keep the braces as they are)
@@ -217,7 +217,7 @@
 #. text in the Options window
 #. Options → Accounts: what these accounts are, and the services' rule against sharing
 #, machine
-	A debrid service downloads a file host's link with your own paid account and gives MDM a direct link. Use only your own account: sharing an account or its links breaks the services' terms and can get it suspended. Downloads the browser already started stay as they are.	დეზაბრიდირების სერვისი ჩამოტვირთავს ფაილის ჰოსტის ბმულს თქვენი საკუთარი ფასიანი ანგარიშით და MDM-ს აძლევს პირდაპირ ბმულს. გამოიყენეთ მხოლოდ თქვენი საკუთარი ანგარიში: ანგარიშის ან მისი ბმულების გაზიარება არღვევს სერვისების პირობებს და შეიძლება გამოიწვიოს მისი შეჩერება. ბრაუზერის მიერ უკვე დაწყებული ჩამოტვირთვები რჩება ისე, როგორც არის.
+	A debrid service downloads a file host's link with your own paid account and gives SDM a direct link. Use only your own account: sharing an account or its links breaks the services' terms and can get it suspended. Downloads the browser already started stay as they are.	დეზაბრიდირების სერვისი ჩამოტვირთავს ფაილის ჰოსტის ბმულს თქვენი საკუთარი ფასიანი ანგარიშით და SDM-ს აძლევს პირდაპირ ბმულს. გამოიყენეთ მხოლოდ თქვენი საკუთარი ანგარიში: ანგარიშის ან მისი ბმულების გაზიარება არღვევს სერვისების პირობებს და შეიძლება გამოიწვიოს მისი შეჩერება. ბრაუზერის მიერ უკვე დაწყებული ჩამოტვირთვები რჩება ისე, როგორც არის.
 #. text in a download's progress window
 #. reason shown on the Rename box when the entered name ends with a period
 #, machine
@@ -261,7 +261,7 @@
 #, machine
 	A single-file torrent keeps its name	ერთფაილიანი ტორენტი ინარჩუნებს სახელს
 #. text in the Add torrent window
-#. Add trackers: MDM never contacts a tracker on this computer or the local network
+#. Add trackers: SDM never contacts a tracker on this computer or the local network
 #, machine
 	A tracker on this computer or the local network is never contacted: {line}	ამ კომპიუტერზე ან ლოკალურ ქსელში არსებულ ტრეკერთან კავშირი არასოდეს მყარდება: {line}
 #. text in extracting archives (a download's log, the Archive password window)
@@ -270,7 +270,7 @@
 	a volume of it is missing	მას ერთი ტომი აკლია
 #. window title in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #, machine
-	About Mister Download Manager	Mister Download Manager-ის შესახებ
+	About Sedot Download Manager	Sedot Download Manager-ის შესახებ
 #. text in whereis.rs
 #. a download's server's round trip: {ms} a number of milliseconds, {reach} near, medium or far
 #, machine
@@ -333,7 +333,7 @@
 #. window title in extension.rs
 #. title of the window that offers the browser extension
 #, machine
-	Add Mister Download Manager to your browser	Mister Download Manager-ის დამატება თქვენს ბრაუზერში
+	Add Sedot Download Manager to your browser	Sedot Download Manager-ის დამატება თქვენს ბრაუზერში
 #. message or event log entry in the main window; text in the tray icon's menu
 #. link in the empty download list: opens Add URL
 #, machine
@@ -395,9 +395,9 @@
 #, machine
 	Added.	დამატებულია.
 #. text in remote.rs
-#. remote control page (on a phone): a magnet link or .torrent file was added; MDM reads the torrent's files first
+#. remote control page (on a phone): a magnet link or .torrent file was added; SDM reads the torrent's files first
 #, machine
-	Added. MDM is reading the torrent: it joins the list in a moment.	დამატებულია. MDM კითხულობს ტორენტს: ის მალე შეუერთდება სიას.
+	Added. SDM is reading the torrent: it joins the list in a moment.	დამატებულია. SDM კითხულობს ტორენტს: ის მალე შეუერთდება სიას.
 #. text in the Batch download window; text in a dialog box; label in the Options window; text in a download's progress window
 #. noun: the web address (URL)
 #. column title: the web address (URL)
@@ -481,7 +481,7 @@
 #, machine
 	Already reported as issue #{number}: {title}	უკვე მოხსენებულია, როგორც საკითხი #{number}: {title}
 #. checkbox in crashui.rs
-#. crash report window: checkbox; the .dmp file holds what MDM had in memory
+#. crash report window: checkbox; the .dmp file holds what SDM had in memory
 #, machine
 	Also attach the crash data (.dmp): it may hold addresses, cookies and passwords	ასევე დაურთეთ ავარიის მონაცემები (.dmp): ის შეიძლება შეიცავდეს მისამართებს, ქუქი-ფაილებს და პაროლებს
 #. text in a dialog box
@@ -500,7 +500,7 @@
 	Always into a folder named after it	ყოველთვის მის სახელობის საქაღალდეში
 #. checkbox in a dialog box
 #, machine
-	Always turn on Speed Limiter on Mister Download Manager startup	ყოველთვის ჩართეთ სიჩქარის შემზღუდველი Mister Download Manager-ის გაშვებისას
+	Always turn on Speed Limiter on Sedot Download Manager startup	ყოველთვის ჩართეთ სიჩქარის შემზღუდველი Sedot Download Manager-ის გაშვებისას
 #. text in regional.rs; text in the Scheduler window
 #. before noon, after a time of day (12-hour clock). Its pair is "PM": write both the same way (this language's own short marks, or both kept as AM and PM)
 #, machine
@@ -566,7 +566,7 @@
 #. text in a dialog box
 #. {name} = a file name (keep the braces as they are)
 #, machine
-	Are you sure you want to delete "{name}" from Mister Download Manager list of downloads?	დარწმუნებული ხართ, რომ გსურთ „{name}“-ის წაშლა Mister Download Manager-ის ჩამოტვირთვების სიიდან?
+	Are you sure you want to delete "{name}" from Sedot Download Manager list of downloads?	დარწმუნებული ხართ, რომ გსურთ „{name}“-ის წაშლა Sedot Download Manager-ის ჩამოტვირთვების სიიდან?
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -626,7 +626,7 @@
 #, machine
 	Austria	ავსტრია
 #. checkbox in the Options window; text in the Options window
-#. checkbox: the User-Agent is the default browser's, which MDM finds itself
+#. checkbox: the User-Agent is the default browser's, which SDM finds itself
 #, machine
 	Automatic	ავტომატური
 #. text in remote.rs
@@ -709,7 +709,7 @@
 	Bosnia and Herzegovina	ბოსნია და ჰერცეგოვინა
 #. text in helpers.rs
 #, machine
-	Both are open source. MDM gets them from their official releases with its own downloader and checks each file's signature before it runs. About 100 MB, once.	ორივე ღია წყაროა. MDM მათ ოფიციალური გამოშვებებიდან იღებს საკუთარი ჩამომტვირთველით და ამოწმებს თითოეული ფაილის ხელმოწერას გაშვებამდე. დაახლოებით 100 მბ, ერთხელ.
+	Both are open source. SDM gets them from their official releases with its own downloader and checks each file's signature before it runs. About 100 MB, once.	ორივე ღია წყაროა. SDM მათ ოფიციალური გამოშვებებიდან იღებს საკუთარი ჩამომტვირთველით და ამოწმებს თითოეული ფაილის ხელმოწერას გაშვებამდე. დაახლოებით 100 მბ, ერთხელ.
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -739,7 +739,7 @@
 	Browse...	დათვალიერება...
 #. text in extension.rs
 #, machine
-	Browser integration isn't set up on this computer, so no browser can reach Mister Download Manager yet.	ბრაუზერის ინტეგრაცია ამ კომპიუტერზე არ არის დაყენებული, ამიტომ არცერთ ბრაუზერს არ შეუძლია Mister Download Manager-თან დაკავშირება.
+	Browser integration isn't set up on this computer, so no browser can reach Sedot Download Manager yet.	ბრაუზერის ინტეგრაცია ამ კომპიუტერზე არ არის დაყენებული, ამიტომ არცერთ ბრაუზერს არ შეუძლია Sedot Download Manager-თან დაკავშირება.
 #. page title in the Options window
 #, machine
 	Browser/System Integration	ბრაუზერის/სისტემის ინტეგრაცია
@@ -871,7 +871,7 @@
 #, machine
 	Check for updates	განახლებების შემოწმება
 #. checkbox in the Help menu's windows (About, updates, shortcuts, Tell a friend)
-#. check box in the update window: look for a new version every time MDM starts
+#. check box in the update window: look for a new version every time SDM starts
 #, machine
 	Check for updates at every start	ყოველი გაშვებისას შეამოწმეთ განახლებები
 #. text in errors.rs
@@ -883,9 +883,9 @@
 #, machine
 	Check your connection, then try again, or get them later from the video window.	შეამოწმეთ თქვენი კავშირი, შემდეგ სცადეთ ხელახლა, ან მიიღეთ მოგვიანებით ვიდეოს ფანჯრიდან.
 #. text in the Options window
-#. tooltip of the close-setting: checked keeps MDM running when the window closes, in the notification area when available or else the taskbar; downloads continue; unchecked closing quits
+#. tooltip of the close-setting: checked keeps SDM running when the window closes, in the notification area when available or else the taskbar; downloads continue; unchecked closing quits
 #, machine
-	Checked, closing the window keeps MDM running: it hides in the notification area when available, or minimizes to the taskbar otherwise, and downloads continue; unchecked, closing quits MDM	მონიშვნის შემთხვევაში, ფანჯრის დახურვისას MDM გააგრძელებს მუშაობას: ის დაიმალება შეტყობინებების ზონაში, თუ ხელმისაწვდომია, ან მინიმიზირდება დავალებათა ზოლში, ხოლო ჩამოტვირთვები გაგრძელდება; მოუნიშნავის შემთხვევაში, დახურვისას MDM გამოირთვება.
+	Checked, closing the window keeps SDM running: it hides in the notification area when available, or minimizes to the taskbar otherwise, and downloads continue; unchecked, closing quits SDM	მონიშვნის შემთხვევაში, ფანჯრის დახურვისას SDM გააგრძელებს მუშაობას: ის დაიმალება შეტყობინებების ზონაში, თუ ხელმისაწვდომია, ან მინიმიზირდება დავალებათა ზოლში, ხოლო ჩამოტვირთვები გაგრძელდება; მოუნიშნავის შემთხვევაში, დახურვისას SDM გამოირთვება.
 #. message or event log entry in the main window
 #. event log entry after Recheck: {have} and {total} are sizes ("1.2 GB of 4 GB there")
 #, machine
@@ -944,7 +944,7 @@
 	Choose a language	აირჩიეთ ენა
 #. text in langpick.rs
 #, machine
-	Choose the language Mister Download Manager shows its windows in:	აირჩიეთ ენა, რომელზეც Mister Download Manager აჩვენებს ფანჯრებს:
+	Choose the language Sedot Download Manager shows its windows in:	აირჩიეთ ენა, რომელზეც Sedot Download Manager აჩვენებს ფანჯრებს:
 #. text in the Options window
 #. Options → Sites Logins → Cookies for video sites: the title of the window, and the tooltip of the button, that pick a browser profile's folder
 #, machine
@@ -1032,7 +1032,7 @@
 #, machine
 	Congo	კონგო
 #. text in extension.rs
-#. in the browser extension's window, beside a browser whose extension reached MDM
+#. in the browser extension's window, beside a browser whose extension reached SDM
 #, machine
 	Connected	დაკავშირებულია
 #. text in extension.rs
@@ -1084,7 +1084,7 @@
 #, machine
 	Could not be read: {error}	წაკითხვა ვერ მოხერხდა: {error}
 #. text in errors.rs
-#. a helper (yt-dlp, ffmpeg) couldn't be downloaded: the proxy set in Options ({proxy}, its address) didn't let MDM connect
+#. a helper (yt-dlp, ffmpeg) couldn't be downloaded: the proxy set in Options ({proxy}, its address) didn't let SDM connect
 #, machine
 	could not connect through the proxy {proxy}	პროქსის {proxy} მეშვეობით დაკავშირება ვერ მოხერხდა
 #. text in errors.rs
@@ -1122,13 +1122,13 @@
 	Customize "Download progress" dialog	„ჩამოტვირთვის პროგრესის“ დიალოგის მორგება
 #. text in the Options window
 #, machine
-	Customize keys to prevent or force downloading with MDM	MDM-ით ჩამოტვირთვის თავიდან ასაცილებლად ან ჩამოტვირთვის იძულებისთვის კლავიშების მორგება
+	Customize keys to prevent or force downloading with SDM	SDM-ით ჩამოტვირთვის თავიდან ასაცილებლად ან ჩამოტვირთვის იძულებისთვის კლავიშების მორგება
 #. text in the Options window
 #, machine
-	Customize MDM Download panels in browsers	ბრაუზერებში MDM ჩამოტვირთვის პანელების მორგება
+	Customize SDM Download panels in browsers	ბრაუზერებში SDM ჩამოტვირთვის პანელების მორგება
 #. text in the Options window
 #, machine
-	Customize MDM menu items in context menu of browsers	ბრაუზერების კონტექსტურ მენიუში MDM მენიუს ელემენტების მორგება
+	Customize SDM menu items in context menu of browsers	ბრაუზერების კონტექსტურ მენიუში SDM მენიუს ელემენტების მორგება
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -1317,9 +1317,9 @@
 #, machine
 	Download complete	ჩამოტვირთვა დასრულდა
 #. text in the Options window
-#. Options, Downloads, under "Show download complete dialog": snoozed with "Until MDM restarts"
+#. Options, Downloads, under "Show download complete dialog": snoozed with "Until SDM restarts"
 #, machine
-	Download complete is snoozed until MDM restarts	ჩამოტვირთვა დასრულდა, გადაიდო MDM-ის გადატვირთვამდე
+	Download complete is snoozed until SDM restarts	ჩამოტვირთვა დასრულდა, გადაიდო SDM-ის გადატვირთვამდე
 #. text in the Options window
 #. Options, Downloads, under "Show download complete dialog": {time} when the snooze ends, like "14:30"
 #. {time} = a time of day (keep the braces as they are)
@@ -1428,10 +1428,10 @@
 #, machine
 	Downloading and verifying yt-dlp...	yt-dlp-ის ჩამოტვირთვა და შემოწმება...
 #. text in helpers.rs
-#. Video helpers: MDM's own yt-dlp is being downloaded
+#. Video helpers: SDM's own yt-dlp is being downloaded
 #. the trailing ... means it is still going on: keep it
 #, machine
-	Downloading MDM's own copy...	MDM-ის ასლის ჩამოტვირთვა მიმდინარეობს...
+	Downloading SDM's own copy...	SDM-ის ასლის ჩამოტვირთვა მიმდინარეობს...
 #. text in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #. Check for updates, while Update now downloads; {percent} like "42%"
 #, machine
@@ -1474,7 +1474,7 @@
 	Drag the file into a folder or an app	გადაიტანეთ ფაილი საქაღალდეში ან აპში
 #. message or event log entry in the main window
 #, machine
-	Dragged out of Download complete and moved to a place MDM couldn't learn	გადმოათრიეს „ჩამოტვირთვა დასრულებულია“-დან და გადაიტანეს MDM-ისთვის უცნობ ადგილას.
+	Dragged out of Download complete and moved to a place SDM couldn't learn	გადმოათრიეს „ჩამოტვირთვა დასრულებულია“-დან და გადაიტანეს SDM-ისთვის უცნობ ადგილას.
 #. message or event log entry in the main window
 #, machine
 	Dragged out of Download complete and moved to {folder}	გადმოათრიეს „ჩამოტვირთვა დასრულებულია“-დან და გადაიტანეს {folder}-ში.
@@ -1536,9 +1536,9 @@
 #, machine
 	Empty: all of them. On most sites the newest come first.	ცარიელი: ყველა მათგანი. უმეტეს საიტებზე უახლესი პირველია.
 #. text in crashui.rs
-#. crash report window button: end the frozen MDM and start it again
+#. crash report window button: end the frozen SDM and start it again
 #, machine
-	End and restart MDM	MDM-ის დასრულება და გადატვირთვა
+	End and restart SDM	SDM-ის დასრულება და გადატვირთვა
 #. text in the Add torrent window
 #, machine
 	Enter a magnet link or choose a .torrent file	შეიყვანეთ მაგნიტური ბმული ან აირჩიეთ .torrent ფაილი
@@ -1621,7 +1621,7 @@
 	Exit	გასვლა
 #. checkbox in a download's progress window; checkbox in the Scheduler window
 #, machine
-	Exit Mister Download Manager when done	Mister Download Manager-დან გასვლა დასრულების შემდეგ
+	Exit Sedot Download Manager when done	Sedot Download Manager-დან გასვლა დასრულების შემდეგ
 #. text in the Checksum window
 #, machine
 	Expected checksum (MD5, SHA-1, SHA-256, SHA-512 or CRC32):	მოსალოდნელი საკონტროლო ჯამი (MD5, SHA-1, SHA-256, SHA-512 ან CRC32):
@@ -1836,7 +1836,7 @@
 #, machine
 	For example:  {address}	მაგალითად: {address}
 #. text in the Add torrent window
-#. Torrent settings, under the switch that makes MDM open magnet links and .torrent files (macOS, Linux)
+#. Torrent settings, under the switch that makes SDM open magnet links and .torrent files (macOS, Linux)
 #, machine
 	For your account only. Another app set as the default stays first.	მხოლოდ თქვენი ანგარიშისთვის. სხვა აპლიკაცია, რომელიც ნაგულისხმევად არის დაყენებული, პირველი რჩება.
 #. text in the Add torrent window
@@ -1846,7 +1846,7 @@
 #, machine
 	Force processes to terminate	პროცესების იძულებითი შეწყვეტა
 #. text in remote.rs
-#. remote control page (on a phone): menu command: unpair this phone or computer from MDM
+#. remote control page (on a phone): menu command: unpair this phone or computer from SDM
 #, machine
 	Forget this device	ამ მოწყობილობის დავიწყება
 #. text in remote.rs
@@ -2057,11 +2057,11 @@
 #, machine
 	Help	დახმარება
 #. window title in helpers.rs
-#. window title: where MDM takes its helper programs (yt-dlp, ffmpeg, gallery-dl) from
+#. window title: where SDM takes its helper programs (yt-dlp, ffmpeg, gallery-dl) from
 #, machine
 	Helpers	დამხმარეები
 #. text in errors.rs; button in gallerydlg.rs; button in the Download video window
-#. button in Download video: where MDM takes yt-dlp and ffmpeg from
+#. button in Download video: where SDM takes yt-dlp and ffmpeg from
 #. the trailing ... means it opens a window: keep it
 #, machine
 	Helpers...	დამხმარეები...
@@ -2086,7 +2086,7 @@
 	Hide web pages	ვებ გვერდების დამალვა
 #. text in the Options window
 #, machine
-	Hold Alt while clicking a link to let the browser download it instead of Mister Download Manager.	დააჭირეთ Alt-ს ბმულზე დაწკაპუნებისას, რათა ბრაუზერმა ჩამოტვირთოს ის Mister Download Manager-ის ნაცვლად.
+	Hold Alt while clicking a link to let the browser download it instead of Sedot Download Manager.	დააჭირეთ Alt-ს ბმულზე დაწკაპუნებისას, რათა ბრაუზერმა ჩამოტვირთოს ის Sedot Download Manager-ის ნაცვლად.
 #. link (opens a web page) in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #, machine
 	Home page	მთავარი გვერდი
@@ -2127,7 +2127,7 @@
 	Hungary	უნგრეთი
 #. text in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #, machine
-	I download with Mister Download Manager: fast, free, and it looks like the download manager you already know. {link}	მე ვიწერ Mister Download Manager-ით: სწრაფი, უფასო და ის ჰგავს ჩამოტვირთვის მენეჯერს, რომელიც უკვე იცით. {link}
+	I download with Sedot Download Manager: fast, free, and it looks like the download manager you already know. {link}	მე ვიწერ Sedot Download Manager-ით: სწრაფი, უფასო და ის ჰგავს ჩამოტვირთვის მენეჯერს, რომელიც უკვე იცით. {link}
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -2164,7 +2164,7 @@
 #, machine
 	In the categories: the selected category's menu	კატეგორიებში: არჩეული კატეგორიის მენიუ
 #. text in the Options window
-#. Options → Accounts: the account's sign-in is in the system's keyring (Linux), which is locked now; MDM never unlocks it
+#. Options → Accounts: the account's sign-in is in the system's keyring (Linux), which is locked now; SDM never unlocks it
 #, machine
 	in the locked keyring	დაბლოკილ საკვანძო რგოლში
 #. text in standard windows
@@ -2204,7 +2204,7 @@
 #, machine
 	Install it by hand	ხელით დააინსტალირეთ
 #. text in unix.rs
-#. Linux, after a missing library's name, on a distribution MDM doesn't know
+#. Linux, after a missing library's name, on a distribution SDM doesn't know
 #, machine
 	Install what's missing from your distribution's packages.	დააინსტალირეთ ის, რაც თქვენს დისტრიბუციას აკლია, პაკეტებიდან.
 #. text in the Download video window
@@ -2263,7 +2263,7 @@
 #. text in extracting archives (a download's log, the Archive password window)
 #. why an archive wasn't extracted (after "Couldn't extract {name}: ")
 #, machine
-	it is not an archive MDM extracts	ის არ არის არქივი, რომელსაც MDM ამოიღებს
+	it is not an archive SDM extracts	ის არ არის არქივი, რომელსაც SDM ამოიღებს
 #. text in extracting archives (a download's log, the Archive password window)
 #. why an archive wasn't extracted (after "Couldn't extract {name}: ")
 #, machine
@@ -2284,7 +2284,7 @@
 #. text in the Batch download window
 #. \\n starts a new line: break lines where they fit the translation
 #, machine
-	It's possible to add a group of sequential file names like img001.jpg, img002.jpg, etc.,\nimg100.jpg to MDM download queue. Use the asterisk wildcard for the file name pattern.	შესაძლებელია MDM ჩამოტვირთვის რიგში თანმიმდევრული ფაილების ჯგუფის დამატება, როგორიცაა img001.jpg, img002.jpg და ა.შ.,\nimg100.jpg. გამოიყენეთ ვარსკვლავის სიმბოლო ფაილის სახელის შაბლონისთვის.
+	It's possible to add a group of sequential file names like img001.jpg, img002.jpg, etc.,\nimg100.jpg to SDM download queue. Use the asterisk wildcard for the file name pattern.	შესაძლებელია SDM ჩამოტვირთვის რიგში თანმიმდევრული ფაილების ჯგუფის დამატება, როგორიცაა img001.jpg, img002.jpg და ა.შ.,\nimg100.jpg. გამოიყენეთ ვარსკვლავის სიმბოლო ფაილის სახელის შაბლონისთვის.
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -2342,7 +2342,7 @@
 #, machine
 	KBytes/sec	კბაიტი/წმ
 #. text in the Options window
-#. checkbox: closing keeps MDM running, in the notification area when available or else the taskbar, instead of quitting
+#. checkbox: closing keeps SDM running, in the notification area when available or else the taskbar, instead of quitting
 #, machine
 	Keep running when closing the window	ფანჯრის დახურვისას გაშვებული იყოს
 #. checkbox in the Add torrent window
@@ -2360,7 +2360,7 @@
 #, machine
 	Keyboard shortcuts	კლავიატურის მალსახმობები
 #. window title in the Options window
-#. window title: the keys that force or prevent downloading with MDM
+#. window title: the keys that force or prevent downloading with SDM
 #, machine
 	Keys	კლავიშები
 #. button in the Options window
@@ -2396,14 +2396,14 @@
 #, machine
 	Laos	ლაოსი
 #. message or event log entry in the main window
-#. RSS: a feed bigger than MDM reads (5 MB)
+#. RSS: a feed bigger than SDM reads (5 MB)
 #, machine
 	larger than a feed can be	არხის დასაშვებ ზომაზე დიდია
 #. text in the Batch download window
 #, machine
 	Last file:	ბოლო ფაილი:
 #. text in the Options window
-#. column title: when the device last reached MDM
+#. column title: when the device last reached SDM
 #, machine
 	Last seen	ბოლოს ნახული
 #. text in a download's Properties window
@@ -2421,7 +2421,7 @@
 	Latvia	ლატვია
 #. text in the Options window
 #, machine
-	Launch Mister Download Manager on startup	Mister Download Manager-ის გაშვება Windows-ის გაშვებისას
+	Launch Sedot Download Manager on startup	Sedot Download Manager-ის გაშვება Windows-ის გაშვებისას
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -2433,7 +2433,7 @@
 #. checkbox in the Options window
 #. Options → Remote check box (off by default)
 #, machine
-	Let phones and computers on the local network control MDM	ნება მიეცით ტელეფონებსა და კომპიუტერებს ლოკალურ ქსელში, აკონტროლონ MDM
+	Let phones and computers on the local network control SDM	ნება მიეცით ტელეფონებსა და კომპიუტერებს ლოკალურ ქსელში, აკონტროლონ SDM
 #. option (radio button) in the Batch download window
 #. the * in the address runs through letters
 #, machine
@@ -2482,7 +2482,7 @@
 #, machine
 	List the rest	დანარჩენის ჩამოთვლა
 #. text in the Options window
-#. Options → Remote: label before the choice of the address MDM listens on
+#. Options → Remote: label before the choice of the address SDM listens on
 #, machine
 	Listen on:	მოსმენა:
 #. text in playlistdlg.rs
@@ -2666,32 +2666,32 @@
 #. text in the Options window
 #. Options → Remote → Pair a device: the remote control isn't listening (no network, port taken): the Remote page says why
 #, machine
-	MDM can't be reached on the network now: Options → Remote says why.	MDM-თან დაკავშირება ქსელში ახლა შეუძლებელია: პარამეტრები → დისტანციური მართვა გეტყვით მიზეზს.
+	SDM can't be reached on the network now: Options → Remote says why.	SDM-თან დაკავშირება ქსელში ახლა შეუძლებელია: პარამეტრები → დისტანციური მართვა გეტყვით მიზეზს.
 #. text in remote.rs
-#. remote control page (on a phone): the address typed isn't one MDM downloads (not http, https, ftp or magnet)
+#. remote control page (on a phone): the address typed isn't one SDM downloads (not http, https, ftp or magnet)
 #, machine
-	MDM cannot download this address.	MDM-ს არ შეუძლია ამ მისამართის ჩამოტვირთვა.
+	SDM cannot download this address.	SDM-ს არ შეუძლია ამ მისამართის ჩამოტვირთვა.
 #. text in remote.rs
 #. remote control page (on a phone): adding a download failed
 #, machine
-	MDM could not add it.	MDM-მა ვერ დაამატა.
+	SDM could not add it.	SDM-მა ვერ დაამატა.
 #. text in remote.rs
 #. remote control page (on a phone): an action failed
 #, machine
-	MDM could not do it.	MDM-მა ვერ შეასრულა.
+	SDM could not do it.	SDM-მა ვერ შეასრულა.
 #. text in remote.rs
-#. remote control page (on a phone): MDM can't be reached while pairing
+#. remote control page (on a phone): SDM can't be reached while pairing
 #, machine
-	MDM does not answer. Check that it is running and on the same network.	MDM არ პასუხობს. შეამოწმეთ, რომ ის მუშაობს და იმავე ქსელშია.
+	SDM does not answer. Check that it is running and on the same network.	SDM არ პასუხობს. შეამოწმეთ, რომ ის მუშაობს და იმავე ქსელშია.
 #. text in remote.rs
-#. remote control page (on a phone): MDM can't be reached now; the page keeps trying by itself
+#. remote control page (on a phone): SDM can't be reached now; the page keeps trying by itself
 #. the trailing ... means it is still going on: keep it
 #, machine
-	MDM does not answer. Trying again...	MDM არ პასუხობს. ხელახლა ვცდი...
+	SDM does not answer. Trying again...	SDM არ პასუხობს. ხელახლა ვცდი...
 #. text in remote.rs
-#. remote control page (on a phone): no pairing code is shown in MDM; "Pair a device" is MDM's button
+#. remote control page (on a phone): no pairing code is shown in SDM; "Pair a device" is SDM's button
 #, machine
-	MDM shows no code now. Click Pair a device there first.	MDM ახლა არ აჩვენებს კოდს. ჯერ დააწკაპუნეთ „მოწყობილობის დაწყვილება“.
+	SDM shows no code now. Click Pair a device there first.	SDM ახლა არ აჩვენებს კოდს. ჯერ დააწკაპუნეთ „მოწყობილობის დაწყვილება“.
 #. text in whereis.rs
 #. how far a download's server is, by its round trip (60 to 150 ms)
 #, machine
@@ -2722,7 +2722,7 @@
 #, machine
 	Minimize	მინიმიზაცია
 #. text in the Options window
-#. checkbox: the Minimize button hides MDM's windows to the notification area (system tray) instead of the taskbar
+#. checkbox: the Minimize button hides SDM's windows to the notification area (system tray) instead of the taskbar
 #, machine
 	Minimize to the notification area	შეტყობინებების არეში მინიმიზაცია
 #. text in rssdlg.rs; text in the Add torrent window
@@ -2736,58 +2736,58 @@
 	Missing	ჩამოუტვირთავი
 #. message or event log entry in the main window; window title in a dialog box; text in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #, machine
-	Mister Download Manager	Mister Download Manager
+	Sedot Download Manager	Sedot Download Manager
 #. text in unix.rs
 #. Linux, at start, on the terminal and in a message box: a library the window needs isn't installed; {libraries} = its file names (libxkbcommon-x11.so.0…), left as they are
 #, machine
-	Mister Download Manager can't open its window: this system lacks {libraries}.	Mister Download Manager-ს არ შეუძლია ფანჯრის გახსნა: ამ სისტემას აკლია {libraries}.
+	Sedot Download Manager can't open its window: this system lacks {libraries}.	Sedot Download Manager-ს არ შეუძლია ფანჯრის გახსნა: ამ სისტემას აკლია {libraries}.
 #. text in crashui.rs
-#. crash report window heading: MDM crashed and is gone
+#. crash report window heading: SDM crashed and is gone
 #, machine
-	Mister Download Manager closed unexpectedly	Mister Download Manager მოულოდნელად დაიხურა
+	Sedot Download Manager closed unexpectedly	Sedot Download Manager მოულოდნელად დაიხურა
 #. window title in the Options window
 #, machine
-	Mister Download Manager Configuration	Mister Download Manager-ის კონფიგურაცია
+	Sedot Download Manager Configuration	Sedot Download Manager-ის კონფიგურაცია
 #. text in crashui.rs
 #, machine
-	Mister Download Manager crash report	Mister Download Manager ავარიის ანგარიში
+	Sedot Download Manager crash report	Sedot Download Manager ავარიის ანგარიში
 #. text in crashui.rs
-#. crash report window heading: an internal error, MDM still running
+#. crash report window heading: an internal error, SDM still running
 #, machine
-	Mister Download Manager hit an internal error	Mister Download Manager-ში შიდა შეცდომა მოხდა
+	Sedot Download Manager hit an internal error	Sedot Download Manager-ში შიდა შეცდომა მოხდა
 #. text in wake.rs
 #. why the computer isn't going to sleep, in the system's list of programs that keep it awake (Windows' power requests, Linux's inhibitors)
 #, machine
-	Mister Download Manager is downloading	Mister Download Manager ჩამოტვირთვას ახორციელებს
+	Sedot Download Manager is downloading	Sedot Download Manager ჩამოტვირთვას ახორციელებს
 #. text in wake.rs
 #. why the computer isn't going to sleep, in the system's list of programs that keep it awake; {queue} = the queue's name
 #. {queue} = a queue name such as "Main queue" (keep the braces as they are)
 #, machine
-	Mister Download Manager is running the queue "{queue}"	Mister Download Manager ამუშავებს რიგს „{queue}“
+	Sedot Download Manager is running the queue "{queue}"	Sedot Download Manager ამუშავებს რიგს „{queue}“
 #. text in crashui.rs
-#. crash report window heading: MDM's window doesn't answer (frozen)
+#. crash report window heading: SDM's window doesn't answer (frozen)
 #, machine
-	Mister Download Manager stopped responding	Mister Download Manager აღარ პასუხობს
+	Sedot Download Manager stopped responding	Sedot Download Manager აღარ პასუხობს
 #. text in crashui.rs
 #, machine
-	Mister Download Manager stopped responding for a while	Mister Download Manager ცოტა ხნით აღარ პასუხობდა
+	Sedot Download Manager stopped responding for a while	Sedot Download Manager ცოტა ხნით აღარ პასუხობდა
 #. text in the Options window
 #. \\n starts a new line: break lines where they fit the translation
 #, machine
-	Mister Download Manager writes every connection straight into the final\nfile (a sparse part file next to it), so no temporary directory and no\nassembling step are needed.	Mister Download Manager ყოველ კავშირს პირდაპირ საბოლოო\nფაილში წერს (მის გვერდით არსებულ მეჩხერ ნაწილობრივ ფაილში), ამიტომ არ არის საჭირო დროებითი დირექტორია და აწყობის ეტაპი.
+	Sedot Download Manager writes every connection straight into the final\nfile (a sparse part file next to it), so no temporary directory and no\nassembling step are needed.	Sedot Download Manager ყოველ კავშირს პირდაპირ საბოლოო\nფაილში წერს (მის გვერდით არსებულ მეჩხერ ნაწილობრივ ფაილში), ამიტომ არ არის საჭირო დროებითი დირექტორია და აწყობის ეტაპი.
 #. text in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #. {version} = a version number (keep the braces as they are)
 #, machine
-	Mister Download Manager {version} is available (released {date}).	Mister Download Manager {version} ხელმისაწვდომია (გამოვიდა {date}).
+	Sedot Download Manager {version} is available (released {date}).	Sedot Download Manager {version} ხელმისაწვდომია (გამოვიდა {date}).
 #. text in helpers.rs
-#. Video helpers: {version} = the version of MDM's own copy
+#. Video helpers: {version} = the version of SDM's own copy
 #. {version} = a version number (keep the braces as they are)
 #, machine
-	Mister Download Manager's own copy, version {version}	Mister Download Manager-ის საკუთარი ასლი, ვერსია {version}
+	Sedot Download Manager's own copy, version {version}	Sedot Download Manager-ის საკუთარი ასლი, ვერსია {version}
 #. text in unix.rs
 #. Linux, at start, on the terminal: the libraries an X11 window needs aren't installed, so the window opens through Wayland instead, where menus can't be placed under what was clicked; {libraries} = their file names, left as they are
 #, machine
-	Mister Download Manager's X11 window needs {libraries}, which this system lacks: it opens on Wayland instead, where its menus may open away from their titles.	Mister Download Manager-ის X11 ფანჯარას სჭირდება {libraries}, რომელიც ამ სისტემას აკლია: ის იხსნება Wayland-ზე, სადაც მისი მენიუები შეიძლება გაიხსნას მათი სათაურებისგან მოშორებით.
+	Sedot Download Manager's X11 window needs {libraries}, which this system lacks: it opens on Wayland instead, where its menus may open away from their titles.	Sedot Download Manager-ის X11 ფანჯარას სჭირდება {libraries}, რომელიც ამ სისტემას აკლია: ის იხსნება Wayland-ზე, სადაც მისი მენიუები შეიძლება გაიხსნას მათი სათაურებისგან მოშორებით.
 #. text in the Scheduler window
 #. Monday, as short as a calendar's column head (two letters in English)
 #, machine
@@ -2871,7 +2871,7 @@
 #, machine
 	Mozambique	მოზამბიკი
 #. text in the Download video window
-#. why "Embed chapters" is greyed in Download video: the choice is a sound converted to MP3, Opus or FLAC, which MDM saves without chapters
+#. why "Embed chapters" is greyed in Download video: the choice is a sound converted to MP3, Opus or FLAC, which SDM saves without chapters
 #, machine
 	MP3, Opus and FLAC files are saved without chapters	MP3, Opus და FLAC ფაილები ინახება თავების გარეშე
 #. text in errors.rs
@@ -2996,11 +2996,11 @@
 #, machine
 	No addresses yet	ჯერ არ არის მისამართები
 #. text in extension.rs
-#. a check of Test browser integration (Linux, macOS): MDM found no browser it can connect to (one installed as a Flatpak isn't found)
+#. a check of Test browser integration (Linux, macOS): SDM found no browser it can connect to (one installed as a Flatpak isn't found)
 #, machine
-	No browser MDM can connect to was found	ვერ მოიძებნა ბრაუზერი, რომელთანაც MDM-ს შეუძლია დაკავშირება
+	No browser SDM can connect to was found	ვერ მოიძებნა ბრაუზერი, რომელთანაც SDM-ს შეუძლია დაკავშირება
 #. text in extension.rs
-#. a check of Test browser integration: no browser's extension has reached MDM
+#. a check of Test browser integration: no browser's extension has reached SDM
 #, machine
 	No browser's extension has connected yet	ბრაუზერის არცერთი გაფართოება ჯერ არ დაკავშირებულა
 #. text in torrent downloads
@@ -3069,9 +3069,9 @@
 #, machine
 	No proxy/socks	პროქსი/SOCKS არ არის
 #. text in the Options window
-#. Options → Accounts: no system keyring/keychain answered (none runs, e.g. a desktop without one), so the sign-ins stay in MDM's settings folder, which only the user's account may read
+#. Options → Accounts: no system keyring/keychain answered (none runs, e.g. a desktop without one), so the sign-ins stay in SDM's settings folder, which only the user's account may read
 #, machine
-	No system keyring answered, so sign-ins and passwords are kept in MDM's settings, which only you can read.	სისტემის საკვანძო რგოლმა არ უპასუხა, ამიტომ შესვლის მონაცემები და პაროლები ინახება MDM-ის პარამეტრებში, რომელთა წაკითხვა მხოლოდ თქვენ შეგიძლიათ.
+	No system keyring answered, so sign-ins and passwords are kept in SDM's settings, which only you can read.	სისტემის საკვანძო რგოლმა არ უპასუხა, ამიტომ შესვლის მონაცემები და პაროლები ინახება SDM-ის პარამეტრებში, რომელთა წაკითხვა მხოლოდ თქვენ შეგიძლიათ.
 #. message or event log entry in the main window
 #. event log entry: Add trackers changed nothing, the torrent had them all
 #, machine
@@ -3202,7 +3202,7 @@
 #. text in the Options window
 #. Options → Remote → Status: the remote control is off
 #, machine
-	Off: nothing on the network can reach MDM.	გამორთულია: ქსელში არაფერი ვერ მიწვდება MDM-ს.
+	Off: nothing on the network can reach SDM.	გამორთულია: ქსელში არაფერი ვერ მიწვდება SDM-ს.
 #. text in the Options window
 #, machine
 	Offer to download links copied to the clipboard	შემოთავაზება ბუფერში კოპირებული ბმულების ჩამოსატვირთად
@@ -3229,7 +3229,7 @@
 #, machine
 	On macOS, only an administrator can schedule a wake	macOS-ზე, მხოლოდ ადმინისტრატორს შეუძლია გაღვიძების დაგეგმვა
 #. text in remote.rs
-#. remote control page (on a phone): how to pair; "Options", "Remote" and "Pair a device" are MDM's dialog, tab and button
+#. remote control page (on a phone): how to pair; "Options", "Remote" and "Pair a device" are SDM's dialog, tab and button
 #, machine
 	On the computer, open Options, then Remote, and click Pair a device. Enter the code it shows.	კომპიუტერზე გახსენით პარამეტრები, შემდეგ დისტანციური მართვა და დააწკაპუნეთ „მოწყობილობის დაწყვილება“. შეიყვანეთ ნაჩვენები კოდი.
 #. text in the Options window
@@ -3278,9 +3278,9 @@
 #. text in the Options window
 #. Options → Remote, at the bottom of the page
 #, machine
-	Only paired devices see or change anything. The first time, the phone's browser warns about MDM's own certificate: its fingerprint is the one above.	მხოლოდ დაწყვილებული მოწყობილობები ხედავენ ან ცვლიან რამეს. პირველად, ტელეფონის ბრაუზერი გაფრთხილებთ MDM-ის საკუთარი სერტიფიკატის შესახებ: მისი თითის ანაბეჭდი ზემოთ მოცემულია.
+	Only paired devices see or change anything. The first time, the phone's browser warns about SDM's own certificate: its fingerprint is the one above.	მხოლოდ დაწყვილებული მოწყობილობები ხედავენ ან ცვლიან რამეს. პირველად, ტელეფონის ბრაუზერი გაფრთხილებთ SDM-ის საკუთარი სერტიფიკატის შესახებ: მისი თითის ანაბეჭდი ზემოთ მოცემულია.
 #. text in playlistdlg.rs
-#. in Download video, a list longer than MDM lists: only its first {n} videos are shown
+#. in Download video, a list longer than SDM lists: only its first {n} videos are shown
 #. {n} = a number (keep the braces as they are)
 #, machine
 	Only the first {n} videos are listed.	ჩამოთვლილია მხოლოდ პირველი {n} ვიდეო.
@@ -3305,10 +3305,10 @@
 	Open in browser	ბრაუზერში გახსნა
 #. checkbox in the Add torrent window
 #, machine
-	Open magnet links and .torrent files with Mister Download Manager	გახსენით მაგნიტური ბმულები და .torrent ფაილები Mister Download Manager-ით
+	Open magnet links and .torrent files with Sedot Download Manager	გახსენით მაგნიტური ბმულები და .torrent ფაილები Sedot Download Manager-ით
 #. text in the tray icon's menu
 #, machine
-	Open Mister Download Manager	გახსენით Mister Download Manager
+	Open Sedot Download Manager	გახსენით Sedot Download Manager
 #. text in extension.rs
 #. step 2 of turning on the Safari extension; Cmd is the Command key
 #, machine
@@ -3364,7 +3364,7 @@
 #, machine
 	Page address	გვერდის მისამართი
 #. text in remote.rs
-#. remote control page (on a phone): button: pair this phone with MDM
+#. remote control page (on a phone): button: pair this phone with SDM
 #, machine
 	Pair	დაწყვილება
 #. window title in the Options window
@@ -3379,7 +3379,7 @@
 #. text in remote.rs
 #. remote control page (on a phone): title of the pairing screen
 #, machine
-	Pair with Mister Download Manager	Mister Download Manager-თან დაწყვილება
+	Pair with Sedot Download Manager	Sedot Download Manager-თან დაწყვილება
 #. text in the Options window
 #. column title: when the device was paired
 #, machine
@@ -3667,11 +3667,11 @@
 #, machine
 	Remember this path for "{category}" category	დაიმახსოვრე ეს გზა „{category}“ კატეგორიისთვის
 #. text in the Options window
-#. tab title: control MDM from a phone or another computer on the local network
+#. tab title: control SDM from a phone or another computer on the local network
 #, machine
 	Remote	დისტანციური
 #. text in the Options window
-#. Options page title: control MDM from a phone or another computer on the local network
+#. Options page title: control SDM from a phone or another computer on the local network
 #, machine
 	Remote control	დისტანციური მართვა
 #. button in the Options window; text in remote.rs; button in rssdlg.rs
@@ -3701,9 +3701,9 @@
 #, machine
 	Replace asterisk to	შეცვალეთ ვარსკვლავი
 #. text in crashui.rs
-#. crash report window button: start MDM again
+#. crash report window button: start SDM again
 #, machine
-	Restart MDM	MDM-ის გადატვირთვა
+	Restart SDM	SDM-ის გადატვირთვა
 #. button in the Options window; text in the Options window
 #, machine
 	Restore the built-in categories	ჩაშენებული კატეგორიების აღდგენა
@@ -3883,7 +3883,7 @@
 	Select or unselect the download with the dotted outline	წერტილოვანი მონახაზის მქონე ჩამოტვირთვის არჩევა ან მოხსნა
 #. group box title in the Options window
 #, machine
-	Select sounds for Mister Download Manager events	აირჩიეთ ხმები Mister Download Manager-ის მოვლენებისთვის
+	Select sounds for Sedot Download Manager events	აირჩიეთ ხმები Sedot Download Manager-ის მოვლენებისთვის
 #. what a keyboard shortcut does in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #, machine
 	Select the downloads in the box	ჩამოტვირთვების არჩევა ველში
@@ -3906,7 +3906,7 @@
 #, machine
 	Send this to a friend:	გაუგზავნეთ მეგობარს:
 #. text in the Options window
-#. Options → Accounts: checkbox: magnet links and .torrent files go to the first account's service, which downloads them; MDM then downloads the files from it (no connections to peers)
+#. Options → Accounts: checkbox: magnet links and .torrent files go to the first account's service, which downloads them; SDM then downloads the files from it (no connections to peers)
 #, machine
 	Send torrents and magnet links to the first account instead of to peers	ტორენტები და მაგნიტური ბმულები გაუგზავნეთ პირველ ანგარიშს თანატოლების ნაცვლად
 #. text in countries.rs
@@ -3951,8 +3951,8 @@
 #, machine
 	Set file creation date as provided by the server	ფაილის შექმნის თარიღის დაყენება სერვერის მიერ მოწოდებულის მიხედვით
 #. button in extension.rs; button in the Options window
-#. button in the browser extension's window: register MDM's helper with the browsers
-#. button in Test browser integration: register MDM's helper with the browsers
+#. button in the browser extension's window: register SDM's helper with the browsers
+#. button in Test browser integration: register SDM's helper with the browsers
 #, machine
 	Set it up	დააყენეთ
 #. message or event log entry in the main window
@@ -4033,7 +4033,7 @@
 #, machine
 	Show download progress dialog when a download starts	ჩამოტვირთვის პროგრესის დიალოგის ჩვენება ჩამოტვირთვის დაწყებისას
 #. button in a dialog box
-#. button: shows these downloads in MDM's list, selected
+#. button: shows these downloads in SDM's list, selected
 #, machine
 	Show in list	სიაში ჩვენება
 #. text in extension.rs
@@ -4111,7 +4111,7 @@
 	Sites Logins	საიტის შესვლა
 #. text in helpers.rs
 #, machine
-	Sites send their best quality as separate video and audio, and ffmpeg joins them. On this system MDM uses yours: install ffmpeg with your package manager.	საიტები საუკეთესო ხარისხს ცალკე ვიდეოდ და აუდიოდ აგზავნიან, ffmpeg კი მათ აერთიანებს. ამ სისტემაზე MDM იყენებს თქვენსას: დააინსტალირეთ ffmpeg თქვენი პაკეტის მენეჯერით.
+	Sites send their best quality as separate video and audio, and ffmpeg joins them. On this system SDM uses yours: install ffmpeg with your package manager.	საიტები საუკეთესო ხარისხს ცალკე ვიდეოდ და აუდიოდ აგზავნიან, ffmpeg კი მათ აერთიანებს. ამ სისტემაზე SDM იყენებს თქვენსას: დააინსტალირეთ ffmpeg თქვენი პაკეტის მენეჯერით.
 #. text in helpers.rs
 #, machine
 	Sites send their best quality as separate video and audio. ffmpeg puts them together into one file that plays anywhere.	საიტები საუკეთესო ხარისხს ცალკე ვიდეოდ და აუდიოდ აგზავნიან. ffmpeg მათ ერთ ფაილად აერთიანებს, რომელიც ყველგან უკრავს.
@@ -4230,7 +4230,7 @@
 	Start download at	ჩამოტვირთვის დაწყება
 #. checkbox in the Scheduler window
 #, machine
-	Start download on Mister Download Manager startup	ჩამოტვირთვის დაწყება Mister Download Manager-ის გაშვებისას
+	Start download on Sedot Download Manager startup	ჩამოტვირთვის დაწყება Sedot Download Manager-ის გაშვებისას
 #. checkbox in the Options window
 #, machine
 	Start downloading immediately while displaying "Download File Info" dialog	დაუყოვნებლივ დაიწყეთ ჩამოტვირთვა „ფაილის ინფორმაციის ჩამოტვირთვა“ დიალოგის ჩვენებისას
@@ -4261,11 +4261,11 @@
 #, machine
 	Started with gallery-dl {version}	დაიწყო gallery-dl {version}-ით
 #. text in the Options window
-#. the same tooltip where no notification area (system tray) shows MDM's icon (some Linux desktops): its window starts minimized instead
+#. the same tooltip where no notification area (system tray) shows SDM's icon (some Linux desktops): its window starts minimized instead
 #, machine
 	Started with the computer, it starts minimized: no notification area shows its icon here	კომპიუტერის გაშვებისას, ის მინიმალურ რეჟიმში ირთვება: აქ მისი ხატულა შეტყობინებების ზონაში არ ჩანს
 #. text in the Options window
-#. tooltip of "Launch Mister Download Manager on startup": started with the computer, MDM's window stays hidden, its icon in the notification area (system tray)
+#. tooltip of "Launch Sedot Download Manager on startup": started with the computer, SDM's window stays hidden, its icon in the notification area (system tray)
 #, machine
 	Started with the computer, it waits in the notification area	კომპიუტერის გაშვებისას, ის შეტყობინებების ზონაში ელოდება
 #. message or event log entry in the main window
@@ -4373,7 +4373,7 @@
 	Sunday	კვირა
 #. link (opens a web page) in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #, machine
-	Support MDM on GitHub Sponsors	MDM-ის მხარდაჭერა GitHub Sponsors-ზე
+	Support SDM on GitHub Sponsors	SDM-ის მხარდაჭერა GitHub Sponsors-ზე
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -4484,17 +4484,17 @@
 #, machine
 	The best qualities, MP3, Opus and FLAC need ffmpeg: install it with your system's package manager (or Homebrew).	საუკეთესო ხარისხის ვარიანტებს, MP3-ს, Opus-სა და FLAC-ს ffmpeg სჭირდება: დააინსტალირეთ ის თქვენი სისტემის პაკეტების მენეჯერის (ან Homebrew-ის) მეშვეობით.
 #. text in the settings
-#. an error: the browser's VPN or proxy extension logs in to its proxy itself, and MDM can't; Options → Proxy / Socks → Network adapter is where an adapter can be chosen
+#. an error: the browser's VPN or proxy extension logs in to its proxy itself, and SDM can't; Options → Proxy / Socks → Network adapter is where an adapter can be chosen
 #, machine
 	the browser's proxy (a VPN or proxy extension) asks for a login only that extension has: use the VPN's own app, or choose its network adapter in Options → Proxy / Socks	ბრაუზერის პროქსი (VPN ან პროქსის გაფართოება) შესვლას ითხოვს, რომლის მონაცემებიც მხოლოდ ამ გაფართოებას აქვს: გამოიყენეთ VPN-ის საკუთარი აპი ან აირჩიეთ მისი ქსელის ადაპტერი ოფციებში → პროქსი / SOCKS
 #. text in extension.rs
-#. a check of Test browser integration: the browsers are pointed at a copy of MDM that was deleted (often one started from inside a zip); that copy's folder shows on the line under it
+#. a check of Test browser integration: the browsers are pointed at a copy of SDM that was deleted (often one started from inside a zip); that copy's folder shows on the line under it
 #, machine
 	The browsers are set up for a copy that is gone:	ბრაუზერები დაყენებულია წაშლილი ასლისთვის:
 #. text in extension.rs
-#. a check of Test browser integration: the browsers find MDM's helper program
+#. a check of Test browser integration: the browsers find SDM's helper program
 #, machine
-	The browsers can find Mister Download Manager	ბრაუზერები Mister Download Manager-ს პოულობენ
+	The browsers can find Sedot Download Manager	ბრაუზერები Sedot Download Manager-ს პოულობენ
 #. text in the Options window
 #. Options → Remote → Status: the settings were changed; they apply on OK
 #, machine
@@ -4521,7 +4521,7 @@
 #. text in the Scheduler window
 #. tooltip on the Scheduler's "Wake the computer to run this queue"
 #, machine
-	The computer is woken a minute before the start time and kept awake while the queue runs. Mister Download Manager has to be running (it can wait in the notification area).	კომპიუტერი გაღვიძდება დაწყების დრომდე ერთი წუთით ადრე და გაღვიძებული დარჩება, სანამ რიგი მუშაობს. Mister Download Manager უნდა მუშაობდეს (შესაძლებელია, ის შეტყობინებების არეში იყოს მინიმიზებული).
+	The computer is woken a minute before the start time and kept awake while the queue runs. Sedot Download Manager has to be running (it can wait in the notification area).	კომპიუტერი გაღვიძდება დაწყების დრომდე ერთი წუთით ადრე და გაღვიძებული დარჩება, სანამ რიგი მუშაობს. Sedot Download Manager უნდა მუშაობდეს (შესაძლებელია, ის შეტყობინებების არეში იყოს მინიმიზებული).
 #. text in the Scheduler window
 #. the Scheduler, under "Wake the computer to run this queue": when it will happen; {date} = e.g. 06/11/2026, {time} = e.g. 22:59:00
 #. {time} = a time of day (keep the braces as they are)
@@ -4576,7 +4576,7 @@
 #. message or event log entry in the main window
 #. {error} = an error message (keep the braces as they are)
 #, machine
-	The download list could not be saved: {error}. Changes are kept while MDM runs.	ჩამოტვირთვის სია ვერ შეინახა: {error}. ცვლილებები შენარჩუნებულია MDM-ის მუშაობისას.
+	The download list could not be saved: {error}. Changes are kept while SDM runs.	ჩამოტვირთვის სია ვერ შეინახა: {error}. ცვლილებები შენარჩუნებულია SDM-ის მუშაობისას.
 #. text in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #, machine
 	The download manager you already know, rebuilt to be faster. Free and open source under the GNU GPL, version 3 or later. Videos are found by yt-dlp; torrents run on librqbit.	ჩამოტვირთვის მენეჯერი, რომელიც უკვე იცით, ხელახლა აშენდა უფრო სწრაფად. უფასო და ღია წყარო GNU GPL, ვერსია 3 ან უფრო გვიანდელი ლიცენზიით. ვიდეოებს პოულობს yt-dlp; ტორენტები მუშაობს librqbit-ზე.
@@ -4711,7 +4711,7 @@
 #. text in a dialog box
 #. \\n starts a new line: break lines where they fit the translation
 #, machine
-	The selected download is not complete. Are you sure you want to delete\nit from Mister Download Manager list of downloads?	არჩეული ჩამოტვირთვა არ არის დასრულებული. დარწმუნებული ხართ, რომ გსურთ მისი წაშლა\nMister Download Manager-ის ჩამოტვირთვების სიიდან?
+	The selected download is not complete. Are you sure you want to delete\nit from Sedot Download Manager list of downloads?	არჩეული ჩამოტვირთვა არ არის დასრულებული. დარწმუნებული ხართ, რომ გსურთ მისი წაშლა\nSedot Download Manager-ის ჩამოტვირთვების სიიდან?
 #. text in errors.rs
 #, machine
 	the server answered {status}	სერვერმა უპასუხა {status}
@@ -4731,9 +4731,9 @@
 #, machine
 	the server sent an unexpected part of the file ({detail})	სერვერმა ფაილის მოულოდნელი ნაწილი გამოაგზავნა ({detail})
 #. text in errors.rs
-#. why a download failed (#701): a file host answered with its own web page (a countdown before the link, a captcha, a sign-in) where the file was expected. The browser gets past it; MDM's browser extension then hands the real file back to MDM
+#. why a download failed (#701): a file host answered with its own web page (a countdown before the link, a captcha, a sign-in) where the file was expected. The browser gets past it; SDM's browser extension then hands the real file back to SDM
 #, machine
-	the site sent a web page instead of the file (a waiting page, a captcha or a sign-in): open the link in your browser, finish there, and the download comes back to MDM	საიტმა ფაილის ნაცვლად ვებგვერდი გამოაგზავნა (მოლოდინის გვერდი, captcha ან შესვლა): გახსენით ბმული თქვენს ბრაუზერში, დაასრულეთ იქ და ჩამოტვირთვა დაბრუნდება MDM-ში
+	the site sent a web page instead of the file (a waiting page, a captcha or a sign-in): open the link in your browser, finish there, and the download comes back to SDM	საიტმა ფაილის ნაცვლად ვებგვერდი გამოაგზავნა (მოლოდინის გვერდი, captcha ან შესვლა): გახსენით ბმული თქვენს ბრაუზერში, დაასრულეთ იქ და ჩამოტვირთვა დაბრუნდება SDM-ში
 #. text in the Download video window
 #. the Download video window: the site asked for a sign-in although the browser's extension passed the page's cookies
 #, machine
@@ -4757,15 +4757,15 @@
 #. text in errors.rs
 #. why a download failed: the site's security certificate (what proves a secure, HTTPS, site is the one it says) is past its end date. Browsers warn about the same site
 #, machine
-	the site's security certificate has expired, so MDM can't be sure it's the real site (your browser warns about it too)	საიტის უსაფრთხოების სერტიფიკატს ვადა გაუვიდა, ამიტომ MDM ვერ იქნება დარწმუნებული, რომ ეს ნამდვილი საიტია (თქვენი ბრაუზერიც აფრთხილებს ამის შესახებ)
+	the site's security certificate has expired, so SDM can't be sure it's the real site (your browser warns about it too)	საიტის უსაფრთხოების სერტიფიკატს ვადა გაუვიდა, ამიტომ SDM ვერ იქნება დარწმუნებული, რომ ეს ნამდვილი საიტია (თქვენი ბრაუზერიც აფრთხილებს ამის შესახებ)
 #. text in errors.rs
 #. why a download failed: the site's security certificate was made for other site names than the one in the address
 #, machine
-	the site's security certificate is for another site name, so MDM can't be sure it's the real site (your browser warns about it too)	საიტის უსაფრთხოების სერტიფიკატი განკუთვნილია სხვა საიტის სახელებისთვის, ვიდრე მისამართშია, ამიტომ MDM ვერ იქნება დარწმუნებული, რომ ეს ნამდვილი საიტია (თქვენი ბრაუზერიც აფრთხილებს ამის შესახებ)
+	the site's security certificate is for another site name, so SDM can't be sure it's the real site (your browser warns about it too)	საიტის უსაფრთხოების სერტიფიკატი განკუთვნილია სხვა საიტის სახელებისთვის, ვიდრე მისამართშია, ამიტომ SDM ვერ იქნება დარწმუნებული, რომ ეს ნამდვილი საიტია (თქვენი ბრაუზერიც აფრთხილებს ამის შესახებ)
 #. text in errors.rs
 #. why a download failed: the site's security certificate was signed by the site itself or by an issuer this computer doesn't trust. Browsers warn about the same site
 #, machine
-	the site's security certificate isn't trusted (it's self-signed or from an unknown issuer), so MDM can't be sure it's the real site (your browser warns about it too)	საიტის უსაფრთხოების სერტიფიკატი არ არის სანდო (თვითხელმოწერილია ან უცნობი გამცემისგან), ამიტომ MDM ვერ იქნება დარწმუნებული, რომ ეს ნამდვილი საიტია (თქვენი ბრაუზერიც აფრთხილებს ამის შესახებ)
+	the site's security certificate isn't trusted (it's self-signed or from an unknown issuer), so SDM can't be sure it's the real site (your browser warns about it too)	საიტის უსაფრთხოების სერტიფიკატი არ არის სანდო (თვითხელმოწერილია ან უცნობი გამცემისგან), ამიტომ SDM ვერ იქნება დარწმუნებული, რომ ეს ნამდვილი საიტია (თქვენი ბრაუზერიც აფრთხილებს ამის შესახებ)
 #. text in errors.rs
 #. why a download failed: the site's security certificate's validity hasn't begun; usually this computer's date or time is wrong
 #, machine
@@ -4773,11 +4773,11 @@
 #. text in errors.rs
 #. why a download failed: the site's security certificate was refused for another reason (a bad signature, a broken certificate)
 #, machine
-	the site's security certificate was refused, so MDM can't be sure it's the real site	საიტის უსაფრთხოების სერტიფიკატზე უარი თქვეს, ამიტომ MDM ვერ იქნება დარწმუნებული, რომ ეს ნამდვილი საიტია
+	the site's security certificate was refused, so SDM can't be sure it's the real site	საიტის უსაფრთხოების სერტიფიკატზე უარი თქვეს, ამიტომ SDM ვერ იქნება დარწმუნებული, რომ ეს ნამდვილი საიტია
 #. text in errors.rs
 #. why a download failed: the issuer of the site's security certificate took it back
 #, machine
-	the site's security certificate was revoked by its issuer, so MDM won't trust it	საიტის უსაფრთხოების სერტიფიკატი გაუქმდა მისი გამცემის მიერ, ამიტომ MDM არ ენდობა მას
+	the site's security certificate was revoked by its issuer, so SDM won't trust it	საიტის უსაფრთხოების სერტიფიკატი გაუქმდა მისი გამცემის მიერ, ამიტომ SDM არ ენდობა მას
 #. text in the Download video window
 #. the Download video window: the site's certificate is trusted neither by yt-dlp nor by the computer (asked again with the computer's certificates, #955); usually an antivirus or a proxy that reads secure (HTTPS) connections signs sites with a certificate of its own
 #, machine
@@ -4785,15 +4785,15 @@
 #. text in errors.rs
 #. why a download failed: the site's security certificate is made for other uses than a website (its "extended key usage" leaves out web servers)
 #, machine
-	the site's security certificate isn't made for websites, so MDM can't be sure it's the real site	საიტის უსაფრთხოების სერტიფიკატი ვებსაიტებისთვის არ არის განკუთვნილი, ამიტომ MDM ვერ იქნება დარწმუნებული, რომ ეს ნამდვილი საიტია
+	the site's security certificate isn't made for websites, so SDM can't be sure it's the real site	საიტის უსაფრთხოების სერტიფიკატი ვებსაიტებისთვის არ არის განკუთვნილი, ამიტომ SDM ვერ იქნება დარწმუნებული, რომ ეს ნამდვილი საიტია
 #. text in crashui.rs
 #. crash report window: the symbols couldn't be downloaded; the report still works
 #, machine
 	The symbols couldn't be fetched: some lines of the report show addresses instead of names (the developers can still read them).	სიმბოლოების მოძიება ვერ მოხერხდა: ანგარიშის ზოგიერთ ხაზზე სახელების ნაცვლად მისამართებია ნაჩვენები (დეველოპერებს მათი წაკითხვა მაინც შეუძლიათ).
 #. text in the Options window
-#. Options → Accounts (Linux): the system keyring is locked (MDM never unlocks it: that would ask for its password), so the sign-ins stay in MDM's settings folder, which only the user's account may read
+#. Options → Accounts (Linux): the system keyring is locked (SDM never unlocks it: that would ask for its password), so the sign-ins stay in SDM's settings folder, which only the user's account may read
 #, machine
-	The system keyring is locked and MDM doesn't unlock it, so sign-ins and passwords are kept in MDM's settings, which only you can read.	სისტემის საკვანძო რგოლი დაბლოკილია და MDM მას არ ხსნის, ამიტომ შესვლის მონაცემები და პაროლები MDM-ის პარამეტრების საქაღალდეში ინახება, რომლის წაკითხვაც მხოლოდ თქვენ შეგიძლიათ.
+	The system keyring is locked and SDM doesn't unlock it, so sign-ins and passwords are kept in SDM's settings, which only you can read.	სისტემის საკვანძო რგოლი დაბლოკილია და SDM მას არ ხსნის, ამიტომ შესვლის მონაცემები და პაროლები SDM-ის პარამეტრების საქაღალდეში ინახება, რომლის წაკითხვაც მხოლოდ თქვენ შეგიძლიათ.
 #. text in the Options window
 #. Options → Connection → DNS: the operating system's own DNS (the default)
 #, machine
@@ -4825,7 +4825,7 @@
 #, machine
 	The web page from which this file was obtained:	ვებ გვერდი, საიდანაც ეს ფაილი იქნა მიღებული:
 #. message or event log entry in the main window
-#. the kind of file View → Theme → Add a theme file lists: MDM's themes (TOML, JSON), Base16 schemes (YAML) and pywal's colors.json
+#. the kind of file View → Theme → Add a theme file lists: SDM's themes (TOML, JSON), Base16 schemes (YAML) and pywal's colors.json
 #, machine
 	Themes and colour schemes	თემები და ფერთა სქემები
 #. text in the Options window
@@ -4883,7 +4883,7 @@
 #, machine
 	This computer only (127.0.0.1)	მხოლოდ ეს კომპიუტერი (127.0.0.1)
 #. text in extension.rs
-#. a check of Test browser integration: MDM was started from inside a zip (or from the temporary folder), which is deleted after it quits, so it can't be connected to the browsers
+#. a check of Test browser integration: SDM was started from inside a zip (or from the temporary folder), which is deleted after it quits, so it can't be connected to the browsers
 #, machine
 	This copy runs from a temporary folder that will be deleted	ეს ასლი დროებითი საქაღალდიდან მუშაობს, რომელიც წაიშლება
 #. text in the Scheduler window
@@ -4891,7 +4891,7 @@
 #, machine
 	This date has passed: the queue will not start	ეს თარიღი გავიდა: რიგი არ დაიწყება
 #. text in remote.rs
-#. remote control page (on a phone): label of the box naming this phone (shown in MDM's list of paired devices)
+#. remote control page (on a phone): label of the box naming this phone (shown in SDM's list of paired devices)
 #, machine
 	This device's name	ამ მოწყობილობის სახელი
 #. message or event log entry in the main window
@@ -5008,7 +5008,7 @@
 #. message or event log entry in the main window
 #. event log: a torrent goes through the user's debrid account, not to peers; {service} its name ("Real-Debrid")
 #, machine
-	Through {service}: the service downloads the torrent, then MDM its files	{service}-ის გავლით: სერვისი ჩამოტვირთავს ტორენტს, შემდეგ MDM მის ფაილებს
+	Through {service}: the service downloads the torrent, then SDM its files	{service}-ის გავლით: სერვისი ჩამოტვირთავს ტორენტს, შემდეგ SDM მის ფაილებს
 #. text in the Scheduler window
 #, machine
 	Thursday	ხუთშაბათი
@@ -5154,7 +5154,7 @@
 #. text in extension.rs
 #. step 8 of turning on the Safari extension
 #, machine
-	Turn on "Mister Download Manager" and allow it on all websites.	ჩართეთ „Mister Download Manager“ და დაუშვით ყველა ვებსაიტზე.
+	Turn on "Sedot Download Manager" and allow it on all websites.	ჩართეთ „Sedot Download Manager“ და დაუშვით ყველა ვებსაიტზე.
 #. text in extension.rs
 #. step 4 of turning on the Safari extension; the quoted switch name is what Safari's settings show in this language: use Apple's own words for it, or keep the English name when unsure
 #, machine
@@ -5210,7 +5210,7 @@
 #. Options → Add an account: waiting while the user types the code at the service's page; {page} its address, {time} minutes:seconds left
 #. {time} = a time of day (keep the braces as they are)
 #, machine
-	Type this code at {page} and allow MDM; waiting for you (the code expires in {time}).	ჩაწერეთ ეს კოდი {page}-ზე და დაუშვით MDM; გელოდებით (კოდი იწურება {time}-ში).
+	Type this code at {page} and allow SDM; waiting for you (the code expires in {time}).	ჩაწერეთ ეს კოდი {page}-ზე და დაუშვით SDM; გელოდებით (კოდი იწურება {time}-ში).
 #. tooltip (why a control is greyed) in the Find window
 #. tooltip of the greyed Find button
 #, machine
@@ -5266,9 +5266,9 @@
 #, machine
 	unknown	უცნობი
 #. text in finish.rs
-#. Snooze menu of the Download complete window: show no Download complete window until MDM is started again
+#. Snooze menu of the Download complete window: show no Download complete window until SDM is started again
 #, machine
-	Until MDM restarts	MDM-ის გადატვირთვამდე
+	Until SDM restarts	SDM-ის გადატვირთვამდე
 #. button in the Options window
 #. button (short): move the account up the list (accounts are asked in the list's order)
 #, machine
@@ -5310,9 +5310,9 @@
 #, machine
 	Use FTP in PASV mode	FTP-ის გამოყენება PASV რეჟიმში
 #. button in helpers.rs
-#. Video helpers: button: go back to the copy MDM downloads and checks itself
+#. Video helpers: button: go back to the copy SDM downloads and checks itself
 #, machine
-	Use MDM's own copy	MDM-ის საკუთარი ასლის გამოყენება
+	Use SDM's own copy	SDM-ის საკუთარი ასლის გამოყენება
 #. text in the Batch download window
 #. why Batch download's OK is greyed
 #, machine
@@ -5518,9 +5518,9 @@
 #, machine
 	Windows checks the files marked this way: SmartScreen before a program first runs, Office's Protected View before a document opens. Unticked, or under Windows' policy "Do not preserve zone information in file attachments", no download is marked.	Windows ამოწმებს ამგვარად მონიშნულ ფაილებს: SmartScreen პროგრამის პირველი გაშვების წინ, Office-ის დაცული ხედი დოკუმენტის გახსნის წინ. მოხსნის შემთხვევაში, ან Windows-ის პოლიტიკის „არ შეინახოს ზონის ინფორმაცია ფაილის დანართებში“ მიხედვით, არცერთი ჩამოტვირთვა არ აღინიშნება.
 #. text in the Options window
-#. Options → Accounts: Windows Credential Manager didn't answer, so the sign-ins stay in MDM's settings, encrypted so that only this Windows account can read them
+#. Options → Accounts: Windows Credential Manager didn't answer, so the sign-ins stay in SDM's settings, encrypted so that only this Windows account can read them
 #, machine
-	Windows Credential Manager didn't answer, so sign-ins and passwords are kept in MDM's settings, encrypted for your Windows account.	Windows-ის სერთიფიკატების მენეჯერმა არ უპასუხა, ამიტომ შესვლის მონაცემები და პაროლები ინახება MDM-ის პარამეტრებში, დაშიფრული თქვენი Windows ანგარიშისთვის.
+	Windows Credential Manager didn't answer, so sign-ins and passwords are kept in SDM's settings, encrypted for your Windows account.	Windows-ის სერთიფიკატების მენეჯერმა არ უპასუხა, ამიტომ შესვლის მონაცემები და პაროლები ინახება SDM-ის პარამეტრებში, დაშიფრული თქვენი Windows ანგარიშისთვის.
 #. text in a dialog box
 #. why the computer could not be put to sleep (fills {error})
 #, machine
@@ -5552,7 +5552,7 @@
 #. text in remote.rs
 #. remote control page (on a phone): pairing failed and the code is void now
 #, machine
-	Wrong code. Show a new code in MDM and try again.	არასწორი კოდი. აჩვენეთ ახალი კოდი MDM-ში და სცადეთ ხელახლა.
+	Wrong code. Show a new code in SDM and try again.	არასწორი კოდი. აჩვენეთ ახალი კოდი SDM-ში და სცადეთ ხელახლა.
 #. text in remote.rs
 #. remote control page (on a phone): pairing failed; {n} = how many more codes may be tried
 #. {n} = a number (keep the braces as they are)
@@ -5584,9 +5584,9 @@
 #. text in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #. {version} = a version number (keep the braces as they are)
 #, machine
-	You have the latest version of Mister Download Manager ({version}).	თქვენ გაქვთ Mister Download Manager-ის უახლესი ვერსია ({version}).
+	You have the latest version of Sedot Download Manager ({version}).	თქვენ გაქვთ Sedot Download Manager-ის უახლესი ვერსია ({version}).
 #. text in the Help menu's windows (About, updates, shortcuts, Tell a friend)
-#. Check for updates, under the new version's line, when MDM was installed by the Linux system's package manager (pacman, ...), which MDM can't update itself
+#. Check for updates, under the new version's line, when SDM was installed by the Linux system's package manager (pacman, ...), which SDM can't update itself
 #. {version} = a version number (keep the braces as they are)
 #, machine
 	You have version {version}, from your system's package manager: update it there.	თქვენ გაქვთ {version} ვერსია, რომელიც სისტემის პაკეტების მენეჯერითაა დაყენებული: განაახლეთ იქ.
@@ -5600,7 +5600,7 @@
 	Your browser	თქვენი ბრაუზერი
 #. text in the Options window
 #, machine
-	Your default browser isn't one MDM knows: a current Chrome's User-Agent	თქვენი ნაგულისხმევი ბრაუზერი არ არის MDM-ისთვის ცნობილი: მიმდინარე Chrome-ის User-Agent
+	Your default browser isn't one SDM knows: a current Chrome's User-Agent	თქვენი ნაგულისხმევი ბრაუზერი არ არის SDM-ისთვის ცნობილი: მიმდინარე Chrome-ის User-Agent
 #. text in the Options window
 #. tooltip; {browser} is a browser and its version, e.g. "Brave 157"
 #, machine
@@ -5614,10 +5614,10 @@
 #, machine
 	your Google account has no access to this file, or its owner turned off downloading	თქვენს Google ანგარიშს არ აქვს წვდომა ამ ფაილზე, ან მისმა მფლობელმა გამორთო ჩამოტვირთვა
 #. text in helpers.rs
-#. Video helpers: the person's own gallery-dl is too old and not used; {version} = its version, {oldest} = the oldest MDM can use
+#. Video helpers: the person's own gallery-dl is too old and not used; {version} = its version, {oldest} = the oldest SDM can use
 #. {version} = a version number (keep the braces as they are)
 #, machine
-	Your own program ({version}) is too old: MDM needs {oldest} or newer	თქვენი პროგრამა ({version}) ძალიან ძველია: MDM-ს სჭირდება {oldest} ან უფრო ახალი
+	Your own program ({version}) is too old: SDM needs {oldest} or newer	თქვენი პროგრამა ({version}) ძალიან ძველია: SDM-ს სჭირდება {oldest} ან უფრო ახალი
 #. text in helpers.rs
 #. Video helpers: {path} = the program the person chose, {version} = its version
 #. {version} = a version number (keep the braces as they are)
@@ -5645,11 +5645,11 @@
 #, machine
 	yt-dlp couldn't read {browser}'s cookies: {error}	yt-dlp-მ ვერ წაიკითხა {browser}-ის ქუქი-ფაილები: {error}
 #. text in a download's progress window
-#. progress window, a video's line: the helper program yt-dlp gave no address MDM's own downloader could use
+#. progress window, a video's line: the helper program yt-dlp gave no address SDM's own downloader could use
 #, machine
 	yt-dlp downloads it itself	yt-dlp თავად ჩამოტვირთავს
 #. text in a download's progress window
-#. progress window, a video's line: MDM's own downloader can't take a live broadcast, so the helper program yt-dlp records it
+#. progress window, a video's line: SDM's own downloader can't take a live broadcast, so the helper program yt-dlp records it
 #, machine
 	yt-dlp downloads it itself: a live stream	yt-dlp თავად ჩამოტვირთავს: პირდაპირი ტრანსლაცია
 #. text in a download's progress window
@@ -5661,7 +5661,7 @@
 #, machine
 	yt-dlp downloads it itself: protected (DRM)	yt-dlp თავად ჩამოტვირთავს: დაცული (DRM)
 #. text in a download's progress window
-#. progress window, a video's line: {protocol} = a streaming protocol's short name (rtmp, rtsp, mms); MDM's own downloader doesn't speak it, so the helper program yt-dlp downloads it
+#. progress window, a video's line: {protocol} = a streaming protocol's short name (rtmp, rtsp, mms); SDM's own downloader doesn't speak it, so the helper program yt-dlp downloads it
 #, machine
 	yt-dlp downloads it itself: {protocol}	yt-dlp თავად ჩამოტვირთავს: {protocol}
 #. text in the Download video window
@@ -5736,7 +5736,7 @@
 #. text in the Options window
 #. Options → Remote → Pair a device: done; {device} = the name it was given
 #, machine
-	{device} is paired. It can control MDM now.	{device} დაწყვილებულია. მას შეუძლია MDM-ის მართვა.
+	{device} is paired. It can control SDM now.	{device} დაწყვილებულია. მას შეუძლია SDM-ის მართვა.
 #. text in remote.rs
 #. remote control page (on a phone): progress; {done} and {size} are sizes ("1.2 MB of 7.5 MB")
 #. {size} = a file size such as "4.2 MB" (keep the braces as they are)
@@ -5772,7 +5772,7 @@
 	{file} is too large to be a list of addresses ({size}). Import reads text files, web pages and .ef2 exports of up to {limit}.	{file} ძალიან დიდია მისამართების სიისთვის ({size}). იმპორტის ფუნქცია კითხულობს ტექსტურ ფაილებს, ვებგვერდებს და .ef2 ექსპორტებს, რომელთა ზომა არ აღემატება {limit}-ს.
 #. text in a dialog box
 #, machine
-	{file} was moved elsewhere by dragging it out of Download complete, and MDM couldn't learn where. Look for it where you dropped it.	{file} გადატანილია სხვაგან „ჩამოტვირთვა დასრულებულია“-დან გადმოთრევით და MDM-მა ვერ გაიგო სად. მოძებნეთ იქ, სადაც დააგდეთ.
+	{file} was moved elsewhere by dragging it out of Download complete, and SDM couldn't learn where. Look for it where you dropped it.	{file} გადატანილია სხვაგან „ჩამოტვირთვა დასრულებულია“-დან გადმოთრევით და SDM-მა ვერ გაიგო სად. მოძებნეთ იქ, სადაც დააგდეთ.
 #. text in the Checksum window
 #. {algorithm} = a checksum algorithm such as "SHA-256" (keep the braces as they are)
 #, machine
@@ -5858,7 +5858,7 @@
 #. in the "7-Zip needed" window: {name} is the archive's file name; 7-Zip is a program's name
 #. {name} = a file name (keep the braces as they are)
 #, machine
-	{name} is a 7z or RAR archive. MDM extracts those with 7-Zip, which isn't installed.	{name} არის 7z ან RAR არქივი. MDM მათ ამოფუთავს 7-Zip-ით, რომელიც არ არის დაინსტალირებული.
+	{name} is a 7z or RAR archive. SDM extracts those with 7-Zip, which isn't installed.	{name} არის 7z ან RAR არქივი. SDM მათ ამოფუთავს 7-Zip-ით, რომელიც არ არის დაინსტალირებული.
 #. text in extracting archives (a download's log, the Archive password window)
 #. in Archive password: {name} is the archive's file name
 #. {name} = a file name (keep the braces as they are)
@@ -5870,10 +5870,10 @@
 #, machine
 	{name} isn't offered as {how}.	{name} არ არის შემოთავაზებული როგორც {how}.
 #. text in errors.rs
-#. error: a program chosen as a helper is too old; {name} = gallery-dl, {version} = its version, {oldest} = the oldest one MDM can use
+#. error: a program chosen as a helper is too old; {name} = gallery-dl, {version} = its version, {oldest} = the oldest one SDM can use
 #. {name} = a file name; {version} = a version number (keep the braces as they are)
 #, machine
-	{name} {version} is too old: MDM needs {oldest} or newer	{name} {version} ძალიან ძველია: MDM-ს სჭირდება {oldest} ან უფრო ახალი
+	{name} {version} is too old: SDM needs {oldest} or newer	{name} {version} ძალიან ძველია: SDM-ს სჭირდება {oldest} ან უფრო ახალი
 #. text in a dialog box
 #. one failed download in the summary of a group of downloads: {name} its file name, {error} why it failed
 #. {name} = a file name; {error} = an error message (keep the braces as they are)
@@ -5894,7 +5894,7 @@
 #, machine
 	{n} of {total} selected	{total}-დან {n} არჩეულია
 #. text in the download list (sizes, speeds, status)
-#. a torrent's status while the user's debrid service downloads it, before MDM gets its files; {service} the service ("Real-Debrid"), {percent} how far it is ("45%")
+#. a torrent's status while the user's debrid service downloads it, before SDM gets its files; {service} the service ("Real-Debrid"), {percent} how far it is ("45%")
 #, machine
 	{percent} at {service}	{service}-ზე {percent}
 #. text in errors.rs
@@ -5905,9 +5905,9 @@
 #, machine
 	{problem}. {advice}	{problem}. {advice}
 #. text in errors.rs
-#. a debrid service's error: too many requests; MDM waits and retries
+#. a debrid service's error: too many requests; SDM waits and retries
 #, machine
-	{service} asks to slow down; MDM will try again in a minute	{service} სიჩქარის შემცირებას ითხოვს; MDM ერთ წუთში ისევ სცდის
+	{service} asks to slow down; SDM will try again in a minute	{service} სიჩქარის შემცირებას ითხოვს; SDM ერთ წუთში ისევ სცდის
 #. text in errors.rs
 #. a debrid service's error: it wants the user to allow this computer (it sent an email)
 #, machine
@@ -5917,7 +5917,7 @@
 	{service} can't get this torrent: nobody shares it, or its link can't be read	{service} ამ ტორენტს ვერ იღებს: მას არავინ აზიარებს, ან მისი ბმულის წაკითხვა შეუძლებელია
 #. text in errors.rs
 #, machine
-	{service} can't reach this file host right now; MDM will try again later	{service} ამჟამად ამ ფაილჰოსტთან დაკავშირებას ვერ ახერხებს; MDM მოგვიანებით ისევ სცდის
+	{service} can't reach this file host right now; SDM will try again later	{service} ამჟამად ამ ფაილჰოსტთან დაკავშირებას ვერ ახერხებს; SDM მოგვიანებით ისევ სცდის
 #. text in errors.rs
 #. a debrid service's error: it isn't answering
 #, machine
@@ -5952,7 +5952,7 @@
 	{service}: this needs a premium account	{service}: ამისთვის პრემიუმ ანგარიშია საჭირო
 #. text in errors.rs
 #, machine
-	{service}: too many downloads at once through your account; MDM will try again	{service}: თქვენი ანგარიშით ერთდროულად ძალიან ბევრი ჩამოტვირთვა მიმდინარეობს; MDM ხელახლა სცდის
+	{service}: too many downloads at once through your account; SDM will try again	{service}: თქვენი ანგარიშით ერთდროულად ძალიან ბევრი ჩამოტვირთვა მიმდინარეობს; SDM ხელახლა სცდის
 #. text in errors.rs
 #. a debrid service's error: the account's limit (traffic) for this host is used up
 #, machine
@@ -5992,7 +5992,7 @@
 #, machine
 	{title}: already in the list	{title}: უკვე სიაშია
 #. message or event log entry in the main window
-#. RSS feeds window, under the rules: not added, because files of its names are already in the folder (MDM never writes into them unasked)
+#. RSS feeds window, under the rules: not added, because files of its names are already in the folder (SDM never writes into them unasked)
 #, machine
 	{title}: not added: files of its names are already in {folder}	{title}: არ დაემატა: ამ სახელის ფაილები უკვე არის {folder}-ში
 #. message or event log entry in the main window
@@ -6062,13 +6062,13 @@ column	Transfer rate	გადაცემის სიჩქარე
 #, machine
 column	Upload speed	ატვირთვის სიჩქარე
 #. text in the browser extension
-#. in the menu under the download button over a video: the page is a list of videos (a playlist), whose videos are chosen in the app's window; keep the name Mister Download Manager as it is
+#. in the menu under the download button over a video: the page is a list of videos (a playlist), whose videos are chosen in the app's window; keep the name Sedot Download Manager as it is
 #, machine
-extension	A list of videos: choose them in Mister Download Manager	ვიდეოების სია: აირჩიეთ ისინი Mister Download Manager-ში
+extension	A list of videos: choose them in Sedot Download Manager	ვიდეოების სია: აირჩიეთ ისინი Sedot Download Manager-ში
 #. text in the browser extension
-#. on the download button (green) over a video after the app added and started the download; a quality may follow ('· 1080p') and a 'Show' button; MDM is the app's short name, keep it; short
+#. on the download button (green) over a video after the app added and started the download; a quality may follow ('· 1080p') and a 'Show' button; SDM is the app's short name, keep it; short
 #, machine
-extension	Added to MDM	MDM-ში დამატებულია
+extension	Added to SDM	SDM-ში დამატებულია
 #. text in the browser extension
 #. shown briefly on the download button over a video after a quality was picked: the download was added to the app's download queue, to start later
 #, machine
@@ -6079,9 +6079,9 @@ extension	Added to the queue	რიგში დაემატა
 #, machine
 extension	All qualities and subtitles...	ყველა ხარისხი და სუბტიტრები...
 #. text in the browser extension
-#. choice under Send downloads to: an MDM running on another computer of the network, such as a home server; keep the name Mister Download Manager as it is
+#. choice under Send downloads to: an SDM running on another computer of the network, such as a home server; keep the name Sedot Download Manager as it is
 #, machine
-extension	Another Mister Download Manager (a server)	სხვა Mister Download Manager (სერვერი)
+extension	Another Sedot Download Manager (a server)	სხვა Sedot Download Manager (სერვერი)
 #. text in the browser extension
 #. tab above the list of qualities in the menu under the download button over a video: the choices that are sound only (MP3, Opus and the like); short, one word
 #, machine
@@ -6091,11 +6091,11 @@ extension	Audio	აუდიო
 #, machine
 extension	best	საუკეთესო
 #. text in the browser extension
-#. the name this browser gets in the other MDM's list of paired devices
+#. the name this browser gets in the other SDM's list of paired devices
 #, machine
 extension	Browser extension	ბრაუზერის გაფართოება
 #. text in the browser extension
-#. menu command of the download button over a video: opens its settings in Mister Download Manager
+#. menu command of the download button over a video: opens its settings in Sedot Download Manager
 #. the trailing ... means it is still going on: keep it
 #, machine
 extension	Button settings...	ღილაკის პარამეტრები...
@@ -6108,14 +6108,14 @@ extension	can't be saved	ვერ შეინახება
 #, machine
 extension	Can't tell which video this is: open its own page and try there	ვერ დგინდება, რომელი ვიდეოა ეს: გახსენით მისი საკუთარი გვერდი და სცადეთ იქ
 #. text in the browser extension
-#. the toolbar button's status when the browser reaches the app; keep the name Mister Download Manager as it is
+#. the toolbar button's status when the browser reaches the app; keep the name Sedot Download Manager as it is
 #, machine
-extension	Connected to Mister Download Manager	დაკავშირებულია Mister Download Manager-თან
+extension	Connected to Sedot Download Manager	დაკავშირებულია Sedot Download Manager-თან
 #. text in the browser extension
-#. the toolbar button's status when the browser reaches the app, with the app's version number; keep the name Mister Download Manager as it is
+#. the toolbar button's status when the browser reaches the app, with the app's version number; keep the name Sedot Download Manager as it is
 #. {version} = a version number (keep the braces as they are)
 #, machine
-extension	Connected to Mister Download Manager {version}	დაკავშირებულია Mister Download Manager {version}-თან
+extension	Connected to Sedot Download Manager {version}	დაკავშირებულია Sedot Download Manager {version}-თან
 #. text in the browser extension
 #. in the menu under the download button over a video: finding the video's qualities failed; the app's own explanation follows on the next line
 #, machine
@@ -6125,17 +6125,17 @@ extension	Could not look it up	ვერ მოიძებნა
 #, machine
 extension	Download	ჩამოტვირთვა
 #. text in the browser extension
-#. command in the browser's right-click menu on a page: download the links of the whole page; keep the name Mister Download Manager as it is
+#. command in the browser's right-click menu on a page: download the links of the whole page; keep the name Sedot Download Manager as it is
 #, machine
-extension	Download all links with Mister Download Manager	ყველა ბმულის ჩამოტვირთვა Mister Download Manager-ით
+extension	Download all links with Sedot Download Manager	ყველა ბმულის ჩამოტვირთვა Sedot Download Manager-ით
 #. text in the browser extension
 #. first line of the list under the download button over a video: downloads the best quality at once; the quality, its file type and size follow on the same line; short
 #, machine
 extension	Download best	საუკეთესო ხარისხის ჩამოტვირთვა
 #. text in the browser extension
-#. command in the browser's right-click menu on selected text: download the links in the selection; keep the name Mister Download Manager as it is
+#. command in the browser's right-click menu on selected text: download the links in the selection; keep the name Sedot Download Manager as it is
 #, machine
-extension	Download selected links with Mister Download Manager	არჩეული ბმულების ჩამოტვირთვა Mister Download Manager-ით
+extension	Download selected links with Sedot Download Manager	არჩეული ბმულების ჩამოტვირთვა Sedot Download Manager-ით
 #. text in the browser extension
 #. first line of the tooltip of the download button over a video while the app is still finding its qualities
 #, machine
@@ -6145,9 +6145,9 @@ extension	Download the best quality	ჩამოტვირთეთ საუ�
 #, machine
 extension	Download video	ვიდეოს ჩამოტვირთვა
 #. text in the browser extension
-#. command in the browser's right-click menu on a link, picture, video or sound; keep the name Mister Download Manager as it is
+#. command in the browser's right-click menu on a link, picture, video or sound; keep the name Sedot Download Manager as it is
 #, machine
-extension	Download with Mister Download Manager	ჩამოტვირთვა Mister Download Manager-ით
+extension	Download with Sedot Download Manager	ჩამოტვირთვა Sedot Download Manager-ით
 #. text in the browser extension
 #. first line of the tooltip of the download button over a video: what one click downloads; $what$ is a quality, a file type and a size, e.g. '1080p MP4 · 412 MB'
 #, machine
@@ -6158,7 +6158,7 @@ extension	Download {what}	ჩამოტვირთეთ {what}
 #, machine
 extension	Downloads from {site} stay with the browser	{site}-დან ჩამოტვირთვები ბრაუზერში რჩება
 #. text in the browser extension
-#. the toolbar button's status while downloads go to another MDM
+#. the toolbar button's status while downloads go to another SDM
 #, machine
 extension	Downloads go to {address}	ჩამოტვირთვები გადადის {address}-ზე
 #. text in the browser extension
@@ -6170,13 +6170,13 @@ extension	Drag the dots to move it along the edge	გადაათრიეთ
 #, machine
 extension	Enter its https:// address.	შეიყვანეთ მისი https:// მისამართი.
 #. text in the browser extension
-#. button on the download button over a video when the app didn't answer: opens the app's download page; MDM is the app's short name, keep it; very short
+#. button on the download button over a video when the app didn't answer: opens the app's download page; SDM is the app's short name, keep it; very short
 #, machine
-extension	Get MDM	მიიღეთ MDM
+extension	Get SDM	მიიღეთ SDM
 #. text in the browser extension
-#. the extension's description in the browser's list of extensions; keep the name Mister Download Manager as it is
+#. the extension's description in the browser's list of extensions; keep the name Sedot Download Manager as it is
 #, machine
-extension	Hands downloads from the browser to Mister Download Manager.	გადასცემს ჩამოტვირთვებს ბრაუზერიდან Mister Download Manager-ს.
+extension	Hands downloads from the browser to Sedot Download Manager.	გადასცემს ჩამოტვირთვებს ბრაუზერიდან Sedot Download Manager-ს.
 #. text in the browser extension
 #. link in the toolbar button's popup to the help page
 #, machine
@@ -6202,13 +6202,13 @@ extension	How to fix it	როგორ გამოვასწოროთ
 #, machine
 extension	It didn't work. Try again.	არ იმუშავა. სცადეთ ხელახლა.
 #. text in the browser extension
-#. pairing failed: the other MDM shows no pairing code; Pair a device is its button
+#. pairing failed: the other SDM shows no pairing code; Pair a device is its button
 #, machine
 extension	It shows no code now: click Pair a device there first.	ახლა კოდს არ აჩვენებს: ჯერ დააწკაპუნეთ იქ „მოწყობილობის დაწყვილება“-ზე.
 #. text in the browser extension
-#. why a download stayed with the browser: it is a .torrent file and the app's Torrent settings don't open torrents with Mister Download Manager, so the browser keeps it for the user's own torrent program; keep the setting's name as the app shows it
+#. why a download stayed with the browser: it is a .torrent file and the app's Torrent settings don't open torrents with Sedot Download Manager, so the browser keeps it for the user's own torrent program; keep the setting's name as the app shows it
 #, machine
-extension	It's a torrent, and Open magnet links and .torrent files with Mister Download Manager is off in Torrent settings.	ეს არის ტორენტი, და „მაგნიტური ბმულების და .torrent ფაილების გახსნა Mister Download Manager-ით“ გამორთულია ტორენტის პარამეტრებში.
+extension	It's a torrent, and Open magnet links and .torrent files with Sedot Download Manager is off in Torrent settings.	ეს არის ტორენტი, და „მაგნიტური ბმულების და .torrent ფაილების გახსნა Sedot Download Manager-ით“ გამორთულია ტორენტის პარამეტრებში.
 #. text in the browser extension
 #. why a download stayed with the browser: the file is smaller than the app's minimum size setting
 #, machine
@@ -6243,49 +6243,49 @@ extension	Looking up the qualities…	ხარისხის ძიება�
 #, machine
 extension	Looking up took too long	მოძიებას ძალიან დიდი დრო დასჭირდა
 #. text in the browser extension
-#. on the download button (red) over a video when the app isn't installed or didn't start; 'Get MDM' and 'Retry' buttons follow; MDM is the app's short name, keep it; short
+#. on the download button (red) over a video when the app isn't installed or didn't start; 'Get SDM' and 'Retry' buttons follow; SDM is the app's short name, keep it; short
 #, machine
-extension	MDM didn't answer	MDM-მა პასუხი არ გასცა
+extension	SDM didn't answer	SDM-მა პასუხი არ გასცა
 #. text in the browser extension
 #. heading in the toolbar button's popup over the list of the videos, sounds and streams the current web page has loaded
 #, machine
 extension	Media on this page	მედია ამ გვერდზე
 #. text in the browser extension
-#. the extension's name in the browser's list of extensions and on its toolbar button; keep the name Mister Download Manager as it is
+#. the extension's name in the browser's list of extensions and on its toolbar button; keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager	Mister Download Manager
+extension	Sedot Download Manager	Sedot Download Manager
 #. text in the browser extension
-#. status when the app was started for a download but didn't answer in time; keep the name Mister Download Manager as it is
+#. status when the app was started for a download but didn't answer in time; keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager didn't start in time	Mister Download Manager დროულად არ დაიწყო
+extension	Sedot Download Manager didn't start in time	Sedot Download Manager დროულად არ დაიწყო
 #. text in the browser extension
-#. status when the app refuses this copy of the extension (another copy is installed, or it came from another store); keep the name Mister Download Manager as it is
+#. status when the app refuses this copy of the extension (another copy is installed, or it came from another store); keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager doesn't accept this copy of the extension	Mister Download Manager არ იღებს გაფართოების ამ ასლს
+extension	Sedot Download Manager doesn't accept this copy of the extension	Sedot Download Manager არ იღებს გაფართოების ამ ასლს
 #. text in the browser extension
-#. in the menu under the download button over a video: the app is already looking up other videos and can't look this one up now; keep the name Mister Download Manager as it is
+#. in the menu under the download button over a video: the app is already looking up other videos and can't look this one up now; keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager is busy with other videos	Mister Download Manager სხვა ვიდეოებითაა დაკავებული
+extension	Sedot Download Manager is busy with other videos	Sedot Download Manager სხვა ვიდეოებითაა დაკავებული
 #. text in the browser extension
-#. shown briefly on the download button when the app could not be reached; keep the name Mister Download Manager as it is
+#. shown briefly on the download button when the app could not be reached; keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager isn't installed or didn't start	Mister Download Manager არ არის დაინსტალირებული ან არ დაიწყო
+extension	Sedot Download Manager isn't installed or didn't start	Sedot Download Manager არ არის დაინსტალირებული ან არ დაიწყო
 #. text in the browser extension
-#. status when the browser can't find the app's connection; keep the name Mister Download Manager as it is
+#. status when the browser can't find the app's connection; keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager isn't installed, or its browser integration isn't set up	Mister Download Manager არ არის დაინსტალირებული, ან მისი ბრაუზერის ინტეგრაცია არ არის დაყენებული
+extension	Sedot Download Manager isn't installed, or its browser integration isn't set up	Sedot Download Manager არ არის დაინსტალირებული, ან მისი ბრაუზერის ინტეგრაცია არ არის დაყენებული
 #. text in the browser extension
-#. in the menu under the download button over a video: the app needs the yt-dlp tool (a program's name, keep it as it is) to find this video's qualities, and it isn't installed; keep the name Mister Download Manager as it is
+#. in the menu under the download button over a video: the app needs the yt-dlp tool (a program's name, keep it as it is) to find this video's qualities, and it isn't installed; keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager needs yt-dlp for this video	Mister Download Manager-ს სჭირდება yt-dlp ამ ვიდეოსთვის
+extension	Sedot Download Manager needs yt-dlp for this video	Sedot Download Manager-ს სჭირდება yt-dlp ამ ვიდეოსთვის
 #. text in the browser extension
-#. tooltip of the switch Send downloads through this browser's proxy or VPN extension; keep the name Mister Download Manager as it is
+#. tooltip of the switch Send downloads through this browser's proxy or VPN extension; keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager then downloads through the same proxy as this browser. The browser asks you once to allow it; turning this off takes that back.	Mister Download Manager შემდეგ ჩამოტვირთავს ამ ბრაუზერის მსგავსი პროქსის მეშვეობით. ბრაუზერი ერთხელ გთხოვთ ამის დაშვებას; ამის გამორთვა გააუქმებს ამ ნებართვას.
+extension	Sedot Download Manager then downloads through the same proxy as this browser. The browser asks you once to allow it; turning this off takes that back.	Sedot Download Manager შემდეგ ჩამოტვირთავს ამ ბრაუზერის მსგავსი პროქსის მეშვეობით. ბრაუზერი ერთხელ გთხოვთ ამის დაშვებას; ამის გამორთვა გააუქმებს ამ ნებართვას.
 #. text in the browser extension
-#. tooltip of the switch Send downloads through this browser's proxy or VPN extension in Chrome, Edge and the other Chromium browsers (they ask for no permission at the switch); keep the name Mister Download Manager as it is
+#. tooltip of the switch Send downloads through this browser's proxy or VPN extension in Chrome, Edge and the other Chromium browsers (they ask for no permission at the switch); keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager then downloads through the same proxy as this browser. While this is off, the extension doesn't read the browser's proxy.	Mister Download Manager შემდეგ ჩამოტვირთავს იმავე პროქსის მეშვეობით, როგორც ეს ბრაუზერი. სანამ ეს გამორთულია, გაფართოება არ კითხულობს ბრაუზერის პროქსის.
+extension	Sedot Download Manager then downloads through the same proxy as this browser. While this is off, the extension doesn't read the browser's proxy.	Sedot Download Manager შემდეგ ჩამოტვირთავს იმავე პროქსის მეშვეობით, როგორც ეს ბრაუზერი. სანამ ეს გამორთულია, გაფართოება არ კითხულობს ბრაუზერის პროქსის.
 #. text in the browser extension
 #. the small arrow next to the Download video button that opens its menu (read aloud by screen readers)
 #, machine
@@ -6309,7 +6309,7 @@ extension	No video or sound found on this page yet. Play it, then open this agai
 #, machine
 extension	No video to download here	აქ ჩამოსატვირთი ვიდეო არ არის
 #. text in the browser extension
-#. pairing failed: the other MDM didn't answer
+#. pairing failed: the other SDM didn't answer
 #, machine
 extension	Not reached. Open its address once in this browser and accept its certificate, then try again.	მიუწვდომელია. გახსენით მისი მისამართი ერთხელ ამ ბრაუზერში და მიიღეთ მისი სერტიფიკატი, შემდეგ სცადეთ ხელახლა.
 #. text in the browser extension
@@ -6317,7 +6317,7 @@ extension	Not reached. Open its address once in this browser and accept its cert
 #, machine
 extension	Off on this site	ამ საიტზე გამორთულია
 #. text in the browser extension
-#. button: open the other MDM's address in a tab (to accept its certificate once)
+#. button: open the other SDM's address in a tab (to accept its certificate once)
 #, machine
 extension	Open it	გახსნა
 #. text in the browser extension
@@ -6325,9 +6325,9 @@ extension	Open it	გახსნა
 #, machine
 extension	Open its address once and accept its certificate, then enter a code from its Options, Remote, Pair a device (or misterdownloadmanager-cli pair).	გახსენით მისი მისამართი ერთხელ და მიიღეთ მისი სერტიფიკატი, შემდეგ შეიყვანეთ კოდი მისი „პარამეტრები“, „დისტანციური“, „მოწყობილობის დაწყვილება“-დან (ან misterdownloadmanager-cli pair).
 #. text in the browser extension
-#. button in the toolbar button's popup; keep the name Mister Download Manager as it is
+#. button in the toolbar button's popup; keep the name Sedot Download Manager as it is
 #, machine
-extension	Open Mister Download Manager	Mister Download Manager-ის გახსნა
+extension	Open Sedot Download Manager	Sedot Download Manager-ის გახსნა
 #. text in the browser extension
 #. button on the download button over a video in a feed: opens the post the video belongs to in a new tab; verb; very short
 #, machine
@@ -6346,11 +6346,11 @@ extension	Options...	პარამეტრები...
 #, machine
 extension	original	ორიგინალი
 #. text in the browser extension
-#. button: pair this browser with the other MDM using the code
+#. button: pair this browser with the other SDM using the code
 #, machine
 extension	Pair	დაწყვილება
 #. text in the browser extension
-#. placeholder of the box for the 8-digit code the other MDM shows
+#. placeholder of the box for the 8-digit code the other SDM shows
 #, machine
 extension	Pairing code	დაწყვილების კოდი
 #. text in the browser extension
@@ -6382,22 +6382,22 @@ extension	Send downloads through this browser's proxy or VPN extension	ჩამ
 #, machine
 extension	Send downloads to	ჩამოტვირთვების გაგზავნა
 #. text in the browser extension
-#. on the download button over a video right after it was clicked, while the download goes to the app; MDM is Mister Download Manager's short name, keep it as it is; short
+#. on the download button over a video right after it was clicked, while the download goes to the app; SDM is Sedot Download Manager's short name, keep it as it is; short
 #. the trailing ... means it is still going on: keep it
 #, machine
-extension	Sending to MDM...	MDM-ში გაგზავნა...
+extension	Sending to SDM...	SDM-ში გაგზავნა...
 #. text in the browser extension
-#. shown briefly on the download button after it was clicked; keep the name Mister Download Manager as it is
+#. shown briefly on the download button after it was clicked; keep the name Sedot Download Manager as it is
 #, machine
-extension	Sent to Mister Download Manager	გაგზავნილია Mister Download Manager-ში
+extension	Sent to Sedot Download Manager	გაგზავნილია Sedot Download Manager-ში
 #. text in the browser extension
 #. button on the download button over a video after a download was added: shows that download in the app's window; verb; very short
 #, machine
 extension	Show	ჩვენება
 #. text in the browser extension
-#. link at the foot of the toolbar button's popup to the creator's GitHub Sponsors page (MDM is free; this is an optional donation)
+#. link at the foot of the toolbar button's popup to the creator's GitHub Sponsors page (SDM is free; this is an optional donation)
 #, machine
-extension	Support MDM	MDM-ის მხარდაჭერა
+extension	Support SDM	SDM-ის მხარდაჭერა
 #. text in the browser extension
 #. check box in the toolbar button's popup: on, downloads go to the app; off, the browser keeps them
 #, machine
@@ -6407,9 +6407,9 @@ extension	Take downloads from this browser	ჩამოტვირთვებ�
 #, machine
 extension	The Chrome Web Store's rules keep this copy of the add-on away from this site's videos. Help says what you can do.	Chrome Web Store-ის წესების გამო გაფართოების ეს ვერსია ამ საიტის ვიდეოებთან ვერ მუშაობს. რა შეგიძლიათ გააკეთოთ, იხილეთ დახმარებაში.
 #. text in the browser extension
-#. status when the connection to the app broke off (often security software blocking it); keep the name Mister Download Manager as it is
+#. status when the connection to the app broke off (often security software blocking it); keep the name Sedot Download Manager as it is
 #, machine
-extension	The connection to Mister Download Manager failed	კავშირი Mister Download Manager-თან ვერ მოხერხდა
+extension	The connection to Sedot Download Manager failed	კავშირი Sedot Download Manager-თან ვერ მოხერხდა
 #. text in the browser extension
 #. why a download stayed with the browser: the user limited the extension's access to web sites in the browser, so it can't pass the sign-in on
 #, machine
@@ -6423,7 +6423,7 @@ extension	The last download was left to the browser.	ბოლო ჩამო�
 #, machine
 extension	This browser isn't ticked in Options → General.	ეს ბრაუზერი არ არის მონიშნული პარამეტრებში → ზოგადი.
 #. text in the browser extension
-#. choice under Send downloads to: the Mister Download Manager on this computer
+#. choice under Send downloads to: the Sedot Download Manager on this computer
 #, machine
 extension	This computer	ეს კომპიუტერი
 #. text in the browser extension
@@ -6443,9 +6443,9 @@ extension	Turn on	ჩართვა
 #, machine
 extension	Undo	გაუქმება
 #. text in the browser extension
-#. status when the app is older than the extension; keep the name Mister Download Manager as it is
+#. status when the app is older than the extension; keep the name Sedot Download Manager as it is
 #, machine
-extension	Update Mister Download Manager to use everything this extension offers	განაახლეთ Mister Download Manager, რათა გამოიყენოთ ყველაფერი, რასაც ეს გაფართოება გთავაზობთ
+extension	Update Sedot Download Manager to use everything this extension offers	განაახლეთ Sedot Download Manager, რათა გამოიყენოთ ყველაფერი, რასაც ეს გაფართოება გთავაზობთ
 #. text in the browser extension
 #. why a download stayed with the browser: the app's setting 'Use advanced browser integration' is off; keep the setting's name as the app shows it
 #, machine
@@ -6573,13 +6573,13 @@ key	Up / Down	ზემოთ / ქვემოთ
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	&About Mister Download Manager	Mister Download Manager-ის &შესახებ
+menu	&About Sedot Download Manager	Sedot Download Manager-ის &შესახებ
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
 menu	&Add new download	&ახალი ჩამოტვირთვის დამატება
 #. menu command in the main window
-#. View → Window system: MDM chooses the window system itself at each start
+#. View → Window system: SDM chooses the window system itself at each start
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
 menu	&Automatic	ა&ვტომატური
@@ -6614,7 +6614,7 @@ menu	&Exit	&გასვლა
 #, machine
 menu	&Import	&იმპორტი
 #. menu command in the main window
-#. View menu: submenu choosing how large MDM draws its windows and text (100 % to 200 %), as a browser's zoom
+#. View menu: submenu choosing how large SDM draws its windows and text (100 % to 200 %), as a browser's zoom
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
 menu	&Interface size	ინტერფეისის &ზომა
@@ -6704,7 +6704,7 @@ menu	&Undo	&გაუქმება
 #, machine
 menu	&Video downloads	&ვიდეო ჩამოტვირთვები
 #. menu command in the main window
-#. View menu: submenu choosing the window system MDM's windows use on Linux (X11 through XWayland, or Wayland)
+#. View menu: submenu choosing the window system SDM's windows use on Linux (X11 through XWayland, or Wayland)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
 menu	&Window system	&ფანჯრის სისტემა
@@ -6746,9 +6746,9 @@ menu	Adwaita	Adwaita
 #, machine
 menu	Aero	Aero
 #. menu command in the main window
-#. View → Draw with: a greyed note under the choices; the choice takes effect when MDM is started again
+#. View → Draw with: a greyed note under the choices; the choice takes effect when SDM is started again
 #, machine
-menu	Applies the next time MDM starts	გამოიყენება MDM-ის შემდეგი გაშვებისას
+menu	Applies the next time SDM starts	გამოიყენება SDM-ის შემდეგი გაშვებისას
 #. menu command in the main window
 #. View → Theme: a style theme's name (Mac OS X's look), a name: keep "Aqua" as written
 #, machine
@@ -6823,7 +6823,7 @@ menu	C&ustomize URL List...	URL სიის &მორგება...
 #, machine
 menu	Check for &updates...	&განახლებების შემოწმება...
 #. menu command in the main window
-#. View → Theme: MDM's own look, the default (IDM's layout, Windows 11's controls)
+#. View → Theme: SDM's own look, the default (IDM's layout, Windows 11's controls)
 #, machine
 menu	Classic	კლასიკური
 #. menu command in the main window
@@ -6877,7 +6877,7 @@ menu	Download &video from a page...	&ვიდეოს ჩამოტვირ
 #, machine
 menu	Download in order	თანმიმდევრული ჩამოტვირთვა
 #. menu command in the main window
-#. View menu: submenu choosing what draws MDM's windows: OpenGL, or Direct3D, Vulkan or Metal (graphics systems)
+#. View menu: submenu choosing what draws SDM's windows: OpenGL, or Direct3D, Vulkan or Metal (graphics systems)
 #, machine
 menu	Draw with	დახატვა
 #. menu command in the main window
@@ -6937,23 +6937,23 @@ menu	Hide drop target	ჩამოშვების სამიზნის �
 #, machine
 menu	High contrast	მაღალი კონტრასტი
 #. menu command in the main window
-#. View → Window system: a greyed note; MDM's windows are Wayland's now
+#. View → Window system: a greyed note; SDM's windows are Wayland's now
 #, machine
 menu	In use: Wayland	გამოყენებაში: Wayland
 #. menu command in the main window
-#. View → Window system: a greyed note; MDM's windows are X11's (through XWayland) now
+#. View → Window system: a greyed note; SDM's windows are X11's (through XWayland) now
 #, machine
 menu	In use: X11 (XWayland)	გამოყენებაში: X11 (XWayland)
 #. menu command in the main window
-#. View → Draw with: a greyed note under "… didn't start here"; why: another error, written in MDM's log
+#. View → Draw with: a greyed note under "… didn't start here"; why: another error, written in SDM's log
 #, machine
 menu	It couldn't start: the log says why	ვერ გაეშვა: მიზეზი ჟურნალშია
 #. menu command in the main window
-#. View → Draw with: a greyed note under "… didn't start here"; why: the window stayed empty, so MDM started again with OpenGL
+#. View → Draw with: a greyed note under "… didn't start here"; why: the window stayed empty, so SDM started again with OpenGL
 #, machine
 menu	Its first frame didn't show within 10 seconds	მისი პირველი კადრი 10 წამში არ გამოჩნდა
 #. menu command in the main window
-#. View → Draw with: a greyed note under "… didn't start here"; why: MDM crashed or was closed while starting with it
+#. View → Draw with: a greyed note under "… didn't start here"; why: SDM crashed or was closed while starting with it
 #, machine
 menu	Its last start ended before its first frame	მისი ბოლო გაშვება პირველ კადრამდე დასრულდა
 #. menu command in the main window
@@ -6979,7 +6979,7 @@ menu	Metro	მეტრო
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	Mister Download Manager &Home Page	Mister Download Manager-ის &მთავარი გვერდი
+menu	Sedot Download Manager &Home Page	Sedot Download Manager-ის &მთავარი გვერდი
 #. menu command in the main window
 #, machine
 menu	Move/Rename (Ctrl-M)	გადატანა/გადარქმევა (Ctrl-M)
@@ -7020,23 +7020,23 @@ menu	Open with...	გახსნა რითი...
 #, machine
 menu	OpenGL	OpenGL
 #. menu command in the main window
-#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: it couldn't start on this computer
+#. View → Draw with: a greyed note; why SDM no longer draws with OpenGL: it couldn't start on this computer
 #, machine
 menu	OpenGL didn't start here	OpenGL აქ არ გაეშვა
 #. menu command in the main window
-#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: its window froze inside the graphics card's driver while OpenGL drew
+#. View → Draw with: a greyed note; why SDM no longer draws with OpenGL: its window froze inside the graphics card's driver while OpenGL drew
 #, machine
 menu	OpenGL froze inside the graphics driver here	OpenGL აქ გაიყინა გრაფიკულ დრაივერში
 #. menu command in the main window
-#. View → Draw with: a greyed note; this computer's OpenGL (its graphics driver) is too old, so MDM doesn't draw with it
+#. View → Draw with: a greyed note; this computer's OpenGL (its graphics driver) is too old, so SDM doesn't draw with it
 #, machine
-menu	OpenGL here is too old to draw MDM	აქ OpenGL ზედმეტად ძველია MDM-ის გამოსახატავად
+menu	OpenGL here is too old to draw SDM	აქ OpenGL ზედმეტად ძველია SDM-ის გამოსახატავად
 #. menu command in the main window
-#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: its window stayed empty for 10 seconds, so MDM started again another way
+#. View → Draw with: a greyed note; why SDM no longer draws with OpenGL: its window stayed empty for 10 seconds, so SDM started again another way
 #, machine
 menu	OpenGL's first frame didn't show within 10 seconds	OpenGL-ის პირველი კადრი 10 წამში არ გამოჩნდა
 #. menu command in the main window
-#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: MDM crashed or was closed while starting with it
+#. View → Draw with: a greyed note; why SDM no longer draws with OpenGL: SDM crashed or was closed while starting with it
 #, machine
 menu	OpenGL's last start ended before its first frame	OpenGL-ის ბოლო გაშვება პირველ კადრამდე დასრულდა
 #. menu command in the main window
@@ -7112,7 +7112,7 @@ menu	Select &all	ყველას &არჩევა
 menu	Show &drop target	&ჩამოგდების სამიზნის ჩვენება
 #. menu command in the main window
 #, machine
-menu	Show Mister Download Manager	Mister Download Manager-ის ჩვენება
+menu	Show Sedot Download Manager	Sedot Download Manager-ის ჩვენება
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
@@ -7134,7 +7134,7 @@ menu	Stop Download	ჩამოტვირთვის შეჩერება
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	Support &MDM	MDM-ის მხარ&დაჭერა
+menu	Support SD&M	SDM-ის მხარ&დაჭერა
 #. menu command in the main window
 #. View menu: submenu choosing how the text is drawn (smooth or classic)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
@@ -7149,7 +7149,7 @@ menu	Tell a &friend	&მეგობრისთვის თქმა
 #, machine
 menu	The graphics card was lost twice in 10 minutes	გრაფიკულმა ბარათმა 10 წუთში ორჯერ შეწყვიტა მუშაობა
 #. menu command in the main window
-#. View menu: submenu choosing MDM's look (colours, sizes, icons): Classic, Native…
+#. View menu: submenu choosing SDM's look (colours, sizes, icons): Classic, Native…
 #, machine
 menu	Theme	თემა
 #. menu command in the main window

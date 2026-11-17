@@ -1,4 +1,4 @@
-# Mister Download Manager in Chinese (Traditional) (繁體中文): tools/i18n/translate.py
+# Sedot Download Manager in Chinese (Traditional) (繁體中文): tools/i18n/translate.py
 # writes the rows marked '#, machine'; a native speaker deletes that line after checking.
 # context	source	translation (craft-i18n format, rows as in en.tsv)
 @id	language.name	繁體中文
@@ -11,7 +11,7 @@
 #. never shown for a single download
 #. {n} = a number (keep the braces as they are)
 #, machine
-@plural	Are you sure you want to delete {n} download from Mister Download Manager list of downloads?|Are you sure you want to delete these {n} downloads from Mister Download Manager list of downloads?	您確定要從 Mister Download Manager 的下載清單中刪除這 {n} 個下載項目嗎？
+@plural	Are you sure you want to delete {n} download from Sedot Download Manager list of downloads?|Are you sure you want to delete these {n} downloads from Sedot Download Manager list of downloads?	您確定要從 Sedot Download Manager 的下載清單中刪除這 {n} 個下載項目嗎？
 #. count in the Add torrent window
 #. while a magnet link's file list is fetched; {n} = peers that answered
 #. {n} = a number (keep the braces as they are)
@@ -217,7 +217,7 @@
 #. text in the Options window
 #. Options → Accounts: what these accounts are, and the services' rule against sharing
 #, machine
-	A debrid service downloads a file host's link with your own paid account and gives MDM a direct link. Use only your own account: sharing an account or its links breaks the services' terms and can get it suspended. Downloads the browser already started stay as they are.	解鎖服務會使用您自己的付費帳戶下載檔案主機的連結，並提供 MDM 直接連結。請僅使用您自己的帳戶：共用帳戶或其連結會違反服務條款，並可能導致帳戶遭到停用。瀏覽器已開始的下載會維持原狀。
+	A debrid service downloads a file host's link with your own paid account and gives SDM a direct link. Use only your own account: sharing an account or its links breaks the services' terms and can get it suspended. Downloads the browser already started stay as they are.	解鎖服務會使用您自己的付費帳戶下載檔案主機的連結，並提供 SDM 直接連結。請僅使用您自己的帳戶：共用帳戶或其連結會違反服務條款，並可能導致帳戶遭到停用。瀏覽器已開始的下載會維持原狀。
 #. text in a download's progress window
 #. reason shown on the Rename box when the entered name ends with a period
 #, machine
@@ -261,7 +261,7 @@
 #, machine
 	A single-file torrent keeps its name	單一檔案種子需保留原檔名
 #. text in the Add torrent window
-#. Add trackers: MDM never contacts a tracker on this computer or the local network
+#. Add trackers: SDM never contacts a tracker on this computer or the local network
 #, machine
 	A tracker on this computer or the local network is never contacted: {line}	不會聯絡此電腦或區域網路上的追蹤器：{line}
 #. text in extracting archives (a download's log, the Archive password window)
@@ -270,7 +270,7 @@
 	a volume of it is missing	缺少其中一個磁碟區
 #. window title in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #, machine
-	About Mister Download Manager	關於 Mister Download Manager
+	About Sedot Download Manager	關於 Sedot Download Manager
 #. text in whereis.rs
 #. a download's server's round trip: {ms} a number of milliseconds, {reach} near, medium or far
 #, machine
@@ -333,7 +333,7 @@
 #. window title in extension.rs
 #. title of the window that offers the browser extension
 #, machine
-	Add Mister Download Manager to your browser	將 Mister Download Manager 新增至您的瀏覽器
+	Add Sedot Download Manager to your browser	將 Sedot Download Manager 新增至您的瀏覽器
 #. message or event log entry in the main window; text in the tray icon's menu
 #. link in the empty download list: opens Add URL
 #, machine
@@ -395,9 +395,9 @@
 #, machine
 	Added.	已新增。
 #. text in remote.rs
-#. remote control page (on a phone): a magnet link or .torrent file was added; MDM reads the torrent's files first
+#. remote control page (on a phone): a magnet link or .torrent file was added; SDM reads the torrent's files first
 #, machine
-	Added. MDM is reading the torrent: it joins the list in a moment.	已新增。MDM 正在讀取 torrent：它會立即加入清單。
+	Added. SDM is reading the torrent: it joins the list in a moment.	已新增。SDM 正在讀取 torrent：它會立即加入清單。
 #. text in the Batch download window; text in a dialog box; label in the Options window; text in a download's progress window
 #. noun: the web address (URL)
 #. column title: the web address (URL)
@@ -481,7 +481,7 @@
 #, machine
 	Already reported as issue #{number}: {title}	已回報為問題 #{number}：{title}
 #. checkbox in crashui.rs
-#. crash report window: checkbox; the .dmp file holds what MDM had in memory
+#. crash report window: checkbox; the .dmp file holds what SDM had in memory
 #, machine
 	Also attach the crash data (.dmp): it may hold addresses, cookies and passwords	同時附加當機資料 (.dmp)：它可能包含位址、Cookie 和密碼
 #. text in a dialog box
@@ -500,7 +500,7 @@
 	Always into a folder named after it	一律放入以其命名的資料夾
 #. checkbox in a dialog box
 #, machine
-	Always turn on Speed Limiter on Mister Download Manager startup	在 Mister Download Manager 啟動時一律開啟速度限制器
+	Always turn on Speed Limiter on Sedot Download Manager startup	在 Sedot Download Manager 啟動時一律開啟速度限制器
 #. text in regional.rs; text in the Scheduler window
 #. before noon, after a time of day (12-hour clock). Its pair is "PM": write both the same way (this language's own short marks, or both kept as AM and PM)
 #, machine
@@ -566,7 +566,7 @@
 #. text in a dialog box
 #. {name} = a file name (keep the braces as they are)
 #, machine
-	Are you sure you want to delete "{name}" from Mister Download Manager list of downloads?	您確定要從 Mister Download Manager 下載清單中刪除「{name}」嗎？
+	Are you sure you want to delete "{name}" from Sedot Download Manager list of downloads?	您確定要從 Sedot Download Manager 下載清單中刪除「{name}」嗎？
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -626,7 +626,7 @@
 #, machine
 	Austria	奧地利
 #. checkbox in the Options window; text in the Options window
-#. checkbox: the User-Agent is the default browser's, which MDM finds itself
+#. checkbox: the User-Agent is the default browser's, which SDM finds itself
 #, machine
 	Automatic	自動
 #. text in remote.rs
@@ -709,7 +709,7 @@
 	Bosnia and Herzegovina	波士尼亞與赫塞哥維納
 #. text in helpers.rs
 #, machine
-	Both are open source. MDM gets them from their official releases with its own downloader and checks each file's signature before it runs. About 100 MB, once.	兩者都是開放原始碼。MDM 會從其官方版本下載，並在執行前檢查每個檔案的簽章。大約 100 MB，一次。
+	Both are open source. SDM gets them from their official releases with its own downloader and checks each file's signature before it runs. About 100 MB, once.	兩者都是開放原始碼。SDM 會從其官方版本下載，並在執行前檢查每個檔案的簽章。大約 100 MB，一次。
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -739,7 +739,7 @@
 	Browse...	瀏覽...
 #. text in extension.rs
 #, machine
-	Browser integration isn't set up on this computer, so no browser can reach Mister Download Manager yet.	此電腦上未設定瀏覽器整合，因此沒有瀏覽器可以連線到 Mister Download Manager。
+	Browser integration isn't set up on this computer, so no browser can reach Sedot Download Manager yet.	此電腦上未設定瀏覽器整合，因此沒有瀏覽器可以連線到 Sedot Download Manager。
 #. page title in the Options window
 #, machine
 	Browser/System Integration	瀏覽器/系統整合
@@ -871,7 +871,7 @@
 #, machine
 	Check for updates	檢查更新
 #. checkbox in the Help menu's windows (About, updates, shortcuts, Tell a friend)
-#. check box in the update window: look for a new version every time MDM starts
+#. check box in the update window: look for a new version every time SDM starts
 #, machine
 	Check for updates at every start	每次啟動時檢查更新
 #. text in errors.rs
@@ -883,9 +883,9 @@
 #, machine
 	Check your connection, then try again, or get them later from the video window.	檢查您的連線，然後再試一次，或稍後從影片視窗取得。
 #. text in the Options window
-#. tooltip of the close-setting: checked keeps MDM running when the window closes, in the notification area when available or else the taskbar; downloads continue; unchecked closing quits
+#. tooltip of the close-setting: checked keeps SDM running when the window closes, in the notification area when available or else the taskbar; downloads continue; unchecked closing quits
 #, machine
-	Checked, closing the window keeps MDM running: it hides in the notification area when available, or minimizes to the taskbar otherwise, and downloads continue; unchecked, closing quits MDM	勾選此項，關閉視窗後 MDM 會繼續執行：若有通知區域，則會隱藏在通知區域中，否則會最小化至工作列，且下載會繼續；若未勾選，關閉視窗即會結束 MDM。
+	Checked, closing the window keeps SDM running: it hides in the notification area when available, or minimizes to the taskbar otherwise, and downloads continue; unchecked, closing quits SDM	勾選此項，關閉視窗後 SDM 會繼續執行：若有通知區域，則會隱藏在通知區域中，否則會最小化至工作列，且下載會繼續；若未勾選，關閉視窗即會結束 SDM。
 #. message or event log entry in the main window
 #. event log entry after Recheck: {have} and {total} are sizes ("1.2 GB of 4 GB there")
 #, machine
@@ -944,7 +944,7 @@
 	Choose a language	選擇語言
 #. text in langpick.rs
 #, machine
-	Choose the language Mister Download Manager shows its windows in:	選擇 Mister Download Manager 顯示視窗的語言：
+	Choose the language Sedot Download Manager shows its windows in:	選擇 Sedot Download Manager 顯示視窗的語言：
 #. text in the Options window
 #. Options → Sites Logins → Cookies for video sites: the title of the window, and the tooltip of the button, that pick a browser profile's folder
 #, machine
@@ -1032,7 +1032,7 @@
 #, machine
 	Congo	剛果
 #. text in extension.rs
-#. in the browser extension's window, beside a browser whose extension reached MDM
+#. in the browser extension's window, beside a browser whose extension reached SDM
 #, machine
 	Connected	已連線
 #. text in extension.rs
@@ -1084,7 +1084,7 @@
 #, machine
 	Could not be read: {error}	無法讀取：{error}
 #. text in errors.rs
-#. a helper (yt-dlp, ffmpeg) couldn't be downloaded: the proxy set in Options ({proxy}, its address) didn't let MDM connect
+#. a helper (yt-dlp, ffmpeg) couldn't be downloaded: the proxy set in Options ({proxy}, its address) didn't let SDM connect
 #, machine
 	could not connect through the proxy {proxy}	無法透過代理 {proxy} 連線
 #. text in errors.rs
@@ -1122,13 +1122,13 @@
 	Customize "Download progress" dialog	自訂「下載進度」對話方塊
 #. text in the Options window
 #, machine
-	Customize keys to prevent or force downloading with MDM	自訂按鍵以防止或強制使用 MDM 下載
+	Customize keys to prevent or force downloading with SDM	自訂按鍵以防止或強制使用 SDM 下載
 #. text in the Options window
 #, machine
-	Customize MDM Download panels in browsers	自訂瀏覽器中的 MDM 下載面板
+	Customize SDM Download panels in browsers	自訂瀏覽器中的 SDM 下載面板
 #. text in the Options window
 #, machine
-	Customize MDM menu items in context menu of browsers	自訂瀏覽器內容功能表中的 MDM 功能表項目
+	Customize SDM menu items in context menu of browsers	自訂瀏覽器內容功能表中的 SDM 功能表項目
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -1317,9 +1317,9 @@
 #, machine
 	Download complete	下載完成
 #. text in the Options window
-#. Options, Downloads, under "Show download complete dialog": snoozed with "Until MDM restarts"
+#. Options, Downloads, under "Show download complete dialog": snoozed with "Until SDM restarts"
 #, machine
-	Download complete is snoozed until MDM restarts	「下載完成」通知已延後顯示，直到 MDM 重新啟動為止
+	Download complete is snoozed until SDM restarts	「下載完成」通知已延後顯示，直到 SDM 重新啟動為止
 #. text in the Options window
 #. Options, Downloads, under "Show download complete dialog": {time} when the snooze ends, like "14:30"
 #. {time} = a time of day (keep the braces as they are)
@@ -1428,10 +1428,10 @@
 #, machine
 	Downloading and verifying yt-dlp...	正在下載並驗證 yt-dlp...
 #. text in helpers.rs
-#. Video helpers: MDM's own yt-dlp is being downloaded
+#. Video helpers: SDM's own yt-dlp is being downloaded
 #. the trailing ... means it is still going on: keep it
 #, machine
-	Downloading MDM's own copy...	正在下載 MDM 自己的副本...
+	Downloading SDM's own copy...	正在下載 SDM 自己的副本...
 #. text in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #. Check for updates, while Update now downloads; {percent} like "42%"
 #, machine
@@ -1474,7 +1474,7 @@
 	Drag the file into a folder or an app	將檔案拖曳到資料夾或應用程式
 #. message or event log entry in the main window
 #, machine
-	Dragged out of Download complete and moved to a place MDM couldn't learn	已從「下載完成」拖曳出，並移至 MDM 無法辨識的位置
+	Dragged out of Download complete and moved to a place SDM couldn't learn	已從「下載完成」拖曳出，並移至 SDM 無法辨識的位置
 #. message or event log entry in the main window
 #, machine
 	Dragged out of Download complete and moved to {folder}	已從「下載完成」拖曳出，並移至 {folder}
@@ -1536,9 +1536,9 @@
 #, machine
 	Empty: all of them. On most sites the newest come first.	空白：全部。在大多數網站上，最新的檔案會先顯示。
 #. text in crashui.rs
-#. crash report window button: end the frozen MDM and start it again
+#. crash report window button: end the frozen SDM and start it again
 #, machine
-	End and restart MDM	結束並重新啟動 MDM
+	End and restart SDM	結束並重新啟動 SDM
 #. text in the Add torrent window
 #, machine
 	Enter a magnet link or choose a .torrent file	輸入磁力連結或選擇 .torrent 檔案
@@ -1621,7 +1621,7 @@
 	Exit	結束
 #. checkbox in a download's progress window; checkbox in the Scheduler window
 #, machine
-	Exit Mister Download Manager when done	完成後結束 Mister Download Manager
+	Exit Sedot Download Manager when done	完成後結束 Sedot Download Manager
 #. text in the Checksum window
 #, machine
 	Expected checksum (MD5, SHA-1, SHA-256, SHA-512 or CRC32):	預期檢查碼 (MD5、SHA-1、SHA-256、SHA-512 或 CRC32):
@@ -1836,7 +1836,7 @@
 #, machine
 	For example:  {address}	例如: {address}
 #. text in the Add torrent window
-#. Torrent settings, under the switch that makes MDM open magnet links and .torrent files (macOS, Linux)
+#. Torrent settings, under the switch that makes SDM open magnet links and .torrent files (macOS, Linux)
 #, machine
 	For your account only. Another app set as the default stays first.	僅限您的帳戶。另一個應用程式設定為預設值時，仍會優先。
 #. text in the Add torrent window
@@ -1846,7 +1846,7 @@
 #, machine
 	Force processes to terminate	強制終止處理程序
 #. text in remote.rs
-#. remote control page (on a phone): menu command: unpair this phone or computer from MDM
+#. remote control page (on a phone): menu command: unpair this phone or computer from SDM
 #, machine
 	Forget this device	忘記此裝置
 #. text in remote.rs
@@ -2057,11 +2057,11 @@
 #, machine
 	Help	說明
 #. window title in helpers.rs
-#. window title: where MDM takes its helper programs (yt-dlp, ffmpeg, gallery-dl) from
+#. window title: where SDM takes its helper programs (yt-dlp, ffmpeg, gallery-dl) from
 #, machine
 	Helpers	輔助程式
 #. text in errors.rs; button in gallerydlg.rs; button in the Download video window
-#. button in Download video: where MDM takes yt-dlp and ffmpeg from
+#. button in Download video: where SDM takes yt-dlp and ffmpeg from
 #. the trailing ... means it opens a window: keep it
 #, machine
 	Helpers...	輔助程式...
@@ -2086,7 +2086,7 @@
 	Hide web pages	隱藏網頁
 #. text in the Options window
 #, machine
-	Hold Alt while clicking a link to let the browser download it instead of Mister Download Manager.	按住 Alt 鍵並點擊連結，讓瀏覽器下載，而不是 Mister Download Manager。
+	Hold Alt while clicking a link to let the browser download it instead of Sedot Download Manager.	按住 Alt 鍵並點擊連結，讓瀏覽器下載，而不是 Sedot Download Manager。
 #. link (opens a web page) in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #, machine
 	Home page	首頁
@@ -2127,7 +2127,7 @@
 	Hungary	匈牙利
 #. text in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #, machine
-	I download with Mister Download Manager: fast, free, and it looks like the download manager you already know. {link}	我使用 Mister Download Manager 下載：快速、免費，而且它看起來就像您已經知道的下載管理員。{link}
+	I download with Sedot Download Manager: fast, free, and it looks like the download manager you already know. {link}	我使用 Sedot Download Manager 下載：快速、免費，而且它看起來就像您已經知道的下載管理員。{link}
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -2164,7 +2164,7 @@
 #, machine
 	In the categories: the selected category's menu	在類別中：所選類別的功能表
 #. text in the Options window
-#. Options → Accounts: the account's sign-in is in the system's keyring (Linux), which is locked now; MDM never unlocks it
+#. Options → Accounts: the account's sign-in is in the system's keyring (Linux), which is locked now; SDM never unlocks it
 #, machine
 	in the locked keyring	在鎖定的金鑰圈中
 #. text in standard windows
@@ -2204,7 +2204,7 @@
 #, machine
 	Install it by hand	手動安裝
 #. text in unix.rs
-#. Linux, after a missing library's name, on a distribution MDM doesn't know
+#. Linux, after a missing library's name, on a distribution SDM doesn't know
 #, machine
 	Install what's missing from your distribution's packages.	請從您的發行套件安裝遺失的項目。
 #. text in the Download video window
@@ -2263,7 +2263,7 @@
 #. text in extracting archives (a download's log, the Archive password window)
 #. why an archive wasn't extracted (after "Couldn't extract {name}: ")
 #, machine
-	it is not an archive MDM extracts	它不是 MDM 解壓縮的封存
+	it is not an archive SDM extracts	它不是 SDM 解壓縮的封存
 #. text in extracting archives (a download's log, the Archive password window)
 #. why an archive wasn't extracted (after "Couldn't extract {name}: ")
 #, machine
@@ -2284,7 +2284,7 @@
 #. text in the Batch download window
 #. \\n starts a new line: break lines where they fit the translation
 #, machine
-	It's possible to add a group of sequential file names like img001.jpg, img002.jpg, etc.,\nimg100.jpg to MDM download queue. Use the asterisk wildcard for the file name pattern.	您可以將 img001.jpg、img002.jpg 等一系列檔案名稱新增至\nMDM 下載佇列。檔案名稱模式請使用星號萬用字元。
+	It's possible to add a group of sequential file names like img001.jpg, img002.jpg, etc.,\nimg100.jpg to SDM download queue. Use the asterisk wildcard for the file name pattern.	您可以將 img001.jpg、img002.jpg 等一系列檔案名稱新增至\nMDM 下載佇列。檔案名稱模式請使用星號萬用字元。
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -2342,7 +2342,7 @@
 #, machine
 	KBytes/sec	KB/秒
 #. text in the Options window
-#. checkbox: closing keeps MDM running, in the notification area when available or else the taskbar, instead of quitting
+#. checkbox: closing keeps SDM running, in the notification area when available or else the taskbar, instead of quitting
 #, machine
 	Keep running when closing the window	關閉視窗時保持執行
 #. checkbox in the Add torrent window
@@ -2360,7 +2360,7 @@
 #, machine
 	Keyboard shortcuts	鍵盤快速鍵
 #. window title in the Options window
-#. window title: the keys that force or prevent downloading with MDM
+#. window title: the keys that force or prevent downloading with SDM
 #, machine
 	Keys	按鍵
 #. button in the Options window
@@ -2396,14 +2396,14 @@
 #, machine
 	Laos	寮國
 #. message or event log entry in the main window
-#. RSS: a feed bigger than MDM reads (5 MB)
+#. RSS: a feed bigger than SDM reads (5 MB)
 #, machine
 	larger than a feed can be	大於摘要可讀取的大小
 #. text in the Batch download window
 #, machine
 	Last file:	最後一個檔案:
 #. text in the Options window
-#. column title: when the device last reached MDM
+#. column title: when the device last reached SDM
 #, machine
 	Last seen	上次看到
 #. text in a download's Properties window
@@ -2421,7 +2421,7 @@
 	Latvia	拉脫維亞
 #. text in the Options window
 #, machine
-	Launch Mister Download Manager on startup	啟動時執行 Mister Download Manager
+	Launch Sedot Download Manager on startup	啟動時執行 Sedot Download Manager
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -2433,7 +2433,7 @@
 #. checkbox in the Options window
 #. Options → Remote check box (off by default)
 #, machine
-	Let phones and computers on the local network control MDM	允許區域網路上的手機和電腦控制 MDM
+	Let phones and computers on the local network control SDM	允許區域網路上的手機和電腦控制 SDM
 #. option (radio button) in the Batch download window
 #. the * in the address runs through letters
 #, machine
@@ -2482,7 +2482,7 @@
 #, machine
 	List the rest	列出其餘項目
 #. text in the Options window
-#. Options → Remote: label before the choice of the address MDM listens on
+#. Options → Remote: label before the choice of the address SDM listens on
 #, machine
 	Listen on:	監聽：
 #. text in playlistdlg.rs
@@ -2666,32 +2666,32 @@
 #. text in the Options window
 #. Options → Remote → Pair a device: the remote control isn't listening (no network, port taken): the Remote page says why
 #, machine
-	MDM can't be reached on the network now: Options → Remote says why.	MDM 目前無法在網路上連線：選項 → 遠端說明原因。
+	SDM can't be reached on the network now: Options → Remote says why.	SDM 目前無法在網路上連線：選項 → 遠端說明原因。
 #. text in remote.rs
-#. remote control page (on a phone): the address typed isn't one MDM downloads (not http, https, ftp or magnet)
+#. remote control page (on a phone): the address typed isn't one SDM downloads (not http, https, ftp or magnet)
 #, machine
-	MDM cannot download this address.	MDM 無法下載此位址。
+	SDM cannot download this address.	SDM 無法下載此位址。
 #. text in remote.rs
 #. remote control page (on a phone): adding a download failed
 #, machine
-	MDM could not add it.	MDM 無法新增。
+	SDM could not add it.	SDM 無法新增。
 #. text in remote.rs
 #. remote control page (on a phone): an action failed
 #, machine
-	MDM could not do it.	MDM 無法執行。
+	SDM could not do it.	SDM 無法執行。
 #. text in remote.rs
-#. remote control page (on a phone): MDM can't be reached while pairing
+#. remote control page (on a phone): SDM can't be reached while pairing
 #, machine
-	MDM does not answer. Check that it is running and on the same network.	MDM 沒有回應。請檢查它是否正在執行且在同一個網路上。
+	SDM does not answer. Check that it is running and on the same network.	SDM 沒有回應。請檢查它是否正在執行且在同一個網路上。
 #. text in remote.rs
-#. remote control page (on a phone): MDM can't be reached now; the page keeps trying by itself
+#. remote control page (on a phone): SDM can't be reached now; the page keeps trying by itself
 #. the trailing ... means it is still going on: keep it
 #, machine
-	MDM does not answer. Trying again...	MDM 沒有回應。正在重試...
+	SDM does not answer. Trying again...	SDM 沒有回應。正在重試...
 #. text in remote.rs
-#. remote control page (on a phone): no pairing code is shown in MDM; "Pair a device" is MDM's button
+#. remote control page (on a phone): no pairing code is shown in SDM; "Pair a device" is SDM's button
 #, machine
-	MDM shows no code now. Click Pair a device there first.	MDM 目前沒有顯示代碼。請先按一下「配對裝置」。
+	SDM shows no code now. Click Pair a device there first.	SDM 目前沒有顯示代碼。請先按一下「配對裝置」。
 #. text in whereis.rs
 #. how far a download's server is, by its round trip (60 to 150 ms)
 #, machine
@@ -2722,7 +2722,7 @@
 #, machine
 	Minimize	最小化
 #. text in the Options window
-#. checkbox: the Minimize button hides MDM's windows to the notification area (system tray) instead of the taskbar
+#. checkbox: the Minimize button hides SDM's windows to the notification area (system tray) instead of the taskbar
 #, machine
 	Minimize to the notification area	最小化到通知區域
 #. text in rssdlg.rs; text in the Add torrent window
@@ -2736,58 +2736,58 @@
 	Missing	未下載
 #. message or event log entry in the main window; window title in a dialog box; text in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #, machine
-	Mister Download Manager	Mister Download Manager
+	Sedot Download Manager	Sedot Download Manager
 #. text in unix.rs
 #. Linux, at start, on the terminal and in a message box: a library the window needs isn't installed; {libraries} = its file names (libxkbcommon-x11.so.0…), left as they are
 #, machine
-	Mister Download Manager can't open its window: this system lacks {libraries}.	Mister Download Manager 無法開啟視窗：此系統缺少 {libraries}。
+	Sedot Download Manager can't open its window: this system lacks {libraries}.	Sedot Download Manager 無法開啟視窗：此系統缺少 {libraries}。
 #. text in crashui.rs
-#. crash report window heading: MDM crashed and is gone
+#. crash report window heading: SDM crashed and is gone
 #, machine
-	Mister Download Manager closed unexpectedly	Mister Download Manager 意外關閉
+	Sedot Download Manager closed unexpectedly	Sedot Download Manager 意外關閉
 #. window title in the Options window
 #, machine
-	Mister Download Manager Configuration	Mister Download Manager 設定
+	Sedot Download Manager Configuration	Sedot Download Manager 設定
 #. text in crashui.rs
 #, machine
-	Mister Download Manager crash report	Mister Download Manager 當機報告
+	Sedot Download Manager crash report	Sedot Download Manager 當機報告
 #. text in crashui.rs
-#. crash report window heading: an internal error, MDM still running
+#. crash report window heading: an internal error, SDM still running
 #, machine
-	Mister Download Manager hit an internal error	Mister Download Manager 發生內部錯誤
+	Sedot Download Manager hit an internal error	Sedot Download Manager 發生內部錯誤
 #. text in wake.rs
 #. why the computer isn't going to sleep, in the system's list of programs that keep it awake (Windows' power requests, Linux's inhibitors)
 #, machine
-	Mister Download Manager is downloading	Mister Download Manager 正在下載
+	Sedot Download Manager is downloading	Sedot Download Manager 正在下載
 #. text in wake.rs
 #. why the computer isn't going to sleep, in the system's list of programs that keep it awake; {queue} = the queue's name
 #. {queue} = a queue name such as "Main queue" (keep the braces as they are)
 #, machine
-	Mister Download Manager is running the queue "{queue}"	Mister Download Manager 正在執行佇列「{queue}」
+	Sedot Download Manager is running the queue "{queue}"	Sedot Download Manager 正在執行佇列「{queue}」
 #. text in crashui.rs
-#. crash report window heading: MDM's window doesn't answer (frozen)
+#. crash report window heading: SDM's window doesn't answer (frozen)
 #, machine
-	Mister Download Manager stopped responding	Mister Download Manager 停止回應
+	Sedot Download Manager stopped responding	Sedot Download Manager 停止回應
 #. text in crashui.rs
 #, machine
-	Mister Download Manager stopped responding for a while	Mister Download Manager 停止回應了一段時間
+	Sedot Download Manager stopped responding for a while	Sedot Download Manager 停止回應了一段時間
 #. text in the Options window
 #. \\n starts a new line: break lines where they fit the translation
 #, machine
-	Mister Download Manager writes every connection straight into the final\nfile (a sparse part file next to it), so no temporary directory and no\nassembling step are needed.	Mister Download Manager 會將每個連線直接寫入最終檔案\n(旁邊的疏鬆部分檔案)，因此不需要暫存目錄和組裝步驟。
+	Sedot Download Manager writes every connection straight into the final\nfile (a sparse part file next to it), so no temporary directory and no\nassembling step are needed.	Sedot Download Manager 會將每個連線直接寫入最終檔案\n(旁邊的疏鬆部分檔案)，因此不需要暫存目錄和組裝步驟。
 #. text in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #. {version} = a version number (keep the braces as they are)
 #, machine
-	Mister Download Manager {version} is available (released {date}).	Mister Download Manager {version} 可用 (發行於 {date})。
+	Sedot Download Manager {version} is available (released {date}).	Sedot Download Manager {version} 可用 (發行於 {date})。
 #. text in helpers.rs
-#. Video helpers: {version} = the version of MDM's own copy
+#. Video helpers: {version} = the version of SDM's own copy
 #. {version} = a version number (keep the braces as they are)
 #, machine
-	Mister Download Manager's own copy, version {version}	Mister Download Manager 的自有副本，版本 {version}
+	Sedot Download Manager's own copy, version {version}	Sedot Download Manager 的自有副本，版本 {version}
 #. text in unix.rs
 #. Linux, at start, on the terminal: the libraries an X11 window needs aren't installed, so the window opens through Wayland instead, where menus can't be placed under what was clicked; {libraries} = their file names, left as they are
 #, machine
-	Mister Download Manager's X11 window needs {libraries}, which this system lacks: it opens on Wayland instead, where its menus may open away from their titles.	Mister Download Manager 的 X11 視窗需要此系統缺少的 {libraries}：它改為在 Wayland 上開啟，其功能表可能會在標題以外的位置開啟。
+	Sedot Download Manager's X11 window needs {libraries}, which this system lacks: it opens on Wayland instead, where its menus may open away from their titles.	Sedot Download Manager 的 X11 視窗需要此系統缺少的 {libraries}：它改為在 Wayland 上開啟，其功能表可能會在標題以外的位置開啟。
 #. text in the Scheduler window
 #. Monday, as short as a calendar's column head (two letters in English)
 #, machine
@@ -2871,7 +2871,7 @@
 #, machine
 	Mozambique	莫三比克
 #. text in the Download video window
-#. why "Embed chapters" is greyed in Download video: the choice is a sound converted to MP3, Opus or FLAC, which MDM saves without chapters
+#. why "Embed chapters" is greyed in Download video: the choice is a sound converted to MP3, Opus or FLAC, which SDM saves without chapters
 #, machine
 	MP3, Opus and FLAC files are saved without chapters	MP3、Opus 和 FLAC 檔案不會儲存章節
 #. text in errors.rs
@@ -2996,11 +2996,11 @@
 #, machine
 	No addresses yet	尚無位址
 #. text in extension.rs
-#. a check of Test browser integration (Linux, macOS): MDM found no browser it can connect to (one installed as a Flatpak isn't found)
+#. a check of Test browser integration (Linux, macOS): SDM found no browser it can connect to (one installed as a Flatpak isn't found)
 #, machine
-	No browser MDM can connect to was found	找不到 MDM 可連線的瀏覽器
+	No browser SDM can connect to was found	找不到 SDM 可連線的瀏覽器
 #. text in extension.rs
-#. a check of Test browser integration: no browser's extension has reached MDM
+#. a check of Test browser integration: no browser's extension has reached SDM
 #, machine
 	No browser's extension has connected yet	尚未有瀏覽器擴充功能連線
 #. text in torrent downloads
@@ -3069,9 +3069,9 @@
 #, machine
 	No proxy/socks	無 Proxy/SOCKS
 #. text in the Options window
-#. Options → Accounts: no system keyring/keychain answered (none runs, e.g. a desktop without one), so the sign-ins stay in MDM's settings folder, which only the user's account may read
+#. Options → Accounts: no system keyring/keychain answered (none runs, e.g. a desktop without one), so the sign-ins stay in SDM's settings folder, which only the user's account may read
 #, machine
-	No system keyring answered, so sign-ins and passwords are kept in MDM's settings, which only you can read.	沒有系統金鑰圈回應，因此登入資訊和密碼會保留在 MDM 的設定中，只有您可以讀取。
+	No system keyring answered, so sign-ins and passwords are kept in SDM's settings, which only you can read.	沒有系統金鑰圈回應，因此登入資訊和密碼會保留在 SDM 的設定中，只有您可以讀取。
 #. message or event log entry in the main window
 #. event log entry: Add trackers changed nothing, the torrent had them all
 #, machine
@@ -3202,7 +3202,7 @@
 #. text in the Options window
 #. Options → Remote → Status: the remote control is off
 #, machine
-	Off: nothing on the network can reach MDM.	關閉：網路上的任何東西都無法連線到 MDM。
+	Off: nothing on the network can reach SDM.	關閉：網路上的任何東西都無法連線到 SDM。
 #. text in the Options window
 #, machine
 	Offer to download links copied to the clipboard	提示下載複製到剪貼簿的連結
@@ -3229,7 +3229,7 @@
 #, machine
 	On macOS, only an administrator can schedule a wake	在 macOS 上，只有管理員才能排程喚醒
 #. text in remote.rs
-#. remote control page (on a phone): how to pair; "Options", "Remote" and "Pair a device" are MDM's dialog, tab and button
+#. remote control page (on a phone): how to pair; "Options", "Remote" and "Pair a device" are SDM's dialog, tab and button
 #, machine
 	On the computer, open Options, then Remote, and click Pair a device. Enter the code it shows.	在電腦上，開啟「選項」，然後開啟「遠端」，然後按一下「配對裝置」。輸入它顯示的代碼。
 #. text in the Options window
@@ -3278,9 +3278,9 @@
 #. text in the Options window
 #. Options → Remote, at the bottom of the page
 #, machine
-	Only paired devices see or change anything. The first time, the phone's browser warns about MDM's own certificate: its fingerprint is the one above.	只有已配對的裝置才能查看或變更任何內容。第一次時，手機的瀏覽器會警告 MDM 自己的憑證：其指紋就是上面那個。
+	Only paired devices see or change anything. The first time, the phone's browser warns about SDM's own certificate: its fingerprint is the one above.	只有已配對的裝置才能查看或變更任何內容。第一次時，手機的瀏覽器會警告 SDM 自己的憑證：其指紋就是上面那個。
 #. text in playlistdlg.rs
-#. in Download video, a list longer than MDM lists: only its first {n} videos are shown
+#. in Download video, a list longer than SDM lists: only its first {n} videos are shown
 #. {n} = a number (keep the braces as they are)
 #, machine
 	Only the first {n} videos are listed.	僅列出前 {n} 個影片。
@@ -3305,10 +3305,10 @@
 	Open in browser	在瀏覽器中開啟
 #. checkbox in the Add torrent window
 #, machine
-	Open magnet links and .torrent files with Mister Download Manager	使用 Mister Download Manager 開啟磁力連結和 .torrent 檔案
+	Open magnet links and .torrent files with Sedot Download Manager	使用 Sedot Download Manager 開啟磁力連結和 .torrent 檔案
 #. text in the tray icon's menu
 #, machine
-	Open Mister Download Manager	開啟 Mister Download Manager
+	Open Sedot Download Manager	開啟 Sedot Download Manager
 #. text in extension.rs
 #. step 2 of turning on the Safari extension; Cmd is the Command key
 #, machine
@@ -3364,7 +3364,7 @@
 #, machine
 	Page address	頁面位址
 #. text in remote.rs
-#. remote control page (on a phone): button: pair this phone with MDM
+#. remote control page (on a phone): button: pair this phone with SDM
 #, machine
 	Pair	配對
 #. window title in the Options window
@@ -3379,7 +3379,7 @@
 #. text in remote.rs
 #. remote control page (on a phone): title of the pairing screen
 #, machine
-	Pair with Mister Download Manager	與 Mister Download Manager 配對
+	Pair with Sedot Download Manager	與 Sedot Download Manager 配對
 #. text in the Options window
 #. column title: when the device was paired
 #, machine
@@ -3667,11 +3667,11 @@
 #, machine
 	Remember this path for "{category}" category	記住「{category}」類別的路徑
 #. text in the Options window
-#. tab title: control MDM from a phone or another computer on the local network
+#. tab title: control SDM from a phone or another computer on the local network
 #, machine
 	Remote	遠端
 #. text in the Options window
-#. Options page title: control MDM from a phone or another computer on the local network
+#. Options page title: control SDM from a phone or another computer on the local network
 #, machine
 	Remote control	遠端控制
 #. button in the Options window; text in remote.rs; button in rssdlg.rs
@@ -3701,9 +3701,9 @@
 #, machine
 	Replace asterisk to	將星號取代為
 #. text in crashui.rs
-#. crash report window button: start MDM again
+#. crash report window button: start SDM again
 #, machine
-	Restart MDM	重新啟動 MDM
+	Restart SDM	重新啟動 SDM
 #. button in the Options window; text in the Options window
 #, machine
 	Restore the built-in categories	還原內建類別
@@ -3883,7 +3883,7 @@
 	Select or unselect the download with the dotted outline	選取或取消選取虛線框的下載
 #. group box title in the Options window
 #, machine
-	Select sounds for Mister Download Manager events	選取 Mister Download Manager 事件的音效
+	Select sounds for Sedot Download Manager events	選取 Sedot Download Manager 事件的音效
 #. what a keyboard shortcut does in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #, machine
 	Select the downloads in the box	選取方塊中的下載
@@ -3906,7 +3906,7 @@
 #, machine
 	Send this to a friend:	傳送給朋友:
 #. text in the Options window
-#. Options → Accounts: checkbox: magnet links and .torrent files go to the first account's service, which downloads them; MDM then downloads the files from it (no connections to peers)
+#. Options → Accounts: checkbox: magnet links and .torrent files go to the first account's service, which downloads them; SDM then downloads the files from it (no connections to peers)
 #, machine
 	Send torrents and magnet links to the first account instead of to peers	將 torrent 和磁力連結傳送至第一個帳戶，而不是傳送至同儕
 #. text in countries.rs
@@ -3951,8 +3951,8 @@
 #, machine
 	Set file creation date as provided by the server	設定檔案建立日期為伺服器提供
 #. button in extension.rs; button in the Options window
-#. button in the browser extension's window: register MDM's helper with the browsers
-#. button in Test browser integration: register MDM's helper with the browsers
+#. button in the browser extension's window: register SDM's helper with the browsers
+#. button in Test browser integration: register SDM's helper with the browsers
 #, machine
 	Set it up	設定
 #. message or event log entry in the main window
@@ -4033,7 +4033,7 @@
 #, machine
 	Show download progress dialog when a download starts	下載開始時顯示下載進度對話方塊
 #. button in a dialog box
-#. button: shows these downloads in MDM's list, selected
+#. button: shows these downloads in SDM's list, selected
 #, machine
 	Show in list	在清單中顯示
 #. text in extension.rs
@@ -4111,7 +4111,7 @@
 	Sites Logins	網站登入
 #. text in helpers.rs
 #, machine
-	Sites send their best quality as separate video and audio, and ffmpeg joins them. On this system MDM uses yours: install ffmpeg with your package manager.	網站會將最佳品質的影片和音訊分開傳送，ffmpeg 會將它們合併。在此系統上，MDM 會使用您的：請使用您的套件管理員安裝 ffmpeg。
+	Sites send their best quality as separate video and audio, and ffmpeg joins them. On this system SDM uses yours: install ffmpeg with your package manager.	網站會將最佳品質的影片和音訊分開傳送，ffmpeg 會將它們合併。在此系統上，SDM 會使用您的：請使用您的套件管理員安裝 ffmpeg。
 #. text in helpers.rs
 #, machine
 	Sites send their best quality as separate video and audio. ffmpeg puts them together into one file that plays anywhere.	網站會將最佳品質的影片和音訊分開傳送。ffmpeg 會將它們合併成一個可在任何地方播放的檔案。
@@ -4230,7 +4230,7 @@
 	Start download at	在以下時間開始下載
 #. checkbox in the Scheduler window
 #, machine
-	Start download on Mister Download Manager startup	在 Mister Download Manager 啟動時開始下載
+	Start download on Sedot Download Manager startup	在 Sedot Download Manager 啟動時開始下載
 #. checkbox in the Options window
 #, machine
 	Start downloading immediately while displaying "Download File Info" dialog	顯示「下載檔案資訊」對話方塊時立即開始下載
@@ -4261,11 +4261,11 @@
 #, machine
 	Started with gallery-dl {version}	已使用 gallery-dl {version} 啟動
 #. text in the Options window
-#. the same tooltip where no notification area (system tray) shows MDM's icon (some Linux desktops): its window starts minimized instead
+#. the same tooltip where no notification area (system tray) shows SDM's icon (some Linux desktops): its window starts minimized instead
 #, machine
 	Started with the computer, it starts minimized: no notification area shows its icon here	隨電腦啟動時，它會最小化啟動：此處沒有通知區域會顯示其圖示
 #. text in the Options window
-#. tooltip of "Launch Mister Download Manager on startup": started with the computer, MDM's window stays hidden, its icon in the notification area (system tray)
+#. tooltip of "Launch Sedot Download Manager on startup": started with the computer, SDM's window stays hidden, its icon in the notification area (system tray)
 #, machine
 	Started with the computer, it waits in the notification area	隨電腦啟動時，它會在通知區域中等候
 #. message or event log entry in the main window
@@ -4373,7 +4373,7 @@
 	Sunday	星期日
 #. link (opens a web page) in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #, machine
-	Support MDM on GitHub Sponsors	在 GitHub Sponsors 上支持 MDM
+	Support SDM on GitHub Sponsors	在 GitHub Sponsors 上支持 SDM
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -4484,17 +4484,17 @@
 #, machine
 	The best qualities, MP3, Opus and FLAC need ffmpeg: install it with your system's package manager (or Homebrew).	最佳品質、MP3、Opus 和 FLAC 需要 ffmpeg：請使用系統的套件管理員（或 Homebrew）安裝。
 #. text in the settings
-#. an error: the browser's VPN or proxy extension logs in to its proxy itself, and MDM can't; Options → Proxy / Socks → Network adapter is where an adapter can be chosen
+#. an error: the browser's VPN or proxy extension logs in to its proxy itself, and SDM can't; Options → Proxy / Socks → Network adapter is where an adapter can be chosen
 #, machine
 	the browser's proxy (a VPN or proxy extension) asks for a login only that extension has: use the VPN's own app, or choose its network adapter in Options → Proxy / Socks	瀏覽器的 Proxy (VPN 或 Proxy 擴充功能) 要求只有該擴充功能才有的登入資訊：請使用 VPN 自己的應用程式，或在「選項」→「Proxy / SOCKS」中選擇其網路介面卡
 #. text in extension.rs
-#. a check of Test browser integration: the browsers are pointed at a copy of MDM that was deleted (often one started from inside a zip); that copy's folder shows on the line under it
+#. a check of Test browser integration: the browsers are pointed at a copy of SDM that was deleted (often one started from inside a zip); that copy's folder shows on the line under it
 #, machine
 	The browsers are set up for a copy that is gone:	瀏覽器已設定為已移除的副本：
 #. text in extension.rs
-#. a check of Test browser integration: the browsers find MDM's helper program
+#. a check of Test browser integration: the browsers find SDM's helper program
 #, machine
-	The browsers can find Mister Download Manager	瀏覽器可以找到 Mister Download Manager
+	The browsers can find Sedot Download Manager	瀏覽器可以找到 Sedot Download Manager
 #. text in the Options window
 #. Options → Remote → Status: the settings were changed; they apply on OK
 #, machine
@@ -4521,7 +4521,7 @@
 #. text in the Scheduler window
 #. tooltip on the Scheduler's "Wake the computer to run this queue"
 #, machine
-	The computer is woken a minute before the start time and kept awake while the queue runs. Mister Download Manager has to be running (it can wait in the notification area).	電腦會在開始時間前一分鐘喚醒，並在佇列執行時保持喚醒狀態。Mister Download Manager 必須正在執行 (它可以在通知區域中等待)。
+	The computer is woken a minute before the start time and kept awake while the queue runs. Sedot Download Manager has to be running (it can wait in the notification area).	電腦會在開始時間前一分鐘喚醒，並在佇列執行時保持喚醒狀態。Sedot Download Manager 必須正在執行 (它可以在通知區域中等待)。
 #. text in the Scheduler window
 #. the Scheduler, under "Wake the computer to run this queue": when it will happen; {date} = e.g. 06/11/2026, {time} = e.g. 22:59:00
 #. {time} = a time of day (keep the braces as they are)
@@ -4576,7 +4576,7 @@
 #. message or event log entry in the main window
 #. {error} = an error message (keep the braces as they are)
 #, machine
-	The download list could not be saved: {error}. Changes are kept while MDM runs.	下載清單無法儲存：{error}。MDM 執行期間會保留變更。
+	The download list could not be saved: {error}. Changes are kept while SDM runs.	下載清單無法儲存：{error}。SDM 執行期間會保留變更。
 #. text in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #, machine
 	The download manager you already know, rebuilt to be faster. Free and open source under the GNU GPL, version 3 or later. Videos are found by yt-dlp; torrents run on librqbit.	您已熟悉的下載管理員，經過重新建構以提供更快的速度。依據 GNU GPL 第 3 版或更新版本，免費且開放原始碼。視訊由 yt-dlp 尋找；Torrent 則在 librqbit 上執行。
@@ -4711,7 +4711,7 @@
 #. text in a dialog box
 #. \\n starts a new line: break lines where they fit the translation
 #, machine
-	The selected download is not complete. Are you sure you want to delete\nit from Mister Download Manager list of downloads?	選取的下載尚未完成。您確定要從 Mister Download Manager 下載清單中刪除它嗎？
+	The selected download is not complete. Are you sure you want to delete\nit from Sedot Download Manager list of downloads?	選取的下載尚未完成。您確定要從 Sedot Download Manager 下載清單中刪除它嗎？
 #. text in errors.rs
 #, machine
 	the server answered {status}	伺服器回應 {status}
@@ -4731,9 +4731,9 @@
 #, machine
 	the server sent an unexpected part of the file ({detail})	伺服器傳送了非預期的檔案部分（{detail}）
 #. text in errors.rs
-#. why a download failed (#701): a file host answered with its own web page (a countdown before the link, a captcha, a sign-in) where the file was expected. The browser gets past it; MDM's browser extension then hands the real file back to MDM
+#. why a download failed (#701): a file host answered with its own web page (a countdown before the link, a captcha, a sign-in) where the file was expected. The browser gets past it; SDM's browser extension then hands the real file back to SDM
 #, machine
-	the site sent a web page instead of the file (a waiting page, a captcha or a sign-in): open the link in your browser, finish there, and the download comes back to MDM	網站傳回網頁而非檔案 (等候頁面、驗證碼或登入頁面)：請在瀏覽器中開啟連結，完成後下載會回到 MDM
+	the site sent a web page instead of the file (a waiting page, a captcha or a sign-in): open the link in your browser, finish there, and the download comes back to SDM	網站傳回網頁而非檔案 (等候頁面、驗證碼或登入頁面)：請在瀏覽器中開啟連結，完成後下載會回到 SDM
 #. text in the Download video window
 #. the Download video window: the site asked for a sign-in although the browser's extension passed the page's cookies
 #, machine
@@ -4757,15 +4757,15 @@
 #. text in errors.rs
 #. why a download failed: the site's security certificate (what proves a secure, HTTPS, site is the one it says) is past its end date. Browsers warn about the same site
 #, machine
-	the site's security certificate has expired, so MDM can't be sure it's the real site (your browser warns about it too)	網站的安全性憑證已過期，因此 MDM 無法確定它是真實網站 (您的瀏覽器也會發出警告)
+	the site's security certificate has expired, so SDM can't be sure it's the real site (your browser warns about it too)	網站的安全性憑證已過期，因此 SDM 無法確定它是真實網站 (您的瀏覽器也會發出警告)
 #. text in errors.rs
 #. why a download failed: the site's security certificate was made for other site names than the one in the address
 #, machine
-	the site's security certificate is for another site name, so MDM can't be sure it's the real site (your browser warns about it too)	網站的安全性憑證適用於其他網站名稱，因此 MDM 無法確定這是真正的網站（您的瀏覽器也會發出警告）
+	the site's security certificate is for another site name, so SDM can't be sure it's the real site (your browser warns about it too)	網站的安全性憑證適用於其他網站名稱，因此 SDM 無法確定這是真正的網站（您的瀏覽器也會發出警告）
 #. text in errors.rs
 #. why a download failed: the site's security certificate was signed by the site itself or by an issuer this computer doesn't trust. Browsers warn about the same site
 #, machine
-	the site's security certificate isn't trusted (it's self-signed or from an unknown issuer), so MDM can't be sure it's the real site (your browser warns about it too)	網站的安全性憑證不受信任（它是自我簽署的，或是由不明發行者簽署），因此 MDM 無法確定這是真正的網站（您的瀏覽器也會發出警告）
+	the site's security certificate isn't trusted (it's self-signed or from an unknown issuer), so SDM can't be sure it's the real site (your browser warns about it too)	網站的安全性憑證不受信任（它是自我簽署的，或是由不明發行者簽署），因此 SDM 無法確定這是真正的網站（您的瀏覽器也會發出警告）
 #. text in errors.rs
 #. why a download failed: the site's security certificate's validity hasn't begun; usually this computer's date or time is wrong
 #, machine
@@ -4773,11 +4773,11 @@
 #. text in errors.rs
 #. why a download failed: the site's security certificate was refused for another reason (a bad signature, a broken certificate)
 #, machine
-	the site's security certificate was refused, so MDM can't be sure it's the real site	網站的安全性憑證遭到拒絕，因此 MDM 無法確定這是真正的網站
+	the site's security certificate was refused, so SDM can't be sure it's the real site	網站的安全性憑證遭到拒絕，因此 SDM 無法確定這是真正的網站
 #. text in errors.rs
 #. why a download failed: the issuer of the site's security certificate took it back
 #, machine
-	the site's security certificate was revoked by its issuer, so MDM won't trust it	網站的安全性憑證已由其發行者撤銷，因此 MDM 不會信任它
+	the site's security certificate was revoked by its issuer, so SDM won't trust it	網站的安全性憑證已由其發行者撤銷，因此 SDM 不會信任它
 #. text in the Download video window
 #. the Download video window: the site's certificate is trusted neither by yt-dlp nor by the computer (asked again with the computer's certificates, #955); usually an antivirus or a proxy that reads secure (HTTPS) connections signs sites with a certificate of its own
 #, machine
@@ -4785,15 +4785,15 @@
 #. text in errors.rs
 #. why a download failed: the site's security certificate is made for other uses than a website (its "extended key usage" leaves out web servers)
 #, machine
-	the site's security certificate isn't made for websites, so MDM can't be sure it's the real site	網站的安全憑證並非用於網站，因此 MDM 無法確定這是真正的網站
+	the site's security certificate isn't made for websites, so SDM can't be sure it's the real site	網站的安全憑證並非用於網站，因此 SDM 無法確定這是真正的網站
 #. text in crashui.rs
 #. crash report window: the symbols couldn't be downloaded; the report still works
 #, machine
 	The symbols couldn't be fetched: some lines of the report show addresses instead of names (the developers can still read them).	無法擷取符號：報告中的某些行會顯示位址而非名稱（開發人員仍可讀取這些位址）。
 #. text in the Options window
-#. Options → Accounts (Linux): the system keyring is locked (MDM never unlocks it: that would ask for its password), so the sign-ins stay in MDM's settings folder, which only the user's account may read
+#. Options → Accounts (Linux): the system keyring is locked (SDM never unlocks it: that would ask for its password), so the sign-ins stay in SDM's settings folder, which only the user's account may read
 #, machine
-	The system keyring is locked and MDM doesn't unlock it, so sign-ins and passwords are kept in MDM's settings, which only you can read.	系統金鑰圈已鎖定，MDM 不會將其解鎖，因此登入資訊和密碼會保存在 MDM 的設定資料夾中，只有您可以讀取。
+	The system keyring is locked and SDM doesn't unlock it, so sign-ins and passwords are kept in SDM's settings, which only you can read.	系統金鑰圈已鎖定，SDM 不會將其解鎖，因此登入資訊和密碼會保存在 SDM 的設定資料夾中，只有您可以讀取。
 #. text in the Options window
 #. Options → Connection → DNS: the operating system's own DNS (the default)
 #, machine
@@ -4825,7 +4825,7 @@
 #, machine
 	The web page from which this file was obtained:	取得此檔案的網頁：
 #. message or event log entry in the main window
-#. the kind of file View → Theme → Add a theme file lists: MDM's themes (TOML, JSON), Base16 schemes (YAML) and pywal's colors.json
+#. the kind of file View → Theme → Add a theme file lists: SDM's themes (TOML, JSON), Base16 schemes (YAML) and pywal's colors.json
 #, machine
 	Themes and colour schemes	佈景主題與色彩配置
 #. text in the Options window
@@ -4883,7 +4883,7 @@
 #, machine
 	This computer only (127.0.0.1)	僅限此電腦 (127.0.0.1)
 #. text in extension.rs
-#. a check of Test browser integration: MDM was started from inside a zip (or from the temporary folder), which is deleted after it quits, so it can't be connected to the browsers
+#. a check of Test browser integration: SDM was started from inside a zip (or from the temporary folder), which is deleted after it quits, so it can't be connected to the browsers
 #, machine
 	This copy runs from a temporary folder that will be deleted	此副本從將被刪除的暫存資料夾執行
 #. text in the Scheduler window
@@ -4891,7 +4891,7 @@
 #, machine
 	This date has passed: the queue will not start	此日期已過：佇列將不會啟動
 #. text in remote.rs
-#. remote control page (on a phone): label of the box naming this phone (shown in MDM's list of paired devices)
+#. remote control page (on a phone): label of the box naming this phone (shown in SDM's list of paired devices)
 #, machine
 	This device's name	此裝置的名稱
 #. message or event log entry in the main window
@@ -5008,7 +5008,7 @@
 #. message or event log entry in the main window
 #. event log: a torrent goes through the user's debrid account, not to peers; {service} its name ("Real-Debrid")
 #, machine
-	Through {service}: the service downloads the torrent, then MDM its files	透過 {service}：服務會下載 torrent，然後 MDM 會下載其檔案
+	Through {service}: the service downloads the torrent, then SDM its files	透過 {service}：服務會下載 torrent，然後 SDM 會下載其檔案
 #. text in the Scheduler window
 #, machine
 	Thursday	星期四
@@ -5154,7 +5154,7 @@
 #. text in extension.rs
 #. step 8 of turning on the Safari extension
 #, machine
-	Turn on "Mister Download Manager" and allow it on all websites.	開啟「Mister Download Manager」，並允許它在所有網站上使用。
+	Turn on "Sedot Download Manager" and allow it on all websites.	開啟「Sedot Download Manager」，並允許它在所有網站上使用。
 #. text in extension.rs
 #. step 4 of turning on the Safari extension; the quoted switch name is what Safari's settings show in this language: use Apple's own words for it, or keep the English name when unsure
 #, machine
@@ -5210,7 +5210,7 @@
 #. Options → Add an account: waiting while the user types the code at the service's page; {page} its address, {time} minutes:seconds left
 #. {time} = a time of day (keep the braces as they are)
 #, machine
-	Type this code at {page} and allow MDM; waiting for you (the code expires in {time}).	在 {page} 輸入此代碼並允許 MDM；正在等候您 (代碼將在 {time} 後過期)。
+	Type this code at {page} and allow SDM; waiting for you (the code expires in {time}).	在 {page} 輸入此代碼並允許 SDM；正在等候您 (代碼將在 {time} 後過期)。
 #. tooltip (why a control is greyed) in the Find window
 #. tooltip of the greyed Find button
 #, machine
@@ -5266,9 +5266,9 @@
 #, machine
 	unknown	未知
 #. text in finish.rs
-#. Snooze menu of the Download complete window: show no Download complete window until MDM is started again
+#. Snooze menu of the Download complete window: show no Download complete window until SDM is started again
 #, machine
-	Until MDM restarts	直到 MDM 重新啟動
+	Until SDM restarts	直到 SDM 重新啟動
 #. button in the Options window
 #. button (short): move the account up the list (accounts are asked in the list's order)
 #, machine
@@ -5310,9 +5310,9 @@
 #, machine
 	Use FTP in PASV mode	以 PASV 模式使用 FTP
 #. button in helpers.rs
-#. Video helpers: button: go back to the copy MDM downloads and checks itself
+#. Video helpers: button: go back to the copy SDM downloads and checks itself
 #, machine
-	Use MDM's own copy	使用 MDM 的自有副本
+	Use SDM's own copy	使用 SDM 的自有副本
 #. text in the Batch download window
 #. why Batch download's OK is greyed
 #, machine
@@ -5518,9 +5518,9 @@
 #, machine
 	Windows checks the files marked this way: SmartScreen before a program first runs, Office's Protected View before a document opens. Unticked, or under Windows' policy "Do not preserve zone information in file attachments", no download is marked.	Windows 會檢查以這種方式標記的檔案：SmartScreen 會在程式首次執行前檢查，Office 的受保護的檢視會在文件開啟前檢查。如果未勾選，或在 Windows 的「不保留檔案附件中的區域資訊」原則下，則不會標記任何下載項目。
 #. text in the Options window
-#. Options → Accounts: Windows Credential Manager didn't answer, so the sign-ins stay in MDM's settings, encrypted so that only this Windows account can read them
+#. Options → Accounts: Windows Credential Manager didn't answer, so the sign-ins stay in SDM's settings, encrypted so that only this Windows account can read them
 #, machine
-	Windows Credential Manager didn't answer, so sign-ins and passwords are kept in MDM's settings, encrypted for your Windows account.	Windows 認證管理員沒有回應，因此登入資訊和密碼會保留在 MDM 的設定中，並為您的 Windows 帳戶加密。
+	Windows Credential Manager didn't answer, so sign-ins and passwords are kept in SDM's settings, encrypted for your Windows account.	Windows 認證管理員沒有回應，因此登入資訊和密碼會保留在 SDM 的設定中，並為您的 Windows 帳戶加密。
 #. text in a dialog box
 #. why the computer could not be put to sleep (fills {error})
 #, machine
@@ -5552,7 +5552,7 @@
 #. text in remote.rs
 #. remote control page (on a phone): pairing failed and the code is void now
 #, machine
-	Wrong code. Show a new code in MDM and try again.	代碼錯誤。請在 MDM 中顯示新代碼，然後再試一次。
+	Wrong code. Show a new code in SDM and try again.	代碼錯誤。請在 SDM 中顯示新代碼，然後再試一次。
 #. text in remote.rs
 #. remote control page (on a phone): pairing failed; {n} = how many more codes may be tried
 #. {n} = a number (keep the braces as they are)
@@ -5584,9 +5584,9 @@
 #. text in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #. {version} = a version number (keep the braces as they are)
 #, machine
-	You have the latest version of Mister Download Manager ({version}).	您已擁有最新版 Mister Download Manager ({version})。
+	You have the latest version of Sedot Download Manager ({version}).	您已擁有最新版 Sedot Download Manager ({version})。
 #. text in the Help menu's windows (About, updates, shortcuts, Tell a friend)
-#. Check for updates, under the new version's line, when MDM was installed by the Linux system's package manager (pacman, ...), which MDM can't update itself
+#. Check for updates, under the new version's line, when SDM was installed by the Linux system's package manager (pacman, ...), which SDM can't update itself
 #. {version} = a version number (keep the braces as they are)
 #, machine
 	You have version {version}, from your system's package manager: update it there.	您安裝的是 {version} 版，來自系統的套件管理員：請從該處更新。
@@ -5600,7 +5600,7 @@
 	Your browser	您的瀏覽器
 #. text in the Options window
 #, machine
-	Your default browser isn't one MDM knows: a current Chrome's User-Agent	您的預設瀏覽器不是 MDM 知道的瀏覽器：目前的 Chrome User-Agent
+	Your default browser isn't one SDM knows: a current Chrome's User-Agent	您的預設瀏覽器不是 SDM 知道的瀏覽器：目前的 Chrome User-Agent
 #. text in the Options window
 #. tooltip; {browser} is a browser and its version, e.g. "Brave 157"
 #, machine
@@ -5614,10 +5614,10 @@
 #, machine
 	your Google account has no access to this file, or its owner turned off downloading	您的 Google 帳戶無權存取此檔案，或其擁有者已關閉下載功能
 #. text in helpers.rs
-#. Video helpers: the person's own gallery-dl is too old and not used; {version} = its version, {oldest} = the oldest MDM can use
+#. Video helpers: the person's own gallery-dl is too old and not used; {version} = its version, {oldest} = the oldest SDM can use
 #. {version} = a version number (keep the braces as they are)
 #, machine
-	Your own program ({version}) is too old: MDM needs {oldest} or newer	您的程式 ({version}) 太舊：MDM 需要 {oldest} 或更新版本
+	Your own program ({version}) is too old: SDM needs {oldest} or newer	您的程式 ({version}) 太舊：SDM 需要 {oldest} 或更新版本
 #. text in helpers.rs
 #. Video helpers: {path} = the program the person chose, {version} = its version
 #. {version} = a version number (keep the braces as they are)
@@ -5645,11 +5645,11 @@
 #, machine
 	yt-dlp couldn't read {browser}'s cookies: {error}	yt-dlp 無法讀取 {browser} 的 Cookie：{error}
 #. text in a download's progress window
-#. progress window, a video's line: the helper program yt-dlp gave no address MDM's own downloader could use
+#. progress window, a video's line: the helper program yt-dlp gave no address SDM's own downloader could use
 #, machine
 	yt-dlp downloads it itself	yt-dlp 會自行下載
 #. text in a download's progress window
-#. progress window, a video's line: MDM's own downloader can't take a live broadcast, so the helper program yt-dlp records it
+#. progress window, a video's line: SDM's own downloader can't take a live broadcast, so the helper program yt-dlp records it
 #, machine
 	yt-dlp downloads it itself: a live stream	yt-dlp 會自行下載：即時串流
 #. text in a download's progress window
@@ -5661,7 +5661,7 @@
 #, machine
 	yt-dlp downloads it itself: protected (DRM)	yt-dlp 會自行下載：受保護 (DRM)
 #. text in a download's progress window
-#. progress window, a video's line: {protocol} = a streaming protocol's short name (rtmp, rtsp, mms); MDM's own downloader doesn't speak it, so the helper program yt-dlp downloads it
+#. progress window, a video's line: {protocol} = a streaming protocol's short name (rtmp, rtsp, mms); SDM's own downloader doesn't speak it, so the helper program yt-dlp downloads it
 #, machine
 	yt-dlp downloads it itself: {protocol}	yt-dlp 會自行下載：{protocol}
 #. text in the Download video window
@@ -5736,7 +5736,7 @@
 #. text in the Options window
 #. Options → Remote → Pair a device: done; {device} = the name it was given
 #, machine
-	{device} is paired. It can control MDM now.	{device} 已配對。現在可以控制 MDM。
+	{device} is paired. It can control SDM now.	{device} 已配對。現在可以控制 SDM。
 #. text in remote.rs
 #. remote control page (on a phone): progress; {done} and {size} are sizes ("1.2 MB of 7.5 MB")
 #. {size} = a file size such as "4.2 MB" (keep the braces as they are)
@@ -5772,7 +5772,7 @@
 	{file} is too large to be a list of addresses ({size}). Import reads text files, web pages and .ef2 exports of up to {limit}.	{file} ({size}) 過大，無法作為位址清單。匯入功能可讀取文字檔、網頁和 .ef2 匯出檔，最大為 {limit}。
 #. text in a dialog box
 #, machine
-	{file} was moved elsewhere by dragging it out of Download complete, and MDM couldn't learn where. Look for it where you dropped it.	{file} 已從「下載完成」拖曳出並移至其他位置，MDM 無法辨識。請在您放置的位置尋找該檔案。
+	{file} was moved elsewhere by dragging it out of Download complete, and SDM couldn't learn where. Look for it where you dropped it.	{file} 已從「下載完成」拖曳出並移至其他位置，SDM 無法辨識。請在您放置的位置尋找該檔案。
 #. text in the Checksum window
 #. {algorithm} = a checksum algorithm such as "SHA-256" (keep the braces as they are)
 #, machine
@@ -5858,7 +5858,7 @@
 #. in the "7-Zip needed" window: {name} is the archive's file name; 7-Zip is a program's name
 #. {name} = a file name (keep the braces as they are)
 #, machine
-	{name} is a 7z or RAR archive. MDM extracts those with 7-Zip, which isn't installed.	{name} 是 7z 或 RAR 壓縮檔。MDM 使用 7-Zip 解壓縮這些檔案，但尚未安裝 7-Zip。
+	{name} is a 7z or RAR archive. SDM extracts those with 7-Zip, which isn't installed.	{name} 是 7z 或 RAR 壓縮檔。SDM 使用 7-Zip 解壓縮這些檔案，但尚未安裝 7-Zip。
 #. text in extracting archives (a download's log, the Archive password window)
 #. in Archive password: {name} is the archive's file name
 #. {name} = a file name (keep the braces as they are)
@@ -5870,10 +5870,10 @@
 #, machine
 	{name} isn't offered as {how}.	{name} 不提供 {how}。
 #. text in errors.rs
-#. error: a program chosen as a helper is too old; {name} = gallery-dl, {version} = its version, {oldest} = the oldest one MDM can use
+#. error: a program chosen as a helper is too old; {name} = gallery-dl, {version} = its version, {oldest} = the oldest one SDM can use
 #. {name} = a file name; {version} = a version number (keep the braces as they are)
 #, machine
-	{name} {version} is too old: MDM needs {oldest} or newer	{name} {version} 太舊：MDM 需要 {oldest} 或更新版本
+	{name} {version} is too old: SDM needs {oldest} or newer	{name} {version} 太舊：SDM 需要 {oldest} 或更新版本
 #. text in a dialog box
 #. one failed download in the summary of a group of downloads: {name} its file name, {error} why it failed
 #. {name} = a file name; {error} = an error message (keep the braces as they are)
@@ -5894,7 +5894,7 @@
 #, machine
 	{n} of {total} selected	已選取 {total} 個中的 {n} 個
 #. text in the download list (sizes, speeds, status)
-#. a torrent's status while the user's debrid service downloads it, before MDM gets its files; {service} the service ("Real-Debrid"), {percent} how far it is ("45%")
+#. a torrent's status while the user's debrid service downloads it, before SDM gets its files; {service} the service ("Real-Debrid"), {percent} how far it is ("45%")
 #, machine
 	{percent} at {service}	{service} 已完成 {percent}
 #. text in errors.rs
@@ -5905,9 +5905,9 @@
 #, machine
 	{problem}. {advice}	{problem}. {advice}
 #. text in errors.rs
-#. a debrid service's error: too many requests; MDM waits and retries
+#. a debrid service's error: too many requests; SDM waits and retries
 #, machine
-	{service} asks to slow down; MDM will try again in a minute	{service} 要求放慢速度；MDM 將在一分鐘後重試
+	{service} asks to slow down; SDM will try again in a minute	{service} 要求放慢速度；SDM 將在一分鐘後重試
 #. text in errors.rs
 #. a debrid service's error: it wants the user to allow this computer (it sent an email)
 #, machine
@@ -5917,7 +5917,7 @@
 	{service} can't get this torrent: nobody shares it, or its link can't be read	{service} 無法取得此 torrent：沒有人分享，或其連結無法讀取
 #. text in errors.rs
 #, machine
-	{service} can't reach this file host right now; MDM will try again later	{service} 目前無法連線到此檔案主機；MDM 將稍後重試
+	{service} can't reach this file host right now; SDM will try again later	{service} 目前無法連線到此檔案主機；SDM 將稍後重試
 #. text in errors.rs
 #. a debrid service's error: it isn't answering
 #, machine
@@ -5952,7 +5952,7 @@
 	{service}: this needs a premium account	{service}：這需要付費帳戶
 #. text in errors.rs
 #, machine
-	{service}: too many downloads at once through your account; MDM will try again	{service}：您的帳戶同時下載過多；MDM 將重試
+	{service}: too many downloads at once through your account; SDM will try again	{service}：您的帳戶同時下載過多；SDM 將重試
 #. text in errors.rs
 #. a debrid service's error: the account's limit (traffic) for this host is used up
 #, machine
@@ -5992,7 +5992,7 @@
 #, machine
 	{title}: already in the list	{title}：已在清單中
 #. message or event log entry in the main window
-#. RSS feeds window, under the rules: not added, because files of its names are already in the folder (MDM never writes into them unasked)
+#. RSS feeds window, under the rules: not added, because files of its names are already in the folder (SDM never writes into them unasked)
 #, machine
 	{title}: not added: files of its names are already in {folder}	{title}：未新增：同名檔案已在 {folder} 中
 #. message or event log entry in the main window
@@ -6062,13 +6062,13 @@ column	Transfer rate	傳輸速率
 #, machine
 column	Upload speed	上傳速度
 #. text in the browser extension
-#. in the menu under the download button over a video: the page is a list of videos (a playlist), whose videos are chosen in the app's window; keep the name Mister Download Manager as it is
+#. in the menu under the download button over a video: the page is a list of videos (a playlist), whose videos are chosen in the app's window; keep the name Sedot Download Manager as it is
 #, machine
-extension	A list of videos: choose them in Mister Download Manager	影片清單：請在 Mister Download Manager 中選擇
+extension	A list of videos: choose them in Sedot Download Manager	影片清單：請在 Sedot Download Manager 中選擇
 #. text in the browser extension
-#. on the download button (green) over a video after the app added and started the download; a quality may follow ('· 1080p') and a 'Show' button; MDM is the app's short name, keep it; short
+#. on the download button (green) over a video after the app added and started the download; a quality may follow ('· 1080p') and a 'Show' button; SDM is the app's short name, keep it; short
 #, machine
-extension	Added to MDM	已新增至 MDM
+extension	Added to SDM	已新增至 SDM
 #. text in the browser extension
 #. shown briefly on the download button over a video after a quality was picked: the download was added to the app's download queue, to start later
 #, machine
@@ -6079,9 +6079,9 @@ extension	Added to the queue	已新增至佇列
 #, machine
 extension	All qualities and subtitles...	所有畫質和字幕...
 #. text in the browser extension
-#. choice under Send downloads to: an MDM running on another computer of the network, such as a home server; keep the name Mister Download Manager as it is
+#. choice under Send downloads to: an SDM running on another computer of the network, such as a home server; keep the name Sedot Download Manager as it is
 #, machine
-extension	Another Mister Download Manager (a server)	另一個 Mister Download Manager (伺服器)
+extension	Another Sedot Download Manager (a server)	另一個 Sedot Download Manager (伺服器)
 #. text in the browser extension
 #. tab above the list of qualities in the menu under the download button over a video: the choices that are sound only (MP3, Opus and the like); short, one word
 #, machine
@@ -6091,11 +6091,11 @@ extension	Audio	音訊
 #, machine
 extension	best	最佳
 #. text in the browser extension
-#. the name this browser gets in the other MDM's list of paired devices
+#. the name this browser gets in the other SDM's list of paired devices
 #, machine
 extension	Browser extension	瀏覽器擴充功能
 #. text in the browser extension
-#. menu command of the download button over a video: opens its settings in Mister Download Manager
+#. menu command of the download button over a video: opens its settings in Sedot Download Manager
 #. the trailing ... means it is still going on: keep it
 #, machine
 extension	Button settings...	按鈕設定...
@@ -6108,14 +6108,14 @@ extension	can't be saved	無法儲存
 #, machine
 extension	Can't tell which video this is: open its own page and try there	無法判斷這是哪部影片：請開啟該影片本身的頁面再試一次
 #. text in the browser extension
-#. the toolbar button's status when the browser reaches the app; keep the name Mister Download Manager as it is
+#. the toolbar button's status when the browser reaches the app; keep the name Sedot Download Manager as it is
 #, machine
-extension	Connected to Mister Download Manager	已連線到 Mister Download Manager
+extension	Connected to Sedot Download Manager	已連線到 Sedot Download Manager
 #. text in the browser extension
-#. the toolbar button's status when the browser reaches the app, with the app's version number; keep the name Mister Download Manager as it is
+#. the toolbar button's status when the browser reaches the app, with the app's version number; keep the name Sedot Download Manager as it is
 #. {version} = a version number (keep the braces as they are)
 #, machine
-extension	Connected to Mister Download Manager {version}	已連線到 Mister Download Manager {version}
+extension	Connected to Sedot Download Manager {version}	已連線到 Sedot Download Manager {version}
 #. text in the browser extension
 #. in the menu under the download button over a video: finding the video's qualities failed; the app's own explanation follows on the next line
 #, machine
@@ -6125,17 +6125,17 @@ extension	Could not look it up	無法尋找
 #, machine
 extension	Download	下載
 #. text in the browser extension
-#. command in the browser's right-click menu on a page: download the links of the whole page; keep the name Mister Download Manager as it is
+#. command in the browser's right-click menu on a page: download the links of the whole page; keep the name Sedot Download Manager as it is
 #, machine
-extension	Download all links with Mister Download Manager	使用 Mister Download Manager 下載所有連結
+extension	Download all links with Sedot Download Manager	使用 Sedot Download Manager 下載所有連結
 #. text in the browser extension
 #. first line of the list under the download button over a video: downloads the best quality at once; the quality, its file type and size follow on the same line; short
 #, machine
 extension	Download best	下載最佳品質
 #. text in the browser extension
-#. command in the browser's right-click menu on selected text: download the links in the selection; keep the name Mister Download Manager as it is
+#. command in the browser's right-click menu on selected text: download the links in the selection; keep the name Sedot Download Manager as it is
 #, machine
-extension	Download selected links with Mister Download Manager	使用 Mister Download Manager 下載選取的連結
+extension	Download selected links with Sedot Download Manager	使用 Sedot Download Manager 下載選取的連結
 #. text in the browser extension
 #. first line of the tooltip of the download button over a video while the app is still finding its qualities
 #, machine
@@ -6145,9 +6145,9 @@ extension	Download the best quality	下載最佳品質
 #, machine
 extension	Download video	下載影片
 #. text in the browser extension
-#. command in the browser's right-click menu on a link, picture, video or sound; keep the name Mister Download Manager as it is
+#. command in the browser's right-click menu on a link, picture, video or sound; keep the name Sedot Download Manager as it is
 #, machine
-extension	Download with Mister Download Manager	使用 Mister Download Manager 下載
+extension	Download with Sedot Download Manager	使用 Sedot Download Manager 下載
 #. text in the browser extension
 #. first line of the tooltip of the download button over a video: what one click downloads; $what$ is a quality, a file type and a size, e.g. '1080p MP4 · 412 MB'
 #, machine
@@ -6158,7 +6158,7 @@ extension	Download {what}	下載 {what}
 #, machine
 extension	Downloads from {site} stay with the browser	來自 {site} 的下載保留在瀏覽器中
 #. text in the browser extension
-#. the toolbar button's status while downloads go to another MDM
+#. the toolbar button's status while downloads go to another SDM
 #, machine
 extension	Downloads go to {address}	下載項目傳送至 {address}
 #. text in the browser extension
@@ -6170,13 +6170,13 @@ extension	Drag the dots to move it along the edge	拖曳點點以沿邊緣移動
 #, machine
 extension	Enter its https:// address.	輸入其 https:// 位址。
 #. text in the browser extension
-#. button on the download button over a video when the app didn't answer: opens the app's download page; MDM is the app's short name, keep it; very short
+#. button on the download button over a video when the app didn't answer: opens the app's download page; SDM is the app's short name, keep it; very short
 #, machine
-extension	Get MDM	取得 MDM
+extension	Get SDM	取得 SDM
 #. text in the browser extension
-#. the extension's description in the browser's list of extensions; keep the name Mister Download Manager as it is
+#. the extension's description in the browser's list of extensions; keep the name Sedot Download Manager as it is
 #, machine
-extension	Hands downloads from the browser to Mister Download Manager.	將瀏覽器中的下載交給 Mister Download Manager。
+extension	Hands downloads from the browser to Sedot Download Manager.	將瀏覽器中的下載交給 Sedot Download Manager。
 #. text in the browser extension
 #. link in the toolbar button's popup to the help page
 #, machine
@@ -6202,13 +6202,13 @@ extension	How to fix it	如何修正
 #, machine
 extension	It didn't work. Try again.	失敗。請再試一次。
 #. text in the browser extension
-#. pairing failed: the other MDM shows no pairing code; Pair a device is its button
+#. pairing failed: the other SDM shows no pairing code; Pair a device is its button
 #, machine
 extension	It shows no code now: click Pair a device there first.	它現在沒有顯示代碼：請先按一下「配對裝置」。
 #. text in the browser extension
-#. why a download stayed with the browser: it is a .torrent file and the app's Torrent settings don't open torrents with Mister Download Manager, so the browser keeps it for the user's own torrent program; keep the setting's name as the app shows it
+#. why a download stayed with the browser: it is a .torrent file and the app's Torrent settings don't open torrents with Sedot Download Manager, so the browser keeps it for the user's own torrent program; keep the setting's name as the app shows it
 #, machine
-extension	It's a torrent, and Open magnet links and .torrent files with Mister Download Manager is off in Torrent settings.	這是 torrent 檔案，且「在 Torrent 設定中以 Mister Download Manager 開啟磁力連結和 .torrent 檔案」已關閉。
+extension	It's a torrent, and Open magnet links and .torrent files with Sedot Download Manager is off in Torrent settings.	這是 torrent 檔案，且「在 Torrent 設定中以 Sedot Download Manager 開啟磁力連結和 .torrent 檔案」已關閉。
 #. text in the browser extension
 #. why a download stayed with the browser: the file is smaller than the app's minimum size setting
 #, machine
@@ -6243,49 +6243,49 @@ extension	Looking up the qualities…	正在尋找畫質…
 #, machine
 extension	Looking up took too long	尋找耗時過久
 #. text in the browser extension
-#. on the download button (red) over a video when the app isn't installed or didn't start; 'Get MDM' and 'Retry' buttons follow; MDM is the app's short name, keep it; short
+#. on the download button (red) over a video when the app isn't installed or didn't start; 'Get SDM' and 'Retry' buttons follow; SDM is the app's short name, keep it; short
 #, machine
-extension	MDM didn't answer	MDM 沒有回應
+extension	SDM didn't answer	SDM 沒有回應
 #. text in the browser extension
 #. heading in the toolbar button's popup over the list of the videos, sounds and streams the current web page has loaded
 #, machine
 extension	Media on this page	此頁面上的媒體
 #. text in the browser extension
-#. the extension's name in the browser's list of extensions and on its toolbar button; keep the name Mister Download Manager as it is
+#. the extension's name in the browser's list of extensions and on its toolbar button; keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager	Mister Download Manager
+extension	Sedot Download Manager	Sedot Download Manager
 #. text in the browser extension
-#. status when the app was started for a download but didn't answer in time; keep the name Mister Download Manager as it is
+#. status when the app was started for a download but didn't answer in time; keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager didn't start in time	Mister Download Manager 未及時啟動
+extension	Sedot Download Manager didn't start in time	Sedot Download Manager 未及時啟動
 #. text in the browser extension
-#. status when the app refuses this copy of the extension (another copy is installed, or it came from another store); keep the name Mister Download Manager as it is
+#. status when the app refuses this copy of the extension (another copy is installed, or it came from another store); keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager doesn't accept this copy of the extension	Mister Download Manager 不接受此擴充功能副本
+extension	Sedot Download Manager doesn't accept this copy of the extension	Sedot Download Manager 不接受此擴充功能副本
 #. text in the browser extension
-#. in the menu under the download button over a video: the app is already looking up other videos and can't look this one up now; keep the name Mister Download Manager as it is
+#. in the menu under the download button over a video: the app is already looking up other videos and can't look this one up now; keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager is busy with other videos	Mister Download Manager 正忙於處理其他影片
+extension	Sedot Download Manager is busy with other videos	Sedot Download Manager 正忙於處理其他影片
 #. text in the browser extension
-#. shown briefly on the download button when the app could not be reached; keep the name Mister Download Manager as it is
+#. shown briefly on the download button when the app could not be reached; keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager isn't installed or didn't start	Mister Download Manager 未安裝或未啟動
+extension	Sedot Download Manager isn't installed or didn't start	Sedot Download Manager 未安裝或未啟動
 #. text in the browser extension
-#. status when the browser can't find the app's connection; keep the name Mister Download Manager as it is
+#. status when the browser can't find the app's connection; keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager isn't installed, or its browser integration isn't set up	Mister Download Manager 未安裝，或其瀏覽器整合未設定
+extension	Sedot Download Manager isn't installed, or its browser integration isn't set up	Sedot Download Manager 未安裝，或其瀏覽器整合未設定
 #. text in the browser extension
-#. in the menu under the download button over a video: the app needs the yt-dlp tool (a program's name, keep it as it is) to find this video's qualities, and it isn't installed; keep the name Mister Download Manager as it is
+#. in the menu under the download button over a video: the app needs the yt-dlp tool (a program's name, keep it as it is) to find this video's qualities, and it isn't installed; keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager needs yt-dlp for this video	Mister Download Manager 需要 yt-dlp 才能處理此影片
+extension	Sedot Download Manager needs yt-dlp for this video	Sedot Download Manager 需要 yt-dlp 才能處理此影片
 #. text in the browser extension
-#. tooltip of the switch Send downloads through this browser's proxy or VPN extension; keep the name Mister Download Manager as it is
+#. tooltip of the switch Send downloads through this browser's proxy or VPN extension; keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager then downloads through the same proxy as this browser. The browser asks you once to allow it; turning this off takes that back.	Mister Download Manager 會透過此瀏覽器使用的相同 Proxy 進行下載。瀏覽器會要求您允許一次；關閉此選項會撤銷該權限。
+extension	Sedot Download Manager then downloads through the same proxy as this browser. The browser asks you once to allow it; turning this off takes that back.	Sedot Download Manager 會透過此瀏覽器使用的相同 Proxy 進行下載。瀏覽器會要求您允許一次；關閉此選項會撤銷該權限。
 #. text in the browser extension
-#. tooltip of the switch Send downloads through this browser's proxy or VPN extension in Chrome, Edge and the other Chromium browsers (they ask for no permission at the switch); keep the name Mister Download Manager as it is
+#. tooltip of the switch Send downloads through this browser's proxy or VPN extension in Chrome, Edge and the other Chromium browsers (they ask for no permission at the switch); keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager then downloads through the same proxy as this browser. While this is off, the extension doesn't read the browser's proxy.	Mister Download Manager 會透過與此瀏覽器相同的 Proxy 進行下載。關閉此選項時，擴充功能不會讀取瀏覽器的 Proxy。
+extension	Sedot Download Manager then downloads through the same proxy as this browser. While this is off, the extension doesn't read the browser's proxy.	Sedot Download Manager 會透過與此瀏覽器相同的 Proxy 進行下載。關閉此選項時，擴充功能不會讀取瀏覽器的 Proxy。
 #. text in the browser extension
 #. the small arrow next to the Download video button that opens its menu (read aloud by screen readers)
 #, machine
@@ -6309,7 +6309,7 @@ extension	No video or sound found on this page yet. Play it, then open this agai
 #, machine
 extension	No video to download here	此處沒有可下載的影片
 #. text in the browser extension
-#. pairing failed: the other MDM didn't answer
+#. pairing failed: the other SDM didn't answer
 #, machine
 extension	Not reached. Open its address once in this browser and accept its certificate, then try again.	無法連線。請先在此瀏覽器中開啟其位址一次並接受其憑證，然後再試一次。
 #. text in the browser extension
@@ -6317,7 +6317,7 @@ extension	Not reached. Open its address once in this browser and accept its cert
 #, machine
 extension	Off on this site	此網站已關閉
 #. text in the browser extension
-#. button: open the other MDM's address in a tab (to accept its certificate once)
+#. button: open the other SDM's address in a tab (to accept its certificate once)
 #, machine
 extension	Open it	開啟它
 #. text in the browser extension
@@ -6325,9 +6325,9 @@ extension	Open it	開啟它
 #, machine
 extension	Open its address once and accept its certificate, then enter a code from its Options, Remote, Pair a device (or misterdownloadmanager-cli pair).	開啟其位址一次並接受其憑證，然後從其「選項」、「遠端」、「配對裝置」(或 misterdownloadmanager-cli pair) 輸入代碼。
 #. text in the browser extension
-#. button in the toolbar button's popup; keep the name Mister Download Manager as it is
+#. button in the toolbar button's popup; keep the name Sedot Download Manager as it is
 #, machine
-extension	Open Mister Download Manager	開啟 Mister Download Manager
+extension	Open Sedot Download Manager	開啟 Sedot Download Manager
 #. text in the browser extension
 #. button on the download button over a video in a feed: opens the post the video belongs to in a new tab; verb; very short
 #, machine
@@ -6346,11 +6346,11 @@ extension	Options...	選項...
 #, machine
 extension	original	原始
 #. text in the browser extension
-#. button: pair this browser with the other MDM using the code
+#. button: pair this browser with the other SDM using the code
 #, machine
 extension	Pair	配對
 #. text in the browser extension
-#. placeholder of the box for the 8-digit code the other MDM shows
+#. placeholder of the box for the 8-digit code the other SDM shows
 #, machine
 extension	Pairing code	配對代碼
 #. text in the browser extension
@@ -6382,22 +6382,22 @@ extension	Send downloads through this browser's proxy or VPN extension	透過此
 #, machine
 extension	Send downloads to	傳送下載項目至
 #. text in the browser extension
-#. on the download button over a video right after it was clicked, while the download goes to the app; MDM is Mister Download Manager's short name, keep it as it is; short
+#. on the download button over a video right after it was clicked, while the download goes to the app; SDM is Sedot Download Manager's short name, keep it as it is; short
 #. the trailing ... means it is still going on: keep it
 #, machine
-extension	Sending to MDM...	正在傳送至 MDM...
+extension	Sending to SDM...	正在傳送至 SDM...
 #. text in the browser extension
-#. shown briefly on the download button after it was clicked; keep the name Mister Download Manager as it is
+#. shown briefly on the download button after it was clicked; keep the name Sedot Download Manager as it is
 #, machine
-extension	Sent to Mister Download Manager	已傳送至 Mister Download Manager
+extension	Sent to Sedot Download Manager	已傳送至 Sedot Download Manager
 #. text in the browser extension
 #. button on the download button over a video after a download was added: shows that download in the app's window; verb; very short
 #, machine
 extension	Show	顯示
 #. text in the browser extension
-#. link at the foot of the toolbar button's popup to the creator's GitHub Sponsors page (MDM is free; this is an optional donation)
+#. link at the foot of the toolbar button's popup to the creator's GitHub Sponsors page (SDM is free; this is an optional donation)
 #, machine
-extension	Support MDM	支援 MDM
+extension	Support SDM	支援 SDM
 #. text in the browser extension
 #. check box in the toolbar button's popup: on, downloads go to the app; off, the browser keeps them
 #, machine
@@ -6407,9 +6407,9 @@ extension	Take downloads from this browser	從此瀏覽器接管下載
 #, machine
 extension	The Chrome Web Store's rules keep this copy of the add-on away from this site's videos. Help says what you can do.	Chrome 線上應用程式商店的規則使此擴充功能副本無法用於此網站的影片。請參閱「說明」以了解您可以怎麼做。
 #. text in the browser extension
-#. status when the connection to the app broke off (often security software blocking it); keep the name Mister Download Manager as it is
+#. status when the connection to the app broke off (often security software blocking it); keep the name Sedot Download Manager as it is
 #, machine
-extension	The connection to Mister Download Manager failed	與 Mister Download Manager 的連線失敗
+extension	The connection to Sedot Download Manager failed	與 Sedot Download Manager 的連線失敗
 #. text in the browser extension
 #. why a download stayed with the browser: the user limited the extension's access to web sites in the browser, so it can't pass the sign-in on
 #, machine
@@ -6423,7 +6423,7 @@ extension	The last download was left to the browser.	上次下載已留給瀏覽
 #, machine
 extension	This browser isn't ticked in Options → General.	此瀏覽器未在「選項 → 一般」中勾選。
 #. text in the browser extension
-#. choice under Send downloads to: the Mister Download Manager on this computer
+#. choice under Send downloads to: the Sedot Download Manager on this computer
 #, machine
 extension	This computer	這部電腦
 #. text in the browser extension
@@ -6443,9 +6443,9 @@ extension	Turn on	開啟
 #, machine
 extension	Undo	復原
 #. text in the browser extension
-#. status when the app is older than the extension; keep the name Mister Download Manager as it is
+#. status when the app is older than the extension; keep the name Sedot Download Manager as it is
 #, machine
-extension	Update Mister Download Manager to use everything this extension offers	更新 Mister Download Manager 以使用此擴充功能提供的所有功能
+extension	Update Sedot Download Manager to use everything this extension offers	更新 Sedot Download Manager 以使用此擴充功能提供的所有功能
 #. text in the browser extension
 #. why a download stayed with the browser: the app's setting 'Use advanced browser integration' is off; keep the setting's name as the app shows it
 #, machine
@@ -6573,13 +6573,13 @@ key	Up / Down	向上鍵 / 向下鍵
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	&About Mister Download Manager	關於 Mister Download Manager(&A)
+menu	&About Sedot Download Manager	關於 Sedot Download Manager(&A)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
 menu	&Add new download	新增下載(&D)
 #. menu command in the main window
-#. View → Window system: MDM chooses the window system itself at each start
+#. View → Window system: SDM chooses the window system itself at each start
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
 menu	&Automatic	自動(&A)
@@ -6614,7 +6614,7 @@ menu	&Exit	結束(&X)
 #, machine
 menu	&Import	匯入(&I)
 #. menu command in the main window
-#. View menu: submenu choosing how large MDM draws its windows and text (100 % to 200 %), as a browser's zoom
+#. View menu: submenu choosing how large SDM draws its windows and text (100 % to 200 %), as a browser's zoom
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
 menu	&Interface size	介面&大小
@@ -6704,7 +6704,7 @@ menu	&Undo	復原(&U)
 #, machine
 menu	&Video downloads	影片下載(&V)
 #. menu command in the main window
-#. View menu: submenu choosing the window system MDM's windows use on Linux (X11 through XWayland, or Wayland)
+#. View menu: submenu choosing the window system SDM's windows use on Linux (X11 through XWayland, or Wayland)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
 menu	&Window system	視窗系統(&W)
@@ -6746,9 +6746,9 @@ menu	Adwaita	Adwaita
 #, machine
 menu	Aero	Aero
 #. menu command in the main window
-#. View → Draw with: a greyed note under the choices; the choice takes effect when MDM is started again
+#. View → Draw with: a greyed note under the choices; the choice takes effect when SDM is started again
 #, machine
-menu	Applies the next time MDM starts	下次 MDM 啟動時套用
+menu	Applies the next time SDM starts	下次 SDM 啟動時套用
 #. menu command in the main window
 #. View → Theme: a style theme's name (Mac OS X's look), a name: keep "Aqua" as written
 #, machine
@@ -6823,7 +6823,7 @@ menu	C&ustomize URL List...	自訂 URL 清單(&U)...
 #, machine
 menu	Check for &updates...	檢查更新(&U)...
 #. menu command in the main window
-#. View → Theme: MDM's own look, the default (IDM's layout, Windows 11's controls)
+#. View → Theme: SDM's own look, the default (IDM's layout, Windows 11's controls)
 #, machine
 menu	Classic	傳統
 #. menu command in the main window
@@ -6877,7 +6877,7 @@ menu	Download &video from a page...	從頁面下載影片(&V)...
 #, machine
 menu	Download in order	依序下載
 #. menu command in the main window
-#. View menu: submenu choosing what draws MDM's windows: OpenGL, or Direct3D, Vulkan or Metal (graphics systems)
+#. View menu: submenu choosing what draws SDM's windows: OpenGL, or Direct3D, Vulkan or Metal (graphics systems)
 #, machine
 menu	Draw with	繪製方式
 #. menu command in the main window
@@ -6937,23 +6937,23 @@ menu	Hide drop target	隱藏拖放目標
 #, machine
 menu	High contrast	高對比
 #. menu command in the main window
-#. View → Window system: a greyed note; MDM's windows are Wayland's now
+#. View → Window system: a greyed note; SDM's windows are Wayland's now
 #, machine
 menu	In use: Wayland	使用中：Wayland
 #. menu command in the main window
-#. View → Window system: a greyed note; MDM's windows are X11's (through XWayland) now
+#. View → Window system: a greyed note; SDM's windows are X11's (through XWayland) now
 #, machine
 menu	In use: X11 (XWayland)	使用中：X11 (XWayland)
 #. menu command in the main window
-#. View → Draw with: a greyed note under "… didn't start here"; why: another error, written in MDM's log
+#. View → Draw with: a greyed note under "… didn't start here"; why: another error, written in SDM's log
 #, machine
 menu	It couldn't start: the log says why	無法啟動：記錄檔說明原因
 #. menu command in the main window
-#. View → Draw with: a greyed note under "… didn't start here"; why: the window stayed empty, so MDM started again with OpenGL
+#. View → Draw with: a greyed note under "… didn't start here"; why: the window stayed empty, so SDM started again with OpenGL
 #, machine
 menu	Its first frame didn't show within 10 seconds	第一個畫面未在 10 秒內顯示
 #. menu command in the main window
-#. View → Draw with: a greyed note under "… didn't start here"; why: MDM crashed or was closed while starting with it
+#. View → Draw with: a greyed note under "… didn't start here"; why: SDM crashed or was closed while starting with it
 #, machine
 menu	Its last start ended before its first frame	上次啟動在第一個畫面顯示前結束
 #. menu command in the main window
@@ -6979,7 +6979,7 @@ menu	Metro	都會
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	Mister Download Manager &Home Page	Mister Download Manager 首頁(&H)
+menu	Sedot Download Manager &Home Page	Sedot Download Manager 首頁(&H)
 #. menu command in the main window
 #, machine
 menu	Move/Rename (Ctrl-M)	移動/重新命名 (Ctrl-M)
@@ -7020,23 +7020,23 @@ menu	Open with...	開啟方式...
 #, machine
 menu	OpenGL	OpenGL
 #. menu command in the main window
-#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: it couldn't start on this computer
+#. View → Draw with: a greyed note; why SDM no longer draws with OpenGL: it couldn't start on this computer
 #, machine
 menu	OpenGL didn't start here	OpenGL 未在此處啟動
 #. menu command in the main window
-#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: its window froze inside the graphics card's driver while OpenGL drew
+#. View → Draw with: a greyed note; why SDM no longer draws with OpenGL: its window froze inside the graphics card's driver while OpenGL drew
 #, machine
 menu	OpenGL froze inside the graphics driver here	OpenGL 在此處的圖形驅動程式中凍結
 #. menu command in the main window
-#. View → Draw with: a greyed note; this computer's OpenGL (its graphics driver) is too old, so MDM doesn't draw with it
+#. View → Draw with: a greyed note; this computer's OpenGL (its graphics driver) is too old, so SDM doesn't draw with it
 #, machine
-menu	OpenGL here is too old to draw MDM	此電腦的 OpenGL 版本過舊，無法用來繪製 MDM
+menu	OpenGL here is too old to draw SDM	此電腦的 OpenGL 版本過舊，無法用來繪製 SDM
 #. menu command in the main window
-#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: its window stayed empty for 10 seconds, so MDM started again another way
+#. View → Draw with: a greyed note; why SDM no longer draws with OpenGL: its window stayed empty for 10 seconds, so SDM started again another way
 #, machine
 menu	OpenGL's first frame didn't show within 10 seconds	OpenGL 的第一個畫面未在 10 秒內顯示
 #. menu command in the main window
-#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: MDM crashed or was closed while starting with it
+#. View → Draw with: a greyed note; why SDM no longer draws with OpenGL: SDM crashed or was closed while starting with it
 #, machine
 menu	OpenGL's last start ended before its first frame	OpenGL 的上次啟動在第一個畫面顯示前結束
 #. menu command in the main window
@@ -7112,7 +7112,7 @@ menu	Select &all	全選(&A)
 menu	Show &drop target	顯示拖放目標(&D)
 #. menu command in the main window
 #, machine
-menu	Show Mister Download Manager	顯示 Mister Download Manager
+menu	Show Sedot Download Manager	顯示 Sedot Download Manager
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
@@ -7134,7 +7134,7 @@ menu	Stop Download	停止下載
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	Support &MDM	支援 &MDM
+menu	Support SD&M	支援 SD&M
 #. menu command in the main window
 #. View menu: submenu choosing how the text is drawn (smooth or classic)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
@@ -7149,7 +7149,7 @@ menu	Tell a &friend	告訴朋友(&F)
 #, machine
 menu	The graphics card was lost twice in 10 minutes	顯示卡在 10 分鐘內失效兩次
 #. menu command in the main window
-#. View menu: submenu choosing MDM's look (colours, sizes, icons): Classic, Native…
+#. View menu: submenu choosing SDM's look (colours, sizes, icons): Classic, Native…
 #, machine
 menu	Theme	佈景主題
 #. menu command in the main window

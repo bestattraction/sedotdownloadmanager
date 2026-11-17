@@ -81,7 +81,7 @@ Exec=misterdownloadmanager %U
 Icon=misterdownloadmanager
 Terminal=false
 Categories=Network;FileTransfer;
-StartupWMClass=misterdownloadmanager
+StartupWMClass=sedotdownloadmanager
 MimeType=x-scheme-handler/magnet;application/x-bittorrent;
 EOF
 

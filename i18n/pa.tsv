@@ -1,4 +1,4 @@
-# Mister Download Manager in Punjabi (ਪੰਜਾਬੀ): tools/i18n/translate.py
+# Sedot Download Manager in Punjabi (ਪੰਜਾਬੀ): tools/i18n/translate.py
 # writes the rows marked '#, machine'; a native speaker deletes that line after checking.
 # context	source	translation (craft-i18n format, rows as in en.tsv)
 @id	language.name	ਪੰਜਾਬੀ
@@ -11,7 +11,7 @@
 #. never shown for a single download
 #. {n} = a number (keep the braces as they are)
 #, machine
-@plural	Are you sure you want to delete {n} download from Mister Download Manager list of downloads?|Are you sure you want to delete these {n} downloads from Mister Download Manager list of downloads?	ਕੀ ਤੁਸੀਂ Mister Download Manager ਦੀ ਡਾਊਨਲੋਡ ਸੂਚੀ ਵਿੱਚੋਂ {n} ਡਾਊਨਲੋਡ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?|ਕੀ ਤੁਸੀਂ Mister Download Manager ਦੀ ਡਾਊਨਲੋਡ ਸੂਚੀ ਵਿੱਚੋਂ ਇਹ {n} ਡਾਊਨਲੋਡ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?
+@plural	Are you sure you want to delete {n} download from Sedot Download Manager list of downloads?|Are you sure you want to delete these {n} downloads from Sedot Download Manager list of downloads?	ਕੀ ਤੁਸੀਂ Sedot Download Manager ਦੀ ਡਾਊਨਲੋਡ ਸੂਚੀ ਵਿੱਚੋਂ {n} ਡਾਊਨਲੋਡ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?|ਕੀ ਤੁਸੀਂ Sedot Download Manager ਦੀ ਡਾਊਨਲੋਡ ਸੂਚੀ ਵਿੱਚੋਂ ਇਹ {n} ਡਾਊਨਲੋਡ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?
 #. count in the Add torrent window
 #. while a magnet link's file list is fetched; {n} = peers that answered
 #. {n} = a number (keep the braces as they are)
@@ -217,7 +217,7 @@
 #. text in the Options window
 #. Options → Accounts: what these accounts are, and the services' rule against sharing
 #, machine
-	A debrid service downloads a file host's link with your own paid account and gives MDM a direct link. Use only your own account: sharing an account or its links breaks the services' terms and can get it suspended. Downloads the browser already started stay as they are.	ਡੀਬ੍ਰਿਡ ਸੇਵਾ ਤੁਹਾਡੇ ਆਪਣੇ ਭੁਗਤਾਨਸ਼ੁਦਾ ਖਾਤੇ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਫ਼ਾਈਲ ਹੋਸਟ ਦੇ ਲਿੰਕ ਤੋਂ ਫ਼ਾਈਲ ਡਾਊਨਲੋਡ ਕਰਦੀ ਹੈ ਅਤੇ MDM ਨੂੰ ਸਿੱਧਾ ਲਿੰਕ ਦਿੰਦੀ ਹੈ। ਸਿਰਫ਼ ਆਪਣਾ ਖਾਤਾ ਵਰਤੋ: ਖਾਤਾ ਜਾਂ ਇਸ ਦੇ ਲਿੰਕ ਸਾਂਝੇ ਕਰਨਾ ਸੇਵਾਵਾਂ ਦੀਆਂ ਸ਼ਰਤਾਂ ਦੀ ਉਲੰਘਣਾ ਹੈ ਅਤੇ ਇਸ ਕਾਰਨ ਖਾਤਾ ਮੁਅੱਤਲ ਹੋ ਸਕਦਾ ਹੈ। ਬ੍ਰਾਊਜ਼ਰ ਵੱਲੋਂ ਪਹਿਲਾਂ ਹੀ ਸ਼ੁਰੂ ਕੀਤੇ ਡਾਊਨਲੋਡ ਜਿਵੇਂ ਦੇ ਤਿਵੇਂ ਰਹਿੰਦੇ ਹਨ।
+	A debrid service downloads a file host's link with your own paid account and gives SDM a direct link. Use only your own account: sharing an account or its links breaks the services' terms and can get it suspended. Downloads the browser already started stay as they are.	ਡੀਬ੍ਰਿਡ ਸੇਵਾ ਤੁਹਾਡੇ ਆਪਣੇ ਭੁਗਤਾਨਸ਼ੁਦਾ ਖਾਤੇ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਫ਼ਾਈਲ ਹੋਸਟ ਦੇ ਲਿੰਕ ਤੋਂ ਫ਼ਾਈਲ ਡਾਊਨਲੋਡ ਕਰਦੀ ਹੈ ਅਤੇ SDM ਨੂੰ ਸਿੱਧਾ ਲਿੰਕ ਦਿੰਦੀ ਹੈ। ਸਿਰਫ਼ ਆਪਣਾ ਖਾਤਾ ਵਰਤੋ: ਖਾਤਾ ਜਾਂ ਇਸ ਦੇ ਲਿੰਕ ਸਾਂਝੇ ਕਰਨਾ ਸੇਵਾਵਾਂ ਦੀਆਂ ਸ਼ਰਤਾਂ ਦੀ ਉਲੰਘਣਾ ਹੈ ਅਤੇ ਇਸ ਕਾਰਨ ਖਾਤਾ ਮੁਅੱਤਲ ਹੋ ਸਕਦਾ ਹੈ। ਬ੍ਰਾਊਜ਼ਰ ਵੱਲੋਂ ਪਹਿਲਾਂ ਹੀ ਸ਼ੁਰੂ ਕੀਤੇ ਡਾਊਨਲੋਡ ਜਿਵੇਂ ਦੇ ਤਿਵੇਂ ਰਹਿੰਦੇ ਹਨ।
 #. text in a download's progress window
 #. reason shown on the Rename box when the entered name ends with a period
 #, machine
@@ -261,7 +261,7 @@
 #, machine
 	A single-file torrent keeps its name	ਇੱਕ-ਫਾਇਲ ਟੋਰੈਂਟ ਆਪਣਾ ਨਾਮ ਬਰਕਰਾਰ ਰੱਖਦਾ ਹੈ
 #. text in the Add torrent window
-#. Add trackers: MDM never contacts a tracker on this computer or the local network
+#. Add trackers: SDM never contacts a tracker on this computer or the local network
 #, machine
 	A tracker on this computer or the local network is never contacted: {line}	ਇਸ ਕੰਪਿਊਟਰ ਜਾਂ ਸਥਾਨਕ ਨੈੱਟਵਰਕ 'ਤੇ ਕਿਸੇ ਟਰੈਕਰ ਨਾਲ ਕਦੇ ਸੰਪਰਕ ਨਹੀਂ ਕੀਤਾ ਜਾਂਦਾ: {line}
 #. text in extracting archives (a download's log, the Archive password window)
@@ -270,7 +270,7 @@
 	a volume of it is missing	ਇਸਦਾ ਇੱਕ ਭਾਗ ਗੁੰਮ ਹੈ
 #. window title in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #, machine
-	About Mister Download Manager	Mister Download Manager ਬਾਰੇ
+	About Sedot Download Manager	Sedot Download Manager ਬਾਰੇ
 #. text in whereis.rs
 #. a download's server's round trip: {ms} a number of milliseconds, {reach} near, medium or far
 #, machine
@@ -333,7 +333,7 @@
 #. window title in extension.rs
 #. title of the window that offers the browser extension
 #, machine
-	Add Mister Download Manager to your browser	Mister Download Manager ਨੂੰ ਆਪਣੇ ਬ੍ਰਾਊਜ਼ਰ ਵਿੱਚ ਸ਼ਾਮਲ ਕਰੋ
+	Add Sedot Download Manager to your browser	Sedot Download Manager ਨੂੰ ਆਪਣੇ ਬ੍ਰਾਊਜ਼ਰ ਵਿੱਚ ਸ਼ਾਮਲ ਕਰੋ
 #. message or event log entry in the main window; text in the tray icon's menu
 #. link in the empty download list: opens Add URL
 #, machine
@@ -395,9 +395,9 @@
 #, machine
 	Added.	ਸ਼ਾਮਲ ਕੀਤਾ ਗਿਆ।
 #. text in remote.rs
-#. remote control page (on a phone): a magnet link or .torrent file was added; MDM reads the torrent's files first
+#. remote control page (on a phone): a magnet link or .torrent file was added; SDM reads the torrent's files first
 #, machine
-	Added. MDM is reading the torrent: it joins the list in a moment.	ਸ਼ਾਮਲ ਕੀਤਾ ਗਿਆ। MDM ਟੋਰੈਂਟ ਪੜ੍ਹ ਰਿਹਾ ਹੈ: ਇਹ ਇੱਕ ਪਲ ਵਿੱਚ ਸੂਚੀ ਵਿੱਚ ਸ਼ਾਮਲ ਹੋ ਜਾਵੇਗਾ।
+	Added. SDM is reading the torrent: it joins the list in a moment.	ਸ਼ਾਮਲ ਕੀਤਾ ਗਿਆ। SDM ਟੋਰੈਂਟ ਪੜ੍ਹ ਰਿਹਾ ਹੈ: ਇਹ ਇੱਕ ਪਲ ਵਿੱਚ ਸੂਚੀ ਵਿੱਚ ਸ਼ਾਮਲ ਹੋ ਜਾਵੇਗਾ।
 #. text in the Batch download window; text in a dialog box; label in the Options window; text in a download's progress window
 #. noun: the web address (URL)
 #. column title: the web address (URL)
@@ -481,7 +481,7 @@
 #, machine
 	Already reported as issue #{number}: {title}	ਪਹਿਲਾਂ ਹੀ ਅੰਕ #{number}: {title} ਵਜੋਂ ਰਿਪੋਰਟ ਕੀਤਾ ਗਿਆ ਹੈ
 #. checkbox in crashui.rs
-#. crash report window: checkbox; the .dmp file holds what MDM had in memory
+#. crash report window: checkbox; the .dmp file holds what SDM had in memory
 #, machine
 	Also attach the crash data (.dmp): it may hold addresses, cookies and passwords	ਕ੍ਰੈਸ਼ ਡਾਟਾ (.dmp) ਵੀ ਨੱਥੀ ਕਰੋ: ਇਸ ਵਿੱਚ ਪਤੇ, ਕੂਕੀਜ਼ ਅਤੇ ਪਾਸਵਰਡ ਹੋ ਸਕਦੇ ਹਨ
 #. text in a dialog box
@@ -500,7 +500,7 @@
 	Always into a folder named after it	ਹਮੇਸ਼ਾ ਇਸਦੇ ਨਾਮ ਵਾਲੇ ਫੋਲਡਰ ਵਿੱਚ
 #. checkbox in a dialog box
 #, machine
-	Always turn on Speed Limiter on Mister Download Manager startup	Mister Download Manager ਸ਼ੁਰੂ ਹੋਣ 'ਤੇ ਹਮੇਸ਼ਾ ਸਪੀਡ ਲਿਮੀਟਰ ਚਾਲੂ ਕਰੋ
+	Always turn on Speed Limiter on Sedot Download Manager startup	Sedot Download Manager ਸ਼ੁਰੂ ਹੋਣ 'ਤੇ ਹਮੇਸ਼ਾ ਸਪੀਡ ਲਿਮੀਟਰ ਚਾਲੂ ਕਰੋ
 #. text in regional.rs; text in the Scheduler window
 #. before noon, after a time of day (12-hour clock). Its pair is "PM": write both the same way (this language's own short marks, or both kept as AM and PM)
 #, machine
@@ -566,7 +566,7 @@
 #. text in a dialog box
 #. {name} = a file name (keep the braces as they are)
 #, machine
-	Are you sure you want to delete "{name}" from Mister Download Manager list of downloads?	ਕੀ ਤੁਸੀਂ Mister Download Manager ਦੀ ਡਾਊਨਲੋਡ ਸੂਚੀ ਵਿੱਚੋਂ "{name}" ਨੂੰ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?
+	Are you sure you want to delete "{name}" from Sedot Download Manager list of downloads?	ਕੀ ਤੁਸੀਂ Sedot Download Manager ਦੀ ਡਾਊਨਲੋਡ ਸੂਚੀ ਵਿੱਚੋਂ "{name}" ਨੂੰ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -626,7 +626,7 @@
 #, machine
 	Austria	ਆਸਟ੍ਰੀਆ
 #. checkbox in the Options window; text in the Options window
-#. checkbox: the User-Agent is the default browser's, which MDM finds itself
+#. checkbox: the User-Agent is the default browser's, which SDM finds itself
 #, machine
 	Automatic	ਆਟੋਮੈਟਿਕ
 #. text in remote.rs
@@ -709,7 +709,7 @@
 	Bosnia and Herzegovina	ਬੋਸਨੀਆ ਅਤੇ ਹਰਜ਼ੇਗੋਵਿਨਾ
 #. text in helpers.rs
 #, machine
-	Both are open source. MDM gets them from their official releases with its own downloader and checks each file's signature before it runs. About 100 MB, once.	ਦੋਵੇਂ ਓਪਨ ਸੋਰਸ ਹਨ। MDM ਉਹਨਾਂ ਨੂੰ ਆਪਣੇ ਡਾਊਨਲੋਡਰ ਨਾਲ ਉਹਨਾਂ ਦੀਆਂ ਅਧਿਕਾਰਤ ਰੀਲੀਜ਼ਾਂ ਤੋਂ ਪ੍ਰਾਪਤ ਕਰਦਾ ਹੈ ਅਤੇ ਚਲਾਉਣ ਤੋਂ ਪਹਿਲਾਂ ਹਰੇਕ ਫਾਈਲ ਦੇ ਦਸਤਖਤ ਦੀ ਜਾਂਚ ਕਰਦਾ ਹੈ। ਲਗਭਗ 100 MB, ਇੱਕ ਵਾਰ।
+	Both are open source. SDM gets them from their official releases with its own downloader and checks each file's signature before it runs. About 100 MB, once.	ਦੋਵੇਂ ਓਪਨ ਸੋਰਸ ਹਨ। SDM ਉਹਨਾਂ ਨੂੰ ਆਪਣੇ ਡਾਊਨਲੋਡਰ ਨਾਲ ਉਹਨਾਂ ਦੀਆਂ ਅਧਿਕਾਰਤ ਰੀਲੀਜ਼ਾਂ ਤੋਂ ਪ੍ਰਾਪਤ ਕਰਦਾ ਹੈ ਅਤੇ ਚਲਾਉਣ ਤੋਂ ਪਹਿਲਾਂ ਹਰੇਕ ਫਾਈਲ ਦੇ ਦਸਤਖਤ ਦੀ ਜਾਂਚ ਕਰਦਾ ਹੈ। ਲਗਭਗ 100 MB, ਇੱਕ ਵਾਰ।
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -739,7 +739,7 @@
 	Browse...	ਫੋਲਡਰ ਚੁਣੋ...
 #. text in extension.rs
 #, machine
-	Browser integration isn't set up on this computer, so no browser can reach Mister Download Manager yet.	ਇਸ ਕੰਪਿਊਟਰ 'ਤੇ ਬ੍ਰਾਊਜ਼ਰ ਇੰਟੀਗ੍ਰੇਸ਼ਨ ਸੈੱਟਅੱਪ ਨਹੀਂ ਹੈ, ਇਸ ਲਈ ਕੋਈ ਵੀ ਬ੍ਰਾਊਜ਼ਰ ਅਜੇ Mister Download Manager ਤੱਕ ਨਹੀਂ ਪਹੁੰਚ ਸਕਦਾ।
+	Browser integration isn't set up on this computer, so no browser can reach Sedot Download Manager yet.	ਇਸ ਕੰਪਿਊਟਰ 'ਤੇ ਬ੍ਰਾਊਜ਼ਰ ਇੰਟੀਗ੍ਰੇਸ਼ਨ ਸੈੱਟਅੱਪ ਨਹੀਂ ਹੈ, ਇਸ ਲਈ ਕੋਈ ਵੀ ਬ੍ਰਾਊਜ਼ਰ ਅਜੇ Sedot Download Manager ਤੱਕ ਨਹੀਂ ਪਹੁੰਚ ਸਕਦਾ।
 #. page title in the Options window
 #, machine
 	Browser/System Integration	ਬ੍ਰਾਊਜ਼ਰ/ਸਿਸਟਮ ਇੰਟੀਗ੍ਰੇਸ਼ਨ
@@ -871,7 +871,7 @@
 #, machine
 	Check for updates	ਅੱਪਡੇਟਾਂ ਦੀ ਜਾਂਚ ਕਰੋ
 #. checkbox in the Help menu's windows (About, updates, shortcuts, Tell a friend)
-#. check box in the update window: look for a new version every time MDM starts
+#. check box in the update window: look for a new version every time SDM starts
 #, machine
 	Check for updates at every start	ਹਰ ਸ਼ੁਰੂਆਤ 'ਤੇ ਅੱਪਡੇਟਾਂ ਦੀ ਜਾਂਚ ਕਰੋ
 #. text in errors.rs
@@ -883,9 +883,9 @@
 #, machine
 	Check your connection, then try again, or get them later from the video window.	ਆਪਣਾ ਕਨੈਕਸ਼ਨ ਜਾਂਚੋ, ਫਿਰ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ, ਜਾਂ ਬਾਅਦ ਵਿੱਚ ਵੀਡੀਓ ਵਿੰਡੋ ਤੋਂ ਪ੍ਰਾਪਤ ਕਰੋ।
 #. text in the Options window
-#. tooltip of the close-setting: checked keeps MDM running when the window closes, in the notification area when available or else the taskbar; downloads continue; unchecked closing quits
+#. tooltip of the close-setting: checked keeps SDM running when the window closes, in the notification area when available or else the taskbar; downloads continue; unchecked closing quits
 #, machine
-	Checked, closing the window keeps MDM running: it hides in the notification area when available, or minimizes to the taskbar otherwise, and downloads continue; unchecked, closing quits MDM	ਚੁਣਿਆ ਹੋਣ 'ਤੇ, ਵਿੰਡੋ ਬੰਦ ਕਰਨ ਨਾਲ MDM ਚੱਲਦਾ ਰਹਿੰਦਾ ਹੈ: ਉਪਲਬਧ ਹੋਣ 'ਤੇ ਇਹ ਸੂਚਨਾ ਖੇਤਰ ਵਿੱਚ ਲੁਕ ਜਾਂਦਾ ਹੈ, ਨਹੀਂ ਤਾਂ ਟਾਸਕਬਾਰ 'ਤੇ ਛੋਟਾ ਹੋ ਜਾਂਦਾ ਹੈ, ਅਤੇ ਡਾਊਨਲੋਡ ਜਾਰੀ ਰਹਿੰਦੇ ਹਨ; ਨਾ ਚੁਣਿਆ ਹੋਣ 'ਤੇ, ਵਿੰਡੋ ਬੰਦ ਕਰਨ ਨਾਲ MDM ਬੰਦ ਹੋ ਜਾਂਦਾ ਹੈ
+	Checked, closing the window keeps SDM running: it hides in the notification area when available, or minimizes to the taskbar otherwise, and downloads continue; unchecked, closing quits SDM	ਚੁਣਿਆ ਹੋਣ 'ਤੇ, ਵਿੰਡੋ ਬੰਦ ਕਰਨ ਨਾਲ SDM ਚੱਲਦਾ ਰਹਿੰਦਾ ਹੈ: ਉਪਲਬਧ ਹੋਣ 'ਤੇ ਇਹ ਸੂਚਨਾ ਖੇਤਰ ਵਿੱਚ ਲੁਕ ਜਾਂਦਾ ਹੈ, ਨਹੀਂ ਤਾਂ ਟਾਸਕਬਾਰ 'ਤੇ ਛੋਟਾ ਹੋ ਜਾਂਦਾ ਹੈ, ਅਤੇ ਡਾਊਨਲੋਡ ਜਾਰੀ ਰਹਿੰਦੇ ਹਨ; ਨਾ ਚੁਣਿਆ ਹੋਣ 'ਤੇ, ਵਿੰਡੋ ਬੰਦ ਕਰਨ ਨਾਲ SDM ਬੰਦ ਹੋ ਜਾਂਦਾ ਹੈ
 #. message or event log entry in the main window
 #. event log entry after Recheck: {have} and {total} are sizes ("1.2 GB of 4 GB there")
 #, machine
@@ -944,7 +944,7 @@
 	Choose a language	ਇੱਕ ਭਾਸ਼ਾ ਚੁਣੋ
 #. text in langpick.rs
 #, machine
-	Choose the language Mister Download Manager shows its windows in:	ਉਹ ਭਾਸ਼ਾ ਚੁਣੋ ਜਿਸ ਵਿੱਚ Mister Download Manager ਆਪਣੀਆਂ ਵਿੰਡੋਜ਼ ਦਿਖਾਉਂਦਾ ਹੈ:
+	Choose the language Sedot Download Manager shows its windows in:	ਉਹ ਭਾਸ਼ਾ ਚੁਣੋ ਜਿਸ ਵਿੱਚ Sedot Download Manager ਆਪਣੀਆਂ ਵਿੰਡੋਜ਼ ਦਿਖਾਉਂਦਾ ਹੈ:
 #. text in the Options window
 #. Options → Sites Logins → Cookies for video sites: the title of the window, and the tooltip of the button, that pick a browser profile's folder
 #, machine
@@ -1032,7 +1032,7 @@
 #, machine
 	Congo	ਕਾਂਗੋ
 #. text in extension.rs
-#. in the browser extension's window, beside a browser whose extension reached MDM
+#. in the browser extension's window, beside a browser whose extension reached SDM
 #, machine
 	Connected	ਕਨੈਕਟ ਕੀਤਾ ਗਿਆ
 #. text in extension.rs
@@ -1084,7 +1084,7 @@
 #, machine
 	Could not be read: {error}	ਪੜ੍ਹੀ ਨਹੀਂ ਜਾ ਸਕੀ: {error}
 #. text in errors.rs
-#. a helper (yt-dlp, ffmpeg) couldn't be downloaded: the proxy set in Options ({proxy}, its address) didn't let MDM connect
+#. a helper (yt-dlp, ffmpeg) couldn't be downloaded: the proxy set in Options ({proxy}, its address) didn't let SDM connect
 #, machine
 	could not connect through the proxy {proxy}	ਪ੍ਰੌਕਸੀ {proxy} ਰਾਹੀਂ ਕਨੈਕਟ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ
 #. text in errors.rs
@@ -1122,13 +1122,13 @@
 	Customize "Download progress" dialog	"ਡਾਊਨਲੋਡ ਪ੍ਰਗਤੀ" ਡਾਇਲਾਗ ਨੂੰ ਅਨੁਕੂਲਿਤ ਕਰੋ
 #. text in the Options window
 #, machine
-	Customize keys to prevent or force downloading with MDM	MDM ਨਾਲ ਡਾਊਨਲੋਡ ਕਰਨ ਤੋਂ ਰੋਕਣ ਜਾਂ ਮਜਬੂਰ ਕਰਨ ਲਈ ਕੁੰਜੀਆਂ ਨੂੰ ਅਨੁਕੂਲਿਤ ਕਰੋ
+	Customize keys to prevent or force downloading with SDM	SDM ਨਾਲ ਡਾਊਨਲੋਡ ਕਰਨ ਤੋਂ ਰੋਕਣ ਜਾਂ ਮਜਬੂਰ ਕਰਨ ਲਈ ਕੁੰਜੀਆਂ ਨੂੰ ਅਨੁਕੂਲਿਤ ਕਰੋ
 #. text in the Options window
 #, machine
-	Customize MDM Download panels in browsers	ਬ੍ਰਾਊਜ਼ਰਾਂ ਵਿੱਚ MDM ਡਾਊਨਲੋਡ ਪੈਨਲਾਂ ਨੂੰ ਅਨੁਕੂਲਿਤ ਕਰੋ
+	Customize SDM Download panels in browsers	ਬ੍ਰਾਊਜ਼ਰਾਂ ਵਿੱਚ SDM ਡਾਊਨਲੋਡ ਪੈਨਲਾਂ ਨੂੰ ਅਨੁਕੂਲਿਤ ਕਰੋ
 #. text in the Options window
 #, machine
-	Customize MDM menu items in context menu of browsers	ਬ੍ਰਾਊਜ਼ਰਾਂ ਦੇ ਸੰਦਰਭ ਮੀਨੂ ਵਿੱਚ MDM ਮੀਨੂ ਆਈਟਮਾਂ ਨੂੰ ਅਨੁਕੂਲਿਤ ਕਰੋ
+	Customize SDM menu items in context menu of browsers	ਬ੍ਰਾਊਜ਼ਰਾਂ ਦੇ ਸੰਦਰਭ ਮੀਨੂ ਵਿੱਚ SDM ਮੀਨੂ ਆਈਟਮਾਂ ਨੂੰ ਅਨੁਕੂਲਿਤ ਕਰੋ
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -1317,9 +1317,9 @@
 #, machine
 	Download complete	ਡਾਊਨਲੋਡ ਪੂਰਾ ਹੋ ਗਿਆ
 #. text in the Options window
-#. Options, Downloads, under "Show download complete dialog": snoozed with "Until MDM restarts"
+#. Options, Downloads, under "Show download complete dialog": snoozed with "Until SDM restarts"
 #, machine
-	Download complete is snoozed until MDM restarts	ਡਾਊਨਲੋਡ ਪੂਰਾ ਹੋਣ ਦੀ ਸੂਚਨਾ MDM ਦੇ ਮੁੜ ਚਾਲੂ ਹੋਣ ਤੱਕ ਮੁਲਤਵੀ ਹੈ
+	Download complete is snoozed until SDM restarts	ਡਾਊਨਲੋਡ ਪੂਰਾ ਹੋਣ ਦੀ ਸੂਚਨਾ SDM ਦੇ ਮੁੜ ਚਾਲੂ ਹੋਣ ਤੱਕ ਮੁਲਤਵੀ ਹੈ
 #. text in the Options window
 #. Options, Downloads, under "Show download complete dialog": {time} when the snooze ends, like "14:30"
 #. {time} = a time of day (keep the braces as they are)
@@ -1428,10 +1428,10 @@
 #, machine
 	Downloading and verifying yt-dlp...	yt-dlp ਨੂੰ ਡਾਊਨਲੋਡ ਅਤੇ ਤਸਦੀਕ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...
 #. text in helpers.rs
-#. Video helpers: MDM's own yt-dlp is being downloaded
+#. Video helpers: SDM's own yt-dlp is being downloaded
 #. the trailing ... means it is still going on: keep it
 #, machine
-	Downloading MDM's own copy...	MDM ਦੀ ਆਪਣੀ ਕਾਪੀ ਡਾਊਨਲੋਡ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ...
+	Downloading SDM's own copy...	SDM ਦੀ ਆਪਣੀ ਕਾਪੀ ਡਾਊਨਲੋਡ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ...
 #. text in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #. Check for updates, while Update now downloads; {percent} like "42%"
 #, machine
@@ -1474,7 +1474,7 @@
 	Drag the file into a folder or an app	ਫ਼ਾਈਲ ਨੂੰ ਕਿਸੇ ਫੋਲਡਰ ਜਾਂ ਐਪ ਵਿੱਚ ਖਿੱਚੋ
 #. message or event log entry in the main window
 #, machine
-	Dragged out of Download complete and moved to a place MDM couldn't learn	“ਡਾਊਨਲੋਡ ਪੂਰਾ ਹੋ ਗਿਆ” ਵਿੱਚੋਂ ਬਾਹਰ ਖਿੱਚ ਕੇ ਅਜਿਹੀ ਥਾਂ 'ਤੇ ਭੇਜਿਆ ਗਿਆ ਜਿਸ ਬਾਰੇ MDM ਨੂੰ ਪਤਾ ਨਹੀਂ ਲੱਗ ਸਕਿਆ
+	Dragged out of Download complete and moved to a place SDM couldn't learn	“ਡਾਊਨਲੋਡ ਪੂਰਾ ਹੋ ਗਿਆ” ਵਿੱਚੋਂ ਬਾਹਰ ਖਿੱਚ ਕੇ ਅਜਿਹੀ ਥਾਂ 'ਤੇ ਭੇਜਿਆ ਗਿਆ ਜਿਸ ਬਾਰੇ SDM ਨੂੰ ਪਤਾ ਨਹੀਂ ਲੱਗ ਸਕਿਆ
 #. message or event log entry in the main window
 #, machine
 	Dragged out of Download complete and moved to {folder}	“ਡਾਊਨਲੋਡ ਪੂਰਾ ਹੋ ਗਿਆ” ਵਿੱਚੋਂ ਬਾਹਰ ਖਿੱਚ ਕੇ {folder} ਵਿੱਚ ਭੇਜਿਆ ਗਿਆ
@@ -1536,9 +1536,9 @@
 #, machine
 	Empty: all of them. On most sites the newest come first.	ਖਾਲੀ: ਸਾਰੇ। ਜ਼ਿਆਦਾਤਰ ਸਾਈਟਾਂ 'ਤੇ ਨਵੀਆਂ ਫ਼ਾਈਲਾਂ ਪਹਿਲਾਂ ਆਉਂਦੀਆਂ ਹਨ।
 #. text in crashui.rs
-#. crash report window button: end the frozen MDM and start it again
+#. crash report window button: end the frozen SDM and start it again
 #, machine
-	End and restart MDM	MDM ਨੂੰ ਸਮਾਪਤ ਕਰੋ ਅਤੇ ਮੁੜ-ਚਾਲੂ ਕਰੋ
+	End and restart SDM	SDM ਨੂੰ ਸਮਾਪਤ ਕਰੋ ਅਤੇ ਮੁੜ-ਚਾਲੂ ਕਰੋ
 #. text in the Add torrent window
 #, machine
 	Enter a magnet link or choose a .torrent file	ਮੈਗਨੈੱਟ ਲਿੰਕ ਦਾਖਲ ਕਰੋ ਜਾਂ .torrent ਫ਼ਾਈਲ ਚੁਣੋ
@@ -1621,7 +1621,7 @@
 	Exit	ਬਾਹਰ ਜਾਓ
 #. checkbox in a download's progress window; checkbox in the Scheduler window
 #, machine
-	Exit Mister Download Manager when done	ਹੋਣ 'ਤੇ Mister Download Manager ਤੋਂ ਬਾਹਰ ਆਓ
+	Exit Sedot Download Manager when done	ਹੋਣ 'ਤੇ Sedot Download Manager ਤੋਂ ਬਾਹਰ ਆਓ
 #. text in the Checksum window
 #, machine
 	Expected checksum (MD5, SHA-1, SHA-256, SHA-512 or CRC32):	ਉਮੀਦ ਕੀਤੀ ਗਈ ਚੈੱਕਸਮ (MD5, SHA-1, SHA-256, SHA-512 ਜਾਂ CRC32):
@@ -1836,7 +1836,7 @@
 #, machine
 	For example:  {address}	ਉਦਾਹਰਨ ਲਈ: {address}
 #. text in the Add torrent window
-#. Torrent settings, under the switch that makes MDM open magnet links and .torrent files (macOS, Linux)
+#. Torrent settings, under the switch that makes SDM open magnet links and .torrent files (macOS, Linux)
 #, machine
 	For your account only. Another app set as the default stays first.	ਸਿਰਫ਼ ਤੁਹਾਡੇ ਖਾਤੇ ਲਈ। ਡਿਫੌਲਟ ਵਜੋਂ ਸੈੱਟ ਕੀਤੀ ਗਈ ਕੋਈ ਹੋਰ ਐਪ ਪਹਿਲਾਂ ਰਹਿੰਦੀ ਹੈ।
 #. text in the Add torrent window
@@ -1846,7 +1846,7 @@
 #, machine
 	Force processes to terminate	ਪ੍ਰਕਿਰਿਆਵਾਂ ਨੂੰ ਖਤਮ ਕਰਨ ਲਈ ਮਜਬੂਰ ਕਰੋ
 #. text in remote.rs
-#. remote control page (on a phone): menu command: unpair this phone or computer from MDM
+#. remote control page (on a phone): menu command: unpair this phone or computer from SDM
 #, machine
 	Forget this device	ਇਸ ਡਿਵਾਈਸ ਨੂੰ ਭੁੱਲ ਜਾਓ
 #. text in remote.rs
@@ -2057,11 +2057,11 @@
 #, machine
 	Help	ਮਦਦ
 #. window title in helpers.rs
-#. window title: where MDM takes its helper programs (yt-dlp, ffmpeg, gallery-dl) from
+#. window title: where SDM takes its helper programs (yt-dlp, ffmpeg, gallery-dl) from
 #, machine
 	Helpers	ਮਦਦਗਾਰ
 #. text in errors.rs; button in gallerydlg.rs; button in the Download video window
-#. button in Download video: where MDM takes yt-dlp and ffmpeg from
+#. button in Download video: where SDM takes yt-dlp and ffmpeg from
 #. the trailing ... means it opens a window: keep it
 #, machine
 	Helpers...	ਸਹਾਇਕ...
@@ -2086,7 +2086,7 @@
 	Hide web pages	ਵੈੱਬ ਪੰਨੇ ਲੁਕਾਓ
 #. text in the Options window
 #, machine
-	Hold Alt while clicking a link to let the browser download it instead of Mister Download Manager.	Mister Download Manager ਦੀ ਬਜਾਏ ਬ੍ਰਾਊਜ਼ਰ ਨੂੰ ਡਾਊਨਲੋਡ ਕਰਨ ਦੇਣ ਲਈ ਲਿੰਕ 'ਤੇ ਕਲਿੱਕ ਕਰਦੇ ਸਮੇਂ Alt ਦਬਾ ਕੇ ਰੱਖੋ।
+	Hold Alt while clicking a link to let the browser download it instead of Sedot Download Manager.	Sedot Download Manager ਦੀ ਬਜਾਏ ਬ੍ਰਾਊਜ਼ਰ ਨੂੰ ਡਾਊਨਲੋਡ ਕਰਨ ਦੇਣ ਲਈ ਲਿੰਕ 'ਤੇ ਕਲਿੱਕ ਕਰਦੇ ਸਮੇਂ Alt ਦਬਾ ਕੇ ਰੱਖੋ।
 #. link (opens a web page) in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #, machine
 	Home page	ਮੁੱਖ ਪੰਨਾ
@@ -2127,7 +2127,7 @@
 	Hungary	ਹੰਗਰੀ
 #. text in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #, machine
-	I download with Mister Download Manager: fast, free, and it looks like the download manager you already know. {link}	ਮੈਂ Mister Download Manager ਨਾਲ ਡਾਊਨਲੋਡ ਕਰਦਾ ਹਾਂ: ਤੇਜ਼, ਮੁਫ਼ਤ, ਅਤੇ ਇਹ ਉਸ ਡਾਊਨਲੋਡ ਮੈਨੇਜਰ ਵਰਗਾ ਲੱਗਦਾ ਹੈ ਜਿਸਨੂੰ ਤੁਸੀਂ ਪਹਿਲਾਂ ਹੀ ਜਾਣਦੇ ਹੋ। {link}
+	I download with Sedot Download Manager: fast, free, and it looks like the download manager you already know. {link}	ਮੈਂ Sedot Download Manager ਨਾਲ ਡਾਊਨਲੋਡ ਕਰਦਾ ਹਾਂ: ਤੇਜ਼, ਮੁਫ਼ਤ, ਅਤੇ ਇਹ ਉਸ ਡਾਊਨਲੋਡ ਮੈਨੇਜਰ ਵਰਗਾ ਲੱਗਦਾ ਹੈ ਜਿਸਨੂੰ ਤੁਸੀਂ ਪਹਿਲਾਂ ਹੀ ਜਾਣਦੇ ਹੋ। {link}
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -2164,7 +2164,7 @@
 #, machine
 	In the categories: the selected category's menu	ਸ਼੍ਰੇਣੀਆਂ ਵਿੱਚ: ਚੁਣੀ ਗਈ ਸ਼੍ਰੇਣੀ ਦਾ ਮੀਨੂ
 #. text in the Options window
-#. Options → Accounts: the account's sign-in is in the system's keyring (Linux), which is locked now; MDM never unlocks it
+#. Options → Accounts: the account's sign-in is in the system's keyring (Linux), which is locked now; SDM never unlocks it
 #, machine
 	in the locked keyring	ਲਾਕ ਕੀਤੀ ਕੀਰਿੰਗ ਵਿੱਚ
 #. text in standard windows
@@ -2204,7 +2204,7 @@
 #, machine
 	Install it by hand	ਇਸਨੂੰ ਹੱਥੀਂ ਸਥਾਪਤ ਕਰੋ
 #. text in unix.rs
-#. Linux, after a missing library's name, on a distribution MDM doesn't know
+#. Linux, after a missing library's name, on a distribution SDM doesn't know
 #, machine
 	Install what's missing from your distribution's packages.	ਆਪਣੀ ਡਿਸਟ੍ਰੀਬਿਊਸ਼ਨ ਦੇ ਪੈਕੇਜਾਂ ਤੋਂ ਜੋ ਗੁੰਮ ਹੈ, ਉਸਨੂੰ ਇੰਸਟਾਲ ਕਰੋ।
 #. text in the Download video window
@@ -2263,7 +2263,7 @@
 #. text in extracting archives (a download's log, the Archive password window)
 #. why an archive wasn't extracted (after "Couldn't extract {name}: ")
 #, machine
-	it is not an archive MDM extracts	ਇਹ ਉਹ ਆਰਕਾਈਵ ਨਹੀਂ ਹੈ ਜਿਸਨੂੰ MDM ਐਕਸਟਰੈਕਟ ਕਰਦਾ ਹੈ
+	it is not an archive SDM extracts	ਇਹ ਉਹ ਆਰਕਾਈਵ ਨਹੀਂ ਹੈ ਜਿਸਨੂੰ SDM ਐਕਸਟਰੈਕਟ ਕਰਦਾ ਹੈ
 #. text in extracting archives (a download's log, the Archive password window)
 #. why an archive wasn't extracted (after "Couldn't extract {name}: ")
 #, machine
@@ -2284,7 +2284,7 @@
 #. text in the Batch download window
 #. \\n starts a new line: break lines where they fit the translation
 #, machine
-	It's possible to add a group of sequential file names like img001.jpg, img002.jpg, etc.,\nimg100.jpg to MDM download queue. Use the asterisk wildcard for the file name pattern.	MDM ਡਾਊਨਲੋਡ ਕਤਾਰ ਵਿੱਚ img001.jpg, img002.jpg, ਆਦਿ, img100.jpg ਵਰਗੇ ਕ੍ਰਮਵਾਰ ਫ਼ਾਈਲ ਨਾਂਵਾਂ ਦਾ ਸਮੂਹ ਜੋੜਿਆ ਜਾ ਸਕਦਾ ਹੈ। ਫ਼ਾਈਲ ਨਾਂ ਦੇ ਪੈਟਰਨ ਲਈ ਤਾਰੇ ਵਾਲੇ ਵਾਈਲਡਕਾਰਡ ਦੀ ਵਰਤੋਂ ਕਰੋ।
+	It's possible to add a group of sequential file names like img001.jpg, img002.jpg, etc.,\nimg100.jpg to SDM download queue. Use the asterisk wildcard for the file name pattern.	SDM ਡਾਊਨਲੋਡ ਕਤਾਰ ਵਿੱਚ img001.jpg, img002.jpg, ਆਦਿ, img100.jpg ਵਰਗੇ ਕ੍ਰਮਵਾਰ ਫ਼ਾਈਲ ਨਾਂਵਾਂ ਦਾ ਸਮੂਹ ਜੋੜਿਆ ਜਾ ਸਕਦਾ ਹੈ। ਫ਼ਾਈਲ ਨਾਂ ਦੇ ਪੈਟਰਨ ਲਈ ਤਾਰੇ ਵਾਲੇ ਵਾਈਲਡਕਾਰਡ ਦੀ ਵਰਤੋਂ ਕਰੋ।
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -2342,9 +2342,9 @@
 #, machine
 	KBytes/sec	ਕਿਲੋਬਾਈਟ/ਸਕਿੰਟ
 #. text in the Options window
-#. checkbox: closing keeps MDM running, in the notification area when available or else the taskbar, instead of quitting
+#. checkbox: closing keeps SDM running, in the notification area when available or else the taskbar, instead of quitting
 #, machine
-	Keep running when closing the window	ਵਿੰਡੋ ਬੰਦ ਕਰਨ 'ਤੇ MDM ਚੱਲਦਾ ਰਹੇ
+	Keep running when closing the window	ਵਿੰਡੋ ਬੰਦ ਕਰਨ 'ਤੇ SDM ਚੱਲਦਾ ਰਹੇ
 #. checkbox in the Add torrent window
 #, machine
 	Keep sharing torrents after they finish	ਟੋਰੈਂਟ ਪੂਰੇ ਹੋਣ ਤੋਂ ਬਾਅਦ ਵੀ ਸਾਂਝੇ ਕਰਦੇ ਰਹੋ
@@ -2360,7 +2360,7 @@
 #, machine
 	Keyboard shortcuts	ਕੀਬੋਰਡ ਸ਼ਾਰਟਕੱਟ
 #. window title in the Options window
-#. window title: the keys that force or prevent downloading with MDM
+#. window title: the keys that force or prevent downloading with SDM
 #, machine
 	Keys	ਕੁੰਜੀਆਂ
 #. button in the Options window
@@ -2396,14 +2396,14 @@
 #, machine
 	Laos	ਲਾਓਸ
 #. message or event log entry in the main window
-#. RSS: a feed bigger than MDM reads (5 MB)
+#. RSS: a feed bigger than SDM reads (5 MB)
 #, machine
 	larger than a feed can be	ਇੱਕ ਫੀਡ ਤੋਂ ਵੱਡਾ ਹੋ ਸਕਦਾ ਹੈ
 #. text in the Batch download window
 #, machine
 	Last file:	ਆਖਰੀ ਫ਼ਾਈਲ:
 #. text in the Options window
-#. column title: when the device last reached MDM
+#. column title: when the device last reached SDM
 #, machine
 	Last seen	ਆਖਰੀ ਵਾਰ ਦੇਖਿਆ ਗਿਆ
 #. text in a download's Properties window
@@ -2421,7 +2421,7 @@
 	Latvia	ਲਾਤਵੀਆ
 #. text in the Options window
 #, machine
-	Launch Mister Download Manager on startup	ਸਟਾਰਟਅੱਪ 'ਤੇ Mister Download Manager ਲਾਂਚ ਕਰੋ
+	Launch Sedot Download Manager on startup	ਸਟਾਰਟਅੱਪ 'ਤੇ Sedot Download Manager ਲਾਂਚ ਕਰੋ
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -2433,7 +2433,7 @@
 #. checkbox in the Options window
 #. Options → Remote check box (off by default)
 #, machine
-	Let phones and computers on the local network control MDM	ਸਥਾਨਕ ਨੈੱਟਵਰਕ 'ਤੇ ਫ਼ੋਨਾਂ ਅਤੇ ਕੰਪਿਊਟਰਾਂ ਨੂੰ MDM ਨੂੰ ਕੰਟਰੋਲ ਕਰਨ ਦਿਓ
+	Let phones and computers on the local network control SDM	ਸਥਾਨਕ ਨੈੱਟਵਰਕ 'ਤੇ ਫ਼ੋਨਾਂ ਅਤੇ ਕੰਪਿਊਟਰਾਂ ਨੂੰ SDM ਨੂੰ ਕੰਟਰੋਲ ਕਰਨ ਦਿਓ
 #. option (radio button) in the Batch download window
 #. the * in the address runs through letters
 #, machine
@@ -2482,7 +2482,7 @@
 #, machine
 	List the rest	ਬਾਕੀ ਸੂਚੀਬੱਧ ਕਰੋ
 #. text in the Options window
-#. Options → Remote: label before the choice of the address MDM listens on
+#. Options → Remote: label before the choice of the address SDM listens on
 #, machine
 	Listen on:	ਇਸ 'ਤੇ ਸੁਣੋ:
 #. text in playlistdlg.rs
@@ -2666,32 +2666,32 @@
 #. text in the Options window
 #. Options → Remote → Pair a device: the remote control isn't listening (no network, port taken): the Remote page says why
 #, machine
-	MDM can't be reached on the network now: Options → Remote says why.	MDM ਹੁਣ ਨੈੱਟਵਰਕ 'ਤੇ ਨਹੀਂ ਪਹੁੰਚਿਆ ਜਾ ਸਕਦਾ: ਵਿਕਲਪ → ਰਿਮੋਟ ਦੱਸਦਾ ਹੈ ਕਿਉਂ।
+	SDM can't be reached on the network now: Options → Remote says why.	SDM ਹੁਣ ਨੈੱਟਵਰਕ 'ਤੇ ਨਹੀਂ ਪਹੁੰਚਿਆ ਜਾ ਸਕਦਾ: ਵਿਕਲਪ → ਰਿਮੋਟ ਦੱਸਦਾ ਹੈ ਕਿਉਂ।
 #. text in remote.rs
-#. remote control page (on a phone): the address typed isn't one MDM downloads (not http, https, ftp or magnet)
+#. remote control page (on a phone): the address typed isn't one SDM downloads (not http, https, ftp or magnet)
 #, machine
-	MDM cannot download this address.	MDM ਇਸ ਪਤੇ ਨੂੰ ਡਾਊਨਲੋਡ ਨਹੀਂ ਕਰ ਸਕਦਾ।
+	SDM cannot download this address.	SDM ਇਸ ਪਤੇ ਨੂੰ ਡਾਊਨਲੋਡ ਨਹੀਂ ਕਰ ਸਕਦਾ।
 #. text in remote.rs
 #. remote control page (on a phone): adding a download failed
 #, machine
-	MDM could not add it.	MDM ਇਸਨੂੰ ਸ਼ਾਮਲ ਨਹੀਂ ਕਰ ਸਕਿਆ।
+	SDM could not add it.	SDM ਇਸਨੂੰ ਸ਼ਾਮਲ ਨਹੀਂ ਕਰ ਸਕਿਆ।
 #. text in remote.rs
 #. remote control page (on a phone): an action failed
 #, machine
-	MDM could not do it.	MDM ਇਹ ਨਹੀਂ ਕਰ ਸਕਿਆ।
+	SDM could not do it.	SDM ਇਹ ਨਹੀਂ ਕਰ ਸਕਿਆ।
 #. text in remote.rs
-#. remote control page (on a phone): MDM can't be reached while pairing
+#. remote control page (on a phone): SDM can't be reached while pairing
 #, machine
-	MDM does not answer. Check that it is running and on the same network.	MDM ਜਵਾਬ ਨਹੀਂ ਦੇ ਰਿਹਾ। ਜਾਂਚ ਕਰੋ ਕਿ ਇਹ ਚੱਲ ਰਿਹਾ ਹੈ ਅਤੇ ਉਸੇ ਨੈੱਟਵਰਕ 'ਤੇ ਹੈ।
+	SDM does not answer. Check that it is running and on the same network.	SDM ਜਵਾਬ ਨਹੀਂ ਦੇ ਰਿਹਾ। ਜਾਂਚ ਕਰੋ ਕਿ ਇਹ ਚੱਲ ਰਿਹਾ ਹੈ ਅਤੇ ਉਸੇ ਨੈੱਟਵਰਕ 'ਤੇ ਹੈ।
 #. text in remote.rs
-#. remote control page (on a phone): MDM can't be reached now; the page keeps trying by itself
+#. remote control page (on a phone): SDM can't be reached now; the page keeps trying by itself
 #. the trailing ... means it is still going on: keep it
 #, machine
-	MDM does not answer. Trying again...	MDM ਜਵਾਬ ਨਹੀਂ ਦੇ ਰਿਹਾ। ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰ ਰਿਹਾ ਹੈ...
+	SDM does not answer. Trying again...	SDM ਜਵਾਬ ਨਹੀਂ ਦੇ ਰਿਹਾ। ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰ ਰਿਹਾ ਹੈ...
 #. text in remote.rs
-#. remote control page (on a phone): no pairing code is shown in MDM; "Pair a device" is MDM's button
+#. remote control page (on a phone): no pairing code is shown in SDM; "Pair a device" is SDM's button
 #, machine
-	MDM shows no code now. Click Pair a device there first.	MDM ਹੁਣ ਕੋਈ ਕੋਡ ਨਹੀਂ ਦਿਖਾ ਰਿਹਾ। ਪਹਿਲਾਂ ਉੱਥੇ ਇੱਕ ਡਿਵਾਈਸ ਪੇਅਰ ਕਰੋ 'ਤੇ ਕਲਿੱਕ ਕਰੋ।
+	SDM shows no code now. Click Pair a device there first.	SDM ਹੁਣ ਕੋਈ ਕੋਡ ਨਹੀਂ ਦਿਖਾ ਰਿਹਾ। ਪਹਿਲਾਂ ਉੱਥੇ ਇੱਕ ਡਿਵਾਈਸ ਪੇਅਰ ਕਰੋ 'ਤੇ ਕਲਿੱਕ ਕਰੋ।
 #. text in whereis.rs
 #. how far a download's server is, by its round trip (60 to 150 ms)
 #, machine
@@ -2722,7 +2722,7 @@
 #, machine
 	Minimize	ਛੋਟਾ ਕਰੋ
 #. text in the Options window
-#. checkbox: the Minimize button hides MDM's windows to the notification area (system tray) instead of the taskbar
+#. checkbox: the Minimize button hides SDM's windows to the notification area (system tray) instead of the taskbar
 #, machine
 	Minimize to the notification area	ਸੂਚਨਾ ਖੇਤਰ ਵਿੱਚ ਛੋਟਾ ਕਰੋ
 #. text in rssdlg.rs; text in the Add torrent window
@@ -2736,58 +2736,58 @@
 	Missing	ਬਾਕੀ
 #. message or event log entry in the main window; window title in a dialog box; text in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #, machine
-	Mister Download Manager	Mister Download Manager
+	Sedot Download Manager	Sedot Download Manager
 #. text in unix.rs
 #. Linux, at start, on the terminal and in a message box: a library the window needs isn't installed; {libraries} = its file names (libxkbcommon-x11.so.0…), left as they are
 #, machine
-	Mister Download Manager can't open its window: this system lacks {libraries}.	Mister Download Manager ਆਪਣੀ ਵਿੰਡੋ ਨਹੀਂ ਖੋਲ੍ਹ ਸਕਦਾ: ਇਸ ਸਿਸਟਮ ਵਿੱਚ {libraries} ਦੀ ਘਾਟ ਹੈ।
+	Sedot Download Manager can't open its window: this system lacks {libraries}.	Sedot Download Manager ਆਪਣੀ ਵਿੰਡੋ ਨਹੀਂ ਖੋਲ੍ਹ ਸਕਦਾ: ਇਸ ਸਿਸਟਮ ਵਿੱਚ {libraries} ਦੀ ਘਾਟ ਹੈ।
 #. text in crashui.rs
-#. crash report window heading: MDM crashed and is gone
+#. crash report window heading: SDM crashed and is gone
 #, machine
-	Mister Download Manager closed unexpectedly	Mister Download Manager ਅਚਾਨਕ ਬੰਦ ਹੋ ਗਿਆ
+	Sedot Download Manager closed unexpectedly	Sedot Download Manager ਅਚਾਨਕ ਬੰਦ ਹੋ ਗਿਆ
 #. window title in the Options window
 #, machine
-	Mister Download Manager Configuration	Mister Download Manager ਸੰਰਚਨਾ
+	Sedot Download Manager Configuration	Sedot Download Manager ਸੰਰਚਨਾ
 #. text in crashui.rs
 #, machine
-	Mister Download Manager crash report	Mister Download Manager ਕ੍ਰੈਸ਼ ਰਿਪੋਰਟ
+	Sedot Download Manager crash report	Sedot Download Manager ਕ੍ਰੈਸ਼ ਰਿਪੋਰਟ
 #. text in crashui.rs
-#. crash report window heading: an internal error, MDM still running
+#. crash report window heading: an internal error, SDM still running
 #, machine
-	Mister Download Manager hit an internal error	Mister Download Manager ਵਿੱਚ ਅੰਦਰੂਨੀ ਗਲਤੀ ਆਈ
+	Sedot Download Manager hit an internal error	Sedot Download Manager ਵਿੱਚ ਅੰਦਰੂਨੀ ਗਲਤੀ ਆਈ
 #. text in wake.rs
 #. why the computer isn't going to sleep, in the system's list of programs that keep it awake (Windows' power requests, Linux's inhibitors)
 #, machine
-	Mister Download Manager is downloading	Mister Download Manager ਡਾਊਨਲੋਡ ਕਰ ਰਿਹਾ ਹੈ
+	Sedot Download Manager is downloading	Sedot Download Manager ਡਾਊਨਲੋਡ ਕਰ ਰਿਹਾ ਹੈ
 #. text in wake.rs
 #. why the computer isn't going to sleep, in the system's list of programs that keep it awake; {queue} = the queue's name
 #. {queue} = a queue name such as "Main queue" (keep the braces as they are)
 #, machine
-	Mister Download Manager is running the queue "{queue}"	Mister Download Manager ਕਤਾਰ "{queue}" ਚਲਾ ਰਿਹਾ ਹੈ
+	Sedot Download Manager is running the queue "{queue}"	Sedot Download Manager ਕਤਾਰ "{queue}" ਚਲਾ ਰਿਹਾ ਹੈ
 #. text in crashui.rs
-#. crash report window heading: MDM's window doesn't answer (frozen)
+#. crash report window heading: SDM's window doesn't answer (frozen)
 #, machine
-	Mister Download Manager stopped responding	Mister Download Manager ਨੇ ਜਵਾਬ ਦੇਣਾ ਬੰਦ ਕਰ ਦਿੱਤਾ
+	Sedot Download Manager stopped responding	Sedot Download Manager ਨੇ ਜਵਾਬ ਦੇਣਾ ਬੰਦ ਕਰ ਦਿੱਤਾ
 #. text in crashui.rs
 #, machine
-	Mister Download Manager stopped responding for a while	Mister Download Manager ਨੇ ਕੁਝ ਸਮੇਂ ਲਈ ਜਵਾਬ ਦੇਣਾ ਬੰਦ ਕਰ ਦਿੱਤਾ
+	Sedot Download Manager stopped responding for a while	Sedot Download Manager ਨੇ ਕੁਝ ਸਮੇਂ ਲਈ ਜਵਾਬ ਦੇਣਾ ਬੰਦ ਕਰ ਦਿੱਤਾ
 #. text in the Options window
 #. \\n starts a new line: break lines where they fit the translation
 #, machine
-	Mister Download Manager writes every connection straight into the final\nfile (a sparse part file next to it), so no temporary directory and no\nassembling step are needed.	Mister Download Manager ਹਰੇਕ ਕਨੈਕਸ਼ਨ ਨੂੰ ਸਿੱਧਾ ਅੰਤਿਮ ਫਾਈਲ\n(ਇਸਦੇ ਨਾਲ ਇੱਕ ਸਪਾਰਸ ਪਾਰਟ ਫਾਈਲ) ਵਿੱਚ ਲਿਖਦਾ ਹੈ, ਇਸਲਈ ਕਿਸੇ ਅਸਥਾਈ ਡਾਇਰੈਕਟਰੀ ਅਤੇ ਕਿਸੇ\nਅਸੈਂਬਲਿੰਗ ਕਦਮ ਦੀ ਲੋੜ ਨਹੀਂ ਹੈ।
+	Sedot Download Manager writes every connection straight into the final\nfile (a sparse part file next to it), so no temporary directory and no\nassembling step are needed.	Sedot Download Manager ਹਰੇਕ ਕਨੈਕਸ਼ਨ ਨੂੰ ਸਿੱਧਾ ਅੰਤਿਮ ਫਾਈਲ\n(ਇਸਦੇ ਨਾਲ ਇੱਕ ਸਪਾਰਸ ਪਾਰਟ ਫਾਈਲ) ਵਿੱਚ ਲਿਖਦਾ ਹੈ, ਇਸਲਈ ਕਿਸੇ ਅਸਥਾਈ ਡਾਇਰੈਕਟਰੀ ਅਤੇ ਕਿਸੇ\nਅਸੈਂਬਲਿੰਗ ਕਦਮ ਦੀ ਲੋੜ ਨਹੀਂ ਹੈ।
 #. text in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #. {version} = a version number (keep the braces as they are)
 #, machine
-	Mister Download Manager {version} is available (released {date}).	Mister Download Manager {version} ਉਪਲਬਧ ਹੈ ({date} ਨੂੰ ਜਾਰੀ ਕੀਤਾ ਗਿਆ)।
+	Sedot Download Manager {version} is available (released {date}).	Sedot Download Manager {version} ਉਪਲਬਧ ਹੈ ({date} ਨੂੰ ਜਾਰੀ ਕੀਤਾ ਗਿਆ)।
 #. text in helpers.rs
-#. Video helpers: {version} = the version of MDM's own copy
+#. Video helpers: {version} = the version of SDM's own copy
 #. {version} = a version number (keep the braces as they are)
 #, machine
-	Mister Download Manager's own copy, version {version}	Mister Download Manager ਦੀ ਆਪਣੀ ਕਾਪੀ, ਵਰਜਨ {version}
+	Sedot Download Manager's own copy, version {version}	Sedot Download Manager ਦੀ ਆਪਣੀ ਕਾਪੀ, ਵਰਜਨ {version}
 #. text in unix.rs
 #. Linux, at start, on the terminal: the libraries an X11 window needs aren't installed, so the window opens through Wayland instead, where menus can't be placed under what was clicked; {libraries} = their file names, left as they are
 #, machine
-	Mister Download Manager's X11 window needs {libraries}, which this system lacks: it opens on Wayland instead, where its menus may open away from their titles.	Mister Download Manager ਦੀ X11 ਵਿੰਡੋ ਨੂੰ {libraries} ਦੀ ਲੋੜ ਹੈ, ਜੋ ਇਸ ਸਿਸਟਮ ਵਿੱਚ ਨਹੀਂ ਹਨ: ਇਹ ਇਸ ਦੀ ਬਜਾਏ Wayland 'ਤੇ ਖੁੱਲ੍ਹਦੀ ਹੈ, ਜਿੱਥੇ ਇਸਦੇ ਮੀਨੂ ਆਪਣੇ ਸਿਰਲੇਖਾਂ ਤੋਂ ਦੂਰ ਖੁੱਲ੍ਹ ਸਕਦੇ ਹਨ।
+	Sedot Download Manager's X11 window needs {libraries}, which this system lacks: it opens on Wayland instead, where its menus may open away from their titles.	Sedot Download Manager ਦੀ X11 ਵਿੰਡੋ ਨੂੰ {libraries} ਦੀ ਲੋੜ ਹੈ, ਜੋ ਇਸ ਸਿਸਟਮ ਵਿੱਚ ਨਹੀਂ ਹਨ: ਇਹ ਇਸ ਦੀ ਬਜਾਏ Wayland 'ਤੇ ਖੁੱਲ੍ਹਦੀ ਹੈ, ਜਿੱਥੇ ਇਸਦੇ ਮੀਨੂ ਆਪਣੇ ਸਿਰਲੇਖਾਂ ਤੋਂ ਦੂਰ ਖੁੱਲ੍ਹ ਸਕਦੇ ਹਨ।
 #. text in the Scheduler window
 #. Monday, as short as a calendar's column head (two letters in English)
 #, machine
@@ -2871,7 +2871,7 @@
 #, machine
 	Mozambique	ਮੋਜ਼ਾਮਬੀਕ
 #. text in the Download video window
-#. why "Embed chapters" is greyed in Download video: the choice is a sound converted to MP3, Opus or FLAC, which MDM saves without chapters
+#. why "Embed chapters" is greyed in Download video: the choice is a sound converted to MP3, Opus or FLAC, which SDM saves without chapters
 #, machine
 	MP3, Opus and FLAC files are saved without chapters	MP3, Opus ਅਤੇ FLAC ਫ਼ਾਈਲਾਂ ਅਧਿਆਇਆਂ ਤੋਂ ਬਿਨਾਂ ਸੇਵ ਕੀਤੀਆਂ ਜਾਂਦੀਆਂ ਹਨ
 #. text in errors.rs
@@ -2996,11 +2996,11 @@
 #, machine
 	No addresses yet	ਕੋਈ ਪਤੇ ਨਹੀਂ ਹਨ
 #. text in extension.rs
-#. a check of Test browser integration (Linux, macOS): MDM found no browser it can connect to (one installed as a Flatpak isn't found)
+#. a check of Test browser integration (Linux, macOS): SDM found no browser it can connect to (one installed as a Flatpak isn't found)
 #, machine
-	No browser MDM can connect to was found	ਕੋਈ ਬ੍ਰਾਊਜ਼ਰ ਨਹੀਂ ਮਿਲਿਆ ਜਿਸ ਨਾਲ MDM ਕਨੈਕਟ ਕਰ ਸਕੇ
+	No browser SDM can connect to was found	ਕੋਈ ਬ੍ਰਾਊਜ਼ਰ ਨਹੀਂ ਮਿਲਿਆ ਜਿਸ ਨਾਲ SDM ਕਨੈਕਟ ਕਰ ਸਕੇ
 #. text in extension.rs
-#. a check of Test browser integration: no browser's extension has reached MDM
+#. a check of Test browser integration: no browser's extension has reached SDM
 #, machine
 	No browser's extension has connected yet	ਕਿਸੇ ਵੀ ਬ੍ਰਾਊਜ਼ਰ ਦੀ ਐਕਸਟੈਂਸ਼ਨ ਅਜੇ ਕਨੈਕਟ ਨਹੀਂ ਹੋਈ ਹੈ
 #. text in torrent downloads
@@ -3069,9 +3069,9 @@
 #, machine
 	No proxy/socks	ਕੋਈ ਪ੍ਰੌਕਸੀ/SOCKS ਨਹੀਂ
 #. text in the Options window
-#. Options → Accounts: no system keyring/keychain answered (none runs, e.g. a desktop without one), so the sign-ins stay in MDM's settings folder, which only the user's account may read
+#. Options → Accounts: no system keyring/keychain answered (none runs, e.g. a desktop without one), so the sign-ins stay in SDM's settings folder, which only the user's account may read
 #, machine
-	No system keyring answered, so sign-ins and passwords are kept in MDM's settings, which only you can read.	ਕੋਈ ਸਿਸਟਮ ਕੀਰਿੰਗ ਜਵਾਬ ਨਹੀਂ ਦਿੱਤਾ, ਇਸ ਲਈ ਸਾਈਨ-ਇਨ ਅਤੇ ਪਾਸਵਰਡ MDM ਦੀਆਂ ਸੈਟਿੰਗਾਂ ਵਿੱਚ ਰੱਖੇ ਜਾਂਦੇ ਹਨ, ਜਿਨ੍ਹਾਂ ਨੂੰ ਸਿਰਫ਼ ਤੁਸੀਂ ਪੜ੍ਹ ਸਕਦੇ ਹੋ।
+	No system keyring answered, so sign-ins and passwords are kept in SDM's settings, which only you can read.	ਕੋਈ ਸਿਸਟਮ ਕੀਰਿੰਗ ਜਵਾਬ ਨਹੀਂ ਦਿੱਤਾ, ਇਸ ਲਈ ਸਾਈਨ-ਇਨ ਅਤੇ ਪਾਸਵਰਡ SDM ਦੀਆਂ ਸੈਟਿੰਗਾਂ ਵਿੱਚ ਰੱਖੇ ਜਾਂਦੇ ਹਨ, ਜਿਨ੍ਹਾਂ ਨੂੰ ਸਿਰਫ਼ ਤੁਸੀਂ ਪੜ੍ਹ ਸਕਦੇ ਹੋ।
 #. message or event log entry in the main window
 #. event log entry: Add trackers changed nothing, the torrent had them all
 #, machine
@@ -3202,7 +3202,7 @@
 #. text in the Options window
 #. Options → Remote → Status: the remote control is off
 #, machine
-	Off: nothing on the network can reach MDM.	ਬੰਦ: ਨੈੱਟਵਰਕ 'ਤੇ ਕੋਈ ਵੀ MDM ਤੱਕ ਨਹੀਂ ਪਹੁੰਚ ਸਕਦਾ।
+	Off: nothing on the network can reach SDM.	ਬੰਦ: ਨੈੱਟਵਰਕ 'ਤੇ ਕੋਈ ਵੀ SDM ਤੱਕ ਨਹੀਂ ਪਹੁੰਚ ਸਕਦਾ।
 #. text in the Options window
 #, machine
 	Offer to download links copied to the clipboard	ਕਲਿੱਪਬੋਰਡ 'ਤੇ ਕਾਪੀ ਕੀਤੇ ਲਿੰਕਾਂ ਨੂੰ ਡਾਊਨਲੋਡ ਕਰਨ ਦੀ ਪੇਸ਼ਕਸ਼ ਕਰੋ
@@ -3229,7 +3229,7 @@
 #, machine
 	On macOS, only an administrator can schedule a wake	macOS 'ਤੇ, ਸਿਰਫ਼ ਇੱਕ ਪ੍ਰਬੰਧਕ ਹੀ ਵੇਕ ਨੂੰ ਤਹਿ ਕਰ ਸਕਦਾ ਹੈ
 #. text in remote.rs
-#. remote control page (on a phone): how to pair; "Options", "Remote" and "Pair a device" are MDM's dialog, tab and button
+#. remote control page (on a phone): how to pair; "Options", "Remote" and "Pair a device" are SDM's dialog, tab and button
 #, machine
 	On the computer, open Options, then Remote, and click Pair a device. Enter the code it shows.	ਕੰਪਿਊਟਰ 'ਤੇ, ਵਿਕਲਪ ਖੋਲ੍ਹੋ, ਫਿਰ ਰਿਮੋਟ, ਅਤੇ ਇੱਕ ਡਿਵਾਈਸ ਪੇਅਰ ਕਰੋ 'ਤੇ ਕਲਿੱਕ ਕਰੋ। ਇਹ ਜੋ ਕੋਡ ਦਿਖਾਉਂਦਾ ਹੈ, ਉਹ ਦਾਖਲ ਕਰੋ।
 #. text in the Options window
@@ -3278,9 +3278,9 @@
 #. text in the Options window
 #. Options → Remote, at the bottom of the page
 #, machine
-	Only paired devices see or change anything. The first time, the phone's browser warns about MDM's own certificate: its fingerprint is the one above.	ਸਿਰਫ਼ ਪੇਅਰ ਕੀਤੀਆਂ ਡਿਵਾਈਸਾਂ ਹੀ ਕੁਝ ਵੀ ਦੇਖ ਜਾਂ ਬਦਲ ਸਕਦੀਆਂ ਹਨ। ਪਹਿਲੀ ਵਾਰ, ਫ਼ੋਨ ਦਾ ਬ੍ਰਾਊਜ਼ਰ MDM ਦੇ ਆਪਣੇ ਸਰਟੀਫਿਕੇਟ ਬਾਰੇ ਚੇਤਾਵਨੀ ਦਿੰਦਾ ਹੈ: ਇਸਦਾ ਫਿੰਗਰਪ੍ਰਿੰਟ ਉੱਪਰ ਦਿੱਤਾ ਗਿਆ ਹੈ।
+	Only paired devices see or change anything. The first time, the phone's browser warns about SDM's own certificate: its fingerprint is the one above.	ਸਿਰਫ਼ ਪੇਅਰ ਕੀਤੀਆਂ ਡਿਵਾਈਸਾਂ ਹੀ ਕੁਝ ਵੀ ਦੇਖ ਜਾਂ ਬਦਲ ਸਕਦੀਆਂ ਹਨ। ਪਹਿਲੀ ਵਾਰ, ਫ਼ੋਨ ਦਾ ਬ੍ਰਾਊਜ਼ਰ SDM ਦੇ ਆਪਣੇ ਸਰਟੀਫਿਕੇਟ ਬਾਰੇ ਚੇਤਾਵਨੀ ਦਿੰਦਾ ਹੈ: ਇਸਦਾ ਫਿੰਗਰਪ੍ਰਿੰਟ ਉੱਪਰ ਦਿੱਤਾ ਗਿਆ ਹੈ।
 #. text in playlistdlg.rs
-#. in Download video, a list longer than MDM lists: only its first {n} videos are shown
+#. in Download video, a list longer than SDM lists: only its first {n} videos are shown
 #. {n} = a number (keep the braces as they are)
 #, machine
 	Only the first {n} videos are listed.	ਸਿਰਫ਼ ਪਹਿਲੇ {n} ਵੀਡੀਓ ਸੂਚੀਬੱਧ ਹਨ।
@@ -3305,10 +3305,10 @@
 	Open in browser	ਬ੍ਰਾਊਜ਼ਰ ਵਿੱਚ ਖੋਲ੍ਹੋ
 #. checkbox in the Add torrent window
 #, machine
-	Open magnet links and .torrent files with Mister Download Manager	Mister Download Manager ਨਾਲ ਮੈਗਨੈੱਟ ਲਿੰਕ ਅਤੇ .torrent ਫ਼ਾਈਲਾਂ ਖੋਲ੍ਹੋ
+	Open magnet links and .torrent files with Sedot Download Manager	Sedot Download Manager ਨਾਲ ਮੈਗਨੈੱਟ ਲਿੰਕ ਅਤੇ .torrent ਫ਼ਾਈਲਾਂ ਖੋਲ੍ਹੋ
 #. text in the tray icon's menu
 #, machine
-	Open Mister Download Manager	Mister Download Manager ਖੋਲ੍ਹੋ
+	Open Sedot Download Manager	Sedot Download Manager ਖੋਲ੍ਹੋ
 #. text in extension.rs
 #. step 2 of turning on the Safari extension; Cmd is the Command key
 #, machine
@@ -3364,7 +3364,7 @@
 #, machine
 	Page address	ਪੰਨੇ ਦਾ ਪਤਾ
 #. text in remote.rs
-#. remote control page (on a phone): button: pair this phone with MDM
+#. remote control page (on a phone): button: pair this phone with SDM
 #, machine
 	Pair	ਪੇਅਰ ਕਰੋ
 #. window title in the Options window
@@ -3379,7 +3379,7 @@
 #. text in remote.rs
 #. remote control page (on a phone): title of the pairing screen
 #, machine
-	Pair with Mister Download Manager	Mister Download Manager ਨਾਲ ਜੋੜਾ ਬਣਾਓ
+	Pair with Sedot Download Manager	Sedot Download Manager ਨਾਲ ਜੋੜਾ ਬਣਾਓ
 #. text in the Options window
 #. column title: when the device was paired
 #, machine
@@ -3667,11 +3667,11 @@
 #, machine
 	Remember this path for "{category}" category	"{category}" ਸ਼੍ਰੇਣੀ ਲਈ ਇਹ ਮਾਰਗ ਯਾਦ ਰੱਖੋ
 #. text in the Options window
-#. tab title: control MDM from a phone or another computer on the local network
+#. tab title: control SDM from a phone or another computer on the local network
 #, machine
 	Remote	ਰਿਮੋਟ
 #. text in the Options window
-#. Options page title: control MDM from a phone or another computer on the local network
+#. Options page title: control SDM from a phone or another computer on the local network
 #, machine
 	Remote control	ਰਿਮੋਟ ਕੰਟਰੋਲ
 #. button in the Options window; text in remote.rs; button in rssdlg.rs
@@ -3701,9 +3701,9 @@
 #, machine
 	Replace asterisk to	ਤਾਰੇ ਨੂੰ ਇਸ ਨਾਲ ਬਦਲੋ
 #. text in crashui.rs
-#. crash report window button: start MDM again
+#. crash report window button: start SDM again
 #, machine
-	Restart MDM	MDM ਨੂੰ ਮੁੜ-ਚਾਲੂ ਕਰੋ
+	Restart SDM	SDM ਨੂੰ ਮੁੜ-ਚਾਲੂ ਕਰੋ
 #. button in the Options window; text in the Options window
 #, machine
 	Restore the built-in categories	ਬਿਲਟ-ਇਨ ਸ਼੍ਰੇਣੀਆਂ ਨੂੰ ਬਹਾਲ ਕਰੋ
@@ -3883,7 +3883,7 @@
 	Select or unselect the download with the dotted outline	ਬਿੰਦੀਦਾਰ ਰੂਪਰੇਖਾ ਵਾਲਾ ਡਾਊਨਲੋਡ ਚੁਣੋ ਜਾਂ ਅਣਚੁਣੋ
 #. group box title in the Options window
 #, machine
-	Select sounds for Mister Download Manager events	Mister Download Manager ਦੇ ਇਵੈਂਟਾਂ ਲਈ ਆਵਾਜ਼ਾਂ ਚੁਣੋ
+	Select sounds for Sedot Download Manager events	Sedot Download Manager ਦੇ ਇਵੈਂਟਾਂ ਲਈ ਆਵਾਜ਼ਾਂ ਚੁਣੋ
 #. what a keyboard shortcut does in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #, machine
 	Select the downloads in the box	ਬਾਕਸ ਵਿੱਚ ਡਾਊਨਲੋਡ ਚੁਣੋ
@@ -3906,7 +3906,7 @@
 #, machine
 	Send this to a friend:	ਇਹ ਕਿਸੇ ਦੋਸਤ ਨੂੰ ਭੇਜੋ:
 #. text in the Options window
-#. Options → Accounts: checkbox: magnet links and .torrent files go to the first account's service, which downloads them; MDM then downloads the files from it (no connections to peers)
+#. Options → Accounts: checkbox: magnet links and .torrent files go to the first account's service, which downloads them; SDM then downloads the files from it (no connections to peers)
 #, machine
 	Send torrents and magnet links to the first account instead of to peers	ਟੋਰੈਂਟਾਂ ਅਤੇ ਮੈਗਨੈੱਟ ਲਿੰਕਾਂ ਨੂੰ ਪੀਅਰਾਂ ਦੀ ਬਜਾਏ ਪਹਿਲੇ ਖਾਤੇ 'ਤੇ ਭੇਜੋ
 #. text in countries.rs
@@ -3951,8 +3951,8 @@
 #, machine
 	Set file creation date as provided by the server	ਸਰਵਰ ਦੁਆਰਾ ਪ੍ਰਦਾਨ ਕੀਤੀ ਗਈ ਫਾਈਲ ਬਣਾਉਣ ਦੀ ਮਿਤੀ ਸੈੱਟ ਕਰੋ
 #. button in extension.rs; button in the Options window
-#. button in the browser extension's window: register MDM's helper with the browsers
-#. button in Test browser integration: register MDM's helper with the browsers
+#. button in the browser extension's window: register SDM's helper with the browsers
+#. button in Test browser integration: register SDM's helper with the browsers
 #, machine
 	Set it up	ਇਸਨੂੰ ਸੈੱਟਅੱਪ ਕਰੋ
 #. message or event log entry in the main window
@@ -4033,7 +4033,7 @@
 #, machine
 	Show download progress dialog when a download starts	ਜਦੋਂ ਡਾਊਨਲੋਡ ਸ਼ੁਰੂ ਹੁੰਦਾ ਹੈ ਤਾਂ ਡਾਊਨਲੋਡ ਪ੍ਰਗਤੀ ਡਾਇਲਾਗ ਦਿਖਾਓ
 #. button in a dialog box
-#. button: shows these downloads in MDM's list, selected
+#. button: shows these downloads in SDM's list, selected
 #, machine
 	Show in list	ਸੂਚੀ ਵਿੱਚ ਦਿਖਾਓ
 #. text in extension.rs
@@ -4111,7 +4111,7 @@
 	Sites Logins	ਸਾਈਟਾਂ ਦੇ ਲੌਗਇਨ
 #. text in helpers.rs
 #, machine
-	Sites send their best quality as separate video and audio, and ffmpeg joins them. On this system MDM uses yours: install ffmpeg with your package manager.	ਸਾਈਟਾਂ ਆਪਣੀ ਸਭ ਤੋਂ ਵਧੀਆ ਗੁਣਵੱਤਾ ਨੂੰ ਵੱਖਰੇ ਵੀਡੀਓ ਅਤੇ ਆਡੀਓ ਦੇ ਰੂਪ ਵਿੱਚ ਭੇਜਦੀਆਂ ਹਨ, ਅਤੇ ffmpeg ਉਹਨਾਂ ਨੂੰ ਜੋੜਦਾ ਹੈ। ਇਸ ਸਿਸਟਮ 'ਤੇ MDM ਤੁਹਾਡਾ ffmpeg ਵਰਤਦਾ ਹੈ: ਆਪਣੇ ਪੈਕੇਜ ਮੈਨੇਜਰ ਨਾਲ ffmpeg ਇੰਸਟਾਲ ਕਰੋ।
+	Sites send their best quality as separate video and audio, and ffmpeg joins them. On this system SDM uses yours: install ffmpeg with your package manager.	ਸਾਈਟਾਂ ਆਪਣੀ ਸਭ ਤੋਂ ਵਧੀਆ ਗੁਣਵੱਤਾ ਨੂੰ ਵੱਖਰੇ ਵੀਡੀਓ ਅਤੇ ਆਡੀਓ ਦੇ ਰੂਪ ਵਿੱਚ ਭੇਜਦੀਆਂ ਹਨ, ਅਤੇ ffmpeg ਉਹਨਾਂ ਨੂੰ ਜੋੜਦਾ ਹੈ। ਇਸ ਸਿਸਟਮ 'ਤੇ SDM ਤੁਹਾਡਾ ffmpeg ਵਰਤਦਾ ਹੈ: ਆਪਣੇ ਪੈਕੇਜ ਮੈਨੇਜਰ ਨਾਲ ffmpeg ਇੰਸਟਾਲ ਕਰੋ।
 #. text in helpers.rs
 #, machine
 	Sites send their best quality as separate video and audio. ffmpeg puts them together into one file that plays anywhere.	ਸਾਈਟਾਂ ਆਪਣੀ ਸਭ ਤੋਂ ਵਧੀਆ ਗੁਣਵੱਤਾ ਨੂੰ ਵੱਖਰੇ ਵੀਡੀਓ ਅਤੇ ਆਡੀਓ ਦੇ ਰੂਪ ਵਿੱਚ ਭੇਜਦੀਆਂ ਹਨ। ffmpeg ਉਹਨਾਂ ਨੂੰ ਇੱਕ ਫਾਈਲ ਵਿੱਚ ਇਕੱਠਾ ਕਰਦਾ ਹੈ ਜੋ ਕਿਤੇ ਵੀ ਚੱਲਦੀ ਹੈ।
@@ -4230,7 +4230,7 @@
 	Start download at	ਡਾਊਨਲੋਡ ਸ਼ੁਰੂ ਕਰੋ
 #. checkbox in the Scheduler window
 #, machine
-	Start download on Mister Download Manager startup	Mister Download Manager ਸ਼ੁਰੂ ਹੋਣ 'ਤੇ ਡਾਊਨਲੋਡ ਸ਼ੁਰੂ ਕਰੋ
+	Start download on Sedot Download Manager startup	Sedot Download Manager ਸ਼ੁਰੂ ਹੋਣ 'ਤੇ ਡਾਊਨਲੋਡ ਸ਼ੁਰੂ ਕਰੋ
 #. checkbox in the Options window
 #, machine
 	Start downloading immediately while displaying "Download File Info" dialog	"ਡਾਊਨਲੋਡ ਫਾਈਲ ਜਾਣਕਾਰੀ" ਡਾਇਲਾਗ ਦਿਖਾਉਂਦੇ ਹੋਏ ਤੁਰੰਤ ਡਾਊਨਲੋਡ ਕਰਨਾ ਸ਼ੁਰੂ ਕਰੋ
@@ -4261,11 +4261,11 @@
 #, machine
 	Started with gallery-dl {version}	gallery-dl {version} ਨਾਲ ਸ਼ੁਰੂ ਕੀਤਾ ਗਿਆ
 #. text in the Options window
-#. the same tooltip where no notification area (system tray) shows MDM's icon (some Linux desktops): its window starts minimized instead
+#. the same tooltip where no notification area (system tray) shows SDM's icon (some Linux desktops): its window starts minimized instead
 #, machine
 	Started with the computer, it starts minimized: no notification area shows its icon here	ਕੰਪਿਊਟਰ ਨਾਲ ਸ਼ੁਰੂ ਕੀਤਾ ਗਿਆ, ਇਹ ਛੋਟਾ ਹੋ ਕੇ ਸ਼ੁਰੂ ਹੁੰਦਾ ਹੈ: ਇੱਥੇ ਕੋਈ ਸੂਚਨਾ ਖੇਤਰ ਇਸਦਾ ਆਈਕਨ ਨਹੀਂ ਦਿਖਾਉਂਦਾ
 #. text in the Options window
-#. tooltip of "Launch Mister Download Manager on startup": started with the computer, MDM's window stays hidden, its icon in the notification area (system tray)
+#. tooltip of "Launch Sedot Download Manager on startup": started with the computer, SDM's window stays hidden, its icon in the notification area (system tray)
 #, machine
 	Started with the computer, it waits in the notification area	ਕੰਪਿਊਟਰ ਨਾਲ ਸ਼ੁਰੂ ਕੀਤਾ ਗਿਆ, ਇਹ ਸੂਚਨਾ ਖੇਤਰ ਵਿੱਚ ਉਡੀਕ ਕਰਦਾ ਹੈ
 #. message or event log entry in the main window
@@ -4373,7 +4373,7 @@
 	Sunday	ਐਤਵਾਰ
 #. link (opens a web page) in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #, machine
-	Support MDM on GitHub Sponsors	GitHub ਸਪਾਂਸਰਾਂ 'ਤੇ MDM ਦਾ ਸਮਰਥਨ ਕਰੋ
+	Support SDM on GitHub Sponsors	GitHub ਸਪਾਂਸਰਾਂ 'ਤੇ SDM ਦਾ ਸਮਰਥਨ ਕਰੋ
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -4484,17 +4484,17 @@
 #, machine
 	The best qualities, MP3, Opus and FLAC need ffmpeg: install it with your system's package manager (or Homebrew).	ਸਭ ਤੋਂ ਵਧੀਆ ਗੁਣਵੱਤਾ, MP3, Opus ਅਤੇ FLAC ਲਈ ffmpeg ਦੀ ਲੋੜ ਹੁੰਦੀ ਹੈ: ਇਸਨੂੰ ਆਪਣੇ ਸਿਸਟਮ ਦੇ ਪੈਕੇਜ ਮੈਨੇਜਰ (ਜਾਂ Homebrew) ਨਾਲ ਸਥਾਪਤ ਕਰੋ।
 #. text in the settings
-#. an error: the browser's VPN or proxy extension logs in to its proxy itself, and MDM can't; Options → Proxy / Socks → Network adapter is where an adapter can be chosen
+#. an error: the browser's VPN or proxy extension logs in to its proxy itself, and SDM can't; Options → Proxy / Socks → Network adapter is where an adapter can be chosen
 #, machine
 	the browser's proxy (a VPN or proxy extension) asks for a login only that extension has: use the VPN's own app, or choose its network adapter in Options → Proxy / Socks	ਬ੍ਰਾਊਜ਼ਰ ਦਾ ਪ੍ਰੌਕਸੀ (ਇੱਕ VPN ਜਾਂ ਪ੍ਰੌਕਸੀ ਐਕਸਟੈਂਸ਼ਨ) ਸਿਰਫ਼ ਉਸ ਐਕਸਟੈਂਸ਼ਨ ਕੋਲ ਮੌਜੂਦ ਲੌਗਇਨ ਲਈ ਪੁੱਛਦਾ ਹੈ: VPN ਦੀ ਆਪਣੀ ਐਪ ਦੀ ਵਰਤੋਂ ਕਰੋ, ਜਾਂ ਵਿਕਲਪ → ਪ੍ਰੌਕਸੀ / SOCKS ਵਿੱਚ ਇਸਦਾ ਨੈੱਟਵਰਕ ਅਡਾਪਟਰ ਚੁਣੋ
 #. text in extension.rs
-#. a check of Test browser integration: the browsers are pointed at a copy of MDM that was deleted (often one started from inside a zip); that copy's folder shows on the line under it
+#. a check of Test browser integration: the browsers are pointed at a copy of SDM that was deleted (often one started from inside a zip); that copy's folder shows on the line under it
 #, machine
 	The browsers are set up for a copy that is gone:	ਬ੍ਰਾਊਜ਼ਰ ਇੱਕ ਅਜਿਹੀ ਕਾਪੀ ਲਈ ਸੈੱਟ ਕੀਤੇ ਗਏ ਹਨ ਜੋ ਹੁਣ ਮੌਜੂਦ ਨਹੀਂ ਹੈ:
 #. text in extension.rs
-#. a check of Test browser integration: the browsers find MDM's helper program
+#. a check of Test browser integration: the browsers find SDM's helper program
 #, machine
-	The browsers can find Mister Download Manager	ਬ੍ਰਾਊਜ਼ਰ Mister Download Manager ਨੂੰ ਲੱਭ ਸਕਦੇ ਹਨ
+	The browsers can find Sedot Download Manager	ਬ੍ਰਾਊਜ਼ਰ Sedot Download Manager ਨੂੰ ਲੱਭ ਸਕਦੇ ਹਨ
 #. text in the Options window
 #. Options → Remote → Status: the settings were changed; they apply on OK
 #, machine
@@ -4521,7 +4521,7 @@
 #. text in the Scheduler window
 #. tooltip on the Scheduler's "Wake the computer to run this queue"
 #, machine
-	The computer is woken a minute before the start time and kept awake while the queue runs. Mister Download Manager has to be running (it can wait in the notification area).	ਕੰਪਿਊਟਰ ਨੂੰ ਸ਼ੁਰੂ ਹੋਣ ਦੇ ਸਮੇਂ ਤੋਂ ਇੱਕ ਮਿੰਟ ਪਹਿਲਾਂ ਜਗਾਇਆ ਜਾਂਦਾ ਹੈ ਅਤੇ ਕਤਾਰ ਚੱਲਣ ਤੱਕ ਜਗਾਇਆ ਰੱਖਿਆ ਜਾਂਦਾ ਹੈ। Mister Download Manager ਚੱਲਦਾ ਰਹਿਣਾ ਚਾਹੀਦਾ ਹੈ (ਇਹ ਸੂਚਨਾ ਖੇਤਰ ਵਿੱਚ ਉਡੀਕ ਕਰ ਸਕਦਾ ਹੈ)।
+	The computer is woken a minute before the start time and kept awake while the queue runs. Sedot Download Manager has to be running (it can wait in the notification area).	ਕੰਪਿਊਟਰ ਨੂੰ ਸ਼ੁਰੂ ਹੋਣ ਦੇ ਸਮੇਂ ਤੋਂ ਇੱਕ ਮਿੰਟ ਪਹਿਲਾਂ ਜਗਾਇਆ ਜਾਂਦਾ ਹੈ ਅਤੇ ਕਤਾਰ ਚੱਲਣ ਤੱਕ ਜਗਾਇਆ ਰੱਖਿਆ ਜਾਂਦਾ ਹੈ। Sedot Download Manager ਚੱਲਦਾ ਰਹਿਣਾ ਚਾਹੀਦਾ ਹੈ (ਇਹ ਸੂਚਨਾ ਖੇਤਰ ਵਿੱਚ ਉਡੀਕ ਕਰ ਸਕਦਾ ਹੈ)।
 #. text in the Scheduler window
 #. the Scheduler, under "Wake the computer to run this queue": when it will happen; {date} = e.g. 06/11/2026, {time} = e.g. 22:59:00
 #. {time} = a time of day (keep the braces as they are)
@@ -4576,7 +4576,7 @@
 #. message or event log entry in the main window
 #. {error} = an error message (keep the braces as they are)
 #, machine
-	The download list could not be saved: {error}. Changes are kept while MDM runs.	ਡਾਊਨਲੋਡ ਸੂਚੀ ਸੁਰੱਖਿਅਤ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕੀ: {error}। MDM ਚੱਲਣ ਤੱਕ ਤਬਦੀਲੀਆਂ ਰੱਖੀਆਂ ਜਾਂਦੀਆਂ ਹਨ।
+	The download list could not be saved: {error}. Changes are kept while SDM runs.	ਡਾਊਨਲੋਡ ਸੂਚੀ ਸੁਰੱਖਿਅਤ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕੀ: {error}। SDM ਚੱਲਣ ਤੱਕ ਤਬਦੀਲੀਆਂ ਰੱਖੀਆਂ ਜਾਂਦੀਆਂ ਹਨ।
 #. text in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #, machine
 	The download manager you already know, rebuilt to be faster. Free and open source under the GNU GPL, version 3 or later. Videos are found by yt-dlp; torrents run on librqbit.	ਉਹੀ ਡਾਊਨਲੋਡ ਮੈਨੇਜਰ ਜਿਸਨੂੰ ਤੁਸੀਂ ਜਾਣਦੇ ਹੋ, ਹੁਣ ਹੋਰ ਤੇਜ਼ ਕੀਤਾ ਗਿਆ ਹੈ। GNU GPL ਸੰਸਕਰਣ 3 ਜਾਂ ਇਸ ਤੋਂ ਬਾਅਦ ਦੇ ਤਹਿਤ ਮੁਫ਼ਤ ਅਤੇ ਓਪਨ ਸੋਰਸ। ਵੀਡੀਓ yt-dlp ਰਾਹੀਂ ਲੱਭੇ ਜਾਂਦੇ ਹਨ; ਟੋਰੈਂਟ librqbit 'ਤੇ ਚੱਲਦੇ ਹਨ।
@@ -4711,7 +4711,7 @@
 #. text in a dialog box
 #. \\n starts a new line: break lines where they fit the translation
 #, machine
-	The selected download is not complete. Are you sure you want to delete\nit from Mister Download Manager list of downloads?	ਚੁਣਿਆ ਗਿਆ ਡਾਊਨਲੋਡ ਪੂਰਾ ਨਹੀਂ ਹੋਇਆ ਹੈ। ਕੀ ਤੁਸੀਂ ਇਸਨੂੰ\nMister Download Manager ਦੀ ਡਾਊਨਲੋਡ ਸੂਚੀ ਵਿੱਚੋਂ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?
+	The selected download is not complete. Are you sure you want to delete\nit from Sedot Download Manager list of downloads?	ਚੁਣਿਆ ਗਿਆ ਡਾਊਨਲੋਡ ਪੂਰਾ ਨਹੀਂ ਹੋਇਆ ਹੈ। ਕੀ ਤੁਸੀਂ ਇਸਨੂੰ\nSedot Download Manager ਦੀ ਡਾਊਨਲੋਡ ਸੂਚੀ ਵਿੱਚੋਂ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?
 #. text in errors.rs
 #, machine
 	the server answered {status}	ਸਰਵਰ ਨੇ {status} ਦਾ ਜਵਾਬ ਦਿੱਤਾ
@@ -4731,9 +4731,9 @@
 #, machine
 	the server sent an unexpected part of the file ({detail})	ਸਰਵਰ ਨੇ ਫਾਈਲ ਦਾ ਇੱਕ ਅਣਕਿਆਸਿਆ ਹਿੱਸਾ ਭੇਜਿਆ ({detail})
 #. text in errors.rs
-#. why a download failed (#701): a file host answered with its own web page (a countdown before the link, a captcha, a sign-in) where the file was expected. The browser gets past it; MDM's browser extension then hands the real file back to MDM
+#. why a download failed (#701): a file host answered with its own web page (a countdown before the link, a captcha, a sign-in) where the file was expected. The browser gets past it; SDM's browser extension then hands the real file back to SDM
 #, machine
-	the site sent a web page instead of the file (a waiting page, a captcha or a sign-in): open the link in your browser, finish there, and the download comes back to MDM	ਸਾਈਟ ਨੇ ਫ਼ਾਈਲ ਦੀ ਬਜਾਏ ਵੈੱਬ ਪੰਨਾ ਭੇਜਿਆ (ਉਡੀਕ ਪੰਨਾ, ਕੈਪਚਾ ਜਾਂ ਸਾਈਨ-ਇਨ): ਲਿੰਕ ਨੂੰ ਬ੍ਰਾਊਜ਼ਰ ਵਿੱਚ ਖੋਲ੍ਹੋ, ਉੱਥੇ ਇਹ ਪੂਰਾ ਕਰੋ, ਅਤੇ ਡਾਊਨਲੋਡ MDM ਵਿੱਚ ਵਾਪਸ ਆ ਜਾਵੇਗਾ।
+	the site sent a web page instead of the file (a waiting page, a captcha or a sign-in): open the link in your browser, finish there, and the download comes back to SDM	ਸਾਈਟ ਨੇ ਫ਼ਾਈਲ ਦੀ ਬਜਾਏ ਵੈੱਬ ਪੰਨਾ ਭੇਜਿਆ (ਉਡੀਕ ਪੰਨਾ, ਕੈਪਚਾ ਜਾਂ ਸਾਈਨ-ਇਨ): ਲਿੰਕ ਨੂੰ ਬ੍ਰਾਊਜ਼ਰ ਵਿੱਚ ਖੋਲ੍ਹੋ, ਉੱਥੇ ਇਹ ਪੂਰਾ ਕਰੋ, ਅਤੇ ਡਾਊਨਲੋਡ SDM ਵਿੱਚ ਵਾਪਸ ਆ ਜਾਵੇਗਾ।
 #. text in the Download video window
 #. the Download video window: the site asked for a sign-in although the browser's extension passed the page's cookies
 #, machine
@@ -4757,15 +4757,15 @@
 #. text in errors.rs
 #. why a download failed: the site's security certificate (what proves a secure, HTTPS, site is the one it says) is past its end date. Browsers warn about the same site
 #, machine
-	the site's security certificate has expired, so MDM can't be sure it's the real site (your browser warns about it too)	ਸਾਈਟ ਦਾ ਸੁਰੱਖਿਆ ਸਰਟੀਫਿਕੇਟ ਮਿਆਦ ਪੁੱਗ ਗਈ ਹੈ, ਇਸ ਲਈ MDM ਯਕੀਨੀ ਨਹੀਂ ਹੋ ਸਕਦਾ ਕਿ ਇਹ ਅਸਲ ਸਾਈਟ ਹੈ (ਤੁਹਾਡਾ ਬ੍ਰਾਊਜ਼ਰ ਵੀ ਇਸ ਬਾਰੇ ਚੇਤਾਵਨੀ ਦਿੰਦਾ ਹੈ)
+	the site's security certificate has expired, so SDM can't be sure it's the real site (your browser warns about it too)	ਸਾਈਟ ਦਾ ਸੁਰੱਖਿਆ ਸਰਟੀਫਿਕੇਟ ਮਿਆਦ ਪੁੱਗ ਗਈ ਹੈ, ਇਸ ਲਈ SDM ਯਕੀਨੀ ਨਹੀਂ ਹੋ ਸਕਦਾ ਕਿ ਇਹ ਅਸਲ ਸਾਈਟ ਹੈ (ਤੁਹਾਡਾ ਬ੍ਰਾਊਜ਼ਰ ਵੀ ਇਸ ਬਾਰੇ ਚੇਤਾਵਨੀ ਦਿੰਦਾ ਹੈ)
 #. text in errors.rs
 #. why a download failed: the site's security certificate was made for other site names than the one in the address
 #, machine
-	the site's security certificate is for another site name, so MDM can't be sure it's the real site (your browser warns about it too)	ਸਾਈਟ ਦਾ ਸੁਰੱਖਿਆ ਸਰਟੀਫਿਕੇਟ ਪਤੇ ਵਿੱਚ ਦਿੱਤੇ ਨਾਮ ਤੋਂ ਇਲਾਵਾ ਹੋਰ ਸਾਈਟ ਨਾਮਾਂ ਲਈ ਹੈ, ਇਸ ਲਈ MDM ਯਕੀਨੀ ਨਹੀਂ ਹੋ ਸਕਦਾ ਕਿ ਇਹ ਅਸਲ ਸਾਈਟ ਹੈ (ਤੁਹਾਡਾ ਬ੍ਰਾਊਜ਼ਰ ਵੀ ਇਸ ਬਾਰੇ ਚੇਤਾਵਨੀ ਦਿੰਦਾ ਹੈ)
+	the site's security certificate is for another site name, so SDM can't be sure it's the real site (your browser warns about it too)	ਸਾਈਟ ਦਾ ਸੁਰੱਖਿਆ ਸਰਟੀਫਿਕੇਟ ਪਤੇ ਵਿੱਚ ਦਿੱਤੇ ਨਾਮ ਤੋਂ ਇਲਾਵਾ ਹੋਰ ਸਾਈਟ ਨਾਮਾਂ ਲਈ ਹੈ, ਇਸ ਲਈ SDM ਯਕੀਨੀ ਨਹੀਂ ਹੋ ਸਕਦਾ ਕਿ ਇਹ ਅਸਲ ਸਾਈਟ ਹੈ (ਤੁਹਾਡਾ ਬ੍ਰਾਊਜ਼ਰ ਵੀ ਇਸ ਬਾਰੇ ਚੇਤਾਵਨੀ ਦਿੰਦਾ ਹੈ)
 #. text in errors.rs
 #. why a download failed: the site's security certificate was signed by the site itself or by an issuer this computer doesn't trust. Browsers warn about the same site
 #, machine
-	the site's security certificate isn't trusted (it's self-signed or from an unknown issuer), so MDM can't be sure it's the real site (your browser warns about it too)	ਸਾਈਟ ਦਾ ਸੁਰੱਖਿਆ ਸਰਟੀਫਿਕੇਟ ਭਰੋਸੇਯੋਗ ਨਹੀਂ ਹੈ (ਇਹ ਸਵੈ-ਹਸਤਾਖਰਿਤ ਹੈ ਜਾਂ ਕਿਸੇ ਅਣਜਾਣ ਜਾਰੀਕਰਤਾ ਤੋਂ ਹੈ), ਇਸ ਲਈ MDM ਯਕੀਨੀ ਨਹੀਂ ਹੋ ਸਕਦਾ ਕਿ ਇਹ ਅਸਲ ਸਾਈਟ ਹੈ (ਤੁਹਾਡਾ ਬ੍ਰਾਊਜ਼ਰ ਵੀ ਇਸ ਬਾਰੇ ਚੇਤਾਵਨੀ ਦਿੰਦਾ ਹੈ)
+	the site's security certificate isn't trusted (it's self-signed or from an unknown issuer), so SDM can't be sure it's the real site (your browser warns about it too)	ਸਾਈਟ ਦਾ ਸੁਰੱਖਿਆ ਸਰਟੀਫਿਕੇਟ ਭਰੋਸੇਯੋਗ ਨਹੀਂ ਹੈ (ਇਹ ਸਵੈ-ਹਸਤਾਖਰਿਤ ਹੈ ਜਾਂ ਕਿਸੇ ਅਣਜਾਣ ਜਾਰੀਕਰਤਾ ਤੋਂ ਹੈ), ਇਸ ਲਈ SDM ਯਕੀਨੀ ਨਹੀਂ ਹੋ ਸਕਦਾ ਕਿ ਇਹ ਅਸਲ ਸਾਈਟ ਹੈ (ਤੁਹਾਡਾ ਬ੍ਰਾਊਜ਼ਰ ਵੀ ਇਸ ਬਾਰੇ ਚੇਤਾਵਨੀ ਦਿੰਦਾ ਹੈ)
 #. text in errors.rs
 #. why a download failed: the site's security certificate's validity hasn't begun; usually this computer's date or time is wrong
 #, machine
@@ -4773,11 +4773,11 @@
 #. text in errors.rs
 #. why a download failed: the site's security certificate was refused for another reason (a bad signature, a broken certificate)
 #, machine
-	the site's security certificate was refused, so MDM can't be sure it's the real site	ਸਾਈਟ ਦਾ ਸੁਰੱਖਿਆ ਸਰਟੀਫਿਕੇਟ ਰੱਦ ਕਰ ਦਿੱਤਾ ਗਿਆ ਸੀ, ਇਸ ਲਈ MDM ਯਕੀਨੀ ਨਹੀਂ ਹੋ ਸਕਦਾ ਕਿ ਇਹ ਅਸਲ ਸਾਈਟ ਹੈ
+	the site's security certificate was refused, so SDM can't be sure it's the real site	ਸਾਈਟ ਦਾ ਸੁਰੱਖਿਆ ਸਰਟੀਫਿਕੇਟ ਰੱਦ ਕਰ ਦਿੱਤਾ ਗਿਆ ਸੀ, ਇਸ ਲਈ SDM ਯਕੀਨੀ ਨਹੀਂ ਹੋ ਸਕਦਾ ਕਿ ਇਹ ਅਸਲ ਸਾਈਟ ਹੈ
 #. text in errors.rs
 #. why a download failed: the issuer of the site's security certificate took it back
 #, machine
-	the site's security certificate was revoked by its issuer, so MDM won't trust it	ਸਾਈਟ ਦਾ ਸੁਰੱਖਿਆ ਸਰਟੀਫਿਕੇਟ ਇਸਦੇ ਜਾਰੀਕਰਤਾ ਦੁਆਰਾ ਰੱਦ ਕਰ ਦਿੱਤਾ ਗਿਆ ਸੀ, ਇਸ ਲਈ MDM ਇਸ 'ਤੇ ਭਰੋਸਾ ਨਹੀਂ ਕਰੇਗਾ
+	the site's security certificate was revoked by its issuer, so SDM won't trust it	ਸਾਈਟ ਦਾ ਸੁਰੱਖਿਆ ਸਰਟੀਫਿਕੇਟ ਇਸਦੇ ਜਾਰੀਕਰਤਾ ਦੁਆਰਾ ਰੱਦ ਕਰ ਦਿੱਤਾ ਗਿਆ ਸੀ, ਇਸ ਲਈ SDM ਇਸ 'ਤੇ ਭਰੋਸਾ ਨਹੀਂ ਕਰੇਗਾ
 #. text in the Download video window
 #. the Download video window: the site's certificate is trusted neither by yt-dlp nor by the computer (asked again with the computer's certificates, #955); usually an antivirus or a proxy that reads secure (HTTPS) connections signs sites with a certificate of its own
 #, machine
@@ -4785,15 +4785,15 @@
 #. text in errors.rs
 #. why a download failed: the site's security certificate is made for other uses than a website (its "extended key usage" leaves out web servers)
 #, machine
-	the site's security certificate isn't made for websites, so MDM can't be sure it's the real site	ਸਾਈਟ ਦਾ ਸੁਰੱਖਿਆ ਸਰਟੀਫਿਕੇਟ ਵੈੱਬਸਾਈਟਾਂ ਲਈ ਨਹੀਂ ਬਣਾਇਆ ਗਿਆ ਹੈ, ਇਸ ਲਈ MDM ਇਹ ਯਕੀਨੀ ਨਹੀਂ ਕਰ ਸਕਦਾ ਕਿ ਇਹ ਅਸਲੀ ਸਾਈਟ ਹੈ
+	the site's security certificate isn't made for websites, so SDM can't be sure it's the real site	ਸਾਈਟ ਦਾ ਸੁਰੱਖਿਆ ਸਰਟੀਫਿਕੇਟ ਵੈੱਬਸਾਈਟਾਂ ਲਈ ਨਹੀਂ ਬਣਾਇਆ ਗਿਆ ਹੈ, ਇਸ ਲਈ SDM ਇਹ ਯਕੀਨੀ ਨਹੀਂ ਕਰ ਸਕਦਾ ਕਿ ਇਹ ਅਸਲੀ ਸਾਈਟ ਹੈ
 #. text in crashui.rs
 #. crash report window: the symbols couldn't be downloaded; the report still works
 #, machine
 	The symbols couldn't be fetched: some lines of the report show addresses instead of names (the developers can still read them).	ਚਿੰਨ੍ਹ ਪ੍ਰਾਪਤ ਨਹੀਂ ਕੀਤੇ ਜਾ ਸਕੇ: ਰਿਪੋਰਟ ਦੀਆਂ ਕੁਝ ਲਾਈਨਾਂ ਨਾਮਾਂ ਦੀ ਬਜਾਏ ਪਤੇ ਦਿਖਾਉਂਦੀਆਂ ਹਨ (ਡਿਵੈਲਪਰ ਅਜੇ ਵੀ ਉਹਨਾਂ ਨੂੰ ਪੜ੍ਹ ਸਕਦੇ ਹਨ)।
 #. text in the Options window
-#. Options → Accounts (Linux): the system keyring is locked (MDM never unlocks it: that would ask for its password), so the sign-ins stay in MDM's settings folder, which only the user's account may read
+#. Options → Accounts (Linux): the system keyring is locked (SDM never unlocks it: that would ask for its password), so the sign-ins stay in SDM's settings folder, which only the user's account may read
 #, machine
-	The system keyring is locked and MDM doesn't unlock it, so sign-ins and passwords are kept in MDM's settings, which only you can read.	ਸਿਸਟਮ ਕੀਰਿੰਗ ਲਾਕ ਹੈ ਅਤੇ MDM ਇਸਨੂੰ ਅਨਲਾਕ ਨਹੀਂ ਕਰਦਾ, ਇਸ ਲਈ ਸਾਈਨ-ਇਨ ਅਤੇ ਪਾਸਵਰਡ MDM ਦੀਆਂ ਸੈਟਿੰਗਾਂ ਵਿੱਚ ਰੱਖੇ ਜਾਂਦੇ ਹਨ, ਜਿਨ੍ਹਾਂ ਨੂੰ ਸਿਰਫ਼ ਤੁਸੀਂ ਪੜ੍ਹ ਸਕਦੇ ਹੋ।
+	The system keyring is locked and SDM doesn't unlock it, so sign-ins and passwords are kept in SDM's settings, which only you can read.	ਸਿਸਟਮ ਕੀਰਿੰਗ ਲਾਕ ਹੈ ਅਤੇ SDM ਇਸਨੂੰ ਅਨਲਾਕ ਨਹੀਂ ਕਰਦਾ, ਇਸ ਲਈ ਸਾਈਨ-ਇਨ ਅਤੇ ਪਾਸਵਰਡ SDM ਦੀਆਂ ਸੈਟਿੰਗਾਂ ਵਿੱਚ ਰੱਖੇ ਜਾਂਦੇ ਹਨ, ਜਿਨ੍ਹਾਂ ਨੂੰ ਸਿਰਫ਼ ਤੁਸੀਂ ਪੜ੍ਹ ਸਕਦੇ ਹੋ।
 #. text in the Options window
 #. Options → Connection → DNS: the operating system's own DNS (the default)
 #, machine
@@ -4825,7 +4825,7 @@
 #, machine
 	The web page from which this file was obtained:	ਵੈੱਬ ਪੰਨਾ ਜਿੱਥੋਂ ਇਹ ਫਾਈਲ ਪ੍ਰਾਪਤ ਕੀਤੀ ਗਈ ਸੀ:
 #. message or event log entry in the main window
-#. the kind of file View → Theme → Add a theme file lists: MDM's themes (TOML, JSON), Base16 schemes (YAML) and pywal's colors.json
+#. the kind of file View → Theme → Add a theme file lists: SDM's themes (TOML, JSON), Base16 schemes (YAML) and pywal's colors.json
 #, machine
 	Themes and colour schemes	ਥੀਮ ਅਤੇ ਰੰਗ ਸਕੀਮਾਂ
 #. text in the Options window
@@ -4883,7 +4883,7 @@
 #, machine
 	This computer only (127.0.0.1)	ਸਿਰਫ਼ ਇਹ ਕੰਪਿਊਟਰ (127.0.0.1)
 #. text in extension.rs
-#. a check of Test browser integration: MDM was started from inside a zip (or from the temporary folder), which is deleted after it quits, so it can't be connected to the browsers
+#. a check of Test browser integration: SDM was started from inside a zip (or from the temporary folder), which is deleted after it quits, so it can't be connected to the browsers
 #, machine
 	This copy runs from a temporary folder that will be deleted	ਇਹ ਕਾਪੀ ਇੱਕ ਅਸਥਾਈ ਫੋਲਡਰ ਤੋਂ ਚੱਲਦੀ ਹੈ ਜੋ ਮਿਟਾ ਦਿੱਤਾ ਜਾਵੇਗਾ
 #. text in the Scheduler window
@@ -4891,7 +4891,7 @@
 #, machine
 	This date has passed: the queue will not start	ਇਹ ਮਿਤੀ ਲੰਘ ਚੁੱਕੀ ਹੈ: ਕਤਾਰ ਸ਼ੁਰੂ ਨਹੀਂ ਹੋਵੇਗੀ
 #. text in remote.rs
-#. remote control page (on a phone): label of the box naming this phone (shown in MDM's list of paired devices)
+#. remote control page (on a phone): label of the box naming this phone (shown in SDM's list of paired devices)
 #, machine
 	This device's name	ਇਸ ਡਿਵਾਈਸ ਦਾ ਨਾਮ
 #. message or event log entry in the main window
@@ -5008,7 +5008,7 @@
 #. message or event log entry in the main window
 #. event log: a torrent goes through the user's debrid account, not to peers; {service} its name ("Real-Debrid")
 #, machine
-	Through {service}: the service downloads the torrent, then MDM its files	{service} ਰਾਹੀਂ: ਸੇਵਾ ਟੋਰੈਂਟ ਨੂੰ ਡਾਊਨਲੋਡ ਕਰਦੀ ਹੈ, ਫਿਰ MDM ਇਸ ਦੀਆਂ ਫ਼ਾਈਲਾਂ ਨੂੰ ਡਾਊਨਲੋਡ ਕਰਦਾ ਹੈ
+	Through {service}: the service downloads the torrent, then SDM its files	{service} ਰਾਹੀਂ: ਸੇਵਾ ਟੋਰੈਂਟ ਨੂੰ ਡਾਊਨਲੋਡ ਕਰਦੀ ਹੈ, ਫਿਰ SDM ਇਸ ਦੀਆਂ ਫ਼ਾਈਲਾਂ ਨੂੰ ਡਾਊਨਲੋਡ ਕਰਦਾ ਹੈ
 #. text in the Scheduler window
 #, machine
 	Thursday	ਵੀਰਵਾਰ
@@ -5154,7 +5154,7 @@
 #. text in extension.rs
 #. step 8 of turning on the Safari extension
 #, machine
-	Turn on "Mister Download Manager" and allow it on all websites.	“Mister Download Manager” ਨੂੰ ਚਾਲੂ ਕਰੋ ਅਤੇ ਇਸ ਨੂੰ ਸਾਰੀਆਂ ਵੈੱਬਸਾਈਟਾਂ 'ਤੇ ਇਜਾਜ਼ਤ ਦਿਓ।
+	Turn on "Sedot Download Manager" and allow it on all websites.	“Sedot Download Manager” ਨੂੰ ਚਾਲੂ ਕਰੋ ਅਤੇ ਇਸ ਨੂੰ ਸਾਰੀਆਂ ਵੈੱਬਸਾਈਟਾਂ 'ਤੇ ਇਜਾਜ਼ਤ ਦਿਓ।
 #. text in extension.rs
 #. step 4 of turning on the Safari extension; the quoted switch name is what Safari's settings show in this language: use Apple's own words for it, or keep the English name when unsure
 #, machine
@@ -5210,7 +5210,7 @@
 #. Options → Add an account: waiting while the user types the code at the service's page; {page} its address, {time} minutes:seconds left
 #. {time} = a time of day (keep the braces as they are)
 #, machine
-	Type this code at {page} and allow MDM; waiting for you (the code expires in {time}).	ਇਸ ਕੋਡ ਨੂੰ {page} 'ਤੇ ਟਾਈਪ ਕਰੋ ਅਤੇ MDM ਨੂੰ ਇਜਾਜ਼ਤ ਦਿਓ; ਤੁਹਾਡੀ ਉਡੀਕ ਕਰ ਰਿਹਾ ਹੈ (ਕੋਡ ਦੀ ਮਿਆਦ {time} ਵਿੱਚ ਖਤਮ ਹੋ ਜਾਂਦੀ ਹੈ)।
+	Type this code at {page} and allow SDM; waiting for you (the code expires in {time}).	ਇਸ ਕੋਡ ਨੂੰ {page} 'ਤੇ ਟਾਈਪ ਕਰੋ ਅਤੇ SDM ਨੂੰ ਇਜਾਜ਼ਤ ਦਿਓ; ਤੁਹਾਡੀ ਉਡੀਕ ਕਰ ਰਿਹਾ ਹੈ (ਕੋਡ ਦੀ ਮਿਆਦ {time} ਵਿੱਚ ਖਤਮ ਹੋ ਜਾਂਦੀ ਹੈ)।
 #. tooltip (why a control is greyed) in the Find window
 #. tooltip of the greyed Find button
 #, machine
@@ -5266,9 +5266,9 @@
 #, machine
 	unknown	ਅਣਜਾਣ
 #. text in finish.rs
-#. Snooze menu of the Download complete window: show no Download complete window until MDM is started again
+#. Snooze menu of the Download complete window: show no Download complete window until SDM is started again
 #, machine
-	Until MDM restarts	MDM ਦੇ ਮੁੜ ਚਾਲੂ ਹੋਣ ਤੱਕ
+	Until SDM restarts	SDM ਦੇ ਮੁੜ ਚਾਲੂ ਹੋਣ ਤੱਕ
 #. button in the Options window
 #. button (short): move the account up the list (accounts are asked in the list's order)
 #, machine
@@ -5310,9 +5310,9 @@
 #, machine
 	Use FTP in PASV mode	PASV ਮੋਡ ਵਿੱਚ FTP ਦੀ ਵਰਤੋਂ ਕਰੋ
 #. button in helpers.rs
-#. Video helpers: button: go back to the copy MDM downloads and checks itself
+#. Video helpers: button: go back to the copy SDM downloads and checks itself
 #, machine
-	Use MDM's own copy	MDM ਦੀ ਆਪਣੀ ਕਾਪੀ ਵਰਤੋ
+	Use SDM's own copy	SDM ਦੀ ਆਪਣੀ ਕਾਪੀ ਵਰਤੋ
 #. text in the Batch download window
 #. why Batch download's OK is greyed
 #, machine
@@ -5518,9 +5518,9 @@
 #, machine
 	Windows checks the files marked this way: SmartScreen before a program first runs, Office's Protected View before a document opens. Unticked, or under Windows' policy "Do not preserve zone information in file attachments", no download is marked.	Windows ਇਸ ਤਰ੍ਹਾਂ ਮਾਰਕ ਕੀਤੀਆਂ ਫ਼ਾਈਲਾਂ ਦੀ ਜਾਂਚ ਕਰਦਾ ਹੈ: ਕਿਸੇ ਪ੍ਰੋਗਰਾਮ ਦੇ ਪਹਿਲੀ ਵਾਰ ਚੱਲਣ ਤੋਂ ਪਹਿਲਾਂ SmartScreen, ਕਿਸੇ ਦਸਤਾਵੇਜ਼ ਦੇ ਖੁੱਲ੍ਹਣ ਤੋਂ ਪਹਿਲਾਂ Office ਦਾ Protected View। ਜੇ ਇਹ ਚੋਣ ਨਾ ਕੀਤੀ ਹੋਵੇ, ਜਾਂ Windows ਦੀ ਨੀਤੀ “ਫ਼ਾਈਲ ਅਟੈਚਮੈਂਟਾਂ ਵਿੱਚ ਜ਼ੋਨ ਜਾਣਕਾਰੀ ਸੁਰੱਖਿਅਤ ਨਾ ਰੱਖੋ” ਲਾਗੂ ਹੋਵੇ, ਤਾਂ ਕੋਈ ਡਾਊਨਲੋਡ ਮਾਰਕ ਨਹੀਂ ਹੁੰਦਾ।
 #. text in the Options window
-#. Options → Accounts: Windows Credential Manager didn't answer, so the sign-ins stay in MDM's settings, encrypted so that only this Windows account can read them
+#. Options → Accounts: Windows Credential Manager didn't answer, so the sign-ins stay in SDM's settings, encrypted so that only this Windows account can read them
 #, machine
-	Windows Credential Manager didn't answer, so sign-ins and passwords are kept in MDM's settings, encrypted for your Windows account.	Windows ਕ੍ਰੇਡੈਂਸ਼ੀਅਲ ਮੈਨੇਜਰ ਨੇ ਜਵਾਬ ਨਹੀਂ ਦਿੱਤਾ, ਇਸ ਲਈ ਸਾਈਨ-ਇਨ ਅਤੇ ਪਾਸਵਰਡ MDM ਦੀਆਂ ਸੈਟਿੰਗਾਂ ਵਿੱਚ ਰੱਖੇ ਜਾਂਦੇ ਹਨ, ਜੋ ਤੁਹਾਡੇ Windows ਖਾਤੇ ਲਈ ਐਨਕ੍ਰਿਪਟਡ ਹਨ।
+	Windows Credential Manager didn't answer, so sign-ins and passwords are kept in SDM's settings, encrypted for your Windows account.	Windows ਕ੍ਰੇਡੈਂਸ਼ੀਅਲ ਮੈਨੇਜਰ ਨੇ ਜਵਾਬ ਨਹੀਂ ਦਿੱਤਾ, ਇਸ ਲਈ ਸਾਈਨ-ਇਨ ਅਤੇ ਪਾਸਵਰਡ SDM ਦੀਆਂ ਸੈਟਿੰਗਾਂ ਵਿੱਚ ਰੱਖੇ ਜਾਂਦੇ ਹਨ, ਜੋ ਤੁਹਾਡੇ Windows ਖਾਤੇ ਲਈ ਐਨਕ੍ਰਿਪਟਡ ਹਨ।
 #. text in a dialog box
 #. why the computer could not be put to sleep (fills {error})
 #, machine
@@ -5552,7 +5552,7 @@
 #. text in remote.rs
 #. remote control page (on a phone): pairing failed and the code is void now
 #, machine
-	Wrong code. Show a new code in MDM and try again.	ਗਲਤ ਕੋਡ। MDM ਵਿੱਚ ਇੱਕ ਨਵਾਂ ਕੋਡ ਦਿਖਾਓ ਅਤੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।
+	Wrong code. Show a new code in SDM and try again.	ਗਲਤ ਕੋਡ। SDM ਵਿੱਚ ਇੱਕ ਨਵਾਂ ਕੋਡ ਦਿਖਾਓ ਅਤੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।
 #. text in remote.rs
 #. remote control page (on a phone): pairing failed; {n} = how many more codes may be tried
 #. {n} = a number (keep the braces as they are)
@@ -5584,9 +5584,9 @@
 #. text in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #. {version} = a version number (keep the braces as they are)
 #, machine
-	You have the latest version of Mister Download Manager ({version}).	ਤੁਹਾਡੇ ਕੋਲ Mister Download Manager ({version}) ਦਾ ਨਵੀਨਤਮ ਸੰਸਕਰਣ ਹੈ।
+	You have the latest version of Sedot Download Manager ({version}).	ਤੁਹਾਡੇ ਕੋਲ Sedot Download Manager ({version}) ਦਾ ਨਵੀਨਤਮ ਸੰਸਕਰਣ ਹੈ।
 #. text in the Help menu's windows (About, updates, shortcuts, Tell a friend)
-#. Check for updates, under the new version's line, when MDM was installed by the Linux system's package manager (pacman, ...), which MDM can't update itself
+#. Check for updates, under the new version's line, when SDM was installed by the Linux system's package manager (pacman, ...), which SDM can't update itself
 #. {version} = a version number (keep the braces as they are)
 #, machine
 	You have version {version}, from your system's package manager: update it there.	ਤੁਹਾਡੇ ਕੋਲ ਸਿਸਟਮ ਦੇ ਪੈਕੇਜ ਮੈਨੇਜਰ ਰਾਹੀਂ ਵਰਜਨ {version} ਇੰਸਟਾਲ ਹੈ: ਇਸਨੂੰ ਉੱਥੇ ਅੱਪਡੇਟ ਕਰੋ।
@@ -5600,7 +5600,7 @@
 	Your browser	ਤੁਹਾਡਾ ਬ੍ਰਾਊਜ਼ਰ
 #. text in the Options window
 #, machine
-	Your default browser isn't one MDM knows: a current Chrome's User-Agent	ਤੁਹਾਡਾ ਡਿਫੌਲਟ ਬ੍ਰਾਊਜ਼ਰ MDM ਨੂੰ ਪਤਾ ਨਹੀਂ: ਇੱਕ ਮੌਜੂਦਾ Chrome ਦਾ User-Agent
+	Your default browser isn't one SDM knows: a current Chrome's User-Agent	ਤੁਹਾਡਾ ਡਿਫੌਲਟ ਬ੍ਰਾਊਜ਼ਰ SDM ਨੂੰ ਪਤਾ ਨਹੀਂ: ਇੱਕ ਮੌਜੂਦਾ Chrome ਦਾ User-Agent
 #. text in the Options window
 #. tooltip; {browser} is a browser and its version, e.g. "Brave 157"
 #, machine
@@ -5614,10 +5614,10 @@
 #, machine
 	your Google account has no access to this file, or its owner turned off downloading	ਤੁਹਾਡੇ Google ਖਾਤੇ ਨੂੰ ਇਸ ਫ਼ਾਈਲ ਤੱਕ ਪਹੁੰਚ ਨਹੀਂ ਹੈ, ਜਾਂ ਇਸਦੇ ਮਾਲਕ ਨੇ ਡਾਊਨਲੋਡ ਕਰਨ 'ਤੇ ਪਾਬੰਦੀ ਲਾ ਦਿੱਤੀ ਹੈ
 #. text in helpers.rs
-#. Video helpers: the person's own gallery-dl is too old and not used; {version} = its version, {oldest} = the oldest MDM can use
+#. Video helpers: the person's own gallery-dl is too old and not used; {version} = its version, {oldest} = the oldest SDM can use
 #. {version} = a version number (keep the braces as they are)
 #, machine
-	Your own program ({version}) is too old: MDM needs {oldest} or newer	ਤੁਹਾਡਾ ਆਪਣਾ ਪ੍ਰੋਗਰਾਮ ({version}) ਬਹੁਤ ਪੁਰਾਣਾ ਹੈ: MDM ਨੂੰ {oldest} ਜਾਂ ਨਵਾਂ ਚਾਹੀਦਾ ਹੈ
+	Your own program ({version}) is too old: SDM needs {oldest} or newer	ਤੁਹਾਡਾ ਆਪਣਾ ਪ੍ਰੋਗਰਾਮ ({version}) ਬਹੁਤ ਪੁਰਾਣਾ ਹੈ: SDM ਨੂੰ {oldest} ਜਾਂ ਨਵਾਂ ਚਾਹੀਦਾ ਹੈ
 #. text in helpers.rs
 #. Video helpers: {path} = the program the person chose, {version} = its version
 #. {version} = a version number (keep the braces as they are)
@@ -5645,11 +5645,11 @@
 #, machine
 	yt-dlp couldn't read {browser}'s cookies: {error}	yt-dlp {browser} ਦੀਆਂ ਕੁਕੀਜ਼ ਪੜ੍ਹ ਨਹੀਂ ਸਕਿਆ: {error}
 #. text in a download's progress window
-#. progress window, a video's line: the helper program yt-dlp gave no address MDM's own downloader could use
+#. progress window, a video's line: the helper program yt-dlp gave no address SDM's own downloader could use
 #, machine
 	yt-dlp downloads it itself	yt-dlp ਇਸਨੂੰ ਖੁਦ ਡਾਊਨਲੋਡ ਕਰਦਾ ਹੈ
 #. text in a download's progress window
-#. progress window, a video's line: MDM's own downloader can't take a live broadcast, so the helper program yt-dlp records it
+#. progress window, a video's line: SDM's own downloader can't take a live broadcast, so the helper program yt-dlp records it
 #, machine
 	yt-dlp downloads it itself: a live stream	yt-dlp ਇਸਨੂੰ ਖੁਦ ਡਾਊਨਲੋਡ ਕਰਦਾ ਹੈ: ਇੱਕ ਲਾਈਵ ਸਟ੍ਰੀਮ
 #. text in a download's progress window
@@ -5661,7 +5661,7 @@
 #, machine
 	yt-dlp downloads it itself: protected (DRM)	yt-dlp ਇਸਨੂੰ ਖੁਦ ਡਾਊਨਲੋਡ ਕਰਦਾ ਹੈ: ਸੁਰੱਖਿਅਤ (DRM)
 #. text in a download's progress window
-#. progress window, a video's line: {protocol} = a streaming protocol's short name (rtmp, rtsp, mms); MDM's own downloader doesn't speak it, so the helper program yt-dlp downloads it
+#. progress window, a video's line: {protocol} = a streaming protocol's short name (rtmp, rtsp, mms); SDM's own downloader doesn't speak it, so the helper program yt-dlp downloads it
 #, machine
 	yt-dlp downloads it itself: {protocol}	yt-dlp ਇਸਨੂੰ ਖੁਦ ਡਾਊਨਲੋਡ ਕਰਦਾ ਹੈ: {protocol}
 #. text in the Download video window
@@ -5736,7 +5736,7 @@
 #. text in the Options window
 #. Options → Remote → Pair a device: done; {device} = the name it was given
 #, machine
-	{device} is paired. It can control MDM now.	{device} ਜੋੜਾ ਬਣਾਇਆ ਗਿਆ ਹੈ। ਇਹ ਹੁਣ MDM ਨੂੰ ਕੰਟਰੋਲ ਕਰ ਸਕਦਾ ਹੈ।
+	{device} is paired. It can control SDM now.	{device} ਜੋੜਾ ਬਣਾਇਆ ਗਿਆ ਹੈ। ਇਹ ਹੁਣ SDM ਨੂੰ ਕੰਟਰੋਲ ਕਰ ਸਕਦਾ ਹੈ।
 #. text in remote.rs
 #. remote control page (on a phone): progress; {done} and {size} are sizes ("1.2 MB of 7.5 MB")
 #. {size} = a file size such as "4.2 MB" (keep the braces as they are)
@@ -5772,7 +5772,7 @@
 	{file} is too large to be a list of addresses ({size}). Import reads text files, web pages and .ef2 exports of up to {limit}.	{file} ਪਤਿਆਂ ਦੀ ਸੂਚੀ ਵਜੋਂ ਵਰਤਣ ਲਈ ਬਹੁਤ ਵੱਡੀ ਹੈ ({size})। ਆਯਾਤ {limit} ਤੱਕ ਦੀਆਂ ਟੈਕਸਟ ਫ਼ਾਈਲਾਂ, ਵੈੱਬ ਪੰਨੇ ਅਤੇ .ef2 ਨਿਰਯਾਤ ਪੜ੍ਹਦਾ ਹੈ।
 #. text in a dialog box
 #, machine
-	{file} was moved elsewhere by dragging it out of Download complete, and MDM couldn't learn where. Look for it where you dropped it.	{file} ਨੂੰ “ਡਾਊਨਲੋਡ ਪੂਰਾ ਹੋ ਗਿਆ” ਵਿੱਚੋਂ ਬਾਹਰ ਖਿੱਚ ਕੇ ਕਿਤੇ ਹੋਰ ਭੇਜਿਆ ਗਿਆ ਸੀ, ਅਤੇ MDM ਨੂੰ ਪਤਾ ਨਹੀਂ ਲੱਗ ਸਕਿਆ ਕਿ ਕਿੱਥੇ। ਇਸਨੂੰ ਉੱਥੇ ਲੱਭੋ ਜਿੱਥੇ ਤੁਸੀਂ ਇਸਨੂੰ ਛੱਡਿਆ ਸੀ।
+	{file} was moved elsewhere by dragging it out of Download complete, and SDM couldn't learn where. Look for it where you dropped it.	{file} ਨੂੰ “ਡਾਊਨਲੋਡ ਪੂਰਾ ਹੋ ਗਿਆ” ਵਿੱਚੋਂ ਬਾਹਰ ਖਿੱਚ ਕੇ ਕਿਤੇ ਹੋਰ ਭੇਜਿਆ ਗਿਆ ਸੀ, ਅਤੇ SDM ਨੂੰ ਪਤਾ ਨਹੀਂ ਲੱਗ ਸਕਿਆ ਕਿ ਕਿੱਥੇ। ਇਸਨੂੰ ਉੱਥੇ ਲੱਭੋ ਜਿੱਥੇ ਤੁਸੀਂ ਇਸਨੂੰ ਛੱਡਿਆ ਸੀ।
 #. text in the Checksum window
 #. {algorithm} = a checksum algorithm such as "SHA-256" (keep the braces as they are)
 #, machine
@@ -5858,7 +5858,7 @@
 #. in the "7-Zip needed" window: {name} is the archive's file name; 7-Zip is a program's name
 #. {name} = a file name (keep the braces as they are)
 #, machine
-	{name} is a 7z or RAR archive. MDM extracts those with 7-Zip, which isn't installed.	{name} ਇੱਕ 7z ਜਾਂ RAR ਪੁਰਾਲੇਖ ਹੈ। MDM ਇਹਨਾਂ ਨੂੰ 7-Zip ਨਾਲ ਖੋਲ੍ਹਦਾ ਹੈ, ਪਰ 7-Zip ਇੰਸਟਾਲ ਨਹੀਂ ਹੈ।
+	{name} is a 7z or RAR archive. SDM extracts those with 7-Zip, which isn't installed.	{name} ਇੱਕ 7z ਜਾਂ RAR ਪੁਰਾਲੇਖ ਹੈ। SDM ਇਹਨਾਂ ਨੂੰ 7-Zip ਨਾਲ ਖੋਲ੍ਹਦਾ ਹੈ, ਪਰ 7-Zip ਇੰਸਟਾਲ ਨਹੀਂ ਹੈ।
 #. text in extracting archives (a download's log, the Archive password window)
 #. in Archive password: {name} is the archive's file name
 #. {name} = a file name (keep the braces as they are)
@@ -5870,10 +5870,10 @@
 #, machine
 	{name} isn't offered as {how}.	{name} {how} ਵਜੋਂ ਉਪਲਬਧ ਨਹੀਂ ਹੈ।
 #. text in errors.rs
-#. error: a program chosen as a helper is too old; {name} = gallery-dl, {version} = its version, {oldest} = the oldest one MDM can use
+#. error: a program chosen as a helper is too old; {name} = gallery-dl, {version} = its version, {oldest} = the oldest one SDM can use
 #. {name} = a file name; {version} = a version number (keep the braces as they are)
 #, machine
-	{name} {version} is too old: MDM needs {oldest} or newer	{name} {version} ਬਹੁਤ ਪੁਰਾਣਾ ਹੈ: MDM ਨੂੰ {oldest} ਜਾਂ ਨਵਾਂ ਚਾਹੀਦਾ ਹੈ
+	{name} {version} is too old: SDM needs {oldest} or newer	{name} {version} ਬਹੁਤ ਪੁਰਾਣਾ ਹੈ: SDM ਨੂੰ {oldest} ਜਾਂ ਨਵਾਂ ਚਾਹੀਦਾ ਹੈ
 #. text in a dialog box
 #. one failed download in the summary of a group of downloads: {name} its file name, {error} why it failed
 #. {name} = a file name; {error} = an error message (keep the braces as they are)
@@ -5894,7 +5894,7 @@
 #, machine
 	{n} of {total} selected	ਚੁਣੇ ਗਏ {n} ਵਿੱਚੋਂ {total}
 #. text in the download list (sizes, speeds, status)
-#. a torrent's status while the user's debrid service downloads it, before MDM gets its files; {service} the service ("Real-Debrid"), {percent} how far it is ("45%")
+#. a torrent's status while the user's debrid service downloads it, before SDM gets its files; {service} the service ("Real-Debrid"), {percent} how far it is ("45%")
 #, machine
 	{percent} at {service}	{service} 'ਤੇ {percent}
 #. text in errors.rs
@@ -5905,9 +5905,9 @@
 #, machine
 	{problem}. {advice}	{problem}. {advice}
 #. text in errors.rs
-#. a debrid service's error: too many requests; MDM waits and retries
+#. a debrid service's error: too many requests; SDM waits and retries
 #, machine
-	{service} asks to slow down; MDM will try again in a minute	{service} ਹੌਲੀ ਕਰਨ ਲਈ ਕਹਿੰਦਾ ਹੈ; MDM ਇੱਕ ਮਿੰਟ ਵਿੱਚ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੇਗਾ
+	{service} asks to slow down; SDM will try again in a minute	{service} ਹੌਲੀ ਕਰਨ ਲਈ ਕਹਿੰਦਾ ਹੈ; SDM ਇੱਕ ਮਿੰਟ ਵਿੱਚ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੇਗਾ
 #. text in errors.rs
 #. a debrid service's error: it wants the user to allow this computer (it sent an email)
 #, machine
@@ -5917,7 +5917,7 @@
 	{service} can't get this torrent: nobody shares it, or its link can't be read	{service} ਇਹ ਟੋਰੈਂਟ ਪ੍ਰਾਪਤ ਨਹੀਂ ਕਰ ਸਕਦਾ: ਕੋਈ ਵੀ ਇਸਨੂੰ ਸਾਂਝਾ ਨਹੀਂ ਕਰ ਰਿਹਾ, ਜਾਂ ਇਸਦਾ ਲਿੰਕ ਪੜ੍ਹਿਆ ਨਹੀਂ ਜਾ ਸਕਦਾ
 #. text in errors.rs
 #, machine
-	{service} can't reach this file host right now; MDM will try again later	{service} ਇਸ ਫ਼ਾਈਲ ਹੋਸਟ ਤੱਕ ਇਸ ਵੇਲੇ ਨਹੀਂ ਪਹੁੰਚ ਸਕਦਾ; MDM ਬਾਅਦ ਵਿੱਚ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੇਗਾ
+	{service} can't reach this file host right now; SDM will try again later	{service} ਇਸ ਫ਼ਾਈਲ ਹੋਸਟ ਤੱਕ ਇਸ ਵੇਲੇ ਨਹੀਂ ਪਹੁੰਚ ਸਕਦਾ; SDM ਬਾਅਦ ਵਿੱਚ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੇਗਾ
 #. text in errors.rs
 #. a debrid service's error: it isn't answering
 #, machine
@@ -5952,7 +5952,7 @@
 	{service}: this needs a premium account	{service}: ਇਸ ਲਈ ਪ੍ਰੀਮੀਅਮ ਖਾਤੇ ਦੀ ਲੋੜ ਹੈ
 #. text in errors.rs
 #, machine
-	{service}: too many downloads at once through your account; MDM will try again	{service}: ਤੁਹਾਡੇ ਖਾਤੇ ਰਾਹੀਂ ਇੱਕੋ ਸਮੇਂ ਬਹੁਤ ਸਾਰੇ ਡਾਊਨਲੋਡ ਹੋ ਰਹੇ ਹਨ; MDM ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੇਗਾ
+	{service}: too many downloads at once through your account; SDM will try again	{service}: ਤੁਹਾਡੇ ਖਾਤੇ ਰਾਹੀਂ ਇੱਕੋ ਸਮੇਂ ਬਹੁਤ ਸਾਰੇ ਡਾਊਨਲੋਡ ਹੋ ਰਹੇ ਹਨ; SDM ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੇਗਾ
 #. text in errors.rs
 #. a debrid service's error: the account's limit (traffic) for this host is used up
 #, machine
@@ -5992,7 +5992,7 @@
 #, machine
 	{title}: already in the list	{title}: ਪਹਿਲਾਂ ਹੀ ਸੂਚੀ ਵਿੱਚ ਹੈ
 #. message or event log entry in the main window
-#. RSS feeds window, under the rules: not added, because files of its names are already in the folder (MDM never writes into them unasked)
+#. RSS feeds window, under the rules: not added, because files of its names are already in the folder (SDM never writes into them unasked)
 #, machine
 	{title}: not added: files of its names are already in {folder}	{title}: ਸ਼ਾਮਲ ਨਹੀਂ ਕੀਤਾ ਗਿਆ: ਇਸ ਨਾਮ ਵਾਲੀਆਂ ਫ਼ਾਈਲਾਂ ਪਹਿਲਾਂ ਹੀ {folder} ਵਿੱਚ ਹਨ
 #. message or event log entry in the main window
@@ -6062,13 +6062,13 @@ column	Transfer rate	ਟ੍ਰਾਂਸਫ਼ਰ ਦਰ
 #, machine
 column	Upload speed	ਅੱਪਲੋਡ ਸਪੀਡ
 #. text in the browser extension
-#. in the menu under the download button over a video: the page is a list of videos (a playlist), whose videos are chosen in the app's window; keep the name Mister Download Manager as it is
+#. in the menu under the download button over a video: the page is a list of videos (a playlist), whose videos are chosen in the app's window; keep the name Sedot Download Manager as it is
 #, machine
-extension	A list of videos: choose them in Mister Download Manager	ਵੀਡੀਓਜ਼ ਦੀ ਸੂਚੀ: ਉਹਨਾਂ ਨੂੰ Mister Download Manager ਵਿੱਚ ਚੁਣੋ
+extension	A list of videos: choose them in Sedot Download Manager	ਵੀਡੀਓਜ਼ ਦੀ ਸੂਚੀ: ਉਹਨਾਂ ਨੂੰ Sedot Download Manager ਵਿੱਚ ਚੁਣੋ
 #. text in the browser extension
-#. on the download button (green) over a video after the app added and started the download; a quality may follow ('· 1080p') and a 'Show' button; MDM is the app's short name, keep it; short
+#. on the download button (green) over a video after the app added and started the download; a quality may follow ('· 1080p') and a 'Show' button; SDM is the app's short name, keep it; short
 #, machine
-extension	Added to MDM	MDM ਵਿੱਚ ਜੋੜਿਆ ਗਿਆ
+extension	Added to SDM	SDM ਵਿੱਚ ਜੋੜਿਆ ਗਿਆ
 #. text in the browser extension
 #. shown briefly on the download button over a video after a quality was picked: the download was added to the app's download queue, to start later
 #, machine
@@ -6079,9 +6079,9 @@ extension	Added to the queue	ਕਤਾਰ ਵਿੱਚ ਜੋੜਿਆ ਗਿਆ
 #, machine
 extension	All qualities and subtitles...	ਸਾਰੀਆਂ ਗੁਣਵੱਤਾਵਾਂ ਅਤੇ ਉਪਸਿਰਲੇਖ...
 #. text in the browser extension
-#. choice under Send downloads to: an MDM running on another computer of the network, such as a home server; keep the name Mister Download Manager as it is
+#. choice under Send downloads to: an SDM running on another computer of the network, such as a home server; keep the name Sedot Download Manager as it is
 #, machine
-extension	Another Mister Download Manager (a server)	ਇੱਕ ਹੋਰ Mister Download Manager (ਇੱਕ ਸਰਵਰ)
+extension	Another Sedot Download Manager (a server)	ਇੱਕ ਹੋਰ Sedot Download Manager (ਇੱਕ ਸਰਵਰ)
 #. text in the browser extension
 #. tab above the list of qualities in the menu under the download button over a video: the choices that are sound only (MP3, Opus and the like); short, one word
 #, machine
@@ -6091,11 +6091,11 @@ extension	Audio	ਆਡੀਓ
 #, machine
 extension	best	ਸਭ ਤੋਂ ਵਧੀਆ
 #. text in the browser extension
-#. the name this browser gets in the other MDM's list of paired devices
+#. the name this browser gets in the other SDM's list of paired devices
 #, machine
 extension	Browser extension	ਬ੍ਰਾਊਜ਼ਰ ਐਕਸਟੈਂਸ਼ਨ
 #. text in the browser extension
-#. menu command of the download button over a video: opens its settings in Mister Download Manager
+#. menu command of the download button over a video: opens its settings in Sedot Download Manager
 #. the trailing ... means it is still going on: keep it
 #, machine
 extension	Button settings...	ਬਟਨ ਸੈਟਿੰਗਾਂ...
@@ -6108,14 +6108,14 @@ extension	can't be saved	ਸੇਵ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ
 #, machine
 extension	Can't tell which video this is: open its own page and try there	ਇਹ ਪਤਾ ਨਹੀਂ ਲੱਗ ਰਿਹਾ ਕਿ ਇਹ ਕਿਹੜੀ ਵੀਡੀਓ ਹੈ: ਇਸ ਦਾ ਆਪਣਾ ਪੰਨਾ ਖੋਲ੍ਹ ਕੇ ਉੱਥੇ ਕੋਸ਼ਿਸ਼ ਕਰੋ
 #. text in the browser extension
-#. the toolbar button's status when the browser reaches the app; keep the name Mister Download Manager as it is
+#. the toolbar button's status when the browser reaches the app; keep the name Sedot Download Manager as it is
 #, machine
-extension	Connected to Mister Download Manager	Mister Download Manager ਨਾਲ ਕਨੈਕਟ ਕੀਤਾ ਗਿਆ
+extension	Connected to Sedot Download Manager	Sedot Download Manager ਨਾਲ ਕਨੈਕਟ ਕੀਤਾ ਗਿਆ
 #. text in the browser extension
-#. the toolbar button's status when the browser reaches the app, with the app's version number; keep the name Mister Download Manager as it is
+#. the toolbar button's status when the browser reaches the app, with the app's version number; keep the name Sedot Download Manager as it is
 #. {version} = a version number (keep the braces as they are)
 #, machine
-extension	Connected to Mister Download Manager {version}	Mister Download Manager {version} ਨਾਲ ਕਨੈਕਟ ਕੀਤਾ ਗਿਆ
+extension	Connected to Sedot Download Manager {version}	Sedot Download Manager {version} ਨਾਲ ਕਨੈਕਟ ਕੀਤਾ ਗਿਆ
 #. text in the browser extension
 #. in the menu under the download button over a video: finding the video's qualities failed; the app's own explanation follows on the next line
 #, machine
@@ -6125,17 +6125,17 @@ extension	Could not look it up	ਇਸਨੂੰ ਲੱਭਿਆ ਨਹੀਂ ਜ�
 #, machine
 extension	Download	ਡਾਊਨਲੋਡ ਕਰੋ
 #. text in the browser extension
-#. command in the browser's right-click menu on a page: download the links of the whole page; keep the name Mister Download Manager as it is
+#. command in the browser's right-click menu on a page: download the links of the whole page; keep the name Sedot Download Manager as it is
 #, machine
-extension	Download all links with Mister Download Manager	Mister Download Manager ਨਾਲ ਸਾਰੇ ਲਿੰਕ ਡਾਊਨਲੋਡ ਕਰੋ
+extension	Download all links with Sedot Download Manager	Sedot Download Manager ਨਾਲ ਸਾਰੇ ਲਿੰਕ ਡਾਊਨਲੋਡ ਕਰੋ
 #. text in the browser extension
 #. first line of the list under the download button over a video: downloads the best quality at once; the quality, its file type and size follow on the same line; short
 #, machine
 extension	Download best	ਸਭ ਤੋਂ ਵਧੀਆ ਡਾਊਨਲੋਡ ਕਰੋ
 #. text in the browser extension
-#. command in the browser's right-click menu on selected text: download the links in the selection; keep the name Mister Download Manager as it is
+#. command in the browser's right-click menu on selected text: download the links in the selection; keep the name Sedot Download Manager as it is
 #, machine
-extension	Download selected links with Mister Download Manager	Mister Download Manager ਨਾਲ ਚੁਣੇ ਗਏ ਲਿੰਕ ਡਾਊਨਲੋਡ ਕਰੋ
+extension	Download selected links with Sedot Download Manager	Sedot Download Manager ਨਾਲ ਚੁਣੇ ਗਏ ਲਿੰਕ ਡਾਊਨਲੋਡ ਕਰੋ
 #. text in the browser extension
 #. first line of the tooltip of the download button over a video while the app is still finding its qualities
 #, machine
@@ -6145,9 +6145,9 @@ extension	Download the best quality	ਸਭ ਤੋਂ ਵਧੀਆ ਕੁਆਲ�
 #, machine
 extension	Download video	ਵੀਡੀਓ ਡਾਊਨਲੋਡ ਕਰੋ
 #. text in the browser extension
-#. command in the browser's right-click menu on a link, picture, video or sound; keep the name Mister Download Manager as it is
+#. command in the browser's right-click menu on a link, picture, video or sound; keep the name Sedot Download Manager as it is
 #, machine
-extension	Download with Mister Download Manager	Mister Download Manager ਨਾਲ ਡਾਊਨਲੋਡ ਕਰੋ
+extension	Download with Sedot Download Manager	Sedot Download Manager ਨਾਲ ਡਾਊਨਲੋਡ ਕਰੋ
 #. text in the browser extension
 #. first line of the tooltip of the download button over a video: what one click downloads; $what$ is a quality, a file type and a size, e.g. '1080p MP4 · 412 MB'
 #, machine
@@ -6158,7 +6158,7 @@ extension	Download {what}	{what} ਡਾਊਨਲੋਡ ਕਰੋ
 #, machine
 extension	Downloads from {site} stay with the browser	{site} ਤੋਂ ਡਾਊਨਲੋਡ ਬ੍ਰਾਊਜ਼ਰ ਵਿੱਚ ਹੀ ਰਹਿਣਗੇ
 #. text in the browser extension
-#. the toolbar button's status while downloads go to another MDM
+#. the toolbar button's status while downloads go to another SDM
 #, machine
 extension	Downloads go to {address}	ਡਾਊਨਲੋਡ {address} 'ਤੇ ਜਾਂਦੇ ਹਨ
 #. text in the browser extension
@@ -6170,13 +6170,13 @@ extension	Drag the dots to move it along the edge	ਇਸਨੂੰ ਕਿਨਾ�
 #, machine
 extension	Enter its https:// address.	ਇਸਦਾ https:// ਪਤਾ ਦਾਖਲ ਕਰੋ।
 #. text in the browser extension
-#. button on the download button over a video when the app didn't answer: opens the app's download page; MDM is the app's short name, keep it; very short
+#. button on the download button over a video when the app didn't answer: opens the app's download page; SDM is the app's short name, keep it; very short
 #, machine
-extension	Get MDM	MDM ਪ੍ਰਾਪਤ ਕਰੋ
+extension	Get SDM	SDM ਪ੍ਰਾਪਤ ਕਰੋ
 #. text in the browser extension
-#. the extension's description in the browser's list of extensions; keep the name Mister Download Manager as it is
+#. the extension's description in the browser's list of extensions; keep the name Sedot Download Manager as it is
 #, machine
-extension	Hands downloads from the browser to Mister Download Manager.	ਬ੍ਰਾਊਜ਼ਰ ਤੋਂ ਡਾਊਨਲੋਡ Mister Download Manager ਨੂੰ ਭੇਜਦਾ ਹੈ।
+extension	Hands downloads from the browser to Sedot Download Manager.	ਬ੍ਰਾਊਜ਼ਰ ਤੋਂ ਡਾਊਨਲੋਡ Sedot Download Manager ਨੂੰ ਭੇਜਦਾ ਹੈ।
 #. text in the browser extension
 #. link in the toolbar button's popup to the help page
 #, machine
@@ -6202,13 +6202,13 @@ extension	How to fix it	ਇਸਨੂੰ ਕਿਵੇਂ ਠੀਕ ਕਰਨਾ �
 #, machine
 extension	It didn't work. Try again.	ਇਹ ਕੰਮ ਨਹੀਂ ਕੀਤਾ। ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।
 #. text in the browser extension
-#. pairing failed: the other MDM shows no pairing code; Pair a device is its button
+#. pairing failed: the other SDM shows no pairing code; Pair a device is its button
 #, machine
 extension	It shows no code now: click Pair a device there first.	ਇਹ ਹੁਣ ਕੋਈ ਕੋਡ ਨਹੀਂ ਦਿਖਾਉਂਦਾ: ਪਹਿਲਾਂ ਉੱਥੇ ਇੱਕ ਡਿਵਾਈਸ ਜੋੜੋ 'ਤੇ ਕਲਿੱਕ ਕਰੋ।
 #. text in the browser extension
-#. why a download stayed with the browser: it is a .torrent file and the app's Torrent settings don't open torrents with Mister Download Manager, so the browser keeps it for the user's own torrent program; keep the setting's name as the app shows it
+#. why a download stayed with the browser: it is a .torrent file and the app's Torrent settings don't open torrents with Sedot Download Manager, so the browser keeps it for the user's own torrent program; keep the setting's name as the app shows it
 #, machine
-extension	It's a torrent, and Open magnet links and .torrent files with Mister Download Manager is off in Torrent settings.	ਇਹ ਇੱਕ ਟੋਰੈਂਟ ਹੈ, ਅਤੇ ਟੋਰੈਂਟ ਸੈਟਿੰਗਾਂ ਵਿੱਚ Mister Download Manager ਨਾਲ ਮੈਗਨੈੱਟ ਲਿੰਕ ਅਤੇ .torrent ਫ਼ਾਈਲਾਂ ਖੋਲ੍ਹੋ ਬੰਦ ਹੈ।
+extension	It's a torrent, and Open magnet links and .torrent files with Sedot Download Manager is off in Torrent settings.	ਇਹ ਇੱਕ ਟੋਰੈਂਟ ਹੈ, ਅਤੇ ਟੋਰੈਂਟ ਸੈਟਿੰਗਾਂ ਵਿੱਚ Sedot Download Manager ਨਾਲ ਮੈਗਨੈੱਟ ਲਿੰਕ ਅਤੇ .torrent ਫ਼ਾਈਲਾਂ ਖੋਲ੍ਹੋ ਬੰਦ ਹੈ।
 #. text in the browser extension
 #. why a download stayed with the browser: the file is smaller than the app's minimum size setting
 #, machine
@@ -6243,49 +6243,49 @@ extension	Looking up the qualities…	ਵੀਡੀਓ ਦੀਆਂ ਗੁਣਵ�
 #, machine
 extension	Looking up took too long	ਲੱਭਣ ਵਿੱਚ ਬਹੁਤ ਸਮਾਂ ਲੱਗਿਆ
 #. text in the browser extension
-#. on the download button (red) over a video when the app isn't installed or didn't start; 'Get MDM' and 'Retry' buttons follow; MDM is the app's short name, keep it; short
+#. on the download button (red) over a video when the app isn't installed or didn't start; 'Get SDM' and 'Retry' buttons follow; SDM is the app's short name, keep it; short
 #, machine
-extension	MDM didn't answer	MDM ਨੇ ਜਵਾਬ ਨਹੀਂ ਦਿੱਤਾ
+extension	SDM didn't answer	SDM ਨੇ ਜਵਾਬ ਨਹੀਂ ਦਿੱਤਾ
 #. text in the browser extension
 #. heading in the toolbar button's popup over the list of the videos, sounds and streams the current web page has loaded
 #, machine
 extension	Media on this page	ਇਸ ਪੰਨੇ 'ਤੇ ਮੀਡੀਆ
 #. text in the browser extension
-#. the extension's name in the browser's list of extensions and on its toolbar button; keep the name Mister Download Manager as it is
+#. the extension's name in the browser's list of extensions and on its toolbar button; keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager	Mister Download Manager
+extension	Sedot Download Manager	Sedot Download Manager
 #. text in the browser extension
-#. status when the app was started for a download but didn't answer in time; keep the name Mister Download Manager as it is
+#. status when the app was started for a download but didn't answer in time; keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager didn't start in time	Mister Download Manager ਸਮੇਂ ਸਿਰ ਸ਼ੁਰੂ ਨਹੀਂ ਹੋਇਆ
+extension	Sedot Download Manager didn't start in time	Sedot Download Manager ਸਮੇਂ ਸਿਰ ਸ਼ੁਰੂ ਨਹੀਂ ਹੋਇਆ
 #. text in the browser extension
-#. status when the app refuses this copy of the extension (another copy is installed, or it came from another store); keep the name Mister Download Manager as it is
+#. status when the app refuses this copy of the extension (another copy is installed, or it came from another store); keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager doesn't accept this copy of the extension	Mister Download Manager ਐਕਸਟੈਂਸ਼ਨ ਦੀ ਇਸ ਕਾਪੀ ਨੂੰ ਸਵੀਕਾਰ ਨਹੀਂ ਕਰਦਾ
+extension	Sedot Download Manager doesn't accept this copy of the extension	Sedot Download Manager ਐਕਸਟੈਂਸ਼ਨ ਦੀ ਇਸ ਕਾਪੀ ਨੂੰ ਸਵੀਕਾਰ ਨਹੀਂ ਕਰਦਾ
 #. text in the browser extension
-#. in the menu under the download button over a video: the app is already looking up other videos and can't look this one up now; keep the name Mister Download Manager as it is
+#. in the menu under the download button over a video: the app is already looking up other videos and can't look this one up now; keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager is busy with other videos	Mister Download Manager ਹੋਰ ਵੀਡੀਓਜ਼ ਨਾਲ ਰੁੱਝਿਆ ਹੋਇਆ ਹੈ
+extension	Sedot Download Manager is busy with other videos	Sedot Download Manager ਹੋਰ ਵੀਡੀਓਜ਼ ਨਾਲ ਰੁੱਝਿਆ ਹੋਇਆ ਹੈ
 #. text in the browser extension
-#. shown briefly on the download button when the app could not be reached; keep the name Mister Download Manager as it is
+#. shown briefly on the download button when the app could not be reached; keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager isn't installed or didn't start	Mister Download Manager ਇੰਸਟਾਲ ਨਹੀਂ ਹੈ ਜਾਂ ਸ਼ੁਰੂ ਨਹੀਂ ਹੋਇਆ
+extension	Sedot Download Manager isn't installed or didn't start	Sedot Download Manager ਇੰਸਟਾਲ ਨਹੀਂ ਹੈ ਜਾਂ ਸ਼ੁਰੂ ਨਹੀਂ ਹੋਇਆ
 #. text in the browser extension
-#. status when the browser can't find the app's connection; keep the name Mister Download Manager as it is
+#. status when the browser can't find the app's connection; keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager isn't installed, or its browser integration isn't set up	Mister Download Manager ਇੰਸਟਾਲ ਨਹੀਂ ਹੈ, ਜਾਂ ਇਸਦੀ ਬ੍ਰਾਊਜ਼ਰ ਇੰਟੀਗ੍ਰੇਸ਼ਨ ਸੈੱਟਅੱਪ ਨਹੀਂ ਹੈ
+extension	Sedot Download Manager isn't installed, or its browser integration isn't set up	Sedot Download Manager ਇੰਸਟਾਲ ਨਹੀਂ ਹੈ, ਜਾਂ ਇਸਦੀ ਬ੍ਰਾਊਜ਼ਰ ਇੰਟੀਗ੍ਰੇਸ਼ਨ ਸੈੱਟਅੱਪ ਨਹੀਂ ਹੈ
 #. text in the browser extension
-#. in the menu under the download button over a video: the app needs the yt-dlp tool (a program's name, keep it as it is) to find this video's qualities, and it isn't installed; keep the name Mister Download Manager as it is
+#. in the menu under the download button over a video: the app needs the yt-dlp tool (a program's name, keep it as it is) to find this video's qualities, and it isn't installed; keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager needs yt-dlp for this video	Mister Download Manager ਨੂੰ ਇਸ ਵੀਡੀਓ ਲਈ yt-dlp ਦੀ ਲੋੜ ਹੈ
+extension	Sedot Download Manager needs yt-dlp for this video	Sedot Download Manager ਨੂੰ ਇਸ ਵੀਡੀਓ ਲਈ yt-dlp ਦੀ ਲੋੜ ਹੈ
 #. text in the browser extension
-#. tooltip of the switch Send downloads through this browser's proxy or VPN extension; keep the name Mister Download Manager as it is
+#. tooltip of the switch Send downloads through this browser's proxy or VPN extension; keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager then downloads through the same proxy as this browser. The browser asks you once to allow it; turning this off takes that back.	Mister Download Manager ਫਿਰ ਇਸ ਬ੍ਰਾਊਜ਼ਰ ਵਾਂਗ ਉਸੇ ਪ੍ਰੌਕਸੀ ਰਾਹੀਂ ਡਾਊਨਲੋਡ ਕਰਦਾ ਹੈ। ਬ੍ਰਾਊਜ਼ਰ ਤੁਹਾਨੂੰ ਇੱਕ ਵਾਰ ਇਸਦੀ ਇਜਾਜ਼ਤ ਦੇਣ ਲਈ ਪੁੱਛਦਾ ਹੈ; ਇਸਨੂੰ ਬੰਦ ਕਰਨ ਨਾਲ ਉਹ ਵਾਪਸ ਲੈ ਲਿਆ ਜਾਂਦਾ ਹੈ।
+extension	Sedot Download Manager then downloads through the same proxy as this browser. The browser asks you once to allow it; turning this off takes that back.	Sedot Download Manager ਫਿਰ ਇਸ ਬ੍ਰਾਊਜ਼ਰ ਵਾਂਗ ਉਸੇ ਪ੍ਰੌਕਸੀ ਰਾਹੀਂ ਡਾਊਨਲੋਡ ਕਰਦਾ ਹੈ। ਬ੍ਰਾਊਜ਼ਰ ਤੁਹਾਨੂੰ ਇੱਕ ਵਾਰ ਇਸਦੀ ਇਜਾਜ਼ਤ ਦੇਣ ਲਈ ਪੁੱਛਦਾ ਹੈ; ਇਸਨੂੰ ਬੰਦ ਕਰਨ ਨਾਲ ਉਹ ਵਾਪਸ ਲੈ ਲਿਆ ਜਾਂਦਾ ਹੈ।
 #. text in the browser extension
-#. tooltip of the switch Send downloads through this browser's proxy or VPN extension in Chrome, Edge and the other Chromium browsers (they ask for no permission at the switch); keep the name Mister Download Manager as it is
+#. tooltip of the switch Send downloads through this browser's proxy or VPN extension in Chrome, Edge and the other Chromium browsers (they ask for no permission at the switch); keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager then downloads through the same proxy as this browser. While this is off, the extension doesn't read the browser's proxy.	Mister Download Manager ਫਿਰ ਇਸ ਬ੍ਰਾਊਜ਼ਰ ਵਾਂਗ ਉਸੇ ਪ੍ਰੌਕਸੀ ਰਾਹੀਂ ਡਾਊਨਲੋਡ ਕਰਦਾ ਹੈ। ਜਦੋਂ ਇਹ ਬੰਦ ਹੁੰਦਾ ਹੈ, ਤਾਂ ਐਕਸਟੈਂਸ਼ਨ ਬ੍ਰਾਊਜ਼ਰ ਦੀ ਪ੍ਰੌਕਸੀ ਨੂੰ ਨਹੀਂ ਪੜ੍ਹਦੀ।
+extension	Sedot Download Manager then downloads through the same proxy as this browser. While this is off, the extension doesn't read the browser's proxy.	Sedot Download Manager ਫਿਰ ਇਸ ਬ੍ਰਾਊਜ਼ਰ ਵਾਂਗ ਉਸੇ ਪ੍ਰੌਕਸੀ ਰਾਹੀਂ ਡਾਊਨਲੋਡ ਕਰਦਾ ਹੈ। ਜਦੋਂ ਇਹ ਬੰਦ ਹੁੰਦਾ ਹੈ, ਤਾਂ ਐਕਸਟੈਂਸ਼ਨ ਬ੍ਰਾਊਜ਼ਰ ਦੀ ਪ੍ਰੌਕਸੀ ਨੂੰ ਨਹੀਂ ਪੜ੍ਹਦੀ।
 #. text in the browser extension
 #. the small arrow next to the Download video button that opens its menu (read aloud by screen readers)
 #, machine
@@ -6309,7 +6309,7 @@ extension	No video or sound found on this page yet. Play it, then open this agai
 #, machine
 extension	No video to download here	ਇੱਥੇ ਡਾਊਨਲੋਡ ਕਰਨ ਲਈ ਕੋਈ ਵੀਡੀਓ ਨਹੀਂ
 #. text in the browser extension
-#. pairing failed: the other MDM didn't answer
+#. pairing failed: the other SDM didn't answer
 #, machine
 extension	Not reached. Open its address once in this browser and accept its certificate, then try again.	ਪਹੁੰਚਿਆ ਨਹੀਂ। ਇਸ ਬ੍ਰਾਊਜ਼ਰ ਵਿੱਚ ਇੱਕ ਵਾਰ ਇਸਦਾ ਪਤਾ ਖੋਲ੍ਹੋ ਅਤੇ ਇਸਦੇ ਸਰਟੀਫਿਕੇਟ ਨੂੰ ਸਵੀਕਾਰ ਕਰੋ, ਫਿਰ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।
 #. text in the browser extension
@@ -6317,7 +6317,7 @@ extension	Not reached. Open its address once in this browser and accept its cert
 #, machine
 extension	Off on this site	ਇਸ ਸਾਈਟ 'ਤੇ ਬੰਦ
 #. text in the browser extension
-#. button: open the other MDM's address in a tab (to accept its certificate once)
+#. button: open the other SDM's address in a tab (to accept its certificate once)
 #, machine
 extension	Open it	ਇਸਨੂੰ ਖੋਲ੍ਹੋ
 #. text in the browser extension
@@ -6325,9 +6325,9 @@ extension	Open it	ਇਸਨੂੰ ਖੋਲ੍ਹੋ
 #, machine
 extension	Open its address once and accept its certificate, then enter a code from its Options, Remote, Pair a device (or misterdownloadmanager-cli pair).	ਇਸਦਾ ਪਤਾ ਇੱਕ ਵਾਰ ਖੋਲ੍ਹੋ ਅਤੇ ਇਸਦੇ ਸਰਟੀਫਿਕੇਟ ਨੂੰ ਸਵੀਕਾਰ ਕਰੋ, ਫਿਰ ਇਸਦੇ ਵਿਕਲਪ, ਰਿਮੋਟ, ਇੱਕ ਡਿਵਾਈਸ ਜੋੜੋ (ਜਾਂ misterdownloadmanager-cli pair) ਤੋਂ ਇੱਕ ਕੋਡ ਦਾਖਲ ਕਰੋ।
 #. text in the browser extension
-#. button in the toolbar button's popup; keep the name Mister Download Manager as it is
+#. button in the toolbar button's popup; keep the name Sedot Download Manager as it is
 #, machine
-extension	Open Mister Download Manager	Mister Download Manager ਖੋਲ੍ਹੋ
+extension	Open Sedot Download Manager	Sedot Download Manager ਖੋਲ੍ਹੋ
 #. text in the browser extension
 #. button on the download button over a video in a feed: opens the post the video belongs to in a new tab; verb; very short
 #, machine
@@ -6346,11 +6346,11 @@ extension	Options...	ਵਿਕਲਪ...
 #, machine
 extension	original	ਮੂਲ
 #. text in the browser extension
-#. button: pair this browser with the other MDM using the code
+#. button: pair this browser with the other SDM using the code
 #, machine
 extension	Pair	ਜੋੜੋ
 #. text in the browser extension
-#. placeholder of the box for the 8-digit code the other MDM shows
+#. placeholder of the box for the 8-digit code the other SDM shows
 #, machine
 extension	Pairing code	ਜੋੜਨ ਵਾਲਾ ਕੋਡ
 #. text in the browser extension
@@ -6382,22 +6382,22 @@ extension	Send downloads through this browser's proxy or VPN extension	ਇਸ �
 #, machine
 extension	Send downloads to	ਡਾਊਨਲੋਡ ਇਸਨੂੰ ਭੇਜੋ
 #. text in the browser extension
-#. on the download button over a video right after it was clicked, while the download goes to the app; MDM is Mister Download Manager's short name, keep it as it is; short
+#. on the download button over a video right after it was clicked, while the download goes to the app; SDM is Sedot Download Manager's short name, keep it as it is; short
 #. the trailing ... means it is still going on: keep it
 #, machine
-extension	Sending to MDM...	MDM ਨੂੰ ਭੇਜਿਆ ਜਾ ਰਿਹਾ ਹੈ...
+extension	Sending to SDM...	SDM ਨੂੰ ਭੇਜਿਆ ਜਾ ਰਿਹਾ ਹੈ...
 #. text in the browser extension
-#. shown briefly on the download button after it was clicked; keep the name Mister Download Manager as it is
+#. shown briefly on the download button after it was clicked; keep the name Sedot Download Manager as it is
 #, machine
-extension	Sent to Mister Download Manager	Mister Download Manager ਨੂੰ ਭੇਜਿਆ ਗਿਆ
+extension	Sent to Sedot Download Manager	Sedot Download Manager ਨੂੰ ਭੇਜਿਆ ਗਿਆ
 #. text in the browser extension
 #. button on the download button over a video after a download was added: shows that download in the app's window; verb; very short
 #, machine
 extension	Show	ਦਿਖਾਓ
 #. text in the browser extension
-#. link at the foot of the toolbar button's popup to the creator's GitHub Sponsors page (MDM is free; this is an optional donation)
+#. link at the foot of the toolbar button's popup to the creator's GitHub Sponsors page (SDM is free; this is an optional donation)
 #, machine
-extension	Support MDM	MDM ਦਾ ਸਮਰਥਨ ਕਰੋ
+extension	Support SDM	SDM ਦਾ ਸਮਰਥਨ ਕਰੋ
 #. text in the browser extension
 #. check box in the toolbar button's popup: on, downloads go to the app; off, the browser keeps them
 #, machine
@@ -6407,9 +6407,9 @@ extension	Take downloads from this browser	ਇਸ ਬ੍ਰਾਊਜ਼ਰ ਤ�
 #, machine
 extension	The Chrome Web Store's rules keep this copy of the add-on away from this site's videos. Help says what you can do.	Chrome Web Store ਦੇ ਨਿਯਮ ਇਸ ਐਡ-ਆਨ ਦੀ ਇਸ ਕਾਪੀ ਨੂੰ ਇਸ ਸਾਈਟ ਦੀਆਂ ਵੀਡੀਓ ਤੋਂ ਦੂਰ ਰੱਖਦੇ ਹਨ। ਮਦਦ ਦੱਸਦੀ ਹੈ ਕਿ ਤੁਸੀਂ ਕੀ ਕਰ ਸਕਦੇ ਹੋ।
 #. text in the browser extension
-#. status when the connection to the app broke off (often security software blocking it); keep the name Mister Download Manager as it is
+#. status when the connection to the app broke off (often security software blocking it); keep the name Sedot Download Manager as it is
 #, machine
-extension	The connection to Mister Download Manager failed	Mister Download Manager ਨਾਲ ਕਨੈਕਸ਼ਨ ਅਸਫਲ ਰਿਹਾ
+extension	The connection to Sedot Download Manager failed	Sedot Download Manager ਨਾਲ ਕਨੈਕਸ਼ਨ ਅਸਫਲ ਰਿਹਾ
 #. text in the browser extension
 #. why a download stayed with the browser: the user limited the extension's access to web sites in the browser, so it can't pass the sign-in on
 #, machine
@@ -6423,7 +6423,7 @@ extension	The last download was left to the browser.	ਆਖਰੀ ਡਾਊਨ�
 #, machine
 extension	This browser isn't ticked in Options → General.	ਇਹ ਬ੍ਰਾਊਜ਼ਰ ਚੋਣਾਂ → ਆਮ ਵਿੱਚ ਚੁਣਿਆ ਨਹੀਂ ਗਿਆ ਹੈ।
 #. text in the browser extension
-#. choice under Send downloads to: the Mister Download Manager on this computer
+#. choice under Send downloads to: the Sedot Download Manager on this computer
 #, machine
 extension	This computer	ਇਹ ਕੰਪਿਊਟਰ
 #. text in the browser extension
@@ -6443,9 +6443,9 @@ extension	Turn on	ਚਾਲੂ ਕਰੋ
 #, machine
 extension	Undo	ਮੁੜ ਲਾਗੂ ਕਰੋ
 #. text in the browser extension
-#. status when the app is older than the extension; keep the name Mister Download Manager as it is
+#. status when the app is older than the extension; keep the name Sedot Download Manager as it is
 #, machine
-extension	Update Mister Download Manager to use everything this extension offers	ਇਸ ਐਕਸਟੈਂਸ਼ਨ ਦੀਆਂ ਸਾਰੀਆਂ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਵਰਤਣ ਲਈ Mister Download Manager ਅੱਪਡੇਟ ਕਰੋ
+extension	Update Sedot Download Manager to use everything this extension offers	ਇਸ ਐਕਸਟੈਂਸ਼ਨ ਦੀਆਂ ਸਾਰੀਆਂ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਵਰਤਣ ਲਈ Sedot Download Manager ਅੱਪਡੇਟ ਕਰੋ
 #. text in the browser extension
 #. why a download stayed with the browser: the app's setting 'Use advanced browser integration' is off; keep the setting's name as the app shows it
 #, machine
@@ -6573,13 +6573,13 @@ key	Up / Down	ਉੱਪਰ / ਹੇਠਾਂ
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	&About Mister Download Manager	Mister Download Manager ਬਾਰੇ(&A)
+menu	&About Sedot Download Manager	Sedot Download Manager ਬਾਰੇ(&A)
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
 menu	&Add new download	ਨਵਾਂ ਡਾਊਨਲੋਡ ਸ਼ਾਮਲ ਕਰੋ(&A)
 #. menu command in the main window
-#. View → Window system: MDM chooses the window system itself at each start
+#. View → Window system: SDM chooses the window system itself at each start
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
 menu	&Automatic	ਆ&ਟੋਮੈਟਿਕ
@@ -6614,7 +6614,7 @@ menu	&Exit	ਬਾਹਰ ਜਾਓ(&E)
 #, machine
 menu	&Import	ਆਯਾਤ ਕਰੋ(&I)
 #. menu command in the main window
-#. View menu: submenu choosing how large MDM draws its windows and text (100 % to 200 %), as a browser's zoom
+#. View menu: submenu choosing how large SDM draws its windows and text (100 % to 200 %), as a browser's zoom
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
 menu	&Interface size	ਇੰਟਰਫੇਸ ਦਾ &ਆਕਾਰ
@@ -6709,7 +6709,7 @@ menu	&Video downloads	ਵੀਡੀਓ ਡਾਊਨਲੋਡ(&V)
 #, machine
 menu	&Wayland	&ਵੇਲੈਂਡ
 #. menu command in the main window
-#. View menu: submenu choosing the window system MDM's windows use on Linux (X11 through XWayland, or Wayland)
+#. View menu: submenu choosing the window system SDM's windows use on Linux (X11 through XWayland, or Wayland)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
 menu	&Window system	&ਵਿੰਡੋ ਸਿਸਟਮ
@@ -6751,9 +6751,9 @@ menu	Adwaita	Adwaita
 #, machine
 menu	Aero	Aero
 #. menu command in the main window
-#. View → Draw with: a greyed note under the choices; the choice takes effect when MDM is started again
+#. View → Draw with: a greyed note under the choices; the choice takes effect when SDM is started again
 #, machine
-menu	Applies the next time MDM starts	ਅਗਲੀ ਵਾਰ MDM ਸ਼ੁਰੂ ਹੋਣ 'ਤੇ ਲਾਗੂ ਹੁੰਦਾ ਹੈ
+menu	Applies the next time SDM starts	ਅਗਲੀ ਵਾਰ SDM ਸ਼ੁਰੂ ਹੋਣ 'ਤੇ ਲਾਗੂ ਹੁੰਦਾ ਹੈ
 #. menu command in the main window
 #. View → Theme: a style theme's name (Mac OS X's look), a name: keep "Aqua" as written
 #, machine
@@ -6828,7 +6828,7 @@ menu	C&ustomize URL List...	URL ਸੂਚੀ ਨੂੰ ਅਨੁਕੂਲਿਤ 
 #, machine
 menu	Check for &updates...	ਅੱਪਡੇਟਾਂ ਦੀ ਜਾਂਚ ਕਰੋ(&u)...
 #. menu command in the main window
-#. View → Theme: MDM's own look, the default (IDM's layout, Windows 11's controls)
+#. View → Theme: SDM's own look, the default (IDM's layout, Windows 11's controls)
 #, machine
 menu	Classic	ਕਲਾਸਿਕ
 #. menu command in the main window
@@ -6882,7 +6882,7 @@ menu	Download &video from a page...	ਇੱਕ ਪੰਨੇ ਤੋਂ ਵੀਡ�
 #, machine
 menu	Download in order	ਕ੍ਰਮ ਵਿੱਚ ਡਾਊਨਲੋਡ ਕਰੋ
 #. menu command in the main window
-#. View menu: submenu choosing what draws MDM's windows: OpenGL, or Direct3D, Vulkan or Metal (graphics systems)
+#. View menu: submenu choosing what draws SDM's windows: OpenGL, or Direct3D, Vulkan or Metal (graphics systems)
 #, machine
 menu	Draw with	ਇਸ ਨਾਲ ਡਰਾਅ ਕਰੋ
 #. menu command in the main window
@@ -6942,23 +6942,23 @@ menu	Hide drop target	ਡ੍ਰੌਪ ਟਾਰਗੇਟ ਲੁਕਾਓ
 #, machine
 menu	High contrast	ਉੱਚ ਕੰਟ੍ਰਾਸਟ
 #. menu command in the main window
-#. View → Window system: a greyed note; MDM's windows are Wayland's now
+#. View → Window system: a greyed note; SDM's windows are Wayland's now
 #, machine
 menu	In use: Wayland	ਵਰਤੋਂ ਵਿੱਚ: ਵੇਲੈਂਡ
 #. menu command in the main window
-#. View → Window system: a greyed note; MDM's windows are X11's (through XWayland) now
+#. View → Window system: a greyed note; SDM's windows are X11's (through XWayland) now
 #, machine
 menu	In use: X11 (XWayland)	ਵਰਤੋਂ ਵਿੱਚ: X11 (XWayland)
 #. menu command in the main window
-#. View → Draw with: a greyed note under "… didn't start here"; why: another error, written in MDM's log
+#. View → Draw with: a greyed note under "… didn't start here"; why: another error, written in SDM's log
 #, machine
 menu	It couldn't start: the log says why	ਇਹ ਸ਼ੁਰੂ ਨਹੀਂ ਹੋ ਸਕਿਆ: ਲੌਗ ਵਿੱਚ ਕਾਰਨ ਦਿੱਤਾ ਹੈ
 #. menu command in the main window
-#. View → Draw with: a greyed note under "… didn't start here"; why: the window stayed empty, so MDM started again with OpenGL
+#. View → Draw with: a greyed note under "… didn't start here"; why: the window stayed empty, so SDM started again with OpenGL
 #, machine
 menu	Its first frame didn't show within 10 seconds	ਇਸਦਾ ਪਹਿਲਾ ਫਰੇਮ 10 ਸਕਿੰਟਾਂ ਦੇ ਅੰਦਰ ਨਹੀਂ ਦਿਖਾਇਆ ਗਿਆ
 #. menu command in the main window
-#. View → Draw with: a greyed note under "… didn't start here"; why: MDM crashed or was closed while starting with it
+#. View → Draw with: a greyed note under "… didn't start here"; why: SDM crashed or was closed while starting with it
 #, machine
 menu	Its last start ended before its first frame	ਇਸਦੀ ਆਖਰੀ ਸ਼ੁਰੂਆਤ ਇਸਦੇ ਪਹਿਲੇ ਫਰੇਮ ਤੋਂ ਪਹਿਲਾਂ ਖਤਮ ਹੋ ਗਈ
 #. menu command in the main window
@@ -6984,7 +6984,7 @@ menu	Metro	ਮੈਟਰੋ
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	Mister Download Manager &Home Page	Mister Download Manager ਦਾ &ਮੁੱਖ ਪੰਨਾ
+menu	Sedot Download Manager &Home Page	Sedot Download Manager ਦਾ &ਮੁੱਖ ਪੰਨਾ
 #. menu command in the main window
 #, machine
 menu	Move/Rename (Ctrl-M)	ਮੂਵ/ਨਾਮ ਬਦਲੋ (Ctrl-M)
@@ -7025,23 +7025,23 @@ menu	Open with...	ਇਸ ਨਾਲ ਖੋਲ੍ਹੋ...
 #, machine
 menu	OpenGL	OpenGL
 #. menu command in the main window
-#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: it couldn't start on this computer
+#. View → Draw with: a greyed note; why SDM no longer draws with OpenGL: it couldn't start on this computer
 #, machine
 menu	OpenGL didn't start here	ਇੱਥੇ OpenGL ਸ਼ੁਰੂ ਨਹੀਂ ਹੋਇਆ
 #. menu command in the main window
-#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: its window froze inside the graphics card's driver while OpenGL drew
+#. View → Draw with: a greyed note; why SDM no longer draws with OpenGL: its window froze inside the graphics card's driver while OpenGL drew
 #, machine
 menu	OpenGL froze inside the graphics driver here	ਇੱਥੇ OpenGL ਗ੍ਰਾਫਿਕਸ ਡਰਾਈਵਰ ਦੇ ਅੰਦਰ ਫ੍ਰੀਜ਼ ਹੋ ਗਿਆ
 #. menu command in the main window
-#. View → Draw with: a greyed note; this computer's OpenGL (its graphics driver) is too old, so MDM doesn't draw with it
+#. View → Draw with: a greyed note; this computer's OpenGL (its graphics driver) is too old, so SDM doesn't draw with it
 #, machine
-menu	OpenGL here is too old to draw MDM	ਇੱਥੇ OpenGL MDM ਨੂੰ ਡਰਾਅ ਕਰਨ ਲਈ ਬਹੁਤ ਪੁਰਾਣਾ ਹੈ
+menu	OpenGL here is too old to draw SDM	ਇੱਥੇ OpenGL SDM ਨੂੰ ਡਰਾਅ ਕਰਨ ਲਈ ਬਹੁਤ ਪੁਰਾਣਾ ਹੈ
 #. menu command in the main window
-#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: its window stayed empty for 10 seconds, so MDM started again another way
+#. View → Draw with: a greyed note; why SDM no longer draws with OpenGL: its window stayed empty for 10 seconds, so SDM started again another way
 #, machine
 menu	OpenGL's first frame didn't show within 10 seconds	OpenGL ਦਾ ਪਹਿਲਾ ਫਰੇਮ 10 ਸਕਿੰਟਾਂ ਦੇ ਅੰਦਰ ਨਹੀਂ ਦਿਖਾਇਆ ਗਿਆ
 #. menu command in the main window
-#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: MDM crashed or was closed while starting with it
+#. View → Draw with: a greyed note; why SDM no longer draws with OpenGL: SDM crashed or was closed while starting with it
 #, machine
 menu	OpenGL's last start ended before its first frame	OpenGL ਦੀ ਆਖਰੀ ਸ਼ੁਰੂਆਤ ਇਸਦੇ ਪਹਿਲੇ ਫਰੇਮ ਤੋਂ ਪਹਿਲਾਂ ਖਤਮ ਹੋ ਗਈ
 #. menu command in the main window
@@ -7117,7 +7117,7 @@ menu	Select &all	ਸਾਰੇ ਚੁਣੋ(&A)
 menu	Show &drop target	ਡ੍ਰੌਪ ਟਾਰਗੇਟ ਦਿਖਾਓ(&d)
 #. menu command in the main window
 #, machine
-menu	Show Mister Download Manager	Mister Download Manager ਦਿਖਾਓ
+menu	Show Sedot Download Manager	Sedot Download Manager ਦਿਖਾਓ
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
@@ -7139,7 +7139,7 @@ menu	Stop Download	ਡਾਊਨਲੋਡ ਰੋਕੋ
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	Support &MDM	MDM ਦਾ ਸਮਰਥਨ ਕਰੋ(&M)
+menu	Support SD&M	SDM ਦਾ ਸਮਰਥਨ ਕਰੋ(&M)
 #. menu command in the main window
 #. View menu: submenu choosing how the text is drawn (smooth or classic)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
@@ -7154,7 +7154,7 @@ menu	Tell a &friend	ਦੋਸਤ ਨੂੰ ਦੱਸੋ(&f)
 #, machine
 menu	The graphics card was lost twice in 10 minutes	ਗ੍ਰਾਫਿਕਸ ਕਾਰਡ 10 ਮਿੰਟਾਂ ਵਿੱਚ ਦੋ ਵਾਰ ਕੰਮ ਕਰਨਾ ਬੰਦ ਕਰ ਗਿਆ
 #. menu command in the main window
-#. View menu: submenu choosing MDM's look (colours, sizes, icons): Classic, Native…
+#. View menu: submenu choosing SDM's look (colours, sizes, icons): Classic, Native…
 #, machine
 menu	Theme	ਥੀਮ
 #. menu command in the main window

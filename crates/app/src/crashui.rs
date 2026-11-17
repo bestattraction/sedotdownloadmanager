@@ -95,7 +95,7 @@ pub fn monitor_main(m: MonitorArgs) -> eframe::Result {
     let builder = crate::quiet(
         crate::window_builder()
             .with_title(crate::i18n::os_text(crate::i18n::t(
-                "Mister Download Manager crash report",
+                "Sedot Download Manager crash report",
             )))
             .with_inner_size([CLIENT[0] * zoom, CLIENT[1] * zoom])
             .with_resizable(false)
@@ -364,7 +364,7 @@ impl eframe::App for ReportWindow {
         #[cfg(windows)]
         if !self.caption_dwm {
             self.caption_dwm = crate::win32::caption_dark(
-                crate::i18n::t("Mister Download Manager crash report"),
+                crate::i18n::t("Sedot Download Manager crash report"),
                 crate::theme::dark_surface(),
             );
         }
@@ -392,14 +392,14 @@ impl ReportWindow {
         match self.job.kind {
             // i18n: crash report window heading: the window of MDM stopped answering, then answered again
             Kind::Freeze if self.recovered => {
-                crate::i18n::t("Mister Download Manager stopped responding for a while")
+                crate::i18n::t("Sedot Download Manager stopped responding for a while")
             }
             // i18n: crash report window heading: MDM's window doesn't answer (frozen)
-            Kind::Freeze => crate::i18n::t("Mister Download Manager stopped responding"),
+            Kind::Freeze => crate::i18n::t("Sedot Download Manager stopped responding"),
             // i18n: crash report window heading: an internal error, MDM still running
-            Kind::Panic if alive => crate::i18n::t("Mister Download Manager hit an internal error"),
+            Kind::Panic if alive => crate::i18n::t("Sedot Download Manager hit an internal error"),
             // i18n: crash report window heading: MDM crashed and is gone
-            _ => crate::i18n::t("Mister Download Manager closed unexpectedly"),
+            _ => crate::i18n::t("Sedot Download Manager closed unexpectedly"),
         }
     }
 

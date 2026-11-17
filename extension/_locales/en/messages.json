@@ -144,7 +144,7 @@
     "description": "link in the toolbar button's popup to the help page"
   },
   "popup_support": {
-    "message": "Support MDM",
+    "message": "Support SDM",
     "description": "link at the foot of the toolbar button's popup to the creator's GitHub Sponsors page (MDM is free; this is an optional donation)"
   },
   "popup_fix": {
@@ -382,11 +382,11 @@
     "description": "first line of the tooltip of the download button over a video while the app is still finding its qualities"
   },
   "video_sending": {
-    "message": "Sending to MDM...",
+    "message": "Sending to SDM...",
     "description": "on the download button over a video right after it was clicked, while the download goes to the app; MDM is Sedot Download Manager's short name, keep it as it is; short"
   },
   "video_added": {
-    "message": "Added to MDM",
+    "message": "Added to SDM",
     "description": "on the download button (green) over a video after the app added and started the download; a quality may follow ('· 1080p') and a 'Show' button; MDM is the app's short name, keep it; short"
   },
   "video_show": {
@@ -394,11 +394,11 @@
     "description": "button on the download button over a video after a download was added: shows that download in the app's window; verb; very short"
   },
   "video_no_answer": {
-    "message": "MDM didn't answer",
+    "message": "SDM didn't answer",
     "description": "on the download button (red) over a video when the app isn't installed or didn't start; 'Get MDM' and 'Retry' buttons follow; MDM is the app's short name, keep it; short"
   },
   "video_get_mdm": {
-    "message": "Get MDM",
+    "message": "Get SDM",
     "description": "button on the download button over a video when the app didn't answer: opens the app's download page; MDM is the app's short name, keep it; very short"
   },
   "video_retry": {

@@ -596,7 +596,7 @@ Connection: close
         ));
         assert!(script.contains("$suffix = if ($Arch -eq \"x64\") { \"\" } else { \"-$Arch\" }"));
         assert!(script.contains("[ValidateSet(\"x64\", \"arm64\", \"x86\")]"));
-        let iss = include_str!("../../../tools/installer/mdm.iss").replace("\r\n", "\n");
+        let iss = include_str!("../../../tools/installer/sdm.iss").replace("\r\n", "\n");
         assert!(iss.contains(
             "#if Arch == \"x64\"\nOutputBaseFilename=MisterDownloadManager-{#AppVersion}-setup\n#else\nOutputBaseFilename=MisterDownloadManager-{#AppVersion}-setup-{#Arch}\n#endif"
         ));

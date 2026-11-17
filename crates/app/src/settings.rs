@@ -161,8 +161,7 @@ pub struct Settings {
     /// quickest way in.
     pub clipboard_autostart: bool,
     /// General: Minimize hides the main window, and a download's progress window, to the
-    /// notification area, as closing the main window does (#63). On by default (the
-    /// maintainer's choice), for existing lists too. Only where a tray shows MDM's icon.
+    /// notification area, as closing the main window does (#63). Off by default. Only where a tray shows MDM's icon.
     pub minimize_to_tray: bool,
     /// General: closing the main window keeps MDM running, hidden in the notification area (else
     /// closing quits). On by default, for existing lists too, in every copy. Only where a tray
@@ -451,7 +450,7 @@ impl Default for Settings {
             helpers_asked: false,
             extension_never_ask: false,
             clipboard_autostart: true,
-            minimize_to_tray: true,
+            minimize_to_tray: false,
             close_to_tray: true,
             show_hide_hotkey: String::new(),
             mv2_extensions: true,
@@ -596,7 +595,7 @@ impl Settings {
             "proxy".into(),
             &|| {
                 format!(
-                    "Mister Download Manager: {} {}:{}",
+                    "Sedot Download Manager: {} {}:{}",
                     // i18n: the proxy's password in the system's keychain (Credential Manager, the keyring): its name there, followed by the proxy's address
                     crate::i18n::t("proxy server"),
                     self.proxy_host,
@@ -609,7 +608,7 @@ impl Settings {
             "archives/passwords".into(),
             &|| {
                 format!(
-                    "Mister Download Manager: {}",
+                    "Sedot Download Manager: {}",
                     // i18n: the list of archive passwords in the system's keychain (Credential Manager, the keyring): its name there
                     crate::i18n::t("archive passwords")
                 )
@@ -619,7 +618,7 @@ impl Settings {
         for (a, d) in self.debrid_accounts.iter().zip(&mut disk.debrid_accounts) {
             d.secret = kept(
                 format!("debrid/{}", a.id),
-                &|| format!("Mister Download Manager: {} ({})", a.service.name(), a.user),
+                &|| format!("Sedot Download Manager: {} ({})", a.service.name(), a.user),
                 &a.secret,
             );
         }
@@ -632,7 +631,7 @@ impl Settings {
 {user}"
                     ))
                 ),
-                &|| format!("Mister Download Manager: {site} ({user})"),
+                &|| format!("Sedot Download Manager: {site} ({user})"),
                 pw,
             );
         }

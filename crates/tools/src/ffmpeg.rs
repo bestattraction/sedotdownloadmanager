@@ -95,6 +95,53 @@ fn own(dir: &Path) -> Option<Installed> {
         .filter(|i| i.exe.is_file())
 }
 
+/// Check whether a newer version of ffmpeg is available.
+/// Returns Ok(Some(version)) if a newer release exists, Ok(None) if current or chosen.
+pub async fn check_ffmpeg_update(
+    dir: &Path,
+    net: &mdm_engine::Options,
+) -> Result<Option<String>, Error> {
+    if crate::chosen::chosen(dir, crate::chosen::Helper::Ffmpeg).is_some() {
+        return Ok(None);
+    }
+    let Some(current) = own(dir) else {
+        return Ok(None);
+    };
+    let Some(build) = build() else {
+        return Ok(None);
+    };
+    let client = crate::client(net, RELEASES)?;
+    let body = client
+        .get(RELEASES)
+        .send()
+        .await?
+        .error_for_status()?
+        .bytes()
+        .await?;
+    let mut releases: Vec<Release> =
+        serde_json::from_slice(&body).map_err(|e| Error::BadRelease(e.to_string()))?;
+    releases.sort_by(|a, b| b.published_at.cmp(&a.published_at));
+    let Some((release, asset)) = releases.iter().find_map(|r| {
+        let has_sums = r.assets.iter().any(|a| a.name == "checksums.sha256");
+        best_build(r, build).filter(|_| has_sums).map(|a| (r, a))
+    }) else {
+        return Ok(None);
+    };
+    let line = stable_line(&asset.name, build).unwrap_or_default();
+    let date: String = release
+        .published_at
+        .chars()
+        .take(10)
+        .filter(char::is_ascii_digit)
+        .collect();
+    let version = format!("{line}.{date}");
+    if newer(&version, &current.version) {
+        Ok(Some(version))
+    } else {
+        Ok(None)
+    }
+}
+
 /// Install the newest stable LGPL build into `dir` unless the installed one is as new, the zip
 /// downloaded with MDM's engine (`net`), counted into `progress`.
 pub async fn install_latest(

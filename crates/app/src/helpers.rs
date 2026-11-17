@@ -32,10 +32,17 @@ struct Job {
     state: Arc<Mutex<State>>,
 }
 
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub enum HelperMode {
+    Initial,
+    Update { name: &'static str, version: String },
+}
+
 pub struct Helpers {
     dir: Option<std::path::PathBuf>,
     /// Once Yes was pressed.
     job: Option<Job>,
+    mode: HelperMode,
 }
 
 /// Whether to offer the helpers at this start: never asked, and one of them is missing (ffmpeg
@@ -53,6 +60,15 @@ impl Helpers {
         Helpers {
             dir: mdm_tools::tools_dir(),
             job: None,
+            mode: HelperMode::Initial,
+        }
+    }
+
+    pub fn for_update(name: &'static str, version: String) -> Self {
+        Helpers {
+            dir: mdm_tools::tools_dir(),
+            job: None,
+            mode: HelperMode::Update { name, version },
         }
     }
 
@@ -63,12 +79,22 @@ impl Helpers {
             return;
         };
         let mut list = Vec::new();
-        if mdm_tools::installed(&dir).is_none() {
-            list.push("yt-dlp");
+        match &self.mode {
+            HelperMode::Update { name, .. } => {
+                list.push(*name);
+            }
+            HelperMode::Initial => {
+                if mdm_tools::installed(&dir).is_none() {
+                    list.push("yt-dlp");
+                }
+                // ffmpeg: MDM's own on Windows (it has no build elsewhere, where the system's is used).
+                if cfg!(windows) && mdm_tools::ffmpeg::installed(&dir).is_none() {
+                    list.push("ffmpeg");
+                }
+            }
         }
-        // ffmpeg: MDM's own on Windows (it has no build elsewhere, where the system's is used).
-        if cfg!(windows) && mdm_tools::ffmpeg::installed(&dir).is_none() {
-            list.push("ffmpeg");
+        if list.is_empty() {
+            return;
         }
         let job = Job {
             progress: Arc::default(),
@@ -131,11 +157,15 @@ impl Helpers {
         let extra = crate::dialogs::grow_extra(ctx, "helpers-banner")
             + crate::dialogs::grow_extra(ctx, "helpers-error")
             + crate::dialogs::grow_extra(ctx, "helpers-advice");
+        let title = match &self.mode {
+            HelperMode::Update { .. } => "Update video download module",
+            HelperMode::Initial => "Get ready for video downloads",
+        };
         window(
             ctx,
             "helpers",
-            // i18n: title of the first start's window that offers yt-dlp and ffmpeg
-            "Get ready for video downloads",
+            // i18n: title of the window that offers yt-dlp and ffmpeg
+            title,
             // Taller once Yes is pressed: the progress under the last section.
             [
                 520.0,
@@ -170,17 +200,35 @@ impl Helpers {
         let (ink, muted) = (winui::TEXT(), winui::MUTED());
         let w = 520.0;
         // The banner: MDM's own logo, what this is for, in one line, and why now.
+        let (headline, subline) = match &self.mode {
+            HelperMode::Update { name, version } => (
+                crate::i18n::fmt(
+                    crate::i18n::t("Update available for {name}"),
+                    &[("name", name)],
+                ),
+                crate::i18n::fmt(
+                    crate::i18n::t(
+                        "Version {version} is available. Updating ensures video downloads continue to work properly.",
+                    ),
+                    &[("version", version)],
+                ),
+            ),
+            HelperMode::Initial => (
+                crate::i18n::t("Download videos from YouTube and 1,000+ sites").to_owned(),
+                crate::i18n::t(
+                    "Two free helpers make it work. Get them now, and saving a video is one click away when you find one.",
+                )
+                .to_owned(),
+            ),
+        };
         let extra = winui::banner(
             ui,
             &p,
             o,
             w,
             "helpers-banner",
-            // i18n: the headline of the first start's helpers window
-            crate::i18n::t("Download videos from YouTube and 1,000+ sites"),
-            crate::i18n::t(
-                "Two free helpers make it work. Get them now, and saving a video is one click away when you find one.",
-            ),
+            &headline,
+            &subline,
         );
         // Everything below it moves down with a taller banner.
         let o = o + egui::vec2(0.0, extra);
@@ -391,13 +439,17 @@ impl Helpers {
         );
         let y = y + 28.0 + 16.0 * lines.saturating_sub(1) as f32;
         if self.job.is_none() {
+            let yes_label = match &self.mode {
+                HelperMode::Update { .. } => "Update now (recommended)",
+                HelperMode::Initial => "Yes, download them (recommended)",
+            };
             // As wide as their labels in this language (#192), the row ending where it ends in
             // English.
             let [not_now_at, yes_at] = winui::button_row(
                 &p,
                 &[
                     ("Not now", 196.0, 90.0),
-                    ("Yes, download them (recommended)", 292.0, 212.0),
+                    (yes_label, 292.0, 212.0),
                 ],
                 6.0,
                 16.0,
@@ -413,11 +465,10 @@ impl Helpers {
                 false,
                 None,
             );
-            // i18n: the first start's helpers window: download yt-dlp and ffmpeg (the recommended answer)
             let yes = winui::button(
                 ui,
                 r(o, yes_at.0, y, yes_at.1, 25.0),
-                "Yes, download them (recommended)",
+                yes_label,
                 ButtonKind::Accent,
                 false,
                 None,
@@ -629,7 +680,7 @@ impl Programs {
             let status = match (too_old, found) {
                 _ if downloading => {
                     // i18n: Video helpers: MDM's own yt-dlp is being downloaded
-                    crate::i18n::t("Downloading MDM's own copy...").to_owned()
+                    crate::i18n::t("Downloading SDM's own copy...").to_owned()
                 }
                 _ if checking => {
                     // i18n: Video helpers: a program just chosen is being checked
@@ -660,7 +711,7 @@ impl Programs {
                 ),
                 (None, Some(i)) => crate::i18n::fmt(
                     // i18n: Video helpers: {version} = the version of MDM's own copy
-                    crate::i18n::t("Mister Download Manager's own copy, version {version}"),
+                    crate::i18n::t("Sedot Download Manager's own copy, version {version}"),
                     &[("version", &i.version)],
                 ),
                 // Linux and macOS as before: there the system's package manager (or Homebrew)

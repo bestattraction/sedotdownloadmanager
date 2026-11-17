@@ -1,4 +1,4 @@
-# Mister Download Manager in Amharic (አማርኛ): tools/i18n/translate.py
+# Sedot Download Manager in Amharic (አማርኛ): tools/i18n/translate.py
 # writes the rows marked '#, machine'; a native speaker deletes that line after checking.
 # context	source	translation (craft-i18n format, rows as in en.tsv)
 @id	language.name	አማርኛ
@@ -11,7 +11,7 @@
 #. never shown for a single download
 #. {n} = a number (keep the braces as they are)
 #, machine
-@plural	Are you sure you want to delete {n} download from Mister Download Manager list of downloads?|Are you sure you want to delete these {n} downloads from Mister Download Manager list of downloads?	{n} ማውረድን ከMister Download Manager የማውረዶች ዝርዝር መሰረዝ ይፈልጋሉ፧|እነዚህን {n} ማውረዶች ከMister Download Manager የማውረዶች ዝርዝር መሰረዝ ይፈልጋሉ፧
+@plural	Are you sure you want to delete {n} download from Sedot Download Manager list of downloads?|Are you sure you want to delete these {n} downloads from Sedot Download Manager list of downloads?	{n} ማውረድን ከSedot Download Manager የማውረዶች ዝርዝር መሰረዝ ይፈልጋሉ፧|እነዚህን {n} ማውረዶች ከSedot Download Manager የማውረዶች ዝርዝር መሰረዝ ይፈልጋሉ፧
 #. count in the Add torrent window
 #. while a magnet link's file list is fetched; {n} = peers that answered
 #. {n} = a number (keep the braces as they are)
@@ -217,7 +217,7 @@
 #. text in the Options window
 #. Options → Accounts: what these accounts are, and the services' rule against sharing
 #, machine
-	A debrid service downloads a file host's link with your own paid account and gives MDM a direct link. Use only your own account: sharing an account or its links breaks the services' terms and can get it suspended. Downloads the browser already started stay as they are.	የዲብሪድ አገልግሎት የፋይል አስተናጋጅ ማገናኛን በራስዎ የሚከፈልበት መለያ ያወርዳል እና ለMDM ቀጥተኛ ማገናኛ ይሰጣል። የራስዎን መለያ ብቻ ይጠቀሙ፡ መለያ ወይም ማገናኛዎቹን ማጋራት የአገልግሎቶቹን ውሎች ይጥሳል እና ሊታገድ ይችላል። አሳሹ አስቀድሞ የጀመራቸው ውርዶች እንዳሉ ይቆያሉ።
+	A debrid service downloads a file host's link with your own paid account and gives SDM a direct link. Use only your own account: sharing an account or its links breaks the services' terms and can get it suspended. Downloads the browser already started stay as they are.	የዲብሪድ አገልግሎት የፋይል አስተናጋጅ ማገናኛን በራስዎ የሚከፈልበት መለያ ያወርዳል እና ለMDM ቀጥተኛ ማገናኛ ይሰጣል። የራስዎን መለያ ብቻ ይጠቀሙ፡ መለያ ወይም ማገናኛዎቹን ማጋራት የአገልግሎቶቹን ውሎች ይጥሳል እና ሊታገድ ይችላል። አሳሹ አስቀድሞ የጀመራቸው ውርዶች እንዳሉ ይቆያሉ።
 #. text in a download's progress window
 #. reason shown on the Rename box when the entered name ends with a period
 #, machine
@@ -261,7 +261,7 @@
 #, machine
 	A single-file torrent keeps its name	ነጠላ-ፋይል ቶረንት ስሙን ይጠብቃል
 #. text in the Add torrent window
-#. Add trackers: MDM never contacts a tracker on this computer or the local network
+#. Add trackers: SDM never contacts a tracker on this computer or the local network
 #, machine
 	A tracker on this computer or the local network is never contacted: {line}	በዚህ ኮምፒውተር ወይም በአካባቢያዊ አውታረ መረብ ላይ ያለ መከታተያ በጭራሽ አይገናኝም፦ {line}
 #. text in extracting archives (a download's log, the Archive password window)
@@ -270,7 +270,7 @@
 	a volume of it is missing	አንድ ጥራዙ ጎድሏል
 #. window title in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #, machine
-	About Mister Download Manager	ስለ Mister Download Manager
+	About Sedot Download Manager	ስለ Sedot Download Manager
 #. text in whereis.rs
 #. a download's server's round trip: {ms} a number of milliseconds, {reach} near, medium or far
 #, machine
@@ -333,7 +333,7 @@
 #. window title in extension.rs
 #. title of the window that offers the browser extension
 #, machine
-	Add Mister Download Manager to your browser	Mister Download Managerን ወደ አሳሽዎ ያክሉ
+	Add Sedot Download Manager to your browser	Sedot Download Managerን ወደ አሳሽዎ ያክሉ
 #. message or event log entry in the main window; text in the tray icon's menu
 #. link in the empty download list: opens Add URL
 #, machine
@@ -395,9 +395,9 @@
 #, machine
 	Added.	ታክሏል።
 #. text in remote.rs
-#. remote control page (on a phone): a magnet link or .torrent file was added; MDM reads the torrent's files first
+#. remote control page (on a phone): a magnet link or .torrent file was added; SDM reads the torrent's files first
 #, machine
-	Added. MDM is reading the torrent: it joins the list in a moment.	ታክሏል። MDM ቶረንቱን እያነበበ ነው: በቅርቡ ዝርዝሩን ይቀላቀላል።
+	Added. SDM is reading the torrent: it joins the list in a moment.	ታክሏል። SDM ቶረንቱን እያነበበ ነው: በቅርቡ ዝርዝሩን ይቀላቀላል።
 #. text in the Batch download window; text in a dialog box; label in the Options window; text in a download's progress window
 #. noun: the web address (URL)
 #. column title: the web address (URL)
@@ -481,7 +481,7 @@
 #, machine
 	Already reported as issue #{number}: {title}	እንደ ጉዳይ #{number} ሪፖርት ተደርጓል፦ {title}
 #. checkbox in crashui.rs
-#. crash report window: checkbox; the .dmp file holds what MDM had in memory
+#. crash report window: checkbox; the .dmp file holds what SDM had in memory
 #, machine
 	Also attach the crash data (.dmp): it may hold addresses, cookies and passwords	የብልሽት ውሂብ (.dmp) ያያይዙ፡ አድራሻዎችን፣ ኩኪዎችን እና የይለፍ ቃሎችን ሊይዝ ይችላል
 #. text in a dialog box
@@ -500,7 +500,7 @@
 	Always into a folder named after it	ሁልጊዜ በራሱ ስም ወደተሰየመ አቃፊ
 #. checkbox in a dialog box
 #, machine
-	Always turn on Speed Limiter on Mister Download Manager startup	Mister Download Manager ሲጀመር የፍጥነት ገደብን ሁልጊዜ ያብሩ
+	Always turn on Speed Limiter on Sedot Download Manager startup	Sedot Download Manager ሲጀመር የፍጥነት ገደብን ሁልጊዜ ያብሩ
 #. text in regional.rs; text in the Scheduler window
 #. before noon, after a time of day (12-hour clock). Its pair is "PM": write both the same way (this language's own short marks, or both kept as AM and PM)
 #, machine
@@ -566,7 +566,7 @@
 #. text in a dialog box
 #. {name} = a file name (keep the braces as they are)
 #, machine
-	Are you sure you want to delete "{name}" from Mister Download Manager list of downloads?	“{name}”ን ከMister Download Manager የማውረዶች ዝርዝር ውስጥ መሰረዝ ይፈልጋሉ?
+	Are you sure you want to delete "{name}" from Sedot Download Manager list of downloads?	“{name}”ን ከSedot Download Manager የማውረዶች ዝርዝር ውስጥ መሰረዝ ይፈልጋሉ?
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -626,7 +626,7 @@
 #, machine
 	Austria	ኦስትሪያ
 #. checkbox in the Options window; text in the Options window
-#. checkbox: the User-Agent is the default browser's, which MDM finds itself
+#. checkbox: the User-Agent is the default browser's, which SDM finds itself
 #, machine
 	Automatic	ራስ-ሰር
 #. text in remote.rs
@@ -709,7 +709,7 @@
 	Bosnia and Herzegovina	ቦስኒያ እና ሄርዞጎቪና
 #. text in helpers.rs
 #, machine
-	Both are open source. MDM gets them from their official releases with its own downloader and checks each file's signature before it runs. About 100 MB, once.	ሁለቱም ክፍት ምንጭ ናቸው። MDM ከኦፊሴላዊ ልቀቶቻቸው በራሱ ማውረጃ ያገኛቸዋል እና ከማስኬዱ በፊት የእያንዳንዱን ፋይል ፊርማ ይፈትሻል። አንድ ጊዜ ወደ 100 ሜባ ነው።
+	Both are open source. SDM gets them from their official releases with its own downloader and checks each file's signature before it runs. About 100 MB, once.	ሁለቱም ክፍት ምንጭ ናቸው። SDM ከኦፊሴላዊ ልቀቶቻቸው በራሱ ማውረጃ ያገኛቸዋል እና ከማስኬዱ በፊት የእያንዳንዱን ፋይል ፊርማ ይፈትሻል። አንድ ጊዜ ወደ 100 ሜባ ነው።
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -739,7 +739,7 @@
 	Browse...	አስስ...
 #. text in extension.rs
 #, machine
-	Browser integration isn't set up on this computer, so no browser can reach Mister Download Manager yet.	የአሳሽ ውህደት በዚህ ኮምፒውተር ላይ አልተዘጋጀም፣ ስለዚህ እስካሁን ምንም አሳሽ Mister Download Managerን ማግኘት አይችልም።
+	Browser integration isn't set up on this computer, so no browser can reach Sedot Download Manager yet.	የአሳሽ ውህደት በዚህ ኮምፒውተር ላይ አልተዘጋጀም፣ ስለዚህ እስካሁን ምንም አሳሽ Sedot Download Managerን ማግኘት አይችልም።
 #. page title in the Options window
 #, machine
 	Browser/System Integration	አሳሽ/ስርዓት ውህደት
@@ -871,9 +871,9 @@
 #, machine
 	Check for updates	ዝማኔዎችን ያረጋግጡ
 #. checkbox in the Help menu's windows (About, updates, shortcuts, Tell a friend)
-#. check box in the update window: look for a new version every time MDM starts
+#. check box in the update window: look for a new version every time SDM starts
 #, machine
-	Check for updates at every start	MDM በሚጀምርበት ጊዜ ሁሉ ዝማኔዎችን ይፈትሹ
+	Check for updates at every start	SDM በሚጀምርበት ጊዜ ሁሉ ዝማኔዎችን ይፈትሹ
 #. text in errors.rs
 #. what to do when the proxy set in Options didn't let a helper's download connect; {proxy} = the Options tab Proxy / Socks; {name} = yt-dlp, ffmpeg or gallery-dl; {helpers} and {other} = the buttons Helpers and Use another program
 #. {name} = a file name (keep the braces as they are)
@@ -883,9 +883,9 @@
 #, machine
 	Check your connection, then try again, or get them later from the video window.	ግንኙነትዎን ይፈትሹ፣ ከዚያ እንደገና ይሞክሩ፣ ወይም በኋላ ከቪዲዮ መስኮቱ ያግኟቸው።
 #. text in the Options window
-#. tooltip of the close-setting: checked keeps MDM running when the window closes, in the notification area when available or else the taskbar; downloads continue; unchecked closing quits
+#. tooltip of the close-setting: checked keeps SDM running when the window closes, in the notification area when available or else the taskbar; downloads continue; unchecked closing quits
 #, machine
-	Checked, closing the window keeps MDM running: it hides in the notification area when available, or minimizes to the taskbar otherwise, and downloads continue; unchecked, closing quits MDM	ምልክት ከተደረገበት፣ መስኮቱን ሲዘጉ MDM እየሰራ ይቆያል፦ ሲገኝ በማሳወቂያ አካባቢው ይደበቃል፣ አለበለዚያ ወደ ተግባር አሞሌው ይቀነሳል፣ ማውረዶችም ይቀጥላሉ፤ ምልክት ካልተደረገበት፣ መስኮቱን መዝጋት MDMን ያቆማል።
+	Checked, closing the window keeps SDM running: it hides in the notification area when available, or minimizes to the taskbar otherwise, and downloads continue; unchecked, closing quits SDM	ምልክት ከተደረገበት፣ መስኮቱን ሲዘጉ SDM እየሰራ ይቆያል፦ ሲገኝ በማሳወቂያ አካባቢው ይደበቃል፣ አለበለዚያ ወደ ተግባር አሞሌው ይቀነሳል፣ ማውረዶችም ይቀጥላሉ፤ ምልክት ካልተደረገበት፣ መስኮቱን መዝጋት MDMን ያቆማል።
 #. message or event log entry in the main window
 #. event log entry after Recheck: {have} and {total} are sizes ("1.2 GB of 4 GB there")
 #, machine
@@ -944,7 +944,7 @@
 	Choose a language	ቋንቋ ይምረጡ
 #. text in langpick.rs
 #, machine
-	Choose the language Mister Download Manager shows its windows in:	Mister Download Manager መስኮቶቹን የሚያሳይበትን ቋንቋ ይምረጡ:
+	Choose the language Sedot Download Manager shows its windows in:	Sedot Download Manager መስኮቶቹን የሚያሳይበትን ቋንቋ ይምረጡ:
 #. text in the Options window
 #. Options → Sites Logins → Cookies for video sites: the title of the window, and the tooltip of the button, that pick a browser profile's folder
 #, machine
@@ -1032,7 +1032,7 @@
 #, machine
 	Congo	ኮንጎ
 #. text in extension.rs
-#. in the browser extension's window, beside a browser whose extension reached MDM
+#. in the browser extension's window, beside a browser whose extension reached SDM
 #, machine
 	Connected	ተገናኝቷል
 #. text in extension.rs
@@ -1084,7 +1084,7 @@
 #, machine
 	Could not be read: {error}	ሊነበብ አልቻለም: {error}
 #. text in errors.rs
-#. a helper (yt-dlp, ffmpeg) couldn't be downloaded: the proxy set in Options ({proxy}, its address) didn't let MDM connect
+#. a helper (yt-dlp, ffmpeg) couldn't be downloaded: the proxy set in Options ({proxy}, its address) didn't let SDM connect
 #, machine
 	could not connect through the proxy {proxy}	በተኪው {proxy} በኩል መገናኘት አልተቻለም
 #. text in errors.rs
@@ -1122,13 +1122,13 @@
 	Customize "Download progress" dialog	"የማውረድ ሂደት" መገናኛን ያብጁ
 #. text in the Options window
 #, machine
-	Customize keys to prevent or force downloading with MDM	በMDM ማውረድን ለመከላከል ወይም ለማስገደድ ቁልፎችን ያብጁ
+	Customize keys to prevent or force downloading with SDM	በMDM ማውረድን ለመከላከል ወይም ለማስገደድ ቁልፎችን ያብጁ
 #. text in the Options window
 #, machine
-	Customize MDM Download panels in browsers	በአሳሾች ውስጥ የMDM ማውረድ ፓነሎችን ያብጁ
+	Customize SDM Download panels in browsers	በአሳሾች ውስጥ የMDM ማውረድ ፓነሎችን ያብጁ
 #. text in the Options window
 #, machine
-	Customize MDM menu items in context menu of browsers	በአሳሾች የአውድ ምናሌ ውስጥ የMDM ምናሌ ንጥሎችን ያብጁ
+	Customize SDM menu items in context menu of browsers	በአሳሾች የአውድ ምናሌ ውስጥ የMDM ምናሌ ንጥሎችን ያብጁ
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -1317,9 +1317,9 @@
 #, machine
 	Download complete	ማውረድ ተጠናቋል
 #. text in the Options window
-#. Options, Downloads, under "Show download complete dialog": snoozed with "Until MDM restarts"
+#. Options, Downloads, under "Show download complete dialog": snoozed with "Until SDM restarts"
 #, machine
-	Download complete is snoozed until MDM restarts	ማውረድ ተጠናቋል የሚለው MDM እንደገና እስኪጀመር ድረስ ታግዷል
+	Download complete is snoozed until SDM restarts	ማውረድ ተጠናቋል የሚለው SDM እንደገና እስኪጀመር ድረስ ታግዷል
 #. text in the Options window
 #. Options, Downloads, under "Show download complete dialog": {time} when the snooze ends, like "14:30"
 #. {time} = a time of day (keep the braces as they are)
@@ -1428,10 +1428,10 @@
 #, machine
 	Downloading and verifying yt-dlp...	yt-dlp በመውረድ ላይ እና በመረጋገጥ ላይ ነው...
 #. text in helpers.rs
-#. Video helpers: MDM's own yt-dlp is being downloaded
+#. Video helpers: SDM's own yt-dlp is being downloaded
 #. the trailing ... means it is still going on: keep it
 #, machine
-	Downloading MDM's own copy...	የMDMን ቅጂ በማውረድ ላይ...
+	Downloading SDM's own copy...	የMDMን ቅጂ በማውረድ ላይ...
 #. text in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #. Check for updates, while Update now downloads; {percent} like "42%"
 #, machine
@@ -1474,7 +1474,7 @@
 	Drag the file into a folder or an app	ፋይሉን ወደ አቃፊ ወይም መተግበሪያ ይጎትቱት
 #. message or event log entry in the main window
 #, machine
-	Dragged out of Download complete and moved to a place MDM couldn't learn	ከ“ማውረድ ተጠናቋል” ተጎትቶ MDM ሊያውቀው ወደማይችል ቦታ ተወስዷል
+	Dragged out of Download complete and moved to a place SDM couldn't learn	ከ“ማውረድ ተጠናቋል” ተጎትቶ SDM ሊያውቀው ወደማይችል ቦታ ተወስዷል
 #. message or event log entry in the main window
 #, machine
 	Dragged out of Download complete and moved to {folder}	ከ“ማውረድ ተጠናቋል” ተጎትቶ ወደ {folder} ተወስዷል
@@ -1536,9 +1536,9 @@
 #, machine
 	Empty: all of them. On most sites the newest come first.	ባዶ ከሆነ: ሁሉም። በአብዛኛዎቹ ጣቢያዎች ላይ አዲሶቹ መጀመሪያ ይመጣሉ።
 #. text in crashui.rs
-#. crash report window button: end the frozen MDM and start it again
+#. crash report window button: end the frozen SDM and start it again
 #, machine
-	End and restart MDM	MDMን ጨርስ እና እንደገና አስጀምር
+	End and restart SDM	MDMን ጨርስ እና እንደገና አስጀምር
 #. text in the Add torrent window
 #, machine
 	Enter a magnet link or choose a .torrent file	መግነጢሳዊ አገናኝ ያስገቡ ወይም .torrent ፋይል ይምረጡ
@@ -1621,7 +1621,7 @@
 	Exit	ውጣ
 #. checkbox in a download's progress window; checkbox in the Scheduler window
 #, machine
-	Exit Mister Download Manager when done	ሲጠናቀቅ Mister Download Managerን ዝጋ
+	Exit Sedot Download Manager when done	ሲጠናቀቅ Sedot Download Managerን ዝጋ
 #. text in the Checksum window
 #, machine
 	Expected checksum (MD5, SHA-1, SHA-256, SHA-512 or CRC32):	የሚጠበቀው የቼክሰም (MD5, SHA-1, SHA-256, SHA-512 ወይም CRC32):
@@ -1836,7 +1836,7 @@
 #, machine
 	For example:  {address}	ለምሳሌ: {address}
 #. text in the Add torrent window
-#. Torrent settings, under the switch that makes MDM open magnet links and .torrent files (macOS, Linux)
+#. Torrent settings, under the switch that makes SDM open magnet links and .torrent files (macOS, Linux)
 #, machine
 	For your account only. Another app set as the default stays first.	ለመለያዎ ብቻ። ሌላ መተግበሪያ እንደ ነባሪ ተቀናብሮ መጀመሪያ ላይ ይቆያል።
 #. text in the Add torrent window
@@ -1846,7 +1846,7 @@
 #, machine
 	Force processes to terminate	ሂደቶችን እንዲያቋርጡ አስገድድ
 #. text in remote.rs
-#. remote control page (on a phone): menu command: unpair this phone or computer from MDM
+#. remote control page (on a phone): menu command: unpair this phone or computer from SDM
 #, machine
 	Forget this device	ይህን መሣሪያ እርሳ
 #. text in remote.rs
@@ -2057,11 +2057,11 @@
 #, machine
 	Help	እገዛ
 #. window title in helpers.rs
-#. window title: where MDM takes its helper programs (yt-dlp, ffmpeg, gallery-dl) from
+#. window title: where SDM takes its helper programs (yt-dlp, ffmpeg, gallery-dl) from
 #, machine
 	Helpers	ረዳቶች
 #. text in errors.rs; button in gallerydlg.rs; button in the Download video window
-#. button in Download video: where MDM takes yt-dlp and ffmpeg from
+#. button in Download video: where SDM takes yt-dlp and ffmpeg from
 #. the trailing ... means it opens a window: keep it
 #, machine
 	Helpers...	ረዳቶች...
@@ -2086,7 +2086,7 @@
 	Hide web pages	የድር ገጾችን ደብቅ
 #. text in the Options window
 #, machine
-	Hold Alt while clicking a link to let the browser download it instead of Mister Download Manager.	አሳሹ ከMister Download Manager ይልቅ እንዲያወርደው አገናኝ ላይ ጠቅ ሲያደርጉ Altን ይያዙ።
+	Hold Alt while clicking a link to let the browser download it instead of Sedot Download Manager.	አሳሹ ከSedot Download Manager ይልቅ እንዲያወርደው አገናኝ ላይ ጠቅ ሲያደርጉ Altን ይያዙ።
 #. link (opens a web page) in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #, machine
 	Home page	መነሻ ገጽ
@@ -2127,7 +2127,7 @@
 	Hungary	ሀንጋሪ
 #. text in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #, machine
-	I download with Mister Download Manager: fast, free, and it looks like the download manager you already know. {link}	በMister Download Manager አወርዳለሁ፦ ፈጣን፣ ነፃ እና አስቀድመው የሚያውቁትን የማውረጃ አስተዳዳሪ ይመስላል። {link}
+	I download with Sedot Download Manager: fast, free, and it looks like the download manager you already know. {link}	በSedot Download Manager አወርዳለሁ፦ ፈጣን፣ ነፃ እና አስቀድመው የሚያውቁትን የማውረጃ አስተዳዳሪ ይመስላል። {link}
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -2164,7 +2164,7 @@
 #, machine
 	In the categories: the selected category's menu	በምድቦች ውስጥ፦ የተመረጠው ምድብ ምናሌ
 #. text in the Options window
-#. Options → Accounts: the account's sign-in is in the system's keyring (Linux), which is locked now; MDM never unlocks it
+#. Options → Accounts: the account's sign-in is in the system's keyring (Linux), which is locked now; SDM never unlocks it
 #, machine
 	in the locked keyring	በተቆለፈው ቁልፍ መያዣ ውስጥ
 #. text in standard windows
@@ -2204,7 +2204,7 @@
 #, machine
 	Install it by hand	በእጅ ይጫኑት
 #. text in unix.rs
-#. Linux, after a missing library's name, on a distribution MDM doesn't know
+#. Linux, after a missing library's name, on a distribution SDM doesn't know
 #, machine
 	Install what's missing from your distribution's packages.	የጎደለውን ከስርጭትዎ ፓኬጆች ይጫኑ።
 #. text in the Download video window
@@ -2263,7 +2263,7 @@
 #. text in extracting archives (a download's log, the Archive password window)
 #. why an archive wasn't extracted (after "Couldn't extract {name}: ")
 #, machine
-	it is not an archive MDM extracts	MDM ሊያወጣው የማይችለው ማህደር ነው
+	it is not an archive SDM extracts	SDM ሊያወጣው የማይችለው ማህደር ነው
 #. text in extracting archives (a download's log, the Archive password window)
 #. why an archive wasn't extracted (after "Couldn't extract {name}: ")
 #, machine
@@ -2284,7 +2284,7 @@
 #. text in the Batch download window
 #. \\n starts a new line: break lines where they fit the translation
 #, machine
-	It's possible to add a group of sequential file names like img001.jpg, img002.jpg, etc.,\nimg100.jpg to MDM download queue. Use the asterisk wildcard for the file name pattern.	ተከታታይ የፋይል ስሞችን እንደ img001.jpg፣ img002.jpg፣ ወዘተ፣\nimg100.jpg ወደ MDM ማውረጃ ወረፋ ማከል ይቻላል። ለፋይል ስም ስርዓተ-ጥለት የኮከብ ምልክት የዱር ካርድ ይጠቀሙ።
+	It's possible to add a group of sequential file names like img001.jpg, img002.jpg, etc.,\nimg100.jpg to SDM download queue. Use the asterisk wildcard for the file name pattern.	ተከታታይ የፋይል ስሞችን እንደ img001.jpg፣ img002.jpg፣ ወዘተ፣\nimg100.jpg ወደ SDM ማውረጃ ወረፋ ማከል ይቻላል። ለፋይል ስም ስርዓተ-ጥለት የኮከብ ምልክት የዱር ካርድ ይጠቀሙ።
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -2342,7 +2342,7 @@
 #, machine
 	KBytes/sec	ኪባ/ሰከንድ
 #. text in the Options window
-#. checkbox: closing keeps MDM running, in the notification area when available or else the taskbar, instead of quitting
+#. checkbox: closing keeps SDM running, in the notification area when available or else the taskbar, instead of quitting
 #, machine
 	Keep running when closing the window	መስኮቱን ሲዘጉ እንዲሰራ ያድርጉ
 #. checkbox in the Add torrent window
@@ -2360,7 +2360,7 @@
 #, machine
 	Keyboard shortcuts	የቁልፍ ሰሌዳ አቋራጮች
 #. window title in the Options window
-#. window title: the keys that force or prevent downloading with MDM
+#. window title: the keys that force or prevent downloading with SDM
 #, machine
 	Keys	ቁልፎች
 #. button in the Options window
@@ -2396,14 +2396,14 @@
 #, machine
 	Laos	ላኦስ
 #. message or event log entry in the main window
-#. RSS: a feed bigger than MDM reads (5 MB)
+#. RSS: a feed bigger than SDM reads (5 MB)
 #, machine
 	larger than a feed can be	አንድ ምግብ ሊሆን ከሚችለው በላይ ትልቅ ነው
 #. text in the Batch download window
 #, machine
 	Last file:	የመጨረሻ ፋይል:
 #. text in the Options window
-#. column title: when the device last reached MDM
+#. column title: when the device last reached SDM
 #, machine
 	Last seen	ለመጨረሻ ጊዜ የታየው
 #. text in a download's Properties window
@@ -2421,7 +2421,7 @@
 	Latvia	ላትቪያ
 #. text in the Options window
 #, machine
-	Launch Mister Download Manager on startup	Mister Download Manager ሲጀመር አስጀምር
+	Launch Sedot Download Manager on startup	Sedot Download Manager ሲጀመር አስጀምር
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -2433,7 +2433,7 @@
 #. checkbox in the Options window
 #. Options → Remote check box (off by default)
 #, machine
-	Let phones and computers on the local network control MDM	በአካባቢያዊ አውታረ መረብ ላይ ያሉ ስልኮች እና ኮምፒውተሮች MDMን እንዲቆጣጠሩ ፍቀድ
+	Let phones and computers on the local network control SDM	በአካባቢያዊ አውታረ መረብ ላይ ያሉ ስልኮች እና ኮምፒውተሮች MDMን እንዲቆጣጠሩ ፍቀድ
 #. option (radio button) in the Batch download window
 #. the * in the address runs through letters
 #, machine
@@ -2482,7 +2482,7 @@
 #, machine
 	List the rest	የቀረውን ይዘርዝሩ
 #. text in the Options window
-#. Options → Remote: label before the choice of the address MDM listens on
+#. Options → Remote: label before the choice of the address SDM listens on
 #, machine
 	Listen on:	ያዳምጡ:
 #. text in playlistdlg.rs
@@ -2666,32 +2666,32 @@
 #. text in the Options window
 #. Options → Remote → Pair a device: the remote control isn't listening (no network, port taken): the Remote page says why
 #, machine
-	MDM can't be reached on the network now: Options → Remote says why.	MDM አሁን በአውታረ መረቡ ላይ ሊደረስበት አይችልም: አማራጮች → የርቀት መቆጣጠሪያ ምክንያቱን ይናገራል።
+	SDM can't be reached on the network now: Options → Remote says why.	SDM አሁን በአውታረ መረቡ ላይ ሊደረስበት አይችልም: አማራጮች → የርቀት መቆጣጠሪያ ምክንያቱን ይናገራል።
 #. text in remote.rs
-#. remote control page (on a phone): the address typed isn't one MDM downloads (not http, https, ftp or magnet)
+#. remote control page (on a phone): the address typed isn't one SDM downloads (not http, https, ftp or magnet)
 #, machine
-	MDM cannot download this address.	MDM ይህን አድራሻ ማውረድ አይችልም።
+	SDM cannot download this address.	SDM ይህን አድራሻ ማውረድ አይችልም።
 #. text in remote.rs
 #. remote control page (on a phone): adding a download failed
 #, machine
-	MDM could not add it.	MDM ሊያክለው አልቻለም።
+	SDM could not add it.	SDM ሊያክለው አልቻለም።
 #. text in remote.rs
 #. remote control page (on a phone): an action failed
 #, machine
-	MDM could not do it.	MDM ሊያደርገው አልቻለም።
+	SDM could not do it.	SDM ሊያደርገው አልቻለም።
 #. text in remote.rs
-#. remote control page (on a phone): MDM can't be reached while pairing
+#. remote control page (on a phone): SDM can't be reached while pairing
 #, machine
-	MDM does not answer. Check that it is running and on the same network.	MDM ምላሽ አይሰጥም። እየሰራ መሆኑን እና በተመሳሳይ አውታረ መረብ ላይ መሆኑን ያረጋግጡ።
+	SDM does not answer. Check that it is running and on the same network.	SDM ምላሽ አይሰጥም። እየሰራ መሆኑን እና በተመሳሳይ አውታረ መረብ ላይ መሆኑን ያረጋግጡ።
 #. text in remote.rs
-#. remote control page (on a phone): MDM can't be reached now; the page keeps trying by itself
+#. remote control page (on a phone): SDM can't be reached now; the page keeps trying by itself
 #. the trailing ... means it is still going on: keep it
 #, machine
-	MDM does not answer. Trying again...	MDM ምላሽ አይሰጥም። እንደገና በመሞከር ላይ...
+	SDM does not answer. Trying again...	SDM ምላሽ አይሰጥም። እንደገና በመሞከር ላይ...
 #. text in remote.rs
-#. remote control page (on a phone): no pairing code is shown in MDM; "Pair a device" is MDM's button
+#. remote control page (on a phone): no pairing code is shown in SDM; "Pair a device" is SDM's button
 #, machine
-	MDM shows no code now. Click Pair a device there first.	MDM አሁን ምንም ኮድ አያሳይም። መጀመሪያ እዚያ መሣሪያ ያጣምሩ የሚለውን ጠቅ ያድርጉ።
+	SDM shows no code now. Click Pair a device there first.	SDM አሁን ምንም ኮድ አያሳይም። መጀመሪያ እዚያ መሣሪያ ያጣምሩ የሚለውን ጠቅ ያድርጉ።
 #. text in whereis.rs
 #. how far a download's server is, by its round trip (60 to 150 ms)
 #, machine
@@ -2722,7 +2722,7 @@
 #, machine
 	Minimize	ዝቅተኛ
 #. text in the Options window
-#. checkbox: the Minimize button hides MDM's windows to the notification area (system tray) instead of the taskbar
+#. checkbox: the Minimize button hides SDM's windows to the notification area (system tray) instead of the taskbar
 #, machine
 	Minimize to the notification area	ወደ ማሳወቂያ ቦታ ማሳነስ
 #. text in rssdlg.rs; text in the Add torrent window
@@ -2736,58 +2736,58 @@
 	Missing	የጠፉ
 #. message or event log entry in the main window; window title in a dialog box; text in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #, machine
-	Mister Download Manager	Mister Download Manager
+	Sedot Download Manager	Sedot Download Manager
 #. text in unix.rs
 #. Linux, at start, on the terminal and in a message box: a library the window needs isn't installed; {libraries} = its file names (libxkbcommon-x11.so.0…), left as they are
 #, machine
-	Mister Download Manager can't open its window: this system lacks {libraries}.	Mister Download Manager መስኮቱን መክፈት አልቻለም፦ በዚህ ስርዓት {libraries} የሉም።
+	Sedot Download Manager can't open its window: this system lacks {libraries}.	Sedot Download Manager መስኮቱን መክፈት አልቻለም፦ በዚህ ስርዓት {libraries} የሉም።
 #. text in crashui.rs
-#. crash report window heading: MDM crashed and is gone
+#. crash report window heading: SDM crashed and is gone
 #, machine
-	Mister Download Manager closed unexpectedly	Mister Download Manager ሳይታሰብ ተዘግቷል
+	Sedot Download Manager closed unexpectedly	Sedot Download Manager ሳይታሰብ ተዘግቷል
 #. window title in the Options window
 #, machine
-	Mister Download Manager Configuration	Mister Download Manager ውቅር
+	Sedot Download Manager Configuration	Sedot Download Manager ውቅር
 #. text in crashui.rs
 #, machine
-	Mister Download Manager crash report	Mister Download Manager የብልሽት ሪፖርት
+	Sedot Download Manager crash report	Sedot Download Manager የብልሽት ሪፖርት
 #. text in crashui.rs
-#. crash report window heading: an internal error, MDM still running
+#. crash report window heading: an internal error, SDM still running
 #, machine
-	Mister Download Manager hit an internal error	Mister Download Manager የውስጥ ስህተት አጋጥሞታል
+	Sedot Download Manager hit an internal error	Sedot Download Manager የውስጥ ስህተት አጋጥሞታል
 #. text in wake.rs
 #. why the computer isn't going to sleep, in the system's list of programs that keep it awake (Windows' power requests, Linux's inhibitors)
 #, machine
-	Mister Download Manager is downloading	Mister Download Manager በማውረድ ላይ ነው
+	Sedot Download Manager is downloading	Sedot Download Manager በማውረድ ላይ ነው
 #. text in wake.rs
 #. why the computer isn't going to sleep, in the system's list of programs that keep it awake; {queue} = the queue's name
 #. {queue} = a queue name such as "Main queue" (keep the braces as they are)
 #, machine
-	Mister Download Manager is running the queue "{queue}"	Mister Download Manager ወረፋውን "{queue}" እያሄደ ነው
+	Sedot Download Manager is running the queue "{queue}"	Sedot Download Manager ወረፋውን "{queue}" እያሄደ ነው
 #. text in crashui.rs
-#. crash report window heading: MDM's window doesn't answer (frozen)
+#. crash report window heading: SDM's window doesn't answer (frozen)
 #, machine
-	Mister Download Manager stopped responding	Mister Download Manager ምላሽ መስጠት አቁሟል
+	Sedot Download Manager stopped responding	Sedot Download Manager ምላሽ መስጠት አቁሟል
 #. text in crashui.rs
 #, machine
-	Mister Download Manager stopped responding for a while	Mister Download Manager ለተወሰነ ጊዜ ምላሽ መስጠት አቁሟል
+	Sedot Download Manager stopped responding for a while	Sedot Download Manager ለተወሰነ ጊዜ ምላሽ መስጠት አቁሟል
 #. text in the Options window
 #. \\n starts a new line: break lines where they fit the translation
 #, machine
-	Mister Download Manager writes every connection straight into the final\nfile (a sparse part file next to it), so no temporary directory and no\nassembling step are needed.	Mister Download Manager እያንዳንዱን ግንኙነት በቀጥታ ወደ መጨረሻው\nፋይል (ከጎኑ ያለ ቀጭን ክፍል ፋይል) ይጽፋል፣ ስለዚህ ምንም ጊዜያዊ ማውጫ እና\nየመገጣጠም ደረጃ አያስፈልግም።
+	Sedot Download Manager writes every connection straight into the final\nfile (a sparse part file next to it), so no temporary directory and no\nassembling step are needed.	Sedot Download Manager እያንዳንዱን ግንኙነት በቀጥታ ወደ መጨረሻው\nፋይል (ከጎኑ ያለ ቀጭን ክፍል ፋይል) ይጽፋል፣ ስለዚህ ምንም ጊዜያዊ ማውጫ እና\nየመገጣጠም ደረጃ አያስፈልግም።
 #. text in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #. {version} = a version number (keep the braces as they are)
 #, machine
-	Mister Download Manager {version} is available (released {date}).	Mister Download Manager {version} ይገኛል (በ{date} ተለቋል)።
+	Sedot Download Manager {version} is available (released {date}).	Sedot Download Manager {version} ይገኛል (በ{date} ተለቋል)።
 #. text in helpers.rs
-#. Video helpers: {version} = the version of MDM's own copy
+#. Video helpers: {version} = the version of SDM's own copy
 #. {version} = a version number (keep the braces as they are)
 #, machine
-	Mister Download Manager's own copy, version {version}	Mister Download Manager የራሱ ቅጂ፣ ስሪት {version}
+	Sedot Download Manager's own copy, version {version}	Sedot Download Manager የራሱ ቅጂ፣ ስሪት {version}
 #. text in unix.rs
 #. Linux, at start, on the terminal: the libraries an X11 window needs aren't installed, so the window opens through Wayland instead, where menus can't be placed under what was clicked; {libraries} = their file names, left as they are
 #, machine
-	Mister Download Manager's X11 window needs {libraries}, which this system lacks: it opens on Wayland instead, where its menus may open away from their titles.	Mister Download Manager የX11 መስኮት {libraries} ይፈልጋል፣ እነዚህም በዚህ ስርዓት የሉም፦ በምትኩ በWayland ላይ ይከፈታል፣ እዚያም ምናሌዎቹ ከርዕሶቻቸው ርቀው ሊከፈቱ ይችላሉ።
+	Sedot Download Manager's X11 window needs {libraries}, which this system lacks: it opens on Wayland instead, where its menus may open away from their titles.	Sedot Download Manager የX11 መስኮት {libraries} ይፈልጋል፣ እነዚህም በዚህ ስርዓት የሉም፦ በምትኩ በWayland ላይ ይከፈታል፣ እዚያም ምናሌዎቹ ከርዕሶቻቸው ርቀው ሊከፈቱ ይችላሉ።
 #. text in the Scheduler window
 #. Monday, as short as a calendar's column head (two letters in English)
 #, machine
@@ -2871,7 +2871,7 @@
 #, machine
 	Mozambique	ሞዛምቢክ
 #. text in the Download video window
-#. why "Embed chapters" is greyed in Download video: the choice is a sound converted to MP3, Opus or FLAC, which MDM saves without chapters
+#. why "Embed chapters" is greyed in Download video: the choice is a sound converted to MP3, Opus or FLAC, which SDM saves without chapters
 #, machine
 	MP3, Opus and FLAC files are saved without chapters	MP3፣ Opus እና FLAC ፋይሎች ያለ ምዕራፎች ይቀመጣሉ
 #. text in errors.rs
@@ -2996,11 +2996,11 @@
 #, machine
 	No addresses yet	እስካሁን ምንም አድራሻዎች የሉም
 #. text in extension.rs
-#. a check of Test browser integration (Linux, macOS): MDM found no browser it can connect to (one installed as a Flatpak isn't found)
+#. a check of Test browser integration (Linux, macOS): SDM found no browser it can connect to (one installed as a Flatpak isn't found)
 #, machine
-	No browser MDM can connect to was found	MDM ሊገናኝበት የሚችል ምንም አሳሽ አልተገኘም
+	No browser SDM can connect to was found	SDM ሊገናኝበት የሚችል ምንም አሳሽ አልተገኘም
 #. text in extension.rs
-#. a check of Test browser integration: no browser's extension has reached MDM
+#. a check of Test browser integration: no browser's extension has reached SDM
 #, machine
 	No browser's extension has connected yet	እስካሁን ምንም የአሳሽ ቅጥያ አልተገናኘም።
 #. text in torrent downloads
@@ -3069,9 +3069,9 @@
 #, machine
 	No proxy/socks	ምንም ፕሮክሲ/SOCKS የለም
 #. text in the Options window
-#. Options → Accounts: no system keyring/keychain answered (none runs, e.g. a desktop without one), so the sign-ins stay in MDM's settings folder, which only the user's account may read
+#. Options → Accounts: no system keyring/keychain answered (none runs, e.g. a desktop without one), so the sign-ins stay in SDM's settings folder, which only the user's account may read
 #, machine
-	No system keyring answered, so sign-ins and passwords are kept in MDM's settings, which only you can read.	ምንም የስርዓት ቁልፍ መያዣ ምላሽ አልሰጠም፣ ስለዚህ የመግቢያ መረጃዎች እና የይለፍ ቃሎች እርስዎ ብቻ ሊያነቧቸው በሚችሉት የMDM ቅንብሮች ውስጥ ይቀመጣሉ።
+	No system keyring answered, so sign-ins and passwords are kept in SDM's settings, which only you can read.	ምንም የስርዓት ቁልፍ መያዣ ምላሽ አልሰጠም፣ ስለዚህ የመግቢያ መረጃዎች እና የይለፍ ቃሎች እርስዎ ብቻ ሊያነቧቸው በሚችሉት የMDM ቅንብሮች ውስጥ ይቀመጣሉ።
 #. message or event log entry in the main window
 #. event log entry: Add trackers changed nothing, the torrent had them all
 #, machine
@@ -3202,7 +3202,7 @@
 #. text in the Options window
 #. Options → Remote → Status: the remote control is off
 #, machine
-	Off: nothing on the network can reach MDM.	ጠፍቷል: በአውታረ መረቡ ላይ ምንም ነገር MDMን ሊደርስበት አይችልም።
+	Off: nothing on the network can reach SDM.	ጠፍቷል: በአውታረ መረቡ ላይ ምንም ነገር MDMን ሊደርስበት አይችልም።
 #. text in the Options window
 #, machine
 	Offer to download links copied to the clipboard	ወደ ቅንጥብ ሰሌዳ የተገለበጡ አገናኞችን ለማውረድ ያቅርቡ
@@ -3229,7 +3229,7 @@
 #, machine
 	On macOS, only an administrator can schedule a wake	በmacOS ላይ፣ ማንቂያ መርሐግብር ማስያዝ የሚችለው አስተዳዳሪ ብቻ ነው
 #. text in remote.rs
-#. remote control page (on a phone): how to pair; "Options", "Remote" and "Pair a device" are MDM's dialog, tab and button
+#. remote control page (on a phone): how to pair; "Options", "Remote" and "Pair a device" are SDM's dialog, tab and button
 #, machine
 	On the computer, open Options, then Remote, and click Pair a device. Enter the code it shows.	በኮምፒዩተሩ ላይ አማራጮችን ይክፈቱ፣ ከዚያ የርቀት መቆጣጠሪያን ይክፈቱ እና መሣሪያ ያጣምሩ የሚለውን ጠቅ ያድርጉ። የሚያሳየውን ኮድ ያስገቡ።
 #. text in the Options window
@@ -3278,9 +3278,9 @@
 #. text in the Options window
 #. Options → Remote, at the bottom of the page
 #, machine
-	Only paired devices see or change anything. The first time, the phone's browser warns about MDM's own certificate: its fingerprint is the one above.	የተጣመሩ መሣሪያዎች ብቻ ማንኛውንም ነገር ያያሉ ወይም ይለውጣሉ። ለመጀመሪያ ጊዜ የስልኩ አሳሽ ስለ MDM የራሱ የምስክር ወረቀት ያስጠነቅቃል: የጣት አሻራው ከላይ ያለው ነው።
+	Only paired devices see or change anything. The first time, the phone's browser warns about SDM's own certificate: its fingerprint is the one above.	የተጣመሩ መሣሪያዎች ብቻ ማንኛውንም ነገር ያያሉ ወይም ይለውጣሉ። ለመጀመሪያ ጊዜ የስልኩ አሳሽ ስለ SDM የራሱ የምስክር ወረቀት ያስጠነቅቃል: የጣት አሻራው ከላይ ያለው ነው።
 #. text in playlistdlg.rs
-#. in Download video, a list longer than MDM lists: only its first {n} videos are shown
+#. in Download video, a list longer than SDM lists: only its first {n} videos are shown
 #. {n} = a number (keep the braces as they are)
 #, machine
 	Only the first {n} videos are listed.	የመጀመሪያዎቹ {n} ቪዲዮዎች ብቻ ተዘርዝረዋል።
@@ -3305,10 +3305,10 @@
 	Open in browser	በአሳሽ ውስጥ ይክፈቱ
 #. checkbox in the Add torrent window
 #, machine
-	Open magnet links and .torrent files with Mister Download Manager	መግነጢሳዊ አገናኞችን እና .torrent ፋይሎችን በMister Download Manager ይክፈቱ
+	Open magnet links and .torrent files with Sedot Download Manager	መግነጢሳዊ አገናኞችን እና .torrent ፋይሎችን በSedot Download Manager ይክፈቱ
 #. text in the tray icon's menu
 #, machine
-	Open Mister Download Manager	Mister Download Managerን ክፈት
+	Open Sedot Download Manager	Sedot Download Managerን ክፈት
 #. text in extension.rs
 #. step 2 of turning on the Safari extension; Cmd is the Command key
 #, machine
@@ -3364,7 +3364,7 @@
 #, machine
 	Page address	የገጽ አድራሻ
 #. text in remote.rs
-#. remote control page (on a phone): button: pair this phone with MDM
+#. remote control page (on a phone): button: pair this phone with SDM
 #, machine
 	Pair	ያጣምሩ
 #. window title in the Options window
@@ -3379,7 +3379,7 @@
 #. text in remote.rs
 #. remote control page (on a phone): title of the pairing screen
 #, machine
-	Pair with Mister Download Manager	ከMister Download Manager ጋር ያጣምሩ
+	Pair with Sedot Download Manager	ከSedot Download Manager ጋር ያጣምሩ
 #. text in the Options window
 #. column title: when the device was paired
 #, machine
@@ -3667,11 +3667,11 @@
 #, machine
 	Remember this path for "{category}" category	ይህን መንገድ ለ“{category}” ምድብ ያስታውሱ
 #. text in the Options window
-#. tab title: control MDM from a phone or another computer on the local network
+#. tab title: control SDM from a phone or another computer on the local network
 #, machine
 	Remote	የርቀት መቆጣጠሪያ
 #. text in the Options window
-#. Options page title: control MDM from a phone or another computer on the local network
+#. Options page title: control SDM from a phone or another computer on the local network
 #, machine
 	Remote control	የርቀት መቆጣጠሪያ
 #. button in the Options window; text in remote.rs; button in rssdlg.rs
@@ -3701,9 +3701,9 @@
 #, machine
 	Replace asterisk to	ኮከቢትን ወደ
 #. text in crashui.rs
-#. crash report window button: start MDM again
+#. crash report window button: start SDM again
 #, machine
-	Restart MDM	MDMን እንደገና ያስጀምሩ
+	Restart SDM	MDMን እንደገና ያስጀምሩ
 #. button in the Options window; text in the Options window
 #, machine
 	Restore the built-in categories	አብሮ የተሰሩ ምድቦችን ይመልሱ
@@ -3883,7 +3883,7 @@
 	Select or unselect the download with the dotted outline	ነጥብ ያለው ዝርዝር ያለው ውርድ ምረጥ ወይም ምረጣውን አንሳ
 #. group box title in the Options window
 #, machine
-	Select sounds for Mister Download Manager events	ለMister Download Manager ክስተቶች ድምጾችን ምረጥ
+	Select sounds for Sedot Download Manager events	ለSedot Download Manager ክስተቶች ድምጾችን ምረጥ
 #. what a keyboard shortcut does in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #, machine
 	Select the downloads in the box	በሳጥኑ ውስጥ ያሉትን ውርዶች ምረጥ
@@ -3906,7 +3906,7 @@
 #, machine
 	Send this to a friend:	ይህን ለጓደኛ ላክ:
 #. text in the Options window
-#. Options → Accounts: checkbox: magnet links and .torrent files go to the first account's service, which downloads them; MDM then downloads the files from it (no connections to peers)
+#. Options → Accounts: checkbox: magnet links and .torrent files go to the first account's service, which downloads them; SDM then downloads the files from it (no connections to peers)
 #, machine
 	Send torrents and magnet links to the first account instead of to peers	ቶረንቶችን እና ማግኔት ማያያዣዎችን ወደ እኩዮች ከመላክ ይልቅ ወደ መጀመሪያው መለያ ይላኩ
 #. text in countries.rs
@@ -3951,8 +3951,8 @@
 #, machine
 	Set file creation date as provided by the server	በአገልጋዩ የቀረበውን የፋይል መፍጠሪያ ቀን አዘጋጅ
 #. button in extension.rs; button in the Options window
-#. button in the browser extension's window: register MDM's helper with the browsers
-#. button in Test browser integration: register MDM's helper with the browsers
+#. button in the browser extension's window: register SDM's helper with the browsers
+#. button in Test browser integration: register SDM's helper with the browsers
 #, machine
 	Set it up	አዋቅር
 #. message or event log entry in the main window
@@ -4033,7 +4033,7 @@
 #, machine
 	Show download progress dialog when a download starts	ማውረድ ሲጀምር የማውረድ ሂደት መገናኛን አሳይ
 #. button in a dialog box
-#. button: shows these downloads in MDM's list, selected
+#. button: shows these downloads in SDM's list, selected
 #, machine
 	Show in list	በዝርዝር አሳይ
 #. text in extension.rs
@@ -4111,7 +4111,7 @@
 	Sites Logins	የጣቢያ መግቢያዎች
 #. text in helpers.rs
 #, machine
-	Sites send their best quality as separate video and audio, and ffmpeg joins them. On this system MDM uses yours: install ffmpeg with your package manager.	ጣቢያዎች ምርጥ ጥራታቸውን እንደ የተለየ ቪዲዮ እና ድምጽ ይልካሉ፣ እና ffmpeg ያገናኛቸዋል። በዚህ ስርዓት ላይ MDM የእርስዎን ይጠቀማል፦ ffmpegን በእርስዎ የጥቅል አስተዳዳሪ ይጫኑ።
+	Sites send their best quality as separate video and audio, and ffmpeg joins them. On this system SDM uses yours: install ffmpeg with your package manager.	ጣቢያዎች ምርጥ ጥራታቸውን እንደ የተለየ ቪዲዮ እና ድምጽ ይልካሉ፣ እና ffmpeg ያገናኛቸዋል። በዚህ ስርዓት ላይ SDM የእርስዎን ይጠቀማል፦ ffmpegን በእርስዎ የጥቅል አስተዳዳሪ ይጫኑ።
 #. text in helpers.rs
 #, machine
 	Sites send their best quality as separate video and audio. ffmpeg puts them together into one file that plays anywhere.	ጣቢያዎች ከፍተኛ ጥራት ያለውን ይዘት እንደ ተለያዩ የቪዲዮ እና የድምጽ ፋይሎች ይልካሉ። ffmpeg በማንኛውም ቦታ ሊጫወት የሚችል አንድ ፋይል እንዲሆኑ ያዋህዳቸዋል።
@@ -4230,7 +4230,7 @@
 	Start download at	ማውረድ የሚጀምርበት ሰዓት
 #. checkbox in the Scheduler window
 #, machine
-	Start download on Mister Download Manager startup	Mister Download Manager ሲጀምር ማውረድ ይጀምር
+	Start download on Sedot Download Manager startup	Sedot Download Manager ሲጀምር ማውረድ ይጀምር
 #. checkbox in the Options window
 #, machine
 	Start downloading immediately while displaying "Download File Info" dialog	"የፋይል መረጃ አውርድ" መገናኛን እያሳየ ወዲያውኑ ማውረድ ጀምር
@@ -4261,11 +4261,11 @@
 #, machine
 	Started with gallery-dl {version}	በgallery-dl {version} ተጀምሯል
 #. text in the Options window
-#. the same tooltip where no notification area (system tray) shows MDM's icon (some Linux desktops): its window starts minimized instead
+#. the same tooltip where no notification area (system tray) shows SDM's icon (some Linux desktops): its window starts minimized instead
 #, machine
 	Started with the computer, it starts minimized: no notification area shows its icon here	ከኮምፒዩተሩ ጋር ሲጀምር፣ በተቀነሰ መልኩ ይከፈታል፤ የማሳወቂያ አካባቢው አዶውን አያሳይም።
 #. text in the Options window
-#. tooltip of "Launch Mister Download Manager on startup": started with the computer, MDM's window stays hidden, its icon in the notification area (system tray)
+#. tooltip of "Launch Sedot Download Manager on startup": started with the computer, SDM's window stays hidden, its icon in the notification area (system tray)
 #, machine
 	Started with the computer, it waits in the notification area	ከኮምፒዩተሩ ጋር ሲጀምር፣ በማሳወቂያ አካባቢው ይጠብቃል።
 #. message or event log entry in the main window
@@ -4373,7 +4373,7 @@
 	Sunday	እሑድ
 #. link (opens a web page) in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #, machine
-	Support MDM on GitHub Sponsors	MDMን በGitHub ስፖንሰሮች ይደግፉ
+	Support SDM on GitHub Sponsors	MDMን በGitHub ስፖንሰሮች ይደግፉ
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -4484,17 +4484,17 @@
 #, machine
 	The best qualities, MP3, Opus and FLAC need ffmpeg: install it with your system's package manager (or Homebrew).	ምርጥ ጥራቶች፣ MP3፣ Opus እና FLAC ffmpeg ያስፈልጋቸዋል፡ በስርዓትዎ ጥቅል አስተዳዳሪ (ወይም Homebrew) ይጫኑት።
 #. text in the settings
-#. an error: the browser's VPN or proxy extension logs in to its proxy itself, and MDM can't; Options → Proxy / Socks → Network adapter is where an adapter can be chosen
+#. an error: the browser's VPN or proxy extension logs in to its proxy itself, and SDM can't; Options → Proxy / Socks → Network adapter is where an adapter can be chosen
 #, machine
 	the browser's proxy (a VPN or proxy extension) asks for a login only that extension has: use the VPN's own app, or choose its network adapter in Options → Proxy / Socks	የአሳሹ ፕሮክሲ (VPN ወይም ፕሮክሲ ቅጥያ) ያ ቅጥያ ብቻ ያለውን መግቢያ ይጠይቃል፦ የVPNውን የራሱን መተግበሪያ ይጠቀሙ ወይም የአውታረ መረብ አስማሚውን በምርጫዎች → ፕሮክሲ / SOCKS ውስጥ ይምረጡ
 #. text in extension.rs
-#. a check of Test browser integration: the browsers are pointed at a copy of MDM that was deleted (often one started from inside a zip); that copy's folder shows on the line under it
+#. a check of Test browser integration: the browsers are pointed at a copy of SDM that was deleted (often one started from inside a zip); that copy's folder shows on the line under it
 #, machine
 	The browsers are set up for a copy that is gone:	አሳሾቹ ለሌለ ቅጂ ተዘጋጅተዋል፦
 #. text in extension.rs
-#. a check of Test browser integration: the browsers find MDM's helper program
+#. a check of Test browser integration: the browsers find SDM's helper program
 #, machine
-	The browsers can find Mister Download Manager	አሳሾቹ Mister Download Managerን ማግኘት ይችላሉ
+	The browsers can find Sedot Download Manager	አሳሾቹ Sedot Download Managerን ማግኘት ይችላሉ
 #. text in the Options window
 #. Options → Remote → Status: the settings were changed; they apply on OK
 #, machine
@@ -4521,7 +4521,7 @@
 #. text in the Scheduler window
 #. tooltip on the Scheduler's "Wake the computer to run this queue"
 #, machine
-	The computer is woken a minute before the start time and kept awake while the queue runs. Mister Download Manager has to be running (it can wait in the notification area).	ኮምፒውተሩ ከመጀመርያው ሰዓት አንድ ደቂቃ በፊት ይነቃል እና ወረፋው በሚሰራበት ጊዜ ነቅቶ ይቆያል። Mister Download Manager እየሰራ መሆን አለበት (በማሳወቂያ ቦታው ላይ መጠበቅ ይችላል)።
+	The computer is woken a minute before the start time and kept awake while the queue runs. Sedot Download Manager has to be running (it can wait in the notification area).	ኮምፒውተሩ ከመጀመርያው ሰዓት አንድ ደቂቃ በፊት ይነቃል እና ወረፋው በሚሰራበት ጊዜ ነቅቶ ይቆያል። Sedot Download Manager እየሰራ መሆን አለበት (በማሳወቂያ ቦታው ላይ መጠበቅ ይችላል)።
 #. text in the Scheduler window
 #. the Scheduler, under "Wake the computer to run this queue": when it will happen; {date} = e.g. 06/11/2026, {time} = e.g. 22:59:00
 #. {time} = a time of day (keep the braces as they are)
@@ -4576,7 +4576,7 @@
 #. message or event log entry in the main window
 #. {error} = an error message (keep the braces as they are)
 #, machine
-	The download list could not be saved: {error}. Changes are kept while MDM runs.	የማውረድ ዝርዝሩ ሊቀመጥ አልቻለም፡ {error}። MDM በሚሰራበት ጊዜ ለውጦች ይቀመጣሉ።
+	The download list could not be saved: {error}. Changes are kept while SDM runs.	የማውረድ ዝርዝሩ ሊቀመጥ አልቻለም፡ {error}። SDM በሚሰራበት ጊዜ ለውጦች ይቀመጣሉ።
 #. text in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #, machine
 	The download manager you already know, rebuilt to be faster. Free and open source under the GNU GPL, version 3 or later. Videos are found by yt-dlp; torrents run on librqbit.	ቀድሞውንም የሚያውቁት የማውረድ አስተዳዳሪ፣ በፍጥነት እንዲሰራ ተደርጎ እንደገና የተሰራ። በGNU GPL፣ ስሪት 3 ወይም ከዚያ በኋላ ነፃ እና ክፍት ምንጭ። ቪዲዮዎች በyt-dlp ይገኛሉ፤ ቶረንቶች በlibrqbit ላይ ይሰራሉ።
@@ -4711,7 +4711,7 @@
 #. text in a dialog box
 #. \\n starts a new line: break lines where they fit the translation
 #, machine
-	The selected download is not complete. Are you sure you want to delete\nit from Mister Download Manager list of downloads?	የተመረጠው ማውረድ አልተጠናቀቀም። ከMister Download Manager የማውረዶች ዝርዝር ውስጥ\nመሰረዝ ይፈልጋሉ፧
+	The selected download is not complete. Are you sure you want to delete\nit from Sedot Download Manager list of downloads?	የተመረጠው ማውረድ አልተጠናቀቀም። ከSedot Download Manager የማውረዶች ዝርዝር ውስጥ\nመሰረዝ ይፈልጋሉ፧
 #. text in errors.rs
 #, machine
 	the server answered {status}	አገልጋዩ {status} ብሎ መለሰ
@@ -4731,9 +4731,9 @@
 #, machine
 	the server sent an unexpected part of the file ({detail})	አገልጋዩ ያልተጠበቀ የፋይሉን ክፍል ልኳል ({detail})
 #. text in errors.rs
-#. why a download failed (#701): a file host answered with its own web page (a countdown before the link, a captcha, a sign-in) where the file was expected. The browser gets past it; MDM's browser extension then hands the real file back to MDM
+#. why a download failed (#701): a file host answered with its own web page (a countdown before the link, a captcha, a sign-in) where the file was expected. The browser gets past it; SDM's browser extension then hands the real file back to SDM
 #, machine
-	the site sent a web page instead of the file (a waiting page, a captcha or a sign-in): open the link in your browser, finish there, and the download comes back to MDM	ጣቢያው ከፋይሉ ይልቅ የድር ገጽ ልኳል (የመጠበቂያ ገጽ፣ ካፕቻ ወይም መግቢያ)፦ አገናኙን በአሳሽዎ ውስጥ ይክፈቱ፣ እዚያ ይጨርሱት፣ እና ማውረዱ ወደ MDM ይመለሳል።
+	the site sent a web page instead of the file (a waiting page, a captcha or a sign-in): open the link in your browser, finish there, and the download comes back to SDM	ጣቢያው ከፋይሉ ይልቅ የድር ገጽ ልኳል (የመጠበቂያ ገጽ፣ ካፕቻ ወይም መግቢያ)፦ አገናኙን በአሳሽዎ ውስጥ ይክፈቱ፣ እዚያ ይጨርሱት፣ እና ማውረዱ ወደ SDM ይመለሳል።
 #. text in the Download video window
 #. the Download video window: the site asked for a sign-in although the browser's extension passed the page's cookies
 #, machine
@@ -4757,15 +4757,15 @@
 #. text in errors.rs
 #. why a download failed: the site's security certificate (what proves a secure, HTTPS, site is the one it says) is past its end date. Browsers warn about the same site
 #, machine
-	the site's security certificate has expired, so MDM can't be sure it's the real site (your browser warns about it too)	የጣቢያው የደህንነት ሰርተፍኬት ጊዜው አልፎበታል፣ ስለዚህ MDM ትክክለኛው ጣቢያ መሆኑን እርግጠኛ መሆን አይችልም (የእርስዎ አሳሽም ያስጠነቅቃል)
+	the site's security certificate has expired, so SDM can't be sure it's the real site (your browser warns about it too)	የጣቢያው የደህንነት ሰርተፍኬት ጊዜው አልፎበታል፣ ስለዚህ SDM ትክክለኛው ጣቢያ መሆኑን እርግጠኛ መሆን አይችልም (የእርስዎ አሳሽም ያስጠነቅቃል)
 #. text in errors.rs
 #. why a download failed: the site's security certificate was made for other site names than the one in the address
 #, machine
-	the site's security certificate is for another site name, so MDM can't be sure it's the real site (your browser warns about it too)	የጣቢያው የደህንነት ሰርተፍኬት ለሌላ የጣቢያ ስም ነው፣ ስለዚህ MDM ትክክለኛው ጣቢያ መሆኑን እርግጠኛ መሆን አይችልም (የእርስዎ አሳሽም ያስጠነቅቃል)
+	the site's security certificate is for another site name, so SDM can't be sure it's the real site (your browser warns about it too)	የጣቢያው የደህንነት ሰርተፍኬት ለሌላ የጣቢያ ስም ነው፣ ስለዚህ SDM ትክክለኛው ጣቢያ መሆኑን እርግጠኛ መሆን አይችልም (የእርስዎ አሳሽም ያስጠነቅቃል)
 #. text in errors.rs
 #. why a download failed: the site's security certificate was signed by the site itself or by an issuer this computer doesn't trust. Browsers warn about the same site
 #, machine
-	the site's security certificate isn't trusted (it's self-signed or from an unknown issuer), so MDM can't be sure it's the real site (your browser warns about it too)	የጣቢያው የደህንነት ሰርተፍኬት አይታመንም (በራሱ የተፈረመ ወይም ከማይታወቅ ሰጪ ነው)፣ ስለዚህ MDM ትክክለኛው ጣቢያ መሆኑን እርግጠኛ መሆን አይችልም (የእርስዎ አሳሽም ያስጠነቅቃል)
+	the site's security certificate isn't trusted (it's self-signed or from an unknown issuer), so SDM can't be sure it's the real site (your browser warns about it too)	የጣቢያው የደህንነት ሰርተፍኬት አይታመንም (በራሱ የተፈረመ ወይም ከማይታወቅ ሰጪ ነው)፣ ስለዚህ SDM ትክክለኛው ጣቢያ መሆኑን እርግጠኛ መሆን አይችልም (የእርስዎ አሳሽም ያስጠነቅቃል)
 #. text in errors.rs
 #. why a download failed: the site's security certificate's validity hasn't begun; usually this computer's date or time is wrong
 #, machine
@@ -4773,11 +4773,11 @@
 #. text in errors.rs
 #. why a download failed: the site's security certificate was refused for another reason (a bad signature, a broken certificate)
 #, machine
-	the site's security certificate was refused, so MDM can't be sure it's the real site	የጣቢያው የደህንነት ሰርተፍኬት ውድቅ ተደርጓል፣ ስለዚህ MDM ትክክለኛው ጣቢያ መሆኑን እርግጠኛ መሆን አይችልም
+	the site's security certificate was refused, so SDM can't be sure it's the real site	የጣቢያው የደህንነት ሰርተፍኬት ውድቅ ተደርጓል፣ ስለዚህ SDM ትክክለኛው ጣቢያ መሆኑን እርግጠኛ መሆን አይችልም
 #. text in errors.rs
 #. why a download failed: the issuer of the site's security certificate took it back
 #, machine
-	the site's security certificate was revoked by its issuer, so MDM won't trust it	የጣቢያው የደህንነት ሰርተፍኬት በሰጪው ተሽሯል፣ ስለዚህ MDM አያምነውም
+	the site's security certificate was revoked by its issuer, so SDM won't trust it	የጣቢያው የደህንነት ሰርተፍኬት በሰጪው ተሽሯል፣ ስለዚህ SDM አያምነውም
 #. text in the Download video window
 #. the Download video window: the site's certificate is trusted neither by yt-dlp nor by the computer (asked again with the computer's certificates, #955); usually an antivirus or a proxy that reads secure (HTTPS) connections signs sites with a certificate of its own
 #, machine
@@ -4785,15 +4785,15 @@
 #. text in errors.rs
 #. why a download failed: the site's security certificate is made for other uses than a website (its "extended key usage" leaves out web servers)
 #, machine
-	the site's security certificate isn't made for websites, so MDM can't be sure it's the real site	የጣቢያው የደህንነት ሰርተፍኬት ለድር ጣቢያዎች የተሰራ አይደለም፣ ስለዚህ MDM እውነተኛው ጣቢያ መሆኑን ማረጋገጥ አይችልም።
+	the site's security certificate isn't made for websites, so SDM can't be sure it's the real site	የጣቢያው የደህንነት ሰርተፍኬት ለድር ጣቢያዎች የተሰራ አይደለም፣ ስለዚህ SDM እውነተኛው ጣቢያ መሆኑን ማረጋገጥ አይችልም።
 #. text in crashui.rs
 #. crash report window: the symbols couldn't be downloaded; the report still works
 #, machine
 	The symbols couldn't be fetched: some lines of the report show addresses instead of names (the developers can still read them).	ሲምቦሎቹን ማውረድ አልተቻለም፦ አንዳንድ የሪፖርቱ መስመሮች ከስሞች ይልቅ አድራሻዎችን ያሳያሉ (ገንቢዎቹ አሁንም ሊያነቧቸው ይችላሉ)።
 #. text in the Options window
-#. Options → Accounts (Linux): the system keyring is locked (MDM never unlocks it: that would ask for its password), so the sign-ins stay in MDM's settings folder, which only the user's account may read
+#. Options → Accounts (Linux): the system keyring is locked (SDM never unlocks it: that would ask for its password), so the sign-ins stay in SDM's settings folder, which only the user's account may read
 #, machine
-	The system keyring is locked and MDM doesn't unlock it, so sign-ins and passwords are kept in MDM's settings, which only you can read.	የስርዓት ቁልፍ መያዣው ተቆልፏል፣ MDMም አይከፍተውም፤ ስለዚህ የመግቢያ መረጃዎችና የይለፍ ቃሎች እርስዎ ብቻ ሊያነቧቸው በሚችሉበት የMDM ቅንብሮች ውስጥ ይቀመጣሉ።
+	The system keyring is locked and SDM doesn't unlock it, so sign-ins and passwords are kept in SDM's settings, which only you can read.	የስርዓት ቁልፍ መያዣው ተቆልፏል፣ MDMም አይከፍተውም፤ ስለዚህ የመግቢያ መረጃዎችና የይለፍ ቃሎች እርስዎ ብቻ ሊያነቧቸው በሚችሉበት የMDM ቅንብሮች ውስጥ ይቀመጣሉ።
 #. text in the Options window
 #. Options → Connection → DNS: the operating system's own DNS (the default)
 #, machine
@@ -4825,7 +4825,7 @@
 #, machine
 	The web page from which this file was obtained:	ይህ ፋይል የተገኘበት የድር ገጽ:
 #. message or event log entry in the main window
-#. the kind of file View → Theme → Add a theme file lists: MDM's themes (TOML, JSON), Base16 schemes (YAML) and pywal's colors.json
+#. the kind of file View → Theme → Add a theme file lists: SDM's themes (TOML, JSON), Base16 schemes (YAML) and pywal's colors.json
 #, machine
 	Themes and colour schemes	ገጽታዎች እና የቀለም መርሃግብሮች
 #. text in the Options window
@@ -4883,7 +4883,7 @@
 #, machine
 	This computer only (127.0.0.1)	ይህ ኮምፒውተር ብቻ (127.0.0.1)
 #. text in extension.rs
-#. a check of Test browser integration: MDM was started from inside a zip (or from the temporary folder), which is deleted after it quits, so it can't be connected to the browsers
+#. a check of Test browser integration: SDM was started from inside a zip (or from the temporary folder), which is deleted after it quits, so it can't be connected to the browsers
 #, machine
 	This copy runs from a temporary folder that will be deleted	ይህ ቅጂ የሚሰራው ከሚሰረዝ ጊዜያዊ ማህደር ነው
 #. text in the Scheduler window
@@ -4891,7 +4891,7 @@
 #, machine
 	This date has passed: the queue will not start	ይህ ቀን አልፏል፤ ወረፋው አይጀምርም
 #. text in remote.rs
-#. remote control page (on a phone): label of the box naming this phone (shown in MDM's list of paired devices)
+#. remote control page (on a phone): label of the box naming this phone (shown in SDM's list of paired devices)
 #, machine
 	This device's name	የዚህ መሳሪያ ስም
 #. message or event log entry in the main window
@@ -5008,7 +5008,7 @@
 #. message or event log entry in the main window
 #. event log: a torrent goes through the user's debrid account, not to peers; {service} its name ("Real-Debrid")
 #, machine
-	Through {service}: the service downloads the torrent, then MDM its files	በ{service} በኩል: አገልግሎቱ ቶረንቱን ያወርዳል፣ ከዚያ MDM ፋይሎቹን ያወርዳል
+	Through {service}: the service downloads the torrent, then SDM its files	በ{service} በኩል: አገልግሎቱ ቶረንቱን ያወርዳል፣ ከዚያ SDM ፋይሎቹን ያወርዳል
 #. text in the Scheduler window
 #, machine
 	Thursday	ሐሙስ
@@ -5154,7 +5154,7 @@
 #. text in extension.rs
 #. step 8 of turning on the Safari extension
 #, machine
-	Turn on "Mister Download Manager" and allow it on all websites.	“Mister Download Manager” ን ያብሩና በሁሉም ድር ጣቢያዎች ላይ ይፍቀዱለት።
+	Turn on "Sedot Download Manager" and allow it on all websites.	“Sedot Download Manager” ን ያብሩና በሁሉም ድር ጣቢያዎች ላይ ይፍቀዱለት።
 #. text in extension.rs
 #. step 4 of turning on the Safari extension; the quoted switch name is what Safari's settings show in this language: use Apple's own words for it, or keep the English name when unsure
 #, machine
@@ -5210,7 +5210,7 @@
 #. Options → Add an account: waiting while the user types the code at the service's page; {page} its address, {time} minutes:seconds left
 #. {time} = a time of day (keep the braces as they are)
 #, machine
-	Type this code at {page} and allow MDM; waiting for you (the code expires in {time}).	ይህን ኮድ በ{page} ላይ ይተይቡ እና MDMን ይፍቀዱ፤ እርስዎን በመጠበቅ ላይ (ኮዱ በ{time} ጊዜው ያበቃል)።
+	Type this code at {page} and allow SDM; waiting for you (the code expires in {time}).	ይህን ኮድ በ{page} ላይ ይተይቡ እና MDMን ይፍቀዱ፤ እርስዎን በመጠበቅ ላይ (ኮዱ በ{time} ጊዜው ያበቃል)።
 #. tooltip (why a control is greyed) in the Find window
 #. tooltip of the greyed Find button
 #, machine
@@ -5266,9 +5266,9 @@
 #, machine
 	unknown	ያልታወቀ
 #. text in finish.rs
-#. Snooze menu of the Download complete window: show no Download complete window until MDM is started again
+#. Snooze menu of the Download complete window: show no Download complete window until SDM is started again
 #, machine
-	Until MDM restarts	MDM እንደገና እስኪጀመር ድረስ
+	Until SDM restarts	SDM እንደገና እስኪጀመር ድረስ
 #. button in the Options window
 #. button (short): move the account up the list (accounts are asked in the list's order)
 #, machine
@@ -5310,9 +5310,9 @@
 #, machine
 	Use FTP in PASV mode	FTPን በPASV ሁነታ ተጠቀም
 #. button in helpers.rs
-#. Video helpers: button: go back to the copy MDM downloads and checks itself
+#. Video helpers: button: go back to the copy SDM downloads and checks itself
 #, machine
-	Use MDM's own copy	የMDM የራሱን ቅጂ ይጠቀሙ
+	Use SDM's own copy	የMDM የራሱን ቅጂ ይጠቀሙ
 #. text in the Batch download window
 #. why Batch download's OK is greyed
 #, machine
@@ -5518,9 +5518,9 @@
 #, machine
 	Windows checks the files marked this way: SmartScreen before a program first runs, Office's Protected View before a document opens. Unticked, or under Windows' policy "Do not preserve zone information in file attachments", no download is marked.	Windows በዚህ መንገድ ምልክት የተደረገባቸውን ፋይሎች ይፈትሻል፦ SmartScreen አንድ ፕሮግራም ለመጀመሪያ ጊዜ ከመጀመሩ በፊት፣ የ Office የተጠበቀ እይታ አንድ ሰነድ ከመከፈቱ በፊት። ምልክት ካልተደረገበት፣ ወይም በ Windows ፖሊሲ “የዞን መረጃን በፋይል አባሪዎች ውስጥ አያስቀምጡ” ስር፣ ምንም ማውረድ ምልክት አይደረግበትም።
 #. text in the Options window
-#. Options → Accounts: Windows Credential Manager didn't answer, so the sign-ins stay in MDM's settings, encrypted so that only this Windows account can read them
+#. Options → Accounts: Windows Credential Manager didn't answer, so the sign-ins stay in SDM's settings, encrypted so that only this Windows account can read them
 #, machine
-	Windows Credential Manager didn't answer, so sign-ins and passwords are kept in MDM's settings, encrypted for your Windows account.	Windows Credential Manager ምላሽ አልሰጠም፣ ስለዚህ የመግቢያ መረጃዎች እና የይለፍ ቃሎች በMDM ቅንብሮች ውስጥ ይቀመጣሉ፣ ለWindows መለያዎ የተመሰጠሩ ናቸው።
+	Windows Credential Manager didn't answer, so sign-ins and passwords are kept in SDM's settings, encrypted for your Windows account.	Windows Credential Manager ምላሽ አልሰጠም፣ ስለዚህ የመግቢያ መረጃዎች እና የይለፍ ቃሎች በMDM ቅንብሮች ውስጥ ይቀመጣሉ፣ ለWindows መለያዎ የተመሰጠሩ ናቸው።
 #. text in a dialog box
 #. why the computer could not be put to sleep (fills {error})
 #, machine
@@ -5552,7 +5552,7 @@
 #. text in remote.rs
 #. remote control page (on a phone): pairing failed and the code is void now
 #, machine
-	Wrong code. Show a new code in MDM and try again.	የተሳሳተ ኮድ። በMDM ውስጥ አዲስ ኮድ ያሳዩ እና እንደገና ይሞክሩ።
+	Wrong code. Show a new code in SDM and try again.	የተሳሳተ ኮድ። በMDM ውስጥ አዲስ ኮድ ያሳዩ እና እንደገና ይሞክሩ።
 #. text in remote.rs
 #. remote control page (on a phone): pairing failed; {n} = how many more codes may be tried
 #. {n} = a number (keep the braces as they are)
@@ -5584,9 +5584,9 @@
 #. text in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #. {version} = a version number (keep the braces as they are)
 #, machine
-	You have the latest version of Mister Download Manager ({version}).	የMister Download Manager ({version}) የቅርብ ጊዜ ስሪት አለዎት።
+	You have the latest version of Sedot Download Manager ({version}).	የSedot Download Manager ({version}) የቅርብ ጊዜ ስሪት አለዎት።
 #. text in the Help menu's windows (About, updates, shortcuts, Tell a friend)
-#. Check for updates, under the new version's line, when MDM was installed by the Linux system's package manager (pacman, ...), which MDM can't update itself
+#. Check for updates, under the new version's line, when SDM was installed by the Linux system's package manager (pacman, ...), which SDM can't update itself
 #. {version} = a version number (keep the braces as they are)
 #, machine
 	You have version {version}, from your system's package manager: update it there.	የእርስዎ ስሪት {version} ነው፣ ከስርዓትዎ ጥቅል አስተዳዳሪ የተገኘ ነው፦ እዚያ ያዘምኑት።
@@ -5600,7 +5600,7 @@
 	Your browser	የእርስዎ አሳሽ
 #. text in the Options window
 #, machine
-	Your default browser isn't one MDM knows: a current Chrome's User-Agent	ነባሪ አሳሽዎ MDM ከሚያውቃቸው አሳሾች አንዱ አይደለም፦ የአሁኑ የChrome User-Agent
+	Your default browser isn't one SDM knows: a current Chrome's User-Agent	ነባሪ አሳሽዎ SDM ከሚያውቃቸው አሳሾች አንዱ አይደለም፦ የአሁኑ የChrome User-Agent
 #. text in the Options window
 #. tooltip; {browser} is a browser and its version, e.g. "Brave 157"
 #, machine
@@ -5614,10 +5614,10 @@
 #, machine
 	your Google account has no access to this file, or its owner turned off downloading	የእርስዎ የGoogle መለያ ይህን ፋይል የመድረስ ፍቃድ የለውም፣ ወይም ባለቤቱ ማውረድን አጥፍቷል
 #. text in helpers.rs
-#. Video helpers: the person's own gallery-dl is too old and not used; {version} = its version, {oldest} = the oldest MDM can use
+#. Video helpers: the person's own gallery-dl is too old and not used; {version} = its version, {oldest} = the oldest SDM can use
 #. {version} = a version number (keep the braces as they are)
 #, machine
-	Your own program ({version}) is too old: MDM needs {oldest} or newer	የእርስዎ ፕሮግራም ({version}) በጣም ያረጀ ነው፡ MDM {oldest} ወይም ከዚያ በላይ ያስፈልገዋል
+	Your own program ({version}) is too old: SDM needs {oldest} or newer	የእርስዎ ፕሮግራም ({version}) በጣም ያረጀ ነው፡ SDM {oldest} ወይም ከዚያ በላይ ያስፈልገዋል
 #. text in helpers.rs
 #. Video helpers: {path} = the program the person chose, {version} = its version
 #. {version} = a version number (keep the braces as they are)
@@ -5645,11 +5645,11 @@
 #, machine
 	yt-dlp couldn't read {browser}'s cookies: {error}	yt-dlp የ{browser} ኩኪዎችን ማንበብ አልቻለም: {error}
 #. text in a download's progress window
-#. progress window, a video's line: the helper program yt-dlp gave no address MDM's own downloader could use
+#. progress window, a video's line: the helper program yt-dlp gave no address SDM's own downloader could use
 #, machine
 	yt-dlp downloads it itself	yt-dlp ራሱ ያወርደዋል
 #. text in a download's progress window
-#. progress window, a video's line: MDM's own downloader can't take a live broadcast, so the helper program yt-dlp records it
+#. progress window, a video's line: SDM's own downloader can't take a live broadcast, so the helper program yt-dlp records it
 #, machine
 	yt-dlp downloads it itself: a live stream	yt-dlp ራሱ ያወርደዋል፦ የቀጥታ ስርጭት
 #. text in a download's progress window
@@ -5661,7 +5661,7 @@
 #, machine
 	yt-dlp downloads it itself: protected (DRM)	yt-dlp ራሱ ያወርደዋል፦ የተጠበቀ (DRM)
 #. text in a download's progress window
-#. progress window, a video's line: {protocol} = a streaming protocol's short name (rtmp, rtsp, mms); MDM's own downloader doesn't speak it, so the helper program yt-dlp downloads it
+#. progress window, a video's line: {protocol} = a streaming protocol's short name (rtmp, rtsp, mms); SDM's own downloader doesn't speak it, so the helper program yt-dlp downloads it
 #, machine
 	yt-dlp downloads it itself: {protocol}	yt-dlp ራሱ ያወርደዋል፦ {protocol}
 #. text in the Download video window
@@ -5736,7 +5736,7 @@
 #. text in the Options window
 #. Options → Remote → Pair a device: done; {device} = the name it was given
 #, machine
-	{device} is paired. It can control MDM now.	{device} ተጣምሯል። አሁን MDMን መቆጣጠር ይችላል።
+	{device} is paired. It can control SDM now.	{device} ተጣምሯል። አሁን MDMን መቆጣጠር ይችላል።
 #. text in remote.rs
 #. remote control page (on a phone): progress; {done} and {size} are sizes ("1.2 MB of 7.5 MB")
 #. {size} = a file size such as "4.2 MB" (keep the braces as they are)
@@ -5772,7 +5772,7 @@
 	{file} is too large to be a list of addresses ({size}). Import reads text files, web pages and .ef2 exports of up to {limit}.	{file} የአድራሻ ዝርዝር ለመሆን ከመጠን በላይ ትልቅ ነው ({size})። ማስመጣት እስከ {limit} መጠን ያላቸውን የጽሑፍ ፋይሎች፣ የድር ገጾች እና .ef2 ቅርጸት ያላቸው የወጪ ፋይሎችን ያነባል።
 #. text in a dialog box
 #, machine
-	{file} was moved elsewhere by dragging it out of Download complete, and MDM couldn't learn where. Look for it where you dropped it.	{file} ከ“ማውረድ ተጠናቋል” በመጎተት ወደ ሌላ ቦታ ተወስዷል፣ እና MDM የት እንደሆነ ማወቅ አልቻለም። በጣሉት ቦታ ይፈልጉት።
+	{file} was moved elsewhere by dragging it out of Download complete, and SDM couldn't learn where. Look for it where you dropped it.	{file} ከ“ማውረድ ተጠናቋል” በመጎተት ወደ ሌላ ቦታ ተወስዷል፣ እና SDM የት እንደሆነ ማወቅ አልቻለም። በጣሉት ቦታ ይፈልጉት።
 #. text in the Checksum window
 #. {algorithm} = a checksum algorithm such as "SHA-256" (keep the braces as they are)
 #, machine
@@ -5858,7 +5858,7 @@
 #. in the "7-Zip needed" window: {name} is the archive's file name; 7-Zip is a program's name
 #. {name} = a file name (keep the braces as they are)
 #, machine
-	{name} is a 7z or RAR archive. MDM extracts those with 7-Zip, which isn't installed.	{name} የ7z ወይም RAR ማህደር ነው። MDM እነዚህን በ7-Zip ያወጣል፣ 7-Zip ግን አልተጫነም።
+	{name} is a 7z or RAR archive. SDM extracts those with 7-Zip, which isn't installed.	{name} የ7z ወይም RAR ማህደር ነው። SDM እነዚህን በ7-Zip ያወጣል፣ 7-Zip ግን አልተጫነም።
 #. text in extracting archives (a download's log, the Archive password window)
 #. in Archive password: {name} is the archive's file name
 #. {name} = a file name (keep the braces as they are)
@@ -5870,10 +5870,10 @@
 #, machine
 	{name} isn't offered as {how}.	{name} እንደ {how} አይቀርብም።
 #. text in errors.rs
-#. error: a program chosen as a helper is too old; {name} = gallery-dl, {version} = its version, {oldest} = the oldest one MDM can use
+#. error: a program chosen as a helper is too old; {name} = gallery-dl, {version} = its version, {oldest} = the oldest one SDM can use
 #. {name} = a file name; {version} = a version number (keep the braces as they are)
 #, machine
-	{name} {version} is too old: MDM needs {oldest} or newer	{name} {version} በጣም ያረጀ ነው፡ MDM {oldest} ወይም ከዚያ በላይ ያስፈልገዋል
+	{name} {version} is too old: SDM needs {oldest} or newer	{name} {version} በጣም ያረጀ ነው፡ SDM {oldest} ወይም ከዚያ በላይ ያስፈልገዋል
 #. text in a dialog box
 #. one failed download in the summary of a group of downloads: {name} its file name, {error} why it failed
 #. {name} = a file name; {error} = an error message (keep the braces as they are)
@@ -5894,7 +5894,7 @@
 #, machine
 	{n} of {total} selected	ከ{total} {n} ተመርጠዋል
 #. text in the download list (sizes, speeds, status)
-#. a torrent's status while the user's debrid service downloads it, before MDM gets its files; {service} the service ("Real-Debrid"), {percent} how far it is ("45%")
+#. a torrent's status while the user's debrid service downloads it, before SDM gets its files; {service} the service ("Real-Debrid"), {percent} how far it is ("45%")
 #, machine
 	{percent} at {service}	በ{service} ላይ {percent}
 #. text in errors.rs
@@ -5905,9 +5905,9 @@
 #, machine
 	{problem}. {advice}	{problem}. {advice}
 #. text in errors.rs
-#. a debrid service's error: too many requests; MDM waits and retries
+#. a debrid service's error: too many requests; SDM waits and retries
 #, machine
-	{service} asks to slow down; MDM will try again in a minute	{service} ፍጥነቱን እንዲቀንሱ ይጠይቃል፤ MDM በአንድ ደቂቃ ውስጥ እንደገና ይሞክራል።
+	{service} asks to slow down; SDM will try again in a minute	{service} ፍጥነቱን እንዲቀንሱ ይጠይቃል፤ SDM በአንድ ደቂቃ ውስጥ እንደገና ይሞክራል።
 #. text in errors.rs
 #. a debrid service's error: it wants the user to allow this computer (it sent an email)
 #, machine
@@ -5917,7 +5917,7 @@
 	{service} can't get this torrent: nobody shares it, or its link can't be read	{service} ይህን ቶሬንት ማግኘት አልቻለም፦ ማንም አያጋራውም፣ ወይም አገናኙ ሊነበብ አይችልም
 #. text in errors.rs
 #, machine
-	{service} can't reach this file host right now; MDM will try again later	{service} ይህን ፋይል የሚያስተናግደውን አገልጋይ አሁን ማግኘት አይችልም፤ MDM በኋላ እንደገና ይሞክራል።
+	{service} can't reach this file host right now; SDM will try again later	{service} ይህን ፋይል የሚያስተናግደውን አገልጋይ አሁን ማግኘት አይችልም፤ SDM በኋላ እንደገና ይሞክራል።
 #. text in errors.rs
 #. a debrid service's error: it isn't answering
 #, machine
@@ -5952,7 +5952,7 @@
 	{service}: this needs a premium account	{service}፡ ይህ ፕሪሚየም መለያ ያስፈልገዋል።
 #. text in errors.rs
 #, machine
-	{service}: too many downloads at once through your account; MDM will try again	{service}፡ በመለያዎ በአንድ ጊዜ ብዙ ውርዶች፤ MDM እንደገና ይሞክራል።
+	{service}: too many downloads at once through your account; SDM will try again	{service}፡ በመለያዎ በአንድ ጊዜ ብዙ ውርዶች፤ SDM እንደገና ይሞክራል።
 #. text in errors.rs
 #. a debrid service's error: the account's limit (traffic) for this host is used up
 #, machine
@@ -5992,7 +5992,7 @@
 #, machine
 	{title}: already in the list	{title}: አስቀድሞ በዝርዝሩ ውስጥ አለ
 #. message or event log entry in the main window
-#. RSS feeds window, under the rules: not added, because files of its names are already in the folder (MDM never writes into them unasked)
+#. RSS feeds window, under the rules: not added, because files of its names are already in the folder (SDM never writes into them unasked)
 #, machine
 	{title}: not added: files of its names are already in {folder}	{title}: አልታከለም: ተመሳሳይ ስም ያላቸው ፋይሎች አስቀድሞ በ{folder} ውስጥ አሉ።
 #. message or event log entry in the main window
@@ -6062,13 +6062,13 @@ column	Transfer rate	የማስተላለፊያ ፍጥነት
 #, machine
 column	Upload speed	የስቀላ ፍጥነት
 #. text in the browser extension
-#. in the menu under the download button over a video: the page is a list of videos (a playlist), whose videos are chosen in the app's window; keep the name Mister Download Manager as it is
+#. in the menu under the download button over a video: the page is a list of videos (a playlist), whose videos are chosen in the app's window; keep the name Sedot Download Manager as it is
 #, machine
-extension	A list of videos: choose them in Mister Download Manager	የቪዲዮዎች ዝርዝር፦ በMister Download Manager ውስጥ ይምረጧቸው
+extension	A list of videos: choose them in Sedot Download Manager	የቪዲዮዎች ዝርዝር፦ በSedot Download Manager ውስጥ ይምረጧቸው
 #. text in the browser extension
-#. on the download button (green) over a video after the app added and started the download; a quality may follow ('· 1080p') and a 'Show' button; MDM is the app's short name, keep it; short
+#. on the download button (green) over a video after the app added and started the download; a quality may follow ('· 1080p') and a 'Show' button; SDM is the app's short name, keep it; short
 #, machine
-extension	Added to MDM	ወደ MDM ታክሏል
+extension	Added to SDM	ወደ SDM ታክሏል
 #. text in the browser extension
 #. shown briefly on the download button over a video after a quality was picked: the download was added to the app's download queue, to start later
 #, machine
@@ -6079,9 +6079,9 @@ extension	Added to the queue	ወደ ወረፋው ታክሏል
 #, machine
 extension	All qualities and subtitles...	ሁሉም ጥራቶች እና የትርጉም ጽሑፎች...
 #. text in the browser extension
-#. choice under Send downloads to: an MDM running on another computer of the network, such as a home server; keep the name Mister Download Manager as it is
+#. choice under Send downloads to: an SDM running on another computer of the network, such as a home server; keep the name Sedot Download Manager as it is
 #, machine
-extension	Another Mister Download Manager (a server)	ሌላ Mister Download Manager (አገልጋይ)
+extension	Another Sedot Download Manager (a server)	ሌላ Sedot Download Manager (አገልጋይ)
 #. text in the browser extension
 #. tab above the list of qualities in the menu under the download button over a video: the choices that are sound only (MP3, Opus and the like); short, one word
 #, machine
@@ -6091,11 +6091,11 @@ extension	Audio	ኦዲዮ
 #, machine
 extension	best	ምርጥ
 #. text in the browser extension
-#. the name this browser gets in the other MDM's list of paired devices
+#. the name this browser gets in the other SDM's list of paired devices
 #, machine
 extension	Browser extension	የአሳሽ ቅጥያ
 #. text in the browser extension
-#. menu command of the download button over a video: opens its settings in Mister Download Manager
+#. menu command of the download button over a video: opens its settings in Sedot Download Manager
 #. the trailing ... means it is still going on: keep it
 #, machine
 extension	Button settings...	የአዝራር ቅንብሮች...
@@ -6108,14 +6108,14 @@ extension	can't be saved	ማስቀመጥ አይቻልም
 #, machine
 extension	Can't tell which video this is: open its own page and try there	ይህ የትኛው ቪዲዮ እንደሆነ ማወቅ አልተቻለም፦ የራሱን ገጽ ከፍተው እዚያ ይሞክሩ
 #. text in the browser extension
-#. the toolbar button's status when the browser reaches the app; keep the name Mister Download Manager as it is
+#. the toolbar button's status when the browser reaches the app; keep the name Sedot Download Manager as it is
 #, machine
-extension	Connected to Mister Download Manager	ከMister Download Manager ጋር ተገናኝቷል
+extension	Connected to Sedot Download Manager	ከSedot Download Manager ጋር ተገናኝቷል
 #. text in the browser extension
-#. the toolbar button's status when the browser reaches the app, with the app's version number; keep the name Mister Download Manager as it is
+#. the toolbar button's status when the browser reaches the app, with the app's version number; keep the name Sedot Download Manager as it is
 #. {version} = a version number (keep the braces as they are)
 #, machine
-extension	Connected to Mister Download Manager {version}	ከMister Download Manager {version} ጋር ተገናኝቷል
+extension	Connected to Sedot Download Manager {version}	ከSedot Download Manager {version} ጋር ተገናኝቷል
 #. text in the browser extension
 #. in the menu under the download button over a video: finding the video's qualities failed; the app's own explanation follows on the next line
 #, machine
@@ -6125,17 +6125,17 @@ extension	Could not look it up	መፈለግ አልተቻለም
 #, machine
 extension	Download	አውርድ
 #. text in the browser extension
-#. command in the browser's right-click menu on a page: download the links of the whole page; keep the name Mister Download Manager as it is
+#. command in the browser's right-click menu on a page: download the links of the whole page; keep the name Sedot Download Manager as it is
 #, machine
-extension	Download all links with Mister Download Manager	ሁሉንም አገናኞች በMister Download Manager ያውርዱ
+extension	Download all links with Sedot Download Manager	ሁሉንም አገናኞች በSedot Download Manager ያውርዱ
 #. text in the browser extension
 #. first line of the list under the download button over a video: downloads the best quality at once; the quality, its file type and size follow on the same line; short
 #, machine
 extension	Download best	ምርጡን አውርድ
 #. text in the browser extension
-#. command in the browser's right-click menu on selected text: download the links in the selection; keep the name Mister Download Manager as it is
+#. command in the browser's right-click menu on selected text: download the links in the selection; keep the name Sedot Download Manager as it is
 #, machine
-extension	Download selected links with Mister Download Manager	የተመረጡ አገናኞችን በMister Download Manager ያውርዱ
+extension	Download selected links with Sedot Download Manager	የተመረጡ አገናኞችን በSedot Download Manager ያውርዱ
 #. text in the browser extension
 #. first line of the tooltip of the download button over a video while the app is still finding its qualities
 #, machine
@@ -6145,9 +6145,9 @@ extension	Download the best quality	ምርጡን ጥራት ያውርዱ
 #, machine
 extension	Download video	ቪዲዮ አውርድ
 #. text in the browser extension
-#. command in the browser's right-click menu on a link, picture, video or sound; keep the name Mister Download Manager as it is
+#. command in the browser's right-click menu on a link, picture, video or sound; keep the name Sedot Download Manager as it is
 #, machine
-extension	Download with Mister Download Manager	በMister Download Manager ያውርዱ
+extension	Download with Sedot Download Manager	በSedot Download Manager ያውርዱ
 #. text in the browser extension
 #. first line of the tooltip of the download button over a video: what one click downloads; $what$ is a quality, a file type and a size, e.g. '1080p MP4 · 412 MB'
 #, machine
@@ -6158,7 +6158,7 @@ extension	Download {what}	{what} ያውርዱ
 #, machine
 extension	Downloads from {site} stay with the browser	ከ{site} የሚወርዱ ፋይሎች በአሳሹ ውስጥ ይቆያሉ
 #. text in the browser extension
-#. the toolbar button's status while downloads go to another MDM
+#. the toolbar button's status while downloads go to another SDM
 #, machine
 extension	Downloads go to {address}	ውርዶች ወደ {address} ይሄዳሉ
 #. text in the browser extension
@@ -6170,13 +6170,13 @@ extension	Drag the dots to move it along the edge	ነጥቦቹን በመጎተ�
 #, machine
 extension	Enter its https:// address.	የእሱን https:// አድራሻ ያስገቡ።
 #. text in the browser extension
-#. button on the download button over a video when the app didn't answer: opens the app's download page; MDM is the app's short name, keep it; very short
+#. button on the download button over a video when the app didn't answer: opens the app's download page; SDM is the app's short name, keep it; very short
 #, machine
-extension	Get MDM	MDM ያግኙ
+extension	Get SDM	SDM ያግኙ
 #. text in the browser extension
-#. the extension's description in the browser's list of extensions; keep the name Mister Download Manager as it is
+#. the extension's description in the browser's list of extensions; keep the name Sedot Download Manager as it is
 #, machine
-extension	Hands downloads from the browser to Mister Download Manager.	ማውረዶችን ከብሮውዘር ወደ Mister Download Manager ያስተላልፋል።
+extension	Hands downloads from the browser to Sedot Download Manager.	ማውረዶችን ከብሮውዘር ወደ Sedot Download Manager ያስተላልፋል።
 #. text in the browser extension
 #. link in the toolbar button's popup to the help page
 #, machine
@@ -6202,13 +6202,13 @@ extension	How to fix it	እንዴት ማስተካከል ይቻላል
 #, machine
 extension	It didn't work. Try again.	አልሰራም። እንደገና ይሞክሩ።
 #. text in the browser extension
-#. pairing failed: the other MDM shows no pairing code; Pair a device is its button
+#. pairing failed: the other SDM shows no pairing code; Pair a device is its button
 #, machine
 extension	It shows no code now: click Pair a device there first.	አሁን ምንም ኮድ አያሳይም፡ መጀመሪያ እዚያ ላይ መሳሪያ ያጣምሩ የሚለውን ጠቅ ያድርጉ።
 #. text in the browser extension
-#. why a download stayed with the browser: it is a .torrent file and the app's Torrent settings don't open torrents with Mister Download Manager, so the browser keeps it for the user's own torrent program; keep the setting's name as the app shows it
+#. why a download stayed with the browser: it is a .torrent file and the app's Torrent settings don't open torrents with Sedot Download Manager, so the browser keeps it for the user's own torrent program; keep the setting's name as the app shows it
 #, machine
-extension	It's a torrent, and Open magnet links and .torrent files with Mister Download Manager is off in Torrent settings.	ቶረንት ነው፣ እና በቶረንት ቅንብሮች ውስጥ Open magnet links and .torrent files with Mister Download Manager ተሰናክሏል።
+extension	It's a torrent, and Open magnet links and .torrent files with Sedot Download Manager is off in Torrent settings.	ቶረንት ነው፣ እና በቶረንት ቅንብሮች ውስጥ Open magnet links and .torrent files with Sedot Download Manager ተሰናክሏል።
 #. text in the browser extension
 #. why a download stayed with the browser: the file is smaller than the app's minimum size setting
 #, machine
@@ -6243,49 +6243,49 @@ extension	Looking up the qualities…	ጥራቶችን በመፈለግ ላይ…
 #, machine
 extension	Looking up took too long	መፈለጉ በጣም ረጅም ጊዜ ወሰደ
 #. text in the browser extension
-#. on the download button (red) over a video when the app isn't installed or didn't start; 'Get MDM' and 'Retry' buttons follow; MDM is the app's short name, keep it; short
+#. on the download button (red) over a video when the app isn't installed or didn't start; 'Get SDM' and 'Retry' buttons follow; SDM is the app's short name, keep it; short
 #, machine
-extension	MDM didn't answer	MDM ምላሽ አልሰጠም
+extension	SDM didn't answer	SDM ምላሽ አልሰጠም
 #. text in the browser extension
 #. heading in the toolbar button's popup over the list of the videos, sounds and streams the current web page has loaded
 #, machine
 extension	Media on this page	በዚህ ገጽ ላይ ያሉ ሚዲያዎች
 #. text in the browser extension
-#. the extension's name in the browser's list of extensions and on its toolbar button; keep the name Mister Download Manager as it is
+#. the extension's name in the browser's list of extensions and on its toolbar button; keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager	Mister Download Manager
+extension	Sedot Download Manager	Sedot Download Manager
 #. text in the browser extension
-#. status when the app was started for a download but didn't answer in time; keep the name Mister Download Manager as it is
+#. status when the app was started for a download but didn't answer in time; keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager didn't start in time	Mister Download Manager በጊዜ አልጀመረም
+extension	Sedot Download Manager didn't start in time	Sedot Download Manager በጊዜ አልጀመረም
 #. text in the browser extension
-#. status when the app refuses this copy of the extension (another copy is installed, or it came from another store); keep the name Mister Download Manager as it is
+#. status when the app refuses this copy of the extension (another copy is installed, or it came from another store); keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager doesn't accept this copy of the extension	Mister Download Manager የዚህን ቅጥያ ቅጂ አይቀበልም
+extension	Sedot Download Manager doesn't accept this copy of the extension	Sedot Download Manager የዚህን ቅጥያ ቅጂ አይቀበልም
 #. text in the browser extension
-#. in the menu under the download button over a video: the app is already looking up other videos and can't look this one up now; keep the name Mister Download Manager as it is
+#. in the menu under the download button over a video: the app is already looking up other videos and can't look this one up now; keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager is busy with other videos	Mister Download Manager በሌሎች ቪዲዮዎች ተጠምዷል
+extension	Sedot Download Manager is busy with other videos	Sedot Download Manager በሌሎች ቪዲዮዎች ተጠምዷል
 #. text in the browser extension
-#. shown briefly on the download button when the app could not be reached; keep the name Mister Download Manager as it is
+#. shown briefly on the download button when the app could not be reached; keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager isn't installed or didn't start	Mister Download Manager አልተጫነም ወይም አልጀመረም
+extension	Sedot Download Manager isn't installed or didn't start	Sedot Download Manager አልተጫነም ወይም አልጀመረም
 #. text in the browser extension
-#. status when the browser can't find the app's connection; keep the name Mister Download Manager as it is
+#. status when the browser can't find the app's connection; keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager isn't installed, or its browser integration isn't set up	Mister Download Manager አልተጫነም፣ ወይም የአሳሽ ውህደቱ አልተዘጋጀም
+extension	Sedot Download Manager isn't installed, or its browser integration isn't set up	Sedot Download Manager አልተጫነም፣ ወይም የአሳሽ ውህደቱ አልተዘጋጀም
 #. text in the browser extension
-#. in the menu under the download button over a video: the app needs the yt-dlp tool (a program's name, keep it as it is) to find this video's qualities, and it isn't installed; keep the name Mister Download Manager as it is
+#. in the menu under the download button over a video: the app needs the yt-dlp tool (a program's name, keep it as it is) to find this video's qualities, and it isn't installed; keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager needs yt-dlp for this video	Mister Download Manager ለዚህ ቪዲዮ yt-dlp ይፈልጋል
+extension	Sedot Download Manager needs yt-dlp for this video	Sedot Download Manager ለዚህ ቪዲዮ yt-dlp ይፈልጋል
 #. text in the browser extension
-#. tooltip of the switch Send downloads through this browser's proxy or VPN extension; keep the name Mister Download Manager as it is
+#. tooltip of the switch Send downloads through this browser's proxy or VPN extension; keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager then downloads through the same proxy as this browser. The browser asks you once to allow it; turning this off takes that back.	Mister Download Manager ከዚያ በዚህ አሳሽ ከሚጠቀምበት ፕሮክሲ በኩል ያወርዳል። አሳሹ አንድ ጊዜ እንዲፈቅዱ ይጠይቅዎታል፤ ይህን ማጥፋት ፈቃዱን ይሽራል።
+extension	Sedot Download Manager then downloads through the same proxy as this browser. The browser asks you once to allow it; turning this off takes that back.	Sedot Download Manager ከዚያ በዚህ አሳሽ ከሚጠቀምበት ፕሮክሲ በኩል ያወርዳል። አሳሹ አንድ ጊዜ እንዲፈቅዱ ይጠይቅዎታል፤ ይህን ማጥፋት ፈቃዱን ይሽራል።
 #. text in the browser extension
-#. tooltip of the switch Send downloads through this browser's proxy or VPN extension in Chrome, Edge and the other Chromium browsers (they ask for no permission at the switch); keep the name Mister Download Manager as it is
+#. tooltip of the switch Send downloads through this browser's proxy or VPN extension in Chrome, Edge and the other Chromium browsers (they ask for no permission at the switch); keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager then downloads through the same proxy as this browser. While this is off, the extension doesn't read the browser's proxy.	Mister Download Manager ከዚያም በዚህ አሳሽ በኩል በተመሳሳይ ፕሮክሲ ያወርዳል። ይህ ሲጠፋ፣ ቅጥያው የአሳሹን ፕሮክሲ አያነብም።
+extension	Sedot Download Manager then downloads through the same proxy as this browser. While this is off, the extension doesn't read the browser's proxy.	Sedot Download Manager ከዚያም በዚህ አሳሽ በኩል በተመሳሳይ ፕሮክሲ ያወርዳል። ይህ ሲጠፋ፣ ቅጥያው የአሳሹን ፕሮክሲ አያነብም።
 #. text in the browser extension
 #. the small arrow next to the Download video button that opens its menu (read aloud by screen readers)
 #, machine
@@ -6309,7 +6309,7 @@ extension	No video or sound found on this page yet. Play it, then open this agai
 #, machine
 extension	No video to download here	እዚህ የሚወርድ ቪዲዮ የለም
 #. text in the browser extension
-#. pairing failed: the other MDM didn't answer
+#. pairing failed: the other SDM didn't answer
 #, machine
 extension	Not reached. Open its address once in this browser and accept its certificate, then try again.	አልተደረሰም። አድራሻውን በዚህ አሳሽ ውስጥ አንድ ጊዜ ይክፈቱ እና የምስክር ወረቀቱን ይቀበሉ፣ ከዚያ እንደገና ይሞክሩ።
 #. text in the browser extension
@@ -6317,7 +6317,7 @@ extension	Not reached. Open its address once in this browser and accept its cert
 #, machine
 extension	Off on this site	በዚህ ጣቢያ ላይ ጠፍቷል
 #. text in the browser extension
-#. button: open the other MDM's address in a tab (to accept its certificate once)
+#. button: open the other SDM's address in a tab (to accept its certificate once)
 #, machine
 extension	Open it	ክፈት
 #. text in the browser extension
@@ -6325,9 +6325,9 @@ extension	Open it	ክፈት
 #, machine
 extension	Open its address once and accept its certificate, then enter a code from its Options, Remote, Pair a device (or misterdownloadmanager-cli pair).	አድራሻውን አንድ ጊዜ ይክፈቱ እና የምስክር ወረቀቱን ይቀበሉ፣ ከዚያ ከ Options, Remote, Pair a device (ወይም misterdownloadmanager-cli pair) ኮድ ያስገቡ።
 #. text in the browser extension
-#. button in the toolbar button's popup; keep the name Mister Download Manager as it is
+#. button in the toolbar button's popup; keep the name Sedot Download Manager as it is
 #, machine
-extension	Open Mister Download Manager	Mister Download Managerን ይክፈቱ
+extension	Open Sedot Download Manager	Sedot Download Managerን ይክፈቱ
 #. text in the browser extension
 #. button on the download button over a video in a feed: opens the post the video belongs to in a new tab; verb; very short
 #, machine
@@ -6346,11 +6346,11 @@ extension	Options...	አማራጮች...
 #, machine
 extension	original	ኦሪጅናል
 #. text in the browser extension
-#. button: pair this browser with the other MDM using the code
+#. button: pair this browser with the other SDM using the code
 #, machine
 extension	Pair	ያጣምሩ
 #. text in the browser extension
-#. placeholder of the box for the 8-digit code the other MDM shows
+#. placeholder of the box for the 8-digit code the other SDM shows
 #, machine
 extension	Pairing code	የማጣመሪያ ኮድ
 #. text in the browser extension
@@ -6382,22 +6382,22 @@ extension	Send downloads through this browser's proxy or VPN extension	ውርዶ
 #, machine
 extension	Send downloads to	ውርዶችን ወደ
 #. text in the browser extension
-#. on the download button over a video right after it was clicked, while the download goes to the app; MDM is Mister Download Manager's short name, keep it as it is; short
+#. on the download button over a video right after it was clicked, while the download goes to the app; SDM is Sedot Download Manager's short name, keep it as it is; short
 #. the trailing ... means it is still going on: keep it
 #, machine
-extension	Sending to MDM...	ወደ MDM በመላክ ላይ...
+extension	Sending to SDM...	ወደ SDM በመላክ ላይ...
 #. text in the browser extension
-#. shown briefly on the download button after it was clicked; keep the name Mister Download Manager as it is
+#. shown briefly on the download button after it was clicked; keep the name Sedot Download Manager as it is
 #, machine
-extension	Sent to Mister Download Manager	ወደ Mister Download Manager ተልኳል
+extension	Sent to Sedot Download Manager	ወደ Sedot Download Manager ተልኳል
 #. text in the browser extension
 #. button on the download button over a video after a download was added: shows that download in the app's window; verb; very short
 #, machine
 extension	Show	አሳይ
 #. text in the browser extension
-#. link at the foot of the toolbar button's popup to the creator's GitHub Sponsors page (MDM is free; this is an optional donation)
+#. link at the foot of the toolbar button's popup to the creator's GitHub Sponsors page (SDM is free; this is an optional donation)
 #, machine
-extension	Support MDM	MDMን ይደግፉ
+extension	Support SDM	MDMን ይደግፉ
 #. text in the browser extension
 #. check box in the toolbar button's popup: on, downloads go to the app; off, the browser keeps them
 #, machine
@@ -6407,9 +6407,9 @@ extension	Take downloads from this browser	ውርዶችን ከዚህ አሳሽ �
 #, machine
 extension	The Chrome Web Store's rules keep this copy of the add-on away from this site's videos. Help says what you can do.	የChrome Web Store ሕጎች ይህን የተጨማሪ ቅጂ ከዚህ ጣቢያ ቪዲዮዎች ያርቁታል። ምን ማድረግ እንደሚችሉ «እርዳታ» ይነግርዎታል።
 #. text in the browser extension
-#. status when the connection to the app broke off (often security software blocking it); keep the name Mister Download Manager as it is
+#. status when the connection to the app broke off (often security software blocking it); keep the name Sedot Download Manager as it is
 #, machine
-extension	The connection to Mister Download Manager failed	ከMister Download Manager ጋር ያለው ግንኙነት አልተሳካም
+extension	The connection to Sedot Download Manager failed	ከSedot Download Manager ጋር ያለው ግንኙነት አልተሳካም
 #. text in the browser extension
 #. why a download stayed with the browser: the user limited the extension's access to web sites in the browser, so it can't pass the sign-in on
 #, machine
@@ -6423,7 +6423,7 @@ extension	The last download was left to the browser.	የመጨረሻው ማው�
 #, machine
 extension	This browser isn't ticked in Options → General.	ይህ አሳሽ በአማራጮች → አጠቃላይ ውስጥ ምልክት አልተደረገበትም።
 #. text in the browser extension
-#. choice under Send downloads to: the Mister Download Manager on this computer
+#. choice under Send downloads to: the Sedot Download Manager on this computer
 #, machine
 extension	This computer	ይህ ኮምፒውተር
 #. text in the browser extension
@@ -6443,9 +6443,9 @@ extension	Turn on	አብራ
 #, machine
 extension	Undo	ይቀልብሱ
 #. text in the browser extension
-#. status when the app is older than the extension; keep the name Mister Download Manager as it is
+#. status when the app is older than the extension; keep the name Sedot Download Manager as it is
 #, machine
-extension	Update Mister Download Manager to use everything this extension offers	ይህ ቅጥያ የሚያቀርበውን ሁሉ ለመጠቀም Mister Download Managerን ያዘምኑ
+extension	Update Sedot Download Manager to use everything this extension offers	ይህ ቅጥያ የሚያቀርበውን ሁሉ ለመጠቀም Sedot Download Managerን ያዘምኑ
 #. text in the browser extension
 #. why a download stayed with the browser: the app's setting 'Use advanced browser integration' is off; keep the setting's name as the app shows it
 #, machine
@@ -6573,13 +6573,13 @@ key	Up / Down	ወደ ላይ / ወደ ታች
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	&About Mister Download Manager	ስለ &Mister Download Manager
+menu	&About Sedot Download Manager	ስለ &Sedot Download Manager
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
 menu	&Add new download	አዲስ &ማውረድ አክል
 #. menu command in the main window
-#. View → Window system: MDM chooses the window system itself at each start
+#. View → Window system: SDM chooses the window system itself at each start
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
 menu	&Automatic	በ&ራስ-ሰር
@@ -6614,7 +6614,7 @@ menu	&Exit	&ውጣ
 #, machine
 menu	&Import	&አስመጡ
 #. menu command in the main window
-#. View menu: submenu choosing how large MDM draws its windows and text (100 % to 200 %), as a browser's zoom
+#. View menu: submenu choosing how large SDM draws its windows and text (100 % to 200 %), as a browser's zoom
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
 menu	&Interface size	የበይነገጽ &መጠን
@@ -6709,7 +6709,7 @@ menu	&Video downloads	&የቪዲዮ ማውረዶች
 #, machine
 menu	&Wayland	&ዌይላንድ
 #. menu command in the main window
-#. View menu: submenu choosing the window system MDM's windows use on Linux (X11 through XWayland, or Wayland)
+#. View menu: submenu choosing the window system SDM's windows use on Linux (X11 through XWayland, or Wayland)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
 menu	&Window system	&የመስኮት ስርዓት
@@ -6751,9 +6751,9 @@ menu	Adwaita	Adwaita
 #, machine
 menu	Aero	Aero
 #. menu command in the main window
-#. View → Draw with: a greyed note under the choices; the choice takes effect when MDM is started again
+#. View → Draw with: a greyed note under the choices; the choice takes effect when SDM is started again
 #, machine
-menu	Applies the next time MDM starts	MDM በሚቀጥለው ጊዜ ሲጀምር ይተገበራል
+menu	Applies the next time SDM starts	SDM በሚቀጥለው ጊዜ ሲጀምር ይተገበራል
 #. menu command in the main window
 #. View → Theme: a style theme's name (Mac OS X's look), a name: keep "Aqua" as written
 #, machine
@@ -6828,7 +6828,7 @@ menu	C&ustomize URL List...	የ&URL ዝርዝርን ያብጁ...
 #, machine
 menu	Check for &updates...	ለ&ዝማኔዎች ፈትሽ...
 #. menu command in the main window
-#. View → Theme: MDM's own look, the default (IDM's layout, Windows 11's controls)
+#. View → Theme: SDM's own look, the default (IDM's layout, Windows 11's controls)
 #, machine
 menu	Classic	ክላሲክ
 #. menu command in the main window
@@ -6882,7 +6882,7 @@ menu	Download &video from a page...	ቪዲዮ ከገጽ &አውርድ...
 #, machine
 menu	Download in order	በቅደም ተከተል አውርድ
 #. menu command in the main window
-#. View menu: submenu choosing what draws MDM's windows: OpenGL, or Direct3D, Vulkan or Metal (graphics systems)
+#. View menu: submenu choosing what draws SDM's windows: OpenGL, or Direct3D, Vulkan or Metal (graphics systems)
 #, machine
 menu	Draw with	በዚህ ይሳሉ
 #. menu command in the main window
@@ -6942,23 +6942,23 @@ menu	Hide drop target	የመጣል ኢላማ ደብቅ
 #, machine
 menu	High contrast	ከፍተኛ ንፅፅር
 #. menu command in the main window
-#. View → Window system: a greyed note; MDM's windows are Wayland's now
+#. View → Window system: a greyed note; SDM's windows are Wayland's now
 #, machine
 menu	In use: Wayland	በአገልግሎት ላይ ያለ፦ ዌይላንድ
 #. menu command in the main window
-#. View → Window system: a greyed note; MDM's windows are X11's (through XWayland) now
+#. View → Window system: a greyed note; SDM's windows are X11's (through XWayland) now
 #, machine
 menu	In use: X11 (XWayland)	በአገልግሎት ላይ ያለ፦ X11 (XWayland)
 #. menu command in the main window
-#. View → Draw with: a greyed note under "… didn't start here"; why: another error, written in MDM's log
+#. View → Draw with: a greyed note under "… didn't start here"; why: another error, written in SDM's log
 #, machine
 menu	It couldn't start: the log says why	መጀመር አልቻለም፦ የምዝግብ ማስታወሻው ምክንያቱን ይናገራል
 #. menu command in the main window
-#. View → Draw with: a greyed note under "… didn't start here"; why: the window stayed empty, so MDM started again with OpenGL
+#. View → Draw with: a greyed note under "… didn't start here"; why: the window stayed empty, so SDM started again with OpenGL
 #, machine
 menu	Its first frame didn't show within 10 seconds	የመጀመሪያው ፍሬም በ10 ሰከንዶች ውስጥ አልታየም
 #. menu command in the main window
-#. View → Draw with: a greyed note under "… didn't start here"; why: MDM crashed or was closed while starting with it
+#. View → Draw with: a greyed note under "… didn't start here"; why: SDM crashed or was closed while starting with it
 #, machine
 menu	Its last start ended before its first frame	የመጨረሻው ጅምር የመጀመሪያው ፍሬም ከመታየቱ በፊት አብቅቷል
 #. menu command in the main window
@@ -6984,7 +6984,7 @@ menu	Metro	ሜትሮ
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	Mister Download Manager &Home Page	Mister Download Manager &መነሻ ገጽ
+menu	Sedot Download Manager &Home Page	Sedot Download Manager &መነሻ ገጽ
 #. menu command in the main window
 #, machine
 menu	Move/Rename (Ctrl-M)	አንቀሳቅስ/ዳግም ሰይም (Ctrl-M)
@@ -7025,23 +7025,23 @@ menu	Open with...	ክፈት በ...
 #, machine
 menu	OpenGL	OpenGL
 #. menu command in the main window
-#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: it couldn't start on this computer
+#. View → Draw with: a greyed note; why SDM no longer draws with OpenGL: it couldn't start on this computer
 #, machine
 menu	OpenGL didn't start here	OpenGL እዚህ መጀመር አልቻለም
 #. menu command in the main window
-#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: its window froze inside the graphics card's driver while OpenGL drew
+#. View → Draw with: a greyed note; why SDM no longer draws with OpenGL: its window froze inside the graphics card's driver while OpenGL drew
 #, machine
 menu	OpenGL froze inside the graphics driver here	OpenGL እዚህ ውስጥ በግራፊክስ ነጂው ውስጥ ቀዘቀዘ
 #. menu command in the main window
-#. View → Draw with: a greyed note; this computer's OpenGL (its graphics driver) is too old, so MDM doesn't draw with it
+#. View → Draw with: a greyed note; this computer's OpenGL (its graphics driver) is too old, so SDM doesn't draw with it
 #, machine
-menu	OpenGL here is too old to draw MDM	እዚህ ያለው OpenGL MDMን ለመሳል በጣም ያረጀ ነው
+menu	OpenGL here is too old to draw SDM	እዚህ ያለው OpenGL MDMን ለመሳል በጣም ያረጀ ነው
 #. menu command in the main window
-#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: its window stayed empty for 10 seconds, so MDM started again another way
+#. View → Draw with: a greyed note; why SDM no longer draws with OpenGL: its window stayed empty for 10 seconds, so SDM started again another way
 #, machine
 menu	OpenGL's first frame didn't show within 10 seconds	የOpenGL የመጀመሪያ ፍሬም በ10 ሰከንድ ውስጥ አልታየም
 #. menu command in the main window
-#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: MDM crashed or was closed while starting with it
+#. View → Draw with: a greyed note; why SDM no longer draws with OpenGL: SDM crashed or was closed while starting with it
 #, machine
 menu	OpenGL's last start ended before its first frame	የOpenGL የመጨረሻ ጅምር ከመጀመሪያው ፍሬም በፊት አብቅቷል
 #. menu command in the main window
@@ -7117,7 +7117,7 @@ menu	Select &all	ሁሉንም &ምረጥ
 menu	Show &drop target	የመጣል &ዒላማ አሳይ
 #. menu command in the main window
 #, machine
-menu	Show Mister Download Manager	Mister Download Manager አሳይ
+menu	Show Sedot Download Manager	Sedot Download Manager አሳይ
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
@@ -7139,7 +7139,7 @@ menu	Stop Download	ማውረድ አቁም
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	Support &MDM	MDMን ይ&ደግፉ
+menu	Support SD&M	MDMን ይ&ደግፉ
 #. menu command in the main window
 #. View menu: submenu choosing how the text is drawn (smooth or classic)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
@@ -7154,7 +7154,7 @@ menu	Tell a &friend	ለ&ጓደኛ ንገር
 #, machine
 menu	The graphics card was lost twice in 10 minutes	የግራፊክስ ካርዱ በ10 ደቂቃ ውስጥ ሁለት ጊዜ ጠፍቷል
 #. menu command in the main window
-#. View menu: submenu choosing MDM's look (colours, sizes, icons): Classic, Native…
+#. View menu: submenu choosing SDM's look (colours, sizes, icons): Classic, Native…
 #, machine
 menu	Theme	ገጽታ
 #. menu command in the main window

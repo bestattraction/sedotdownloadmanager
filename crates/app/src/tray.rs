@@ -29,6 +29,7 @@ pub enum TrayCmd {
     /// windows, hidden there when frontmost.
     Toggle,
     AddUrl,
+    AddTorrent,
     Batch,
     /// Add batch download from clipboard (#709).
     BatchClipboard,
@@ -447,12 +448,13 @@ impl Native {
         };
         add(
             &menu,
-            crate::i18n::mark("Open Mister Download Manager"),
+            crate::i18n::mark("Open Sedot Download Manager"),
             TrayCmd::Show,
         );
         menu.append(&PredefinedMenuItem::separator()).ok();
         let mark = crate::i18n::mark;
         add(&menu, mark("Add new download"), TrayCmd::AddUrl);
+        add(&menu, mark("Add torrent"), TrayCmd::AddTorrent);
         add(&menu, mark("Add batch download"), TrayCmd::Batch);
         // i18n: tray menu: the links copied to the clipboard, to tick in Link grabber (as Tasks → Add batch download from clipboard)
         add(

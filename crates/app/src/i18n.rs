@@ -468,8 +468,8 @@ mod tests {
         // No isolate: untouched, in any direction.
         for rtl in [false, true] {
             assert_eq!(
-                os_text_in("Mister Download Manager", rtl),
-                "Mister Download Manager"
+                os_text_in("Sedot Download Manager", rtl),
+                "Sedot Download Manager"
             );
             assert_eq!(os_text_in("مدير التنزيل", rtl), "مدير التنزيل");
         }
@@ -491,7 +491,7 @@ mod tests {
             // Counts in an Arabic tip, one per line (the notification area's icon).
             (
                 format!(
-                    "Mister Download Manager\n{}",
+                    "Sedot Download Manager\n{}",
                     fmt(
                         "{n} تنزيلات، {speed}",
                         &[("n", &ltr("3")), ("speed", &ltr("1.2 MB/s"))]

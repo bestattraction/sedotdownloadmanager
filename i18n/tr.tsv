@@ -1,4 +1,4 @@
-# Mister Download Manager in Turkish (Türkçe): tools/i18n/translate.py
+# Sedot Download Manager in Turkish (Türkçe): tools/i18n/translate.py
 # writes the rows marked '#, machine'; a native speaker deletes that line after checking.
 # context	source	translation (craft-i18n format, rows as in en.tsv)
 @id	language.name	Türkçe
@@ -11,7 +11,7 @@
 #. never shown for a single download
 #. {n} = a number (keep the braces as they are)
 #, machine
-@plural	Are you sure you want to delete {n} download from Mister Download Manager list of downloads?|Are you sure you want to delete these {n} downloads from Mister Download Manager list of downloads?	Mister Download Manager indirme listesinden {n} indirmeyi silmek istediğinizden emin misiniz?|Mister Download Manager indirme listesinden bu {n} indirmeyi silmek istediğinizden emin misiniz?
+@plural	Are you sure you want to delete {n} download from Sedot Download Manager list of downloads?|Are you sure you want to delete these {n} downloads from Sedot Download Manager list of downloads?	Sedot Download Manager indirme listesinden {n} indirmeyi silmek istediğinizden emin misiniz?|Sedot Download Manager indirme listesinden bu {n} indirmeyi silmek istediğinizden emin misiniz?
 #. count in the Add torrent window
 #. while a magnet link's file list is fetched; {n} = peers that answered
 #. {n} = a number (keep the braces as they are)
@@ -217,7 +217,7 @@
 #. text in the Options window
 #. Options → Accounts: what these accounts are, and the services' rule against sharing
 #, machine
-	A debrid service downloads a file host's link with your own paid account and gives MDM a direct link. Use only your own account: sharing an account or its links breaks the services' terms and can get it suspended. Downloads the browser already started stay as they are.	Bir debrid hizmeti, dosya barındırıcının bağlantısını ücretli hesabınızı kullanarak indirir ve MDM'ye doğrudan bir bağlantı verir. Yalnızca kendi hesabınızı kullanın: hesabı veya bağlantılarını paylaşmak hizmetlerin kullanım koşullarını ihlal eder ve hesabın askıya alınmasına neden olabilir. Tarayıcının başlattığı indirmeler olduğu gibi kalır.
+	A debrid service downloads a file host's link with your own paid account and gives SDM a direct link. Use only your own account: sharing an account or its links breaks the services' terms and can get it suspended. Downloads the browser already started stay as they are.	Bir debrid hizmeti, dosya barındırıcının bağlantısını ücretli hesabınızı kullanarak indirir ve SDM'ye doğrudan bir bağlantı verir. Yalnızca kendi hesabınızı kullanın: hesabı veya bağlantılarını paylaşmak hizmetlerin kullanım koşullarını ihlal eder ve hesabın askıya alınmasına neden olabilir. Tarayıcının başlattığı indirmeler olduğu gibi kalır.
 #. text in a download's progress window
 #. reason shown on the Rename box when the entered name ends with a period
 #, machine
@@ -261,7 +261,7 @@
 #, machine
 	A single-file torrent keeps its name	Tek dosyalı torrent adını korur
 #. text in the Add torrent window
-#. Add trackers: MDM never contacts a tracker on this computer or the local network
+#. Add trackers: SDM never contacts a tracker on this computer or the local network
 #, machine
 	A tracker on this computer or the local network is never contacted: {line}	Bu bilgisayardaki veya yerel ağdaki bir izleyiciyle asla iletişime geçilmez: {line}
 #. text in extracting archives (a download's log, the Archive password window)
@@ -270,7 +270,7 @@
 	a volume of it is missing	bir birimi eksik
 #. window title in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #, machine
-	About Mister Download Manager	Mister Download Manager Hakkında
+	About Sedot Download Manager	Sedot Download Manager Hakkında
 #. text in whereis.rs
 #. a download's server's round trip: {ms} a number of milliseconds, {reach} near, medium or far
 #, machine
@@ -333,7 +333,7 @@
 #. window title in extension.rs
 #. title of the window that offers the browser extension
 #, machine
-	Add Mister Download Manager to your browser	Mister Download Manager uygulamasını tarayıcınıza ekleyin
+	Add Sedot Download Manager to your browser	Sedot Download Manager uygulamasını tarayıcınıza ekleyin
 #. message or event log entry in the main window; text in the tray icon's menu
 #. link in the empty download list: opens Add URL
 #, machine
@@ -395,9 +395,9 @@
 #, machine
 	Added.	Eklendi.
 #. text in remote.rs
-#. remote control page (on a phone): a magnet link or .torrent file was added; MDM reads the torrent's files first
+#. remote control page (on a phone): a magnet link or .torrent file was added; SDM reads the torrent's files first
 #, machine
-	Added. MDM is reading the torrent: it joins the list in a moment.	Eklendi. MDM torrent'i okuyor: birazdan listeye katılır.
+	Added. SDM is reading the torrent: it joins the list in a moment.	Eklendi. SDM torrent'i okuyor: birazdan listeye katılır.
 #. text in the Batch download window; text in a dialog box; label in the Options window; text in a download's progress window
 #. noun: the web address (URL)
 #. column title: the web address (URL)
@@ -481,7 +481,7 @@
 #, machine
 	Already reported as issue #{number}: {title}	Zaten sorun #{number}: {title} olarak raporlandı
 #. checkbox in crashui.rs
-#. crash report window: checkbox; the .dmp file holds what MDM had in memory
+#. crash report window: checkbox; the .dmp file holds what SDM had in memory
 #, machine
 	Also attach the crash data (.dmp): it may hold addresses, cookies and passwords	Kilitlenme verilerini (.dmp) de ekle: adresler, çerezler ve parolalar içerebilir
 #. text in a dialog box
@@ -500,7 +500,7 @@
 	Always into a folder named after it	Her zaman kendi adını taşıyan bir klasöre
 #. checkbox in a dialog box
 #, machine
-	Always turn on Speed Limiter on Mister Download Manager startup	Mister Download Manager başlatıldığında Hız Sınırlayıcıyı her zaman aç
+	Always turn on Speed Limiter on Sedot Download Manager startup	Sedot Download Manager başlatıldığında Hız Sınırlayıcıyı her zaman aç
 #. text in regional.rs; text in the Scheduler window
 #. before noon, after a time of day (12-hour clock). Its pair is "PM": write both the same way (this language's own short marks, or both kept as AM and PM)
 #, machine
@@ -566,7 +566,7 @@
 #. text in a dialog box
 #. {name} = a file name (keep the braces as they are)
 #, machine
-	Are you sure you want to delete "{name}" from Mister Download Manager list of downloads?	Mister Download Manager'in indirme listesinden "{name}" öğesini silmek istediğinizden emin misiniz?
+	Are you sure you want to delete "{name}" from Sedot Download Manager list of downloads?	Sedot Download Manager'in indirme listesinden "{name}" öğesini silmek istediğinizden emin misiniz?
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -626,7 +626,7 @@
 #, machine
 	Austria	Avusturya
 #. checkbox in the Options window; text in the Options window
-#. checkbox: the User-Agent is the default browser's, which MDM finds itself
+#. checkbox: the User-Agent is the default browser's, which SDM finds itself
 #, machine
 	Automatic	Otomatik
 #. text in remote.rs
@@ -709,7 +709,7 @@
 	Bosnia and Herzegovina	Bosna Hersek
 #. text in helpers.rs
 #, machine
-	Both are open source. MDM gets them from their official releases with its own downloader and checks each file's signature before it runs. About 100 MB, once.	İkisi de açık kaynaklıdır. MDM, bunları kendi indiricisiyle resmi sürümlerinden alır ve çalıştırmadan önce her dosyanın imzasını kontrol eder. Yaklaşık 100 MB, bir kez.
+	Both are open source. SDM gets them from their official releases with its own downloader and checks each file's signature before it runs. About 100 MB, once.	İkisi de açık kaynaklıdır. SDM, bunları kendi indiricisiyle resmi sürümlerinden alır ve çalıştırmadan önce her dosyanın imzasını kontrol eder. Yaklaşık 100 MB, bir kez.
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -739,7 +739,7 @@
 	Browse...	Gözat...
 #. text in extension.rs
 #, machine
-	Browser integration isn't set up on this computer, so no browser can reach Mister Download Manager yet.	Tarayıcı entegrasyonu bu bilgisayarda ayarlanmamış, bu nedenle hiçbir tarayıcı Mister Download Manager uygulamasına henüz ulaşamıyor.
+	Browser integration isn't set up on this computer, so no browser can reach Sedot Download Manager yet.	Tarayıcı entegrasyonu bu bilgisayarda ayarlanmamış, bu nedenle hiçbir tarayıcı Sedot Download Manager uygulamasına henüz ulaşamıyor.
 #. page title in the Options window
 #, machine
 	Browser/System Integration	Tarayıcı/Sistem Entegrasyonu
@@ -871,7 +871,7 @@
 #, machine
 	Check for updates	Güncelleştirmeleri denetle
 #. checkbox in the Help menu's windows (About, updates, shortcuts, Tell a friend)
-#. check box in the update window: look for a new version every time MDM starts
+#. check box in the update window: look for a new version every time SDM starts
 #, machine
 	Check for updates at every start	Her başlangıçta güncelleştirmeleri denetle
 #. text in errors.rs
@@ -883,9 +883,9 @@
 #, machine
 	Check your connection, then try again, or get them later from the video window.	Bağlantınızı kontrol edin, sonra yeniden deneyin veya daha sonra video penceresinden alın.
 #. text in the Options window
-#. tooltip of the close-setting: checked keeps MDM running when the window closes, in the notification area when available or else the taskbar; downloads continue; unchecked closing quits
+#. tooltip of the close-setting: checked keeps SDM running when the window closes, in the notification area when available or else the taskbar; downloads continue; unchecked closing quits
 #, machine
-	Checked, closing the window keeps MDM running: it hides in the notification area when available, or minimizes to the taskbar otherwise, and downloads continue; unchecked, closing quits MDM	İşaretliyken pencere kapatıldığında MDM çalışmaya devam eder: kullanılabiliyorsa bildirim alanında gizlenir, aksi takdirde görev çubuğuna küçültülür ve indirmeler devam eder; işaretli değilken pencere kapatıldığında MDM kapanır
+	Checked, closing the window keeps SDM running: it hides in the notification area when available, or minimizes to the taskbar otherwise, and downloads continue; unchecked, closing quits SDM	İşaretliyken pencere kapatıldığında SDM çalışmaya devam eder: kullanılabiliyorsa bildirim alanında gizlenir, aksi takdirde görev çubuğuna küçültülür ve indirmeler devam eder; işaretli değilken pencere kapatıldığında SDM kapanır
 #. message or event log entry in the main window
 #. event log entry after Recheck: {have} and {total} are sizes ("1.2 GB of 4 GB there")
 #, machine
@@ -944,7 +944,7 @@
 	Choose a language	Dil seçin
 #. text in langpick.rs
 #, machine
-	Choose the language Mister Download Manager shows its windows in:	Mister Download Manager'ın pencerelerini göstereceği dili seçin:
+	Choose the language Sedot Download Manager shows its windows in:	Sedot Download Manager'ın pencerelerini göstereceği dili seçin:
 #. text in the Options window
 #. Options → Sites Logins → Cookies for video sites: the title of the window, and the tooltip of the button, that pick a browser profile's folder
 #, machine
@@ -1032,7 +1032,7 @@
 #, machine
 	Congo	Kongo
 #. text in extension.rs
-#. in the browser extension's window, beside a browser whose extension reached MDM
+#. in the browser extension's window, beside a browser whose extension reached SDM
 #, machine
 	Connected	Bağlandı
 #. text in extension.rs
@@ -1084,7 +1084,7 @@
 #, machine
 	Could not be read: {error}	Okunamadı: {error}
 #. text in errors.rs
-#. a helper (yt-dlp, ffmpeg) couldn't be downloaded: the proxy set in Options ({proxy}, its address) didn't let MDM connect
+#. a helper (yt-dlp, ffmpeg) couldn't be downloaded: the proxy set in Options ({proxy}, its address) didn't let SDM connect
 #, machine
 	could not connect through the proxy {proxy}	Ara sunucu {proxy} üzerinden bağlantı kurulamadı
 #. text in errors.rs
@@ -1122,13 +1122,13 @@
 	Customize "Download progress" dialog	"İndirme ilerlemesi" iletişim kutusunu özelleştir
 #. text in the Options window
 #, machine
-	Customize keys to prevent or force downloading with MDM	MDM ile indirmeyi engellemek veya zorlamak için tuşları özelleştir
+	Customize keys to prevent or force downloading with SDM	SDM ile indirmeyi engellemek veya zorlamak için tuşları özelleştir
 #. text in the Options window
 #, machine
-	Customize MDM Download panels in browsers	Tarayıcılardaki MDM İndirme panellerini özelleştir
+	Customize SDM Download panels in browsers	Tarayıcılardaki SDM İndirme panellerini özelleştir
 #. text in the Options window
 #, machine
-	Customize MDM menu items in context menu of browsers	Tarayıcıların bağlam menüsündeki MDM menü öğelerini özelleştir
+	Customize SDM menu items in context menu of browsers	Tarayıcıların bağlam menüsündeki SDM menü öğelerini özelleştir
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -1317,9 +1317,9 @@
 #, machine
 	Download complete	İndirme tamamlandı
 #. text in the Options window
-#. Options, Downloads, under "Show download complete dialog": snoozed with "Until MDM restarts"
+#. Options, Downloads, under "Show download complete dialog": snoozed with "Until SDM restarts"
 #, machine
-	Download complete is snoozed until MDM restarts	İndirme tamamlandı penceresi MDM yeniden başlatılana kadar ertelendi
+	Download complete is snoozed until SDM restarts	İndirme tamamlandı penceresi SDM yeniden başlatılana kadar ertelendi
 #. text in the Options window
 #. Options, Downloads, under "Show download complete dialog": {time} when the snooze ends, like "14:30"
 #. {time} = a time of day (keep the braces as they are)
@@ -1428,10 +1428,10 @@
 #, machine
 	Downloading and verifying yt-dlp...	yt-dlp indiriliyor ve doğrulanıyor...
 #. text in helpers.rs
-#. Video helpers: MDM's own yt-dlp is being downloaded
+#. Video helpers: SDM's own yt-dlp is being downloaded
 #. the trailing ... means it is still going on: keep it
 #, machine
-	Downloading MDM's own copy...	MDM'nin kendi kopyası indiriliyor...
+	Downloading SDM's own copy...	SDM'nin kendi kopyası indiriliyor...
 #. text in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #. Check for updates, while Update now downloads; {percent} like "42%"
 #, machine
@@ -1474,7 +1474,7 @@
 	Drag the file into a folder or an app	Dosyayı bir klasöre veya uygulamaya sürükleyin
 #. message or event log entry in the main window
 #, machine
-	Dragged out of Download complete and moved to a place MDM couldn't learn	İndirme tamamlandı listesinden sürüklenerek MDM'nin konumunu belirleyemediği bir yere taşındı
+	Dragged out of Download complete and moved to a place SDM couldn't learn	İndirme tamamlandı listesinden sürüklenerek SDM'nin konumunu belirleyemediği bir yere taşındı
 #. message or event log entry in the main window
 #, machine
 	Dragged out of Download complete and moved to {folder}	İndirme tamamlandı klasöründen sürüklenerek {folder} konumuna taşındı
@@ -1536,9 +1536,9 @@
 #, machine
 	Empty: all of them. On most sites the newest come first.	Boş bırakılırsa tümü. Çoğu sitede en yeniler önce gelir.
 #. text in crashui.rs
-#. crash report window button: end the frozen MDM and start it again
+#. crash report window button: end the frozen SDM and start it again
 #, machine
-	End and restart MDM	MDM'yi sonlandır ve yeniden başlat
+	End and restart SDM	SDM'yi sonlandır ve yeniden başlat
 #. text in the Add torrent window
 #, machine
 	Enter a magnet link or choose a .torrent file	Bir magnet bağlantısı girin veya bir .torrent dosyası seçin
@@ -1621,7 +1621,7 @@
 	Exit	Çıkış
 #. checkbox in a download's progress window; checkbox in the Scheduler window
 #, machine
-	Exit Mister Download Manager when done	Tamamlandığında Mister Download Manager'dan çık
+	Exit Sedot Download Manager when done	Tamamlandığında Sedot Download Manager'dan çık
 #. text in the Checksum window
 #, machine
 	Expected checksum (MD5, SHA-1, SHA-256, SHA-512 or CRC32):	Beklenen sağlama toplamı (MD5, SHA-1, SHA-256, SHA-512 veya CRC32):
@@ -1836,7 +1836,7 @@
 #, machine
 	For example:  {address}	Örneğin: {address}
 #. text in the Add torrent window
-#. Torrent settings, under the switch that makes MDM open magnet links and .torrent files (macOS, Linux)
+#. Torrent settings, under the switch that makes SDM open magnet links and .torrent files (macOS, Linux)
 #, machine
 	For your account only. Another app set as the default stays first.	Yalnızca hesabınız için. Varsayılan olarak ayarlanan başka bir uygulama ilk sırada kalır.
 #. text in the Add torrent window
@@ -1846,7 +1846,7 @@
 #, machine
 	Force processes to terminate	İşlemleri sonlandırmaya zorla
 #. text in remote.rs
-#. remote control page (on a phone): menu command: unpair this phone or computer from MDM
+#. remote control page (on a phone): menu command: unpair this phone or computer from SDM
 #, machine
 	Forget this device	Bu cihazı unut
 #. text in remote.rs
@@ -2057,11 +2057,11 @@
 #, machine
 	Help	Yardım
 #. window title in helpers.rs
-#. window title: where MDM takes its helper programs (yt-dlp, ffmpeg, gallery-dl) from
+#. window title: where SDM takes its helper programs (yt-dlp, ffmpeg, gallery-dl) from
 #, machine
 	Helpers	Yardımcılar
 #. text in errors.rs; button in gallerydlg.rs; button in the Download video window
-#. button in Download video: where MDM takes yt-dlp and ffmpeg from
+#. button in Download video: where SDM takes yt-dlp and ffmpeg from
 #. the trailing ... means it opens a window: keep it
 #, machine
 	Helpers...	Yardımcılar...
@@ -2086,7 +2086,7 @@
 	Hide web pages	Web sayfalarını gizle
 #. text in the Options window
 #, machine
-	Hold Alt while clicking a link to let the browser download it instead of Mister Download Manager.	Bir bağlantıya tıklarken Alt tuşunu basılı tutarak Mister Download Manager yerine tarayıcının indirmesini sağlayın.
+	Hold Alt while clicking a link to let the browser download it instead of Sedot Download Manager.	Bir bağlantıya tıklarken Alt tuşunu basılı tutarak Sedot Download Manager yerine tarayıcının indirmesini sağlayın.
 #. link (opens a web page) in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #, machine
 	Home page	Ana sayfa
@@ -2127,7 +2127,7 @@
 	Hungary	Macaristan
 #. text in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #, machine
-	I download with Mister Download Manager: fast, free, and it looks like the download manager you already know. {link}	Mister Download Manager ile indiriyorum: hızlı, ücretsiz ve zaten bildiğiniz indirme yöneticisine benziyor. {link}
+	I download with Sedot Download Manager: fast, free, and it looks like the download manager you already know. {link}	Sedot Download Manager ile indiriyorum: hızlı, ücretsiz ve zaten bildiğiniz indirme yöneticisine benziyor. {link}
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -2164,7 +2164,7 @@
 #, machine
 	In the categories: the selected category's menu	Kategorilerde: seçili kategorinin menüsü
 #. text in the Options window
-#. Options → Accounts: the account's sign-in is in the system's keyring (Linux), which is locked now; MDM never unlocks it
+#. Options → Accounts: the account's sign-in is in the system's keyring (Linux), which is locked now; SDM never unlocks it
 #, machine
 	in the locked keyring	kilitli anahtarlıkta
 #. text in standard windows
@@ -2204,7 +2204,7 @@
 #, machine
 	Install it by hand	Elle kurun
 #. text in unix.rs
-#. Linux, after a missing library's name, on a distribution MDM doesn't know
+#. Linux, after a missing library's name, on a distribution SDM doesn't know
 #, machine
 	Install what's missing from your distribution's packages.	Eksik olanları dağıtımınızın paketlerinden yükleyin.
 #. text in the Download video window
@@ -2263,7 +2263,7 @@
 #. text in extracting archives (a download's log, the Archive password window)
 #. why an archive wasn't extracted (after "Couldn't extract {name}: ")
 #, machine
-	it is not an archive MDM extracts	MDM'nin çıkardığı bir arşiv değil
+	it is not an archive SDM extracts	SDM'nin çıkardığı bir arşiv değil
 #. text in extracting archives (a download's log, the Archive password window)
 #. why an archive wasn't extracted (after "Couldn't extract {name}: ")
 #, machine
@@ -2284,7 +2284,7 @@
 #. text in the Batch download window
 #. \\n starts a new line: break lines where they fit the translation
 #, machine
-	It's possible to add a group of sequential file names like img001.jpg, img002.jpg, etc.,\nimg100.jpg to MDM download queue. Use the asterisk wildcard for the file name pattern.	img001.jpg, img002.jpg vb. img100.jpg gibi sıralı dosya adları grubunu MDM indirme kuyruğuna eklemek mümkündür. Dosya adı deseni için yıldız joker karakterini kullanın.
+	It's possible to add a group of sequential file names like img001.jpg, img002.jpg, etc.,\nimg100.jpg to SDM download queue. Use the asterisk wildcard for the file name pattern.	img001.jpg, img002.jpg vb. img100.jpg gibi sıralı dosya adları grubunu SDM indirme kuyruğuna eklemek mümkündür. Dosya adı deseni için yıldız joker karakterini kullanın.
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -2342,7 +2342,7 @@
 #, machine
 	KBytes/sec	KB/sn
 #. text in the Options window
-#. checkbox: closing keeps MDM running, in the notification area when available or else the taskbar, instead of quitting
+#. checkbox: closing keeps SDM running, in the notification area when available or else the taskbar, instead of quitting
 #, machine
 	Keep running when closing the window	Pencereyi kapatırken çalışmaya devam et
 #. checkbox in the Add torrent window
@@ -2360,7 +2360,7 @@
 #, machine
 	Keyboard shortcuts	Klavye kısayolları
 #. window title in the Options window
-#. window title: the keys that force or prevent downloading with MDM
+#. window title: the keys that force or prevent downloading with SDM
 #, machine
 	Keys	Tuşlar
 #. button in the Options window
@@ -2396,14 +2396,14 @@
 #, machine
 	Laos	Laos
 #. message or event log entry in the main window
-#. RSS: a feed bigger than MDM reads (5 MB)
+#. RSS: a feed bigger than SDM reads (5 MB)
 #, machine
 	larger than a feed can be	bir akışın olabileceğinden daha büyük
 #. text in the Batch download window
 #, machine
 	Last file:	Son dosya:
 #. text in the Options window
-#. column title: when the device last reached MDM
+#. column title: when the device last reached SDM
 #, machine
 	Last seen	Son görülme
 #. text in a download's Properties window
@@ -2421,7 +2421,7 @@
 	Latvia	Letonya
 #. text in the Options window
 #, machine
-	Launch Mister Download Manager on startup	Mister Download Manager'ı başlangıçta çalıştır
+	Launch Sedot Download Manager on startup	Sedot Download Manager'ı başlangıçta çalıştır
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -2433,7 +2433,7 @@
 #. checkbox in the Options window
 #. Options → Remote check box (off by default)
 #, machine
-	Let phones and computers on the local network control MDM	Yerel ağdaki telefonların ve bilgisayarların MDM'yi kontrol etmesine izin ver
+	Let phones and computers on the local network control SDM	Yerel ağdaki telefonların ve bilgisayarların SDM'yi kontrol etmesine izin ver
 #. option (radio button) in the Batch download window
 #. the * in the address runs through letters
 #, machine
@@ -2482,7 +2482,7 @@
 #, machine
 	List the rest	Kalanları listele
 #. text in the Options window
-#. Options → Remote: label before the choice of the address MDM listens on
+#. Options → Remote: label before the choice of the address SDM listens on
 #, machine
 	Listen on:	Dinlenecek adres:
 #. text in playlistdlg.rs
@@ -2666,32 +2666,32 @@
 #. text in the Options window
 #. Options → Remote → Pair a device: the remote control isn't listening (no network, port taken): the Remote page says why
 #, machine
-	MDM can't be reached on the network now: Options → Remote says why.	MDM'ye şu anda ağ üzerinden ulaşılamıyor: Seçenekler → Uzak nedenini belirtir.
+	SDM can't be reached on the network now: Options → Remote says why.	SDM'ye şu anda ağ üzerinden ulaşılamıyor: Seçenekler → Uzak nedenini belirtir.
 #. text in remote.rs
-#. remote control page (on a phone): the address typed isn't one MDM downloads (not http, https, ftp or magnet)
+#. remote control page (on a phone): the address typed isn't one SDM downloads (not http, https, ftp or magnet)
 #, machine
-	MDM cannot download this address.	MDM bu adresi indiremiyor.
+	SDM cannot download this address.	SDM bu adresi indiremiyor.
 #. text in remote.rs
 #. remote control page (on a phone): adding a download failed
 #, machine
-	MDM could not add it.	MDM ekleyemedi.
+	SDM could not add it.	SDM ekleyemedi.
 #. text in remote.rs
 #. remote control page (on a phone): an action failed
 #, machine
-	MDM could not do it.	MDM yapamadı.
+	SDM could not do it.	SDM yapamadı.
 #. text in remote.rs
-#. remote control page (on a phone): MDM can't be reached while pairing
+#. remote control page (on a phone): SDM can't be reached while pairing
 #, machine
-	MDM does not answer. Check that it is running and on the same network.	MDM yanıt vermiyor. Çalıştığından ve aynı ağda olduğundan emin olun.
+	SDM does not answer. Check that it is running and on the same network.	SDM yanıt vermiyor. Çalıştığından ve aynı ağda olduğundan emin olun.
 #. text in remote.rs
-#. remote control page (on a phone): MDM can't be reached now; the page keeps trying by itself
+#. remote control page (on a phone): SDM can't be reached now; the page keeps trying by itself
 #. the trailing ... means it is still going on: keep it
 #, machine
-	MDM does not answer. Trying again...	MDM yanıt vermiyor. Tekrar deneniyor...
+	SDM does not answer. Trying again...	SDM yanıt vermiyor. Tekrar deneniyor...
 #. text in remote.rs
-#. remote control page (on a phone): no pairing code is shown in MDM; "Pair a device" is MDM's button
+#. remote control page (on a phone): no pairing code is shown in SDM; "Pair a device" is SDM's button
 #, machine
-	MDM shows no code now. Click Pair a device there first.	MDM şu anda kod göstermiyor. Önce oradaki Bir cihazı eşleştir'e tıklayın.
+	SDM shows no code now. Click Pair a device there first.	SDM şu anda kod göstermiyor. Önce oradaki Bir cihazı eşleştir'e tıklayın.
 #. text in whereis.rs
 #. how far a download's server is, by its round trip (60 to 150 ms)
 #, machine
@@ -2722,7 +2722,7 @@
 #, machine
 	Minimize	Simge Durumuna Küçült
 #. text in the Options window
-#. checkbox: the Minimize button hides MDM's windows to the notification area (system tray) instead of the taskbar
+#. checkbox: the Minimize button hides SDM's windows to the notification area (system tray) instead of the taskbar
 #, machine
 	Minimize to the notification area	Bildirim alanına küçült
 #. text in rssdlg.rs; text in the Add torrent window
@@ -2736,58 +2736,58 @@
 	Missing	Eksik
 #. message or event log entry in the main window; window title in a dialog box; text in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #, machine
-	Mister Download Manager	Mister Download Manager
+	Sedot Download Manager	Sedot Download Manager
 #. text in unix.rs
 #. Linux, at start, on the terminal and in a message box: a library the window needs isn't installed; {libraries} = its file names (libxkbcommon-x11.so.0…), left as they are
 #, machine
-	Mister Download Manager can't open its window: this system lacks {libraries}.	Mister Download Manager penceresini açamıyor: bu sistemde {libraries} eksik.
+	Sedot Download Manager can't open its window: this system lacks {libraries}.	Sedot Download Manager penceresini açamıyor: bu sistemde {libraries} eksik.
 #. text in crashui.rs
-#. crash report window heading: MDM crashed and is gone
+#. crash report window heading: SDM crashed and is gone
 #, machine
-	Mister Download Manager closed unexpectedly	Mister Download Manager beklenmedik şekilde kapandı
+	Sedot Download Manager closed unexpectedly	Sedot Download Manager beklenmedik şekilde kapandı
 #. window title in the Options window
 #, machine
-	Mister Download Manager Configuration	Mister Download Manager Yapılandırması
+	Sedot Download Manager Configuration	Sedot Download Manager Yapılandırması
 #. text in crashui.rs
 #, machine
-	Mister Download Manager crash report	Mister Download Manager kilitlenme raporu
+	Sedot Download Manager crash report	Sedot Download Manager kilitlenme raporu
 #. text in crashui.rs
-#. crash report window heading: an internal error, MDM still running
+#. crash report window heading: an internal error, SDM still running
 #, machine
-	Mister Download Manager hit an internal error	Mister Download Manager dahili bir hatayla karşılaştı
+	Sedot Download Manager hit an internal error	Sedot Download Manager dahili bir hatayla karşılaştı
 #. text in wake.rs
 #. why the computer isn't going to sleep, in the system's list of programs that keep it awake (Windows' power requests, Linux's inhibitors)
 #, machine
-	Mister Download Manager is downloading	Mister Download Manager indiriliyor
+	Sedot Download Manager is downloading	Sedot Download Manager indiriliyor
 #. text in wake.rs
 #. why the computer isn't going to sleep, in the system's list of programs that keep it awake; {queue} = the queue's name
 #. {queue} = a queue name such as "Main queue" (keep the braces as they are)
 #, machine
-	Mister Download Manager is running the queue "{queue}"	Mister Download Manager, "{queue}" kuyruğunu çalıştırıyor
+	Sedot Download Manager is running the queue "{queue}"	Sedot Download Manager, "{queue}" kuyruğunu çalıştırıyor
 #. text in crashui.rs
-#. crash report window heading: MDM's window doesn't answer (frozen)
+#. crash report window heading: SDM's window doesn't answer (frozen)
 #, machine
-	Mister Download Manager stopped responding	Mister Download Manager yanıt vermeyi durdurdu
+	Sedot Download Manager stopped responding	Sedot Download Manager yanıt vermeyi durdurdu
 #. text in crashui.rs
 #, machine
-	Mister Download Manager stopped responding for a while	Mister Download Manager bir süreliğine yanıt vermeyi durdurdu
+	Sedot Download Manager stopped responding for a while	Sedot Download Manager bir süreliğine yanıt vermeyi durdurdu
 #. text in the Options window
 #. \\n starts a new line: break lines where they fit the translation
 #, machine
-	Mister Download Manager writes every connection straight into the final\nfile (a sparse part file next to it), so no temporary directory and no\nassembling step are needed.	Mister Download Manager her bağlantıyı doğrudan nihai dosyaya (yanındaki seyrek bir bölüm dosyası) yazar, bu nedenle geçici bir dizine ve birleştirme adımına gerek yoktur.
+	Sedot Download Manager writes every connection straight into the final\nfile (a sparse part file next to it), so no temporary directory and no\nassembling step are needed.	Sedot Download Manager her bağlantıyı doğrudan nihai dosyaya (yanındaki seyrek bir bölüm dosyası) yazar, bu nedenle geçici bir dizine ve birleştirme adımına gerek yoktur.
 #. text in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #. {version} = a version number (keep the braces as they are)
 #, machine
-	Mister Download Manager {version} is available (released {date}).	Mister Download Manager {version} sürümü mevcut (yayınlanma tarihi: {date}).
+	Sedot Download Manager {version} is available (released {date}).	Sedot Download Manager {version} sürümü mevcut (yayınlanma tarihi: {date}).
 #. text in helpers.rs
-#. Video helpers: {version} = the version of MDM's own copy
+#. Video helpers: {version} = the version of SDM's own copy
 #. {version} = a version number (keep the braces as they are)
 #, machine
-	Mister Download Manager's own copy, version {version}	Mister Download Manager uygulamasının kendi kopyası, sürüm {version}
+	Sedot Download Manager's own copy, version {version}	Sedot Download Manager uygulamasının kendi kopyası, sürüm {version}
 #. text in unix.rs
 #. Linux, at start, on the terminal: the libraries an X11 window needs aren't installed, so the window opens through Wayland instead, where menus can't be placed under what was clicked; {libraries} = their file names, left as they are
 #, machine
-	Mister Download Manager's X11 window needs {libraries}, which this system lacks: it opens on Wayland instead, where its menus may open away from their titles.	Mister Download Manager'in X11 penceresi, bu sistemde eksik olan {libraries} öğesine ihtiyaç duyuyor: bunun yerine Wayland'de açılıyor ve menüleri başlıklarından uzakta açılabilir.
+	Sedot Download Manager's X11 window needs {libraries}, which this system lacks: it opens on Wayland instead, where its menus may open away from their titles.	Sedot Download Manager'in X11 penceresi, bu sistemde eksik olan {libraries} öğesine ihtiyaç duyuyor: bunun yerine Wayland'de açılıyor ve menüleri başlıklarından uzakta açılabilir.
 #. text in the Scheduler window
 #. Monday, as short as a calendar's column head (two letters in English)
 #, machine
@@ -2871,7 +2871,7 @@
 #, machine
 	Mozambique	Mozambik
 #. text in the Download video window
-#. why "Embed chapters" is greyed in Download video: the choice is a sound converted to MP3, Opus or FLAC, which MDM saves without chapters
+#. why "Embed chapters" is greyed in Download video: the choice is a sound converted to MP3, Opus or FLAC, which SDM saves without chapters
 #, machine
 	MP3, Opus and FLAC files are saved without chapters	MP3, Opus ve FLAC dosyaları bölümsüz kaydedilir
 #. text in errors.rs
@@ -2996,11 +2996,11 @@
 #, machine
 	No addresses yet	Henüz adres yok
 #. text in extension.rs
-#. a check of Test browser integration (Linux, macOS): MDM found no browser it can connect to (one installed as a Flatpak isn't found)
+#. a check of Test browser integration (Linux, macOS): SDM found no browser it can connect to (one installed as a Flatpak isn't found)
 #, machine
-	No browser MDM can connect to was found	MDM'nin bağlanabileceği bir tarayıcı bulunamadı
+	No browser SDM can connect to was found	SDM'nin bağlanabileceği bir tarayıcı bulunamadı
 #. text in extension.rs
-#. a check of Test browser integration: no browser's extension has reached MDM
+#. a check of Test browser integration: no browser's extension has reached SDM
 #, machine
 	No browser's extension has connected yet	Henüz hiçbir tarayıcı uzantısı bağlanmadı
 #. text in torrent downloads
@@ -3069,9 +3069,9 @@
 #, machine
 	No proxy/socks	Proxy/SOCKS yok
 #. text in the Options window
-#. Options → Accounts: no system keyring/keychain answered (none runs, e.g. a desktop without one), so the sign-ins stay in MDM's settings folder, which only the user's account may read
+#. Options → Accounts: no system keyring/keychain answered (none runs, e.g. a desktop without one), so the sign-ins stay in SDM's settings folder, which only the user's account may read
 #, machine
-	No system keyring answered, so sign-ins and passwords are kept in MDM's settings, which only you can read.	Sistem anahtarlığı yanıt vermediği için oturum açma bilgileri ve parolalar yalnızca sizin okuyabileceğiniz MDM ayarlarına kaydedilir.
+	No system keyring answered, so sign-ins and passwords are kept in SDM's settings, which only you can read.	Sistem anahtarlığı yanıt vermediği için oturum açma bilgileri ve parolalar yalnızca sizin okuyabileceğiniz SDM ayarlarına kaydedilir.
 #. message or event log entry in the main window
 #. event log entry: Add trackers changed nothing, the torrent had them all
 #, machine
@@ -3202,7 +3202,7 @@
 #. text in the Options window
 #. Options → Remote → Status: the remote control is off
 #, machine
-	Off: nothing on the network can reach MDM.	Kapalı: ağdaki hiçbir şey MDM'ye ulaşamaz.
+	Off: nothing on the network can reach SDM.	Kapalı: ağdaki hiçbir şey SDM'ye ulaşamaz.
 #. text in the Options window
 #, machine
 	Offer to download links copied to the clipboard	Panoya kopyalanan bağlantıları indirmeyi öner
@@ -3229,7 +3229,7 @@
 #, machine
 	On macOS, only an administrator can schedule a wake	macOS'ta yalnızca bir yönetici uyandırma zamanlayabilir
 #. text in remote.rs
-#. remote control page (on a phone): how to pair; "Options", "Remote" and "Pair a device" are MDM's dialog, tab and button
+#. remote control page (on a phone): how to pair; "Options", "Remote" and "Pair a device" are SDM's dialog, tab and button
 #, machine
 	On the computer, open Options, then Remote, and click Pair a device. Enter the code it shows.	Bilgisayarda Seçenekler'i, ardından Uzak'ı açın ve Bir cihazı eşleştir'e tıklayın. Gösterdiği kodu girin.
 #. text in the Options window
@@ -3278,9 +3278,9 @@
 #. text in the Options window
 #. Options → Remote, at the bottom of the page
 #, machine
-	Only paired devices see or change anything. The first time, the phone's browser warns about MDM's own certificate: its fingerprint is the one above.	Yalnızca eşleştirilmiş cihazlar herhangi bir şeyi görebilir veya değiştirebilir. İlk kez, telefonun tarayıcısı MDM'nin kendi sertifikası hakkında uyarır: parmak izi yukarıdakiyle aynıdır.
+	Only paired devices see or change anything. The first time, the phone's browser warns about SDM's own certificate: its fingerprint is the one above.	Yalnızca eşleştirilmiş cihazlar herhangi bir şeyi görebilir veya değiştirebilir. İlk kez, telefonun tarayıcısı SDM'nin kendi sertifikası hakkında uyarır: parmak izi yukarıdakiyle aynıdır.
 #. text in playlistdlg.rs
-#. in Download video, a list longer than MDM lists: only its first {n} videos are shown
+#. in Download video, a list longer than SDM lists: only its first {n} videos are shown
 #. {n} = a number (keep the braces as they are)
 #, machine
 	Only the first {n} videos are listed.	Yalnızca ilk {n} video listelenir.
@@ -3305,10 +3305,10 @@
 	Open in browser	Tarayıcıda aç
 #. checkbox in the Add torrent window
 #, machine
-	Open magnet links and .torrent files with Mister Download Manager	Mıknatıs bağlantılarını ve .torrent dosyalarını Mister Download Manager ile aç
+	Open magnet links and .torrent files with Sedot Download Manager	Mıknatıs bağlantılarını ve .torrent dosyalarını Sedot Download Manager ile aç
 #. text in the tray icon's menu
 #, machine
-	Open Mister Download Manager	Mister Download Manager'ı Aç
+	Open Sedot Download Manager	Sedot Download Manager'ı Aç
 #. text in extension.rs
 #. step 2 of turning on the Safari extension; Cmd is the Command key
 #, machine
@@ -3364,7 +3364,7 @@
 #, machine
 	Page address	Sayfa adresi
 #. text in remote.rs
-#. remote control page (on a phone): button: pair this phone with MDM
+#. remote control page (on a phone): button: pair this phone with SDM
 #, machine
 	Pair	Eşleştir
 #. window title in the Options window
@@ -3379,7 +3379,7 @@
 #. text in remote.rs
 #. remote control page (on a phone): title of the pairing screen
 #, machine
-	Pair with Mister Download Manager	Mister Download Manager ile eşleştir
+	Pair with Sedot Download Manager	Sedot Download Manager ile eşleştir
 #. text in the Options window
 #. column title: when the device was paired
 #, machine
@@ -3667,11 +3667,11 @@
 #, machine
 	Remember this path for "{category}" category	"{category}" kategorisi için bu yolu hatırla
 #. text in the Options window
-#. tab title: control MDM from a phone or another computer on the local network
+#. tab title: control SDM from a phone or another computer on the local network
 #, machine
 	Remote	Uzaktan
 #. text in the Options window
-#. Options page title: control MDM from a phone or another computer on the local network
+#. Options page title: control SDM from a phone or another computer on the local network
 #, machine
 	Remote control	Uzaktan kumanda
 #. button in the Options window; text in remote.rs; button in rssdlg.rs
@@ -3701,9 +3701,9 @@
 #, machine
 	Replace asterisk to	Yıldızın yerine şunu koy
 #. text in crashui.rs
-#. crash report window button: start MDM again
+#. crash report window button: start SDM again
 #, machine
-	Restart MDM	MDM'yi yeniden başlat
+	Restart SDM	SDM'yi yeniden başlat
 #. button in the Options window; text in the Options window
 #, machine
 	Restore the built-in categories	Yerleşik kategorileri geri yükle
@@ -3883,7 +3883,7 @@
 	Select or unselect the download with the dotted outline	Noktalı ana hattı olan indirmeyi seç veya seçimi kaldır
 #. group box title in the Options window
 #, machine
-	Select sounds for Mister Download Manager events	Mister Download Manager olayları için sesleri seçin
+	Select sounds for Sedot Download Manager events	Sedot Download Manager olayları için sesleri seçin
 #. what a keyboard shortcut does in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #, machine
 	Select the downloads in the box	Kutudaki indirmeleri seç
@@ -3906,7 +3906,7 @@
 #, machine
 	Send this to a friend:	Bunu bir arkadaşınıza gönderin:
 #. text in the Options window
-#. Options → Accounts: checkbox: magnet links and .torrent files go to the first account's service, which downloads them; MDM then downloads the files from it (no connections to peers)
+#. Options → Accounts: checkbox: magnet links and .torrent files go to the first account's service, which downloads them; SDM then downloads the files from it (no connections to peers)
 #, machine
 	Send torrents and magnet links to the first account instead of to peers	Torrentleri ve magnet bağlantılarını eşlere değil, ilk hesabın hizmetine gönder
 #. text in countries.rs
@@ -3951,8 +3951,8 @@
 #, machine
 	Set file creation date as provided by the server	Dosya oluşturma tarihini sunucu tarafından sağlandığı gibi ayarla
 #. button in extension.rs; button in the Options window
-#. button in the browser extension's window: register MDM's helper with the browsers
-#. button in Test browser integration: register MDM's helper with the browsers
+#. button in the browser extension's window: register SDM's helper with the browsers
+#. button in Test browser integration: register SDM's helper with the browsers
 #, machine
 	Set it up	Ayarlayın
 #. message or event log entry in the main window
@@ -4033,7 +4033,7 @@
 #, machine
 	Show download progress dialog when a download starts	Bir indirme başladığında indirme ilerleme iletişim kutusunu göster
 #. button in a dialog box
-#. button: shows these downloads in MDM's list, selected
+#. button: shows these downloads in SDM's list, selected
 #, machine
 	Show in list	Listede göster
 #. text in extension.rs
@@ -4111,7 +4111,7 @@
 	Sites Logins	Site oturum açma bilgileri
 #. text in helpers.rs
 #, machine
-	Sites send their best quality as separate video and audio, and ffmpeg joins them. On this system MDM uses yours: install ffmpeg with your package manager.	Siteler en iyi kaliteyi ayrı video ve ses olarak gönderir, ffmpeg de bunları birleştirir. Bu sistemde MDM sizinkini kullanır: ffmpeg'i paket yöneticinizle yükleyin.
+	Sites send their best quality as separate video and audio, and ffmpeg joins them. On this system SDM uses yours: install ffmpeg with your package manager.	Siteler en iyi kaliteyi ayrı video ve ses olarak gönderir, ffmpeg de bunları birleştirir. Bu sistemde SDM sizinkini kullanır: ffmpeg'i paket yöneticinizle yükleyin.
 #. text in helpers.rs
 #, machine
 	Sites send their best quality as separate video and audio. ffmpeg puts them together into one file that plays anywhere.	Siteler en iyi kaliteyi ayrı video ve ses olarak gönderir. ffmpeg bunları her yerde oynatılabilen tek bir dosyada birleştirir.
@@ -4230,7 +4230,7 @@
 	Start download at	İndirmeyi şu saatte başlat
 #. checkbox in the Scheduler window
 #, machine
-	Start download on Mister Download Manager startup	Mister Download Manager başlatıldığında indirmeyi başlat
+	Start download on Sedot Download Manager startup	Sedot Download Manager başlatıldığında indirmeyi başlat
 #. checkbox in the Options window
 #, machine
 	Start downloading immediately while displaying "Download File Info" dialog	"Dosya Bilgilerini İndir" iletişim kutusunu görüntülerken hemen indirmeye başla
@@ -4261,11 +4261,11 @@
 #, machine
 	Started with gallery-dl {version}	gallery-dl {version} ile başlatıldı
 #. text in the Options window
-#. the same tooltip where no notification area (system tray) shows MDM's icon (some Linux desktops): its window starts minimized instead
+#. the same tooltip where no notification area (system tray) shows SDM's icon (some Linux desktops): its window starts minimized instead
 #, machine
 	Started with the computer, it starts minimized: no notification area shows its icon here	Bilgisayarla başlatıldığında simge durumuna küçültülmüş olarak başlar: burada bildirim alanında simgesi görünmez
 #. text in the Options window
-#. tooltip of "Launch Mister Download Manager on startup": started with the computer, MDM's window stays hidden, its icon in the notification area (system tray)
+#. tooltip of "Launch Sedot Download Manager on startup": started with the computer, SDM's window stays hidden, its icon in the notification area (system tray)
 #, machine
 	Started with the computer, it waits in the notification area	Bilgisayarla başlatıldığında bildirim alanında bekler
 #. message or event log entry in the main window
@@ -4373,7 +4373,7 @@
 	Sunday	Pazar
 #. link (opens a web page) in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #, machine
-	Support MDM on GitHub Sponsors	GitHub Sponsors'ta MDM'yi Destekleyin
+	Support SDM on GitHub Sponsors	GitHub Sponsors'ta SDM'yi Destekleyin
 #. text in countries.rs
 #. a country's name (where a download's server is)
 #, machine
@@ -4484,17 +4484,17 @@
 #, machine
 	The best qualities, MP3, Opus and FLAC need ffmpeg: install it with your system's package manager (or Homebrew).	En iyi kaliteler olan MP3, Opus ve FLAC için ffmpeg gerekir: sisteminizin paket yöneticisi (veya Homebrew) ile yükleyin.
 #. text in the settings
-#. an error: the browser's VPN or proxy extension logs in to its proxy itself, and MDM can't; Options → Proxy / Socks → Network adapter is where an adapter can be chosen
+#. an error: the browser's VPN or proxy extension logs in to its proxy itself, and SDM can't; Options → Proxy / Socks → Network adapter is where an adapter can be chosen
 #, machine
 	the browser's proxy (a VPN or proxy extension) asks for a login only that extension has: use the VPN's own app, or choose its network adapter in Options → Proxy / Socks	Tarayıcının proxy'si (bir VPN veya proxy uzantısı) yalnızca o uzantının sahip olduğu bir oturum açma bilgisi istiyor: VPN'in kendi uygulamasını kullanın veya Seçenekler → Proxy / Socks bölümünden ağ bağdaştırıcısını seçin
 #. text in extension.rs
-#. a check of Test browser integration: the browsers are pointed at a copy of MDM that was deleted (often one started from inside a zip); that copy's folder shows on the line under it
+#. a check of Test browser integration: the browsers are pointed at a copy of SDM that was deleted (often one started from inside a zip); that copy's folder shows on the line under it
 #, machine
 	The browsers are set up for a copy that is gone:	Tarayıcılar, kaldırılmış bir kopyaya ayarlanmış:
 #. text in extension.rs
-#. a check of Test browser integration: the browsers find MDM's helper program
+#. a check of Test browser integration: the browsers find SDM's helper program
 #, machine
-	The browsers can find Mister Download Manager	Tarayıcılar Mister Download Manager uygulamasını bulabiliyor
+	The browsers can find Sedot Download Manager	Tarayıcılar Sedot Download Manager uygulamasını bulabiliyor
 #. text in the Options window
 #. Options → Remote → Status: the settings were changed; they apply on OK
 #, machine
@@ -4521,7 +4521,7 @@
 #. text in the Scheduler window
 #. tooltip on the Scheduler's "Wake the computer to run this queue"
 #, machine
-	The computer is woken a minute before the start time and kept awake while the queue runs. Mister Download Manager has to be running (it can wait in the notification area).	Bilgisayar, başlama saatinden bir dakika önce uyandırılır ve kuyruk çalışırken uyanık tutulur. Mister Download Manager çalışıyor olmalı (bildirim alanında bekleyebilir).
+	The computer is woken a minute before the start time and kept awake while the queue runs. Sedot Download Manager has to be running (it can wait in the notification area).	Bilgisayar, başlama saatinden bir dakika önce uyandırılır ve kuyruk çalışırken uyanık tutulur. Sedot Download Manager çalışıyor olmalı (bildirim alanında bekleyebilir).
 #. text in the Scheduler window
 #. the Scheduler, under "Wake the computer to run this queue": when it will happen; {date} = e.g. 06/11/2026, {time} = e.g. 22:59:00
 #. {time} = a time of day (keep the braces as they are)
@@ -4576,7 +4576,7 @@
 #. message or event log entry in the main window
 #. {error} = an error message (keep the braces as they are)
 #, machine
-	The download list could not be saved: {error}. Changes are kept while MDM runs.	İndirme listesi kaydedilemedi: {error}. MDM çalışırken değişiklikler korunur.
+	The download list could not be saved: {error}. Changes are kept while SDM runs.	İndirme listesi kaydedilemedi: {error}. SDM çalışırken değişiklikler korunur.
 #. text in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #, machine
 	The download manager you already know, rebuilt to be faster. Free and open source under the GNU GPL, version 3 or later. Videos are found by yt-dlp; torrents run on librqbit.	Zaten bildiğiniz indirme yöneticisi, daha hızlı çalışacak şekilde yeniden tasarlandı. GNU GPL sürüm 3 veya sonrası kapsamında ücretsiz ve açık kaynaklıdır. Videolar yt-dlp tarafından bulunur; torrentler librqbit üzerinde çalışır.
@@ -4711,7 +4711,7 @@
 #. text in a dialog box
 #. \\n starts a new line: break lines where they fit the translation
 #, machine
-	The selected download is not complete. Are you sure you want to delete\nit from Mister Download Manager list of downloads?	Seçilen indirme tamamlanmadı. Mister Download Manager indirme listesinden silmek istediğinizden emin misiniz?
+	The selected download is not complete. Are you sure you want to delete\nit from Sedot Download Manager list of downloads?	Seçilen indirme tamamlanmadı. Sedot Download Manager indirme listesinden silmek istediğinizden emin misiniz?
 #. text in errors.rs
 #, machine
 	the server answered {status}	sunucu {status} yanıtını verdi
@@ -4731,9 +4731,9 @@
 #, machine
 	the server sent an unexpected part of the file ({detail})	sunucu dosyanın beklenmeyen bir bölümünü gönderdi ({detail})
 #. text in errors.rs
-#. why a download failed (#701): a file host answered with its own web page (a countdown before the link, a captcha, a sign-in) where the file was expected. The browser gets past it; MDM's browser extension then hands the real file back to MDM
+#. why a download failed (#701): a file host answered with its own web page (a countdown before the link, a captcha, a sign-in) where the file was expected. The browser gets past it; SDM's browser extension then hands the real file back to SDM
 #, machine
-	the site sent a web page instead of the file (a waiting page, a captcha or a sign-in): open the link in your browser, finish there, and the download comes back to MDM	Site, dosya yerine bir web sayfası gönderdi (bir bekleme sayfası, bir CAPTCHA veya bir oturum açma): bağlantıyı tarayıcınızda açın, işlemi orada tamamlayın, indirme MDM'ye geri dönecektir
+	the site sent a web page instead of the file (a waiting page, a captcha or a sign-in): open the link in your browser, finish there, and the download comes back to SDM	Site, dosya yerine bir web sayfası gönderdi (bir bekleme sayfası, bir CAPTCHA veya bir oturum açma): bağlantıyı tarayıcınızda açın, işlemi orada tamamlayın, indirme SDM'ye geri dönecektir
 #. text in the Download video window
 #. the Download video window: the site asked for a sign-in although the browser's extension passed the page's cookies
 #, machine
@@ -4757,15 +4757,15 @@
 #. text in errors.rs
 #. why a download failed: the site's security certificate (what proves a secure, HTTPS, site is the one it says) is past its end date. Browsers warn about the same site
 #, machine
-	the site's security certificate has expired, so MDM can't be sure it's the real site (your browser warns about it too)	sitenin güvenlik sertifikasının süresi doldu, bu nedenle MDM'nin sitenin gerçek site olduğundan emin olması mümkün değil (tarayıcınız da bu konuda uyarı veriyor)
+	the site's security certificate has expired, so SDM can't be sure it's the real site (your browser warns about it too)	sitenin güvenlik sertifikasının süresi doldu, bu nedenle SDM'nin sitenin gerçek site olduğundan emin olması mümkün değil (tarayıcınız da bu konuda uyarı veriyor)
 #. text in errors.rs
 #. why a download failed: the site's security certificate was made for other site names than the one in the address
 #, machine
-	the site's security certificate is for another site name, so MDM can't be sure it's the real site (your browser warns about it too)	sitenin güvenlik sertifikası adresteki site adından farklı bir site adı için düzenlenmiş, bu nedenle MDM'nin sitenin gerçek site olduğundan emin olması mümkün değil (tarayıcınız da bu konuda uyarı veriyor)
+	the site's security certificate is for another site name, so SDM can't be sure it's the real site (your browser warns about it too)	sitenin güvenlik sertifikası adresteki site adından farklı bir site adı için düzenlenmiş, bu nedenle SDM'nin sitenin gerçek site olduğundan emin olması mümkün değil (tarayıcınız da bu konuda uyarı veriyor)
 #. text in errors.rs
 #. why a download failed: the site's security certificate was signed by the site itself or by an issuer this computer doesn't trust. Browsers warn about the same site
 #, machine
-	the site's security certificate isn't trusted (it's self-signed or from an unknown issuer), so MDM can't be sure it's the real site (your browser warns about it too)	sitenin güvenlik sertifikasına güvenilmiyor (kendinden imzalı veya bilinmeyen bir sertifika yetkilisinden), bu nedenle MDM'nin sitenin gerçek site olduğundan emin olması mümkün değil (tarayıcınız da bu konuda uyarı veriyor)
+	the site's security certificate isn't trusted (it's self-signed or from an unknown issuer), so SDM can't be sure it's the real site (your browser warns about it too)	sitenin güvenlik sertifikasına güvenilmiyor (kendinden imzalı veya bilinmeyen bir sertifika yetkilisinden), bu nedenle SDM'nin sitenin gerçek site olduğundan emin olması mümkün değil (tarayıcınız da bu konuda uyarı veriyor)
 #. text in errors.rs
 #. why a download failed: the site's security certificate's validity hasn't begun; usually this computer's date or time is wrong
 #, machine
@@ -4773,11 +4773,11 @@
 #. text in errors.rs
 #. why a download failed: the site's security certificate was refused for another reason (a bad signature, a broken certificate)
 #, machine
-	the site's security certificate was refused, so MDM can't be sure it's the real site	sitenin güvenlik sertifikası reddedildi, bu nedenle MDM bunun gerçek site olduğundan emin olamaz
+	the site's security certificate was refused, so SDM can't be sure it's the real site	sitenin güvenlik sertifikası reddedildi, bu nedenle SDM bunun gerçek site olduğundan emin olamaz
 #. text in errors.rs
 #. why a download failed: the issuer of the site's security certificate took it back
 #, machine
-	the site's security certificate was revoked by its issuer, so MDM won't trust it	sitenin güvenlik sertifikası sertifika yetkilisi tarafından iptal edildi, bu nedenle MDM bu sertifikaya güvenmeyecek
+	the site's security certificate was revoked by its issuer, so SDM won't trust it	sitenin güvenlik sertifikası sertifika yetkilisi tarafından iptal edildi, bu nedenle SDM bu sertifikaya güvenmeyecek
 #. text in the Download video window
 #. the Download video window: the site's certificate is trusted neither by yt-dlp nor by the computer (asked again with the computer's certificates, #955); usually an antivirus or a proxy that reads secure (HTTPS) connections signs sites with a certificate of its own
 #, machine
@@ -4785,15 +4785,15 @@
 #. text in errors.rs
 #. why a download failed: the site's security certificate is made for other uses than a website (its "extended key usage" leaves out web servers)
 #, machine
-	the site's security certificate isn't made for websites, so MDM can't be sure it's the real site	sitenin güvenlik sertifikası web siteleri için düzenlenmemiş, bu nedenle MDM'nin bağlandığı sitenin gerçek site olduğundan emin olunamıyor
+	the site's security certificate isn't made for websites, so SDM can't be sure it's the real site	sitenin güvenlik sertifikası web siteleri için düzenlenmemiş, bu nedenle SDM'nin bağlandığı sitenin gerçek site olduğundan emin olunamıyor
 #. text in crashui.rs
 #. crash report window: the symbols couldn't be downloaded; the report still works
 #, machine
 	The symbols couldn't be fetched: some lines of the report show addresses instead of names (the developers can still read them).	Semboller getirilemedi: raporun bazı satırları adlar yerine adresleri gösteriyor (geliştiriciler yine de okuyabilir).
 #. text in the Options window
-#. Options → Accounts (Linux): the system keyring is locked (MDM never unlocks it: that would ask for its password), so the sign-ins stay in MDM's settings folder, which only the user's account may read
+#. Options → Accounts (Linux): the system keyring is locked (SDM never unlocks it: that would ask for its password), so the sign-ins stay in SDM's settings folder, which only the user's account may read
 #, machine
-	The system keyring is locked and MDM doesn't unlock it, so sign-ins and passwords are kept in MDM's settings, which only you can read.	Sistem anahtarlığı kilitli ve MDM kilidini açmıyor, bu nedenle oturum açma bilgileri ve parolalar yalnızca sizin okuyabileceğiniz MDM ayarlarına kaydedilir.
+	The system keyring is locked and SDM doesn't unlock it, so sign-ins and passwords are kept in SDM's settings, which only you can read.	Sistem anahtarlığı kilitli ve SDM kilidini açmıyor, bu nedenle oturum açma bilgileri ve parolalar yalnızca sizin okuyabileceğiniz SDM ayarlarına kaydedilir.
 #. text in the Options window
 #. Options → Connection → DNS: the operating system's own DNS (the default)
 #, machine
@@ -4825,7 +4825,7 @@
 #, machine
 	The web page from which this file was obtained:	Bu dosyanın alındığı web sayfası:
 #. message or event log entry in the main window
-#. the kind of file View → Theme → Add a theme file lists: MDM's themes (TOML, JSON), Base16 schemes (YAML) and pywal's colors.json
+#. the kind of file View → Theme → Add a theme file lists: SDM's themes (TOML, JSON), Base16 schemes (YAML) and pywal's colors.json
 #, machine
 	Themes and colour schemes	Temalar ve renk şemaları
 #. text in the Options window
@@ -4883,7 +4883,7 @@
 #, machine
 	This computer only (127.0.0.1)	Yalnızca bu bilgisayar (127.0.0.1)
 #. text in extension.rs
-#. a check of Test browser integration: MDM was started from inside a zip (or from the temporary folder), which is deleted after it quits, so it can't be connected to the browsers
+#. a check of Test browser integration: SDM was started from inside a zip (or from the temporary folder), which is deleted after it quits, so it can't be connected to the browsers
 #, machine
 	This copy runs from a temporary folder that will be deleted	Bu kopya, silinecek geçici bir klasörden çalışıyor
 #. text in the Scheduler window
@@ -4891,7 +4891,7 @@
 #, machine
 	This date has passed: the queue will not start	Bu tarih geçti: sıra başlamaz
 #. text in remote.rs
-#. remote control page (on a phone): label of the box naming this phone (shown in MDM's list of paired devices)
+#. remote control page (on a phone): label of the box naming this phone (shown in SDM's list of paired devices)
 #, machine
 	This device's name	Bu cihazın adı
 #. message or event log entry in the main window
@@ -5008,7 +5008,7 @@
 #. message or event log entry in the main window
 #. event log: a torrent goes through the user's debrid account, not to peers; {service} its name ("Real-Debrid")
 #, machine
-	Through {service}: the service downloads the torrent, then MDM its files	{service} aracılığıyla: hizmet torrenti indirir, ardından MDM dosyalarını indirir
+	Through {service}: the service downloads the torrent, then SDM its files	{service} aracılığıyla: hizmet torrenti indirir, ardından SDM dosyalarını indirir
 #. text in the Scheduler window
 #, machine
 	Thursday	Perşembe
@@ -5154,7 +5154,7 @@
 #. text in extension.rs
 #. step 8 of turning on the Safari extension
 #, machine
-	Turn on "Mister Download Manager" and allow it on all websites.	“Mister Download Manager” uzantısını aç ve tüm web sitelerinde kullanılmasına izin ver.
+	Turn on "Sedot Download Manager" and allow it on all websites.	“Sedot Download Manager” uzantısını aç ve tüm web sitelerinde kullanılmasına izin ver.
 #. text in extension.rs
 #. step 4 of turning on the Safari extension; the quoted switch name is what Safari's settings show in this language: use Apple's own words for it, or keep the English name when unsure
 #, machine
@@ -5210,7 +5210,7 @@
 #. Options → Add an account: waiting while the user types the code at the service's page; {page} its address, {time} minutes:seconds left
 #. {time} = a time of day (keep the braces as they are)
 #, machine
-	Type this code at {page} and allow MDM; waiting for you (the code expires in {time}).	Bu kodu {page} adresine yazın ve MDM'ye izin verin; sizi bekliyor ({time} içinde kodun süresi dolar).
+	Type this code at {page} and allow SDM; waiting for you (the code expires in {time}).	Bu kodu {page} adresine yazın ve SDM'ye izin verin; sizi bekliyor ({time} içinde kodun süresi dolar).
 #. tooltip (why a control is greyed) in the Find window
 #. tooltip of the greyed Find button
 #, machine
@@ -5266,9 +5266,9 @@
 #, machine
 	unknown	bilinmiyor
 #. text in finish.rs
-#. Snooze menu of the Download complete window: show no Download complete window until MDM is started again
+#. Snooze menu of the Download complete window: show no Download complete window until SDM is started again
 #, machine
-	Until MDM restarts	MDM yeniden başlatılana kadar
+	Until SDM restarts	SDM yeniden başlatılana kadar
 #. button in the Options window
 #. button (short): move the account up the list (accounts are asked in the list's order)
 #, machine
@@ -5310,9 +5310,9 @@
 #, machine
 	Use FTP in PASV mode	FTP'yi PASV modunda kullan
 #. button in helpers.rs
-#. Video helpers: button: go back to the copy MDM downloads and checks itself
+#. Video helpers: button: go back to the copy SDM downloads and checks itself
 #, machine
-	Use MDM's own copy	MDM'nin kendi kopyasını kullan
+	Use SDM's own copy	SDM'nin kendi kopyasını kullan
 #. text in the Batch download window
 #. why Batch download's OK is greyed
 #, machine
@@ -5518,9 +5518,9 @@
 #, machine
 	Windows checks the files marked this way: SmartScreen before a program first runs, Office's Protected View before a document opens. Unticked, or under Windows' policy "Do not preserve zone information in file attachments", no download is marked.	Windows bu şekilde işaretlenmiş dosyaları denetler: SmartScreen bir program ilk kez çalıştırılmadan önce, Office'in Korumalı Görünümü ise bir belge açılmadan önce. Seçili değilse veya Windows'un “Dosya eklerinde bölge bilgilerini koruma” ilkesi etkinse hiçbir indirme işaretlenmez.
 #. text in the Options window
-#. Options → Accounts: Windows Credential Manager didn't answer, so the sign-ins stay in MDM's settings, encrypted so that only this Windows account can read them
+#. Options → Accounts: Windows Credential Manager didn't answer, so the sign-ins stay in SDM's settings, encrypted so that only this Windows account can read them
 #, machine
-	Windows Credential Manager didn't answer, so sign-ins and passwords are kept in MDM's settings, encrypted for your Windows account.	Windows Kimlik Bilgileri Yöneticisi yanıt vermediği için oturum açma bilgileri ve parolalar MDM ayarlarına, Windows hesabınız için şifrelenmiş olarak kaydedilir.
+	Windows Credential Manager didn't answer, so sign-ins and passwords are kept in SDM's settings, encrypted for your Windows account.	Windows Kimlik Bilgileri Yöneticisi yanıt vermediği için oturum açma bilgileri ve parolalar SDM ayarlarına, Windows hesabınız için şifrelenmiş olarak kaydedilir.
 #. text in a dialog box
 #. why the computer could not be put to sleep (fills {error})
 #, machine
@@ -5552,7 +5552,7 @@
 #. text in remote.rs
 #. remote control page (on a phone): pairing failed and the code is void now
 #, machine
-	Wrong code. Show a new code in MDM and try again.	Yanlış kod. MDM'de yeni bir kod gösterin ve tekrar deneyin.
+	Wrong code. Show a new code in SDM and try again.	Yanlış kod. SDM'de yeni bir kod gösterin ve tekrar deneyin.
 #. text in remote.rs
 #. remote control page (on a phone): pairing failed; {n} = how many more codes may be tried
 #. {n} = a number (keep the braces as they are)
@@ -5584,9 +5584,9 @@
 #. text in the Help menu's windows (About, updates, shortcuts, Tell a friend)
 #. {version} = a version number (keep the braces as they are)
 #, machine
-	You have the latest version of Mister Download Manager ({version}).	Mister Download Manager'ın en son sürümüne ({version}) sahipsiniz.
+	You have the latest version of Sedot Download Manager ({version}).	Sedot Download Manager'ın en son sürümüne ({version}) sahipsiniz.
 #. text in the Help menu's windows (About, updates, shortcuts, Tell a friend)
-#. Check for updates, under the new version's line, when MDM was installed by the Linux system's package manager (pacman, ...), which MDM can't update itself
+#. Check for updates, under the new version's line, when SDM was installed by the Linux system's package manager (pacman, ...), which SDM can't update itself
 #. {version} = a version number (keep the braces as they are)
 #, machine
 	You have version {version}, from your system's package manager: update it there.	Sisteminizin paket yöneticisinden {version} sürümüne sahipsiniz: oradan güncelleyin.
@@ -5600,7 +5600,7 @@
 	Your browser	Tarayıcınız
 #. text in the Options window
 #, machine
-	Your default browser isn't one MDM knows: a current Chrome's User-Agent	Varsayılan tarayıcınız MDM'nin bildiği bir tarayıcı değil: güncel Chrome tarayıcısının User-Agent'ı
+	Your default browser isn't one SDM knows: a current Chrome's User-Agent	Varsayılan tarayıcınız SDM'nin bildiği bir tarayıcı değil: güncel Chrome tarayıcısının User-Agent'ı
 #. text in the Options window
 #. tooltip; {browser} is a browser and its version, e.g. "Brave 157"
 #, machine
@@ -5614,10 +5614,10 @@
 #, machine
 	your Google account has no access to this file, or its owner turned off downloading	Google hesabınızın bu dosyaya erişimi yok veya sahibi indirmeyi kapattı
 #. text in helpers.rs
-#. Video helpers: the person's own gallery-dl is too old and not used; {version} = its version, {oldest} = the oldest MDM can use
+#. Video helpers: the person's own gallery-dl is too old and not used; {version} = its version, {oldest} = the oldest SDM can use
 #. {version} = a version number (keep the braces as they are)
 #, machine
-	Your own program ({version}) is too old: MDM needs {oldest} or newer	Kendi programınız ({version}) çok eski: MDM {oldest} veya daha yenisini gerektiriyor
+	Your own program ({version}) is too old: SDM needs {oldest} or newer	Kendi programınız ({version}) çok eski: SDM {oldest} veya daha yenisini gerektiriyor
 #. text in helpers.rs
 #. Video helpers: {path} = the program the person chose, {version} = its version
 #. {version} = a version number (keep the braces as they are)
@@ -5645,11 +5645,11 @@
 #, machine
 	yt-dlp couldn't read {browser}'s cookies: {error}	yt-dlp, {browser} çerezlerini okuyamadı: {error}
 #. text in a download's progress window
-#. progress window, a video's line: the helper program yt-dlp gave no address MDM's own downloader could use
+#. progress window, a video's line: the helper program yt-dlp gave no address SDM's own downloader could use
 #, machine
 	yt-dlp downloads it itself	yt-dlp indiriyor
 #. text in a download's progress window
-#. progress window, a video's line: MDM's own downloader can't take a live broadcast, so the helper program yt-dlp records it
+#. progress window, a video's line: SDM's own downloader can't take a live broadcast, so the helper program yt-dlp records it
 #, machine
 	yt-dlp downloads it itself: a live stream	yt-dlp indiriyor: canlı yayın
 #. text in a download's progress window
@@ -5661,7 +5661,7 @@
 #, machine
 	yt-dlp downloads it itself: protected (DRM)	yt-dlp indiriyor: korumalı (DRM)
 #. text in a download's progress window
-#. progress window, a video's line: {protocol} = a streaming protocol's short name (rtmp, rtsp, mms); MDM's own downloader doesn't speak it, so the helper program yt-dlp downloads it
+#. progress window, a video's line: {protocol} = a streaming protocol's short name (rtmp, rtsp, mms); SDM's own downloader doesn't speak it, so the helper program yt-dlp downloads it
 #, machine
 	yt-dlp downloads it itself: {protocol}	yt-dlp indiriyor: {protocol}
 #. text in the Download video window
@@ -5736,7 +5736,7 @@
 #. text in the Options window
 #. Options → Remote → Pair a device: done; {device} = the name it was given
 #, machine
-	{device} is paired. It can control MDM now.	{device} eşleştirildi. Artık MDM'yi kontrol edebilir.
+	{device} is paired. It can control SDM now.	{device} eşleştirildi. Artık SDM'yi kontrol edebilir.
 #. text in remote.rs
 #. remote control page (on a phone): progress; {done} and {size} are sizes ("1.2 MB of 7.5 MB")
 #. {size} = a file size such as "4.2 MB" (keep the braces as they are)
@@ -5772,7 +5772,7 @@
 	{file} is too large to be a list of addresses ({size}). Import reads text files, web pages and .ef2 exports of up to {limit}.	{file} çok büyük olduğundan adres listesi olamaz ({size}). İçeri Aktar, en fazla {limit} boyutunda metin dosyalarını, web sayfalarını ve .ef2 dışa aktarımlarını okur.
 #. text in a dialog box
 #, machine
-	{file} was moved elsewhere by dragging it out of Download complete, and MDM couldn't learn where. Look for it where you dropped it.	{file} dosyası, İndirme tamamlandı klasöründen sürüklenerek başka bir yere taşındı ve MDM nereye taşındığını öğrenemedi. Bıraktığınız yerde arayın.
+	{file} was moved elsewhere by dragging it out of Download complete, and SDM couldn't learn where. Look for it where you dropped it.	{file} dosyası, İndirme tamamlandı klasöründen sürüklenerek başka bir yere taşındı ve SDM nereye taşındığını öğrenemedi. Bıraktığınız yerde arayın.
 #. text in the Checksum window
 #. {algorithm} = a checksum algorithm such as "SHA-256" (keep the braces as they are)
 #, machine
@@ -5858,7 +5858,7 @@
 #. in the "7-Zip needed" window: {name} is the archive's file name; 7-Zip is a program's name
 #. {name} = a file name (keep the braces as they are)
 #, machine
-	{name} is a 7z or RAR archive. MDM extracts those with 7-Zip, which isn't installed.	{name} bir 7z veya RAR arşividir. MDM bunları yüklü olmayan 7-Zip ile ayıklar.
+	{name} is a 7z or RAR archive. SDM extracts those with 7-Zip, which isn't installed.	{name} bir 7z veya RAR arşividir. SDM bunları yüklü olmayan 7-Zip ile ayıklar.
 #. text in extracting archives (a download's log, the Archive password window)
 #. in Archive password: {name} is the archive's file name
 #. {name} = a file name (keep the braces as they are)
@@ -5870,10 +5870,10 @@
 #, machine
 	{name} isn't offered as {how}.	{name}, {how} olarak sunulmuyor.
 #. text in errors.rs
-#. error: a program chosen as a helper is too old; {name} = gallery-dl, {version} = its version, {oldest} = the oldest one MDM can use
+#. error: a program chosen as a helper is too old; {name} = gallery-dl, {version} = its version, {oldest} = the oldest one SDM can use
 #. {name} = a file name; {version} = a version number (keep the braces as they are)
 #, machine
-	{name} {version} is too old: MDM needs {oldest} or newer	{name} {version} çok eski: MDM {oldest} veya daha yenisini gerektiriyor
+	{name} {version} is too old: SDM needs {oldest} or newer	{name} {version} çok eski: SDM {oldest} veya daha yenisini gerektiriyor
 #. text in a dialog box
 #. one failed download in the summary of a group of downloads: {name} its file name, {error} why it failed
 #. {name} = a file name; {error} = an error message (keep the braces as they are)
@@ -5894,7 +5894,7 @@
 #, machine
 	{n} of {total} selected	{total} taneden {n} tanesi seçili
 #. text in the download list (sizes, speeds, status)
-#. a torrent's status while the user's debrid service downloads it, before MDM gets its files; {service} the service ("Real-Debrid"), {percent} how far it is ("45%")
+#. a torrent's status while the user's debrid service downloads it, before SDM gets its files; {service} the service ("Real-Debrid"), {percent} how far it is ("45%")
 #, machine
 	{percent} at {service}	{service} üzerinde %{percent}
 #. text in errors.rs
@@ -5905,9 +5905,9 @@
 #, machine
 	{problem}. {advice}	{problem}. {advice}
 #. text in errors.rs
-#. a debrid service's error: too many requests; MDM waits and retries
+#. a debrid service's error: too many requests; SDM waits and retries
 #, machine
-	{service} asks to slow down; MDM will try again in a minute	{service} istek sıklığını azaltmanızı istiyor; MDM bir dakika içinde yeniden deneyecek
+	{service} asks to slow down; SDM will try again in a minute	{service} istek sıklığını azaltmanızı istiyor; SDM bir dakika içinde yeniden deneyecek
 #. text in errors.rs
 #. a debrid service's error: it wants the user to allow this computer (it sent an email)
 #, machine
@@ -5917,7 +5917,7 @@
 	{service} can't get this torrent: nobody shares it, or its link can't be read	{service} bu torrenti alamıyor: kimse paylaşmıyor veya bağlantısı okunamıyor
 #. text in errors.rs
 #, machine
-	{service} can't reach this file host right now; MDM will try again later	{service} şu anda bu dosya barındırıcısına ulaşamıyor; MDM daha sonra tekrar deneyecek
+	{service} can't reach this file host right now; SDM will try again later	{service} şu anda bu dosya barındırıcısına ulaşamıyor; SDM daha sonra tekrar deneyecek
 #. text in errors.rs
 #. a debrid service's error: it isn't answering
 #, machine
@@ -5952,7 +5952,7 @@
 	{service}: this needs a premium account	{service}: premium hesap gerekiyor
 #. text in errors.rs
 #, machine
-	{service}: too many downloads at once through your account; MDM will try again	{service}: hesabınız aracılığıyla aynı anda çok fazla indirme; MDM tekrar deneyecek
+	{service}: too many downloads at once through your account; SDM will try again	{service}: hesabınız aracılığıyla aynı anda çok fazla indirme; SDM tekrar deneyecek
 #. text in errors.rs
 #. a debrid service's error: the account's limit (traffic) for this host is used up
 #, machine
@@ -5992,7 +5992,7 @@
 #, machine
 	{title}: already in the list	{title}: zaten listede
 #. message or event log entry in the main window
-#. RSS feeds window, under the rules: not added, because files of its names are already in the folder (MDM never writes into them unasked)
+#. RSS feeds window, under the rules: not added, because files of its names are already in the folder (SDM never writes into them unasked)
 #, machine
 	{title}: not added: files of its names are already in {folder}	{title}: eklenmedi: aynı isimli dosyalar zaten {folder} klasöründe
 #. message or event log entry in the main window
@@ -6062,13 +6062,13 @@ column	Transfer rate	Aktarım hızı
 #, machine
 column	Upload speed	Gönderme hızı
 #. text in the browser extension
-#. in the menu under the download button over a video: the page is a list of videos (a playlist), whose videos are chosen in the app's window; keep the name Mister Download Manager as it is
+#. in the menu under the download button over a video: the page is a list of videos (a playlist), whose videos are chosen in the app's window; keep the name Sedot Download Manager as it is
 #, machine
-extension	A list of videos: choose them in Mister Download Manager	Bir video listesi: videoları Mister Download Manager uygulamasında seçin
+extension	A list of videos: choose them in Sedot Download Manager	Bir video listesi: videoları Sedot Download Manager uygulamasında seçin
 #. text in the browser extension
-#. on the download button (green) over a video after the app added and started the download; a quality may follow ('· 1080p') and a 'Show' button; MDM is the app's short name, keep it; short
+#. on the download button (green) over a video after the app added and started the download; a quality may follow ('· 1080p') and a 'Show' button; SDM is the app's short name, keep it; short
 #, machine
-extension	Added to MDM	MDM'ye eklendi
+extension	Added to SDM	SDM'ye eklendi
 #. text in the browser extension
 #. shown briefly on the download button over a video after a quality was picked: the download was added to the app's download queue, to start later
 #, machine
@@ -6079,9 +6079,9 @@ extension	Added to the queue	Sıraya eklendi
 #, machine
 extension	All qualities and subtitles...	Tüm kaliteler ve altyazılar...
 #. text in the browser extension
-#. choice under Send downloads to: an MDM running on another computer of the network, such as a home server; keep the name Mister Download Manager as it is
+#. choice under Send downloads to: an SDM running on another computer of the network, such as a home server; keep the name Sedot Download Manager as it is
 #, machine
-extension	Another Mister Download Manager (a server)	Başka bir Mister Download Manager (bir sunucu)
+extension	Another Sedot Download Manager (a server)	Başka bir Sedot Download Manager (bir sunucu)
 #. text in the browser extension
 #. tab above the list of qualities in the menu under the download button over a video: the choices that are sound only (MP3, Opus and the like); short, one word
 #, machine
@@ -6091,11 +6091,11 @@ extension	Audio	Ses
 #, machine
 extension	best	en iyi
 #. text in the browser extension
-#. the name this browser gets in the other MDM's list of paired devices
+#. the name this browser gets in the other SDM's list of paired devices
 #, machine
 extension	Browser extension	Tarayıcı uzantısı
 #. text in the browser extension
-#. menu command of the download button over a video: opens its settings in Mister Download Manager
+#. menu command of the download button over a video: opens its settings in Sedot Download Manager
 #. the trailing ... means it is still going on: keep it
 #, machine
 extension	Button settings...	Düğme ayarları...
@@ -6108,14 +6108,14 @@ extension	can't be saved	kaydedilemez
 #, machine
 extension	Can't tell which video this is: open its own page and try there	Bunun hangi video olduğu anlaşılamıyor: videonun kendi sayfasını açıp orada deneyin
 #. text in the browser extension
-#. the toolbar button's status when the browser reaches the app; keep the name Mister Download Manager as it is
+#. the toolbar button's status when the browser reaches the app; keep the name Sedot Download Manager as it is
 #, machine
-extension	Connected to Mister Download Manager	Mister Download Manager uygulamasına bağlandı
+extension	Connected to Sedot Download Manager	Sedot Download Manager uygulamasına bağlandı
 #. text in the browser extension
-#. the toolbar button's status when the browser reaches the app, with the app's version number; keep the name Mister Download Manager as it is
+#. the toolbar button's status when the browser reaches the app, with the app's version number; keep the name Sedot Download Manager as it is
 #. {version} = a version number (keep the braces as they are)
 #, machine
-extension	Connected to Mister Download Manager {version}	Mister Download Manager {version} uygulamasına bağlandı
+extension	Connected to Sedot Download Manager {version}	Sedot Download Manager {version} uygulamasına bağlandı
 #. text in the browser extension
 #. in the menu under the download button over a video: finding the video's qualities failed; the app's own explanation follows on the next line
 #, machine
@@ -6125,17 +6125,17 @@ extension	Could not look it up	Aranamadı
 #, machine
 extension	Download	İndir
 #. text in the browser extension
-#. command in the browser's right-click menu on a page: download the links of the whole page; keep the name Mister Download Manager as it is
+#. command in the browser's right-click menu on a page: download the links of the whole page; keep the name Sedot Download Manager as it is
 #, machine
-extension	Download all links with Mister Download Manager	Tüm bağlantıları Mister Download Manager ile indir
+extension	Download all links with Sedot Download Manager	Tüm bağlantıları Sedot Download Manager ile indir
 #. text in the browser extension
 #. first line of the list under the download button over a video: downloads the best quality at once; the quality, its file type and size follow on the same line; short
 #, machine
 extension	Download best	En iyi kaliteyi indir
 #. text in the browser extension
-#. command in the browser's right-click menu on selected text: download the links in the selection; keep the name Mister Download Manager as it is
+#. command in the browser's right-click menu on selected text: download the links in the selection; keep the name Sedot Download Manager as it is
 #, machine
-extension	Download selected links with Mister Download Manager	Seçili bağlantıları Mister Download Manager ile indir
+extension	Download selected links with Sedot Download Manager	Seçili bağlantıları Sedot Download Manager ile indir
 #. text in the browser extension
 #. first line of the tooltip of the download button over a video while the app is still finding its qualities
 #, machine
@@ -6145,9 +6145,9 @@ extension	Download the best quality	En iyi kaliteyi indir
 #, machine
 extension	Download video	Videoyu indir
 #. text in the browser extension
-#. command in the browser's right-click menu on a link, picture, video or sound; keep the name Mister Download Manager as it is
+#. command in the browser's right-click menu on a link, picture, video or sound; keep the name Sedot Download Manager as it is
 #, machine
-extension	Download with Mister Download Manager	Mister Download Manager ile İndir
+extension	Download with Sedot Download Manager	Sedot Download Manager ile İndir
 #. text in the browser extension
 #. first line of the tooltip of the download button over a video: what one click downloads; $what$ is a quality, a file type and a size, e.g. '1080p MP4 · 412 MB'
 #, machine
@@ -6158,7 +6158,7 @@ extension	Download {what}	{what} indir
 #, machine
 extension	Downloads from {site} stay with the browser	{site} adresinden yapılan indirmeler tarayıcıda kalır
 #. text in the browser extension
-#. the toolbar button's status while downloads go to another MDM
+#. the toolbar button's status while downloads go to another SDM
 #, machine
 extension	Downloads go to {address}	İndirmeler {address} adresine gidiyor
 #. text in the browser extension
@@ -6170,13 +6170,13 @@ extension	Drag the dots to move it along the edge	Taşımak için noktaları ken
 #, machine
 extension	Enter its https:// address.	https:// adresini girin.
 #. text in the browser extension
-#. button on the download button over a video when the app didn't answer: opens the app's download page; MDM is the app's short name, keep it; very short
+#. button on the download button over a video when the app didn't answer: opens the app's download page; SDM is the app's short name, keep it; very short
 #, machine
-extension	Get MDM	MDM'yi yükle
+extension	Get SDM	SDM'yi yükle
 #. text in the browser extension
-#. the extension's description in the browser's list of extensions; keep the name Mister Download Manager as it is
+#. the extension's description in the browser's list of extensions; keep the name Sedot Download Manager as it is
 #, machine
-extension	Hands downloads from the browser to Mister Download Manager.	İndirmeleri tarayıcıdan Mister Download Manager uygulamasına aktarır.
+extension	Hands downloads from the browser to Sedot Download Manager.	İndirmeleri tarayıcıdan Sedot Download Manager uygulamasına aktarır.
 #. text in the browser extension
 #. link in the toolbar button's popup to the help page
 #, machine
@@ -6202,13 +6202,13 @@ extension	How to fix it	Nasıl düzeltilir
 #, machine
 extension	It didn't work. Try again.	İşe yaramadı. Tekrar deneyin.
 #. text in the browser extension
-#. pairing failed: the other MDM shows no pairing code; Pair a device is its button
+#. pairing failed: the other SDM shows no pairing code; Pair a device is its button
 #, machine
 extension	It shows no code now: click Pair a device there first.	Şu anda kod göstermiyor: önce oradaki Bir cihazı eşle'ye tıklayın.
 #. text in the browser extension
-#. why a download stayed with the browser: it is a .torrent file and the app's Torrent settings don't open torrents with Mister Download Manager, so the browser keeps it for the user's own torrent program; keep the setting's name as the app shows it
+#. why a download stayed with the browser: it is a .torrent file and the app's Torrent settings don't open torrents with Sedot Download Manager, so the browser keeps it for the user's own torrent program; keep the setting's name as the app shows it
 #, machine
-extension	It's a torrent, and Open magnet links and .torrent files with Mister Download Manager is off in Torrent settings.	Bu bir torrent ve Torrent ayarlarında Mister Download Manager ile mıknatıs bağlantılarını ve .torrent dosyalarını aç seçeneği kapalı.
+extension	It's a torrent, and Open magnet links and .torrent files with Sedot Download Manager is off in Torrent settings.	Bu bir torrent ve Torrent ayarlarında Sedot Download Manager ile mıknatıs bağlantılarını ve .torrent dosyalarını aç seçeneği kapalı.
 #. text in the browser extension
 #. why a download stayed with the browser: the file is smaller than the app's minimum size setting
 #, machine
@@ -6243,49 +6243,49 @@ extension	Looking up the qualities…	Kaliteler aranıyor…
 #, machine
 extension	Looking up took too long	Arama çok uzun sürdü
 #. text in the browser extension
-#. on the download button (red) over a video when the app isn't installed or didn't start; 'Get MDM' and 'Retry' buttons follow; MDM is the app's short name, keep it; short
+#. on the download button (red) over a video when the app isn't installed or didn't start; 'Get SDM' and 'Retry' buttons follow; SDM is the app's short name, keep it; short
 #, machine
-extension	MDM didn't answer	MDM yanıt vermedi
+extension	SDM didn't answer	SDM yanıt vermedi
 #. text in the browser extension
 #. heading in the toolbar button's popup over the list of the videos, sounds and streams the current web page has loaded
 #, machine
 extension	Media on this page	Bu sayfadaki medya
 #. text in the browser extension
-#. the extension's name in the browser's list of extensions and on its toolbar button; keep the name Mister Download Manager as it is
+#. the extension's name in the browser's list of extensions and on its toolbar button; keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager	Mister Download Manager
+extension	Sedot Download Manager	Sedot Download Manager
 #. text in the browser extension
-#. status when the app was started for a download but didn't answer in time; keep the name Mister Download Manager as it is
+#. status when the app was started for a download but didn't answer in time; keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager didn't start in time	Mister Download Manager zamanında başlatılamadı
+extension	Sedot Download Manager didn't start in time	Sedot Download Manager zamanında başlatılamadı
 #. text in the browser extension
-#. status when the app refuses this copy of the extension (another copy is installed, or it came from another store); keep the name Mister Download Manager as it is
+#. status when the app refuses this copy of the extension (another copy is installed, or it came from another store); keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager doesn't accept this copy of the extension	Mister Download Manager uzantının bu kopyasını kabul etmiyor
+extension	Sedot Download Manager doesn't accept this copy of the extension	Sedot Download Manager uzantının bu kopyasını kabul etmiyor
 #. text in the browser extension
-#. in the menu under the download button over a video: the app is already looking up other videos and can't look this one up now; keep the name Mister Download Manager as it is
+#. in the menu under the download button over a video: the app is already looking up other videos and can't look this one up now; keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager is busy with other videos	Mister Download Manager diğer videolarla meşgul
+extension	Sedot Download Manager is busy with other videos	Sedot Download Manager diğer videolarla meşgul
 #. text in the browser extension
-#. shown briefly on the download button when the app could not be reached; keep the name Mister Download Manager as it is
+#. shown briefly on the download button when the app could not be reached; keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager isn't installed or didn't start	Mister Download Manager yüklü değil veya başlatılamadı
+extension	Sedot Download Manager isn't installed or didn't start	Sedot Download Manager yüklü değil veya başlatılamadı
 #. text in the browser extension
-#. status when the browser can't find the app's connection; keep the name Mister Download Manager as it is
+#. status when the browser can't find the app's connection; keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager isn't installed, or its browser integration isn't set up	Mister Download Manager yüklü değil veya tarayıcı entegrasyonu ayarlanmadı
+extension	Sedot Download Manager isn't installed, or its browser integration isn't set up	Sedot Download Manager yüklü değil veya tarayıcı entegrasyonu ayarlanmadı
 #. text in the browser extension
-#. in the menu under the download button over a video: the app needs the yt-dlp tool (a program's name, keep it as it is) to find this video's qualities, and it isn't installed; keep the name Mister Download Manager as it is
+#. in the menu under the download button over a video: the app needs the yt-dlp tool (a program's name, keep it as it is) to find this video's qualities, and it isn't installed; keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager needs yt-dlp for this video	Mister Download Manager uygulamasının bu video için yt-dlp'ye ihtiyacı var
+extension	Sedot Download Manager needs yt-dlp for this video	Sedot Download Manager uygulamasının bu video için yt-dlp'ye ihtiyacı var
 #. text in the browser extension
-#. tooltip of the switch Send downloads through this browser's proxy or VPN extension; keep the name Mister Download Manager as it is
+#. tooltip of the switch Send downloads through this browser's proxy or VPN extension; keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager then downloads through the same proxy as this browser. The browser asks you once to allow it; turning this off takes that back.	Mister Download Manager daha sonra bu tarayıcıyla aynı proxy üzerinden indirme yapar. Tarayıcı bir kez izin vermenizi ister; bu seçeneği kapatmak verilen izni geri alır.
+extension	Sedot Download Manager then downloads through the same proxy as this browser. The browser asks you once to allow it; turning this off takes that back.	Sedot Download Manager daha sonra bu tarayıcıyla aynı proxy üzerinden indirme yapar. Tarayıcı bir kez izin vermenizi ister; bu seçeneği kapatmak verilen izni geri alır.
 #. text in the browser extension
-#. tooltip of the switch Send downloads through this browser's proxy or VPN extension in Chrome, Edge and the other Chromium browsers (they ask for no permission at the switch); keep the name Mister Download Manager as it is
+#. tooltip of the switch Send downloads through this browser's proxy or VPN extension in Chrome, Edge and the other Chromium browsers (they ask for no permission at the switch); keep the name Sedot Download Manager as it is
 #, machine
-extension	Mister Download Manager then downloads through the same proxy as this browser. While this is off, the extension doesn't read the browser's proxy.	Bu özellik açıkken Mister Download Manager, bu tarayıcıyla aynı proxy üzerinden indirme yapar. Kapalıyken uzantı, tarayıcının proxy ayarlarını okumaz.
+extension	Sedot Download Manager then downloads through the same proxy as this browser. While this is off, the extension doesn't read the browser's proxy.	Bu özellik açıkken Sedot Download Manager, bu tarayıcıyla aynı proxy üzerinden indirme yapar. Kapalıyken uzantı, tarayıcının proxy ayarlarını okumaz.
 #. text in the browser extension
 #. the small arrow next to the Download video button that opens its menu (read aloud by screen readers)
 #, machine
@@ -6309,7 +6309,7 @@ extension	No video or sound found on this page yet. Play it, then open this agai
 #, machine
 extension	No video to download here	Burada indirilecek video yok
 #. text in the browser extension
-#. pairing failed: the other MDM didn't answer
+#. pairing failed: the other SDM didn't answer
 #, machine
 extension	Not reached. Open its address once in this browser and accept its certificate, then try again.	Ulaşılamadı. Bu tarayıcıda adresini bir kez açın ve sertifikasını kabul edin, sonra tekrar deneyin.
 #. text in the browser extension
@@ -6317,7 +6317,7 @@ extension	Not reached. Open its address once in this browser and accept its cert
 #, machine
 extension	Off on this site	Bu sitede kapalı
 #. text in the browser extension
-#. button: open the other MDM's address in a tab (to accept its certificate once)
+#. button: open the other SDM's address in a tab (to accept its certificate once)
 #, machine
 extension	Open it	Aç
 #. text in the browser extension
@@ -6325,9 +6325,9 @@ extension	Open it	Aç
 #, machine
 extension	Open its address once and accept its certificate, then enter a code from its Options, Remote, Pair a device (or misterdownloadmanager-cli pair).	Adresini bir kez açın ve sertifikasını kabul edin, sonra Seçenekler, Uzak, Bir cihazı eşle'den (veya misterdownloadmanager-cli pair) bir kod girin.
 #. text in the browser extension
-#. button in the toolbar button's popup; keep the name Mister Download Manager as it is
+#. button in the toolbar button's popup; keep the name Sedot Download Manager as it is
 #, machine
-extension	Open Mister Download Manager	Mister Download Manager uygulamasını aç
+extension	Open Sedot Download Manager	Sedot Download Manager uygulamasını aç
 #. text in the browser extension
 #. button on the download button over a video in a feed: opens the post the video belongs to in a new tab; verb; very short
 #, machine
@@ -6346,11 +6346,11 @@ extension	Options...	Seçenekler...
 #, machine
 extension	original	orijinal
 #. text in the browser extension
-#. button: pair this browser with the other MDM using the code
+#. button: pair this browser with the other SDM using the code
 #, machine
 extension	Pair	Eşle
 #. text in the browser extension
-#. placeholder of the box for the 8-digit code the other MDM shows
+#. placeholder of the box for the 8-digit code the other SDM shows
 #, machine
 extension	Pairing code	Eşleme kodu
 #. text in the browser extension
@@ -6382,22 +6382,22 @@ extension	Send downloads through this browser's proxy or VPN extension	İndirmel
 #, machine
 extension	Send downloads to	İndirmeleri şuraya gönder
 #. text in the browser extension
-#. on the download button over a video right after it was clicked, while the download goes to the app; MDM is Mister Download Manager's short name, keep it as it is; short
+#. on the download button over a video right after it was clicked, while the download goes to the app; SDM is Sedot Download Manager's short name, keep it as it is; short
 #. the trailing ... means it is still going on: keep it
 #, machine
-extension	Sending to MDM...	MDM'ye gönderiliyor...
+extension	Sending to SDM...	SDM'ye gönderiliyor...
 #. text in the browser extension
-#. shown briefly on the download button after it was clicked; keep the name Mister Download Manager as it is
+#. shown briefly on the download button after it was clicked; keep the name Sedot Download Manager as it is
 #, machine
-extension	Sent to Mister Download Manager	Mister Download Manager uygulamasına gönderildi
+extension	Sent to Sedot Download Manager	Sedot Download Manager uygulamasına gönderildi
 #. text in the browser extension
 #. button on the download button over a video after a download was added: shows that download in the app's window; verb; very short
 #, machine
 extension	Show	Göster
 #. text in the browser extension
-#. link at the foot of the toolbar button's popup to the creator's GitHub Sponsors page (MDM is free; this is an optional donation)
+#. link at the foot of the toolbar button's popup to the creator's GitHub Sponsors page (SDM is free; this is an optional donation)
 #, machine
-extension	Support MDM	MDM'yi Destekleyin
+extension	Support SDM	SDM'yi Destekleyin
 #. text in the browser extension
 #. check box in the toolbar button's popup: on, downloads go to the app; off, the browser keeps them
 #, machine
@@ -6407,9 +6407,9 @@ extension	Take downloads from this browser	İndirmeleri bu tarayıcıdan al
 #, machine
 extension	The Chrome Web Store's rules keep this copy of the add-on away from this site's videos. Help says what you can do.	Chrome Web Mağazası kuralları, eklentinin bu kopyasını bu sitenin videolarından uzak tutuyor. Neler yapabileceğinizi Yardım'da bulabilirsiniz.
 #. text in the browser extension
-#. status when the connection to the app broke off (often security software blocking it); keep the name Mister Download Manager as it is
+#. status when the connection to the app broke off (often security software blocking it); keep the name Sedot Download Manager as it is
 #, machine
-extension	The connection to Mister Download Manager failed	Mister Download Manager ile bağlantı kurulamadı
+extension	The connection to Sedot Download Manager failed	Sedot Download Manager ile bağlantı kurulamadı
 #. text in the browser extension
 #. why a download stayed with the browser: the user limited the extension's access to web sites in the browser, so it can't pass the sign-in on
 #, machine
@@ -6423,7 +6423,7 @@ extension	The last download was left to the browser.	Son indirme tarayıcıya b�
 #, machine
 extension	This browser isn't ticked in Options → General.	Bu tarayıcı, Seçenekler → Genel bölümünde işaretli değil.
 #. text in the browser extension
-#. choice under Send downloads to: the Mister Download Manager on this computer
+#. choice under Send downloads to: the Sedot Download Manager on this computer
 #, machine
 extension	This computer	Bu bilgisayar
 #. text in the browser extension
@@ -6443,9 +6443,9 @@ extension	Turn on	Aç
 #, machine
 extension	Undo	Geri al
 #. text in the browser extension
-#. status when the app is older than the extension; keep the name Mister Download Manager as it is
+#. status when the app is older than the extension; keep the name Sedot Download Manager as it is
 #, machine
-extension	Update Mister Download Manager to use everything this extension offers	Bu uzantının sunduğu tüm özellikleri kullanmak için Mister Download Manager uygulamasını güncelle
+extension	Update Sedot Download Manager to use everything this extension offers	Bu uzantının sunduğu tüm özellikleri kullanmak için Sedot Download Manager uygulamasını güncelle
 #. text in the browser extension
 #. why a download stayed with the browser: the app's setting 'Use advanced browser integration' is off; keep the setting's name as the app shows it
 #, machine
@@ -6573,13 +6573,13 @@ key	Up / Down	Yukarı / Aşağı
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	&About Mister Download Manager	Mister Download Manager &Hakkında
+menu	&About Sedot Download Manager	Sedot Download Manager &Hakkında
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
 menu	&Add new download	Yeni &indirme ekle
 #. menu command in the main window
-#. View → Window system: MDM chooses the window system itself at each start
+#. View → Window system: SDM chooses the window system itself at each start
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
 menu	&Automatic	Otomatik(&A)
@@ -6614,7 +6614,7 @@ menu	&Exit	&Çıkış
 #, machine
 menu	&Import	&İçeri Aktar
 #. menu command in the main window
-#. View menu: submenu choosing how large MDM draws its windows and text (100 % to 200 %), as a browser's zoom
+#. View menu: submenu choosing how large SDM draws its windows and text (100 % to 200 %), as a browser's zoom
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
 menu	&Interface size	Arayüz &boyutu
@@ -6709,7 +6709,7 @@ menu	&Video downloads	&Video indirmeleri
 #, machine
 menu	&Wayland	&Wayland
 #. menu command in the main window
-#. View menu: submenu choosing the window system MDM's windows use on Linux (X11 through XWayland, or Wayland)
+#. View menu: submenu choosing the window system SDM's windows use on Linux (X11 through XWayland, or Wayland)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
 menu	&Window system	&Pencere sistemi
@@ -6756,9 +6756,9 @@ menu	Adwaita	Adwaita
 #, machine
 menu	Aero	Aero
 #. menu command in the main window
-#. View → Draw with: a greyed note under the choices; the choice takes effect when MDM is started again
+#. View → Draw with: a greyed note under the choices; the choice takes effect when SDM is started again
 #, machine
-menu	Applies the next time MDM starts	MDM bir sonraki başlatıldığında uygulanır
+menu	Applies the next time SDM starts	SDM bir sonraki başlatıldığında uygulanır
 #. menu command in the main window
 #. View → Theme: a style theme's name (Mac OS X's look), a name: keep "Aqua" as written
 #, machine
@@ -6833,7 +6833,7 @@ menu	C&ustomize URL List...	&URL listesini özelleştir...
 #, machine
 menu	Check for &updates...	&Güncelleştirmeleri denetle...
 #. menu command in the main window
-#. View → Theme: MDM's own look, the default (IDM's layout, Windows 11's controls)
+#. View → Theme: SDM's own look, the default (IDM's layout, Windows 11's controls)
 #, machine
 menu	Classic	Klasik
 #. menu command in the main window
@@ -6887,7 +6887,7 @@ menu	Download &video from a page...	Bir sayfadan &video indir...
 #, machine
 menu	Download in order	Sırayla İndir
 #. menu command in the main window
-#. View menu: submenu choosing what draws MDM's windows: OpenGL, or Direct3D, Vulkan or Metal (graphics systems)
+#. View menu: submenu choosing what draws SDM's windows: OpenGL, or Direct3D, Vulkan or Metal (graphics systems)
 #, machine
 menu	Draw with	Şununla çiz
 #. menu command in the main window
@@ -6947,23 +6947,23 @@ menu	Hide drop target	Bırakma hedefini gizle
 #, machine
 menu	High contrast	Yüksek karşıtlık
 #. menu command in the main window
-#. View → Window system: a greyed note; MDM's windows are Wayland's now
+#. View → Window system: a greyed note; SDM's windows are Wayland's now
 #, machine
 menu	In use: Wayland	Kullanımda: Wayland
 #. menu command in the main window
-#. View → Window system: a greyed note; MDM's windows are X11's (through XWayland) now
+#. View → Window system: a greyed note; SDM's windows are X11's (through XWayland) now
 #, machine
 menu	In use: X11 (XWayland)	Kullanımda: X11 (XWayland)
 #. menu command in the main window
-#. View → Draw with: a greyed note under "… didn't start here"; why: another error, written in MDM's log
+#. View → Draw with: a greyed note under "… didn't start here"; why: another error, written in SDM's log
 #, machine
 menu	It couldn't start: the log says why	Başlatılamadı: günlükte nedeni belirtiliyor
 #. menu command in the main window
-#. View → Draw with: a greyed note under "… didn't start here"; why: the window stayed empty, so MDM started again with OpenGL
+#. View → Draw with: a greyed note under "… didn't start here"; why: the window stayed empty, so SDM started again with OpenGL
 #, machine
 menu	Its first frame didn't show within 10 seconds	İlk çerçevesi 10 saniye içinde gösterilmedi
 #. menu command in the main window
-#. View → Draw with: a greyed note under "… didn't start here"; why: MDM crashed or was closed while starting with it
+#. View → Draw with: a greyed note under "… didn't start here"; why: SDM crashed or was closed while starting with it
 #, machine
 menu	Its last start ended before its first frame	Son başlatma işlemi ilk karesi gösterilmeden sona erdi
 #. menu command in the main window
@@ -6989,7 +6989,7 @@ menu	Metro	Metro
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	Mister Download Manager &Home Page	Mister Download Manager &Ana Sayfası
+menu	Sedot Download Manager &Home Page	Sedot Download Manager &Ana Sayfası
 #. menu command in the main window
 #, machine
 menu	Move/Rename (Ctrl-M)	Taşı/Yeniden Adlandır (Ctrl-M)
@@ -7030,23 +7030,23 @@ menu	Open with...	Birlikte aç...
 #, machine
 menu	OpenGL	OpenGL
 #. menu command in the main window
-#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: it couldn't start on this computer
+#. View → Draw with: a greyed note; why SDM no longer draws with OpenGL: it couldn't start on this computer
 #, machine
 menu	OpenGL didn't start here	OpenGL bu bilgisayarda başlatılamadı
 #. menu command in the main window
-#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: its window froze inside the graphics card's driver while OpenGL drew
+#. View → Draw with: a greyed note; why SDM no longer draws with OpenGL: its window froze inside the graphics card's driver while OpenGL drew
 #, machine
 menu	OpenGL froze inside the graphics driver here	OpenGL bu bilgisayardaki grafik sürücüsünde dondu
 #. menu command in the main window
-#. View → Draw with: a greyed note; this computer's OpenGL (its graphics driver) is too old, so MDM doesn't draw with it
+#. View → Draw with: a greyed note; this computer's OpenGL (its graphics driver) is too old, so SDM doesn't draw with it
 #, machine
-menu	OpenGL here is too old to draw MDM	Buradaki OpenGL sürücüsü MDM'yi çizmek için çok eski
+menu	OpenGL here is too old to draw SDM	Buradaki OpenGL sürücüsü SDM'yi çizmek için çok eski
 #. menu command in the main window
-#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: its window stayed empty for 10 seconds, so MDM started again another way
+#. View → Draw with: a greyed note; why SDM no longer draws with OpenGL: its window stayed empty for 10 seconds, so SDM started again another way
 #, machine
 menu	OpenGL's first frame didn't show within 10 seconds	OpenGL'in ilk karesi 10 saniye içinde görüntülenmedi
 #. menu command in the main window
-#. View → Draw with: a greyed note; why MDM no longer draws with OpenGL: MDM crashed or was closed while starting with it
+#. View → Draw with: a greyed note; why SDM no longer draws with OpenGL: SDM crashed or was closed while starting with it
 #, machine
 menu	OpenGL's last start ended before its first frame	OpenGL'in son başlatma girişimi ilk karesi görüntülenmeden sona erdi
 #. menu command in the main window
@@ -7122,7 +7122,7 @@ menu	Select &all	Tümünü &seç
 menu	Show &drop target	&Bırakma hedefini göster
 #. menu command in the main window
 #, machine
-menu	Show Mister Download Manager	Mister Download Manager'ı göster
+menu	Show Sedot Download Manager	Sedot Download Manager'ı göster
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
@@ -7144,7 +7144,7 @@ menu	Stop Download	İndirmeyi Durdur
 #. menu command in the main window
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #, machine
-menu	Support &MDM	MDM'yi &Destekle
+menu	Support SD&M	SDM'yi &Destekle
 #. menu command in the main window
 #. View menu: submenu choosing how the text is drawn (smooth or classic)
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
@@ -7159,7 +7159,7 @@ menu	Tell a &friend	Bir &arkadaşına söyle
 #, machine
 menu	The graphics card was lost twice in 10 minutes	Grafik kartı 10 dakika içinde iki kez kayboldu
 #. menu command in the main window
-#. View menu: submenu choosing MDM's look (colours, sizes, icons): Classic, Native…
+#. View menu: submenu choosing SDM's look (colours, sizes, icons): Classic, Native…
 #, machine
 menu	Theme	Tema
 #. menu command in the main window

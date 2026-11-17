@@ -114,7 +114,7 @@
     "message": "Bantuan"
   },
   "popup_support": {
-    "message": "Dukung MDM"
+    "message": "Dukung SDM"
   },
   "popup_fix": {
     "message": "Cara memperbaikinya"
@@ -297,19 +297,19 @@
     "message": "Unduh kualitas terbaik"
   },
   "video_sending": {
-    "message": "Mengirim ke MDM..."
+    "message": "Mengirim ke SDM..."
   },
   "video_added": {
-    "message": "Ditambahkan ke MDM"
+    "message": "Ditambahkan ke SDM"
   },
   "video_show": {
     "message": "Tampilkan"
   },
   "video_no_answer": {
-    "message": "MDM tidak menjawab"
+    "message": "SDM tidak menjawab"
   },
   "video_get_mdm": {
-    "message": "Dapatkan MDM"
+    "message": "Dapatkan SDM"
   },
   "video_retry": {
     "message": "Coba lagi"

@@ -5389,7 +5389,7 @@ pub fn play_sound(file: &str) {
 /// the same as its Capabilities' ApplicationName (Microsoft: "ApplicationName must always match
 /// the name that is registered under RegisteredApplications"). tools/installer/mdm.iss writes
 /// the same.
-pub const REGISTERED_NAME: &str = "Mister Download Manager";
+pub const REGISTERED_NAME: &str = "Sedot Download Manager";
 /// MDM's Capabilities (Default apps' list of what it can open), under HKCU or HKLM.
 const CAPABILITIES: &str = r"Software\MisterDownloadManager\Capabilities";
 /// The ProgIDs MDM's Capabilities name: Default apps wants an application-specific one for each
@@ -5676,11 +5676,11 @@ mod default_apps_tests {
     fn the_settings_page_names_the_registration() {
         assert_eq!(
             default_apps_uri(false),
-            "ms-settings:defaultapps?registeredAppUser=Mister%20Download%20Manager"
+            "ms-settings:defaultapps?registeredAppUser=Sedot%20Download%20Manager"
         );
         assert_eq!(
             default_apps_uri(true),
-            "ms-settings:defaultapps?registeredAppMachine=Mister%20Download%20Manager"
+            "ms-settings:defaultapps?registeredAppMachine=Sedot%20Download%20Manager"
         );
     }
 
@@ -5689,7 +5689,7 @@ mod default_apps_tests {
     #[test]
     fn another_default_is_named_once() {
         let fdm = || h(Some(FDM), Some("Free Download Manager"));
-        let ours = || h(Some(&MDM.to_uppercase()), Some("Mister Download Manager"));
+        let ours = || h(Some(&MDM.to_uppercase()), Some("Sedot Download Manager"));
         assert_eq!(others(&[fdm(), fdm()], MDM), ["Free Download Manager"]);
         assert_eq!(others(&[fdm(), ours()], MDM), ["Free Download Manager"]);
         assert!(others(&[ours(), ours()], MDM).is_empty());
@@ -5963,7 +5963,7 @@ mod startup_tests {
     /// The installer's "Start when Windows starts" writes the entry Options writes.
     #[test]
     fn the_installer_writes_the_same_entry() {
-        let iss = include_str!("../../../tools/installer/mdm.iss");
+        let iss = include_str!("../../../tools/installer/sdm.iss");
         assert!(iss.contains(
             r#"ValueName: "MisterDownloadManager"; ValueData: """{app}\{#AppExe}"" /startup""#
         ));

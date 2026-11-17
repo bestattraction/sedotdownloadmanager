@@ -334,6 +334,35 @@ pub fn refreshable(dir: &Path) -> bool {
     installed(dir).is_some_and(|i| !i.is_system())
 }
 
+/// Check whether a newer version of yt-dlp is available on GitHub releases.
+/// Returns Ok(Some(version)) if a newer release exists, Ok(None) if current or chosen.
+pub async fn check_ytdlp_update(
+    dir: &Path,
+    net: &mdm_engine::Options,
+) -> Result<Option<String>, Error> {
+    if chosen::chosen(dir, chosen::Helper::YtDlp).is_some() {
+        return Ok(None);
+    }
+    let Some(current) = own_ytdlp(dir) else {
+        return Ok(None);
+    };
+    let client = client(net, RELEASES)?;
+    let body = client
+        .get(RELEASES)
+        .send()
+        .await?
+        .error_for_status()?
+        .bytes()
+        .await?;
+    let release: Release =
+        serde_json::from_slice(&body).map_err(|e| Error::BadRelease(e.to_string()))?;
+    if newer(&release.tag_name, &current.version) {
+        Ok(Some(release.tag_name))
+    } else {
+        Ok(None)
+    }
+}
+
 /// Install the latest yt-dlp release into `dir` unless the installed one is as new, the program
 /// downloaded with MDM's engine (`net`), counted into `progress`. Returns what is installed
 /// afterwards. A system copy doesn't count as installed here: this is the way to get MDM's own

@@ -3,6 +3,7 @@
 //! where it goes. yt-dlp is installed (verified, D-011) from here on first use, and ffmpeg (the
 //! LGPL build) when the best qualities need merging. It follows the app's mode, like Add torrent.
 
+use std::collections::HashMap;
 use std::path::PathBuf;
 use std::sync::{Arc, Mutex};
 
@@ -112,11 +113,17 @@ pub struct VideoDialog {
     pref: Subs,
     /// The clipboard's page address, read off the window's thread (#661).
     clip: crate::clipboard::Prefill,
+    /// User-chosen category override.
+    chosen_category: Option<Category>,
+    /// Whether the category combo popup list is open.
+    category_open: bool,
+    /// Known folders for each category.
+    category_dirs: HashMap<Category, String>,
 }
 
 /// The top of the window's bottom row of buttons (Helpers..., Download Now, Later, Cancel),
 /// under Embed chapters.
-const BUTTONS_Y: f32 = 389.0;
+const BUTTONS_Y: f32 = 408.0;
 
 /// What is installed in the tools folder: (folder, yt-dlp, ffmpeg).
 type Tools = (
@@ -209,6 +216,9 @@ impl VideoDialog {
             chapters: true,
             pref: Subs::default(),
             clip: Default::default(),
+            chosen_category: None,
+            category_open: false,
+            category_dirs: HashMap::new(),
         }
     }
 
@@ -230,6 +240,20 @@ impl VideoDialog {
     pub fn with_music_folder(mut self, dir: Option<PathBuf>) -> Self {
         self.music_dir = dir.map(|d| d.display().to_string());
         self
+    }
+
+    /// Provide known category folders for the category picker.
+    pub fn with_category_dirs(mut self, dirs: HashMap<Category, String>) -> Self {
+        self.category_dirs = dirs;
+        self
+    }
+
+    /// Set category and update the save folder accordingly.
+    pub fn set_category(&mut self, c: Category) {
+        self.chosen_category = Some(c);
+        if let Some(dir) = self.category_dirs.get(&c) {
+            self.folder = dir.clone();
+        }
     }
 
     /// Opened for `page` (Add URL was given a video's page, or the browser's button was
@@ -443,7 +467,7 @@ impl VideoDialog {
             ctx,
             "video-page",
             "Download video from a page",
-            [500.0, 422.0],
+            [500.0, 442.0],
             false,
             winui::BG(),
             |ui, o| self.body(ui, o, rt),
@@ -529,8 +553,11 @@ impl VideoDialog {
     }
 
     /// The category the download is listed under (#611), and whose folder "Change folder for
-    /// this category on last selected" keeps: Music for a sound-only choice, else Video.
+    /// this category on last selected" keeps: user's chosen category, or Music for sound-only, else Video.
     pub fn category(&self) -> Category {
+        if let Some(c) = self.chosen_category {
+            return c;
+        }
         if self.music_dir.is_some() && self.sound_only() == Some(true) {
             Category::Music
         } else {
@@ -542,6 +569,9 @@ impl VideoDialog {
     /// Video's when it turns video again, but only while it holds the folder MDM put there: a
     /// folder the user typed or picked is theirs (#611).
     fn follow_sound(&mut self) {
+        if self.chosen_category.is_some() {
+            return;
+        }
         let Some(sound) = self.sound_only() else {
             return;
         };
@@ -938,6 +968,7 @@ impl VideoDialog {
         // language (German's "Speichern unter" is past the English 59 px), up to 150 px, the
         // boxes after it; longer still, a label is cut and shown whole on hover.
         let labels = [
+            crate::i18n::t("Category"),
             crate::i18n::t("Save to"),
             if self.list.is_some() {
                 // i18n: label before the quality chosen for all of a playlist's videos
@@ -965,17 +996,25 @@ impl VideoDialog {
                 ("video-label", y as i32),
             );
         };
-        label(ui, 266.0, labels[0], winui::TEXT());
+        label(ui, 263.0, labels[0], winui::TEXT());
+        let cat_rect = r(o, bx, 250.0, 489.0 - bx, 21.0);
+        let cat = winui::combo(ui, cat_rect, &self.category().shown(), "video-category");
+        if cat.clicked() || winui::combo_keys(ui, &cat) {
+            self.category_open = !self.category_open;
+        }
+        let category_was_open = self.category_open;
+
+        label(ui, 294.0, labels[1], winui::TEXT());
         winui::edit(
             ui,
-            r(o, bx, 253.0, 459.0 - bx, 21.0),
+            r(o, bx, 281.0, 459.0 - bx, 21.0),
             &mut self.folder,
             true,
             false,
         );
         if winui::button(
             ui,
-            r(o, 467.0, 253.0, 22.0, 21.0),
+            r(o, 467.0, 281.0, 22.0, 21.0),
             "...",
             ButtonKind::Normal,
             false,
@@ -991,14 +1030,14 @@ impl VideoDialog {
         if let Some(d) = winui::picked(ui.ctx(), "video-folder") {
             self.folder = d.display().to_string();
         }
-        label(ui, 297.0, labels[1], winui::TEXT());
+        label(ui, 325.0, labels[2], winui::TEXT());
         if let Some(list) = &mut self.list {
             // One quality for every video; their names are their titles (no subtitles).
-            list.quality_row(ui, r(o, bx, 284.0, 489.0 - bx, 21.0), ffmpeg.is_some());
+            list.quality_row(ui, r(o, bx, 312.0, 489.0 - bx, 21.0), ffmpeg.is_some());
         } else {
             winui::edit(
                 ui,
-                r(o, bx, 284.0, 489.0 - bx, 21.0),
+                r(o, bx, 312.0, 489.0 - bx, 21.0),
                 &mut self.name,
                 true,
                 false,
@@ -1009,7 +1048,7 @@ impl VideoDialog {
             } else {
                 winui::TEXT_DISABLED()
             };
-            label(ui, 328.0, labels[2], shade);
+            label(ui, 356.0, labels[3], shade);
         }
         self.chapters_row(ui, o, bx, ffmpeg.is_some());
 
@@ -1086,6 +1125,22 @@ impl VideoDialog {
             None,
         )
         .clicked();
+        if self.category_open {
+            let all = Category::all();
+            let labels: Vec<String> = all.iter().map(|c| c.shown()).collect();
+            if let Some(i) = winui::drop_list(
+                ui,
+                "video-category-drop",
+                cat_rect,
+                &labels,
+                "",
+                &mut self.category_open,
+            ) && let Some(c) = all.get(i)
+            {
+                self.set_category(*c);
+            }
+        }
+
         let cancel = winui::button(
             ui,
             r(o, cancel_at.0, BUTTONS_Y, cancel_at.1, 21.0),
@@ -1097,7 +1152,7 @@ impl VideoDialog {
         .clicked();
         // Escape answers the playlist's question first, when it's asked.
         let asking = self.list.as_ref().is_some_and(|l| l.asking());
-        if cancel || (winui::escape_pressed(ui) && !asking) {
+        if cancel || (winui::escape_pressed(ui) && !asking && !category_was_open) {
             return Outcome::Closed;
         }
         if ready && (now || later) {
@@ -1137,7 +1192,7 @@ impl VideoDialog {
         let mut on = self.chapters && can;
         let resp = winui::checkbox_until(
             ui,
-            pos2(o.x + bx, o.y + 350.0),
+            pos2(o.x + bx, o.y + 378.0),
             &mut on,
             // i18n: checkbox in Download video: the chapters a video's page lists (YouTube's, for one) go into the video file, where players show them and skip between them
             "Embed chapters",
@@ -1183,7 +1238,7 @@ impl VideoDialog {
         let pick = if on { self.sub_pick } else { 0 };
         if let Some(i) = winui::combo_light(
             ui,
-            r(o, bx, 315.0, 200.0, 21.0),
+            r(o, bx, 343.0, 200.0, 21.0),
             &shown,
             pick.min(shown.len().saturating_sub(1)),
             on,
@@ -1198,7 +1253,7 @@ impl VideoDialog {
         let mut embed = self.embed && chosen && ffmpeg && holds;
         let resp = winui::checkbox_until(
             ui,
-            pos2(o.x + bx + 212.0, o.y + 319.0),
+            pos2(o.x + bx + 212.0, o.y + 347.0),
             &mut embed,
             // i18n: checkbox in Download video: subtitles go inside the video file instead of a separate .srt file beside it
             "Put them into the video",

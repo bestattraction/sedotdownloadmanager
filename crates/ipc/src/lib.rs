@@ -350,19 +350,26 @@ pub fn data_dir() -> Option<PathBuf> {
     }
     static RESOLVED: std::sync::OnceLock<Option<PathBuf>> = std::sync::OnceLock::new();
     once(&RESOLVED, || {
-        if let Some(dir) = std::env::var_os("MDM_DATA_DIR") {
+        if let Some(dir) = std::env::var_os("SDM_DATA_DIR").or_else(|| std::env::var_os("MDM_DATA_DIR")) {
             return Some(full(PathBuf::from(dir)));
         }
         if let Some(dir) = portable_dir() {
             return Some(dir);
         }
         let base = dirs::data_dir()?;
-        let dir = base.join("misterdownloadmanager");
+        let sdm = base.join("sedotdownloadmanager");
+        let mdm = base.join("misterdownloadmanager");
         let legacy = base.join("idmnext");
-        if !dir.exists() && legacy.is_dir() {
-            let _ = std::fs::rename(&legacy, &dir);
+        if sdm.exists() {
+            Some(sdm)
+        } else if mdm.exists() {
+            Some(mdm)
+        } else if legacy.is_dir() {
+            let _ = std::fs::rename(&legacy, &sdm);
+            Some(sdm)
+        } else {
+            Some(sdm)
         }
-        Some(dir)
     })
 }
 

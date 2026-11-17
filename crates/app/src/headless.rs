@@ -66,7 +66,7 @@ pub fn main(args: Vec<String>) -> ExitCode {
     }
     let Some(_instance) = mdm_ipc::instance_lock() else {
         eprintln!(
-            "Another Mister Download Manager uses the data folder {}.",
+            "Another Sedot Download Manager uses the data folder {}.",
             data.display()
         );
         return ExitCode::FAILURE;
@@ -76,7 +76,7 @@ pub fn main(args: Vec<String>) -> ExitCode {
     // the one links added by hand go with (#668).
     crate::defaultbrowser::start();
     tracing::info!(
-        "Mister Download Manager {} ({}) starting without a window",
+        "Sedot Download Manager {} ({}) starting without a window",
         crate::help::VERSION,
         crate::help::COMMIT
     );

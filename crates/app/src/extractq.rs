@@ -532,7 +532,7 @@ fn failed(name: &str, e: &Error) -> String {
             ],
         ),
         // i18n: why an archive wasn't extracted (after "Couldn't extract {name}: ")
-        Error::Unsupported => crate::i18n::t("it is not an archive MDM extracts").to_owned(),
+        Error::Unsupported => crate::i18n::t("it is not an archive SDM extracts").to_owned(),
         // i18n: why an archive wasn't extracted (after "Couldn't extract {name}: ")
         Error::Cancelled => crate::i18n::t("it was stopped").to_owned(),
         Error::Io(e) => crate::errors::describe(&mdm_engine::Error::Io(Arc::new(

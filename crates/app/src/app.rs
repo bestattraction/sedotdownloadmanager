@@ -3,6 +3,7 @@
 
 use std::collections::HashMap;
 use std::path::PathBuf;
+use std::sync::{Arc, Mutex};
 use std::time::{Duration, Instant};
 
 use base64::Engine as _;
@@ -1041,6 +1042,11 @@ enum Branch {
     Queues,
 }
 
+#[derive(Clone, Debug)]
+enum HelperUpdateResult {
+    Update { name: &'static str, version: String },
+}
+
 pub struct App {
     rt: tokio::runtime::Handle,
     items: Vec<Item>,
@@ -1085,8 +1091,11 @@ pub struct App {
     tell_friend: Option<crate::help::TellFriend>,
     /// The language picker (first start, View → Language...).
     lang_picker: Option<crate::langpick::Picker>,
-    /// The video helpers' offer (the first start's, after the language).
+    /// The video helpers' offer (the first start's, after the language, missing modules or updates).
     helpers: Option<crate::helpers::Helpers>,
+    raise_helpers: bool,
+    helpers_checked_this_run: Option<i64>,
+    helper_update_slot: Arc<Mutex<Option<HelperUpdateResult>>>,
     /// "Files already there", opened on its own by `/show existing-files` (screenshots and the
     /// translations' fit check); Add torrent asks it itself.
     shown_existing: Option<crate::dialogs::ExistingFiles>,
@@ -1862,6 +1871,9 @@ impl App {
             tell_friend: None,
             lang_picker: None,
             helpers: None,
+            raise_helpers: false,
+            helpers_checked_this_run: None,
+            helper_update_slot: Arc::default(),
             shown_existing: None,
             extension: None,
             extension_weighed: false,
@@ -4593,8 +4605,9 @@ impl App {
                     // Elsewhere focus is all there is to go by (sway, KDE's tray).
                     #[cfg(not(windows))]
                     let in_front = false;
-                    if tray_toggle_hide(self.hidden, minimized, focus, since_focused)
-                        || (!self.hidden && !minimized && in_front)
+                    if self.settings.minimize_to_tray
+                        && (tray_toggle_hide(self.hidden, minimized, focus, since_focused)
+                            || (!self.hidden && !minimized && in_front))
                     {
                         self.hide_to_tray(ctx);
                     } else {
@@ -4603,6 +4616,7 @@ impl App {
                     continue;
                 }
                 TrayCmd::AddUrl => Cmd::AddUrl,
+                TrayCmd::AddTorrent => Cmd::AddMagnet,
                 TrayCmd::Batch => Cmd::Batch,
                 TrayCmd::BatchClipboard => Cmd::BatchClipboard,
                 TrayCmd::LimiterOn => Cmd::LimiterOn,
@@ -5255,6 +5269,10 @@ impl App {
         let dir = self.settings.category_dir(Category::Video, &self.downloads);
         let music = (!Category::Music.deleted())
             .then(|| self.settings.category_dir(Category::Music, &self.downloads));
+        let mut dirs = std::collections::HashMap::new();
+        for c in Category::all() {
+            dirs.insert(c, self.settings.category_dir(c, &self.downloads).display().to_string());
+        }
         match page {
             Some((page, cmd)) => crate::videodlg::VideoDialog::for_page(dir, page, cmd),
             None => crate::videodlg::VideoDialog::new(dir),
@@ -5262,6 +5280,7 @@ impl App {
         .with_subs(self.settings.video_subs.clone())
         .with_chapters(self.settings.video_chapters)
         .with_music_folder(music)
+        .with_category_dirs(dirs)
     }
 
     /// Download video from a page → Download Now / Later; or the browser's quality menu's
@@ -8397,7 +8416,7 @@ impl App {
                 I("&About Sedot Download Manager", Cmd::About, true, false),
                 I("Tell a &friend", Cmd::TellFriend, true, false),
                 // MDM's, not IDM's: the creator's GitHub Sponsors page, asked for only.
-                I("Support &MDM", Cmd::Support, true, false),
+                I("Support SD&M", Cmd::Support, true, false),
             ],
         };
         // View → Theme (MDM's, #45), after Always dark; then Draw with (#89, #206), where wgpu is
@@ -8660,7 +8679,7 @@ impl App {
             // i18n: View → Draw with: a greyed note under why a graphics system ("it": Direct3D, Vulkan, Metal or OpenGL) doesn't draw MDM; {date}: the day that was found; {retry}: the day MDM tries it again
             (false, Some(_), false) => t("Since {date}: MDM tries it again on {retry}"),
             // i18n: View → Draw with: a greyed note under why a graphics system ("it": Direct3D, Vulkan, Metal or OpenGL) doesn't draw MDM; {date}: the day that was found; MDM tries it again once the graphics driver is updated
-            (false, None, true) => t("Since {date}: MDM tries it again after a driver update"),
+            (false, None, true) => t("Since {date}: SDM tries it again after a driver update"),
             // i18n: View → Draw with: a greyed note under why a graphics system doesn't draw MDM; {date}: the day that was found
             (false, None, false) => t("Since {date}"),
         };
@@ -8708,7 +8727,7 @@ impl App {
         ];
         if pick.is_some_and(|p| (p == P::Wayland) != ws.wayland) {
             // i18n: View → Draw with: a greyed note under the choices; the choice takes effect when MDM is started again
-            items.push(off("Applies the next time MDM starts"));
+            items.push(off("Applies the next time SDM starts"));
         }
         // i18n: View menu: submenu choosing the window system MDM's windows use on Linux (X11 through XWayland, or Wayland)
         Sub("&Window system", true, items)
@@ -10947,6 +10966,71 @@ impl App {
         }
     }
 
+    /// Check for missing video download modules or updates for installed modules (yt-dlp, ffmpeg).
+    /// If missing or an update is found, presents the helpers dialog pop-up.
+    fn auto_helper_check(&mut self, ctx: &egui::Context) {
+        if self.lang_picker.is_some() || !self.settings.language_asked {
+            return;
+        }
+        let now = chrono::Utc::now().timestamp();
+        let first = self.helpers_checked_this_run.is_none()
+            && self.started.elapsed() >= Duration::from_secs(3);
+        let again = self
+            .helpers_checked_this_run
+            .is_some_and(|t| now - t >= 12 * 3600);
+
+        if (first || again)
+            && (!crate::offscreen() || std::env::var_os("MDM_UPDATE_FEED").is_some())
+        {
+            self.helpers_checked_this_run = Some(now);
+            if crate::helpers::worth_asking() {
+                if self.helpers.is_none() {
+                    self.helpers = Some(crate::helpers::Helpers::new());
+                    self.raise_helpers = true;
+                }
+            } else if let Some(dir) = mdm_tools::tools_dir() {
+                let slot = self.helper_update_slot.clone();
+                let net = crate::settings::own_net();
+                let ctx_clone = ctx.clone();
+                self.rt.spawn(async move {
+                    if let Ok(Some(version)) = mdm_tools::check_ytdlp_update(&dir, &net).await {
+                        *slot.lock().unwrap() = Some(HelperUpdateResult::Update {
+                            name: "yt-dlp",
+                            version,
+                        });
+                        ctx_clone.request_repaint();
+                        return;
+                    }
+                    #[cfg(windows)]
+                    if let Ok(Some(version)) = mdm_tools::ffmpeg::check_ffmpeg_update(&dir, &net).await {
+                        *slot.lock().unwrap() = Some(HelperUpdateResult::Update {
+                            name: "ffmpeg",
+                            version,
+                        });
+                        ctx_clone.request_repaint();
+                    }
+                });
+            }
+        }
+
+        let found_update = self.helper_update_slot.lock().unwrap().take();
+        if let Some(HelperUpdateResult::Update { name, version }) = found_update {
+            if self.helpers.is_none() {
+                tracing::info!("helper update available: {name} {version}");
+                self.helpers = Some(crate::helpers::Helpers::for_update(name, version));
+                self.raise_helpers = true;
+            }
+        }
+
+        if self.helpers.is_some() {
+            if self.raise_helpers && crate::dialogs::focus_when_shown(ctx, "helpers") {
+                self.raise_helpers = false;
+            }
+        } else {
+            self.raise_helpers = false;
+        }
+    }
+
     fn help_dialogs(&mut self, ctx: &egui::Context) {
         if let Some(d) = &mut self.lang_picker {
             let first = !self.settings.language_asked;
@@ -12125,6 +12209,7 @@ impl App {
         if !self.headless {
             crate::crash::step(crate::crash::Step::UpdateCheck);
             self.auto_update_check(ctx);
+            self.auto_helper_check(ctx);
             crate::crash::step(crate::crash::Step::Clipboard);
             self.watch_clipboard(ctx);
             crate::crash::step(crate::crash::Step::Tray);
