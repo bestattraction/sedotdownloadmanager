@@ -1050,18 +1050,27 @@ fn deliver(cmd: &mdm_ipc::Command) -> Result<(), Undelivered> {
         Ok(path) if !path.trim().is_empty() => PathBuf::from(path.trim()),
         _ => {
             let preferred = dir.join(if cfg!(windows) {
-                "sedotdownloadmanager.exe"
+                "sdm.exe"
             } else {
-                "sedotdownloadmanager"
+                "sdm"
             });
             if preferred.exists() {
                 preferred
             } else {
-                dir.join(if cfg!(windows) {
-                    "misterdownloadmanager.exe"
+                let sedot = dir.join(if cfg!(windows) {
+                    "sedotdownloadmanager.exe"
                 } else {
-                    "misterdownloadmanager"
-                })
+                    "sedotdownloadmanager"
+                });
+                if sedot.exists() {
+                    sedot
+                } else {
+                    dir.join(if cfg!(windows) {
+                        "misterdownloadmanager.exe"
+                    } else {
+                        "misterdownloadmanager"
+                    })
+                }
             }
         }
     };

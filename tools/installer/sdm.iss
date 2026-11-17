@@ -13,7 +13,7 @@
   #define AppVersion "0.5.2"
 #endif
 #define AppName "Sedot Download Manager"
-#define AppExe "sedotdownloadmanager.exe"
+#define AppExe "sdm.exe"
 #define HostExe "misterdownloadmanager-nmhost.exe"
 #define Root "..\.."
 ; The processor (build.ps1 -Arch): x64, arm64 or x86, an installer each; and the folder its
@@ -59,7 +59,7 @@ ArchitecturesInstallIn64BitMode=x64compatible
 #endif
 MinVersion=10.0
 WizardStyle=modern
-SetupIconFile={#Root}\crates\app\assets\icons\app\mdm.ico
+SetupIconFile={#Root}\crates\app\assets\icons\app\sdm.ico
 UninstallDisplayIcon={app}\{#AppExe}
 UninstallDisplayName={#AppName}
 OutputDir={#Root}\target\dist

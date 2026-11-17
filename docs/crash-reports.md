@@ -57,7 +57,7 @@ How it works: a second copy of MDM, the **monitor**, starts beside it with `--cr
 - **A `.dmp` from an issue:**
 
   ```
-  cargo run -p mdm-crash --bin mdm-symbolicate -- crash.dmp MisterDownloadManager-<version>-symbols-windows-x64.zip
+  cargo run -p mdm-crash --bin sdm-symbolicate -- crash.dmp MisterDownloadManager-<version>-symbols-windows-x64.zip
   ```
 
 - **Testing it.** `cargo test -p mdm-crash` runs a real freeze, panic and crash (`examples/crashy.rs`) and checks each report's signature. To try it in the app, start MDM with `MDM_CRASH_TEST=1`, then run `misterdownloadmanager /show crash-test:freeze` (a deadlock; or `spin`, 12 s of a busy window thread, `panic`, `crash`, `abort`). `cargo test -p mdm-app --test freeze_report -- --ignored` does that in a copy of the app off the screens, its window visible and minimized.

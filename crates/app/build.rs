@@ -23,9 +23,9 @@ fn main() {
     // Linux or macOS); winresource builds on Windows only.
     #[cfg(windows)]
     if windows {
-        println!("cargo:rerun-if-changed=assets/icons/app/mdm.ico");
+        println!("cargo:rerun-if-changed=assets/icons/app/sdm.ico");
         let mut res = winresource::WindowsResource::new();
-        res.set_icon("assets/icons/app/mdm.ico")
+        res.set_icon("assets/icons/app/sdm.ico")
             .set("ProductName", "Sedot Download Manager")
             .set("FileDescription", "Sedot Download Manager")
             .set("CompanyName", "Ahmed Nefzaoui")

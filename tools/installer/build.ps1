@@ -57,7 +57,7 @@ if (-not $iscc) { throw "Inno Setup 6 (ISCC.exe) not found" }
 New-Item -ItemType Directory -Force $dist | Out-Null
 $isccArgs = @("/Qp", "/DAppVersion=$version", "/DArch=$Arch", "/DBin=$bin")
 if ($SignCommand) { $isccArgs += @("/DSign", "/Smdmsign=$SignCommand") }
-& $iscc @isccArgs (Join-Path $PSScriptRoot "mdm.iss")
+& $iscc @isccArgs (Join-Path $PSScriptRoot "sdm.iss")
 if ($LASTEXITCODE) { throw "ISCC failed" }
 
 # The zips: the same programs; the portable one adds a `data` folder next to the exe, which
@@ -66,7 +66,7 @@ function New-Zip([string]$name, [bool]$portable) {
   $stage = Join-Path $dist "stage\$name"
   if (Test-Path $stage) { Remove-Item -LiteralPath $stage -Recurse -Force }
   New-Item -ItemType Directory -Force $stage | Out-Null
-  foreach ($exe in "sedotdownloadmanager.exe", "misterdownloadmanager.exe", "misterdownloadmanager-nmhost.exe", "misterdownloadmanager-cli.exe", "misterdownloadmanager-mcp.exe") {
+  foreach ($exe in "sdm.exe", "sedotdownloadmanager.exe", "misterdownloadmanager.exe", "misterdownloadmanager-nmhost.exe", "misterdownloadmanager-cli.exe", "misterdownloadmanager-mcp.exe") {
     $src = Join-Path $bin $exe
     if (Test-Path $src) { Copy-Item $src $stage }
   }
