@@ -69,10 +69,10 @@
     video_all_qualities: "All qualities and subtitles...",
     video_looking: "Looking up the qualities…",
     video_no_choices: "No video to download here",
-    video_playlist: "A list of videos: choose them in Mister Download Manager",
-    video_no_ytdlp: "Mister Download Manager needs yt-dlp for this video",
+    video_playlist: "A list of videos: choose them in Sedot Download Manager",
+    video_no_ytdlp: "Sedot Download Manager needs yt-dlp for this video",
     video_too_long: "Looking up took too long",
-    video_busy: "Mister Download Manager is busy with other videos",
+    video_busy: "Sedot Download Manager is busy with other videos",
     video_queued: "Added to the queue",
     video_failed_lookup: "Could not look it up",
     video_tab_video: "Video",
@@ -821,13 +821,49 @@
   // Hidden while the page is fullscreen (default: true).
   let hideFullscreen = true;
   function isFullscreen() {
-    return Boolean(
+    if (Boolean(
       document.fullscreenElement ||
       document.webkitFullscreenElement ||
       document.mozFullScreenElement ||
       document.msFullscreenElement ||
-      (video && (video.matches && video.matches(":fullscreen, :-webkit-full-screen, :-moz-full-screen") || video.webkitDisplayingFullscreen))
-    );
+      (typeof window !== "undefined" && (window.fullScreen || (window.matchMedia && window.matchMedia("(display-mode: fullscreen)").matches)))
+    )) {
+      return true;
+    }
+    if (video) {
+      if (
+        video.webkitDisplayingFullscreen ||
+        (video.matches && video.matches(":fullscreen, :-webkit-full-screen, :-moz-full-screen"))
+      ) {
+        return true;
+      }
+      const p = getPlayer(video);
+      const vw = typeof innerWidth !== "undefined" ? innerWidth : 1920;
+      const vh = typeof innerHeight !== "undefined" ? innerHeight : 1080;
+      if (p) {
+        if (p.matches && p.matches(":fullscreen, :-webkit-full-screen, :-moz-full-screen")) {
+          return true;
+        }
+        if (
+          p.classList &&
+          (p.classList.contains("ytp-fullscreen") ||
+            p.classList.contains("vjs-fullscreen") ||
+            p.classList.contains("jw-flag-fullscreen") ||
+            p.classList.contains("fullscreen"))
+        ) {
+          return true;
+        }
+        const pr = p.getBoundingClientRect();
+        if (pr.width >= vw - 8 && pr.height >= vh - 8 && pr.top <= 4 && pr.left <= 4) {
+          return true;
+        }
+      }
+      const vr = video.getBoundingClientRect();
+      if (vr.width >= vw - 8 && vr.height >= vh - 8 && vr.top <= 4 && vr.left <= 4) {
+        return true;
+      }
+    }
+    return false;
   }
   try {
     ext.storage.local.get({ hideVideoFullscreen: true }).then((v) => {
@@ -894,6 +930,7 @@
   // and end, never left and right: a right-to-left language mirrors it whole.
   const CSS = `
 :host { all: initial; }
+:host(:fullscreen), :host(:-webkit-full-screen) { display: none !important; }
 * { box-sizing: border-box; }
 .pill, .menu, .tip, .guide {
   --go: #57cc5a; --go-hi: #47b94a; --go-ink: #08200b; --stamp: #1b7a26; --accent: #1b7a26;
@@ -1465,13 +1502,27 @@ button:focus-visible { outline: none; }
     return s.visibility !== "hidden" && s.display !== "none" && Number(s.opacity) > 0.05;
   }
 
+  function getPlayer(v) {
+    if (!v) return null;
+    return (
+      v.closest?.(
+        "#movie_player, .html5-video-player, .video-js, .jwplayer, .plyr, [class*='player-container'], [class*='video-player']"
+      ) || v
+    );
+  }
+
+  function getPlayerRect(v) {
+    const p = getPlayer(v);
+    return p ? p.getBoundingClientRect() : (v ? v.getBoundingClientRect() : { left: 0, top: 0, right: 0, bottom: 0, width: 0, height: 0 });
+  }
+
   // The topmost eligible video under (x, y): players lay their controls over the video, so the
   // video itself rarely gets the pointer's events.
   function videoAt(x, y) {
     let best = null;
     for (const v of [...videos, ...audios, ...shadowVideos()]) {
-      const r = v.getBoundingClientRect();
-      if (x < r.left || x > r.right || y < r.top || y > r.bottom || !eligible(v)) continue;
+      const r = getPlayerRect(v);
+      if (x < r.left - 10 || x > r.right + 10 || y < r.top - 45 || y > r.bottom || !eligible(v)) continue;
       if (!best || r.width * r.height < best.r.width * best.r.height) best = { v, r };
     }
     return best && best.v;
@@ -1481,7 +1532,7 @@ button:focus-visible { outline: none; }
   // `place` is where it sits in the room the video leaves around it: x and y from 0 to 1, one of
   // them 0 or 1 (on an edge).
   function rects() {
-    const r = held ? held.r : (lastRect = video.getBoundingClientRect());
+    const r = held ? held.r : (lastRect = getPlayerRect(video));
     const w = pill.offsetWidth || 150;
     const h = pill.offsetHeight || 30;
     return { r, w, h, roomX: Math.max(0, r.width - w - 2 * INSET), roomY: Math.max(0, r.height - h - 2 * INSET) };
@@ -1545,11 +1596,12 @@ button:focus-visible { outline: none; }
 
   function position() {
     if (!video) return;
+    if (hideFullscreen && isFullscreen()) return hide(true);
     // A small video, one its words wouldn't fit, or Compact chosen in Options: the round button
     // and its menu only.
-    const vr = held ? held.r : video.getBoundingClientRect();
+    const vr = held ? held.r : getPlayerRect(video);
     pill.classList.toggle("compact", compactFor(compactAlways, vr.width, fullWidth, INSET));
-    const { r, w, roomX, roomY } = rects();
+    const { r, w, h, roomX, roomY } = rects();
     // The pointer on it (or its menu open): it stays where it is, whatever the video does
     // meanwhile. A preview that grows while the pointer is over it and shrinks back when the
     // pointer goes (#560) would otherwise take the button from under the pointer. Grown or
@@ -1565,31 +1617,28 @@ button:focus-visible { outline: none; }
       placeTip(pinned.left, w);
       return;
     }
-    // Held for a video gone (#503): where it was, not a corner found anew over what the page
-    // shows there now.
-    const h = pill.offsetHeight || 30;
-    if (!chosen && !dragging) {
-      // Put above video at top-right
-      const left = Math.max(INSET, Math.min(innerWidth - w - INSET, r.right - w - INSET));
-      const above = r.top - h - 4;
-      const top = above >= 0 ? above : Math.min(Math.max(r.top + INSET, 0), innerHeight - h - INSET);
+
+    if (dragging) {
+      const at = dragging.at;
+      const left = r.left + INSET + at.x * roomX;
+      const visTop = Math.max(r.top, 0) + INSET;
+      const visBottom = Math.min(r.bottom, innerHeight) - INSET - h;
+      const top = Math.min(Math.max(r.top + INSET + at.y * roomY, visTop), Math.max(visTop, visBottom));
       root.style.setProperty("transform", `translate(${Math.round(left)}px, ${Math.round(top)}px)`, "important");
-      pinned = { v: video, left, top, w, end: true };
+      pinned = { v: video, left, top, w, end: at.x > 0.5 };
       if (menuOpen) placeMenu(top, left, w);
       placeTip(left, w);
+      if (dragging.moved) drawGuide(r, w, h, roomX, roomY, left, top);
       return;
     }
-    const at = dragging ? dragging.at : held && !chosen ? held.at : spot(r, w, h, roomX, roomY);
-    const left = r.left + INSET + at.x * roomX;
-    // In the part of the video on screen: one scrolled half out keeps its button in view.
-    const visTop = Math.max(r.top, 0) + INSET;
-    const visBottom = Math.min(r.bottom, innerHeight) - INSET - h;
-    const top = Math.min(Math.max(r.top + INSET + at.y * roomY, visTop), Math.max(visTop, visBottom));
+
+    // Default & forced position: OUTSIDE, ABOVE video at top-right
+    const left = Math.max(4, Math.min(innerWidth - w - 4, r.right - w));
+    const top = r.top - h - 4;
     root.style.setProperty("transform", `translate(${Math.round(left)}px, ${Math.round(top)}px)`, "important");
-    pinned = { v: video, left, top, w, end: at.x > 0.5 };
+    pinned = { v: video, left, top, w, end: true };
     if (menuOpen) placeMenu(top, left, w);
     placeTip(left, w);
-    if (dragging && dragging.moved) drawGuide(r, w, h, roomX, roomY, left, top);
   }
 
   // Which of its sides is nearer the video's middle: its menu and its tip line up with that one.
@@ -1654,10 +1703,9 @@ button:focus-visible { outline: none; }
 
   // ---- showing and hiding ---------------------------------------------------------------------
   function attach() {
-    // Over the video in fullscreen: inside the fullscreen element (a fullscreen <video> itself
-    // can't hold it: then it hides).
     const fs = document.fullscreenElement;
-    const parent = fs && fs !== video && fs.contains(video) ? fs : document.documentElement;
+    if (hideFullscreen && isFullscreen()) return false;
+    const parent = fs && fs !== video && fs.contains(video) ? fs : (document.documentElement || document.body);
     if (root.parentNode !== parent) parent.appendChild(root);
     return !(fs && (fs === video || !fs.contains(video)));
   }
@@ -1666,6 +1714,7 @@ button:focus-visible { outline: none; }
     // Cut off from the extension (updated or removed) and still running (Firefox may leave such
     // a copy going in its own world beside the new one): it goes instead of showing (#336).
     if (!ext.runtime?.id) return teardown();
+    if (hideFullscreen && isFullscreen()) return hide(true);
     if (video !== v) {
       video = v;
       held = null;
@@ -1675,7 +1724,6 @@ button:focus-visible { outline: none; }
       if (status && status.state !== "off") endStatus(true);
       current = null;
     }
-    if (hideFullscreen && isFullscreen()) return hide(true);
     if (!attach()) return hide(true);
     root.style.setProperty("display", "block", "important");
     const c = describeNow(v);
@@ -1742,7 +1790,7 @@ button:focus-visible { outline: none; }
   function tick() {
     raf = 0;
     if (!video) return hide(true);
-    if (hideFullscreen && isFullscreen()) return hide(true);
+    if (isFullscreen()) return hide(true);
     const onButton = root.matches(":hover");
     const h = pill.offsetHeight || 30;
     if (!video.isConnected || !eligible(video)) {
@@ -1753,7 +1801,7 @@ button:focus-visible { outline: none; }
         (onButton ||
           (pointer.x >= r.left - INSET &&
             pointer.x <= r.right + INSET &&
-            pointer.y >= r.top - h - 16 &&
+            pointer.y >= r.top - h - 20 &&
             pointer.y <= r.bottom));
       if (!held || !(onButton || menuOpen || dragging || keyboardOn() || (over && Date.now() - held.since < HOLD_MS))) {
         const was = held;
@@ -1767,12 +1815,12 @@ button:focus-visible { outline: none; }
       return;
     }
     held = null;
-    const r = video.getBoundingClientRect();
+    const r = getPlayerRect(video);
     const over =
       onButton ||
       (pointer.x >= r.left - INSET &&
         pointer.x <= r.right + INSET &&
-        pointer.y >= r.top - h - 16 &&
+        pointer.y >= r.top - h - 20 &&
         pointer.y <= r.bottom);
     if (!onButton && !menuOpen && !dragging && !keyboardOn() && (!over || Date.now() - lastMove > IDLE_MS)) {
       return hide();
@@ -2409,12 +2457,14 @@ button:focus-visible { outline: none; }
   });
   function onFullscreenChange() {
     if (isFullscreen()) {
-      if (hideFullscreen) hide(true);
+      hide(true);
     } else if (video) {
       show(video);
     }
   }
-  document.addEventListener("fullscreenchange", onFullscreenChange);
-  document.addEventListener("webkitfullscreenchange", onFullscreenChange);
+  for (const ev of ["fullscreenchange", "webkitfullscreenchange", "mozfullscreenchange", "MSFullscreenChange", "resize"]) {
+    document.addEventListener(ev, onFullscreenChange, true);
+    addEventListener(ev, onFullscreenChange, true);
+  }
   addEventListener("blur", () => hide());
 })();

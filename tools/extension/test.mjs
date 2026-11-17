@@ -2391,9 +2391,26 @@ function videoButton({ stored = {} } = {}) {
   };
 }
 {
-  // Off, as installed: the button shows in full screen once the pointer moves, and entering full
-  // screen leaves it out of the way until then.
+  // On, as installed: the button never shows while the page is in full screen.
   const b = videoButton();
+  await b.move();
+  assert.equal(b.display(), "block", "on, not fullscreen: the button shows");
+  b.setFullscreen(true);
+  await b.fullscreenchange();
+  assert.equal(b.display(), "none", "on: entering full screen hides it");
+  await b.move();
+  assert.equal(b.display(), "none", "on: it stays hidden while fullscreen");
+  b.setFullscreen(false);
+  await b.fullscreenchange();
+  await b.move();
+  assert.equal(b.display(), "block", "on: leaving full screen shows it again");
+  ok("#670: with the option on by default, the button hides in full screen");
+}
+{
+  // Off: the button shows in full screen once the pointer moves, and entering full
+  // screen leaves it out of the way until then.
+  const b = videoButton({ stored: { hideVideoFullscreen: false } });
+  await b.setting(false);
   b.setFullscreen(true);
   await b.move();
   assert.equal(b.display(), "block", "off: the button shows in full screen");
@@ -2409,25 +2426,10 @@ function videoButton({ stored = {} } = {}) {
   ok("#670: with the option off, the button shows in full screen once the pointer moves");
 }
 {
-  // On: it never shows while the page is in full screen: entering it hides a placed button,
-  // leaving it shows the button again.
-  const b = videoButton({ stored: { hideVideoFullscreen: true } });
-  await b.move();
-  assert.equal(b.display(), "block", "on, not fullscreen: the button shows");
-  b.setFullscreen(true);
-  await b.fullscreenchange();
-  assert.equal(b.display(), "none", "on: entering full screen hides it");
-  await b.move();
-  assert.equal(b.display(), "none", "on: it stays hidden while fullscreen");
-  b.setFullscreen(false);
-  await b.fullscreenchange();
-  assert.equal(b.display(), "block", "on: leaving full screen shows it again");
-  ok("#670: with the option on, the button hides in full screen");
-}
-{
   // The setting changed while the video was already in full screen: it hides at once, and comes
   // back at once when turned off again, without waiting for the page to leave full screen.
-  const b = videoButton();
+  const b = videoButton({ stored: { hideVideoFullscreen: false } });
+  await b.setting(false);
   b.setFullscreen(true);
   await b.move();
   assert.equal(b.display(), "block", "off in full screen: the button shows");

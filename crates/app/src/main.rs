@@ -92,7 +92,7 @@ mod xdgicons;
 /// `StartupWMClass=` names it (tools/installer/build-linux.sh, in the AppImage and the packages),
 /// so a window pinned to the taskbar or the dock is the launcher's, whatever name an AppImage
 /// manager gave the entry (#940). Also the entry's own name and the program's.
-pub const APP_ID: &str = "misterdownloadmanager";
+pub const APP_ID: &str = "sedotdownloadmanager";
 
 /// A new window's builder: every window of ours starts from it, so each carries [`APP_ID`]
 /// (eframe gives the main window its app name, a dialog nothing). Without it a dialog had no

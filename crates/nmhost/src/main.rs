@@ -1048,11 +1048,22 @@ fn deliver(cmd: &mdm_ipc::Command) -> Result<(), Undelivered> {
     // written next to this copy.
     let app = match std::fs::read_to_string(dir.join("app-path")) {
         Ok(path) if !path.trim().is_empty() => PathBuf::from(path.trim()),
-        _ => dir.join(if cfg!(windows) {
-            "misterdownloadmanager.exe"
-        } else {
-            "misterdownloadmanager"
-        }),
+        _ => {
+            let preferred = dir.join(if cfg!(windows) {
+                "sedotdownloadmanager.exe"
+            } else {
+                "sedotdownloadmanager"
+            });
+            if preferred.exists() {
+                preferred
+            } else {
+                dir.join(if cfg!(windows) {
+                    "misterdownloadmanager.exe"
+                } else {
+                    "misterdownloadmanager"
+                })
+            }
+        }
     };
     let safari = SAFARI.load(std::sync::atomic::Ordering::Relaxed);
     let mut child = if safari {

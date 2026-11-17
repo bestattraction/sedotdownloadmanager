@@ -12,8 +12,8 @@
 #ifndef AppVersion
   #define AppVersion "0.5.2"
 #endif
-#define AppName "Mister Download Manager"
-#define AppExe "misterdownloadmanager.exe"
+#define AppName "Sedot Download Manager"
+#define AppExe "sedotdownloadmanager.exe"
 #define HostExe "misterdownloadmanager-nmhost.exe"
 #define Root "..\.."
 ; The processor (build.ps1 -Arch): x64, arm64 or x86, an installer each; and the folder its
