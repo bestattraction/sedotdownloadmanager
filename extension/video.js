@@ -818,24 +818,33 @@
   // Options → Download panels → Button size is Compact (#1278): the round button over every video.
   // It comes with the app's answer, so a change in Options reaches a page already open with it.
   let compactAlways = false;
-  // Hidden while the page is fullscreen, when chosen in the popup (off: it shows, as now).
-  let hideFullscreen = false;
+  // Hidden while the page is fullscreen (default: true).
+  let hideFullscreen = true;
+  function isFullscreen() {
+    return Boolean(
+      document.fullscreenElement ||
+      document.webkitFullscreenElement ||
+      document.mozFullScreenElement ||
+      document.msFullscreenElement ||
+      (video && (video.matches && video.matches(":fullscreen, :-webkit-full-screen, :-moz-full-screen") || video.webkitDisplayingFullscreen))
+    );
+  }
   try {
-    ext.storage.local.get({ hideVideoFullscreen: false }).then((v) => {
+    ext.storage.local.get({ hideVideoFullscreen: true }).then((v) => {
       hideFullscreen = Boolean(v.hideVideoFullscreen);
     }).catch(() => {});
     ext.storage.onChanged.addListener((changes, area) => {
       if (area === "local" && changes.hideVideoFullscreen) {
         hideFullscreen = Boolean(changes.hideVideoFullscreen.newValue);
         // Either way at once: a video already in full screen follows the box as it is ticked.
-        if (document.fullscreenElement && video) {
+        if (isFullscreen() && video) {
           if (hideFullscreen) hide(true);
           else show(video);
         }
       }
     });
   } catch {
-    // Without storage: shown, as now.
+    // Without storage: hidden in fullscreen by default.
   }
   const ASK_MS = 5000;
   const answered = () => allowed !== null && Date.now() - askedAt < ASK_MS;
@@ -1559,6 +1568,17 @@ button:focus-visible { outline: none; }
     // Held for a video gone (#503): where it was, not a corner found anew over what the page
     // shows there now.
     const h = pill.offsetHeight || 30;
+    if (!chosen && !dragging) {
+      // Put above video at top-right
+      const left = Math.max(INSET, Math.min(innerWidth - w - INSET, r.right - w - INSET));
+      const above = r.top - h - 4;
+      const top = above >= 0 ? above : Math.min(Math.max(r.top + INSET, 0), innerHeight - h - INSET);
+      root.style.setProperty("transform", `translate(${Math.round(left)}px, ${Math.round(top)}px)`, "important");
+      pinned = { v: video, left, top, w, end: true };
+      if (menuOpen) placeMenu(top, left, w);
+      placeTip(left, w);
+      return;
+    }
     const at = dragging ? dragging.at : held && !chosen ? held.at : spot(r, w, h, roomX, roomY);
     const left = r.left + INSET + at.x * roomX;
     // In the part of the video on screen: one scrolled half out keeps its button in view.
@@ -1655,7 +1675,7 @@ button:focus-visible { outline: none; }
       if (status && status.state !== "off") endStatus(true);
       current = null;
     }
-    if (hideFullscreen && document.fullscreenElement) return hide(true);
+    if (hideFullscreen && isFullscreen()) return hide(true);
     if (!attach()) return hide(true);
     root.style.setProperty("display", "block", "important");
     const c = describeNow(v);
@@ -1722,13 +1742,19 @@ button:focus-visible { outline: none; }
   function tick() {
     raf = 0;
     if (!video) return hide(true);
-    if (hideFullscreen && document.fullscreenElement) return hide(true);
+    if (hideFullscreen && isFullscreen()) return hide(true);
     const onButton = root.matches(":hover");
+    const h = pill.offsetHeight || 30;
     if (!video.isConnected || !eligible(video)) {
       if (!held && lastRect && !isDismissed(video)) held = hold();
       const r = held && held.r;
       const over =
-        r && pointer.x >= r.left && pointer.x <= r.right && pointer.y >= r.top && pointer.y <= r.bottom;
+        r &&
+        (onButton ||
+          (pointer.x >= r.left - INSET &&
+            pointer.x <= r.right + INSET &&
+            pointer.y >= r.top - h - 16 &&
+            pointer.y <= r.bottom));
       if (!held || !(onButton || menuOpen || dragging || keyboardOn() || (over && Date.now() - held.since < HOLD_MS))) {
         const was = held;
         held = null;
@@ -1743,7 +1769,11 @@ button:focus-visible { outline: none; }
     held = null;
     const r = video.getBoundingClientRect();
     const over =
-      pointer.x >= r.left && pointer.x <= r.right && pointer.y >= r.top && pointer.y <= r.bottom;
+      onButton ||
+      (pointer.x >= r.left - INSET &&
+        pointer.x <= r.right + INSET &&
+        pointer.y >= r.top - h - 16 &&
+        pointer.y <= r.bottom);
     if (!onButton && !menuOpen && !dragging && !keyboardOn() && (!over || Date.now() - lastMove > IDLE_MS)) {
       return hide();
     }
@@ -1764,6 +1794,8 @@ button:focus-visible { outline: none; }
   function look() {
     scan = 0;
     if (dragging || never || (allowed === false && answered())) return;
+    if (hideFullscreen && isFullscreen()) return;
+    if (video && (root.matches(":hover") || menuOpen)) return;
     // Kept on its video while its menu is open (pointerTarget).
     const v = pointerTarget(videoAt(pointer.x, pointer.y), video, menuOpen);
     if (!v) return;
@@ -2375,12 +2407,14 @@ button:focus-visible { outline: none; }
       focusedPlayer.focus();
     }
   });
-  document.addEventListener("fullscreenchange", () => {
-    if (!video) return;
-    // Entering full screen: out of the way at once, as the player's own controls are; the
-    // pointer's next move brings it back. Leaving it: shown again, as before.
-    if (document.fullscreenElement) hide(true);
-    else show(video);
-  });
+  function onFullscreenChange() {
+    if (isFullscreen()) {
+      if (hideFullscreen) hide(true);
+    } else if (video) {
+      show(video);
+    }
+  }
+  document.addEventListener("fullscreenchange", onFullscreenChange);
+  document.addEventListener("webkitfullscreenchange", onFullscreenChange);
   addEventListener("blur", () => hide());
 })();

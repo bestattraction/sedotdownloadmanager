@@ -254,10 +254,10 @@ ext.storage.local.get({ mediaTitleName: false })
 mediaTitleName.addEventListener("change", () =>
   ext.storage.local.set({ mediaTitleName: mediaTitleName.checked }).then(show, () => {}));
 
-// Hide the download button over videos while the page is in full screen (#670), off as installed.
+// Hide the download button over videos while the page is in full screen (#670), on as installed.
 const hideFullscreen = $("video-hide-fullscreen");
 $("video-hide-fullscreen-row").title = t("popup_video_hide_fullscreen_title");
-ext.storage.local.get({ hideVideoFullscreen: false })
+ext.storage.local.get({ hideVideoFullscreen: true })
   .then((v) => (hideFullscreen.checked = Boolean(v.hideVideoFullscreen)))
   .catch(() => {});
 hideFullscreen.addEventListener("change", () =>

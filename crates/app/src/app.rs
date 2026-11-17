@@ -2500,9 +2500,8 @@ impl App {
                 }
             } else if !live {
                 self.start(id, true);
-            } else if self.settings.show_progress && !self.progress.iter().any(|p| p.id == id) {
-                self.progress
-                    .push(Progress::new(id, self.settings.show_complete));
+            } else {
+                self.show_progress_window(id);
             }
         } else {
             // Later: paused, its data kept for the queue to resume.
@@ -3874,9 +3873,8 @@ impl App {
         item.error = None;
         item.last_try = Some(model::now_stamp());
         self.dirty = true;
-        if show && !self.progress.iter().any(|p| p.id == id) {
-            self.progress
-                .push(Progress::new(id, self.settings.show_complete));
+        if show {
+            self.show_progress_window(id);
         }
     }
 
@@ -5577,9 +5575,8 @@ impl App {
             }
         }
         self.dirty = true;
-        if show && !self.progress.iter().any(|p| p.id == id) {
-            self.progress
-                .push(Progress::new(id, self.settings.show_complete));
+        if show {
+            self.show_progress_window(id);
         }
     }
 
@@ -5681,9 +5678,8 @@ impl App {
             }
         }
         self.dirty = true;
-        if show && !self.progress.iter().any(|p| p.id == id) {
-            self.progress
-                .push(Progress::new(id, self.settings.show_complete));
+        if show {
+            self.show_progress_window(id);
         }
     }
 
@@ -5931,9 +5927,8 @@ impl App {
         item.error = None;
         item.last_try = Some(model::now_stamp());
         self.dirty = true;
-        if show && !self.progress.iter().any(|p| p.id == id) {
-            self.progress
-                .push(Progress::new(id, self.settings.show_complete));
+        if show {
+            self.show_progress_window(id);
         }
     }
 
@@ -6113,9 +6108,8 @@ impl App {
         item.error = None;
         item.last_try = Some(model::now_stamp());
         self.dirty = true;
-        if show && !self.progress.iter().any(|p| p.id == id) {
-            self.progress
-                .push(Progress::new(id, self.settings.show_complete));
+        if show {
+            self.show_progress_window(id);
         }
     }
 
@@ -7366,24 +7360,34 @@ impl App {
         }
     }
 
+    fn show_progress_window(&mut self, id: u64) {
+        if !self.settings.show_progress {
+            return;
+        }
+        if let Some(p) = self.progress.iter_mut().find(|p| p.id == id) {
+            p.hidden = false;
+            dialogs::raise(
+                &self.ui_ctx,
+                egui::ViewportId::from_hash_of(("progress", id)),
+            );
+        } else {
+            self.progress
+                .push(Progress::new(id, self.settings.show_complete));
+            dialogs::raise(
+                &self.ui_ctx,
+                egui::ViewportId::from_hash_of(("progress", id)),
+            );
+        }
+    }
+
     fn open_item(&mut self, id: u64) {
         let Some(i) = self.items.iter().find(|i| i.id == id) else {
             return;
         };
         if i.status == Status::Complete {
             crate::dialogs::open_download(&i.dest, i.moved_away);
-        } else if !self.progress.iter().any(|p| p.id == id) {
-            self.progress
-                .push(Progress::new(id, self.settings.show_complete));
-        } else if let Some(p) = self.progress.iter_mut().find(|p| p.id == id && p.hidden) {
-            // Hidden in the tray (#63): back, as it was.
-            p.hidden = false;
         } else {
-            // Open already, behind: to the front.
-            dialogs::raise(
-                &self.ui_ctx,
-                egui::ViewportId::from_hash_of(("progress", id)),
-            );
+            self.show_progress_window(id);
         }
     }
 
@@ -7418,6 +7422,8 @@ impl App {
                 for id in many {
                     if self.item(id).is_some_and(|i| i.can_start()) {
                         self.start(id, true);
+                    } else if self.item(id).is_some_and(|i| i.live.is_some() || i.status == Status::Downloading) {
+                        self.show_progress_window(id);
                     }
                 }
             }
@@ -10118,9 +10124,8 @@ impl App {
             self.complete.push(Complete::of(i));
         } else if i.live.is_none() {
             self.start(id, true);
-        } else if self.settings.show_progress && !self.progress.iter().any(|p| p.id == id) {
-            self.progress
-                .push(Progress::new(id, self.settings.show_complete));
+        } else {
+            self.show_progress_window(id);
         }
     }
 

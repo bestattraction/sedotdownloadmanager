@@ -172,7 +172,10 @@ impl Icon {
             Icon::AddUrl => ("#9ad9b0", "#7fb4c0"),
             // The Torrent pill's purple.
             Icon::AddTorrent => ("#b07ad9", "#7d5fd0"),
-            Icon::Resume | Icon::Stop | Icon::StopAll | Icon::Delete => ("#e2e2e2", "#b4b4b4"),
+            Icon::Resume => ("#5cdb80", "#22a348"),
+            Icon::Stop => ("#ff6b6b", "#d93838"),
+            Icon::StopAll => ("#ff8a65", "#d84315"),
+            Icon::Delete => ("#e85a71", "#c72c48"),
             Icon::DeleteCompleted => ("#df6a9c", "#8180c0"),
             Icon::Options => ("#7883c2", "#9b84d0"),
             Icon::Scheduler => ("#a986d2", "#c0957a"),
