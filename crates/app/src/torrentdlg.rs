@@ -52,6 +52,10 @@ pub struct TorrentDialog {
     source: String,
     folder: String,
     folder_edited: bool,
+    pub category: Category,
+    category_open: bool,
+    pub folders: Vec<String>,
+    folders_open: bool,
     downloads: PathBuf,
     category_dirs: Vec<(String, String)>,
     /// The torrents the list already has (and the session must keep).
@@ -219,6 +223,7 @@ impl TorrentDialog {
         known: HashSet<String>,
         downloads: PathBuf,
         category_dirs: Vec<(String, String)>,
+        folders: Vec<String>,
         rt: &tokio::runtime::Handle,
         ctx: &egui::Context,
     ) -> Self {
@@ -233,6 +238,10 @@ impl TorrentDialog {
             source,
             folder: folder.display().to_string(),
             folder_edited: false,
+            category: Category::Torrents,
+            category_open: false,
+            folders,
+            folders_open: false,
             downloads,
             category_dirs,
             known,
@@ -382,7 +391,7 @@ impl TorrentDialog {
                     self.open = self.tree.iter().map(|n| n.depth < 2).collect();
                     if !self.folder_edited {
                         let dir = category_folder(
-                            category_of(&meta),
+                            self.category,
                             &self.downloads,
                             &self.category_dirs,
                         );
@@ -397,7 +406,7 @@ impl TorrentDialog {
             ctx,
             "add-torrent",
             "Add torrent",
-            [600.0, 488.0],
+            [600.0, 502.0],
             false,
             winui::BG(),
             |ui, o| self.body(ui, o, rt),
@@ -433,7 +442,7 @@ impl TorrentDialog {
                         .collect()
                 });
                 Outcome::Done(TorrentAdd {
-                    category: category_of(&meta),
+                    category: self.category,
                     meta,
                     dir: crate::dialogs::resolve_path(&self.folder),
                     files,
@@ -459,10 +468,16 @@ impl TorrentDialog {
         // The source: a magnet link, or a .torrent file chosen with "...".
         // i18n: noun: label before the torrent file or magnet link
         let source_label = crate::i18n::t("Torrent");
+        let category_label = crate::i18n::t("Category");
         let folder_label = crate::i18n::t("Save to");
         let rename_label = crate::torrent_rename::TorrentRenamePlugin::label();
         // The fields start after the longer label (German "Speichern unter").
-        let fx = winui::label_column(&p, 11.0, &[source_label, folder_label, rename_label], 70.0);
+        let fx = winui::label_column(
+            &p,
+            11.0,
+            &[source_label, category_label, folder_label, rename_label],
+            70.0,
+        );
         text(&p, o.x + 11.0, o.y + 23.0, source_label, winui::TEXT());
         let edit = winui::edit(
             ui,
@@ -636,22 +651,30 @@ impl TorrentDialog {
             );
         }
 
-        // Where.
-        text(&p, o.x + 11.0, o.y + 375.0, folder_label, winui::TEXT());
-        if winui::edit(
-            ui,
-            r(o, fx, 361.0, 561.0 - fx, 21.0),
-            &mut self.folder,
-            true,
-            false,
-        )
-        .changed()
-        {
+        // Category row.
+        text(&p, o.x + 11.0, o.y + 370.0, category_label, winui::TEXT());
+        let cat_rc = r(o, fx, 356.0, 180.0, 21.0);
+        let cat = winui::combo(ui, cat_rc, &self.category.shown(), "torrent-category");
+        if cat.clicked() || winui::combo_keys(ui, &cat) {
+            self.category_open = !self.category_open;
+        }
+
+        // Save to row (manual folder or history dropdown).
+        text(&p, o.x + 11.0, o.y + 397.0, folder_label, winui::TEXT());
+        let folder_rc = r(o, fx, 383.0, 561.0 - fx, 21.0);
+        let edit = winui::combo_edit(ui, folder_rc, &mut self.folder);
+        if edit.changed() {
             self.folder_edited = true;
         }
+        if winui::combo_arrow(ui, folder_rc, "torrent-folder", self.folders_open).clicked()
+            || winui::combo_keys(ui, &edit)
+        {
+            self.folders_open = !self.folders_open;
+        }
+        winui::keep_edit_keys(ui, &edit, self.folders_open);
         if winui::button(
             ui,
-            r(o, 567.0, 361.0, 22.0, 21.0),
+            r(o, 567.0, 383.0, 22.0, 21.0),
             "...",
             ButtonKind::Normal,
             false,
@@ -668,10 +691,11 @@ impl TorrentDialog {
             self.folder = d.display().to_string();
             self.folder_edited = true;
         }
+
         // Rename row (`Rename`: main name + extension) below `Save to` (#517).
         if self
             .rename
-            .draw(ui, &p, o, fx, 389.0, has, busy, &mut self.meta)
+            .draw(ui, &p, o, fx, 410.0, has, busy, &mut self.meta)
             && let Some(m) = &self.meta
         {
             self.tree = build_tree(m);
@@ -685,7 +709,7 @@ impl TorrentDialog {
                 &[("folder", &crate::i18n::ltr(&goes.display().to_string()))],
             );
             let (rect, cut) =
-                winui::text_fit(&p, o.x + fx, o.y + 430.0, &s, winui::MUTED(), o.x + 589.0);
+                winui::text_fit(&p, o.x + fx, o.y + 444.0, &s, winui::MUTED(), o.x + 589.0);
             if cut {
                 winui::full_on_hover(ui, rect, "torrent-goes", &s);
             }
@@ -705,7 +729,7 @@ impl TorrentDialog {
         // its right-click menu). Its caption stops before the buttons.
         winui::checkbox_until(
             ui,
-            pos2(o.x + 14.0, o.y + 460.0),
+            pos2(o.x + 14.0, o.y + 472.0),
             &mut self.in_order,
             // i18n: Add torrent, a checkbox: download the files from their start, to watch a video while it downloads
             "Download in order",
@@ -719,7 +743,7 @@ impl TorrentDialog {
             && self.rename.candidate_error().is_none();
         let now = winui::button(
             ui,
-            r(o, now_at.0, 456.0, now_at.1, 21.0),
+            r(o, now_at.0, 468.0, now_at.1, 23.0),
             "Download Now",
             kind(ready, true),
             false,
@@ -729,7 +753,7 @@ impl TorrentDialog {
             || (ready && winui::enter_pressed(ui));
         let later = winui::button(
             ui,
-            r(o, later_at.0, 456.0, later_at.1, 21.0),
+            r(o, later_at.0, 468.0, later_at.1, 23.0),
             // i18n: button: add it now, start downloading later
             "Later",
             kind(ready, false),
@@ -739,14 +763,54 @@ impl TorrentDialog {
         .clicked();
         let cancel = winui::button(
             ui,
-            r(o, cancel_at.0, 456.0, cancel_at.1, 21.0),
+            r(o, cancel_at.0, 468.0, cancel_at.1, 23.0),
             "Cancel",
             ButtonKind::Normal,
             false,
             None,
         )
         .clicked();
-        if cancel || winui::escape_pressed(ui) {
+
+        let was_open = self.folders_open || self.category_open;
+        if self.folders_open {
+            let shown: Vec<String> = self
+                .folders
+                .iter()
+                .map(|f| crate::dialogs::display_path(std::path::Path::new(f)))
+                .collect();
+            if let Some(i) = winui::drop_list(
+                ui,
+                "torrent-folder-history",
+                folder_rc,
+                &shown,
+                crate::i18n::t("No folders yet"),
+                &mut self.folders_open,
+            ) {
+                self.folder = self.folders[i].clone();
+                self.folder_edited = true;
+            }
+        }
+        if self.category_open {
+            let all = Category::all();
+            let labels: Vec<String> = all.iter().map(|c| c.shown()).collect();
+            if let Some(i) = winui::drop_list(
+                ui,
+                "torrent-category-drop",
+                cat_rc,
+                &labels,
+                "",
+                &mut self.category_open,
+            ) && let Some(c) = all.get(i)
+            {
+                self.category = *c;
+                self.folder = category_folder(*c, &self.downloads, &self.category_dirs)
+                    .display()
+                    .to_string();
+                self.folder_edited = false;
+            }
+        }
+
+        if (cancel || winui::escape_pressed(ui)) && !was_open {
             return Outcome::Closed;
         }
         if ready && (now || later) {

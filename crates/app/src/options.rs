@@ -357,7 +357,7 @@ impl OptionsDialog {
         let outcome = window(
             ctx,
             "options",
-            "Mister Download Manager Configuration",
+            "Sedot Download Manager Configuration",
             [430.0, 506.0],
             false,
             LIGHT_BG(),
@@ -490,7 +490,7 @@ impl OptionsDialog {
             (
                 94.0,
                 &mut s.launch_on_startup,
-                crate::i18n::mark("Launch Mister Download Manager on startup"),
+                crate::i18n::mark("Launch Sedot Download Manager on startup"),
             ),
             (
                 113.0,
@@ -1176,7 +1176,7 @@ impl OptionsDialog {
             o.x + 30.0,
             o.y + 409.0,
             crate::i18n::t(
-                "Mister Download Manager writes every connection straight into the final\nfile (a sparse part file next to it), so no temporary directory and no\nassembling step are needed.",
+                "Sedot Download Manager writes every connection straight into the final\nfile (a sparse part file next to it), so no temporary directory and no\nassembling step are needed.",
             ),
             LIGHT_TEXT(),
             o.x + 426.0,
@@ -2733,7 +2733,7 @@ impl OptionsDialog {
             102.0,
             383.0,
             299.0,
-            "Select sounds for Mister Download Manager events",
+            "Select sounds for Sedot Download Manager events",
         );
         let list_on_screen = r(o, 33.0, 112.0, 366.0, 250.0);
         list_frame(&p, list_on_screen);
@@ -3845,7 +3845,7 @@ impl OptionsDialog {
                             o.x + 14.0,
                             o.y + 22.0,
                             crate::i18n::t(
-                                "Hold Alt while clicking a link to let the browser download it instead of Mister Download Manager.",
+                                "Hold Alt while clicking a link to let the browser download it instead of Sedot Download Manager.",
                             ),
                             LIGHT_TEXT(),
                             o.x + 386.0,

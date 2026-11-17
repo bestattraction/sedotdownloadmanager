@@ -191,7 +191,7 @@ pub fn check(rt: &tokio::runtime::Handle, ctx: &egui::Context) -> Slot {
 fn settled(joined: Result<Result<Found, String>, tokio::task::JoinError>) -> Result<Found, String> {
     joined.unwrap_or_else(|e| {
         tracing::warn!("the update check stopped: {e}");
-        Err(crate::i18n::t("Mister Download Manager hit an internal error").to_owned())
+        Err(crate::i18n::t("Sedot Download Manager hit an internal error").to_owned())
     })
 }
 
@@ -395,7 +395,7 @@ impl Updates {
                     Some(Ok(Found::Latest)) => {
                         let line = crate::i18n::fmt(
                             crate::i18n::t(
-                                "You have the latest version of Mister Download Manager ({version}).",
+                                "You have the latest version of Sedot Download Manager ({version}).",
                             ),
                             &[("version", VERSION)],
                         );
@@ -415,7 +415,7 @@ impl Updates {
                     Some(Ok(Found::Newer(rel))) => {
                         let line = crate::i18n::fmt(
                             crate::i18n::t(
-                                "Mister Download Manager {version} is available (released {date}).",
+                                "Sedot Download Manager {version} is available (released {date}).",
                             ),
                             &[("version", &rel.version), ("date", &rel.date)],
                         );
@@ -737,7 +737,7 @@ impl About {
         window(
             ctx,
             "about",
-            "About Mister Download Manager",
+            "About Sedot Download Manager",
             [420.0, 236.0 + extra],
             false,
             winui::BG(),
@@ -753,7 +753,7 @@ impl About {
                     &p,
                     o.x + 80.0,
                     o.y + 28.0,
-                    crate::i18n::t("Mister Download Manager"),
+                    crate::i18n::t("Sedot Download Manager"),
                     ink,
                 );
                 let version = crate::i18n::fmt(
@@ -983,7 +983,7 @@ impl TellFriend {
     fn message() -> String {
         crate::i18n::fmt(
             crate::i18n::t(
-                "I download with Mister Download Manager: fast, free, and it looks like the download manager you already know. {link}",
+                "I download with Sedot Download Manager: fast, free, and it looks like the download manager you already know. {link}",
             ),
             &[("link", SITE)],
         )
@@ -1102,7 +1102,7 @@ impl TellFriend {
                             .collect::<String>()
                             .replace('+', "%20")
                     };
-                    let subject = crate::i18n::t("Mister Download Manager");
+                    let subject = crate::i18n::t("Sedot Download Manager");
                     let opened = open::that_detached(format!(
                         "mailto:?subject={}&body={}",
                         enc(subject),
