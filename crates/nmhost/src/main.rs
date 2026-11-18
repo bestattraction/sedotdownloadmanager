@@ -2694,7 +2694,7 @@ mod tests {
     #[test]
     fn a_pages_links_in_parts_reach_the_app_as_parts() {
         let whole: Message = serde_json::from_str(
-            r#"{"links":["https://x.test/a.zip","mailto:a@b","ftp://x.test/b.iso"],"referrer":"https://x.test/files/","cookies":"sid=1","private":false,"userAgent":"UA","v":"0.6.0"}"#,
+            r#"{"links":["https://x.test/a.zip","mailto:a@b","ftp://x.test/b.iso"],"referrer":"https://x.test/files/","cookies":"sid=1","private":false,"userAgent":"UA","v":"0.6.1"}"#,
         )
         .unwrap();
         let cmd = links_command(&whole).ok().unwrap();

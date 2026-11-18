@@ -54,7 +54,7 @@ dmgs=()
 for pair in "${targets[@]}"; do
   t="${pair%%:*}"
   arch="${pair##*:}"
-  name="MisterDownloadManager-$version-macos-$arch-experimental"
+  name="SedotDownloadManager-$version-macos-$arch-experimental"
   app="$stage/$arch/dmg/Mister Download Manager.app"
   mkdir -p "$app/Contents/MacOS" "$app/Contents/Resources"
 

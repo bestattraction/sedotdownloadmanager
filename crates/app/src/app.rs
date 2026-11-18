@@ -4165,7 +4165,7 @@ impl App {
     /// Delete / Remove / Delete All Completed: asks first (unless "Don't show this dialog
     /// again" was ticked) whether only the list entries go or the files too; `files` ticks that
     /// box (Shift+Delete). Running downloads are left alone.
-    fn ask_delete(&mut self, ids: Vec<u64>, files: bool) {
+    fn ask_delete(&mut self, ids: Vec<u64>, files: bool, allow_files: bool) {
         let gone: Vec<&Item> = ids
             .iter()
             .filter_map(|id| self.items.iter().find(|i| i.id == *id && i.live.is_none()))
@@ -4174,7 +4174,7 @@ impl App {
         // Shift+Delete ticks "also the files" this once; only a plain Delete's answer is
         // remembered (else one Shift+Delete made every later Delete erase files).
         let shift = files;
-        let files = files || self.settings.delete_files_too;
+        let files = allow_files && (files || self.settings.delete_files_too);
         if self.settings.confirm_delete {
             let one = gone.len() == 1;
             let mut ask = dialogs::ConfirmDelete::new(
@@ -4183,7 +4183,8 @@ impl App {
                 one && first.status != Status::Complete,
                 files,
             );
-            ask.remember = !shift;
+            ask.remember = !shift && allow_files;
+            ask.allow_files = allow_files;
             self.confirm_delete = Some(ask);
         } else {
             let ids: Vec<u64> = gone.into_iter().map(|i| i.id).collect();
@@ -4198,7 +4199,7 @@ impl App {
             .filter(|i| i.status == Status::Complete)
             .map(|i| i.id)
             .collect();
-        self.ask_delete(done, false);
+        self.ask_delete(done, false, false);
     }
 
     /// The global cap's rate now: on, and (if asked) only while the user is active (input in
@@ -7435,8 +7436,8 @@ impl App {
                     }
                 }
             }
-            Cmd::Remove => self.ask_delete(many, false),
-            Cmd::RemoveWithFiles => self.ask_delete(many, true),
+            Cmd::Remove => self.ask_delete(many, false, true),
+            Cmd::RemoveWithFiles => self.ask_delete(many, true, true),
             Cmd::Resume => {
                 for id in many {
                     if self.item(id).is_some_and(|i| i.can_start()) {
@@ -8417,7 +8418,7 @@ impl App {
                 Sep,
                 I("Check for &updates...", Cmd::CheckUpdates, true, false),
                 I(
-                    "Check for &tools updates (yt-dlp, ffmpeg)...",
+                    "&Check for tools updates (yt-dlp, ffmpeg)...",
                     Cmd::CheckHelperUpdates,
                     true,
                     false,

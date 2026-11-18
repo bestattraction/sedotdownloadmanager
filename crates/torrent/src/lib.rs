@@ -384,6 +384,8 @@ pub struct Config {
     pub state_dir: PathBuf,
     /// Accept connections from peers (better speed; Windows may ask about the firewall once).
     pub listen: bool,
+    /// Connect over uTP (BitTorrent over UDP) beside TCP (reaches peers that take only uTP).
+    pub utp: bool,
     /// Ask the router (UPnP) to forward the listening port.
     pub upnp: bool,
     /// The port to listen on; None: one picked at each start.
@@ -442,6 +444,7 @@ impl Config {
         Config {
             state_dir,
             listen: true,
+            utp: true,
             upnp: true,
             port: None,
             listen_ip: None,
@@ -599,13 +602,14 @@ fn saved_port(state_dir: &Path) -> Option<u16> {
 /// Where the session listens, in MDM's log (#650): a listener on every address is one IPv6
 /// socket that takes IPv4 too, which Windows' `netstat -p tcp` (IPv4 only) doesn't list.
 /// `saved_nodes`: the DHT started from the nodes the last session saved (`dht.json`).
-fn log_network(session: &Session, saved_nodes: bool) {
+fn log_network(session: &Session, saved_nodes: bool, utp: bool) {
+    let proto = if utp { "TCP and uTP" } else { "TCP" };
     match session.listen_addr() {
         Some(a) if a.ip().is_unspecified() && a.is_ipv6() => tracing::info!(
-            "torrents: listening for peers on TCP port {} (every address, IPv4 and IPv6: {a})",
+            "torrents: listening for peers on {proto} port {} (every address, IPv4 and IPv6: {a})",
             a.port()
         ),
-        Some(a) => tracing::info!("torrents: listening for peers on TCP {a}"),
+        Some(a) => tracing::info!("torrents: listening for peers on {proto} {a}"),
         None => tracing::info!("torrents: not listening for peers (Torrent settings or a proxy)"),
     }
     if let Some(dht) = session.get_dht() {
@@ -651,6 +655,7 @@ impl Torrents {
             .offline
             .then_some(std::net::IpAddr::V4(Ipv4Addr::LOCALHOST)));
         let listening = cfg.listen && !proxied;
+        let utp_on = cfg.utp && !proxied;
         // No port in Torrent settings: the one the last session listened on, when there was one.
         let saved = if listening && cfg.port.is_none() {
             saved_port(&cfg.state_dir)
@@ -658,6 +663,11 @@ impl Torrents {
             None
         };
         let listen = |port: u16| ListenerOptions {
+            mode: if utp_on {
+                librqbit::ListenerMode::TcpAndUtp
+            } else {
+                librqbit::ListenerMode::TcpOnly
+            },
             listen_addr: match ip {
                 Some(ip) => (ip, port).into(),
                 None => {
@@ -755,7 +765,7 @@ impl Torrents {
         // With its causes: "error starting listeners: error binding: …" says why (an adapter's
         // address gone, #143).
         .map_err(|e| engine(format!("{e:#}")))?;
-        log_network(&session, saved_nodes);
+        log_network(&session, saved_nodes, utp_on);
         if let (true, None, Some(addr)) = (listening, cfg.port, session.listen_addr())
             && saved != Some(addr.port())
         {

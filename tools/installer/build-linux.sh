@@ -26,7 +26,7 @@ case "$(uname -m)" in
   aarch64) arch=arm64 deb_arch=arm64 pkg_arch=aarch64 ;;
   *) echo "no Linux release is built for $(uname -m)" >&2; exit 1 ;;
 esac
-name="MisterDownloadManager-$version-linux-$arch"
+name="SedotDownloadManager-$version-linux-$arch"
 programs=(misterdownloadmanager misterdownloadmanager-nmhost misterdownloadmanager-cli misterdownloadmanager-mcp)
 
 if [ "${1:-}" != "--no-build" ]; then

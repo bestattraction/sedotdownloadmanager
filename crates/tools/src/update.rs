@@ -148,7 +148,7 @@ impl Install {
             (_, Arch::Arm64) if linux => ("linux-arm64".to_owned(), self.linux_ext()),
             _ => return Vec::new(),
         };
-        let name = |tail: &str| format!("MisterDownloadManager-{version}-{tail}{ext}");
+        let name = |tail: &str| format!("SedotDownloadManager-{version}-{tail}{ext}");
         match (self, arch) {
             (Install::Installer | Install::PortableZip | Install::PlainZip, _) => vec![name(&tail)],
             // Linux on ARM came after "-experimental" went: it has no older name.
@@ -481,15 +481,15 @@ Connection: close
         let x64 = Some(Arch::X64);
         assert_eq!(
             Install::Installer.assets_on(x64, "0.2.2"),
-            ["MisterDownloadManager-0.2.2-setup.exe"]
+            ["SedotDownloadManager-0.2.2-setup.exe"]
         );
         assert_eq!(
             Install::PortableZip.assets_on(x64, "0.2.2"),
-            ["MisterDownloadManager-0.2.2-portable.zip"]
+            ["SedotDownloadManager-0.2.2-portable.zip"]
         );
         assert_eq!(
             Install::PlainZip.assets_on(x64, "0.2.2"),
-            ["MisterDownloadManager-0.2.2-x64.zip"]
+            ["SedotDownloadManager-0.2.2-x64.zip"]
         );
         // Linux and macOS: the plain name first, then the one up to 0.2.x.
         for (install, ext) in [
@@ -501,8 +501,8 @@ Connection: close
             assert_eq!(
                 install.assets_on(x64, "1.0.0"),
                 [
-                    format!("MisterDownloadManager-1.0.0-linux-x86_64{ext}"),
-                    format!("MisterDownloadManager-1.0.0-linux-x86_64-experimental{ext}"),
+                    format!("SedotDownloadManager-1.0.0-linux-x86_64{ext}"),
+                    format!("SedotDownloadManager-1.0.0-linux-x86_64-experimental{ext}"),
                 ]
             );
         }
@@ -511,8 +511,8 @@ Connection: close
             assert_eq!(
                 Install::Dmg.assets_on(Some(arch), "1.0.0"),
                 [
-                    format!("MisterDownloadManager-1.0.0-macos-{name}.dmg"),
-                    format!("MisterDownloadManager-1.0.0-macos-{name}-experimental.dmg"),
+                    format!("SedotDownloadManager-1.0.0-macos-{name}.dmg"),
+                    format!("SedotDownloadManager-1.0.0-macos-{name}-experimental.dmg"),
                 ]
             );
         }
@@ -533,27 +533,27 @@ Connection: close
         let (arm, x86) = (Some(Arch::Arm64), Some(Arch::X86));
         assert_eq!(
             Install::Installer.assets_on(arm, "1.0.0"),
-            ["MisterDownloadManager-1.0.0-setup-arm64.exe"]
+            ["SedotDownloadManager-1.0.0-setup-arm64.exe"]
         );
         assert_eq!(
             Install::PortableZip.assets_on(arm, "1.0.0"),
-            ["MisterDownloadManager-1.0.0-portable-arm64.zip"]
+            ["SedotDownloadManager-1.0.0-portable-arm64.zip"]
         );
         assert_eq!(
             Install::PlainZip.assets_on(arm, "1.0.0"),
-            ["MisterDownloadManager-1.0.0-arm64.zip"]
+            ["SedotDownloadManager-1.0.0-arm64.zip"]
         );
         assert_eq!(
             Install::Installer.assets_on(x86, "1.0.0"),
-            ["MisterDownloadManager-1.0.0-setup-x86.exe"]
+            ["SedotDownloadManager-1.0.0-setup-x86.exe"]
         );
         assert_eq!(
             Install::PortableZip.assets_on(x86, "1.0.0"),
-            ["MisterDownloadManager-1.0.0-portable-x86.zip"]
+            ["SedotDownloadManager-1.0.0-portable-x86.zip"]
         );
         assert_eq!(
             Install::PlainZip.assets_on(x86, "1.0.0"),
-            ["MisterDownloadManager-1.0.0-x86.zip"]
+            ["SedotDownloadManager-1.0.0-x86.zip"]
         );
         for (install, ext) in [
             (Install::TarGz, ".tar.gz"),
@@ -564,7 +564,7 @@ Connection: close
             // Linux on ARM came after "-experimental" went.
             assert_eq!(
                 install.assets_on(arm, "1.0.0"),
-                [format!("MisterDownloadManager-1.0.0-linux-arm64{ext}")]
+                [format!("SedotDownloadManager-1.0.0-linux-arm64{ext}")]
             );
             assert!(install.assets_on(x86, "1.0.0").is_empty());
         }
@@ -592,13 +592,13 @@ Connection: close
     fn the_windows_names_are_build_ps1_s() {
         let script = include_str!("../../../tools/installer/build.ps1").replace("\r\n", "\n");
         assert!(script.contains(
-            "\nNew-Zip \"MisterDownloadManager-$version-portable$suffix\" $true\nNew-Zip \"MisterDownloadManager-$version-$Arch\" $false\n"
+            "\nNew-Zip \"SedotDownloadManager-$version-portable$suffix\" $true\nNew-Zip \"SedotDownloadManager-$version-$Arch\" $false\n"
         ));
         assert!(script.contains("$suffix = if ($Arch -eq \"x64\") { \"\" } else { \"-$Arch\" }"));
         assert!(script.contains("[ValidateSet(\"x64\", \"arm64\", \"x86\")]"));
         let iss = include_str!("../../../tools/installer/sdm.iss").replace("\r\n", "\n");
         assert!(iss.contains(
-            "#if Arch == \"x64\"\nOutputBaseFilename=MisterDownloadManager-{#AppVersion}-setup\n#else\nOutputBaseFilename=MisterDownloadManager-{#AppVersion}-setup-{#Arch}\n#endif"
+            "#if Arch == \"x64\"\nOutputBaseFilename=SedotDownloadManager-{#AppVersion}-setup\n#else\nOutputBaseFilename=SedotDownloadManager-{#AppVersion}-setup-{#Arch}\n#endif"
         ));
         for arch in [Arch::X64, Arch::Arm64, Arch::X86] {
             let (a, suffix) = match arch {
@@ -607,15 +607,15 @@ Connection: close
             };
             assert_eq!(
                 Install::Installer.assets_on(Some(arch), "1.0.0"),
-                [format!("MisterDownloadManager-1.0.0-setup{suffix}.exe")]
+                [format!("SedotDownloadManager-1.0.0-setup{suffix}.exe")]
             );
             assert_eq!(
                 Install::PortableZip.assets_on(Some(arch), "1.0.0"),
-                [format!("MisterDownloadManager-1.0.0-portable{suffix}.zip")]
+                [format!("SedotDownloadManager-1.0.0-portable{suffix}.zip")]
             );
             assert_eq!(
                 Install::PlainZip.assets_on(Some(arch), "1.0.0"),
-                [format!("MisterDownloadManager-1.0.0-{a}.zip")]
+                [format!("SedotDownloadManager-1.0.0-{a}.zip")]
             );
         }
     }
@@ -626,7 +626,7 @@ Connection: close
     fn the_linux_names_are_build_linux_sh_s() {
         let script = include_str!("../../../tools/installer/build-linux.sh").replace("\r\n", "\n");
         assert!(
-            script.contains("\nname=\"MisterDownloadManager-$version-linux-$arch\"\n"),
+            script.contains("\nname=\"SedotDownloadManager-$version-linux-$arch\"\n"),
             "build-linux.sh names its files differently"
         );
         // Its processors, as the names say them.
@@ -648,11 +648,11 @@ Connection: close
             );
             assert_eq!(
                 install.assets_on(Some(Arch::X64), "1.0.0")[0],
-                format!("MisterDownloadManager-1.0.0-linux-x86_64{ext}")
+                format!("SedotDownloadManager-1.0.0-linux-x86_64{ext}")
             );
             assert_eq!(
                 install.assets_on(Some(Arch::Arm64), "1.0.0")[0],
-                format!("MisterDownloadManager-1.0.0-linux-arm64{ext}")
+                format!("SedotDownloadManager-1.0.0-linux-arm64{ext}")
             );
         }
     }

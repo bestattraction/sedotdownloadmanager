@@ -824,6 +824,9 @@
 	Connected	Terhubung
 #. text in extension.rs
 	Connected: downloads from your browser now come here.	Terhubung: unduhan dari browser Anda sekarang masuk ke sini.
+#. checkbox in Torrent settings
+#. Torrent settings: connect over uTP beside TCP
+	Connect over uTP beside TCP (BitTorrent over UDP)	Hubungkan via uTP di samping TCP (BitTorrent via UDP)
 #. text in a download's progress window
 #. the trailing ... means it is still going on: keep it
 	Connecting...	Menyambungkan...
@@ -5196,7 +5199,7 @@ menu	C&ustomize URL List...	K&ustomisasi Daftar URL...
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #. the trailing ... means it opens a window: keep it
 menu	Check for &updates...	Periksa &pembaruan...
-menu	Check for &tools updates (yt-dlp, ffmpeg)...	Periksa pembaruan ala&t (yt-dlp, ffmpeg)...
+menu	&Check for tools updates (yt-dlp, ffmpeg)...	&Periksa pembaruan alat (yt-dlp, ffmpeg)...
 #. menu command in the main window
 #. View → Theme: SDM's own look, the default (IDM's layout, Windows 11's controls)
 menu	Classic	Klasik

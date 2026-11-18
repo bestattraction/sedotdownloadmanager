@@ -852,6 +852,9 @@
 	Connected	Connected
 #. text in extension.rs
 	Connected: downloads from your browser now come here.	Connected: downloads from your browser now come here.
+#. checkbox in Torrent settings
+#. Torrent settings: connect over uTP beside TCP
+	Connect over uTP beside TCP (BitTorrent over UDP)	Connect over uTP beside TCP (BitTorrent over UDP)
 #. text in a download's progress window
 #. the trailing ... means it is still going on: keep it
 	Connecting...	Connecting...
@@ -5325,7 +5328,7 @@ menu	C&ustomize URL List...	C&ustomize URL List...
 #. & marks the keyboard shortcut letter: keep one & before a letter of the translation
 #. the trailing ... means it opens a window: keep it
 menu	Check for &updates...	Check for &updates...
-menu	Check for &tools updates (yt-dlp, ffmpeg)...	Check for &tools updates (yt-dlp, ffmpeg)...
+menu	&Check for tools updates (yt-dlp, ffmpeg)...	&Check for tools updates (yt-dlp, ffmpeg)...
 #. menu command in the main window
 #. View → Theme: SDM's own look, the default (IDM's layout, Windows 11's controls)
 menu	Classic	Classic

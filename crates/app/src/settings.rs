@@ -311,6 +311,7 @@ pub struct Settings {
     /// the port with the router's UPnP, a fixed port (0: any, picked at each start), the DHT,
     /// finding peers on the local network.
     pub torrent_incoming: bool,
+    pub torrent_utp: bool,
     pub torrent_upnp: bool,
     pub torrent_port: u16,
     pub torrent_dht: bool,
@@ -516,6 +517,7 @@ impl Default for Settings {
             torrent_associations: None,
             torrent_associations_before: false,
             torrent_incoming: true,
+            torrent_utp: true,
             torrent_upnp: true,
             torrent_port: 0,
             torrent_dht: true,
@@ -785,6 +787,7 @@ impl Settings {
             .then(|| state_dir.join(crate::torrents::BLOCKLIST_FILE));
         Some(mdm_torrent::Config {
             listen: self.torrent_incoming,
+            utp: self.torrent_utp,
             upnp: self.torrent_upnp,
             port: (self.torrent_port != 0).then_some(self.torrent_port),
             dht: self.torrent_dht,

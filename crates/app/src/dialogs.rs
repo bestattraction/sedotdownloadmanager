@@ -3092,6 +3092,8 @@ pub struct ConfirmDelete {
     dont_show: bool,
     /// The files box's answer becomes the next one's default (not after Shift+Delete).
     pub remember: bool,
+    /// Whether "Also delete the files from disk" is offered (false for Delete Completed).
+    pub allow_files: bool,
 }
 
 impl ConfirmDelete {
@@ -3104,6 +3106,7 @@ impl ConfirmDelete {
             files,
             dont_show: false,
             remember: true,
+            allow_files: true,
         }
     }
 
@@ -3166,7 +3169,9 @@ it from Sedot Download Manager list of downloads?",
                         &[("n", &crate::i18n::integer(n))],
                     )
                 };
-                winui::checkbox_light(ui, o + vec2(24.0, 60.0), &mut self.files, &files, true);
+                if self.allow_files {
+                    winui::checkbox_light(ui, o + vec2(24.0, 60.0), &mut self.files, &files, true);
+                }
                 let yes = winui::button_light(
                     ui,
                     r(o, 94.0, 86.0, 73.0, 21.0),
@@ -3193,7 +3198,7 @@ it from Sedot Download Manager list of downloads?",
                 if no || winui::escape_pressed(ui) {
                     Outcome::Closed
                 } else if yes || winui::enter_pressed(ui) {
-                    Outcome::Done((self.files, self.dont_show))
+                    Outcome::Done((if self.allow_files { self.files } else { false }, self.dont_show))
                 } else {
                     Outcome::Open
                 }

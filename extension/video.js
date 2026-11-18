@@ -1009,10 +1009,11 @@ button:focus-visible { outline: none; }
   animation: spin .8s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 @keyframes shimmer { from { background-position: 100% 0; } to { background-position: -100% 0; } }
-.chip { font: 700 10.5px/15px var(--font); color: var(--go-ink); background: rgba(255, 255, 255, .55); border-radius: 3px; padding: 0 4px; }
-.chip.skel { width: 30px; height: 15px; padding: 0; background-size: 200% 100%;
-  background-image: linear-gradient(90deg, rgba(255, 255, 255, .3), rgba(255, 255, 255, .8), rgba(255, 255, 255, .3));
-  animation: shimmer 1.4s linear infinite; }
+.chip { font: 700 10.5px/15px var(--font); color: #003865; background: #ffffff; border-radius: 3px; padding: 0 4.5px; box-shadow: 0 1px 2px rgba(0, 0, 0, .2); }
+.chip.hd { background: #ffffff; color: #002847; }
+.chip.skel { width: 30px; height: 15px; padding: 0; background-color: rgba(255, 255, 255, .35); background-size: 200% 100%;
+  background-image: linear-gradient(90deg, rgba(255, 255, 255, .2), rgba(255, 255, 255, .7), rgba(255, 255, 255, .2));
+  animation: shimmer 1.4s linear infinite; box-shadow: none; }
 .chip:empty:not(.skel), .sub:empty, .label:empty, .acts:empty { display: none; }
 .label { font-weight: 600; }
 .sub { color: var(--tx2); }
