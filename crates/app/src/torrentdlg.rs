@@ -46,6 +46,8 @@ pub struct TorrentAdd {
     pub queue: Option<usize>,
     /// No progress window when it starts (sent from a paired device).
     pub quiet: bool,
+    /// Save default folder for the category.
+    pub remember: bool,
 }
 
 pub struct TorrentDialog {
@@ -92,12 +94,55 @@ pub struct TorrentDialog {
     rename: crate::torrent_rename::TorrentRenamePlugin,
     /// The clipboard's magnet link, read off the window's thread (#661).
     clip: crate::clipboard::Prefill,
+    /// Remember the folder as the default for this category.
+    pub remember: bool,
 }
 
 /// The category of a torrent: its largest file's.
 /// Every torrent goes to the Torrents category and its folder (D-021), whatever it holds.
 pub fn category_of(_meta: &Meta) -> Category {
     Category::Torrents
+}
+
+/// Extracts a magnet link, info-hash, or .torrent URL from text (e.g. from clipboard).
+pub fn extract_torrent_source(raw: &str) -> Option<String> {
+    let text = raw.trim();
+    if text.is_empty() {
+        return None;
+    }
+
+    // 1. If text contains a magnet: link (even if surrounded by quotes, brackets, or within a paragraph)
+    if let Some(pos) = text.to_lowercase().find("magnet:?") {
+        let sub = &text[pos..];
+        let end = sub
+            .find(|c: char| c.is_whitespace() || matches!(c, '"' | '\'' | '<' | '>' | '`'))
+            .unwrap_or(sub.len());
+        let candidate = &sub[..end];
+        if candidate.len() > 8 {
+            return Some(candidate.to_owned());
+        }
+    }
+
+    // 2. 40-character hex string (SHA-1 info-hash)
+    let clean = text.trim_matches(|c: char| matches!(c, '"' | '\'' | '<' | '>' | '`' | '(' | ')'));
+    if clean.len() == 40 && clean.chars().all(|c| c.is_ascii_hexdigit()) {
+        return Some(format!("magnet:?xt=urn:btih:{clean}"));
+    }
+
+    // 3. 32-character base32 string (RFC 4648 base32 info-hash, 2-7, A-Z)
+    if clean.len() == 32 && clean.chars().all(|c| matches!(c, 'a'..='z' | 'A'..='Z' | '2'..='7')) {
+        return Some(format!("magnet:?xt=urn:btih:{}", clean.to_ascii_uppercase()));
+    }
+
+    // 4. HTTP(S) URL to a .torrent file
+    if let Ok(u) = url::Url::parse(clean)
+        && matches!(u.scheme(), "http" | "https")
+        && (u.path().ends_with(".torrent") || clean.contains(".torrent"))
+    {
+        return Some(clean.to_owned());
+    }
+
+    None
 }
 
 /// A turning ring: the loading sign while something is fetched (also the video dialog's).
@@ -224,6 +269,7 @@ impl TorrentDialog {
         downloads: PathBuf,
         category_dirs: Vec<(String, String)>,
         folders: Vec<String>,
+        remember: bool,
         rt: &tokio::runtime::Handle,
         ctx: &egui::Context,
     ) -> Self {
@@ -232,7 +278,13 @@ impl TorrentDialog {
         } else {
             Default::default()
         };
-        let source = source.unwrap_or_default();
+        let mut source = source.unwrap_or_default();
+        if source.is_empty()
+            && let Some(latest) = crate::clipboard::latest()
+            && let Some(extracted) = extract_torrent_source(&latest)
+        {
+            source = extracted;
+        }
         let folder = category_folder(Category::Torrents, &downloads, &category_dirs);
         let mut d = TorrentDialog {
             source,
@@ -265,6 +317,7 @@ impl TorrentDialog {
             remote,
             rename: Default::default(),
             clip,
+            remember,
         };
         if !d.source.is_empty() {
             d.look_up(rt, ctx);
@@ -275,11 +328,15 @@ impl TorrentDialog {
     /// The clipboard's magnet link in the box, when it holds one and the box is still empty
     /// (nothing typed meanwhile); whether it was put there (and is to be looked up).
     fn fill_from_clipboard(&mut self, clip: &str) -> bool {
-        let fill = self.source.is_empty() && Source::magnet(clip).is_some();
-        if fill {
-            clip.trim().clone_into(&mut self.source);
+        if !self.source.is_empty() {
+            return false;
         }
-        fill
+        if let Some(src) = extract_torrent_source(clip) {
+            self.source = src;
+            true
+        } else {
+            false
+        }
     }
 
     fn look_up(&mut self, rt: &tokio::runtime::Handle, ctx: &egui::Context) {
@@ -451,6 +508,7 @@ impl TorrentDialog {
                     in_order: self.in_order,
                     queue: None,
                     quiet: false,
+                    remember: self.remember,
                 })
             }
         }
@@ -658,6 +716,18 @@ impl TorrentDialog {
         if cat.clicked() || winui::combo_keys(ui, &cat) {
             self.category_open = !self.category_open;
         }
+        let remember_caption = crate::i18n::fmt(
+            crate::i18n::t("Remember this path for \"{category}\" category"),
+            &[("category", &self.category.shown())],
+        );
+        winui::checkbox_until(
+            ui,
+            pos2(o.x + fx + 190.0, o.y + 358.0),
+            &mut self.remember,
+            &remember_caption,
+            true,
+            Some(o.x + 589.0),
+        );
 
         // Save to row (manual folder or history dropdown).
         text(&p, o.x + 11.0, o.y + 397.0, folder_label, winui::TEXT());
@@ -1961,5 +2031,39 @@ mod tests {
             category_folder(Category::Video, &dl, &both),
             general.join("Video")
         );
+    }
+
+    #[test]
+    fn extract_torrent_source_recognizes_formats() {
+        let m = "magnet:?xt=urn:btih:da39a3ee5e6b4b0d3255bfef95601890afd80709&dn=test";
+        assert_eq!(extract_torrent_source(m), Some(m.to_owned()));
+
+        // Quoted magnet link
+        assert_eq!(
+            extract_torrent_source(r#""magnet:?xt=urn:btih:da39a3ee5e6b4b0d3255bfef95601890afd80709""#),
+            Some("magnet:?xt=urn:btih:da39a3ee5e6b4b0d3255bfef95601890afd80709".to_owned())
+        );
+
+        // In text
+        assert_eq!(
+            extract_torrent_source("Download this: magnet:?xt=urn:btih:da39a3ee5e6b4b0d3255bfef95601890afd80709 thanks!"),
+            Some("magnet:?xt=urn:btih:da39a3ee5e6b4b0d3255bfef95601890afd80709".to_owned())
+        );
+
+        // 40-char hex hash
+        assert_eq!(
+            extract_torrent_source("da39a3ee5e6b4b0d3255bfef95601890afd80709"),
+            Some("magnet:?xt=urn:btih:da39a3ee5e6b4b0d3255bfef95601890afd80709".to_owned())
+        );
+
+        // .torrent URL
+        assert_eq!(
+            extract_torrent_source("https://example.com/dist/ubuntu.torrent"),
+            Some("https://example.com/dist/ubuntu.torrent".to_owned())
+        );
+
+        // Non-torrent plain text
+        assert_eq!(extract_torrent_source("hello world"), None);
+        assert_eq!(extract_torrent_source(""), None);
     }
 }

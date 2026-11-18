@@ -5838,6 +5838,7 @@ impl App {
             self.downloads.clone(),
             self.settings.category_dirs.clone(),
             self.settings.folder_history.clone(),
+            self.settings.change_folder_on_last,
             &self.rt,
             ctx,
         ));
@@ -6355,6 +6356,7 @@ impl App {
             in_order: false,
             queue: None,
             quiet: false,
+            remember: false,
         });
         let feed = self
             .rss
@@ -6975,6 +6977,7 @@ impl App {
                 in_order: false,
                 queue,
                 quiet: true,
+                remember: false,
             });
             if let (Some(g), Some(id)) = (group, id)
                 && let Some(i) = self.item(id)
@@ -7687,7 +7690,11 @@ impl App {
                     self.video_dlg = Some(self.video_dialog(None));
                 }
             }
-            Cmd::AddMagnet => self.open_torrent_dialog(None, ctx),
+            Cmd::AddMagnet => {
+                let initial = crate::clipboard::latest()
+                    .and_then(|text| crate::torrentdlg::extract_torrent_source(&text));
+                self.open_torrent_dialog(initial, ctx);
+            }
             Cmd::HelpPage(page) => crate::help::open_page(page),
             Cmd::Shortcuts => self.shortcuts = Some(crate::help::Shortcuts),
             Cmd::ReportProblem => crate::help::report_problem(),
@@ -11692,7 +11699,7 @@ impl App {
                         &mut self.settings.folder_history,
                         &add.dir.display().to_string(),
                     );
-                    if self.settings.change_folder_on_last
+                    if (add.remember || self.settings.change_folder_on_last)
                         && self
                             .settings
                             .keep_category_dir(add.category, &add.dir, &self.downloads)

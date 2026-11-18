@@ -945,18 +945,19 @@
 :host(:-webkit-full-screen) { display: none !important; }
 * { box-sizing: border-box; }
 .pill, .menu, .tip, .guide {
-  --go: #0078d4; --go-hi: #0068b5; --go-ink: #ffffff; --stamp: #0078d4; --accent: #0078d4;
-  --ok: #0078d4; --warn: #8a5300; --err: #c42b1c; --warn-dot: #F7B500;
-  --bg: #fcfcfb; --bg2: #eef1f5; --bd: #c4ccd8; --tx: #111318; --tx2: #5f6676; --hov: rgba(0, 120, 212, .12);
-  --sh: 0 1px 2px rgba(17, 19, 24, .18), 0 6px 14px rgba(17, 19, 24, .18);
+  --go: #1e2536; --go-hi: #2b354c; --go-ink: #ffffff; --stamp: #0078d4; --accent: #38bdf8;
+  --ok: #38bdf8; --warn: #ffd36b; --err: #ff99a4; --warn-dot: #F7B500;
+  --bg: #0f172a; --bg2: #090e17; --bd: #334155; --tx: #f8fafc; --tx2: #94a3b8; --hov: rgba(255, 255, 255, .12);
+  --sh: 0 2px 4px rgba(0, 0, 0, .45), 0 8px 16px rgba(0, 0, 0, .45);
   --font: "Inter", "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, Roboto, "Noto Sans", sans-serif;
 }
 /* Windows (the system) in dark mode, not the page: SDM's navy board; modern blue brand theme. */
 @media (prefers-color-scheme: dark) {
   .pill, .menu, .tip, .guide {
+    --go: #182030; --go-hi: #243048; --go-ink: #ffffff;
     --accent: #4cc2ff; --ok: #4cc2ff; --warn: #ffd36b; --err: #ff99a4;
-    --bg: #0c1a33; --bg2: #081226; --bd: #2a3d63; --tx: #f2f5fb; --tx2: #b7c3da; --hov: rgba(76, 194, 255, .16);
-    --sh: 0 2px 4px rgba(0, 0, 0, .45), 0 8px 16px rgba(0, 0, 0, .45);
+    --bg: #0b1325; --bg2: #070c18; --bd: #223252; --tx: #f2f5fb; --tx2: #b7c3da; --hov: rgba(76, 194, 255, .16);
+    --sh: 0 2px 4px rgba(0, 0, 0, .55), 0 8px 16px rgba(0, 0, 0, .55);
   }
 }
 [dir="rtl"] { --font: "Segoe UI", "Segoe UI Variable Text", system-ui, -apple-system, Roboto, "Noto Sans Arabic", "Noto Sans", sans-serif; }
@@ -978,12 +979,12 @@ button {
   all: unset; box-sizing: border-box; display: inline-flex; align-items: center;
   color: inherit; cursor: pointer; font: inherit;
 }
-.go { gap: 6px; padding-inline: 5px 9px; border-radius: 3px; cursor: grab; }
-.pill:not(.bare) .go { background: var(--go); color: var(--go-ink); box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .14); }
-.pill:not(.bare) .go:hover { background: var(--go-hi); }
-.pill:not(.bare) .go .label { font-weight: 700; }
+.go { gap: 6px; padding-inline: 6px 10px; border-radius: 4px; cursor: grab; }
+.pill:not(.bare) .go { background: var(--go); color: var(--go-ink); border: 1px solid rgba(255, 255, 255, 0.12); box-shadow: 0 1px 3px rgba(0, 0, 0, .3); }
+.pill:not(.bare) .go:hover { background: var(--go-hi); border-color: rgba(255, 255, 255, 0.22); }
+.pill:not(.bare) .go .label { font-weight: 700; letter-spacing: 0.01em; }
 .more, .x { width: 22px; justify-content: center; flex: none; color: var(--tx2);
-  border: 1px solid var(--bd); border-radius: 3px; background: var(--bg); }
+  border: 1px solid var(--bd); border-radius: 4px; background: var(--bg); }
 .more:hover, .x:hover, .more[aria-expanded="true"] { background: var(--hov); color: var(--tx); }
 .more svg, .x svg { width: 10px; height: 10px; }
 .more[aria-expanded="true"] svg { transform: rotate(180deg); }
@@ -997,9 +998,9 @@ button:focus-visible { outline: none; }
 .grip i { display: block; width: 2px; height: 2px; border-radius: 1px; background: currentColor; opacity: .55; }
 .pill:not(.bare):hover .grip, .pill.dragging .grip { visibility: visible; }
 .pill.bare .grip { display: none; }
-.icon { display: flex; align-items: center; justify-content: center; width: 18px; height: 18px; flex: none; }
+.icon { display: flex; align-items: center; justify-content: center; width: 18px; height: 18px; flex: none; border-radius: 3px; }
 .icon > * { display: none; }
-.icon img { width: 18px; height: 18px; }
+.icon img { width: 18px; height: 18px; border-radius: 3px; }
 .icon svg { width: 16px; height: 16px; }
 .pill[data-state="ready"] .icon .logo, .pill[data-state="looking"] .icon .logo,
 .pill[data-state="sending"] .icon .spin, .pill[data-state="sent"] .icon .i-sent,
@@ -1009,8 +1010,8 @@ button:focus-visible { outline: none; }
   animation: spin .8s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 @keyframes shimmer { from { background-position: 100% 0; } to { background-position: -100% 0; } }
-.chip { font: 700 10.5px/15px var(--font); color: #003865; background: #ffffff; border-radius: 3px; padding: 0 4.5px; box-shadow: 0 1px 2px rgba(0, 0, 0, .2); }
-.chip.hd { background: #ffffff; color: #002847; }
+.chip { font: 700 10.5px/15px var(--font); color: #0f172a; background: #ffffff; border-radius: 3px; padding: 0 5px; box-shadow: 0 1px 2px rgba(0, 0, 0, .25); }
+.chip.hd { background: #ffffff; color: #0284c7; }
 .chip.skel { width: 30px; height: 15px; padding: 0; background-color: rgba(255, 255, 255, .35); background-size: 200% 100%;
   background-image: linear-gradient(90deg, rgba(255, 255, 255, .2), rgba(255, 255, 255, .7), rgba(255, 255, 255, .2));
   animation: shimmer 1.4s linear infinite; box-shadow: none; }
