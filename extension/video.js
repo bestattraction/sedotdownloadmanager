@@ -1145,6 +1145,7 @@ button:focus-visible { outline: none; }
   <div class="rows" role="group"></div>
   <div class="hr"></div>
   <button role="menuitem" data-act="window"><span class="mi"><svg viewBox="0 0 16 16" ${ICON} stroke-width="1.4"><path d="M2.5 4h11M2.5 8h11M2.5 12h7"/></svg></span><span></span></button>
+  <button role="menuitem" data-act="subtitles"><span class="mi"><svg viewBox="0 0 16 16" ${ICON} stroke-width="1.4"><rect x="2.5" y="3.5" width="11" height="9" rx="1.5"/><path d="M4.5 7h7M4.5 9.5h4"/></svg></span><span>Download with Subtitles...</span></button>
   <div class="hr"></div>
   <button role="menuitem" data-act="hide"><span class="mi"><svg viewBox="0 0 16 16" ${ICON} stroke-width="1.4"><circle cx="8" cy="8" r="5.5"/><path d="M4.2 11.8l7.6-7.6"/></svg></span><span></span><span class="k">Esc</span></button>
   <button role="menuitem" data-act="never"><span class="mi"><svg viewBox="0 0 16 16" ${ICON} stroke-width="1.4"><circle cx="8" cy="8" r="5.5"/><path d="M2.5 8h11M8 2.5c2 2 2 9 0 11M8 2.5c-2 2-2 9 0 11"/></svg></span><span></span></button>
@@ -1176,6 +1177,7 @@ button:focus-visible { outline: none; }
   closeX.setAttribute("aria-label", t("video_hide_here"));
   menu.setAttribute("aria-label", idleLabel);
   item("window").lastElementChild.textContent = t("video_all_qualities");
+  if (item("subtitles")) item("subtitles").lastElementChild.textContent = "Download with subtitles...";
   item("hide").children[1].textContent = t("video_hide_here");
   item("never").lastElementChild.textContent = ext.i18n.getMessage("video_never_site", [host]) || `Never on ${host}`;
   item("settings").lastElementChild.textContent = t("video_settings");
@@ -2221,7 +2223,7 @@ button:focus-visible { outline: none; }
   });
 
   async function run(act) {
-    if (act === "window") return download(null, true);
+    if (act === "window" || act === "subtitles") return download(null, true);
     closeMenu();
     if (act === "hide") return hideHere();
     if (act === "never") {

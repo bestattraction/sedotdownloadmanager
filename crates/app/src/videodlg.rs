@@ -1235,16 +1235,38 @@ impl VideoDialog {
         let on = !self.subs.is_empty() && !audio;
         let items = sub_items(&self.subs, self.video.is_some());
         let shown: Vec<&str> = items.iter().map(String::as_str).collect();
+
+        // Direct checkbox for subtitle download
+        let mut download_subs = on && self.sub_pick > 0;
+        let prev_download_subs = download_subs;
+        winui::checkbox(
+            ui,
+            pos2(o.x + bx, o.y + 347.0),
+            &mut download_subs,
+            "Download subtitles",
+            on,
+        );
+        if download_subs != prev_download_subs {
+            self.sub_pick = if download_subs {
+                if shown.len() > 1 { 1 } else { 0 }
+            } else {
+                0
+            };
+        }
+
         let pick = if on { self.sub_pick } else { 0 };
         if let Some(i) = winui::combo_light(
             ui,
-            r(o, bx, 343.0, 200.0, 21.0),
+            r(o, bx + 135.0, 343.0, 160.0, 21.0),
             &shown,
             pick.min(shown.len().saturating_sub(1)),
-            on,
+            on && download_subs,
             "video-subs",
         ) {
             self.sub_pick = i;
+            if i == 0 {
+                // If user selected "None" from combo, uncheck
+            }
         }
         let chosen = on && self.sub_pick > 0;
         let holds = choice
@@ -1253,7 +1275,7 @@ impl VideoDialog {
         let mut embed = self.embed && chosen && ffmpeg && holds;
         let resp = winui::checkbox_until(
             ui,
-            pos2(o.x + bx + 212.0, o.y + 347.0),
+            pos2(o.x + bx + 305.0, o.y + 347.0),
             &mut embed,
             // i18n: checkbox in Download video: subtitles go inside the video file instead of a separate .srt file beside it
             "Put them into the video",

@@ -167,10 +167,9 @@ def main():
 
     icons = {}
     for size in SIZES:
-        if size <= 32:
-            icon = create_tray_small_icon(size)
-        else:
-            icon = master.resize((size, size), Image.LANCZOS)
+        # Resize directly from master artwork with LANCZOS so that all app icon sizes
+        # (titlebar, taskbar, tray, and explorer) have the exact same look as the extension icon.
+        icon = master.resize((size, size), Image.LANCZOS)
 
         icons[size] = icon
         icon.save(APP / f"sdm-{size}.png")

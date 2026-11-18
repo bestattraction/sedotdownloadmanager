@@ -131,14 +131,15 @@ fn volume_set<'a>(item: &'a Item, items: &'a [Item]) -> Vec<(u32, &'a Item)> {
 impl Extracts {
     /// Download `id` just finished: queue its archive when it is to be extracted and its last
     /// volume is there.
-    pub fn finished(&mut self, id: u64, items: &[Item], settings: &Settings) {
+    pub fn finished(&mut self, id: u64, items: &[Item], settings: &Settings, queue_auto: bool) {
         let Some(item) = items.iter().find(|i| i.id == id) else {
             return;
         };
-        let wanted = match &item.package {
-            Some(p) => p.extract,
-            None => settings.extract_auto,
-        };
+        let wanted = queue_auto
+            || match &item.package {
+                Some(p) => p.extract,
+                None => settings.extract_auto,
+            };
         if wanted {
             self.offer(item, items, settings, false);
         }
@@ -883,25 +884,25 @@ mod tests {
             item(4, "m.part2.rar", Status::Complete, Some(8)),
         ];
         let mut q = Extracts::default();
-        q.finished(1, &items, &s);
-        q.finished(3, &items, &s);
+        q.finished(1, &items, &s, false);
+        q.finished(3, &items, &s, false);
         assert!(q.queue.is_empty(), "volume 2 is still downloading");
         items[1].status = Status::Complete;
-        q.finished(2, &items, &s);
+        q.finished(2, &items, &s, false);
         assert_eq!(q.queue.len(), 1);
         let job = &q.queue[0];
         assert_eq!(job.ids, [1, 2, 3]);
         assert_eq!(job.archive, PathBuf::from("dl").join("m.part1.rar"));
         assert_eq!(job.files.len(), 3);
         // Once only, whichever volume finishes last.
-        q.finished(3, &items, &s);
+        q.finished(3, &items, &s, false);
         assert_eq!(q.queue.len(), 1);
         // A gap (volume 2 of another set missing) waits.
         let gap = vec![
             item(5, "g.7z.001", Status::Complete, None),
             item(6, "g.7z.003", Status::Complete, None),
         ];
-        q.finished(6, &gap, &s);
+        q.finished(6, &gap, &s, false);
         assert_eq!(q.queue.len(), 1);
         assert_eq!(
             volume_key("g.7z.001").map(|v| v.kind),
@@ -918,7 +919,7 @@ mod tests {
         let mut items = vec![item(1, "a.7z", Status::Complete, Some(5))];
         items[0].package.as_mut().unwrap().password = Some("pkg".into());
         let mut q = Extracts::default();
-        q.finished(1, &items, &settings);
+        q.finished(1, &items, &settings, false);
         // Without a password first; then the package's, then the list's, without it twice.
         let job = q.queue.pop_front().unwrap();
         assert_eq!(job.password, None);
@@ -999,8 +1000,8 @@ mod tests {
         };
         // a and b need theirs, and both open in the same pass. a's isn't in the list: not
         // kept. b's is: it goes to the top.
-        q.finished(1, &items, &s);
-        q.finished(2, &items, &s);
+        q.finished(1, &items, &s, false);
+        q.finished(2, &items, &s, false);
         let (a, b) = (q.queue.pop_front().unwrap(), q.queue.pop_front().unwrap());
         q.finish(a, Err(Error::NeedsPassword), None, &mut items);
         let a = q.queue.pop_front().unwrap();
@@ -1010,7 +1011,7 @@ mod tests {
         q.finish(b, Ok(Report::default()), None, &mut items);
         assert_eq!(q.take_vault(), vec!["other-site"]);
         // c opens without a password: its package's is never tried, nor kept.
-        q.finished(3, &items, &s);
+        q.finished(3, &items, &s, false);
         let job = q.queue.pop_front().unwrap();
         assert_eq!(job.password, None);
         q.finish(job, Ok(Report::default()), None, &mut items);
@@ -1018,7 +1019,7 @@ mod tests {
         // One that doesn't fit isn't kept.
         let mut items = vec![item(4, "d.rar", Status::Complete, Some(8))];
         items[0].package.as_mut().unwrap().password = Some("wrong".into());
-        q.finished(4, &items, &s);
+        q.finished(4, &items, &s, false);
         let job = q.queue.pop_front().unwrap();
         q.finish(job, Err(Error::NeedsPassword), None, &mut items);
         let job = q.queue.pop_front().unwrap();
@@ -1036,13 +1037,17 @@ mod tests {
         ];
         let mut q = Extracts::default();
         // Off in Options: an archive outside a package stays as it is.
-        q.finished(1, &items, &off);
+        q.finished(1, &items, &off, false);
         assert!(q.queue.is_empty());
+        // Queue auto-extract enabled: an archive is extracted.
+        q.finished(1, &items, &off, true);
+        assert_eq!(q.queue.len(), 1);
+        q.queue.clear();
         // Its package says extract.
-        q.finished(2, &items, &off);
+        q.finished(2, &items, &off, false);
         assert_eq!(q.queue.len(), 1);
         // Not an archive.
-        q.finished(3, &items, &off);
+        q.finished(3, &items, &off, false);
         assert_eq!(q.queue.len(), 1);
         // By hand, whatever Options says (not twice while it waits).
         q.offer(&items[0], &items, &off, true);

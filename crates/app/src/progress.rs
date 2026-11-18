@@ -358,6 +358,7 @@ pub enum Action {
     None,
     Pause,
     Resume,
+    RefreshAddress,
     /// Stop the download and close the dialog.
     Cancel,
     /// Set this download's speed limit (bytes/s, None = off).
@@ -799,8 +800,10 @@ impl Progress {
         // The site sent its page instead of the file (#701): a button opens the link in the
         // browser, which gets past the page (its download then comes back to MDM).
         let web_page = item.got_web_page();
+        let can_refresh = !web_page && item.status == Status::Error && item.torrent.is_none();
         // i18n: button in a download's progress window when the site sent a web page (a waiting page, a captcha) instead of the file: opens the download's link in the web browser
         let open_label = crate::i18n::mark("Open in browser");
+        let refresh_label = crate::i18n::mark("Refresh address");
         // The row as wide as its labels in this language need (#192), each laid out for the
         // longer of its two labels so it keeps its size when they change; Cancel stays at the
         // window's edge.
@@ -815,18 +818,20 @@ impl Progress {
         ];
         if web_page {
             row.insert(1, (open_label, 176.0, 127.0));
+        } else if can_refresh {
+            row.insert(1, (refresh_label, 176.0, 127.0));
         }
         let placed = winui::button_row(&p, &row, 8.0, 30.0, 200.0);
-        let (details_at, open_at, pause_at, cancel_at) = match placed[..] {
-            [details, open, pause, cancel] => (details, Some(open), pause, cancel),
+        let (details_at, extra_at, pause_at, cancel_at) = match placed[..] {
+            [details, extra, pause, cancel] => (details, Some(extra), pause, cancel),
             [details, pause, cancel] => (details, None, pause, cancel),
             _ => unreachable!("three or four buttons"),
         };
-        if let Some(open_at) = open_at
+        if let Some(extra_at) = extra_at
             && winui::button(
                 ui,
-                r(lower, open_at.0, 206.0, open_at.1, 22.0),
-                open_label,
+                r(lower, extra_at.0, 206.0, extra_at.1, 22.0),
+                if web_page { open_label } else { refresh_label },
                 // The way on: the default, unless another tab's Show details is.
                 if other_tab {
                     ButtonKind::Normal
@@ -838,7 +843,11 @@ impl Progress {
             )
             .clicked()
         {
-            crate::launch::open_page(item.url.as_str());
+            if web_page {
+                crate::launch::open_page(item.url.as_str());
+            } else {
+                action = Action::RefreshAddress;
+            }
         }
         if winui::button(
             ui,

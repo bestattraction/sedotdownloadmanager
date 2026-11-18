@@ -423,6 +423,8 @@ enum Cmd {
     RssFeeds(bool),
     /// Right-click → Refresh download address: open the source page, edit the address.
     RefreshAddress,
+    /// Play/preview in-progress video or file while downloading.
+    PlayMedia,
     /// Right-click → Verify checksum… (beyond IDM).
     VerifyChecksum,
     /// Right-click → Extract (beyond IDM, #37): a finished archive, into its folder.
@@ -2264,7 +2266,11 @@ impl App {
                 // i18n: a download's status (state it is in, not a command): it failed
                 Status::Error => "Error",
             },
-            icon: file_icon(&it.file_name),
+            icon: if it.dest.is_file() {
+                IconKey::Path(it.dest.clone())
+            } else {
+                file_icon(&it.file_name)
+            },
             queued: queued.contains(&it.id),
             cells: [
                 it.file_name.clone(),
@@ -5170,7 +5176,7 @@ impl App {
             self.dirty = true;
         }
         if notify_ui {
-            self.extracts.finished(id, &self.items, &self.settings);
+            self.extracts.finished(id, &self.items, &self.settings, false);
         }
     }
 
@@ -5192,7 +5198,7 @@ impl App {
                 } else if !self.renaming.iter().any(|(rid, _)| *rid == id) {
                     let renaming = self.apply_deferred_rename(id);
                     if !renaming {
-                        self.extracts.finished(id, &self.items, &self.settings);
+                        self.extracts.finished(id, &self.items, &self.settings, false);
                     }
                 }
             }
@@ -5216,7 +5222,7 @@ impl App {
         for (id, desired, check) in checked {
             let renaming = check.is_some_and(|c| self.rename_checked(id, desired, c));
             if !renaming {
-                self.extracts.finished(id, &self.items, &self.settings);
+                self.extracts.finished(id, &self.items, &self.settings, false);
             }
         }
 
@@ -7641,6 +7647,11 @@ impl App {
                     self.properties(id);
                 }
             }
+            Cmd::PlayMedia => {
+                if let Some(d) = dest {
+                    dialogs::open_download(&d, moved_away);
+                }
+            }
             Cmd::OpenWith => {
                 if let Some(d) = dest {
                     dialogs::open_download_with(&d, moved_away);
@@ -7943,9 +7954,13 @@ impl App {
             self.release_link(*id);
             self.failures.remove(id);
             let renaming = self.apply_deferred_rename(*id);
+            let queue_auto = self
+                .queues
+                .iter()
+                .any(|q| q.schedule.auto_extract && q.items.contains(id));
             if !renaming {
                 // Its archive, when it is to be extracted and its last volume is in (#37).
-                self.extracts.finished(*id, &self.items, &self.settings);
+                self.extracts.finished(*id, &self.items, &self.settings, queue_auto);
             }
             // Finished files leave download queues (synchronization queues keep them).
             for q in self.queues.iter_mut().filter(|q| !q.sync) {
@@ -8939,10 +8954,15 @@ impl App {
                 && crate::extractq::archive_name(&i.file_name)
         });
         let torrent = it.and_then(|i| i.torrent.as_ref().map(|t| (i, t)));
+        let can_preview = !done
+            && it.is_some_and(|i| {
+                i.dest.exists() && (i.torrent.is_some() || i.video.is_some())
+            });
         let mut entries = vec![
             // i18n: verb: opens the downloaded file
             I("Open", Cmd::Open, done, false),
-            I("Open with...", Cmd::OpenWith, done, false),
+            I("Open with...", Cmd::OpenWith, done || can_preview, false),
+            I("Play / Preview video", Cmd::PlayMedia, can_preview, false),
             // A torrent's folder is there while it downloads (#354).
             I(
                 "Open folder",
@@ -9051,6 +9071,12 @@ impl App {
                             Cmd::TorrentEndsFirst,
                             spec.in_order,
                             spec.in_order && spec.ends_first,
+                        ),
+                        I(
+                            "Play video while downloading",
+                            Cmd::PlayMedia,
+                            can_preview,
+                            false,
                         ),
                         Sep,
                         I("Copy magnet link", Cmd::TorrentCopyMagnet, true, false),
@@ -11943,6 +11969,9 @@ impl App {
                 progress::Action::None => {}
                 progress::Action::Pause => self.stop_by_hand(id),
                 progress::Action::Resume => self.start(id, true),
+                progress::Action::RefreshAddress => {
+                    self.run(Cmd::RefreshAddress, Some(id), ctx);
+                }
                 progress::Action::Cancel => {
                     self.stop(id);
                     self.progress.retain(|p| p.id != id);

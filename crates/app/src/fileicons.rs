@@ -23,15 +23,18 @@ pub enum Kind<'a> {
     /// An open folder (Download complete's: the file is in it). Windows has its own; elsewhere
     /// the theme's "folder-open", else its folder.
     FolderOpen,
+    /// An actual file on disk by its path.
+    Path(&'a std::path::Path),
 }
 
 /// What the system is asked for: a folder, or a file by its extension (lowercase; None: a file
-/// without one).
+/// without one), or an actual file on disk.
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 pub enum What {
     Folder,
     FolderOpen,
     File(Option<String>),
+    Path(std::path::PathBuf),
 }
 
 impl What {
@@ -40,6 +43,7 @@ impl What {
             Kind::Folder => What::Folder,
             Kind::FolderOpen => What::FolderOpen,
             Kind::File(name) => What::File(extension(name)),
+            Kind::Path(path) => What::Path(path.to_path_buf()),
         }
     }
 }
@@ -219,8 +223,13 @@ pub fn paint(ui: &Ui, painter: &Painter, kind: Kind, rc: Rect) {
     let what = What::of(kind);
     // A theme with an icon set draws its own for the type's kind (#45); the system's otherwise.
     if crate::theme::current().icon_set.is_some() {
+        let ext_str;
         let ext = match &what {
             What::File(Some(e)) => Some(e.as_str()),
+            What::Path(p) => {
+                ext_str = p.extension().and_then(|e| e.to_str()).map(|e| e.to_ascii_lowercase());
+                ext_str.as_deref()
+            }
             _ => None,
         };
         let need = crate::themeicons::file_need(tango_name(&what), ext);
@@ -318,11 +327,22 @@ static TANGO: &[Tango] = tango!(
 
 /// Tango's icon for `what`: by the type's kind, the plain page when it is none of them.
 fn tango_name(what: &What) -> &'static str {
+    let ext_str;
     let ext = match what {
         What::Folder => return "folder",
         What::FolderOpen => return "folder-open",
         What::File(None) => return "text-x-generic",
         What::File(Some(e)) => e.as_str(),
+        What::Path(p) => {
+            let name = p.file_name().and_then(|n| n.to_str()).unwrap_or("");
+            match extension(name) {
+                Some(e) => {
+                    ext_str = e;
+                    ext_str.as_str()
+                }
+                None => return "text-x-generic",
+            }
+        }
     };
     match ext {
         "mp4" | "mkv" | "avi" | "mov" | "wmv" | "flv" | "webm" | "m4v" | "mpg" | "mpeg" | "ts"
@@ -557,5 +577,13 @@ mod tests {
         if !missing.is_empty() || !small.is_empty() {
             eprintln!("missing: {missing:?}; smaller than asked: {small:?}");
         }
+    }
+
+    #[test]
+    fn path_gives_icon_for_actual_exe() {
+        let exe = std::env::current_exe().unwrap();
+        let what = What::Path(exe);
+        let icon = system(&what, 16);
+        assert!(icon.is_some(), "exe icon should be extracted");
     }
 }

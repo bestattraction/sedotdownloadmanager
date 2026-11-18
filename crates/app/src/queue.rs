@@ -33,6 +33,8 @@ pub struct Schedule {
     /// "Wake the computer to run this queue" (#142): woken shortly before `start_at`, kept
     /// awake while the queue runs (wake.rs).
     pub wake: bool,
+    /// Auto-extract ZIP/RAR/7z archives downloaded in this queue.
+    pub auto_extract: bool,
 }
 
 /// What happens when a queue, or one download, is done (besides opening a file).
@@ -101,6 +103,7 @@ impl Default for Schedule {
             turn_off: None,
             force_close: false,
             wake: false,
+            auto_extract: false,
         }
     }
 }

@@ -139,7 +139,12 @@ impl Properties {
             .extension()
             .map(|e| e.to_string_lossy().to_ascii_lowercase())
             .unwrap_or_default();
-        icons.paint(ui, IconKey::ExtLarge(ext.clone()), o + vec2(11.0, 11.0));
+        let icon_key = if item.dest.is_file() {
+            IconKey::PathLarge(item.dest.clone())
+        } else {
+            IconKey::ExtLarge(ext.clone())
+        };
+        icons.paint(ui, icon_key, o + vec2(11.0, 11.0));
         let fit = |ui: &mut Ui, x: f32, base: f32, s: &str| {
             let (rect, cut) =
                 winui::text_fit(&p, o.x + x, o.y + base, s, LIGHT_TEXT(), o.x + 466.0);

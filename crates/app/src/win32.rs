@@ -6007,11 +6007,41 @@ fn file_icon_once(what: &crate::fileicons::What, px: u32) -> Option<crate::filei
     use windows_sys::Win32::Storage::FileSystem::FILE_ATTRIBUTE_DIRECTORY;
     use windows_sys::Win32::UI::Shell::SHGFI_SYSICONINDEX;
     com_on_this_thread();
+    if let What::Path(path) = what {
+        if path.is_file() {
+            use std::os::windows::ffi::OsStrExt as _;
+            let wide: Vec<u16> = path.as_os_str().encode_wide().chain([0]).collect();
+            let index = unsafe {
+                let mut info: SHFILEINFOW = zeroed();
+                let ok = SHGetFileInfoW(
+                    wide.as_ptr(),
+                    0,
+                    &mut info,
+                    size_of::<SHFILEINFOW>() as u32,
+                    SHGFI_SYSICONINDEX,
+                );
+                if ok == 0 {
+                    return None;
+                }
+                info.iIcon
+            };
+            return list_icon(index, px);
+        } else if path.is_dir() {
+            return file_icon_once(&What::Folder, px);
+        } else {
+            let ext = path
+                .extension()
+                .and_then(|e| e.to_str())
+                .map(|s| s.to_ascii_lowercase());
+            return file_icon_once(&What::File(ext), px);
+        }
+    }
     let (name, attrs) = match what {
         What::FolderOpen => return list_icon(open_folder_index()?, px),
         What::Folder => ("folder".to_string(), FILE_ATTRIBUTE_DIRECTORY),
         What::File(Some(ext)) => (format!("file.{ext}"), FILE_ATTRIBUTE_NORMAL),
         What::File(None) => ("file".to_string(), FILE_ATTRIBUTE_NORMAL),
+        What::Path(_) => unreachable!(),
     };
     let wide: Vec<u16> = name.encode_utf16().chain([0]).collect();
     // SAFETY: `info` is a zeroed SHFILEINFOW of the stated size; the name is NUL-terminated;

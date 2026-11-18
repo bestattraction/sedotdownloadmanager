@@ -79,6 +79,7 @@ struct Form {
     turn_off: usize,
     force: bool,
     wake: bool,
+    auto_extract: bool,
     files_at_once: String,
 }
 
@@ -111,6 +112,7 @@ impl Form {
                 .unwrap_or(0),
             force: s.force_close,
             wake: s.wake,
+            auto_extract: s.auto_extract,
             files_at_once: q.files_at_once.to_string(),
         }
     }
@@ -134,6 +136,7 @@ impl Form {
         s.turn_off = self.turn_off_on.then(|| TurnOff::ALL[self.turn_off]);
         s.force_close = self.turn_off_on && self.force;
         s.wake = self.wake;
+        s.auto_extract = self.auto_extract;
         q.files_at_once = self.files_at_once.parse().unwrap_or(4).clamp(1, 99);
     }
 }
@@ -1002,6 +1005,13 @@ impl Scheduler {
             99,
             true,
             "files-at-once",
+        );
+        winui::checkbox_light(
+            ui,
+            o + vec2(420.0, 56.0),
+            &mut f.auto_extract,
+            "Auto-extract ZIP/RAR/7z",
+            true,
         );
 
         // The queue's files: File Name, Size, Status, Time left.
