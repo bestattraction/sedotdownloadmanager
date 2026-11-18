@@ -1010,8 +1010,8 @@ button:focus-visible { outline: none; }
   animation: spin .8s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 @keyframes shimmer { from { background-position: 100% 0; } to { background-position: -100% 0; } }
-.chip { font: 700 10.5px/15px var(--font); color: #0f172a; background: #ffffff; border-radius: 3px; padding: 0 5px; box-shadow: 0 1px 2px rgba(0, 0, 0, .25); }
-.chip.hd { background: #ffffff; color: #0284c7; }
+.chip { font: 800 10.5px/15px var(--font); color: #000000; background: #ffffff; border-radius: 3px; padding: 0 5px; box-shadow: 0 1px 2px rgba(0, 0, 0, .3); letter-spacing: .02em; }
+.chip.hd { background: #ffffff; color: #000000; font-weight: 800; }
 .chip.skel { width: 30px; height: 15px; padding: 0; background-color: rgba(255, 255, 255, .35); background-size: 200% 100%;
   background-image: linear-gradient(90deg, rgba(255, 255, 255, .2), rgba(255, 255, 255, .7), rgba(255, 255, 255, .2));
   animation: shimmer 1.4s linear infinite; box-shadow: none; }
