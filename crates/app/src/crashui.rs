@@ -14,7 +14,8 @@ use std::time::Duration;
 
 use egui::{Pos2, Rect, Ui};
 use mdm_crash::MonitorArgs;
-use mdm_crash::github::{self, Found};
+#[cfg(test)]
+use mdm_crash::github;
 use mdm_crash::monitor::{self, Event};
 use mdm_crash::protocol::{Kind, Notes};
 use mdm_crash::report::{self, Made};
@@ -179,8 +180,6 @@ struct Shared {
     fetching: Option<(u64, Option<u64>)>,
     /// The symbols couldn't be fetched (why).
     no_symbols: Option<String>,
-    searching: bool,
-    found: Option<Found>,
 }
 
 struct ReportWindow {
@@ -188,7 +187,6 @@ struct ReportWindow {
     shared: Arc<Mutex<Shared>>,
     events: Receiver<Event>,
     what: String,
-    attach: bool,
     recovered: bool,
     /// Something to tell under the report (copied, sent…).
     told: Option<String>,
@@ -213,7 +211,6 @@ impl ReportWindow {
             shared,
             events,
             what: String::new(),
-            attach: false,
             told: None,
             icon: None,
             caption_set: false,
@@ -261,13 +258,6 @@ fn prepare(job: &Job, shared: Arc<Mutex<Shared>>, ctx: egui::Context) {
         else {
             return;
         };
-        let Ok(http) = reqwest::Client::builder()
-            .user_agent(concat!("MisterDownloadManager/", env!("CARGO_PKG_VERSION")))
-            .timeout(Duration::from_secs(120))
-            .build()
-        else {
-            return;
-        };
         // The release's symbols, when the stacks need them and they aren't here yet.
         if let (Some(v), true, false) = (version.as_deref(), missing, from_source)
             && !mdm_crash::symbols::have(&data, v)
@@ -296,19 +286,6 @@ fn prepare(job: &Job, shared: Arc<Mutex<Shared>>, ctx: egui::Context) {
                     set(&shared, &ctx, |s| s.no_symbols = Some(e));
                 }
             }
-        }
-        // The issue already filed for the same problem.
-        let signature = shared
-            .lock()
-            .ok()
-            .and_then(|s| s.made.as_ref().map(|m| m.signature.clone()));
-        if let Some(sig) = signature {
-            set(&shared, &ctx, |s| s.searching = true);
-            let found = rt.block_on(github::find(&http, &sig));
-            set(&shared, &ctx, |s| {
-                s.searching = false;
-                s.found = found;
-            });
         }
     });
 }
@@ -406,14 +383,12 @@ impl ReportWindow {
     fn body(&mut self, ui: &mut Ui, o: Pos2) {
         let p = ui.painter().clone();
         let alive = self.app_alive();
-        let (made, fetching, no_symbols, searching, found) = {
+        let (made, fetching, no_symbols) = {
             let s = self.shared.lock().unwrap_or_else(|e| e.into_inner());
             (
                 s.made.clone(),
                 s.fetching,
                 s.no_symbols.clone(),
-                s.searching,
-                s.found.clone(),
             )
         };
 
@@ -443,7 +418,7 @@ impl ReportWindow {
             o.y + 50.0,
             // i18n: crash report window: what the report is and what Send does
             crate::i18n::t(
-                "A report was saved. Sending it to the developers on GitHub helps them fix this; you can read everything it holds below first. Nothing is sent by itself: Send opens the report form in your browser, filled in, for you to check and submit.",
+                "A crash report was saved on your computer. You can read the details below, copy the report, or open the folder where it was saved.",
             ),
             winui::TEXT(),
             o.x + 604.0,
@@ -517,98 +492,54 @@ impl ReportWindow {
                     ("total", &total.map_or_else(|| "?".to_owned(), mb)),
                 ],
             ))
-        } else if let Some(f) = &found {
-            Some(crate::i18n::fmt(
-                // i18n: crash report window: the same problem has an issue on GitHub already; {number} and {title} are the issue's
-                crate::i18n::t("Already reported as issue #{number}: {title}"),
-                &[("number", &f.number.to_string()), ("title", &f.title)],
-            ))
-        } else if searching {
-            // i18n: crash report window: looking on GitHub for an issue about the same problem
-            Some(crate::i18n::t("Looking for this problem on GitHub…").to_owned())
         } else if no_symbols.is_some() {
             // i18n: crash report window: the symbols couldn't be downloaded; the report still works
-            Some(crate::i18n::t("The symbols couldn't be fetched: some lines of the report show addresses instead of names (the developers can still read them).").to_owned())
+            Some(crate::i18n::t("The symbols couldn't be fetched: some lines of the report show addresses instead of names.").to_owned())
         } else {
             None
         };
         if let Some(s) = self.told.clone().or(status) {
-            // One line between the report and the check box: a long one (the symbols' note, a
-            // translation, an issue's title) is cut at the window's right margin with "...",
-            // and shown whole under the pointer (#164).
+            // One line between the report and the buttons: a long one is cut at the window's right margin
             let (rc, cut) =
                 winui::text_fit(&p, o.x + 16.0, o.y + 452.0, &s, winui::TEXT(), o.x + 604.0);
             if cut {
                 winui::full_on_hover(ui, rc, "crash-status", &s);
             }
         }
-        if let Some(d) = made.as_ref().and_then(|m| m.dump.as_ref())
-            && d.exists()
-        {
-            winui::checkbox(
-                ui,
-                o + egui::vec2(16.0, 462.0),
-                &mut self.attach,
-                // i18n: crash report window: checkbox; the .dmp file holds what MDM had in memory
-                "Also attach the crash data (.dmp): it may hold addresses, cookies and passwords",
-                true,
-            );
-        }
 
         // The buttons, each as wide as its label in this language (#204): the row fills the
         // window's width, those wider than their label giving room to those that need it.
         let y = 500.0;
-        let send_label = if found.is_some() {
-            // i18n: crash report window button: open the GitHub issue already filed (and copy the report to add it there)
-            "Open the reported issue"
-        } else {
-            // i18n: crash report window button: open GitHub's crash report form filled in
-            "Send on GitHub"
-        };
-        // A frozen MDM can be ended; a gone one started again.
+        // A frozen SDM can be ended; a gone one started again.
         let frozen = self.job.kind == Kind::Freeze && alive && !self.recovered;
         let restart_label = if frozen {
-            // i18n: crash report window button: end the frozen MDM and start it again
-            "End and restart MDM"
+            // i18n: crash report window button: end the frozen SDM and start it again
+            "End and restart SDM"
         } else {
-            // i18n: crash report window button: start MDM again
-            "Restart MDM"
+            // i18n: crash report window button: start SDM again
+            "Restart SDM"
         };
-        let [send_at, copy_at, folder_at, restart_at, close_at] = winui::button_row(
+        let [copy_at, folder_at, restart_at, close_at] = winui::button_row(
             &p,
             &[
-                (send_label, 16.0, 170.0),
-                ("Copy report", 192.0, 110.0),
-                ("Open folder", 308.0, 110.0),
-                (restart_label, 424.0, 112.0),
-                ("Close", 542.0, 62.0),
+                ("Copy report", 16.0, 130.0),
+                ("Open folder", 152.0, 130.0),
+                (restart_label, 288.0, 160.0),
+                ("Close", 454.0, 90.0),
             ],
             6.0,
             16.0,
             260.0,
         )[..] else {
-            unreachable!("five buttons")
+            unreachable!("four buttons")
         };
-        let send = winui::button(
-            ui,
-            r(o, send_at.0, y, send_at.1, 25.0),
-            send_label,
-            if made.is_some() {
-                ButtonKind::Default
-            } else {
-                ButtonKind::Disabled
-            },
-            false,
-            None,
-        )
-        .clicked();
         let copy = winui::button(
             ui,
             r(o, copy_at.0, y, copy_at.1, 25.0),
             // i18n: crash report window button: copy the report's text
             "Copy report",
             if made.is_some() {
-                ButtonKind::Normal
+                ButtonKind::Default
             } else {
                 ButtonKind::Disabled
             },
@@ -653,40 +584,6 @@ impl ReportWindow {
             return;
         };
         let full = self.full_text(&made);
-        if send {
-            if let Some(f) = &found {
-                crate::copy_text(ui.ctx(), full.clone());
-                crate::launch::open(&f.html_url);
-                // i18n: crash report window: after opening the existing issue
-                self.told = Some(
-                    crate::i18n::t(
-                        "The report is on your clipboard: paste it in a comment on the issue.",
-                    )
-                    .to_owned(),
-                );
-            } else {
-                let url = github::new_issue_url(
-                    &format!(
-                        "{}: {}",
-                        report::description(made.kind, &made.notes),
-                        made.signature
-                    ),
-                    &self.fields(&made),
-                    &made.text,
-                    "(The report was cut to fit here. The whole of it is in the .txt file in the folder that just opened: please drag it into this box.)",
-                );
-                crate::launch::open(url);
-                crate::dialogs::show_in_folder(&made.path);
-                // i18n: crash report window: after Send opened the browser
-                self.told = Some(crate::i18n::t("The form opened in your browser. Drag the report's file (and the .dmp, if you chose to) into it, then submit.").to_owned());
-            }
-            if self.attach
-                && let Some(d) = &made.dump
-            {
-                crate::dialogs::show_in_folder(d);
-            }
-            tracing::info!("crash report sent to the browser ({})", made.signature);
-        }
         if copy {
             crate::copy_text(ui.ctx(), full);
             // i18n: crash report window: after Copy report
@@ -719,12 +616,10 @@ impl ReportWindow {
         }
     }
 
-    fn fields(&self, made: &Made) -> github::Fields {
-        fields(&made.notes, made.kind, &made.signature, &self.what)
-    }
 }
 
 /// The Crash report form's fields (.github/ISSUE_TEMPLATE/crash.yml ids), the report aside.
+#[cfg(test)]
 fn fields(notes: &Notes, kind: Kind, signature: &str, what: &str) -> github::Fields {
     let s = notes.session.clone().unwrap_or_default();
     vec![

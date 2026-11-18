@@ -10,7 +10,7 @@
 ; Windows Credential Manager (misterdownloadmanager --forget-sign-ins).
 
 #ifndef AppVersion
-  #define AppVersion "0.6.3"
+  #define AppVersion "0.6.4"
 #endif
 #define AppName "Sedot Download Manager"
 #define AppExe "sdm.exe"
@@ -136,6 +136,9 @@ Name: "{autoprograms}\{#AppName}"; Filename: "{app}\{#AppExe}"
 Name: "{autodesktop}\{#AppName}"; Filename: "{app}\{#AppExe}"; Tasks: desktopicon
 
 [Registry]
+; Clean up old MDM Chrome Web Store external extension auto-install entry
+Root: HKCU; Subkey: "Software\Google\Chrome\Extensions\ejoleppdfgjdndddcjoehopknmlglojp"; Flags: deletekey;
+Root: HKLM; Subkey: "Software\Google\Chrome\Extensions\ejoleppdfgjdndddcjoehopknmlglojp"; Flags: deletekey;
 ; The language chosen in the wizard ({language}: "lang_" + a languages.tsv code with "_" for "-",
 ; see languages.py inno_name). The app
 ; takes it on its first start, when it has no language setting yet (settings.rs), then deletes it.

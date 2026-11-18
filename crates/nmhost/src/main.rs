@@ -57,7 +57,7 @@ mod win32;
 use mdm_ipc::browsers::HOST_NAME;
 #[cfg(windows)]
 use mdm_ipc::browsers::{Family, Holder, Repair, WINDOWS_HOST_KEYS};
-use mdm_ipc::extension::{FIREFOX_ID, STORE_ID, chromium_ids, store_id};
+use mdm_ipc::extension::{FIREFOX_ID, chromium_ids, store_id};
 
 /// Chrome's external extensions: an entry naming the store's extension makes Chrome offer it at
 /// its next start ("New extension added"), the user turning it on there. HKLM's is read from the
@@ -1328,6 +1328,13 @@ fn register(all_users: bool) -> Result<(), String> {
             "/reg:32",
         ])?;
     }
+    // Remove old MDM store extension entry if present
+    let _ = reg(&[
+        "delete",
+        &format!(r"{root}\{CHROME_EXTERNAL_KEY}\ejoleppdfgjdndddcjoehopknmlglojp"),
+        "/f",
+        "/reg:32",
+    ]);
     println!(
         "registered {HOST_NAME} for Chrome, Edge, Brave, Helium and the other Chromium browsers \
          ({}), and for Firefox, Zen and its other forks ({})",
@@ -1381,7 +1388,7 @@ fn unregister(all_users: bool) -> Result<(), String> {
     }
     let _ = reg(&[
         "delete",
-        &format!(r"{root}\{CHROME_EXTERNAL_KEY}\{STORE_ID}"),
+        &format!(r"{root}\{CHROME_EXTERNAL_KEY}\ejoleppdfgjdndddcjoehopknmlglojp"),
         "/f",
         "/reg:32",
     ]);
@@ -1654,15 +1661,11 @@ mod tests {
         assert_eq!(bundle_of(std::path::Path::new("/usr/bin/nmhost")), None);
     }
 
-    /// The Chrome Web Store's copy and the app folder's (unpacked) both connect, and both are
-    /// served: the manifest's allowed_origins and the host's own caller check agree.
+    /// The extension connects and is served: the manifest's allowed_origins and the host's own caller check agree.
     #[test]
     fn store_and_unpacked_extensions_both_allowed() {
         let manifest = chromium_manifest(&this_program().unwrap());
-        for id in [
-            "ejoleppdfgjdndddcjoehopknmlglojp",
-            "oogbclbbninliongijffeeggalppliok",
-        ] {
+        for id in chromium_ids() {
             let o = format!("chrome-extension://{id}/");
             assert!(
                 manifest["allowed_origins"]
@@ -2694,7 +2697,7 @@ mod tests {
     #[test]
     fn a_pages_links_in_parts_reach_the_app_as_parts() {
         let whole: Message = serde_json::from_str(
-            r#"{"links":["https://x.test/a.zip","mailto:a@b","ftp://x.test/b.iso"],"referrer":"https://x.test/files/","cookies":"sid=1","private":false,"userAgent":"UA","v":"0.6.3"}"#,
+            r#"{"links":["https://x.test/a.zip","mailto:a@b","ftp://x.test/b.iso"],"referrer":"https://x.test/files/","cookies":"sid=1","private":false,"userAgent":"UA","v":"0.6.4"}"#,
         )
         .unwrap();
         let cmd = links_command(&whole).ok().unwrap();

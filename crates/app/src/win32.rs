@@ -6011,21 +6011,91 @@ fn file_icon_once(what: &crate::fileicons::What, px: u32) -> Option<crate::filei
         if path.is_file() {
             use std::os::windows::ffi::OsStrExt as _;
             let wide: Vec<u16> = path.as_os_str().encode_wide().chain([0]).collect();
-            let index = unsafe {
-                let mut info: SHFILEINFOW = zeroed();
-                let ok = SHGetFileInfoW(
+            let icon_flag = if px <= 16 {
+                windows_sys::Win32::UI::Shell::SHGFI_SMALLICON
+            } else {
+                windows_sys::Win32::UI::Shell::SHGFI_LARGEICON
+            };
+            let mut info: SHFILEINFOW = unsafe { zeroed() };
+            let ok = unsafe {
+                SHGetFileInfoW(
                     wide.as_ptr(),
                     0,
                     &mut info,
                     size_of::<SHFILEINFOW>() as u32,
+                    windows_sys::Win32::UI::Shell::SHGFI_ICON | icon_flag,
+                )
+            };
+            if ok != 0 && !info.hIcon.is_null() {
+                if let Some((side, rgba)) = unsafe { hicon_rgba(info.hIcon) } {
+                    return Some(crate::fileicons::Native::Rgba {
+                        side,
+                        rgba,
+                        premultiplied: false,
+                    });
+                }
+            }
+            let mut large: windows_sys::Win32::UI::WindowsAndMessaging::HICON = std::ptr::null_mut();
+            let mut small: windows_sys::Win32::UI::WindowsAndMessaging::HICON = std::ptr::null_mut();
+            let count = unsafe {
+                windows_sys::Win32::UI::Shell::ExtractIconExW(
+                    wide.as_ptr(),
+                    0,
+                    &mut large,
+                    &mut small,
+                    1,
+                )
+            };
+            if count > 0 {
+                let (hicon, to_destroy) = if px <= 16 {
+                    if !small.is_null() {
+                        (small, large)
+                    } else {
+                        (large, std::ptr::null_mut())
+                    }
+                } else {
+                    if !large.is_null() {
+                        (large, small)
+                    } else {
+                        (small, std::ptr::null_mut())
+                    }
+                };
+                if !to_destroy.is_null() {
+                    unsafe { windows_sys::Win32::UI::WindowsAndMessaging::DestroyIcon(to_destroy) };
+                }
+                if !hicon.is_null() {
+                    if let Some((side, rgba)) = unsafe { hicon_rgba(hicon) } {
+                        return Some(crate::fileicons::Native::Rgba {
+                            side,
+                            rgba,
+                            premultiplied: false,
+                        });
+                    }
+                }
+            }
+            let index = unsafe {
+                let mut info_sys: SHFILEINFOW = zeroed();
+                let ok = SHGetFileInfoW(
+                    wide.as_ptr(),
+                    0,
+                    &mut info_sys,
+                    size_of::<SHFILEINFOW>() as u32,
                     SHGFI_SYSICONINDEX,
                 );
-                if ok == 0 {
-                    return None;
+                if ok != 0 {
+                    info_sys.iIcon
+                } else {
+                    -1
                 }
-                info.iIcon
             };
-            return list_icon(index, px);
+            if index >= 0 && let Some(native) = list_icon(index, px) {
+                return Some(native);
+            }
+            let ext = path
+                .extension()
+                .and_then(|e| e.to_str())
+                .map(|s| s.to_ascii_lowercase());
+            return file_icon_once(&What::File(ext), px);
         } else if path.is_dir() {
             return file_icon_once(&What::Folder, px);
         } else {
