@@ -28,6 +28,8 @@ pub enum TrayCmd {
     /// Left click on the icon: the window back when hidden or behind other
     /// windows, hidden there when frontmost.
     Toggle,
+    /// Right click on the tray icon: show its context menu.
+    ContextMenu,
     AddUrl,
     AddTorrent,
     Batch,
@@ -263,6 +265,12 @@ impl Tray {
     /// Keep the Speed Limiter checks in step with the app.
     pub fn set_limiter(&self, on: bool) {
         self.at(move |n| n.set_limiter(on));
+    }
+
+    /// Manually show the tray context menu on Windows/macOS.
+    pub fn show_menu(&self) {
+        #[cfg(any(windows, target_os = "macos"))]
+        self.native.tray.show_menu();
     }
 }
 
@@ -513,6 +521,7 @@ impl Native {
         let builder = TrayIconBuilder::new()
             .with_menu(Box::new(menu))
             .with_menu_on_left_click(false)
+            .with_menu_on_right_click(false)
             .with_tooltip(crate::MAIN_TITLE)
             .with_icon(icon);
         // Linux and the BSDs (StatusNotifierItem): the item's title is its name in the shell's
@@ -549,17 +558,35 @@ impl Native {
         let wake = |tx: &Sender<TrayCmd>, ctx: &egui::Context| (tx.clone(), ctx.clone());
         let (icon_tx, icon_ctx) = wake(&tx, ctx);
         TrayIconEvent::set_event_handler(Some(move |e: TrayIconEvent| {
-            if let TrayIconEvent::Click {
-                button: MouseButton::Left,
-                button_state: MouseButtonState::Up,
-                ..
-            } = e
-            {
-                // The window is asked for: a stall from now on is felt (crash.rs, #1126). Seen
-                // during one where the icon's events come on a thread of their own (Linux).
-                crate::crash::asked();
-                let _ = icon_tx.send(TrayCmd::Toggle);
-                icon_ctx.request_repaint();
+            match e {
+                TrayIconEvent::Click {
+                    button: MouseButton::Left,
+                    button_state: MouseButtonState::Up,
+                    ..
+                } => {
+                    // The window is asked for: a stall from now on is felt (crash.rs, #1126). Seen
+                    // during one where the icon's events come on a thread of their own (Linux).
+                    crate::crash::asked();
+                    let _ = icon_tx.send(TrayCmd::Toggle);
+                    icon_ctx.request_repaint();
+                }
+                TrayIconEvent::Click {
+                    button: MouseButton::Right,
+                    button_state: MouseButtonState::Up,
+                    rect,
+                    position,
+                    ..
+                } => {
+                    // Only open the menu if the right-click was actually inside the tray icon's bounds.
+                    // This protects against spurious events caused when other processes (like File Explorer)
+                    // trigger notification-area updates or mouse releases while the cursor is over other windows.
+                    if is_in_tray_rect(position, rect) {
+                        crate::crash::asked();
+                        let _ = icon_tx.send(TrayCmd::ContextMenu);
+                        icon_ctx.request_repaint();
+                    }
+                }
+                _ => {}
             }
         }));
         let (menu_tx, menu_ctx) = wake(&tx, ctx);
@@ -744,6 +771,20 @@ impl watch::Port for WindowsShell {
     fn tip(&mut self, tip: &str) -> bool {
         self.id
             .is_some_and(|id| crate::win32::tray_icon_tip(self.hwnd, id, tip))
+    }
+}
+
+/// Check whether a click at `pos` fell within or near the tray icon's bounding rectangle `rect`.
+fn is_in_tray_rect(pos: tray_icon::dpi::PhysicalPosition<f64>, rect: tray_icon::Rect) -> bool {
+    if rect.size.width > 0 && rect.size.height > 0 {
+        let margin = 24.0;
+        let min_x = rect.position.x - margin;
+        let max_x = rect.position.x + rect.size.width as f64 + margin;
+        let min_y = rect.position.y - margin;
+        let max_y = rect.position.y + rect.size.height as f64 + margin;
+        pos.x >= min_x && pos.x <= max_x && pos.y >= min_y && pos.y <= max_y
+    } else {
+        true
     }
 }
 

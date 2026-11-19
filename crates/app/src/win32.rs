@@ -2182,7 +2182,7 @@ mod main_window_tests {
     /// the search by title still answers.
     #[test]
     fn the_known_window_wins_over_its_namesake() {
-        let class: Vec<u16> = "mdm-main-window-test ".encode_utf16().collect();
+        let class: Vec<u16> = "mdm-main-window-test\0".encode_utf16().collect();
         let name = format!("mdm main window test {}", std::process::id());
         let title: Vec<u16> = name.encode_utf16().chain(Some(0)).collect();
         // SAFETY: a class registered with the system's own procedure, and hidden windows of it

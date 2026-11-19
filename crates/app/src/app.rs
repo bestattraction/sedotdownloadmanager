@@ -4639,6 +4639,12 @@ impl App {
                     self.show_window(ctx);
                     continue;
                 }
+                TrayCmd::ContextMenu => {
+                    if let Some(tray) = &self.tray {
+                        crate::crash::system_dialog(|| tray.show_menu());
+                    }
+                    continue;
+                }
                 TrayCmd::Toggle => {
                     let minimized = ctx.input(|i| i.viewport().minimized == Some(true));
                     // Behind other windows it still reads as shown: only hide when
