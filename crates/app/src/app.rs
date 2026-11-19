@@ -1476,14 +1476,13 @@ pub(crate) fn find_primary_video_in_dir(dir: &std::path::Path) -> Option<std::pa
                 if largest.as_ref().is_none_or(|(_, max)| len > *max) {
                     largest = Some((path, len));
                 }
-            } else if path.is_dir() {
-                if let Some(sub) = find_primary_video_in_dir(&path) {
+            } else if path.is_dir()
+                && let Some(sub) = find_primary_video_in_dir(&path) {
                     let len = std::fs::metadata(&sub).map(|m| m.len()).unwrap_or(0);
                     if largest.as_ref().is_none_or(|(_, max)| len > *max) {
                         largest = Some((sub, len));
                     }
                 }
-            }
         }
     }
     largest.map(|(p, _)| p)
@@ -7706,11 +7705,10 @@ impl App {
                 }
             }
             Cmd::PlayMedia => {
-                if let Some(id) = target {
-                    if let Some(item) = self.item(id) && item.torrent.is_some() {
+                if let Some(id) = target
+                    && let Some(item) = self.item(id) && item.torrent.is_some() {
                         self.toggle_torrent_order(id, true);
                     }
-                }
                 if let Some(d) = dest {
                     let target_file = if d.is_dir() {
                         find_primary_video_in_dir(&d).unwrap_or(d)
@@ -9967,13 +9965,11 @@ impl App {
                 chosen = Some((Cmd::AddUrl, None));
             } else if clip {
                 chosen = Some((Cmd::BatchClipboard, None));
-            } else if recheck_torrent {
-                if let Some(target) = self.selection.one() {
-                    if let Some(item) = self.item(target) && item.torrent.is_some() {
+            } else if recheck_torrent
+                && let Some(target) = self.selection.one()
+                    && let Some(item) = self.item(target) && item.torrent.is_some() {
                         chosen = Some((Cmd::TorrentRecheck, Some(target)));
                     }
-                }
-            }
         }
         // Delete removes the selected downloads, Shift+Delete with their files (both ask first);
         // not while a text box (Find, a filter) has the keys.
@@ -11153,13 +11149,12 @@ impl App {
         }
 
         let found_update = self.helper_update_slot.lock().unwrap().take();
-        if let Some(HelperUpdateResult::Update { name, version }) = found_update {
-            if self.helpers.is_none() {
+        if let Some(HelperUpdateResult::Update { name, version }) = found_update
+            && self.helpers.is_none() {
                 tracing::info!("helper update available: {name} {version}");
                 self.helpers = Some(crate::helpers::Helpers::for_update(name, version));
                 self.raise_helpers = true;
             }
-        }
 
         if self.helpers.is_some() {
             if self.raise_helpers && crate::dialogs::focus_when_shown(ctx, "helpers") {

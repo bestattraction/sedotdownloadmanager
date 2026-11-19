@@ -67,4 +67,7 @@ foreach ($pair in @(
     }
   } finally { $archive.Dispose() }
 }
+Copy-Item (Join-Path $out "sdm-chromium.zip") (Join-Path $out "mdm-chromium.zip") -Force
+Copy-Item (Join-Path $out "sdm-firefox.xpi") (Join-Path $out "mdm-firefox.xpi") -Force
+Copy-Item (Join-Path $out "sdm-chrome-store.zip") (Join-Path $out "mdm-chrome-store.zip") -Force
 "built $out (chromium, firefox, safari, chrome-store, sdm-chromium.zip, sdm-firefox.xpi, sdm-chrome-store.zip; version $version)"

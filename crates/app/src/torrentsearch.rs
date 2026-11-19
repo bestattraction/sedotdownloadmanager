@@ -189,7 +189,9 @@ impl TorrentSearch {
             self.search(rt, ctx.clone());
         }
         let mut download_magnet = None;
-        let outcome = window(
+        
+
+        window(
             ctx,
             "torrent-search",
             "Torrent Search",
@@ -456,8 +458,6 @@ impl TorrentSearch {
                     Outcome::Open
                 }
             },
-        );
-
-        outcome
+        )
     }
 }

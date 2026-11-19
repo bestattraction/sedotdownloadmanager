@@ -222,6 +222,8 @@ jobs:
           New-Item -ItemType Directory -Force target/dist | Out-Null
           Copy-Item target/extension/mdm-chromium.zip "target/dist/SedotDownloadManager-$v-extension-chromium.zip"
           Copy-Item target/extension/mdm-firefox.xpi "target/dist/SedotDownloadManager-$v-extension-firefox.xpi"
+          Copy-Item target/extension/sdm-chromium.zip "target/dist/sdm-chromium.zip"
+          Copy-Item target/extension/sdm-firefox.xpi "target/dist/sdm-firefox.xpi"
           # For the Chrome Web Store (the next step, or its dashboard by hand): kept with the
           # build, not the release.
           New-Item -ItemType Directory -Force target/store | Out-Null

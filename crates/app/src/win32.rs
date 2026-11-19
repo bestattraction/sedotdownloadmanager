@@ -6071,15 +6071,14 @@ fn file_icon_once(what: &crate::fileicons::What, px: u32) -> Option<crate::filei
                     windows_sys::Win32::UI::Shell::SHGFI_ICON | icon_flag,
                 )
             };
-            if ok != 0 && !info.hIcon.is_null() {
-                if let Some((side, rgba)) = unsafe { hicon_rgba(info.hIcon) } {
+            if ok != 0 && !info.hIcon.is_null()
+                && let Some((side, rgba)) = unsafe { hicon_rgba(info.hIcon) } {
                     return Some(crate::fileicons::Native::Rgba {
                         side,
                         rgba,
                         premultiplied: false,
                     });
                 }
-            }
             let mut large: windows_sys::Win32::UI::WindowsAndMessaging::HICON = std::ptr::null_mut();
             let mut small: windows_sys::Win32::UI::WindowsAndMessaging::HICON = std::ptr::null_mut();
             let count = unsafe {
@@ -6108,15 +6107,14 @@ fn file_icon_once(what: &crate::fileicons::What, px: u32) -> Option<crate::filei
                 if !to_destroy.is_null() {
                     unsafe { windows_sys::Win32::UI::WindowsAndMessaging::DestroyIcon(to_destroy) };
                 }
-                if !hicon.is_null() {
-                    if let Some((side, rgba)) = unsafe { hicon_rgba(hicon) } {
+                if !hicon.is_null()
+                    && let Some((side, rgba)) = unsafe { hicon_rgba(hicon) } {
                         return Some(crate::fileicons::Native::Rgba {
                             side,
                             rgba,
                             premultiplied: false,
                         });
                     }
-                }
             }
             let index = unsafe {
                 let mut info_sys: SHFILEINFOW = zeroed();

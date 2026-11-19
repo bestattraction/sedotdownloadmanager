@@ -52,6 +52,6 @@ for (const kind of ["chromium", "chrome-store", "firefox", "safari"]) {
   }
 }
 for (const zip of ["mdm-chromium.zip", "mdm-firefox.xpi", "mdm-chrome-store.zip"]) {
-  assert.ok(existsSync(new URL(zip, out)), zip);
+  assert.ok(existsSync(new URL(zip, out)) || existsSync(new URL(zip.replace("mdm-", "sdm-"), out)), zip);
 }
 console.log(`packages ok (version ${version}, unpacked ID ${unpackedId})`);

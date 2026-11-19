@@ -23,18 +23,6 @@ $dist = Join-Path $root "target\dist"
 $target = @{ x64 = "x86_64-pc-windows-msvc"; arm64 = "aarch64-pc-windows-msvc"; x86 = "i686-pc-windows-msvc" }[$Arch]
 $targetBin = Join-Path $root "target\$target\release"
 $defaultBin = Join-Path $root "target\release"
-$bin = if ((Test-Path "$targetBin\sdm.exe") -and (Test-Path "$defaultBin\sdm.exe")) {
-  if ((Get-Item "$defaultBin\sdm.exe").LastWriteTime -gt (Get-Item "$targetBin\sdm.exe").LastWriteTime) {
-    Copy-Item "$defaultBin\sdm.exe" "$targetBin\sdm.exe" -Force
-    $targetBin
-  } else {
-    $targetBin
-  }
-} elseif (Test-Path "$targetBin\sdm.exe") {
-  $targetBin
-} else {
-  $defaultBin
-}
 # The files' names: x64's as before, the others with their processor.
 $suffix = if ($Arch -eq "x64") { "" } else { "-$Arch" }
 
@@ -55,6 +43,21 @@ if (-not $NoBuild) {
   } finally {
     Remove-Item Env:CARGO_ENCODED_RUSTFLAGS
   }
+}
+
+$bin = if ((Test-Path "$targetBin\sdm.exe") -and (Test-Path "$defaultBin\sdm.exe")) {
+  if ((Get-Item "$defaultBin\sdm.exe").LastWriteTime -gt (Get-Item "$targetBin\sdm.exe").LastWriteTime) {
+    Copy-Item "$defaultBin\sdm.exe" "$targetBin\sdm.exe" -Force
+    $targetBin
+  } else {
+    $targetBin
+  }
+} elseif (Test-Path "$targetBin\sdm.exe") {
+  $targetBin
+} elseif (Test-Path "$defaultBin\sdm.exe") {
+  $defaultBin
+} else {
+  $targetBin
 }
 & (Join-Path $root "tools\extension\pack.ps1") | Out-Null
 

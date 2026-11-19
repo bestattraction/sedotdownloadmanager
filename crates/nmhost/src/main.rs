@@ -1568,8 +1568,10 @@ fn unregister(all_users: bool) -> Result<(), String> {
     for (dir, _) in host_dirs(all_users, None) {
         let _ = std::fs::remove_file(dir.join(format!("{HOST_NAME}.json")));
     }
-    for (dir, _) in external_dirs(all_users) {
-        let _ = std::fs::remove_file(dir.join(format!("{STORE_ID}.json")));
+    if let Some(id) = store_id() {
+        for (dir, _) in external_dirs(all_users) {
+            let _ = std::fs::remove_file(dir.join(format!("{id}.json")));
+        }
     }
     println!("unregistered {HOST_NAME}");
     Ok(())

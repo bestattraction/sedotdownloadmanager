@@ -581,16 +581,15 @@ impl Native {
                     rect,
                     position,
                     ..
-                } => {
+                }
                     // Only open the menu if the right-click was actually inside the tray icon's bounds.
                     // This protects against spurious events caused when other processes (like File Explorer)
                     // trigger notification-area updates or mouse releases while the cursor is over other windows.
-                    if is_in_tray_rect(position, rect) {
+                    if is_in_tray_rect(position, rect) => {
                         crate::crash::asked();
                         let _ = icon_tx.send(TrayCmd::ContextMenu);
                         icon_ctx.request_repaint();
                     }
-                }
                 _ => {}
             }
         }));
