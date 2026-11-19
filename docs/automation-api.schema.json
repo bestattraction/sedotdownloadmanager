@@ -679,6 +679,11 @@
             "null"
           ]
         },
+        "video_subs_only": {
+          "default": false,
+          "description": "From that button over a video: open the Download video window with subtitles only chosen.",
+          "type": "boolean"
+        },
         "video_title": {
           "default": null,
           "description": "The title of the page the button was clicked on (the tab's, for a player in a frame of\nit), without the site's name (`Film | Site` is `Film`: the extension's `withoutSiteName`):\na video yt-dlp knows only by its address is named by it.",

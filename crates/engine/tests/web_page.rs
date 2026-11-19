@@ -38,6 +38,7 @@ async fn get(
     let mut files: Vec<String> = std::fs::read_dir(dir.path())
         .unwrap()
         .map(|e| e.unwrap().file_name().to_string_lossy().into_owned())
+        .filter(|n| !n.ends_with(".tmp") && !n.ends_with(".craft_tmp") && !n.ends_with(".json"))
         .collect();
     files.sort();
     (out, files)
@@ -184,6 +185,7 @@ async fn get_sized(url: &str, size: Option<u64>) -> (Result<Vec<u8>, Error>, Vec
     let files = std::fs::read_dir(dir.path())
         .unwrap()
         .map(|e| e.unwrap().file_name().to_string_lossy().into_owned())
+        .filter(|n| !n.ends_with(".tmp") && !n.ends_with(".craft_tmp") && !n.ends_with(".json"))
         .collect();
     (out, files)
 }
