@@ -13,7 +13,8 @@ use crate::winui::{self, ButtonKind, r};
 
 /// The repository: problem reports, releases, source, licences.
 pub const REPO: &str = "https://github.com/bestattraction/sedotdownloadmanager";
-const LATEST: &str = "https://api.github.com/repos/bestattraction/sedotdownloadmanager/releases/latest";
+const LATEST: &str =
+    "https://api.github.com/repos/bestattraction/sedotdownloadmanager/releases/latest";
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");
 pub const COMMIT: &str = env!("MDM_COMMIT");
 /// While MDM runs, the automatic check comes again this often (it also checks at every start).
@@ -76,7 +77,6 @@ pub fn open_page(doc: &str) {
         }
     }
 }
-
 
 /// A new GitHub issue on the Bug report form (.github/ISSUE_TEMPLATE/bug.yml), filled with
 /// what MDM knows: its version, the system and its version, how it was installed, the

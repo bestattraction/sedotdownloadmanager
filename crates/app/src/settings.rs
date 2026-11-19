@@ -1011,7 +1011,10 @@ impl Settings {
         let parse_time = |s: &str| -> Option<chrono::NaiveTime> {
             chrono::NaiveTime::parse_from_str(s.trim(), "%H:%M").ok()
         };
-        let (Some(from), Some(to)) = (parse_time(&self.speed_alt_from), parse_time(&self.speed_alt_to)) else {
+        let (Some(from), Some(to)) = (
+            parse_time(&self.speed_alt_from),
+            parse_time(&self.speed_alt_to),
+        ) else {
             return false;
         };
         if from <= to {

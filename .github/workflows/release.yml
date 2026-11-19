@@ -446,6 +446,8 @@ jobs:
           }
           # One SHA256SUMS.txt for every file (each build wrote its own).
           Remove-Item dist/SHA256SUMS*.txt -ErrorAction SilentlyContinue
+          # Clean up internal geo data files from dist if downloaded with geo-data artifact
+          Remove-Item dist/*.bin.xz, dist/countries.txt, dist/flags.png, dist/LICENSE-flag-icons, dist/SOURCE.txt -ErrorAction SilentlyContinue
           $files = Get-ChildItem dist -File | Sort-Object Name
           $sums = $files | ForEach-Object { "$((Get-FileHash $_.FullName -Algorithm SHA256).Hash.ToLower())  $($_.Name)" }
           Set-Content -Encoding ascii dist/SHA256SUMS.txt $sums
@@ -513,4 +515,5 @@ jobs:
           }
           # The website links to the latest published release: rebuild it now that the files are
           # there (a release made with this token starts no workflow by itself).
-          try { gh workflow run pages.yml --ref main 2>$null } catch { Write-Warning "pages workflow: $_" }
+          $null = gh workflow run pages.yml --ref main 2>&1
+          $global:LASTEXITCODE = 0

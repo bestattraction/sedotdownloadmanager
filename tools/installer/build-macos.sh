@@ -145,6 +145,9 @@ EOF
   for p in "${programs[@]}"; do
     [ "$p" = misterdownloadmanager ] || codesign --force ${sign_opts[@]+"${sign_opts[@]}"} --sign "$sign" "$app/Contents/MacOS/$p"
   done
+  if [ -f "$app/Contents/MacOS/sdm" ]; then
+    codesign --force ${sign_opts[@]+"${sign_opts[@]}"} --sign "$sign" "$app/Contents/MacOS/sdm"
+  fi
   codesign --force ${sign_opts[@]+"${sign_opts[@]}"} --sign "$sign" "$app"
   codesign --verify --strict --deep "$app"
   if [ -n "${MDM_NOTARY_PROFILE:-}" ]; then

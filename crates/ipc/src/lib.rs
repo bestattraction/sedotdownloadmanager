@@ -350,7 +350,9 @@ pub fn data_dir() -> Option<PathBuf> {
     }
     static RESOLVED: std::sync::OnceLock<Option<PathBuf>> = std::sync::OnceLock::new();
     once(&RESOLVED, || {
-        if let Some(dir) = std::env::var_os("SDM_DATA_DIR").or_else(|| std::env::var_os("MDM_DATA_DIR")) {
+        if let Some(dir) =
+            std::env::var_os("SDM_DATA_DIR").or_else(|| std::env::var_os("MDM_DATA_DIR"))
+        {
             return Some(full(PathBuf::from(dir)));
         }
         if let Some(dir) = portable_dir() {

@@ -2317,7 +2317,10 @@ pub fn file_icon(what: &crate::fileicons::What, px: u32) -> Option<crate::fileic
         What::Folder => vec!["folder".to_string()],
         What::FolderOpen => vec!["folder-open".to_string(), "folder".to_string()],
         What::Path(p) => {
-            let ext = p.extension().and_then(|e| e.to_str()).map(|e| e.to_ascii_lowercase());
+            let ext = p
+                .extension()
+                .and_then(|e| e.to_str())
+                .map(|e| e.to_ascii_lowercase());
             let found = ext
                 .as_ref()
                 .and_then(|e| mime.mime_for(&format!("file.{e}")));
@@ -2415,9 +2418,11 @@ pub fn file_icon(what: &crate::fileicons::What, px: u32) -> Option<crate::fileic
         What::Folder | What::FolderOpen => "public.folder".to_string(),
         What::File(Some(ext)) => ext.clone(),
         What::File(None) => "public.data".to_string(),
-        What::Path(p) => {
-            p.extension().and_then(|e| e.to_str()).unwrap_or("public.data").to_string()
-        }
+        What::Path(p) => p
+            .extension()
+            .and_then(|e| e.to_str())
+            .unwrap_or("public.data")
+            .to_string(),
     };
     let side = px.clamp(1, 1024) as usize;
     objc2::rc::autoreleasepool(|_| {

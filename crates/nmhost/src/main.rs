@@ -1049,11 +1049,7 @@ fn deliver(cmd: &mdm_ipc::Command) -> Result<(), Undelivered> {
     let app = match std::fs::read_to_string(dir.join("app-path")) {
         Ok(path) if !path.trim().is_empty() => PathBuf::from(path.trim()),
         _ => {
-            let preferred = dir.join(if cfg!(windows) {
-                "sdm.exe"
-            } else {
-                "sdm"
-            });
+            let preferred = dir.join(if cfg!(windows) { "sdm.exe" } else { "sdm" });
             if preferred.exists() {
                 preferred
             } else {

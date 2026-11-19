@@ -227,7 +227,10 @@ pub fn paint(ui: &Ui, painter: &Painter, kind: Kind, rc: Rect) {
         let ext = match &what {
             What::File(Some(e)) => Some(e.as_str()),
             What::Path(p) => {
-                ext_str = p.extension().and_then(|e| e.to_str()).map(|e| e.to_ascii_lowercase());
+                ext_str = p
+                    .extension()
+                    .and_then(|e| e.to_str())
+                    .map(|e| e.to_ascii_lowercase());
                 ext_str.as_deref()
             }
             _ => None,

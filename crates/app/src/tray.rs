@@ -799,6 +799,8 @@ fn is_in_tray_rect(pos: tray_icon::dpi::PhysicalPosition<f64>, rect: tray_icon::
     }
     #[cfg(not(windows))]
     {
+        // On non-Windows platforms, spurious events from Explorer don't exist.
+        // If rect is reported, check bounds with margin; if not reported (0x0), always allow.
         if rect.size.width > 0 && rect.size.height > 0 {
             let margin = 16.0;
             pos.x >= rect.position.x - margin
@@ -806,7 +808,7 @@ fn is_in_tray_rect(pos: tray_icon::dpi::PhysicalPosition<f64>, rect: tray_icon::
                 && pos.y >= rect.position.y - margin
                 && pos.y <= rect.position.y + rect.size.height as f64 + margin
         } else {
-            false
+            true
         }
     }
 }

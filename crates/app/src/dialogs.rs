@@ -2281,7 +2281,10 @@ impl Complete {
                 } else if folder.clicked() {
                     show_download_in_folder(&self.path, self.moved_away);
                     Outcome::Done(())
-                } else if close.clicked() || self.snooze.is_some() || (!dragging && winui::escape_pressed(ui)) {
+                } else if close.clicked()
+                    || self.snooze.is_some()
+                    || (!dragging && winui::escape_pressed(ui))
+                {
                     Outcome::Done(())
                 } else {
                     Outcome::Open
@@ -2728,13 +2731,7 @@ impl SpeedSettings {
                 );
                 let alt = self.alt_on;
                 let c_alt = if alt { black } else { winui::LIGHT_DISABLED() };
-                winui::text(
-                    &p,
-                    o.x + 29.0,
-                    o.y + 215.0,
-                    crate::i18n::t("From"),
-                    c_alt,
-                );
+                winui::text(&p, o.x + 29.0, o.y + 215.0, crate::i18n::t("From"), c_alt);
                 winui::edit_light(
                     ui,
                     r(o, 65.0, 201.0, 50.0, 21.0),
@@ -2742,13 +2739,7 @@ impl SpeedSettings {
                     alt,
                     false,
                 );
-                winui::text(
-                    &p,
-                    o.x + 122.0,
-                    o.y + 215.0,
-                    crate::i18n::t("to"),
-                    c_alt,
-                );
+                winui::text(&p, o.x + 122.0, o.y + 215.0, crate::i18n::t("to"), c_alt);
                 winui::edit_light(
                     ui,
                     r(o, 140.0, 201.0, 50.0, 21.0),
@@ -3254,7 +3245,10 @@ it from Sedot Download Manager list of downloads?",
                 if no || winui::escape_pressed(ui) {
                     Outcome::Closed
                 } else if yes || winui::enter_pressed(ui) {
-                    Outcome::Done((if self.allow_files { self.files } else { false }, self.dont_show))
+                    Outcome::Done((
+                        if self.allow_files { self.files } else { false },
+                        self.dont_show,
+                    ))
                 } else {
                     Outcome::Open
                 }

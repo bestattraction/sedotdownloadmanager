@@ -99,8 +99,10 @@ impl Helpers {
             let net = crate::settings::own_net();
             match mdm_tools::check_ytdlp_update(&dir, &net).await {
                 Ok(Some(version)) => {
-                    *checking_slot.lock().unwrap() =
-                        Some(HelperMode::Update { name: "yt-dlp", version });
+                    *checking_slot.lock().unwrap() = Some(HelperMode::Update {
+                        name: "yt-dlp",
+                        version,
+                    });
                     ctx_clone.request_repaint();
                     return;
                 }
@@ -115,13 +117,16 @@ impl Helpers {
             {
                 match mdm_tools::ffmpeg::check_ffmpeg_update(&dir, &net).await {
                     Ok(Some(version)) => {
-                        *checking_slot.lock().unwrap() =
-                            Some(HelperMode::Update { name: "ffmpeg", version });
+                        *checking_slot.lock().unwrap() = Some(HelperMode::Update {
+                            name: "ffmpeg",
+                            version,
+                        });
                         ctx_clone.request_repaint();
                         return;
                     }
                     Err(e) => {
-                        *checking_slot.lock().unwrap() = Some(HelperMode::CheckError(e.to_string()));
+                        *checking_slot.lock().unwrap() =
+                            Some(HelperMode::CheckError(e.to_string()));
                         ctx_clone.request_repaint();
                         return;
                     }
@@ -311,15 +316,7 @@ impl Helpers {
                 crate::i18n::fmt(crate::i18n::t("Error: {error}"), &[("error", err)]),
             ),
         };
-        let extra = winui::banner(
-            ui,
-            &p,
-            o,
-            w,
-            "helpers-banner",
-            &headline,
-            &subline,
-        );
+        let extra = winui::banner(ui, &p, o, w, "helpers-banner", &headline, &subline);
         // Everything below it moves down with a taller banner.
         let o = o + egui::vec2(0.0, extra);
 
@@ -537,13 +534,9 @@ impl Helpers {
         if self.job.is_none() {
             match &self.mode {
                 HelperMode::UpToDate | HelperMode::CheckError(_) => {
-                    let [close_at] = winui::button_row(
-                        &p,
-                        &[("Close", 414.0, 90.0)],
-                        6.0,
-                        16.0,
-                        360.0,
-                    )[..] else {
+                    let [close_at] =
+                        winui::button_row(&p, &[("Close", 414.0, 90.0)], 6.0, 16.0, 360.0)[..]
+                    else {
                         unreachable!()
                     };
                     let close = winui::button(
@@ -559,13 +552,9 @@ impl Helpers {
                     }
                 }
                 HelperMode::Checking => {
-                    let [cancel_at] = winui::button_row(
-                        &p,
-                        &[("Cancel", 414.0, 90.0)],
-                        6.0,
-                        16.0,
-                        360.0,
-                    )[..] else {
+                    let [cancel_at] =
+                        winui::button_row(&p, &[("Cancel", 414.0, 90.0)], 6.0, 16.0, 360.0)[..]
+                    else {
                         unreachable!()
                     };
                     let cancel = winui::button(
@@ -588,10 +577,7 @@ impl Helpers {
                     };
                     let [not_now_at, yes_at] = winui::button_row(
                         &p,
-                        &[
-                            ("Not now", 196.0, 90.0),
-                            (yes_label, 292.0, 212.0),
-                        ],
+                        &[("Not now", 196.0, 90.0), (yes_label, 292.0, 212.0)],
                         6.0,
                         16.0,
                         360.0,

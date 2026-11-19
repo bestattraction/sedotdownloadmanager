@@ -2454,7 +2454,14 @@ pub fn is_pos_on_taskbar(x: i32, y: i32) -> bool {
         if pt_in(sec_wnd) {
             return true;
         }
-        sec_wnd = unsafe { FindWindowExW(std::ptr::null_mut(), sec_wnd, sec_class.as_ptr(), std::ptr::null()) };
+        sec_wnd = unsafe {
+            FindWindowExW(
+                std::ptr::null_mut(),
+                sec_wnd,
+                sec_class.as_ptr(),
+                std::ptr::null(),
+            )
+        };
     }
 
     // 3. Notification overflow window (the ^ pop-up)
@@ -6071,16 +6078,20 @@ fn file_icon_once(what: &crate::fileicons::What, px: u32) -> Option<crate::filei
                     windows_sys::Win32::UI::Shell::SHGFI_ICON | icon_flag,
                 )
             };
-            if ok != 0 && !info.hIcon.is_null()
-                && let Some((side, rgba)) = unsafe { hicon_rgba(info.hIcon) } {
-                    return Some(crate::fileicons::Native::Rgba {
-                        side,
-                        rgba,
-                        premultiplied: false,
-                    });
-                }
-            let mut large: windows_sys::Win32::UI::WindowsAndMessaging::HICON = std::ptr::null_mut();
-            let mut small: windows_sys::Win32::UI::WindowsAndMessaging::HICON = std::ptr::null_mut();
+            if ok != 0
+                && !info.hIcon.is_null()
+                && let Some((side, rgba)) = unsafe { hicon_rgba(info.hIcon) }
+            {
+                return Some(crate::fileicons::Native::Rgba {
+                    side,
+                    rgba,
+                    premultiplied: false,
+                });
+            }
+            let mut large: windows_sys::Win32::UI::WindowsAndMessaging::HICON =
+                std::ptr::null_mut();
+            let mut small: windows_sys::Win32::UI::WindowsAndMessaging::HICON =
+                std::ptr::null_mut();
             let count = unsafe {
                 windows_sys::Win32::UI::Shell::ExtractIconExW(
                     wide.as_ptr(),
@@ -6108,13 +6119,14 @@ fn file_icon_once(what: &crate::fileicons::What, px: u32) -> Option<crate::filei
                     unsafe { windows_sys::Win32::UI::WindowsAndMessaging::DestroyIcon(to_destroy) };
                 }
                 if !hicon.is_null()
-                    && let Some((side, rgba)) = unsafe { hicon_rgba(hicon) } {
-                        return Some(crate::fileicons::Native::Rgba {
-                            side,
-                            rgba,
-                            premultiplied: false,
-                        });
-                    }
+                    && let Some((side, rgba)) = unsafe { hicon_rgba(hicon) }
+                {
+                    return Some(crate::fileicons::Native::Rgba {
+                        side,
+                        rgba,
+                        premultiplied: false,
+                    });
+                }
             }
             let index = unsafe {
                 let mut info_sys: SHFILEINFOW = zeroed();
@@ -6125,13 +6137,11 @@ fn file_icon_once(what: &crate::fileicons::What, px: u32) -> Option<crate::filei
                     size_of::<SHFILEINFOW>() as u32,
                     SHGFI_SYSICONINDEX,
                 );
-                if ok != 0 {
-                    info_sys.iIcon
-                } else {
-                    -1
-                }
+                if ok != 0 { info_sys.iIcon } else { -1 }
             };
-            if index >= 0 && let Some(native) = list_icon(index, px) {
+            if index >= 0
+                && let Some(native) = list_icon(index, px)
+            {
                 return Some(native);
             }
             let ext = path

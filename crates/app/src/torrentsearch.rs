@@ -1,11 +1,11 @@
 //! Integrated Torrent Search: Search torrents from public indexers directly within SDM.
 
-use std::sync::{Arc, Mutex};
-use egui::{pos2, vec2, Color32, Rect};
+use egui::{Color32, Rect, pos2, vec2};
 use serde::Deserialize;
+use std::sync::{Arc, Mutex};
 
 use crate::dialogs::{Outcome, window};
-use crate::winui::{self, ButtonKind, r, text, TEXT, MUTED, BG};
+use crate::winui::{self, BG, ButtonKind, MUTED, TEXT, r, text};
 
 #[derive(Clone, Debug, Deserialize)]
 #[allow(dead_code)]
@@ -145,9 +145,10 @@ impl TorrentSearch {
             let encoded: String = url::form_urlencoded::byte_serialize(q.as_bytes()).collect();
             let url = format!("https://apibay.org/q.php?q={encoded}");
             let res: Result<Vec<ApibayItem>, String> = match reqwest::get(&url).await {
-                Ok(resp) if resp.status().is_success() => {
-                    resp.json::<Vec<ApibayItem>>().await.map_err(|e| e.to_string())
-                }
+                Ok(resp) if resp.status().is_success() => resp
+                    .json::<Vec<ApibayItem>>()
+                    .await
+                    .map_err(|e| e.to_string()),
                 Ok(resp) => Err(format!("HTTP error: {}", resp.status())),
                 Err(e) => Err(format!("Request error: {e}")),
             };
@@ -189,7 +190,6 @@ impl TorrentSearch {
             self.search(rt, ctx.clone());
         }
         let mut download_magnet = None;
-        
 
         window(
             ctx,
@@ -263,35 +263,123 @@ impl TorrentSearch {
                 text(&p, o.x + 270.0, o.y + 57.0, sort_label, MUTED());
 
                 let arrow = |dir: SortDirection| {
-                    if dir == SortDirection::Ascending { " ▲" } else { " ▼" }
+                    if dir == SortDirection::Ascending {
+                        " ▲"
+                    } else {
+                        " ▼"
+                    }
                 };
 
                 let col_kind = |target: SortColumn, current: SortColumn| {
-                    if target == current { ButtonKind::Default } else { ButtonKind::Normal }
+                    if target == current {
+                        ButtonKind::Default
+                    } else {
+                        ButtonKind::Normal
+                    }
                 };
 
-                let sort_name_btn = format!("Name{}", if self.sort_col == SortColumn::Name { arrow(self.sort_dir) } else { "" });
-                if winui::button(ui, r(o, 320.0, 44.0, 80.0, 22.0), &sort_name_btn, col_kind(SortColumn::Name, self.sort_col), false, None).clicked() {
+                let sort_name_btn = format!(
+                    "Name{}",
+                    if self.sort_col == SortColumn::Name {
+                        arrow(self.sort_dir)
+                    } else {
+                        ""
+                    }
+                );
+                if winui::button(
+                    ui,
+                    r(o, 320.0, 44.0, 80.0, 22.0),
+                    &sort_name_btn,
+                    col_kind(SortColumn::Name, self.sort_col),
+                    false,
+                    None,
+                )
+                .clicked()
+                {
                     self.toggle_sort(SortColumn::Name);
                 }
 
-                let sort_size_btn = format!("Size{}", if self.sort_col == SortColumn::Size { arrow(self.sort_dir) } else { "" });
-                if winui::button(ui, r(o, 404.0, 44.0, 80.0, 22.0), &sort_size_btn, col_kind(SortColumn::Size, self.sort_col), false, None).clicked() {
+                let sort_size_btn = format!(
+                    "Size{}",
+                    if self.sort_col == SortColumn::Size {
+                        arrow(self.sort_dir)
+                    } else {
+                        ""
+                    }
+                );
+                if winui::button(
+                    ui,
+                    r(o, 404.0, 44.0, 80.0, 22.0),
+                    &sort_size_btn,
+                    col_kind(SortColumn::Size, self.sort_col),
+                    false,
+                    None,
+                )
+                .clicked()
+                {
                     self.toggle_sort(SortColumn::Size);
                 }
 
-                let sort_seeds_btn = format!("Seeds{}", if self.sort_col == SortColumn::Seeds { arrow(self.sort_dir) } else { "" });
-                if winui::button(ui, r(o, 488.0, 44.0, 84.0, 22.0), &sort_seeds_btn, col_kind(SortColumn::Seeds, self.sort_col), false, None).clicked() {
+                let sort_seeds_btn = format!(
+                    "Seeds{}",
+                    if self.sort_col == SortColumn::Seeds {
+                        arrow(self.sort_dir)
+                    } else {
+                        ""
+                    }
+                );
+                if winui::button(
+                    ui,
+                    r(o, 488.0, 44.0, 84.0, 22.0),
+                    &sort_seeds_btn,
+                    col_kind(SortColumn::Seeds, self.sort_col),
+                    false,
+                    None,
+                )
+                .clicked()
+                {
                     self.toggle_sort(SortColumn::Seeds);
                 }
 
-                let sort_peers_btn = format!("Peers{}", if self.sort_col == SortColumn::Peers { arrow(self.sort_dir) } else { "" });
-                if winui::button(ui, r(o, 576.0, 44.0, 84.0, 22.0), &sort_peers_btn, col_kind(SortColumn::Peers, self.sort_col), false, None).clicked() {
+                let sort_peers_btn = format!(
+                    "Peers{}",
+                    if self.sort_col == SortColumn::Peers {
+                        arrow(self.sort_dir)
+                    } else {
+                        ""
+                    }
+                );
+                if winui::button(
+                    ui,
+                    r(o, 576.0, 44.0, 84.0, 22.0),
+                    &sort_peers_btn,
+                    col_kind(SortColumn::Peers, self.sort_col),
+                    false,
+                    None,
+                )
+                .clicked()
+                {
                     self.toggle_sort(SortColumn::Peers);
                 }
 
-                let sort_date_btn = format!("Date{}", if self.sort_col == SortColumn::Date { arrow(self.sort_dir) } else { "" });
-                if winui::button(ui, r(o, 664.0, 44.0, 80.0, 22.0), &sort_date_btn, col_kind(SortColumn::Date, self.sort_col), false, None).clicked() {
+                let sort_date_btn = format!(
+                    "Date{}",
+                    if self.sort_col == SortColumn::Date {
+                        arrow(self.sort_dir)
+                    } else {
+                        ""
+                    }
+                );
+                if winui::button(
+                    ui,
+                    r(o, 664.0, 44.0, 80.0, 22.0),
+                    &sort_date_btn,
+                    col_kind(SortColumn::Date, self.sort_col),
+                    false,
+                    None,
+                )
+                .clicked()
+                {
                     self.toggle_sort(SortColumn::Date);
                 }
 
@@ -299,43 +387,126 @@ impl TorrentSearch {
                 let table_rect = r(o, 14.0, 72.0, 752.0, 396.0);
                 winui::solid(&p, table_rect, winui::FIELD_EDGE());
                 let header_h = 24.0;
-                let head_rect = Rect::from_min_size(table_rect.min, vec2(table_rect.width(), header_h));
+                let head_rect =
+                    Rect::from_min_size(table_rect.min, vec2(table_rect.width(), header_h));
                 p.rect_filled(head_rect, 0.0, winui::LIST_HEADER());
 
                 // Interactive column headers
-                let col_name_rect = Rect::from_min_max(pos2(table_rect.min.x, table_rect.min.y), pos2(table_rect.min.x + 400.0, table_rect.min.y + header_h));
-                let col_size_rect = Rect::from_min_max(pos2(table_rect.min.x + 400.0, table_rect.min.y), pos2(table_rect.min.x + 490.0, table_rect.min.y + header_h));
-                let col_seeds_rect = Rect::from_min_max(pos2(table_rect.min.x + 490.0, table_rect.min.y), pos2(table_rect.min.x + 570.0, table_rect.min.y + header_h));
-                let col_peers_rect = Rect::from_min_max(pos2(table_rect.min.x + 570.0, table_rect.min.y), pos2(table_rect.min.x + 650.0, table_rect.min.y + header_h));
-                let col_date_rect = Rect::from_min_max(pos2(table_rect.min.x + 650.0, table_rect.min.y), pos2(table_rect.max.x, table_rect.min.y + header_h));
+                let col_name_rect = Rect::from_min_max(
+                    pos2(table_rect.min.x, table_rect.min.y),
+                    pos2(table_rect.min.x + 400.0, table_rect.min.y + header_h),
+                );
+                let col_size_rect = Rect::from_min_max(
+                    pos2(table_rect.min.x + 400.0, table_rect.min.y),
+                    pos2(table_rect.min.x + 490.0, table_rect.min.y + header_h),
+                );
+                let col_seeds_rect = Rect::from_min_max(
+                    pos2(table_rect.min.x + 490.0, table_rect.min.y),
+                    pos2(table_rect.min.x + 570.0, table_rect.min.y + header_h),
+                );
+                let col_peers_rect = Rect::from_min_max(
+                    pos2(table_rect.min.x + 570.0, table_rect.min.y),
+                    pos2(table_rect.min.x + 650.0, table_rect.min.y + header_h),
+                );
+                let col_date_rect = Rect::from_min_max(
+                    pos2(table_rect.min.x + 650.0, table_rect.min.y),
+                    pos2(table_rect.max.x, table_rect.min.y + header_h),
+                );
 
-                if ui.allocate_rect(col_name_rect, egui::Sense::click()).clicked() {
+                if ui
+                    .allocate_rect(col_name_rect, egui::Sense::click())
+                    .clicked()
+                {
                     self.toggle_sort(SortColumn::Name);
                 }
-                if ui.allocate_rect(col_size_rect, egui::Sense::click()).clicked() {
+                if ui
+                    .allocate_rect(col_size_rect, egui::Sense::click())
+                    .clicked()
+                {
                     self.toggle_sort(SortColumn::Size);
                 }
-                if ui.allocate_rect(col_seeds_rect, egui::Sense::click()).clicked() {
+                if ui
+                    .allocate_rect(col_seeds_rect, egui::Sense::click())
+                    .clicked()
+                {
                     self.toggle_sort(SortColumn::Seeds);
                 }
-                if ui.allocate_rect(col_peers_rect, egui::Sense::click()).clicked() {
+                if ui
+                    .allocate_rect(col_peers_rect, egui::Sense::click())
+                    .clicked()
+                {
                     self.toggle_sort(SortColumn::Peers);
                 }
-                if ui.allocate_rect(col_date_rect, egui::Sense::click()).clicked() {
+                if ui
+                    .allocate_rect(col_date_rect, egui::Sense::click())
+                    .clicked()
+                {
                     self.toggle_sort(SortColumn::Date);
                 }
 
                 // Column header labels with indicators
-                let name_hdr = format!("{} {}", crate::i18n::t("Name"), if self.sort_col == SortColumn::Name { arrow(self.sort_dir) } else { "" });
-                let size_hdr = format!("{} {}", crate::i18n::t("Size"), if self.sort_col == SortColumn::Size { arrow(self.sort_dir) } else { "" });
-                let seeds_hdr = format!("{} {}", crate::i18n::t("Seeds"), if self.sort_col == SortColumn::Seeds { arrow(self.sort_dir) } else { "" });
-                let peers_hdr = format!("{} {}", crate::i18n::t("Peers"), if self.sort_col == SortColumn::Peers { arrow(self.sort_dir) } else { "" });
-                let date_hdr = format!("{} {}", crate::i18n::t("Date"), if self.sort_col == SortColumn::Date { arrow(self.sort_dir) } else { "" });
+                let name_hdr = format!(
+                    "{} {}",
+                    crate::i18n::t("Name"),
+                    if self.sort_col == SortColumn::Name {
+                        arrow(self.sort_dir)
+                    } else {
+                        ""
+                    }
+                );
+                let size_hdr = format!(
+                    "{} {}",
+                    crate::i18n::t("Size"),
+                    if self.sort_col == SortColumn::Size {
+                        arrow(self.sort_dir)
+                    } else {
+                        ""
+                    }
+                );
+                let seeds_hdr = format!(
+                    "{} {}",
+                    crate::i18n::t("Seeds"),
+                    if self.sort_col == SortColumn::Seeds {
+                        arrow(self.sort_dir)
+                    } else {
+                        ""
+                    }
+                );
+                let peers_hdr = format!(
+                    "{} {}",
+                    crate::i18n::t("Peers"),
+                    if self.sort_col == SortColumn::Peers {
+                        arrow(self.sort_dir)
+                    } else {
+                        ""
+                    }
+                );
+                let date_hdr = format!(
+                    "{} {}",
+                    crate::i18n::t("Date"),
+                    if self.sort_col == SortColumn::Date {
+                        arrow(self.sort_dir)
+                    } else {
+                        ""
+                    }
+                );
 
                 text(&p, o.x + 22.0, o.y + 88.0, &name_hdr, TEXT());
                 text(&p, o.x + 420.0, o.y + 88.0, &size_hdr, TEXT());
-                text(&p, o.x + 510.0, o.y + 88.0, &seeds_hdr, Color32::from_rgb(0, 180, 0));
-                text(&p, o.x + 590.0, o.y + 88.0, &peers_hdr, Color32::from_rgb(60, 140, 220));
+                text(
+                    &p,
+                    o.x + 510.0,
+                    o.y + 88.0,
+                    &seeds_hdr,
+                    Color32::from_rgb(0, 180, 0),
+                );
+                text(
+                    &p,
+                    o.x + 590.0,
+                    o.y + 88.0,
+                    &peers_hdr,
+                    Color32::from_rgb(60, 140, 220),
+                );
                 text(&p, o.x + 670.0, o.y + 88.0, &date_hdr, TEXT());
 
                 // Scrollable rows
@@ -368,7 +539,10 @@ impl TorrentSearch {
                         if y + row_h <= body_rect.min.y || y >= body_rect.max.y {
                             continue;
                         }
-                        let row_rc = Rect::from_min_size(pos2(body_rect.min.x, y), vec2(body_rect.width(), row_h));
+                        let row_rc = Rect::from_min_size(
+                            pos2(body_rect.min.x, y),
+                            vec2(body_rect.width(), row_h),
+                        );
                         let is_sel = self.selected == Some(i);
 
                         let resp = ui.allocate_rect(row_rc, egui::Sense::click());
@@ -385,12 +559,43 @@ impl TorrentSearch {
                         }
 
                         let text_color = if is_sel { Color32::WHITE } else { TEXT() };
-                        let (fit_name, _) = winui::text_fit(&p, o.x + 22.0, y + 16.0, &item.name, text_color, o.x + 400.0);
+                        let (fit_name, _) = winui::text_fit(
+                            &p,
+                            o.x + 22.0,
+                            y + 16.0,
+                            &item.name,
+                            text_color,
+                            o.x + 400.0,
+                        );
                         let _ = fit_name;
-                        text(&p, o.x + 420.0, y + 16.0, &crate::model::size(item.size), text_color);
-                        text(&p, o.x + 510.0, y + 16.0, &item.seeders.to_string(), Color32::from_rgb(0, 180, 0));
-                        text(&p, o.x + 590.0, y + 16.0, &item.leechers.to_string(), Color32::from_rgb(60, 140, 220));
-                        text(&p, o.x + 670.0, y + 16.0, &format_date(item.added), text_color);
+                        text(
+                            &p,
+                            o.x + 420.0,
+                            y + 16.0,
+                            &crate::model::size(item.size),
+                            text_color,
+                        );
+                        text(
+                            &p,
+                            o.x + 510.0,
+                            y + 16.0,
+                            &item.seeders.to_string(),
+                            Color32::from_rgb(0, 180, 0),
+                        );
+                        text(
+                            &p,
+                            o.x + 590.0,
+                            y + 16.0,
+                            &item.leechers.to_string(),
+                            Color32::from_rgb(60, 140, 220),
+                        );
+                        text(
+                            &p,
+                            o.x + 670.0,
+                            y + 16.0,
+                            &format_date(item.added),
+                            text_color,
+                        );
                     }
                 }
 
@@ -435,8 +640,12 @@ impl TorrentSearch {
                 )
                 .clicked();
 
-                if has_sel && let Some(sel) = self.selected && let Some(item) = items.get(sel) {
-                    let dn: String = url::form_urlencoded::byte_serialize(item.name.as_bytes()).collect();
+                if has_sel
+                    && let Some(sel) = self.selected
+                    && let Some(item) = items.get(sel)
+                {
+                    let dn: String =
+                        url::form_urlencoded::byte_serialize(item.name.as_bytes()).collect();
                     let base_magnet = format!("magnet:?xt=urn:btih:{}&dn={dn}", item.info_hash);
                     let full_magnet = mdm_torrent::trackers::append_to_magnet(
                         &base_magnet,

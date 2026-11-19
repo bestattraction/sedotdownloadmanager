@@ -61,11 +61,39 @@ pub fn install_fonts(defs: &mut egui::FontDefinitions, font_dir: Option<&std::pa
         .cloned()
         .unwrap_or_default();
     for (family, files) in [
-        ("tahoma", &["Inter-Regular.ttf", "Inter.ttf", "segoeui.ttf", "tahoma.ttf"][..]),
-        ("tahoma-bold", &["Inter-Bold.ttf", "Inter-SemiBold.ttf", "segoeuib.ttf", "tahomabd.ttf"][..]),
-        ("arial-bold", &["Inter-Bold.ttf", "Inter-SemiBold.ttf", "segoeuib.ttf", "arialbd.ttf"][..]),
+        (
+            "tahoma",
+            &[
+                "Inter-Regular.ttf",
+                "Inter.ttf",
+                "segoeui.ttf",
+                "tahoma.ttf",
+            ][..],
+        ),
+        (
+            "tahoma-bold",
+            &[
+                "Inter-Bold.ttf",
+                "Inter-SemiBold.ttf",
+                "segoeuib.ttf",
+                "tahomabd.ttf",
+            ][..],
+        ),
+        (
+            "arial-bold",
+            &[
+                "Inter-Bold.ttf",
+                "Inter-SemiBold.ttf",
+                "segoeuib.ttf",
+                "arialbd.ttf",
+            ][..],
+        ),
     ] {
-        let fonts = match font_dir.and_then(|d| files.iter().find_map(|f| crate::theme::read_font(&d.join(f)))) {
+        let fonts = match font_dir.and_then(|d| {
+            files
+                .iter()
+                .find_map(|f| crate::theme::read_font(&d.join(f)))
+        }) {
             Some(bytes) => {
                 defs.font_data.insert(
                     family.into(),

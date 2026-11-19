@@ -1477,12 +1477,13 @@ pub(crate) fn find_primary_video_in_dir(dir: &std::path::Path) -> Option<std::pa
                     largest = Some((path, len));
                 }
             } else if path.is_dir()
-                && let Some(sub) = find_primary_video_in_dir(&path) {
-                    let len = std::fs::metadata(&sub).map(|m| m.len()).unwrap_or(0);
-                    if largest.as_ref().is_none_or(|(_, max)| len > *max) {
-                        largest = Some((sub, len));
-                    }
+                && let Some(sub) = find_primary_video_in_dir(&path)
+            {
+                let len = std::fs::metadata(&sub).map(|m| m.len()).unwrap_or(0);
+                if largest.as_ref().is_none_or(|(_, max)| len > *max) {
+                    largest = Some((sub, len));
                 }
+            }
         }
     }
     largest.map(|(p, _)| p)
@@ -5224,7 +5225,8 @@ impl App {
             self.dirty = true;
         }
         if notify_ui {
-            self.extracts.finished(id, &self.items, &self.settings, false);
+            self.extracts
+                .finished(id, &self.items, &self.settings, false);
         }
     }
 
@@ -5246,7 +5248,8 @@ impl App {
                 } else if !self.renaming.iter().any(|(rid, _)| *rid == id) {
                     let renaming = self.apply_deferred_rename(id);
                     if !renaming {
-                        self.extracts.finished(id, &self.items, &self.settings, false);
+                        self.extracts
+                            .finished(id, &self.items, &self.settings, false);
                     }
                 }
             }
@@ -5270,7 +5273,8 @@ impl App {
         for (id, desired, check) in checked {
             let renaming = check.is_some_and(|c| self.rename_checked(id, desired, c));
             if !renaming {
-                self.extracts.finished(id, &self.items, &self.settings, false);
+                self.extracts
+                    .finished(id, &self.items, &self.settings, false);
             }
         }
 
@@ -5325,7 +5329,13 @@ impl App {
             .then(|| self.settings.category_dir(Category::Music, &self.downloads));
         let mut dirs = std::collections::HashMap::new();
         for c in Category::all() {
-            dirs.insert(c, self.settings.category_dir(c, &self.downloads).display().to_string());
+            dirs.insert(
+                c,
+                self.settings
+                    .category_dir(c, &self.downloads)
+                    .display()
+                    .to_string(),
+            );
         }
         match page {
             Some((page, cmd)) => crate::videodlg::VideoDialog::for_page(dir, page, cmd),
@@ -7505,7 +7515,10 @@ impl App {
                 for id in many {
                     if self.item(id).is_some_and(|i| i.can_start()) {
                         self.start(id, true);
-                    } else if self.item(id).is_some_and(|i| i.live.is_some() || i.status == Status::Downloading) {
+                    } else if self
+                        .item(id)
+                        .is_some_and(|i| i.live.is_some() || i.status == Status::Downloading)
+                    {
                         self.show_progress_window(id);
                     }
                 }
@@ -7706,9 +7719,11 @@ impl App {
             }
             Cmd::PlayMedia => {
                 if let Some(id) = target
-                    && let Some(item) = self.item(id) && item.torrent.is_some() {
-                        self.toggle_torrent_order(id, true);
-                    }
+                    && let Some(item) = self.item(id)
+                    && item.torrent.is_some()
+                {
+                    self.toggle_torrent_order(id, true);
+                }
                 if let Some(d) = dest {
                     let target_file = if d.is_dir() {
                         find_primary_video_in_dir(&d).unwrap_or(d)
@@ -8035,7 +8050,8 @@ impl App {
                 .any(|q| q.schedule.auto_extract && q.items.contains(id));
             if !renaming {
                 // Its archive, when it is to be extracted and its last volume is in (#37).
-                self.extracts.finished(*id, &self.items, &self.settings, queue_auto);
+                self.extracts
+                    .finished(*id, &self.items, &self.settings, queue_auto);
             }
             // Finished files leave download queues (synchronization queues keep them).
             for q in self.queues.iter_mut().filter(|q| !q.sync) {
@@ -8315,7 +8331,12 @@ impl App {
         let mut menu = match index {
             0 => vec![
                 I("&Add new download", Cmd::AddUrl, true, false),
-                I("Search torrents... (Ctrl+Shift+F)", Cmd::TorrentSearch, true, false),
+                I(
+                    "Search torrents... (Ctrl+Shift+F)",
+                    Cmd::TorrentSearch,
+                    true,
+                    false,
+                ),
                 I("Open &torrent file...", Cmd::OpenTorrentFile, true, false),
                 I("Add &magnet link...", Cmd::AddMagnet, true, false),
                 I("Torrent setti&ngs...", Cmd::TorrentSettings, true, false),
@@ -8408,7 +8429,12 @@ impl App {
                 Sep,
                 I("Find (Ctrl-F)", Cmd::Find, true, false),
                 I("Find Next (F3)", Cmd::FindNext, true, false),
-                I("Search torrents... (Ctrl+Shift+F)", Cmd::TorrentSearch, true, false),
+                I(
+                    "Search torrents... (Ctrl+Shift+F)",
+                    Cmd::TorrentSearch,
+                    true,
+                    false,
+                ),
                 I(
                     "Select &all",
                     Cmd::SelectAll,
@@ -8932,7 +8958,12 @@ impl App {
             Popup::QueueDrop(start) => (self.queue_drop(start), None),
             Popup::TorrentDrop => (
                 vec![
-                    MenuEntry::Item("Search torrents... (Ctrl+Shift+F)", Cmd::TorrentSearch, true, false),
+                    MenuEntry::Item(
+                        "Search torrents... (Ctrl+Shift+F)",
+                        Cmd::TorrentSearch,
+                        true,
+                        false,
+                    ),
                     MenuEntry::Item("Open &torrent file...", Cmd::OpenTorrentFile, true, false),
                     MenuEntry::Item("Add &magnet link...", Cmd::AddMagnet, true, false),
                     MenuEntry::Item("&RSS feeds...", Cmd::RssFeeds(false), true, false),
@@ -8960,7 +8991,12 @@ impl App {
         use MenuEntry::{Item as I, Sep};
         vec![
             I("Add &new download...", Cmd::AddUrl, true, false),
-            I("Search torrents... (Ctrl+Shift+F)", Cmd::TorrentSearch, true, false),
+            I(
+                "Search torrents... (Ctrl+Shift+F)",
+                Cmd::TorrentSearch,
+                true,
+                false,
+            ),
             Sep,
             I(
                 "Select &all",
@@ -9034,9 +9070,7 @@ impl App {
         });
         let torrent = it.and_then(|i| i.torrent.as_ref().map(|t| (i, t)));
         let can_preview = !done
-            && it.is_some_and(|i| {
-                i.dest.exists() && (i.torrent.is_some() || i.video.is_some())
-            });
+            && it.is_some_and(|i| i.dest.exists() && (i.torrent.is_some() || i.video.is_some()));
         let mut entries = vec![
             // i18n: verb: opens the downloaded file
             I("Open", Cmd::Open, done, false),
@@ -9050,7 +9084,12 @@ impl App {
                 false,
             ),
             Sep,
-            I("Search torrents... (Ctrl+Shift+F)", Cmd::TorrentSearch, true, false),
+            I(
+                "Search torrents... (Ctrl+Shift+F)",
+                Cmd::TorrentSearch,
+                true,
+                false,
+            ),
             Sep,
             I("Move/Rename (Ctrl-M)", Cmd::MoveRename, movable, false),
             Sep,
@@ -9197,7 +9236,12 @@ impl App {
                         None => off("Properties"),
                     },
                     Sep,
-                    I("Search torrents... (Ctrl+Shift+F)", Cmd::TorrentSearch, true, false),
+                    I(
+                        "Search torrents... (Ctrl+Shift+F)",
+                        Cmd::TorrentSearch,
+                        true,
+                        false,
+                    ),
                     Sep,
                     I("Add category", Cmd::AddCategory, true, false),
                     match cat {
@@ -9937,8 +9981,12 @@ impl App {
         // thread (#418). The full list: Help → Keyboard shortcuts (`help.rs`).
         if chosen.is_none() && self.popup.is_none() && self.open_menu.is_none() {
             let (search_torrents, find, next, add, clip, recheck_torrent) = ctx.input_mut(|i| {
-                let search_torrents = i.consume_key(egui::Modifiers::COMMAND | egui::Modifiers::SHIFT, egui::Key::F);
-                let find = !search_torrents && i.consume_key(egui::Modifiers::COMMAND, egui::Key::F);
+                let search_torrents = i.consume_key(
+                    egui::Modifiers::COMMAND | egui::Modifiers::SHIFT,
+                    egui::Key::F,
+                );
+                let find =
+                    !search_torrents && i.consume_key(egui::Modifiers::COMMAND, egui::Key::F);
                 (
                     search_torrents,
                     find,
@@ -9967,9 +10015,11 @@ impl App {
                 chosen = Some((Cmd::BatchClipboard, None));
             } else if recheck_torrent
                 && let Some(target) = self.selection.one()
-                    && let Some(item) = self.item(target) && item.torrent.is_some() {
-                        chosen = Some((Cmd::TorrentRecheck, Some(target)));
-                    }
+                && let Some(item) = self.item(target)
+                && item.torrent.is_some()
+            {
+                chosen = Some((Cmd::TorrentRecheck, Some(target)));
+            }
         }
         // Delete removes the selected downloads, Shift+Delete with their files (both ask first);
         // not while a text box (Find, a filter) has the keys.
@@ -11137,7 +11187,9 @@ impl App {
                         return;
                     }
                     #[cfg(windows)]
-                    if let Ok(Some(version)) = mdm_tools::ffmpeg::check_ffmpeg_update(&dir, &net).await {
+                    if let Ok(Some(version)) =
+                        mdm_tools::ffmpeg::check_ffmpeg_update(&dir, &net).await
+                    {
                         *slot.lock().unwrap() = Some(HelperUpdateResult::Update {
                             name: "ffmpeg",
                             version,
@@ -11150,11 +11202,12 @@ impl App {
 
         let found_update = self.helper_update_slot.lock().unwrap().take();
         if let Some(HelperUpdateResult::Update { name, version }) = found_update
-            && self.helpers.is_none() {
-                tracing::info!("helper update available: {name} {version}");
-                self.helpers = Some(crate::helpers::Helpers::for_update(name, version));
-                self.raise_helpers = true;
-            }
+            && self.helpers.is_none()
+        {
+            tracing::info!("helper update available: {name} {version}");
+            self.helpers = Some(crate::helpers::Helpers::for_update(name, version));
+            self.raise_helpers = true;
+        }
 
         if self.helpers.is_some() {
             if self.raise_helpers && crate::dialogs::focus_when_shown(ctx, "helpers") {
@@ -11801,9 +11854,11 @@ impl App {
                             &add.dir.display().to_string(),
                         );
                         if (add.remember || self.settings.change_folder_on_last)
-                            && self
-                                .settings
-                                .keep_category_dir(add.category, &add.dir, &self.downloads)
+                            && self.settings.keep_category_dir(
+                                add.category,
+                                &add.dir,
+                                &self.downloads,
+                            )
                         {
                             self.dirty = true;
                         }

@@ -385,11 +385,7 @@ impl ReportWindow {
         let alive = self.app_alive();
         let (made, fetching, no_symbols) = {
             let s = self.shared.lock().unwrap_or_else(|e| e.into_inner());
-            (
-                s.made.clone(),
-                s.fetching,
-                s.no_symbols.clone(),
-            )
+            (s.made.clone(), s.fetching, s.no_symbols.clone())
         };
 
         // The app's icon and the heading.
@@ -615,7 +611,6 @@ impl ReportWindow {
             format!("What I was doing:\n{}\n\n{}", self.what.trim(), made.text)
         }
     }
-
 }
 
 /// The Crash report form's fields (.github/ISSUE_TEMPLATE/crash.yml ids), the report aside.

@@ -132,8 +132,15 @@ pub fn extract_torrent_source(raw: &str) -> Option<String> {
     }
 
     // 3. 32-character base32 string (RFC 4648 base32 info-hash, 2-7, A-Z)
-    if clean.len() == 32 && clean.chars().all(|c| matches!(c, 'a'..='z' | 'A'..='Z' | '2'..='7')) {
-        return Some(format!("magnet:?xt=urn:btih:{}", clean.to_ascii_uppercase()));
+    if clean.len() == 32
+        && clean
+            .chars()
+            .all(|c| matches!(c, 'a'..='z' | 'A'..='Z' | '2'..='7'))
+    {
+        return Some(format!(
+            "magnet:?xt=urn:btih:{}",
+            clean.to_ascii_uppercase()
+        ));
     }
 
     // 4. HTTP(S) URL to a .torrent file
@@ -462,11 +469,8 @@ impl TorrentDialog {
                     // Open the first two levels; deeper folders start closed.
                     self.open = self.tree.iter().map(|n| n.depth < 2).collect();
                     if !self.folder_edited {
-                        let dir = category_folder(
-                            self.category,
-                            &self.downloads,
-                            &self.category_dirs,
-                        );
+                        let dir =
+                            category_folder(self.category, &self.downloads, &self.category_dirs);
                         self.folder = dir.display().to_string();
                     }
                     self.meta = Some(meta);
@@ -1566,7 +1570,9 @@ impl TorrentSettings {
                     &mut pref_enc,
                     "Prefer protocol encryption (anti-throttling)",
                     true,
-                ).changed() {
+                )
+                .changed()
+                {
                     n.encryption = if pref_enc { 0 } else { 2 };
                 }
                 winui::fit(
@@ -2142,13 +2148,17 @@ mod tests {
 
         // Quoted magnet link
         assert_eq!(
-            extract_torrent_source(r#""magnet:?xt=urn:btih:da39a3ee5e6b4b0d3255bfef95601890afd80709""#),
+            extract_torrent_source(
+                r#""magnet:?xt=urn:btih:da39a3ee5e6b4b0d3255bfef95601890afd80709""#
+            ),
             Some("magnet:?xt=urn:btih:da39a3ee5e6b4b0d3255bfef95601890afd80709".to_owned())
         );
 
         // In text
         assert_eq!(
-            extract_torrent_source("Download this: magnet:?xt=urn:btih:da39a3ee5e6b4b0d3255bfef95601890afd80709 thanks!"),
+            extract_torrent_source(
+                "Download this: magnet:?xt=urn:btih:da39a3ee5e6b4b0d3255bfef95601890afd80709 thanks!"
+            ),
             Some("magnet:?xt=urn:btih:da39a3ee5e6b4b0d3255bfef95601890afd80709".to_owned())
         );
 

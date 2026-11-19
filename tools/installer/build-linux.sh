@@ -159,6 +159,8 @@ cp -a "$system/." %{buildroot}/
 /usr/bin/misterdownloadmanager-nmhost
 /usr/bin/misterdownloadmanager-cli
 /usr/bin/misterdownloadmanager-mcp
+/usr/bin/sdm
+/usr/bin/sedotdownloadmanager
 /usr/share/applications/misterdownloadmanager.desktop
 /usr/share/icons/hicolor/256x256/apps/misterdownloadmanager.png
 /usr/share/misterdownloadmanager

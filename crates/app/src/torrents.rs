@@ -202,11 +202,16 @@ pub fn current_public_trackers() -> Vec<String> {
 
 /// Check if cached trackers need refresh (older than 7 days or missing), and fetch in background.
 pub fn refresh_public_trackers_if_stale(rt: &tokio::runtime::Handle) {
-    let Some(path) = trackers_cache_file() else { return };
+    let Some(path) = trackers_cache_file() else {
+        return;
+    };
     let is_stale = match std::fs::metadata(&path) {
         Ok(meta) => {
             if let Ok(mtime) = meta.modified() {
-                mtime.elapsed().map(|d| d.as_secs() > 7 * 86400).unwrap_or(true)
+                mtime
+                    .elapsed()
+                    .map(|d| d.as_secs() > 7 * 86400)
+                    .unwrap_or(true)
             } else {
                 true
             }
@@ -226,7 +231,9 @@ pub fn refresh_public_trackers_if_stale(rt: &tokio::runtime::Handle) {
                     }
                 }
             };
-            if let Some(content) = text && !content.trim().is_empty() {
+            if let Some(content) = text
+                && !content.trim().is_empty()
+            {
                 if let Some(parent) = path.parent() {
                     let _ = std::fs::create_dir_all(parent);
                 }
