@@ -67,6 +67,7 @@
     video_original: "original",
     video_download_best: "Download best",
     video_all_qualities: "All qualities and subtitles...",
+    video_subtitles_only: "Download subtitle only...",
     video_looking: "Looking up the qualities…",
     video_no_choices: "No video to download here",
     video_playlist: "A list of videos: choose them in Sedot Download Manager",
@@ -1156,7 +1157,7 @@ button:focus-visible { outline: none; }
   <div class="rows" role="group"></div>
   <div class="hr"></div>
   <button role="menuitem" data-act="window"><span class="mi"><svg viewBox="0 0 16 16" ${ICON} stroke-width="1.4"><path d="M2.5 4h11M2.5 8h11M2.5 12h7"/></svg></span><span></span></button>
-  <button role="menuitem" data-act="subtitles"><span class="mi"><svg viewBox="0 0 16 16" ${ICON} stroke-width="1.4"><rect x="2.5" y="3.5" width="11" height="9" rx="1.5"/><path d="M4.5 7h7M4.5 9.5h4"/></svg></span><span>Download with Subtitles...</span></button>
+  <button role="menuitem" data-act="subtitles"><span class="mi"><svg viewBox="0 0 16 16" ${ICON} stroke-width="1.4"><rect x="2.5" y="3.5" width="11" height="9" rx="1.5"/><path d="M4.5 7h7M4.5 9.5h4"/></svg></span><span>Download subtitle only...</span></button>
   <div class="hr"></div>
   <button role="menuitem" data-act="hide"><span class="mi"><svg viewBox="0 0 16 16" ${ICON} stroke-width="1.4"><circle cx="8" cy="8" r="5.5"/><path d="M4.2 11.8l7.6-7.6"/></svg></span><span></span><span class="k">Esc</span></button>
   <button role="menuitem" data-act="never"><span class="mi"><svg viewBox="0 0 16 16" ${ICON} stroke-width="1.4"><circle cx="8" cy="8" r="5.5"/><path d="M2.5 8h11M8 2.5c2 2 2 9 0 11M8 2.5c-2 2-2 9 0 11"/></svg></span><span></span></button>
@@ -1188,7 +1189,7 @@ button:focus-visible { outline: none; }
   closeX.setAttribute("aria-label", t("video_hide_here"));
   menu.setAttribute("aria-label", idleLabel);
   item("window").lastElementChild.textContent = t("video_all_qualities");
-  if (item("subtitles")) item("subtitles").lastElementChild.textContent = "Download with subtitles...";
+  if (item("subtitles")) item("subtitles").lastElementChild.textContent = t("video_subtitles_only") || "Download subtitle only...";
   item("hide").children[1].textContent = t("video_hide_here");
   item("never").lastElementChild.textContent = ext.i18n.getMessage("video_never_site", [host]) || `Never on ${host}`;
   item("settings").lastElementChild.textContent = t("video_settings");
@@ -1941,7 +1942,7 @@ button:focus-visible { outline: none; }
   // instead. `toWindow`: "All qualities and subtitles…", MDM's Download video window, which is
   // also where a click goes when nothing was found (no look-ups here, yt-dlp missing, a list, an
   // error: the window says so and offers what to do).
-  async function download(row, toWindow = false) {
+  async function download(row, toWindow = false, opts = {}) {
     if (busy || !video) return;
     busy = true;
     try {
@@ -1954,7 +1955,7 @@ button:focus-visible { outline: none; }
       if (d.drm) return render();
       const og = location.href === landedAt ? document.querySelector('meta[property="og:title"]')?.content : "";
       const title = (og || document.title || "").trim();
-      const j = { video, src: video.currentSrc || "", href: location.href, asked: { src: d.src, title, url: d.url, at: d.at }, row, toWindow };
+      const j = { video, src: video.currentSrc || "", href: location.href, asked: { src: d.src, title, url: d.url, at: d.at }, row, toWindow, subsOnly: Boolean(opts.subsOnly) };
       const c = { v: video, d, key: lookKey(d) };
       let l = lookOf(c);
       setStatus({ state: "sending", text: t("video_sending") });
@@ -2022,7 +2023,7 @@ button:focus-visible { outline: none; }
   async function useWindow(j, { direct = false, words = "" } = {}) {
     if (!firstWindow(j)) return;
     // Where the video is now, for the background to ask the page's player there.
-    const r = await send({ type: "video", ...j.asked, ...(direct ? { direct: true } : {}), at: middle(j.video, j.asked.at) });
+    const r = await send({ type: "video", ...j.asked, ...(direct ? { direct: true } : {}), ...(j.subsOnly ? { subsOnly: true } : {}), at: middle(j.video, j.asked.at) });
     if (r.gone) return;
     if (r.ok) {
       lastShow = r.show || "";
@@ -2247,7 +2248,8 @@ button:focus-visible { outline: none; }
   });
 
   async function run(act) {
-    if (act === "window" || act === "subtitles") return download(null, true);
+    if (act === "window") return download(null, true);
+    if (act === "subtitles") return download(null, true, { subsOnly: true });
     closeMenu();
     if (act === "hide") return hideHere();
     if (act === "never") {

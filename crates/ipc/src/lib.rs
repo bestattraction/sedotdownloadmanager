@@ -141,6 +141,8 @@ pub struct Command {
     /// With `video_page`, from that button over a video that plays a plain file (no stream, no
     /// page to read): `video_page` is that file, downloaded as any file at once, with no window.
     pub video_direct: bool,
+    /// From that button over a video: open the Download video window with subtitles only chosen.
+    pub video_subs_only: bool,
     /// That button's "Show", once a download was added: the main window comes up with the newest
     /// download of this address (the video's page as it was looked up, or its file) selected.
     pub show_download: Option<String>,

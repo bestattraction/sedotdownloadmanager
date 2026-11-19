@@ -417,6 +417,10 @@
     "message": "All qualities and subtitles...",
     "description": "command in the menu of the download button over a video: opens the app's Download video window, with every quality and the subtitles"
   },
+  "video_subtitles_only": {
+    "message": "Download subtitle only...",
+    "description": "command in the menu of the download button over a video: opens the app's Download video window with subtitles only chosen"
+  },
   "video_failed": {
     "message": "Sedot Download Manager isn't installed or didn't start",
     "description": "shown briefly on the download button when the app could not be reached; keep the name Sedot Download Manager as it is"

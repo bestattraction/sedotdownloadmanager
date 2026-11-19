@@ -293,15 +293,36 @@ impl VideoDialog {
             v.title = title.to_owned();
         }
         let merge = self.tools.get_or_insert_with(tools).2.is_some();
-        let choices = mdm_tools::resolve::choices(&v, merge);
-        // The best, as `video-get` takes it by default (#1240).
-        self.chosen = mdm_tools::resolve::pick(&choices, None).map_or(0, |p| p.index);
+        let mut choices = mdm_tools::resolve::choices(&v, merge);
+        self.subs = mdm_tools::resolve::sub_choices(&v, crate::i18n::code());
+        self.sub_pick = pick_for(&self.subs, &self.pref);
+        if !self.subs.is_empty() {
+            choices.push(mdm_tools::resolve::Choice {
+                label: "Subtitles only".into(),
+                selector: mdm_tools::resolve::SUBS_ONLY.into(),
+                ext: "srt".into(),
+                size: Some(100 * 1024),
+                approx: true,
+                height: None,
+                fps: None,
+                codec: None,
+                range: None,
+                kbps: None,
+            });
+        }
+        if self.context.video_subs_only && !self.subs.is_empty() {
+            self.chosen = choices.len() - 1;
+            if self.sub_pick == 0 {
+                self.sub_pick = 1;
+            }
+        } else {
+            // The best, as `video-get` takes it by default (#1240).
+            self.chosen = mdm_tools::resolve::pick(&choices, None).map_or(0, |p| p.index);
+        }
         self.rows = Default::default();
         self.error = choices
             .is_empty()
             .then(|| crate::i18n::t("No video this can download on that page").into());
-        self.subs = mdm_tools::resolve::sub_choices(&v, crate::i18n::code());
-        self.sub_pick = pick_for(&self.subs, &self.pref);
         self.video = Some((v, choices));
         self.name_from_choice();
     }
@@ -517,7 +538,13 @@ impl VideoDialog {
         // Not the name the choice gave it (the page's title): the user's (#1102).
         let named = name
             != mdm_engine::naming::sanitize(file_name(&self.video.as_ref()?.0.title, c).trim());
-        let chosen = self.chosen_subs();
+        let mut chosen = self.chosen_subs();
+        if mdm_tools::resolve::is_subs_only(&c.selector)
+            && chosen.langs.is_empty()
+            && !self.subs.is_empty()
+        {
+            chosen = subs_at(&self.subs, 1, false);
+        }
         // The video the page declares (#1076): its address, the page as its Referer.
         let declared = self
             .declared
@@ -948,6 +975,14 @@ impl VideoDialog {
             }
             if let Some(i) = picked {
                 self.chosen = i;
+                if let Some((_, choices)) = &self.video
+                    && let Some(c) = choices.get(self.chosen)
+                    && mdm_tools::resolve::is_subs_only(&c.selector)
+                    && self.sub_pick == 0
+                    && !self.subs.is_empty()
+                {
+                    self.sub_pick = 1;
+                }
                 self.name_from_choice();
             }
             // Wrapped in the empty list (#317).
@@ -1180,6 +1215,12 @@ impl VideoDialog {
     /// video's page lists go into its file (ffmpeg writes them; on by default). Greyed without
     /// ffmpeg, and for a choice converted to MP3, Opus or FLAC; its tick stays as it was.
     fn chapters_row(&mut self, ui: &mut Ui, o: Pos2, bx: f32, ffmpeg: bool) {
+        let is_subs = match &self.video {
+            Some((_, c)) => c
+                .get(self.chosen)
+                .is_some_and(|c| mdm_tools::resolve::is_subs_only(&c.selector)),
+            None => false,
+        };
         let converts = match &self.list {
             Some(list) => list.converts(),
             None => self
@@ -1188,7 +1229,7 @@ impl VideoDialog {
                 .and_then(|(_, c)| c.get(self.chosen))
                 .is_some_and(|c| mdm_tools::resolve::audio_conversion(&c.selector).is_some()),
         };
-        let can = ffmpeg && !converts;
+        let can = ffmpeg && !converts && !is_subs;
         let mut on = self.chapters && can;
         let resp = winui::checkbox_until(
             ui,
@@ -1201,13 +1242,19 @@ impl VideoDialog {
         );
         let resp = winui::why_disabled(
             resp,
-            !ffmpeg,
+            is_subs,
+            // i18n: why "Embed chapters" is greyed: downloading subtitles only without video
+            "Only subtitles will be downloaded",
+        );
+        let resp = winui::why_disabled(
+            resp,
+            !is_subs && !ffmpeg,
             // i18n: why "Embed chapters" is greyed: ffmpeg (a helper program) is not installed
             "This needs ffmpeg",
         );
         winui::why_disabled(
             resp,
-            ffmpeg && converts,
+            !is_subs && ffmpeg && converts,
             // i18n: why "Embed chapters" is greyed in Download video: the choice is a sound converted to MP3, Opus or FLAC, which MDM saves without chapters
             "MP3, Opus and FLAC files are saved without chapters",
         );
@@ -1257,7 +1304,7 @@ impl VideoDialog {
         let pick = if on { self.sub_pick } else { 0 };
         if let Some(i) = winui::combo_light(
             ui,
-            r(o, bx + 135.0, 343.0, 160.0, 21.0),
+            r(o, bx + 130.0, 343.0, 140.0, 21.0),
             &shown,
             pick.min(shown.len().saturating_sub(1)),
             on && download_subs,
@@ -1269,32 +1316,43 @@ impl VideoDialog {
             }
         }
         let chosen = on && self.sub_pick > 0;
-        let holds = choice
+        let is_subs = choice
             .as_ref()
-            .is_some_and(mdm_tools::resolve::holds_subtitles);
-        let mut embed = self.embed && chosen && ffmpeg && holds;
+            .is_some_and(|c| mdm_tools::resolve::is_subs_only(&c.selector));
+        let holds = !is_subs
+            && choice
+                .as_ref()
+                .is_some_and(mdm_tools::resolve::holds_subtitles);
+        let can_embed = chosen && ffmpeg && holds && !is_subs;
+        let mut embed = self.embed && can_embed;
         let resp = winui::checkbox_until(
             ui,
-            pos2(o.x + bx + 305.0, o.y + 347.0),
+            pos2(o.x + bx + 278.0, o.y + 347.0),
             &mut embed,
             // i18n: checkbox in Download video: subtitles go inside the video file instead of a separate .srt file beside it
-            "Put them into the video",
-            chosen && ffmpeg && holds,
+            "Embed in video",
+            can_embed,
             Some(o.x + 489.0),
         );
         let resp = winui::why_disabled(
             resp,
-            chosen && !ffmpeg,
-            // i18n: why "Put them into the video" is greyed: ffmpeg (a helper program) is not installed
+            chosen && is_subs,
+            // i18n: why "Embed in video" is greyed: downloading subtitles only without video
+            "Only subtitles will be downloaded",
+        );
+        let resp = winui::why_disabled(
+            resp,
+            chosen && !is_subs && !ffmpeg,
+            // i18n: why "Embed in video" is greyed: ffmpeg (a helper program) is not installed
             "This needs ffmpeg",
         );
         winui::why_disabled(
             resp,
-            chosen && ffmpeg && !holds,
-            // i18n: why "Put them into the video" is greyed: the chosen file type can't hold subtitles
+            chosen && !is_subs && ffmpeg && !holds,
+            // i18n: why "Embed in video" is greyed: the chosen file type can't hold subtitles
             "Only MP4 and MKV videos can hold subtitles",
         );
-        if chosen && ffmpeg && holds {
+        if can_embed {
             self.embed = embed;
         }
         on
@@ -1706,6 +1764,9 @@ pub(crate) fn choice_size(c: &Choice) -> (String, String) {
 /// A choice's label in the user's language: the audio choice's words translated, the rest (a
 /// resolution, a type) as they are, kept left to right.
 pub(crate) fn choice_label(label: &str) -> String {
+    if label == "Subtitles only" {
+        return crate::i18n::t("Subtitles only").to_owned();
+    }
     if let Some(kind) = label.strip_prefix(mdm_tools::resolve::AUDIO_ORIGINAL) {
         return crate::i18n::fmt(
             // i18n: a choice in the Download video window: only the sound, the site's own file as it is (not converted); {type} is WEBM, M4A…

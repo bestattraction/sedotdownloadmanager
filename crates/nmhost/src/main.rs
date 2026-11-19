@@ -127,6 +127,8 @@ struct Message {
     title: Option<String>,
     /// The button over a plain file (`src`, #703): it is downloaded as any file, at once.
     direct: bool,
+    /// Download subtitle only (skip downloading video).
+    subs_only: bool,
     /// The button's "Show": the main window with the newest download of this address selected.
     show_download: Option<String>,
     /// The button's "Turn on": show it on this site (a host name) again.
@@ -618,6 +620,7 @@ fn video_command(
     let direct = m.direct && src.is_some();
     Ok(mdm_ipc::Command {
         video_direct: direct,
+        video_subs_only: m.subs_only,
         // The type the plain file's server said when the tab loaded it (#800).
         mime: m.mime.clone().filter(|t| direct && !t.trim().is_empty()),
         video_page: Some(src.unwrap_or_else(|| m.url.clone())),

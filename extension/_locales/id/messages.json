@@ -323,6 +323,9 @@
   "video_all_qualities": {
     "message": "Semua kualitas dan subtitel..."
   },
+  "video_subtitles_only": {
+    "message": "Hanya subtitel..."
+  },
   "video_failed": {
     "message": "Sedot Download Manager tidak terinstal atau tidak dimulai"
   },

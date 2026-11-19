@@ -1128,6 +1128,19 @@ fn run(
                 // Merged and moved: done joining.
                 *merged.lock().unwrap() = None;
                 progress.lock().unwrap().merging = None;
+            } else if line.contains("Writing video subtitles to: ") {
+                let rest = line
+                    .split("Writing video subtitles to: ")
+                    .nth(1)
+                    .unwrap_or("");
+                if !rest.trim().is_empty() {
+                    saved = Some(PathBuf::from(rest.trim()));
+                }
+            } else if let Some(rest) = line.strip_prefix("[download] Destination: ") {
+                let path = rest.trim();
+                if path.ends_with(".srt") || path.ends_with(".vtt") {
+                    saved = Some(PathBuf::from(path));
+                }
             } else if let Some(rest) = line.strip_prefix("MDMQ ") {
                 if let Some(m) = meter.as_deref_mut() {
                     m.quality(rest);
@@ -1252,6 +1265,23 @@ fn merge_step(was: Option<f64>, now: f64) -> f64 {
 /// where, or said it in a form that names no file (#79). Its subtitles (`<stem>.<lang>.srt`) and
 /// unfinished parts don't count; the newest one wins.
 fn saved_by_name(ours: &[String]) -> Option<PathBuf> {
+    if ours.iter().any(|arg| arg == "--skip-download")
+        && let Some((dir, stem)) = template_of(ours)
+        && let Ok(rd) = std::fs::read_dir(&dir)
+    {
+        let prefix = format!("{stem}.");
+        return rd
+            .filter_map(Result::ok)
+            .map(|e| e.path())
+            .filter(|p| {
+                if let Some(name) = p.file_name().and_then(|n| n.to_str()) {
+                    name.starts_with(&prefix) && (name.ends_with(".srt") || name.ends_with(".vtt"))
+                } else {
+                    false
+                }
+            })
+            .max_by_key(|p| std::fs::metadata(p).and_then(|m| m.modified()).ok());
+    }
     const MEDIA: [&str; 15] = [
         "mp4", "mkv", "webm", "mov", "m4v", "m4a", "mp3", "opus", "ogg", "oga", "flac", "wav",
         "aac", "flv", "3gp",
@@ -1937,9 +1967,12 @@ impl VideoJob {
             return Err(ProcError::PathTooLong(folder.join(stem)));
         }
         let output = folder.join(format!("{}.%(ext)s", template_text(stem)));
+        let subs_only = crate::resolve::is_subs_only(selector);
         // An MP3, Opus or FLAC choice (#32, #70): the best sound, converted by ffmpeg.
         let convert = crate::resolve::audio_conversion(selector);
-        let format = if convert.is_some() {
+        let format = if subs_only {
+            String::new()
+        } else if convert.is_some() {
             "ba/b".to_owned()
         } else if ffmpeg.is_none() {
             // A format that comes as a file first (#569): without ffmpeg an HLS stream stays
@@ -1950,38 +1983,71 @@ impl VideoJob {
         };
         // What comes down is the sound as the site has it, not the file the choice's size
         // estimated: the progress follows yt-dlp's own total.
-        let expected = if convert.is_some() { None } else { expected };
-        // Subtitles go with a picture only (none for a sound).
-        let with_subs = convert.is_none() && !subs.langs.is_empty();
+        let expected = if convert.is_some() || subs_only {
+            None
+        } else {
+            expected
+        };
+        // Subtitles go with a picture only (none for a sound), or when subtitles only are requested.
+        let with_subs = (subs_only || convert.is_none()) && !subs.langs.is_empty();
         // How yt-dlp chooses the formats for the engine (#769): the same choice, merge and
         // conversion as the download's run, without downloading.
-        let mut choose: Vec<String> = vec![
-            "-f".into(),
-            format.clone(),
-            "-o".into(),
-            output.to_string_lossy().into_owned(),
-            "--no-playlist".into(),
-        ];
-        let mut ours: Vec<String> = vec![
-            "-f".into(),
-            format,
-            "-o".into(),
-            output.to_string_lossy().into_owned(),
-            "--no-playlist".into(),
-            "--newline".into(),
-            // `--print` makes yt-dlp quiet; this keeps the progress lines.
-            "--progress".into(),
-            "--continue".into(),
-            "--no-mtime".into(),
-            "--progress-template".into(),
-            PROGRESS.into(),
-            "--print".into(),
-            FINAL.into(),
-            "--print".into(),
-            QUALITY.into(),
-            "--print".into(),
-            MERGE.into(),
-        ];
+        let mut choose: Vec<String> = if subs_only {
+            vec![
+                "--skip-download".into(),
+                "-o".into(),
+                output.to_string_lossy().into_owned(),
+                "--no-playlist".into(),
+            ]
+        } else {
+            vec![
+                "-f".into(),
+                format.clone(),
+                "-o".into(),
+                output.to_string_lossy().into_owned(),
+                "--no-playlist".into(),
+            ]
+        };
+        let mut ours: Vec<String> = if subs_only {
+            vec![
+                "--skip-download".into(),
+                "-o".into(),
+                output.to_string_lossy().into_owned(),
+                "--no-playlist".into(),
+                "--newline".into(),
+                "--progress".into(),
+                "--continue".into(),
+                "--no-mtime".into(),
+                "--progress-template".into(),
+                PROGRESS.into(),
+                "--print".into(),
+                FINAL.into(),
+                "--print".into(),
+                QUALITY.into(),
+                "--print".into(),
+                MERGE.into(),
+            ]
+        } else {
+            vec![
+                "-f".into(),
+                format,
+                "-o".into(),
+                output.to_string_lossy().into_owned(),
+                "--no-playlist".into(),
+                "--newline".into(),
+                "--progress".into(),
+                "--continue".into(),
+                "--no-mtime".into(),
+                "--progress-template".into(),
+                PROGRESS.into(),
+                "--print".into(),
+                FINAL.into(),
+                "--print".into(),
+                QUALITY.into(),
+                "--print".into(),
+                MERGE.into(),
+            ]
+        };
         ours.extend(limit_args(rate));
         // A subtitles-only second run, for the ones a site refuses (#68): the same output name.
         let mut retry_base: Vec<String> = vec![

@@ -500,6 +500,13 @@ pub const AUDIO_ONLY: &str = "Audio only";
 /// The sound as the site has it, not converted (#70): its label starts with this.
 pub const AUDIO_ORIGINAL: &str = "Audio only original";
 
+/// A choice that downloads subtitles only (no video or audio stream, using `--skip-download`).
+pub const SUBS_ONLY: &str = "subs_only";
+
+pub fn is_subs_only(selector: &str) -> bool {
+    selector == SUBS_ONLY
+}
+
 /// Opus and FLAC choices' selectors (#70): the best sound converted by ffmpeg (Opus as is when
 /// it already is Opus: yt-dlp then only moves it into an `.opus` file).
 pub const OPUS: &str = "opus:";

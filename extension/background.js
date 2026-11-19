@@ -3020,6 +3020,7 @@ async function pageMessage(m, sender) {
       url: v.own,
       ...(v.src ? { src: v.src } : {}),
       ...(direct ? { direct: true } : {}),
+      ...(m.subsOnly ? { subsOnly: true } : {}),
       ...(loaded && loaded.mime ? { mime: loaded.mime } : {}),
       title: v.title,
       referrer: v.referrer,
