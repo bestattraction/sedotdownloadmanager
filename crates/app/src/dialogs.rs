@@ -2084,9 +2084,6 @@ pub struct Complete {
     /// Clicked (or activated) once: from then on a window like any other, no longer above every
     /// program's (it shows above them until then, as IDM's does: #77).
     pub seen: bool,
-    /// Open was pressed: the file is looked for and handed to its program off the window's
-    /// thread (#743); the box closes when it opened, and stays (for Open folder) when it didn't.
-    pub opening: Option<crate::launch::Asked<PathBuf, bool>>,
     /// Snooze picked a time (#741): the window closes, and no other opens until then.
     pub snooze: Option<crate::finish::SnoozeFor>,
     /// The file was dragged out of the box to a place MDM couldn't learn (#869): Open and Open
@@ -2106,7 +2103,6 @@ impl Complete {
             dont_show: false,
             notices: i.notices.clone(),
             seen: false,
-            opening: None,
             snooze: None,
             moved_away: i.moved_away,
         }
@@ -2275,27 +2271,9 @@ impl Complete {
                 let dragging = crate::win32::dragging_out();
                 #[cfg(not(windows))]
                 let dragging = false; // the grip is Windows-only
-                // A file that can't open says why (the box stays for Open folder). Looked for and
-                // handed over off the window's thread (#743): the box closes once it opened.
-                let opened = self.opening.as_ref().and_then(|a| a.answer(&self.path));
-                if opened.is_some() {
-                    self.opening = None;
-                }
-                if (open.clicked() || (!dragging && winui::enter_pressed(ui)))
-                    && self.opening.is_none()
-                {
-                    let opening = crate::launch::Asked::default();
-                    let moved_away = self.moved_away;
-                    let _ = opening.get(
-                        &self.path,
-                        std::time::Duration::MAX,
-                        std::time::Duration::ZERO,
-                        Some(ui.ctx()),
-                        move |p| open_download_now(p, moved_away),
-                    );
-                    self.opening = Some(opening);
-                }
-                if opened == Some(true) || self.snooze.is_some() {
+
+                if open.clicked() || (!dragging && winui::enter_pressed(ui)) {
+                    open_download(&self.path, self.moved_away);
                     Outcome::Done(())
                 } else if with.clicked() {
                     open_download_with(&self.path, self.moved_away);
@@ -2303,7 +2281,7 @@ impl Complete {
                 } else if folder.clicked() {
                     show_download_in_folder(&self.path, self.moved_away);
                     Outcome::Done(())
-                } else if close.clicked() || (!dragging && winui::escape_pressed(ui)) {
+                } else if close.clicked() || self.snooze.is_some() || (!dragging && winui::escape_pressed(ui)) {
                     Outcome::Done(())
                 } else {
                     Outcome::Open

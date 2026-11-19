@@ -5,6 +5,27 @@ Each release's notes on GitHub come from its section here (`## [X.Y.Z]`, see
 
 ## [Unreleased]
 
+## [0.6.5] - 2026-11-19
+
+### Added
+
+- **Integrated Torrent Search & Quick Access**:
+  - Shortcut `Ctrl+Shift+F` opens Torrent Search directly without conflicting with download list search (`Ctrl+F`).
+  - "Search torrents... (Ctrl+Shift+F)" added to the dropdown arrow menu beside the **Add Torrent** toolbar button, the main **Tasks** menu, and context menus (empty space, item selection, categories).
+  - Torrent Search displays Name, Size, Seeds, Peers, and Date (`YYYY-MM-DD`).
+  - Interactive multi-column sorting (Name, Size, Seeds, Peers, Date) with header clicking and toolbar buttons, sorted by Seeds descending by default.
+  - Keyboard shortcuts dialog updated with `Ctrl+Shift+F`.
+
+### Changed
+
+- **Instant Download Complete dialog dismissal**:
+  - When finished downloads show the completion dialog, clicking **Open** (or pressing Enter) immediately launches the file in the background and closes the dialog instantly, matching **Open with...**, **Open folder**, and **Close**.
+
+### Fixed
+
+- **Torrent background tracker reactor context**: resolved startup crash by executing tracker refreshes within the tokio runtime handle.
+
+
 ### Added
 
 - **Archive passwords** ([#37](https://github.com/anefzaoui/misterdownloadmanager/issues/37)): **Options → Archives → Archive passwords...** keeps the passwords you use again and again. An archive that turns out to be encrypted is tried with its package's password, then with each saved one, before MDM asks; the saved one that fits moves to the top; a package's password (typed in Link grabber, or sent with the links) is used but never saved by itself. The **Archive password** window can remember what you type (**Remember it for other archives**, unticked at first). The list is kept in the system's keychain.
