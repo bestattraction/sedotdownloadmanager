@@ -8953,6 +8953,7 @@ impl App {
         use MenuEntry::{Item as I, Sep};
         vec![
             I("Add &new download...", Cmd::AddUrl, true, false),
+            I("Search torrents... (Ctrl+Shift+F)", Cmd::TorrentSearch, true, false),
             Sep,
             I(
                 "Select &all",
@@ -9041,6 +9042,8 @@ impl App {
                 done || it.is_some_and(|i| i.torrent.is_some()),
                 false,
             ),
+            Sep,
+            I("Search torrents... (Ctrl+Shift+F)", Cmd::TorrentSearch, true, false),
             Sep,
             I("Move/Rename (Ctrl-M)", Cmd::MoveRename, movable, false),
             Sep,
@@ -9186,6 +9189,8 @@ impl App {
                         // i18n: noun: opens the category's properties
                         None => off("Properties"),
                     },
+                    Sep,
+                    I("Search torrents... (Ctrl+Shift+F)", Cmd::TorrentSearch, true, false),
                     Sep,
                     I("Add category", Cmd::AddCategory, true, false),
                     match cat {
@@ -9924,13 +9929,15 @@ impl App {
         // windowing library answers the paste keys by reading the clipboard on the window's
         // thread (#418). The full list: Help → Keyboard shortcuts (`help.rs`).
         if chosen.is_none() && self.popup.is_none() && self.open_menu.is_none() {
-            let (find, next, add, clip, search_torrents, recheck_torrent) = ctx.input_mut(|i| {
+            let (search_torrents, find, next, add, clip, recheck_torrent) = ctx.input_mut(|i| {
+                let search_torrents = i.consume_key(egui::Modifiers::COMMAND | egui::Modifiers::SHIFT, egui::Key::F);
+                let find = !search_torrents && i.consume_key(egui::Modifiers::COMMAND, egui::Key::F);
                 (
-                    i.consume_key(egui::Modifiers::COMMAND, egui::Key::F),
+                    search_torrents,
+                    find,
                     i.consume_key(egui::Modifiers::NONE, egui::Key::F3),
                     i.consume_key(egui::Modifiers::COMMAND, egui::Key::N),
                     i.consume_key(egui::Modifiers::COMMAND, egui::Key::B),
-                    i.consume_key(egui::Modifiers::COMMAND | egui::Modifiers::SHIFT, egui::Key::F),
                     i.consume_key(egui::Modifiers::COMMAND, egui::Key::R),
                 )
             });
@@ -9941,7 +9948,9 @@ impl App {
             }) {
                 chosen = Some((Cmd::MoveRename, None));
             }
-            if find {
+            if search_torrents {
+                chosen = Some((Cmd::TorrentSearch, None));
+            } else if find {
                 chosen = Some((Cmd::Find, None));
             } else if next {
                 chosen = Some((Cmd::FindNext, None));
@@ -9949,8 +9958,6 @@ impl App {
                 chosen = Some((Cmd::AddUrl, None));
             } else if clip {
                 chosen = Some((Cmd::BatchClipboard, None));
-            } else if search_torrents {
-                chosen = Some((Cmd::TorrentSearch, None));
             } else if recheck_torrent {
                 if let Some(target) = self.selection.one() {
                     if let Some(item) = self.item(target) && item.torrent.is_some() {

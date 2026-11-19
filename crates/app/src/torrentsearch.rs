@@ -17,7 +17,24 @@ pub struct ApibayItem {
     pub seeders: String,
     pub num_files: String,
     pub size: String,
+    #[serde(default)]
+    pub added: String,
     pub category: String,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum SortColumn {
+    Name,
+    Size,
+    Seeds,
+    Peers,
+    Date,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum SortDirection {
+    Ascending,
+    Descending,
 }
 
 #[derive(Clone, Debug)]
@@ -27,6 +44,34 @@ pub struct TorrentSearchResult {
     pub size: u64,
     pub seeders: u32,
     pub leechers: u32,
+    pub added: u64,
+}
+
+impl TorrentSearchResult {
+    pub fn compare(&self, other: &Self, col: SortColumn, dir: SortDirection) -> std::cmp::Ordering {
+        let ord = match col {
+            SortColumn::Name => self.name.to_lowercase().cmp(&other.name.to_lowercase()),
+            SortColumn::Size => self.size.cmp(&other.size),
+            SortColumn::Seeds => self.seeders.cmp(&other.seeders),
+            SortColumn::Peers => self.leechers.cmp(&other.leechers),
+            SortColumn::Date => self.added.cmp(&other.added),
+        };
+        match dir {
+            SortDirection::Ascending => ord,
+            SortDirection::Descending => ord.reverse(),
+        }
+    }
+}
+
+pub fn format_date(secs: u64) -> String {
+    if secs == 0 {
+        return "-".to_string();
+    }
+    if let Some(dt) = chrono::DateTime::from_timestamp(secs as i64, 0) {
+        dt.format("%Y-%m-%d").to_string()
+    } else {
+        "-".to_string()
+    }
 }
 
 pub struct TorrentSearch {
@@ -37,6 +82,8 @@ pub struct TorrentSearch {
     pub selected: Option<usize>,
     pub focused: bool,
     pub scroll_offset: f32,
+    pub sort_col: SortColumn,
+    pub sort_dir: SortDirection,
 }
 
 impl Default for TorrentSearch {
@@ -55,7 +102,32 @@ impl TorrentSearch {
             selected: None,
             focused: false,
             scroll_offset: 0.0,
+            sort_col: SortColumn::Seeds,
+            sort_dir: SortDirection::Descending,
         }
+    }
+
+    pub fn apply_sort(&mut self) {
+        let col = self.sort_col;
+        let dir = self.sort_dir;
+        let mut list = self.results.lock().unwrap();
+        list.sort_by(|a, b| a.compare(b, col, dir));
+    }
+
+    pub fn toggle_sort(&mut self, col: SortColumn) {
+        if self.sort_col == col {
+            self.sort_dir = match self.sort_dir {
+                SortDirection::Ascending => SortDirection::Descending,
+                SortDirection::Descending => SortDirection::Ascending,
+            };
+        } else {
+            self.sort_col = col;
+            self.sort_dir = match col {
+                SortColumn::Name => SortDirection::Ascending,
+                _ => SortDirection::Descending,
+            };
+        }
+        self.apply_sort();
     }
 
     pub fn search(&mut self, rt: &tokio::runtime::Handle, ctx: egui::Context) {
@@ -67,6 +139,8 @@ impl TorrentSearch {
         self.status_text = crate::i18n::t("Searching public indexers...").to_owned();
         self.selected = None;
         let results_cell = self.results.clone();
+        let sort_col = self.sort_col;
+        let sort_dir = self.sort_dir;
         rt.spawn(async move {
             let encoded: String = url::form_urlencoded::byte_serialize(q.as_bytes()).collect();
             let url = format!("https://apibay.org/q.php?q={encoded}");
@@ -92,8 +166,10 @@ impl TorrentSearch {
                             size: item.size.parse().unwrap_or(0),
                             seeders: item.seeders.parse().unwrap_or(0),
                             leechers: item.leechers.parse().unwrap_or(0),
+                            added: item.added.parse().unwrap_or(0),
                         });
                     }
+                    list.sort_by(|a, b| a.compare(b, sort_col, sort_dir));
                     *results_cell.lock().unwrap() = list;
                 }
                 Err(e) => {
@@ -117,7 +193,7 @@ impl TorrentSearch {
             ctx,
             "torrent-search",
             "Torrent Search",
-            [680.0, 480.0],
+            [780.0, 520.0],
             false,
             BG(),
             |ui, o| {
@@ -127,7 +203,7 @@ impl TorrentSearch {
                 // Search bar input
                 let edit = winui::edit(
                     ui,
-                    r(o, 14.0, 14.0, 530.0, 24.0),
+                    r(o, 14.0, 14.0, 630.0, 24.0),
                     &mut self.query,
                     !self.searching,
                     false,
@@ -143,7 +219,7 @@ impl TorrentSearch {
                     && winui::take_key(ui, egui::Key::Enter);
                 let btn = winui::button(
                     ui,
-                    r(o, 554.0, 14.0, 110.0, 24.0),
+                    r(o, 654.0, 14.0, 112.0, 24.0),
                     if self.searching {
                         crate::i18n::mark("Searching...")
                     } else {
@@ -178,23 +254,90 @@ impl TorrentSearch {
                     self.status_text = crate::i18n::t("No torrents found").to_owned();
                 }
 
-                text(&p, o.x + 14.0, o.y + 54.0, &self.status_text, MUTED());
+                text(&p, o.x + 14.0, o.y + 57.0, &self.status_text, MUTED());
+
+                // Sort By Toolbar (Explicit buttons)
+                let sort_label = crate::i18n::t("Sort by:");
+                text(&p, o.x + 270.0, o.y + 57.0, sort_label, MUTED());
+
+                let arrow = |dir: SortDirection| {
+                    if dir == SortDirection::Ascending { " ▲" } else { " ▼" }
+                };
+
+                let col_kind = |target: SortColumn, current: SortColumn| {
+                    if target == current { ButtonKind::Default } else { ButtonKind::Normal }
+                };
+
+                let sort_name_btn = format!("Name{}", if self.sort_col == SortColumn::Name { arrow(self.sort_dir) } else { "" });
+                if winui::button(ui, r(o, 320.0, 44.0, 80.0, 22.0), &sort_name_btn, col_kind(SortColumn::Name, self.sort_col), false, None).clicked() {
+                    self.toggle_sort(SortColumn::Name);
+                }
+
+                let sort_size_btn = format!("Size{}", if self.sort_col == SortColumn::Size { arrow(self.sort_dir) } else { "" });
+                if winui::button(ui, r(o, 404.0, 44.0, 80.0, 22.0), &sort_size_btn, col_kind(SortColumn::Size, self.sort_col), false, None).clicked() {
+                    self.toggle_sort(SortColumn::Size);
+                }
+
+                let sort_seeds_btn = format!("Seeds{}", if self.sort_col == SortColumn::Seeds { arrow(self.sort_dir) } else { "" });
+                if winui::button(ui, r(o, 488.0, 44.0, 84.0, 22.0), &sort_seeds_btn, col_kind(SortColumn::Seeds, self.sort_col), false, None).clicked() {
+                    self.toggle_sort(SortColumn::Seeds);
+                }
+
+                let sort_peers_btn = format!("Peers{}", if self.sort_col == SortColumn::Peers { arrow(self.sort_dir) } else { "" });
+                if winui::button(ui, r(o, 576.0, 44.0, 84.0, 22.0), &sort_peers_btn, col_kind(SortColumn::Peers, self.sort_col), false, None).clicked() {
+                    self.toggle_sort(SortColumn::Peers);
+                }
+
+                let sort_date_btn = format!("Date{}", if self.sort_col == SortColumn::Date { arrow(self.sort_dir) } else { "" });
+                if winui::button(ui, r(o, 664.0, 44.0, 80.0, 22.0), &sort_date_btn, col_kind(SortColumn::Date, self.sort_col), false, None).clicked() {
+                    self.toggle_sort(SortColumn::Date);
+                }
 
                 // Table outer container
-                let table_rect = r(o, 14.0, 64.0, 650.0, 360.0);
+                let table_rect = r(o, 14.0, 72.0, 752.0, 396.0);
                 winui::solid(&p, table_rect, winui::FIELD_EDGE());
                 let header_h = 24.0;
                 let head_rect = Rect::from_min_size(table_rect.min, vec2(table_rect.width(), header_h));
                 p.rect_filled(head_rect, 0.0, winui::LIST_HEADER());
 
-                // Column headers
-                text(&p, o.x + 22.0, o.y + 80.0, crate::i18n::t("Name"), TEXT());
-                text(&p, o.x + 440.0, o.y + 80.0, crate::i18n::t("Size"), TEXT());
-                text(&p, o.x + 530.0, o.y + 80.0, crate::i18n::t("Seeds"), Color32::from_rgb(0, 180, 0));
-                text(&p, o.x + 600.0, o.y + 80.0, crate::i18n::t("Peers"), Color32::from_rgb(60, 140, 220));
+                // Interactive column headers
+                let col_name_rect = Rect::from_min_max(pos2(table_rect.min.x, table_rect.min.y), pos2(table_rect.min.x + 400.0, table_rect.min.y + header_h));
+                let col_size_rect = Rect::from_min_max(pos2(table_rect.min.x + 400.0, table_rect.min.y), pos2(table_rect.min.x + 490.0, table_rect.min.y + header_h));
+                let col_seeds_rect = Rect::from_min_max(pos2(table_rect.min.x + 490.0, table_rect.min.y), pos2(table_rect.min.x + 570.0, table_rect.min.y + header_h));
+                let col_peers_rect = Rect::from_min_max(pos2(table_rect.min.x + 570.0, table_rect.min.y), pos2(table_rect.min.x + 650.0, table_rect.min.y + header_h));
+                let col_date_rect = Rect::from_min_max(pos2(table_rect.min.x + 650.0, table_rect.min.y), pos2(table_rect.max.x, table_rect.min.y + header_h));
+
+                if ui.allocate_rect(col_name_rect, egui::Sense::click()).clicked() {
+                    self.toggle_sort(SortColumn::Name);
+                }
+                if ui.allocate_rect(col_size_rect, egui::Sense::click()).clicked() {
+                    self.toggle_sort(SortColumn::Size);
+                }
+                if ui.allocate_rect(col_seeds_rect, egui::Sense::click()).clicked() {
+                    self.toggle_sort(SortColumn::Seeds);
+                }
+                if ui.allocate_rect(col_peers_rect, egui::Sense::click()).clicked() {
+                    self.toggle_sort(SortColumn::Peers);
+                }
+                if ui.allocate_rect(col_date_rect, egui::Sense::click()).clicked() {
+                    self.toggle_sort(SortColumn::Date);
+                }
+
+                // Column header labels with indicators
+                let name_hdr = format!("{} {}", crate::i18n::t("Name"), if self.sort_col == SortColumn::Name { arrow(self.sort_dir) } else { "" });
+                let size_hdr = format!("{} {}", crate::i18n::t("Size"), if self.sort_col == SortColumn::Size { arrow(self.sort_dir) } else { "" });
+                let seeds_hdr = format!("{} {}", crate::i18n::t("Seeds"), if self.sort_col == SortColumn::Seeds { arrow(self.sort_dir) } else { "" });
+                let peers_hdr = format!("{} {}", crate::i18n::t("Peers"), if self.sort_col == SortColumn::Peers { arrow(self.sort_dir) } else { "" });
+                let date_hdr = format!("{} {}", crate::i18n::t("Date"), if self.sort_col == SortColumn::Date { arrow(self.sort_dir) } else { "" });
+
+                text(&p, o.x + 22.0, o.y + 88.0, &name_hdr, TEXT());
+                text(&p, o.x + 420.0, o.y + 88.0, &size_hdr, TEXT());
+                text(&p, o.x + 510.0, o.y + 88.0, &seeds_hdr, Color32::from_rgb(0, 180, 0));
+                text(&p, o.x + 590.0, o.y + 88.0, &peers_hdr, Color32::from_rgb(60, 140, 220));
+                text(&p, o.x + 670.0, o.y + 88.0, &date_hdr, TEXT());
 
                 // Scrollable rows
-                let row_h = 20.0;
+                let row_h = 22.0;
                 let visible_rows = 16;
                 let total_rows = items.len();
                 let max_scroll = (total_rows.saturating_sub(visible_rows) as f32 * row_h).max(0.0);
@@ -240,19 +383,35 @@ impl TorrentSearch {
                         }
 
                         let text_color = if is_sel { Color32::WHITE } else { TEXT() };
-                        let (fit_name, _) = winui::text_fit(&p, o.x + 22.0, y + 15.0, &item.name, text_color, o.x + 420.0);
+                        let (fit_name, _) = winui::text_fit(&p, o.x + 22.0, y + 16.0, &item.name, text_color, o.x + 400.0);
                         let _ = fit_name;
-                        text(&p, o.x + 440.0, y + 15.0, &crate::model::size(item.size), text_color);
-                        text(&p, o.x + 530.0, y + 15.0, &item.seeders.to_string(), Color32::from_rgb(0, 180, 0));
-                        text(&p, o.x + 600.0, y + 15.0, &item.leechers.to_string(), Color32::from_rgb(60, 140, 220));
+                        text(&p, o.x + 420.0, y + 16.0, &crate::model::size(item.size), text_color);
+                        text(&p, o.x + 510.0, y + 16.0, &item.seeders.to_string(), Color32::from_rgb(0, 180, 0));
+                        text(&p, o.x + 590.0, y + 16.0, &item.leechers.to_string(), Color32::from_rgb(60, 140, 220));
+                        text(&p, o.x + 670.0, y + 16.0, &format_date(item.added), text_color);
                     }
                 }
 
                 // Bottom Action buttons
                 let has_sel = self.selected.is_some_and(|idx| idx < items.len());
+
+                let copy_magnet = winui::button(
+                    ui,
+                    r(o, 410.0, 480.0, 120.0, 26.0),
+                    crate::i18n::mark("Copy Magnet"),
+                    if has_sel {
+                        ButtonKind::Normal
+                    } else {
+                        ButtonKind::Disabled
+                    },
+                    false,
+                    None,
+                )
+                .clicked();
+
                 let download = winui::button(
                     ui,
-                    r(o, 440.0, 436.0, 110.0, 24.0),
+                    r(o, 540.0, 480.0, 110.0, 26.0),
                     crate::i18n::mark("Download"),
                     if has_sel {
                         ButtonKind::Default
@@ -264,15 +423,11 @@ impl TorrentSearch {
                 )
                 .clicked();
 
-                let copy_magnet = winui::button(
+                let close = winui::button(
                     ui,
-                    r(o, 310.0, 436.0, 120.0, 24.0),
-                    crate::i18n::mark("Copy Magnet"),
-                    if has_sel {
-                        ButtonKind::Normal
-                    } else {
-                        ButtonKind::Disabled
-                    },
+                    r(o, 660.0, 480.0, 106.0, 26.0),
+                    crate::i18n::mark("Close"),
+                    ButtonKind::Normal,
                     false,
                     None,
                 )
@@ -292,16 +447,6 @@ impl TorrentSearch {
                         download_magnet = Some(full_magnet);
                     }
                 }
-
-                let close = winui::button(
-                    ui,
-                    r(o, 560.0, 436.0, 104.0, 24.0),
-                    crate::i18n::mark("Close"),
-                    ButtonKind::Normal,
-                    false,
-                    None,
-                )
-                .clicked();
 
                 if winui::escape_pressed(ui) || close {
                     Outcome::Closed
