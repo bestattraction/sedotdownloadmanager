@@ -1763,7 +1763,7 @@ impl App {
         if settings.proxy_mode == 2 {
             crate::pacfetch::refresh(&settings.proxy_script, &rt);
         }
-        crate::torrents::refresh_public_trackers_if_stale();
+        crate::torrents::refresh_public_trackers_if_stale(&rt);
         // "Launch on startup" is whatever the Run key says (the installer may have set it); on
         // Linux and macOS, the autostart entry / LaunchAgent.
         // An entry written before #226 (by versions before 0.5.0, or by their installer) starts MDM

@@ -201,7 +201,7 @@ pub fn current_public_trackers() -> Vec<String> {
 }
 
 /// Check if cached trackers need refresh (older than 7 days or missing), and fetch in background.
-pub fn refresh_public_trackers_if_stale() {
+pub fn refresh_public_trackers_if_stale(rt: &tokio::runtime::Handle) {
     let Some(path) = trackers_cache_file() else { return };
     let is_stale = match std::fs::metadata(&path) {
         Ok(meta) => {
@@ -214,7 +214,7 @@ pub fn refresh_public_trackers_if_stale() {
         Err(_) => true,
     };
     if is_stale {
-        tokio::spawn(async move {
+        rt.spawn(async move {
             let res = reqwest::get(LIVE_TRACKERS_URL).await;
             let text = match res {
                 Ok(resp) if resp.status().is_success() => resp.text().await.ok(),
