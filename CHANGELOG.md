@@ -5,6 +5,18 @@ Each release's notes on GitHub come from its section here (`## [X.Y.Z]`, see
 
 ## [Unreleased]
 
+## [0.6.6] - 2026-11-19
+
+### Fixed
+
+- **Vertical Video Quality Labels**:
+  - Fixed an issue in the browser extension and native host where vertical / portrait videos (e.g. 1080×1920 on YouTube Shorts, TikTok, Instagram Reels) were mislabeled as `1920p` instead of `1080p`.
+  - Resolution labels now follow standard video tier conventions (e.g. 1080×1920 is labeled `1080p`, 720×1280 is `720p`, and 2160×3840 is `4K`).
+  - Dropdown quality choices, button chips, tooltips, and manifest parsers (HLS, DASH, MP4) now correctly inspect both dimensions.
+- **Spurious Tray Context Menu on Explorer Alternatives**:
+  - Restrict tray icon right-click context menu popup strictly to the Windows taskbar (`Shell_TrayWnd`, `Shell_SecondaryTrayWnd`, and `NotifyIconOverflowWindow`).
+  - Opening a folder no longer causes the tray menu to appear over third-party file managers (such as RustyFiles).
+
 ## [0.6.5] - 2026-11-19
 
 ### Added
