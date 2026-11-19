@@ -906,6 +906,7 @@ impl Cmd {
             Cmd::Open => "Enter",
             Cmd::SelectAll => "Ctrl+A",
             Cmd::Properties => "Alt+Enter",
+            Cmd::TorrentSearch => "Ctrl+Shift+F",
             Cmd::InterfaceSize(100) => "Ctrl+0",
             _ => return None,
         })
@@ -8310,6 +8311,7 @@ impl App {
         let mut menu = match index {
             0 => vec![
                 I("&Add new download", Cmd::AddUrl, true, false),
+                I("Search torrents... (Ctrl+Shift+F)", Cmd::TorrentSearch, true, false),
                 I("Open &torrent file...", Cmd::OpenTorrentFile, true, false),
                 I("Add &magnet link...", Cmd::AddMagnet, true, false),
                 I("Torrent setti&ngs...", Cmd::TorrentSettings, true, false),
@@ -8926,6 +8928,7 @@ impl App {
             Popup::QueueDrop(start) => (self.queue_drop(start), None),
             Popup::TorrentDrop => (
                 vec![
+                    MenuEntry::Item("Search torrents... (Ctrl+Shift+F)", Cmd::TorrentSearch, true, false),
                     MenuEntry::Item("Open &torrent file...", Cmd::OpenTorrentFile, true, false),
                     MenuEntry::Item("Add &magnet link...", Cmd::AddMagnet, true, false),
                     MenuEntry::Item("&RSS feeds...", Cmd::RssFeeds(false), true, false),
