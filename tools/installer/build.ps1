@@ -21,10 +21,19 @@ $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 $dist = Join-Path $root "target\dist"
 $target = @{ x64 = "x86_64-pc-windows-msvc"; arm64 = "aarch64-pc-windows-msvc"; x86 = "i686-pc-windows-msvc" }[$Arch]
-$bin = if (Test-Path (Join-Path $root "target\$target\release\sdm.exe")) {
-  Join-Path $root "target\$target\release"
+$targetBin = Join-Path $root "target\$target\release"
+$defaultBin = Join-Path $root "target\release"
+$bin = if ((Test-Path "$targetBin\sdm.exe") -and (Test-Path "$defaultBin\sdm.exe")) {
+  if ((Get-Item "$defaultBin\sdm.exe").LastWriteTime -gt (Get-Item "$targetBin\sdm.exe").LastWriteTime) {
+    Copy-Item "$defaultBin\sdm.exe" "$targetBin\sdm.exe" -Force
+    $targetBin
+  } else {
+    $targetBin
+  }
+} elseif (Test-Path "$targetBin\sdm.exe") {
+  $targetBin
 } else {
-  Join-Path $root "target\release"
+  $defaultBin
 }
 # The files' names: x64's as before, the others with their processor.
 $suffix = if ($Arch -eq "x64") { "" } else { "-$Arch" }
