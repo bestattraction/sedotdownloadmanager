@@ -89,7 +89,7 @@ def main():
             f.write(sym)
         print(f"{debug_file} {debug_id} ({len(sym) / 1048576:.1f} MB)")
     os.makedirs(out_dir, exist_ok=True)
-    zip_path = os.path.join(out_dir, f"MisterDownloadManager-{version}-symbols-{plat}.zip")
+    zip_path = os.path.join(out_dir, f"SedotDownloadManager-{version}-symbols-{plat}.zip")
     with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED, compresslevel=9) as z:
         for root, _, files in os.walk(store):
             for fn in files:

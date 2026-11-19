@@ -92,8 +92,10 @@ def main():
     folder, arch = sys.argv[1], sys.argv[2]
     windows = sys.platform == "win32"
     exe = ".exe" if windows else ""
+    main_bin = "sdm" if os.path.exists(os.path.join(folder, "sdm" + exe)) else "misterdownloadmanager"
+    progs = [main_bin, "misterdownloadmanager-nmhost", "misterdownloadmanager-cli", "misterdownloadmanager-mcp"]
     want = ("pe", PE[arch]) if windows else ("elf", ELF.get(arch))
-    for p in PROGRAMS:
+    for p in progs:
         got = machine(os.path.join(folder, p + exe))
         if got != want:
             sys.exit(f"{p}: built for machine {got[1]:#x}, not {arch} ({want[1]:#x})")
@@ -117,7 +119,7 @@ def main():
         os.makedirs(os.path.dirname(dest))
         env = dict(os.environ, MDM_DATA_DIR=data, MDM_DOWNLOADS=os.path.dirname(dest))
         out = subprocess.run(
-            [os.path.join(folder, "misterdownloadmanager" + exe), "--cli", "--json", "get", url,
+            [os.path.join(folder, main_bin + exe), "--cli", "--json", "get", url,
              "-o", dest, "--checksum", "sha256:" + hashlib.sha256(body).hexdigest()],
             capture_output=True, text=True, timeout=300, env=env)
         events = [json.loads(line) for line in out.stdout.splitlines() if line.strip()]

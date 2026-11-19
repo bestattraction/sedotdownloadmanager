@@ -27,6 +27,9 @@ if [ "${1:-}" != "--no-build" ]; then
     # The build machine's paths out of the programs (#25), as build-linux.sh does.
     CARGO_ENCODED_RUSTFLAGS="--remap-path-prefix=${CARGO_HOME:-$HOME/.cargo}=cargo"$'\x1f'"--remap-path-prefix=$root=mdm" \
       cargo build --release --target "$t" -p mdm-app -p mdm-nmhost -p mdm-cli -p mdm-mcp
+    if [ -f "$root/target/$t/release/sdm" ] && [ ! -f "$root/target/$t/release/misterdownloadmanager" ]; then
+      cp "$root/target/$t/release/sdm" "$root/target/$t/release/misterdownloadmanager"
+    fi
   done
 fi
 pwsh -NoProfile -File "$root/tools/extension/pack.ps1"
@@ -72,6 +75,10 @@ for pair in "${targets[@]}"; do
     cp "$root/target/$t/release/$p" "$app/Contents/MacOS/$p"
     strip -S -x "$app/Contents/MacOS/$p"
   done
+  if [ -f "$root/target/$t/release/sdm" ]; then
+    cp "$root/target/$t/release/sdm" "$app/Contents/MacOS/sdm"
+    strip -S -x "$app/Contents/MacOS/sdm"
+  fi
   cp -r "$root/target/extension/chromium" "$app/Contents/Resources/extension-chromium"
   cp "$root/target/extension/mdm-firefox.xpi" "$root/LICENSE" "$root/ATTRIBUTION.md" "$app/Contents/Resources/"
   cp "$stage/AppIcon.icns" "$app/Contents/Resources/AppIcon.icns"

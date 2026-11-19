@@ -36,6 +36,9 @@ if [ "${1:-}" != "--no-build" ]; then
   CARGO_ENCODED_RUSTFLAGS="--remap-path-prefix=${CARGO_HOME:-$HOME/.cargo}=cargo"$'\x1f'"--remap-path-prefix=$root=mdm" \
     cargo build --release -p mdm-app -p mdm-nmhost -p mdm-cli -p mdm-mcp
 fi
+if [ -f "$bin/sdm" ] && [ ! -f "$bin/misterdownloadmanager" ]; then
+  cp "$bin/sdm" "$bin/misterdownloadmanager"
+fi
 pwsh -NoProfile -File "$root/tools/extension/pack.ps1"
 
 mkdir -p "$dist"
@@ -49,6 +52,10 @@ mkdir -p "$tree/usr/bin" "$tree/usr/share/applications" \
   "$tree/usr/share/icons/hicolor/256x256/apps" "$tree/usr/share/misterdownloadmanager" \
   "$tree/usr/share/doc/misterdownloadmanager"
 for p in "${programs[@]}"; do install -m 755 "$bin/$p" "$tree/usr/bin/$p"; done
+if [ -f "$bin/sdm" ]; then
+  install -m 755 "$bin/sdm" "$tree/usr/bin/sdm"
+  ln -sf sdm "$tree/usr/bin/sedotdownloadmanager"
+fi
 # Crash reports: the release's symbols from the programs' debug info (the -symbols zip), then the
 # programs without it or their symbol table (#25; the build id that matches them to the symbols,
 # and the unwind tables, stay).
@@ -75,9 +82,9 @@ EOF
 cat > "$tree/usr/share/applications/misterdownloadmanager.desktop" <<EOF
 [Desktop Entry]
 Type=Application
-Name=Mister Download Manager
+Name=Sedot Download Manager
 Comment=Download manager
-Exec=misterdownloadmanager %U
+Exec=sdm %U
 Icon=misterdownloadmanager
 Terminal=false
 Categories=Network;FileTransfer;
@@ -165,7 +172,11 @@ cp "$rpm"/RPMS/$pkg_arch/*.rpm "$dist/$name.rpm"
 # AppImage: the same tree as an AppDir.
 appdir="$stage/AppDir"
 cp -r "$tree" "$appdir"
-ln -s usr/bin/misterdownloadmanager "$appdir/AppRun"
+if [ -f "$tree/usr/bin/sdm" ]; then
+  ln -s usr/bin/sdm "$appdir/AppRun"
+else
+  ln -s usr/bin/misterdownloadmanager "$appdir/AppRun"
+fi
 cp "$tree/usr/share/applications/misterdownloadmanager.desktop" "$appdir/"
 cp "$tree/usr/share/icons/hicolor/256x256/apps/misterdownloadmanager.png" "$appdir/"
 # appimagetool and the runtime it puts at the front of every AppImage, each at a fixed release and

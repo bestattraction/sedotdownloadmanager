@@ -174,8 +174,9 @@ jobs:
           GH_TOKEN: ${{ github.token }} # downloads the build's helpers signed in (fetch_release.py)
         run: |
           $v = [regex]::Match((Get-Content Cargo.toml -Raw), '(?m)^version\s*=\s*"([^"]+)"').Groups[1].Value
-          $exes = "misterdownloadmanager", "misterdownloadmanager-nmhost", "misterdownloadmanager-cli", "misterdownloadmanager-mcp" |
-            ForEach-Object { "target/${{ matrix.target }}/release/$_.exe" }
+          $exes = "sdm", "misterdownloadmanager", "misterdownloadmanager-nmhost", "misterdownloadmanager-cli", "misterdownloadmanager-mcp" |
+            ForEach-Object { "target/${{ matrix.target }}/release/$_.exe" } |
+            Where-Object { Test-Path $_ }
           python tools/installer/symbols.py windows-${{ matrix.arch }} $v target/dist @exes
           if ($LASTEXITCODE) { throw "symbols failed" }
 
@@ -426,7 +427,9 @@ jobs:
       # (Windows, Linux, macOS and the extension: everything the release ships but the checksums.)
       - uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
         with:
-          subject-path: dist/SedotDownloadManager-*
+          subject-path: |
+            dist/SedotDownloadManager-*
+            dist/sdm-*
 
       - name: Publish release
         env:
@@ -486,7 +489,17 @@ jobs:
           }
           if ($thanks) { $thanks = "`n`n" + $thanks }
           $all = (Get-ChildItem dist -File).FullName
-          if ($m.Success -and $m.Groups[1].Value.Trim()) {
+          $relExists = $false
+          try {
+            $null = gh release view "${{ github.ref_name }}" 2>&1
+            if ($LASTEXITCODE -eq 0) { $relExists = $true }
+          } catch {
+            $relExists = $false
+          }
+
+          if ($relExists) {
+            gh release upload "${{ github.ref_name }}" --clobber $all
+          } elseif ($m.Success -and $m.Groups[1].Value.Trim()) {
             # Links into the repository (docs/x.md) would resolve against the release's page:
             # point them at the tagged files.
             $notes = $m.Groups[1].Value.Trim() -replace '\]\((?![a-z]+:|#)([^)\s]+)\)', '](https://github.com/${{ github.repository }}/blob/${{ github.ref_name }}/$1)'
@@ -498,4 +511,4 @@ jobs:
           }
           # The website links to the latest published release: rebuild it now that the files are
           # there (a release made with this token starts no workflow by itself).
-          gh workflow run pages.yml --ref main
+          try { gh workflow run pages.yml --ref main 2>$null } catch { Write-Warning "pages workflow: $_" }
