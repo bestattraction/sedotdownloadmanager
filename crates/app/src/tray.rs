@@ -536,6 +536,11 @@ impl Native {
                 return None;
             }
         };
+        #[cfg(any(windows, target_os = "macos"))]
+        {
+            tray.set_show_menu_on_left_click(false);
+            tray.set_show_menu_on_right_click(false);
+        }
 
         // Only the hidden window's handle crosses to the watcher's thread: TrayIcon stays here.
         #[cfg(windows)]
@@ -774,17 +779,36 @@ impl watch::Port for WindowsShell {
     }
 }
 
-/// Check whether a click at `pos` fell within or near the tray icon's bounding rectangle `rect`.
+/// Check whether a click at `pos` fell within or near the tray icon's bounding rectangle `rect`
+/// or within the Windows taskbar / notification area.
 fn is_in_tray_rect(pos: tray_icon::dpi::PhysicalPosition<f64>, rect: tray_icon::Rect) -> bool {
-    if rect.size.width > 0 && rect.size.height > 0 {
-        let margin = 24.0;
-        let min_x = rect.position.x - margin;
-        let max_x = rect.position.x + rect.size.width as f64 + margin;
-        let min_y = rect.position.y - margin;
-        let max_y = rect.position.y + rect.size.height as f64 + margin;
-        pos.x >= min_x && pos.x <= max_x && pos.y >= min_y && pos.y <= max_y
-    } else {
-        true
+    #[cfg(windows)]
+    {
+        // 1. If we have a valid bounding box from the shell, test pos against it with a tight margin
+        if rect.size.width > 0 && rect.size.height > 0 {
+            let margin = 12.0;
+            let min_x = rect.position.x - margin;
+            let max_x = rect.position.x + rect.size.width as f64 + margin;
+            let min_y = rect.position.y - margin;
+            let max_y = rect.position.y + rect.size.height as f64 + margin;
+            if pos.x >= min_x && pos.x <= max_x && pos.y >= min_y && pos.y <= max_y {
+                return true;
+            }
+        }
+        // 2. If rect is unavailable (e.g. icon placed in overflow menu), check if cursor is on taskbar/overflow window
+        crate::win32::is_pos_on_taskbar(pos.x as i32, pos.y as i32)
+    }
+    #[cfg(not(windows))]
+    {
+        if rect.size.width > 0 && rect.size.height > 0 {
+            let margin = 16.0;
+            pos.x >= rect.position.x - margin
+                && pos.x <= rect.position.x + rect.size.width as f64 + margin
+                && pos.y >= rect.position.y - margin
+                && pos.y <= rect.position.y + rect.size.height as f64 + margin
+        } else {
+            false
+        }
     }
 }
 

@@ -2422,6 +2422,51 @@ pub fn tray_icon_tip(hwnd: isize, id: u32, tip: &str) -> bool {
     unsafe { Shell_NotifyIconW(NIM_MODIFY, &nid) != 0 }
 }
 
+/// Whether screen coordinate `(x, y)` is within the Windows Taskbar (primary or secondary)
+/// or the notification area overflow flyout window.
+pub fn is_pos_on_taskbar(x: i32, y: i32) -> bool {
+    use windows_sys::Win32::Foundation::{HWND, RECT};
+    use windows_sys::Win32::UI::WindowsAndMessaging::{FindWindowExW, FindWindowW, GetWindowRect};
+
+    let pt_in = |hwnd: HWND| -> bool {
+        if hwnd.is_null() {
+            return false;
+        }
+        let mut r: RECT = unsafe { std::mem::zeroed() };
+        if unsafe { GetWindowRect(hwnd, &mut r) } != 0 {
+            x >= r.left && x <= r.right && y >= r.top && y <= r.bottom
+        } else {
+            false
+        }
+    };
+
+    // 1. Primary taskbar
+    let tray_class: Vec<u16> = "Shell_TrayWnd\0".encode_utf16().collect();
+    let tray_wnd = unsafe { FindWindowW(tray_class.as_ptr(), std::ptr::null()) };
+    if pt_in(tray_wnd) {
+        return true;
+    }
+
+    // 2. Secondary taskbars (multi-monitor setups)
+    let sec_class: Vec<u16> = "Shell_SecondaryTrayWnd\0".encode_utf16().collect();
+    let mut sec_wnd = unsafe { FindWindowW(sec_class.as_ptr(), std::ptr::null()) };
+    while !sec_wnd.is_null() {
+        if pt_in(sec_wnd) {
+            return true;
+        }
+        sec_wnd = unsafe { FindWindowExW(std::ptr::null_mut(), sec_wnd, sec_class.as_ptr(), std::ptr::null()) };
+    }
+
+    // 3. Notification overflow window (the ^ pop-up)
+    let ovf_class: Vec<u16> = "NotifyIconOverflowWindow\0".encode_utf16().collect();
+    let ovf_wnd = unsafe { FindWindowW(ovf_class.as_ptr(), std::ptr::null()) };
+    if pt_in(ovf_wnd) {
+        return true;
+    }
+
+    false
+}
+
 /// The size the notification area draws MDM's icon at, in px, and the taskbar it draws it in (its
 /// window, 0 if none): Windows' small icon size (`SM_CXSMICON`) at the taskbar's DPI (#1161). The
 /// taskbar window's own DPI, not the system's: the system DPI is the main display's scale as it
