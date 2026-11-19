@@ -1,12 +1,12 @@
 {
   "name": {
-    "message": "Mister Download Manager"
+    "message": "Sedot Download Manager"
   },
   "description": {
-    "message": "Överför nedladdningar från webbläsaren till Mister Download Manager."
+    "message": "Överför nedladdningar från webbläsaren till Sedot Download Manager."
   },
   "menu": {
-    "message": "Ladda ned med Mister Download Manager"
+    "message": "Ladda ned med Sedot Download Manager"
   },
   "video_download": {
     "message": "Hämta video"
@@ -30,19 +30,19 @@
     "message": "Knappinställningar..."
   },
   "video_sent": {
-    "message": "Skickades till Mister Download Manager"
+    "message": "Skickades till Sedot Download Manager"
   },
   "menu_selected": {
-    "message": "Ladda ner valda länkar med Mister Download Manager"
+    "message": "Ladda ner valda länkar med Sedot Download Manager"
   },
   "menu_all": {
-    "message": "Ladda ner alla länkar med Mister Download Manager"
+    "message": "Ladda ner alla länkar med Sedot Download Manager"
   },
   "status_connected": {
-    "message": "Ansluten till Mister Download Manager"
+    "message": "Ansluten till Sedot Download Manager"
   },
   "status_connected_version": {
-    "message": "Ansluten till Mister Download Manager $version$",
+    "message": "Ansluten till Sedot Download Manager $version$",
     "placeholders": {
       "version": {
         "content": "$1",
@@ -54,22 +54,22 @@
     "message": "Pausad: nedladdningar stannar i webbläsaren"
   },
   "status_not_installed": {
-    "message": "Mister Download Manager är inte installerad, eller dess webbläsarintegrering är inte inställd"
+    "message": "Sedot Download Manager är inte installerad, eller dess webbläsarintegrering är inte inställd"
   },
   "status_forbidden": {
-    "message": "Mister Download Manager accepterar inte den här kopian av tillägget"
+    "message": "Sedot Download Manager accepterar inte den här kopian av tillägget"
   },
   "status_not_running": {
-    "message": "Mister Download Manager startade inte i tid"
+    "message": "Sedot Download Manager startade inte i tid"
   },
   "status_host_failed": {
-    "message": "Anslutningen till Mister Download Manager misslyckades"
+    "message": "Anslutningen till Sedot Download Manager misslyckades"
   },
   "status_too_large": {
     "message": "Informationen om den här nedladdningen var för stor för att överlämnas"
   },
   "status_update_app": {
-    "message": "Uppdatera Mister Download Manager för att använda allt som det här tillägget erbjuder"
+    "message": "Uppdatera Sedot Download Manager för att använda allt som det här tillägget erbjuder"
   },
   "popup_take": {
     "message": "Ta nedladdningar från den här webbläsaren"
@@ -78,10 +78,10 @@
     "message": "Skicka nedladdningar via den här webbläsarens proxy- eller VPN-tillägg"
   },
   "popup_proxy_title": {
-    "message": "Mister Download Manager laddar sedan ned via samma proxy som den här webbläsaren. Webbläsaren frågar dig en gång om du vill tillåta det. Om du inaktiverar detta tas det tillbaka."
+    "message": "Sedot Download Manager laddar sedan ned via samma proxy som den här webbläsaren. Webbläsaren frågar dig en gång om du vill tillåta det. Om du inaktiverar detta tas det tillbaka."
   },
   "popup_proxy_title_chromium": {
-    "message": "Mister Download Manager hämtar sedan via samma proxy som den här webbläsaren. När detta är inaktiverat läser tillägget inte webbläsarens proxy."
+    "message": "Sedot Download Manager hämtar sedan via samma proxy som den här webbläsaren. När detta är inaktiverat läser tillägget inte webbläsarens proxy."
   },
   "popup_exclude_site": {
     "message": "Ta aldrig nedladdningar från $site$",
@@ -105,7 +105,7 @@
     }
   },
   "popup_open": {
-    "message": "Öppna Mister Download Manager"
+    "message": "Öppna Sedot Download Manager"
   },
   "popup_options": {
     "message": "Alternativ..."
@@ -114,7 +114,7 @@
     "message": "Hjälp"
   },
   "popup_support": {
-    "message": "Stöd MDM"
+    "message": "Stöd SDM"
   },
   "popup_fix": {
     "message": "Så här åtgärdar du det"
@@ -150,7 +150,7 @@
     "message": "Använd avancerad webbläsarintegrering är avstängd i Alternativ → Allmänt."
   },
   "declined_torrents": {
-    "message": "Det är en torrent, och Öppna magnetlänkar och .torrent-filer med Mister Download Manager är avstängt i Torrentinställningar."
+    "message": "Det är en torrent, och Öppna magnetlänkar och .torrent-filer med Sedot Download Manager är avstängt i Torrentinställningar."
   },
   "declined_site_access": {
     "message": "Tillägget får inte läsa den här webbplatsen (webbläsarens webbplatsåtkomst)."
@@ -195,16 +195,16 @@
     "message": "Ingen video att hämta här"
   },
   "video_playlist": {
-    "message": "En lista med videor: välj dem i Mister Download Manager"
+    "message": "En lista med videor: välj dem i Sedot Download Manager"
   },
   "video_no_ytdlp": {
-    "message": "Mister Download Manager behöver yt-dlp för den här videon"
+    "message": "Sedot Download Manager behöver yt-dlp för den här videon"
   },
   "video_too_long": {
     "message": "Sökningen tog för lång tid"
   },
   "video_busy": {
-    "message": "Mister Download Manager är upptaget med andra videor"
+    "message": "Sedot Download Manager är upptaget med andra videor"
   },
   "video_queued": {
     "message": "Tillagd i kön"
@@ -228,7 +228,7 @@
     "message": "Den här datorn"
   },
   "popup_send_remote": {
-    "message": "En annan Mister Download Manager (en server)"
+    "message": "En annan Sedot Download Manager (en server)"
   },
   "popup_remote_code": {
     "message": "Kopplingskod"
@@ -297,19 +297,19 @@
     "message": "Ladda ned bästa kvalitet"
   },
   "video_sending": {
-    "message": "Skickar till MDM..."
+    "message": "Skickar till SDM..."
   },
   "video_added": {
-    "message": "Tillagd i MDM"
+    "message": "Tillagd i SDM"
   },
   "video_show": {
     "message": "Visa"
   },
   "video_no_answer": {
-    "message": "MDM svarade inte"
+    "message": "SDM svarade inte"
   },
   "video_get_mdm": {
-    "message": "Skaffa MDM"
+    "message": "Skaffa SDM"
   },
   "video_retry": {
     "message": "Försök igen"
@@ -323,8 +323,11 @@
   "video_all_qualities": {
     "message": "Alla kvaliteter och undertexter..."
   },
+  "video_subtitles_only": {
+    "message": "Download subtitle only..."
+  },
   "video_failed": {
-    "message": "Mister Download Manager är inte installerad eller startade inte"
+    "message": "Sedot Download Manager är inte installerad eller startade inte"
   },
   "video_download_best": {
     "message": "Ladda ned bästa kvalitet"

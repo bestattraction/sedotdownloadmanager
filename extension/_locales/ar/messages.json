@@ -1,12 +1,12 @@
 {
   "name": {
-    "message": "Mister Download Manager"
+    "message": "Sedot Download Manager"
   },
   "description": {
-    "message": "يسلم التنزيلات من المستعرض إلى Mister Download Manager."
+    "message": "يسلم التنزيلات من المستعرض إلى Sedot Download Manager."
   },
   "menu": {
-    "message": "تنزيل باستخدام Mister Download Manager"
+    "message": "تنزيل باستخدام Sedot Download Manager"
   },
   "video_download": {
     "message": "تنزيل الفيديو"
@@ -30,19 +30,19 @@
     "message": "إعدادات الزر..."
   },
   "video_sent": {
-    "message": "تم الإرسال إلى Mister Download Manager"
+    "message": "تم الإرسال إلى Sedot Download Manager"
   },
   "menu_selected": {
-    "message": "تنزيل الروابط المحددة باستخدام Mister Download Manager"
+    "message": "تنزيل الروابط المحددة باستخدام Sedot Download Manager"
   },
   "menu_all": {
-    "message": "تنزيل جميع الروابط باستخدام Mister Download Manager"
+    "message": "تنزيل جميع الروابط باستخدام Sedot Download Manager"
   },
   "status_connected": {
-    "message": "متصل بـ Mister Download Manager"
+    "message": "متصل بـ Sedot Download Manager"
   },
   "status_connected_version": {
-    "message": "متصل بـ Mister Download Manager $version$",
+    "message": "متصل بـ Sedot Download Manager $version$",
     "placeholders": {
       "version": {
         "content": "$1",
@@ -54,22 +54,22 @@
     "message": "متوقف مؤقتا: تبقى التنزيلات مع المستعرض"
   },
   "status_not_installed": {
-    "message": "لم يتم تثبيت Mister Download Manager، أو لم يتم إعداد الربط بالمستعرض الخاص به"
+    "message": "لم يتم تثبيت Sedot Download Manager، أو لم يتم إعداد الربط بالمستعرض الخاص به"
   },
   "status_forbidden": {
-    "message": "لا يقبل Mister Download Manager هذه النسخة من الملحق"
+    "message": "لا يقبل Sedot Download Manager هذه النسخة من الملحق"
   },
   "status_not_running": {
-    "message": "لم يبدأ Mister Download Manager في الوقت المحدد"
+    "message": "لم يبدأ Sedot Download Manager في الوقت المحدد"
   },
   "status_host_failed": {
-    "message": "فشل الاتصال بـ Mister Download Manager"
+    "message": "فشل الاتصال بـ Sedot Download Manager"
   },
   "status_too_large": {
     "message": "كانت تفاصيل هذا التنزيل كبيرة جدا بحيث لا يمكن تسليمها"
   },
   "status_update_app": {
-    "message": "قم بتحديث Mister Download Manager لاستخدام كل ما يوفره هذا الملحق"
+    "message": "قم بتحديث Sedot Download Manager لاستخدام كل ما يوفره هذا الملحق"
   },
   "popup_take": {
     "message": "تلقي التنزيلات من هذا المستعرض"
@@ -78,10 +78,10 @@
     "message": "إرسال التنزيلات عبر وكيل هذا المستعرض أو ملحق VPN"
   },
   "popup_proxy_title": {
-    "message": "يجري Mister Download Manager التنزيل بعد ذلك عبر الوكيل نفسه الذي يستخدمه هذا المستعرض. يطلب منك المستعرض مرة واحدة السماح بذلك؛ وإيقاف هذا يلغي ذلك."
+    "message": "يجري Sedot Download Manager التنزيل بعد ذلك عبر الوكيل نفسه الذي يستخدمه هذا المستعرض. يطلب منك المستعرض مرة واحدة السماح بذلك؛ وإيقاف هذا يلغي ذلك."
   },
   "popup_proxy_title_chromium": {
-    "message": "يجري Mister Download Manager التنزيل بعد ذلك عبر الوكيل نفسه الذي يستخدمه هذا المستعرض. عندما يكون هذا الخيار متوقفا، لا يقرأ الملحق وكيل المستعرض."
+    "message": "يجري Sedot Download Manager التنزيل بعد ذلك عبر الوكيل نفسه الذي يستخدمه هذا المستعرض. عندما يكون هذا الخيار متوقفا، لا يقرأ الملحق وكيل المستعرض."
   },
   "popup_exclude_site": {
     "message": "عدم التقاط التنزيلات من $site$ أبدا",
@@ -105,7 +105,7 @@
     }
   },
   "popup_open": {
-    "message": "فتح Mister Download Manager"
+    "message": "فتح Sedot Download Manager"
   },
   "popup_options": {
     "message": "خيارات..."
@@ -114,7 +114,7 @@
     "message": "تعليمات"
   },
   "popup_support": {
-    "message": "ادعم MDM"
+    "message": "ادعم SDM"
   },
   "popup_fix": {
     "message": "كيفية إصلاحها"
@@ -144,13 +144,13 @@
     "message": "إنه أصغر من الحجم الأدنى في خيارات ← أنواع الملفات."
   },
   "declined_browser": {
-    "message": "لم يتم تحديد هذا المتصفح في خيارات ← عام."
+    "message": "لم يتم تحديد هذا المستعرض في خيارات ← عام."
   },
   "declined_integration_off": {
-    "message": "استخدام تكامل المتصفح المتقدم معطل في خيارات ← عام."
+    "message": "استخدام الربط المتقدم بالمستعرض معطل في خيارات ← عام."
   },
   "declined_torrents": {
-    "message": "إنه تورنت، وخيار «فتح روابط مغناطيسية وملفات .torrent باستخدام Mister Download Manager» متوقف في إعدادات التورنت."
+    "message": "إنه تورنت، وخيار «فتح روابط مغناطيسية وملفات .torrent باستخدام Sedot Download Manager» متوقف في إعدادات التورنت."
   },
   "declined_site_access": {
     "message": "لا يسمح للملحق بقراءة هذا الموقع (وصول الملحق إلى الموقع)."
@@ -195,16 +195,16 @@
     "message": "لا يوجد فيديو للتنزيل هنا"
   },
   "video_playlist": {
-    "message": "قائمة فيديوهات: اختر منها في Mister Download Manager"
+    "message": "قائمة فيديوهات: اختر منها في Sedot Download Manager"
   },
   "video_no_ytdlp": {
-    "message": "يحتاج Mister Download Manager إلى yt-dlp لهذا الفيديو"
+    "message": "يحتاج Sedot Download Manager إلى yt-dlp لهذا الفيديو"
   },
   "video_too_long": {
     "message": "استغرق البحث وقتا طويلا"
   },
   "video_busy": {
-    "message": "Mister Download Manager مشغول بفيديوهات أخرى"
+    "message": "Sedot Download Manager مشغول بفيديوهات أخرى"
   },
   "video_queued": {
     "message": "تمت الإضافة إلى قائمة الانتظار"
@@ -228,7 +228,7 @@
     "message": "هذا الكمبيوتر"
   },
   "popup_send_remote": {
-    "message": "Mister Download Manager آخر (خادم)"
+    "message": "Sedot Download Manager آخر (خادم)"
   },
   "popup_remote_code": {
     "message": "رمز الإقران"
@@ -255,7 +255,7 @@
     "message": "أدخل عنوان https:// الخاص به."
   },
   "remote_unreachable": {
-    "message": "لم يتم الوصول إليه. افتح عنوانه مرة واحدة في هذا المتصفح واقبل شهادته، ثم حاول مرة أخرى."
+    "message": "لم يتم الوصول إليه. افتح عنوانه مرة واحدة في هذا المستعرض واقبل شهادته، ثم حاول مرة أخرى."
   },
   "remote_wrong_code": {
     "message": "رمز خاطئ."
@@ -270,7 +270,7 @@
     "message": "لم ينجح الأمر. حاول مرة أخرى."
   },
   "remote_device_name": {
-    "message": "ملحق المتصفح"
+    "message": "ملحق المستعرض"
   },
   "popup_media_title_name": {
     "message": "إضافة عنوان الصفحة قبل أسماء ملفات الوسائط"
@@ -297,19 +297,19 @@
     "message": "نزل أفضل جودة"
   },
   "video_sending": {
-    "message": "قيد الإرسال إلى MDM..."
+    "message": "قيد الإرسال إلى SDM..."
   },
   "video_added": {
-    "message": "أضيف إلى MDM"
+    "message": "أضيف إلى SDM"
   },
   "video_show": {
     "message": "إظهار"
   },
   "video_no_answer": {
-    "message": "لم يستجب MDM"
+    "message": "لم يستجب SDM"
   },
   "video_get_mdm": {
-    "message": "احصل على MDM"
+    "message": "احصل على SDM"
   },
   "video_retry": {
     "message": "أعد المحاولة"
@@ -323,8 +323,11 @@
   "video_all_qualities": {
     "message": "كل الجودات والترجمات..."
   },
+  "video_subtitles_only": {
+    "message": "Download subtitle only..."
+  },
   "video_failed": {
-    "message": "لم يتم تثبيت Mister Download Manager أو لم يبدأ"
+    "message": "لم يتم تثبيت Sedot Download Manager أو لم يبدأ"
   },
   "video_download_best": {
     "message": "تنزيل بأفضل جودة"

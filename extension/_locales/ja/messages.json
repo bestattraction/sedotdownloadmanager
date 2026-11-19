@@ -1,12 +1,12 @@
 {
   "name": {
-    "message": "Mister Download Manager"
+    "message": "Sedot Download Manager"
   },
   "description": {
-    "message": "ブラウザーから Mister Download Manager にダウンロードを渡します。"
+    "message": "ブラウザーから Sedot Download Manager にダウンロードを渡します。"
   },
   "menu": {
-    "message": "Mister Download Manager でダウンロード"
+    "message": "Sedot Download Manager でダウンロード"
   },
   "video_download": {
     "message": "動画をダウンロード"
@@ -30,19 +30,19 @@
     "message": "ボタンの設定..."
   },
   "video_sent": {
-    "message": "Mister Download Manager に送信済み"
+    "message": "Sedot Download Manager に送信済み"
   },
   "menu_selected": {
-    "message": "Mister Download Manager で選択したリンクをダウンロード"
+    "message": "Sedot Download Manager で選択したリンクをダウンロード"
   },
   "menu_all": {
-    "message": "Mister Download Manager で全リンクをダウンロード"
+    "message": "Sedot Download Manager で全リンクをダウンロード"
   },
   "status_connected": {
-    "message": "Mister Download Manager に接続済み"
+    "message": "Sedot Download Manager に接続済み"
   },
   "status_connected_version": {
-    "message": "Mister Download Manager $version$ に接続済み",
+    "message": "Sedot Download Manager $version$ に接続済み",
     "placeholders": {
       "version": {
         "content": "$1",
@@ -54,22 +54,22 @@
     "message": "一時停止: ダウンロードはブラウザーに残ります"
   },
   "status_not_installed": {
-    "message": "Mister Download Manager がインストールされていないか、ブラウザー統合が設定されていません"
+    "message": "Sedot Download Manager がインストールされていないか、ブラウザー統合が設定されていません"
   },
   "status_forbidden": {
-    "message": "Mister Download Manager はこの拡張機能のコピーを受け入れません"
+    "message": "Sedot Download Manager はこの拡張機能のコピーを受け入れません"
   },
   "status_not_running": {
-    "message": "Mister Download Manager が時間内に起動しませんでした"
+    "message": "Sedot Download Manager が時間内に起動しませんでした"
   },
   "status_host_failed": {
-    "message": "Mister Download Manager への接続に失敗しました"
+    "message": "Sedot Download Manager への接続に失敗しました"
   },
   "status_too_large": {
     "message": "このダウンロードの詳細は大きすぎて引き渡せませんでした"
   },
   "status_update_app": {
-    "message": "この拡張機能のすべての機能を使用するには、Mister Download Manager を更新してください"
+    "message": "この拡張機能のすべての機能を使用するには、Sedot Download Manager を更新してください"
   },
   "popup_take": {
     "message": "このブラウザーからのダウンロードを取得する"
@@ -78,10 +78,10 @@
     "message": "このブラウザーのプロキシまたは VPN 拡張機能経由でダウンロードを送信する"
   },
   "popup_proxy_title": {
-    "message": "Mister Download Manager は、このブラウザーと同じプロキシ経由でダウンロードします。ブラウザーは一度だけ許可を求めます。これをオフにすると、その許可は取り消されます。"
+    "message": "Sedot Download Manager は、このブラウザーと同じプロキシ経由でダウンロードします。ブラウザーは一度だけ許可を求めます。これをオフにすると、その許可は取り消されます。"
   },
   "popup_proxy_title_chromium": {
-    "message": "Mister Download Manager は、このブラウザーと同じプロキシ経由でダウンロードします。これがオフの場合、拡張機能はブラウザーのプロキシを読み取りません。"
+    "message": "Sedot Download Manager は、このブラウザーと同じプロキシ経由でダウンロードします。これがオフの場合、拡張機能はブラウザーのプロキシを読み取りません。"
   },
   "popup_exclude_site": {
     "message": "$site$ からのダウンロードは今後取得しない",
@@ -105,7 +105,7 @@
     }
   },
   "popup_open": {
-    "message": "Mister Download Manager を開く"
+    "message": "Sedot Download Manager を開く"
   },
   "popup_options": {
     "message": "オプション..."
@@ -114,7 +114,7 @@
     "message": "ヘルプ"
   },
   "popup_support": {
-    "message": "MDM をサポート"
+    "message": "SDM をサポート"
   },
   "popup_fix": {
     "message": "修正方法"
@@ -150,7 +150,7 @@
     "message": "オプション → 全般で「高度なブラウザー統合を使用する」がオフになっています。"
   },
   "declined_torrents": {
-    "message": "これはトレントであり、トレント設定で「マグネット リンクと .torrent ファイルを Mister Download Manager で開く」がオフになっています。"
+    "message": "これはトレントであり、トレント設定で「マグネット リンクと .torrent ファイルを Sedot Download Manager で開く」がオフになっています。"
   },
   "declined_site_access": {
     "message": "このサイトの読み取りは拡張機能に許可されていません (ブラウザーのサイト アクセス)。"
@@ -195,16 +195,16 @@
     "message": "ここにはダウンロードできる動画がありません"
   },
   "video_playlist": {
-    "message": "動画の一覧: Mister Download Manager で選択してください"
+    "message": "動画の一覧: Sedot Download Manager で選択してください"
   },
   "video_no_ytdlp": {
-    "message": "この動画には Mister Download Manager に yt-dlp が必要です"
+    "message": "この動画には Sedot Download Manager に yt-dlp が必要です"
   },
   "video_too_long": {
     "message": "検索に時間がかかりすぎました"
   },
   "video_busy": {
-    "message": "Mister Download Manager は他の動画の処理中です"
+    "message": "Sedot Download Manager は他の動画の処理中です"
   },
   "video_queued": {
     "message": "キューに追加しました"
@@ -228,7 +228,7 @@
     "message": "このコンピューター"
   },
   "popup_send_remote": {
-    "message": "別の Mister Download Manager (サーバー)"
+    "message": "別の Sedot Download Manager (サーバー)"
   },
   "popup_remote_code": {
     "message": "ペアリング コード"
@@ -297,19 +297,19 @@
     "message": "最高品質をダウンロード"
   },
   "video_sending": {
-    "message": "MDM に送信しています..."
+    "message": "SDM に送信しています..."
   },
   "video_added": {
-    "message": "MDM に追加済み"
+    "message": "SDM に追加済み"
   },
   "video_show": {
     "message": "表示"
   },
   "video_no_answer": {
-    "message": "MDM が応答しません"
+    "message": "SDM が応答しません"
   },
   "video_get_mdm": {
-    "message": "MDM を入手"
+    "message": "SDM を入手"
   },
   "video_retry": {
     "message": "再試行"
@@ -323,8 +323,11 @@
   "video_all_qualities": {
     "message": "すべての画質と字幕..."
   },
+  "video_subtitles_only": {
+    "message": "Download subtitle only..."
+  },
   "video_failed": {
-    "message": "Mister Download Manager がインストールされていないか、起動していません"
+    "message": "Sedot Download Manager がインストールされていないか、起動していません"
   },
   "video_download_best": {
     "message": "最高画質をダウンロード"

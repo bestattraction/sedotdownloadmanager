@@ -1,12 +1,12 @@
 {
   "name": {
-    "message": "Mister Download Manager"
+    "message": "Sedot Download Manager"
   },
   "description": {
-    "message": "دانلودها را از مرورگر به Mister Download Manager منتقل می‌کند."
+    "message": "دانلودها را از مرورگر به Sedot Download Manager منتقل می‌کند."
   },
   "menu": {
-    "message": "دانلود با Mister Download Manager"
+    "message": "دانلود با Sedot Download Manager"
   },
   "video_download": {
     "message": "دانلود ویدیو"
@@ -30,19 +30,19 @@
     "message": "تنظیمات دکمه..."
   },
   "video_sent": {
-    "message": "به Mister Download Manager ارسال شد"
+    "message": "به Sedot Download Manager ارسال شد"
   },
   "menu_selected": {
-    "message": "پیوندهای انتخاب شده را با Mister Download Manager بارگیری کن"
+    "message": "پیوندهای انتخاب شده را با Sedot Download Manager بارگیری کن"
   },
   "menu_all": {
-    "message": "همه پیوندها را با Mister Download Manager بارگیری کن"
+    "message": "همه پیوندها را با Sedot Download Manager بارگیری کن"
   },
   "status_connected": {
-    "message": "به Mister Download Manager متصل شد"
+    "message": "به Sedot Download Manager متصل شد"
   },
   "status_connected_version": {
-    "message": "به Mister Download Manager $version$ متصل شد",
+    "message": "به Sedot Download Manager $version$ متصل شد",
     "placeholders": {
       "version": {
         "content": "$1",
@@ -54,22 +54,22 @@
     "message": "متوقف شد: بارگیری‌ها در مرورگر می‌مانند"
   },
   "status_not_installed": {
-    "message": "Mister Download Manager نصب نشده است یا یکپارچه‌سازی آن با مرورگر تنظیم نشده است"
+    "message": "Sedot Download Manager نصب نشده است یا یکپارچه‌سازی آن با مرورگر تنظیم نشده است"
   },
   "status_forbidden": {
-    "message": "Mister Download Manager این نسخه از افزونه را نمی‌پذیرد"
+    "message": "Sedot Download Manager این نسخه از افزونه را نمی‌پذیرد"
   },
   "status_not_running": {
-    "message": "Mister Download Manager به موقع شروع نشد"
+    "message": "Sedot Download Manager به موقع شروع نشد"
   },
   "status_host_failed": {
-    "message": "اتصال به Mister Download Manager برقرار نشد"
+    "message": "اتصال به Sedot Download Manager برقرار نشد"
   },
   "status_too_large": {
     "message": "جزئیات این بارگیری برای واگذاری بیش از حد بزرگ بود"
   },
   "status_update_app": {
-    "message": "Mister Download Manager را به‌روزرسانی کنید تا از همه قابلیت‌های این افزونه استفاده کنید"
+    "message": "Sedot Download Manager را به‌روزرسانی کنید تا از همه قابلیت‌های این افزونه استفاده کنید"
   },
   "popup_take": {
     "message": "دریافت بارگیری‌ها از این مرورگر"
@@ -78,10 +78,10 @@
     "message": "بارگیری‌ها از طریق پروکسی یا افزونه VPN این مرورگر ارسال شوند"
   },
   "popup_proxy_title": {
-    "message": "Mister Download Manager سپس از طریق همان پروکسی این مرورگر بارگیری می‌کند. مرورگر یک‌بار از شما اجازه می‌گیرد؛ با خاموش کردن این گزینه، اجازه لغو می‌شود."
+    "message": "Sedot Download Manager سپس از طریق همان پروکسی این مرورگر بارگیری می‌کند. مرورگر یک‌بار از شما اجازه می‌گیرد؛ با خاموش کردن این گزینه، اجازه لغو می‌شود."
   },
   "popup_proxy_title_chromium": {
-    "message": "Mister Download Manager از طریق همان پراکسی این مرورگر بارگیری می‌کند. وقتی این گزینه خاموش باشد، افزونه پراکسی مرورگر را نمی‌خواند."
+    "message": "Sedot Download Manager از طریق همان پراکسی این مرورگر بارگیری می‌کند. وقتی این گزینه خاموش باشد، افزونه پراکسی مرورگر را نمی‌خواند."
   },
   "popup_exclude_site": {
     "message": "هرگز بارگیری‌های $site$ را دریافت نکنید",
@@ -105,7 +105,7 @@
     }
   },
   "popup_open": {
-    "message": "باز کردن Mister Download Manager"
+    "message": "باز کردن Sedot Download Manager"
   },
   "popup_options": {
     "message": "گزینه‌ها..."
@@ -114,7 +114,7 @@
     "message": "راهنما"
   },
   "popup_support": {
-    "message": "پشتیبانی از MDM"
+    "message": "پشتیبانی از SDM"
   },
   "popup_fix": {
     "message": "چگونه آن را رفع کنیم"
@@ -150,7 +150,7 @@
     "message": "«استفاده از یکپارچه‌سازی پیشرفته مرورگر» در گزینه‌ها ← عمومی خاموش است."
   },
   "declined_torrents": {
-    "message": "این یک تورنت است و «باز کردن پیوندهای مگنت و فایل‌های .torrent با Mister Download Manager» در تنظیمات تورنت خاموش است."
+    "message": "این یک تورنت است و «باز کردن پیوندهای مگنت و فایل‌های .torrent با Sedot Download Manager» در تنظیمات تورنت خاموش است."
   },
   "declined_site_access": {
     "message": "افزونه اجازه خواندن این سایت را ندارد (دسترسی سایت مرورگر)."
@@ -195,16 +195,16 @@
     "message": "ویدیویی برای دانلود در اینجا نیست"
   },
   "video_playlist": {
-    "message": "فهرستی از ویدیوها: آن‌ها را در Mister Download Manager انتخاب کنید"
+    "message": "فهرستی از ویدیوها: آن‌ها را در Sedot Download Manager انتخاب کنید"
   },
   "video_no_ytdlp": {
-    "message": "Mister Download Manager برای این ویدیو به yt-dlp نیاز دارد"
+    "message": "Sedot Download Manager برای این ویدیو به yt-dlp نیاز دارد"
   },
   "video_too_long": {
     "message": "جست‌وجو بیش از حد طول کشید"
   },
   "video_busy": {
-    "message": "Mister Download Manager با ویدیوهای دیگر مشغول است"
+    "message": "Sedot Download Manager با ویدیوهای دیگر مشغول است"
   },
   "video_queued": {
     "message": "به صف اضافه شد"
@@ -228,7 +228,7 @@
     "message": "این رایانه"
   },
   "popup_send_remote": {
-    "message": "یک Mister Download Manager دیگر (یک سرور)"
+    "message": "یک Sedot Download Manager دیگر (یک سرور)"
   },
   "popup_remote_code": {
     "message": "کد جفت‌سازی"
@@ -297,19 +297,19 @@
     "message": "بارگیری بهترین کیفیت"
   },
   "video_sending": {
-    "message": "در حال ارسال به MDM..."
+    "message": "در حال ارسال به SDM..."
   },
   "video_added": {
-    "message": "به MDM اضافه شد"
+    "message": "به SDM اضافه شد"
   },
   "video_show": {
     "message": "نمایش"
   },
   "video_no_answer": {
-    "message": "MDM پاسخ نداد"
+    "message": "SDM پاسخ نداد"
   },
   "video_get_mdm": {
-    "message": "دریافت MDM"
+    "message": "دریافت SDM"
   },
   "video_retry": {
     "message": "تلاش مجدد"
@@ -323,8 +323,11 @@
   "video_all_qualities": {
     "message": "همه کیفیت‌ها و زیرنویس‌ها..."
   },
+  "video_subtitles_only": {
+    "message": "Download subtitle only..."
+  },
   "video_failed": {
-    "message": "Mister Download Manager نصب نشده است یا اجرا نشد"
+    "message": "Sedot Download Manager نصب نشده است یا اجرا نشد"
   },
   "video_download_best": {
     "message": "بارگیری بهترین کیفیت"

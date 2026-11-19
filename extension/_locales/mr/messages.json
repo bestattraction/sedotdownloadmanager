@@ -1,12 +1,12 @@
 {
   "name": {
-    "message": "Mister Download Manager"
+    "message": "Sedot Download Manager"
   },
   "description": {
-    "message": "ब्राउझरवरून Mister Download Manager ला डाउनलोड्स देतो."
+    "message": "ब्राउझरवरून Sedot Download Manager ला डाउनलोड्स देतो."
   },
   "menu": {
-    "message": "Mister Download Manager सह डाउनलोड करा"
+    "message": "Sedot Download Manager सह डाउनलोड करा"
   },
   "video_download": {
     "message": "व्हिडिओ डाउनलोड करा"
@@ -30,19 +30,19 @@
     "message": "बटण सेटिंग्ज..."
   },
   "video_sent": {
-    "message": "Mister Download Manager ला पाठवले"
+    "message": "Sedot Download Manager ला पाठवले"
   },
   "menu_selected": {
-    "message": "Mister Download Manager सह निवडलेल्या लिंक्स डाउनलोड करा"
+    "message": "Sedot Download Manager सह निवडलेल्या लिंक्स डाउनलोड करा"
   },
   "menu_all": {
-    "message": "Mister Download Manager सह सर्व लिंक्स डाउनलोड करा"
+    "message": "Sedot Download Manager सह सर्व लिंक्स डाउनलोड करा"
   },
   "status_connected": {
-    "message": "Mister Download Manager शी कनेक्ट केले"
+    "message": "Sedot Download Manager शी कनेक्ट केले"
   },
   "status_connected_version": {
-    "message": "Mister Download Manager $version$ शी कनेक्ट केले",
+    "message": "Sedot Download Manager $version$ शी कनेक्ट केले",
     "placeholders": {
       "version": {
         "content": "$1",
@@ -54,22 +54,22 @@
     "message": "विरामित: डाउनलोड ब्राउझरमध्येच राहतात"
   },
   "status_not_installed": {
-    "message": "Mister Download Manager स्थापित केलेले नाही, किंवा त्याचे ब्राउझर एकत्रीकरण सेट केलेले नाही"
+    "message": "Sedot Download Manager स्थापित केलेले नाही, किंवा त्याचे ब्राउझर एकत्रीकरण सेट केलेले नाही"
   },
   "status_forbidden": {
-    "message": "Mister Download Manager एक्स्टेंशनची ही प्रत स्वीकारत नाही"
+    "message": "Sedot Download Manager एक्स्टेंशनची ही प्रत स्वीकारत नाही"
   },
   "status_not_running": {
-    "message": "Mister Download Manager वेळेत सुरू झाले नाही"
+    "message": "Sedot Download Manager वेळेत सुरू झाले नाही"
   },
   "status_host_failed": {
-    "message": "Mister Download Manager शी कनेक्शन अयशस्वी झाले"
+    "message": "Sedot Download Manager शी कनेक्शन अयशस्वी झाले"
   },
   "status_too_large": {
     "message": "या डाउनलोडचे तपशील हस्तांतरित करण्यासाठी खूप मोठे होते"
   },
   "status_update_app": {
-    "message": "या एक्स्टेंशनची सर्व वैशिष्ट्ये वापरण्यासाठी Mister Download Manager अपडेट करा"
+    "message": "या एक्स्टेंशनची सर्व वैशिष्ट्ये वापरण्यासाठी Sedot Download Manager अपडेट करा"
   },
   "popup_take": {
     "message": "या ब्राउझरमधील डाउनलोड घ्या"
@@ -78,10 +78,10 @@
     "message": "या ब्राउझरच्या प्रॉक्सी किंवा VPN एक्स्टेंशनद्वारे डाउनलोड पाठवा"
   },
   "popup_proxy_title": {
-    "message": "Mister Download Manager नंतर या ब्राउझरसारख्याच प्रॉक्सीद्वारे डाउनलोड करते. ब्राउझर तुम्हाला एकदा परवानगी देण्यास सांगेल; हे बंद केल्यास ती परवानगी रद्द होते."
+    "message": "Sedot Download Manager नंतर या ब्राउझरसारख्याच प्रॉक्सीद्वारे डाउनलोड करते. ब्राउझर तुम्हाला एकदा परवानगी देण्यास सांगेल; हे बंद केल्यास ती परवानगी रद्द होते."
   },
   "popup_proxy_title_chromium": {
-    "message": "Mister Download Manager नंतर या ब्राउझरच्या समान प्रॉक्सीद्वारे डाउनलोड करते. हे बंद असताना, एक्स्टेंशन ब्राउझरची प्रॉक्सी वाचत नाही."
+    "message": "Sedot Download Manager नंतर या ब्राउझरच्या समान प्रॉक्सीद्वारे डाउनलोड करते. हे बंद असताना, एक्स्टेंशन ब्राउझरची प्रॉक्सी वाचत नाही."
   },
   "popup_exclude_site": {
     "message": "$site$ वरील डाउनलोड कधीही घेऊ नका",
@@ -105,7 +105,7 @@
     }
   },
   "popup_open": {
-    "message": "Mister Download Manager उघडा"
+    "message": "Sedot Download Manager उघडा"
   },
   "popup_options": {
     "message": "पर्याय..."
@@ -114,7 +114,7 @@
     "message": "मदत"
   },
   "popup_support": {
-    "message": "MDM ला सपोर्ट करा"
+    "message": "SDM ला सपोर्ट करा"
   },
   "popup_fix": {
     "message": "ते कसे दुरुस्त करावे"
@@ -150,7 +150,7 @@
     "message": "पर्याय → सामान्य मध्ये 'प्रगत ब्राउझर एकत्रीकरण वापरा' बंद आहे."
   },
   "declined_torrents": {
-    "message": "ही एक टॉरेंट फाइल आहे आणि टॉरेंट सेटिंग्जमध्ये Mister Download Manager सह मॅग्नेट लिंक्स आणि .torrent फाइल्स उघडा हे बंद आहे."
+    "message": "ही एक टॉरेंट फाइल आहे आणि टॉरेंट सेटिंग्जमध्ये Sedot Download Manager सह मॅग्नेट लिंक्स आणि .torrent फाइल्स उघडा हे बंद आहे."
   },
   "declined_site_access": {
     "message": "या साइटला वाचण्याची विस्ताराला परवानगी नाही (ब्राउझरची साइट ॲक्सेस)."
@@ -195,16 +195,16 @@
     "message": "येथे डाउनलोड करण्यासाठी व्हिडिओ नाही"
   },
   "video_playlist": {
-    "message": "व्हिडिओंची सूची: ते Mister Download Manager मध्ये निवडा"
+    "message": "व्हिडिओंची सूची: ते Sedot Download Manager मध्ये निवडा"
   },
   "video_no_ytdlp": {
-    "message": "या व्हिडिओसाठी Mister Download Manager ला yt-dlp आवश्यक आहे"
+    "message": "या व्हिडिओसाठी Sedot Download Manager ला yt-dlp आवश्यक आहे"
   },
   "video_too_long": {
     "message": "शोधण्यास खूप वेळ लागला"
   },
   "video_busy": {
-    "message": "Mister Download Manager इतर व्हिडिओंमध्ये व्यस्त आहे"
+    "message": "Sedot Download Manager इतर व्हिडिओंमध्ये व्यस्त आहे"
   },
   "video_queued": {
     "message": "रांगेत जोडले"
@@ -228,7 +228,7 @@
     "message": "हे संगणक"
   },
   "popup_send_remote": {
-    "message": "दुसरा Mister Download Manager (एक सर्व्हर)"
+    "message": "दुसरा Sedot Download Manager (एक सर्व्हर)"
   },
   "popup_remote_code": {
     "message": "पेअरिंग कोड"
@@ -297,19 +297,19 @@
     "message": "उत्तम गुणवत्ता डाउनलोड करा"
   },
   "video_sending": {
-    "message": "MDM ला पाठवत आहे..."
+    "message": "SDM ला पाठवत आहे..."
   },
   "video_added": {
-    "message": "MDM मध्ये जोडले"
+    "message": "SDM मध्ये जोडले"
   },
   "video_show": {
     "message": "दाखवा"
   },
   "video_no_answer": {
-    "message": "MDM ने प्रतिसाद दिला नाही"
+    "message": "SDM ने प्रतिसाद दिला नाही"
   },
   "video_get_mdm": {
-    "message": "MDM मिळवा"
+    "message": "SDM मिळवा"
   },
   "video_retry": {
     "message": "पुन्हा प्रयत्न करा"
@@ -323,8 +323,11 @@
   "video_all_qualities": {
     "message": "सर्व गुणवत्ता स्तर आणि उपशीर्षके..."
   },
+  "video_subtitles_only": {
+    "message": "Download subtitle only..."
+  },
   "video_failed": {
-    "message": "Mister Download Manager स्थापित केलेले नाही किंवा सुरू झाले नाही"
+    "message": "Sedot Download Manager स्थापित केलेले नाही किंवा सुरू झाले नाही"
   },
   "video_download_best": {
     "message": "सर्वोत्तम डाउनलोड करा"

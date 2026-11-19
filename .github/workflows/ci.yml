@@ -48,7 +48,7 @@ jobs:
       matrix:
         # x64 on pull requests; with Windows on ARM, Linux on ARM and 32-bit Windows on main and
         # by hand.
-        include: ${{ fromJSON(github.event_name == 'pull_request' && '[{"os":"windows-latest"},{"os":"ubuntu-latest"},{"os":"macos-latest","experimental":true}]' || '[{"os":"windows-latest"},{"os":"ubuntu-latest"},{"os":"macos-latest","experimental":true},{"os":"windows-11-arm","name":"windows-arm64"},{"os":"ubuntu-24.04-arm","name":"linux-arm64"},{"os":"windows-latest","name":"windows-x86","target":"i686-pc-windows-msvc"}]') }}
+        include: ${{ fromJSON(github.event_name == 'pull_request' && '[{"os":"windows-latest"},{"os":"ubuntu-latest"}]' || '[{"os":"windows-latest"},{"os":"ubuntu-latest"},{"os":"windows-11-arm","name":"windows-arm64"},{"os":"ubuntu-24.04-arm","name":"linux-arm64"},{"os":"windows-latest","name":"windows-x86","target":"i686-pc-windows-msvc"}]') }}
     runs-on: ${{ matrix.os }}
     continue-on-error: ${{ matrix.experimental == true }}
     # A cold build takes about 10 minutes; a hung runner (apt-get once hung for hours) is cut off

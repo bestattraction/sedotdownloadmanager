@@ -1,12 +1,12 @@
 {
   "name": {
-    "message": "Mister Download Manager"
+    "message": "Sedot Download Manager"
   },
   "description": {
-    "message": "Entrega os downloads do navegador para o Mister Download Manager."
+    "message": "Entrega os downloads do navegador para o Sedot Download Manager."
   },
   "menu": {
-    "message": "Baixar com Mister Download Manager"
+    "message": "Baixar com Sedot Download Manager"
   },
   "video_download": {
     "message": "Baixar vídeo"
@@ -30,19 +30,19 @@
     "message": "Configurações do botão..."
   },
   "video_sent": {
-    "message": "Enviado para Mister Download Manager"
+    "message": "Enviado para Sedot Download Manager"
   },
   "menu_selected": {
-    "message": "Baixar links selecionados com Mister Download Manager"
+    "message": "Baixar links selecionados com Sedot Download Manager"
   },
   "menu_all": {
-    "message": "Baixar todos os links com Mister Download Manager"
+    "message": "Baixar todos os links com Sedot Download Manager"
   },
   "status_connected": {
-    "message": "Conectado a Mister Download Manager"
+    "message": "Conectado a Sedot Download Manager"
   },
   "status_connected_version": {
-    "message": "Conectado a Mister Download Manager $version$",
+    "message": "Conectado a Sedot Download Manager $version$",
     "placeholders": {
       "version": {
         "content": "$1",
@@ -54,22 +54,22 @@
     "message": "Pausado: os downloads permanecem no navegador"
   },
   "status_not_installed": {
-    "message": "Mister Download Manager não está instalado ou sua integração com o navegador não está configurada"
+    "message": "Sedot Download Manager não está instalado ou sua integração com o navegador não está configurada"
   },
   "status_forbidden": {
-    "message": "Mister Download Manager não aceita esta cópia da extensão"
+    "message": "Sedot Download Manager não aceita esta cópia da extensão"
   },
   "status_not_running": {
-    "message": "Mister Download Manager não iniciou a tempo"
+    "message": "Sedot Download Manager não iniciou a tempo"
   },
   "status_host_failed": {
-    "message": "A conexão com Mister Download Manager falhou"
+    "message": "A conexão com Sedot Download Manager falhou"
   },
   "status_too_large": {
     "message": "Os detalhes deste download eram muito grandes para serem entregues"
   },
   "status_update_app": {
-    "message": "Atualize o Mister Download Manager para usar tudo o que esta extensão oferece"
+    "message": "Atualize o Sedot Download Manager para usar tudo o que esta extensão oferece"
   },
   "popup_take": {
     "message": "Assumir downloads deste navegador"
@@ -78,10 +78,10 @@
     "message": "Enviar downloads pelo proxy ou extensão VPN deste navegador"
   },
   "popup_proxy_title": {
-    "message": "O Mister Download Manager baixa usando o mesmo proxy deste navegador. O navegador pedirá uma vez para permitir; desativar isso reverte a permissão."
+    "message": "O Sedot Download Manager baixa usando o mesmo proxy deste navegador. O navegador pedirá uma vez para permitir; desativar isso reverte a permissão."
   },
   "popup_proxy_title_chromium": {
-    "message": "O Mister Download Manager baixa por meio do mesmo proxy que este navegador. Quando desativado, a extensão não lê o proxy do navegador."
+    "message": "O Sedot Download Manager baixa por meio do mesmo proxy que este navegador. Quando desativado, a extensão não lê o proxy do navegador."
   },
   "popup_exclude_site": {
     "message": "Nunca baixar de $site$",
@@ -105,7 +105,7 @@
     }
   },
   "popup_open": {
-    "message": "Abrir Mister Download Manager"
+    "message": "Abrir Sedot Download Manager"
   },
   "popup_options": {
     "message": "Opções..."
@@ -114,7 +114,7 @@
     "message": "Ajuda"
   },
   "popup_support": {
-    "message": "Apoiar o MDM"
+    "message": "Apoiar o SDM"
   },
   "popup_fix": {
     "message": "Como corrigir"
@@ -150,7 +150,7 @@
     "message": "Usar integração avançada do navegador está desativado em Opções → Geral."
   },
   "declined_torrents": {
-    "message": "É um torrent, e Abrir links magnet e arquivos .torrent com Mister Download Manager está desativado nas configurações de Torrent."
+    "message": "É um torrent, e Abrir links magnet e arquivos .torrent com Sedot Download Manager está desativado nas configurações de Torrent."
   },
   "declined_site_access": {
     "message": "A extensão não tem permissão para ler este site (acesso ao site do navegador)."
@@ -195,16 +195,16 @@
     "message": "Nenhum vídeo para baixar aqui"
   },
   "video_playlist": {
-    "message": "Uma lista de vídeos: escolha-os no Mister Download Manager"
+    "message": "Uma lista de vídeos: escolha-os no Sedot Download Manager"
   },
   "video_no_ytdlp": {
-    "message": "O Mister Download Manager precisa do yt-dlp para este vídeo"
+    "message": "O Sedot Download Manager precisa do yt-dlp para este vídeo"
   },
   "video_too_long": {
     "message": "A busca demorou demais"
   },
   "video_busy": {
-    "message": "O Mister Download Manager está ocupado com outros vídeos"
+    "message": "O Sedot Download Manager está ocupado com outros vídeos"
   },
   "video_queued": {
     "message": "Adicionado à fila"
@@ -228,7 +228,7 @@
     "message": "Este computador"
   },
   "popup_send_remote": {
-    "message": "Outro Mister Download Manager (um servidor)"
+    "message": "Outro Sedot Download Manager (um servidor)"
   },
   "popup_remote_code": {
     "message": "Código de emparelhamento"
@@ -297,19 +297,19 @@
     "message": "Baixar a melhor qualidade"
   },
   "video_sending": {
-    "message": "Enviando para o MDM..."
+    "message": "Enviando para o SDM..."
   },
   "video_added": {
-    "message": "Adicionado ao MDM"
+    "message": "Adicionado ao SDM"
   },
   "video_show": {
     "message": "Mostrar"
   },
   "video_no_answer": {
-    "message": "MDM não respondeu"
+    "message": "SDM não respondeu"
   },
   "video_get_mdm": {
-    "message": "Obter MDM"
+    "message": "Obter SDM"
   },
   "video_retry": {
     "message": "Tentar novamente"
@@ -323,8 +323,11 @@
   "video_all_qualities": {
     "message": "Todas as qualidades e legendas..."
   },
+  "video_subtitles_only": {
+    "message": "Download subtitle only..."
+  },
   "video_failed": {
-    "message": "Mister Download Manager não está instalado ou não iniciou"
+    "message": "Sedot Download Manager não está instalado ou não iniciou"
   },
   "video_download_best": {
     "message": "Baixar melhor"

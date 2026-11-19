@@ -1,12 +1,12 @@
 {
   "name": {
-    "message": "Mister Download Manager"
+    "message": "Sedot Download Manager"
   },
   "description": {
-    "message": "Annab allalaadimised brauserist rakendusele Mister Download Manager."
+    "message": "Annab allalaadimised brauserist rakendusele Sedot Download Manager."
   },
   "menu": {
-    "message": "Laadi alla rakendusega Mister Download Manager"
+    "message": "Laadi alla rakendusega Sedot Download Manager"
   },
   "video_download": {
     "message": "Laadi video alla"
@@ -30,19 +30,19 @@
     "message": "Nupu sätted..."
   },
   "video_sent": {
-    "message": "Saadetud rakendusse Mister Download Manager"
+    "message": "Saadetud rakendusse Sedot Download Manager"
   },
   "menu_selected": {
-    "message": "Laadi valitud lingid alla rakendusega Mister Download Manager"
+    "message": "Laadi valitud lingid alla rakendusega Sedot Download Manager"
   },
   "menu_all": {
-    "message": "Laadi kõik lingid alla rakendusega Mister Download Manager"
+    "message": "Laadi kõik lingid alla rakendusega Sedot Download Manager"
   },
   "status_connected": {
-    "message": "Ühendatud rakendusega Mister Download Manager"
+    "message": "Ühendatud rakendusega Sedot Download Manager"
   },
   "status_connected_version": {
-    "message": "Ühendatud rakendusega Mister Download Manager $version$",
+    "message": "Ühendatud rakendusega Sedot Download Manager $version$",
     "placeholders": {
       "version": {
         "content": "$1",
@@ -54,22 +54,22 @@
     "message": "Peatatud: allalaadimised jäävad brauserisse"
   },
   "status_not_installed": {
-    "message": "Mister Download Manager pole installitud või selle brauseri integreerimine pole seadistatud"
+    "message": "Sedot Download Manager pole installitud või selle brauseri integreerimine pole seadistatud"
   },
   "status_forbidden": {
-    "message": "Mister Download Manager ei aktsepteeri seda laienduse koopiat"
+    "message": "Sedot Download Manager ei aktsepteeri seda laienduse koopiat"
   },
   "status_not_running": {
-    "message": "Mister Download Manager ei käivitunud õigel ajal"
+    "message": "Sedot Download Manager ei käivitunud õigel ajal"
   },
   "status_host_failed": {
-    "message": "Ühenduse loomine rakendusega Mister Download Manager nurjus"
+    "message": "Ühenduse loomine rakendusega Sedot Download Manager nurjus"
   },
   "status_too_large": {
     "message": "Selle allalaadimise üksikasjad olid edastamiseks liiga suured"
   },
   "status_update_app": {
-    "message": "Värskendage rakendust Mister Download Manager, et kasutada kõiki laienduse võimalusi"
+    "message": "Värskendage rakendust Sedot Download Manager, et kasutada kõiki laienduse võimalusi"
   },
   "popup_take": {
     "message": "Suuna allalaadimised sellest brauserist rakendusse"
@@ -78,10 +78,10 @@
     "message": "Suuna allalaadimised selle brauseri puhverserveri või VPN-laienduse kaudu"
   },
   "popup_proxy_title": {
-    "message": "Mister Download Manager laadib seejärel alla sama puhverserveri kaudu, mida see brauser kasutab. Brauser küsib teilt selleks ühe korra luba; selle väljalülitamisel luba tühistatakse."
+    "message": "Sedot Download Manager laadib seejärel alla sama puhverserveri kaudu, mida see brauser kasutab. Brauser küsib teilt selleks ühe korra luba; selle väljalülitamisel luba tühistatakse."
   },
   "popup_proxy_title_chromium": {
-    "message": "Mister Download Manager laadib seejärel alla sama puhverserveri kaudu, mida see brauser kasutab. Kui see on välja lülitatud, ei loe laiendus brauseri puhverserverit."
+    "message": "Sedot Download Manager laadib seejärel alla sama puhverserveri kaudu, mida see brauser kasutab. Kui see on välja lülitatud, ei loe laiendus brauseri puhverserverit."
   },
   "popup_exclude_site": {
     "message": "Ära võta enam allalaadimisi saidilt $site$",
@@ -105,7 +105,7 @@
     }
   },
   "popup_open": {
-    "message": "Ava Mister Download Manager"
+    "message": "Ava Sedot Download Manager"
   },
   "popup_options": {
     "message": "Suvandid..."
@@ -114,7 +114,7 @@
     "message": "Abi"
   },
   "popup_support": {
-    "message": "Toeta MDM-i"
+    "message": "Toeta SDM-i"
   },
   "popup_fix": {
     "message": "Kuidas seda parandada"
@@ -150,7 +150,7 @@
     "message": "Valik „Kasuta täiustatud brauseri integreerimist” on valikutes Suvandid → Üldine välja lülitatud."
   },
   "declined_torrents": {
-    "message": "See on torrent ja „Ava magnetlingid ja .torrent-failid programmiga Mister Download Manager” on torrenti sätetes välja lülitatud."
+    "message": "See on torrent ja „Ava magnetlingid ja .torrent-failid programmiga Sedot Download Manager” on torrenti sätetes välja lülitatud."
   },
   "declined_site_access": {
     "message": "Laiendil pole lubatud seda saiti lugeda (brauseri saidi juurdepääs)."
@@ -195,16 +195,16 @@
     "message": "Siin pole allalaaditavat videot"
   },
   "video_playlist": {
-    "message": "Videode loend: valige need rakenduses Mister Download Manager"
+    "message": "Videode loend: valige need rakenduses Sedot Download Manager"
   },
   "video_no_ytdlp": {
-    "message": "Mister Download Manager vajab selle video jaoks programmi yt-dlp"
+    "message": "Sedot Download Manager vajab selle video jaoks programmi yt-dlp"
   },
   "video_too_long": {
     "message": "Otsimine võttis liiga kaua aega"
   },
   "video_busy": {
-    "message": "Mister Download Manager on teiste videotega hõivatud"
+    "message": "Sedot Download Manager on teiste videotega hõivatud"
   },
   "video_queued": {
     "message": "Lisatud järjekorda"
@@ -228,7 +228,7 @@
     "message": "See arvuti"
   },
   "popup_send_remote": {
-    "message": "Muu Mister Download Manager (server)"
+    "message": "Muu Sedot Download Manager (server)"
   },
   "popup_remote_code": {
     "message": "Sidumiskood"
@@ -297,19 +297,19 @@
     "message": "Laadi alla parim kvaliteet"
   },
   "video_sending": {
-    "message": "Saadan MDM-i..."
+    "message": "Saadan SDM-i..."
   },
   "video_added": {
-    "message": "MDM-i lisatud"
+    "message": "SDM-i lisatud"
   },
   "video_show": {
     "message": "Näita"
   },
   "video_no_answer": {
-    "message": "MDM ei vastanud"
+    "message": "SDM ei vastanud"
   },
   "video_get_mdm": {
-    "message": "Hangi MDM"
+    "message": "Hangi SDM"
   },
   "video_retry": {
     "message": "Proovi uuesti"
@@ -323,8 +323,11 @@
   "video_all_qualities": {
     "message": "Kõik kvaliteedid ja subtiitrid..."
   },
+  "video_subtitles_only": {
+    "message": "Download subtitle only..."
+  },
   "video_failed": {
-    "message": "Mister Download Manager pole installitud või ei käivitunud"
+    "message": "Sedot Download Manager pole installitud või ei käivitunud"
   },
   "video_download_best": {
     "message": "Laadi parim alla"

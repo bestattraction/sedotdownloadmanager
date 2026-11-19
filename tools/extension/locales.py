@@ -59,9 +59,8 @@ def main():
         for key, m in english.items():
             # The catalogs write Chrome's $name$ placeholders as {name}.
             source = re.sub(r"\$(\w+)\$", r"{\1}", m["message"])
-            if source not in have:
-                continue
-            entry = {"message": re.sub(r"\{(\w+)\}", r"$\1$", have[source])}
+            translated = have.get(source, m["message"])
+            entry = {"message": re.sub(r"\{(\w+)\}", r"$\1$", translated)}
             if "placeholders" in m:
                 entry["placeholders"] = m["placeholders"]
             messages[key] = entry

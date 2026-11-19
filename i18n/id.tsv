@@ -2712,6 +2712,7 @@
 	Put a * in the address where the numbers or letters go	Letakkan * di alamat tempat angka atau huruf berada
 #. checkbox in the Download video window
 #. checkbox in Download video: subtitles go inside the video file instead of a separate .srt file beside it
+	Embed in video	Masukkan ke dalam video
 	Put them into the video	Masukkan ke dalam video
 #. text in countries.rs
 #. a country's name (where a download's server is)
@@ -4619,6 +4620,10 @@ extension	Added to the queue	Ditambahkan ke antrean
 #. command in the menu of the download button over a video: opens the app's Download video window, with every quality and the subtitles
 #. the trailing ... means it is still going on: keep it
 extension	All qualities and subtitles...	Semua kualitas dan subtitel...
+#. text in the browser extension
+#. command in the menu of the download button over a video: opens the app's Download video window with subtitles only chosen
+#. the trailing ... means it is still going on: keep it
+extension	Download subtitle only...	Hanya subtitel...
 #. text in the browser extension
 #. choice under Send downloads to: an SDM running on another computer of the network, such as a home server; keep the name Sedot Download Manager as it is
 extension	Another Sedot Download Manager (a server)	Sedot Download Manager lain (server)
