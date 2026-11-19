@@ -5,6 +5,30 @@ Each release's notes on GitHub come from its section here (`## [X.Y.Z]`, see
 
 ## [Unreleased]
 
+## [0.6.7] - 2026-11-20
+
+### Added
+
+- **Subtitle-Only Video Download**:
+  - The browser extension video panel now provides a dedicated option to download subtitles only, skipping the video stream.
+  - The video download dialog in the app includes a "Subtitles only" option and automatically selects available subtitle languages.
+  - When downloading subtitles only, video and chapter embedding options are automatically disabled with clear contextual tooltips.
+- **Enhanced BitTorrent Trackers & Connectivity**:
+  - Expanded the default BitTorrent tracker list with 23 verified, high-stability public trackers (OpenTrackr, Stealth, Torrent.eu.org, Desync, Explodie, Dler, Nyaa, Tamersunion, etc.) for significantly faster peer discovery and higher seed/peer availability when searching and downloading torrents.
+  - Added CDN fallback (`cdn.jsdelivr.net`) for automatic tracker list updates, ensuring reliable tracker synchronization even if GitHub raw domains are filtered or throttled by local ISPs.
+
+### Changed
+
+- **Video Download Dialog UI**:
+  - Shortened the checkbox label from "Put them into the video" to "Embed in video" to prevent label truncation on Windows systems.
+
+### Fixed
+
+- **IPC Automation Schema Synchronization**:
+  - Added `video_subs_only` property to the automated IPC schema specification.
+- **NTFS Test Directory Filtering**:
+  - Filtered transient temporary files (`.tmp`, `.craft_tmp`, `.json`) during directory enumerations in `web_page` engine tests to prevent race conditions during parallel test runs.
+
 ## [0.6.6] - 2026-11-19
 
 ### Fixed

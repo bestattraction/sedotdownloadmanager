@@ -79,7 +79,9 @@ jobs:
           "$env:USERPROFILE\.cargo\bin" >> $env:GITHUB_PATH
 
       - name: Toolchain
-        run: rustup show active-toolchain || rustup toolchain install
+        run: |
+          rustup show active-toolchain || rustup toolchain install
+          rustup component add clippy rustfmt
 
       - name: Target
         if: matrix.target

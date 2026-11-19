@@ -76,15 +76,28 @@ pub(crate) fn public(ip: IpAddr) -> bool {
 /// Reliable, fast public trackers bundled as defaults when dynamic list has not yet been fetched.
 pub const DEFAULT_TRACKERS: &[&str] = &[
     "udp://tracker.opentrackr.org:1337/announce",
-    "udp://open.demonii.com:1337/announce",
     "udp://open.stealth.si:80/announce",
     "udp://tracker.torrent.eu.org:451/announce",
+    "udp://open.tracker.cl:1337/announce",
+    "udp://open.demonii.com:1337/announce",
+    "udp://exodus.desync.com:6969/announce",
     "udp://explodie.org:6969/announce",
+    "udp://tracker.qu.ax:6969/announce",
+    "udp://tracker.dler.org:6969/announce",
+    "udp://tracker2.dler.org:80/announce",
+    "udp://tracker.nyaa.vc:6969/announce",
+    "udp://tracker.corpscorp.online:80/announce",
+    "udp://tracker.ducks.party:1984/announce",
+    "udp://tracker-udp.gbitt.info:80/announce",
     "udp://tracker.bittor.pw:1337/announce",
-    "udp://tracker.coppersurfer.tk:6969/announce",
+    "udp://tracker.tryhackx.org:6969/announce",
     "udp://opentracker.i2p.rocks:6969/announce",
-    "udp://tracker.internetwarriors.net:1337/announce",
     "http://tracker.openbittorrent.com:80/announce",
+    "https://tracker.tamersunion.org:443/announce",
+    "https://1.tracker.eu.org:443/announce",
+    "udp://tracker.torrents.observer:80/announce",
+    "http://tracker.dler.com:6969/announce",
+    "http://tracker.renfei.net:8080/announce",
 ];
 
 /// A magnet link's trackers (`tr=`), each once, in its order.

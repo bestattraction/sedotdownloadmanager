@@ -174,6 +174,8 @@ pub const LIVE_TRACKERS_URL: &str =
     "https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_best.txt";
 pub const LIVE_TRACKERS_FALLBACK_URL: &str =
     "https://ngosang.github.io/trackerslist/trackers_best.txt";
+pub const LIVE_TRACKERS_CDN_URL: &str =
+    "https://cdn.jsdelivr.net/gh/ngosang/trackerslist@master/trackers_best.txt";
 
 /// Path to the cached trackers list.
 pub fn trackers_cache_file() -> Option<PathBuf> {
@@ -224,7 +226,13 @@ pub fn refresh_public_trackers_if_stale(rt: &tokio::runtime::Handle) {
             let text = match res {
                 Ok(resp) if resp.status().is_success() => resp.text().await.ok(),
                 _ => {
-                    if let Ok(resp) = reqwest::get(LIVE_TRACKERS_FALLBACK_URL).await {
+                    if let Ok(resp) = reqwest::get(LIVE_TRACKERS_FALLBACK_URL).await
+                        && resp.status().is_success()
+                    {
+                        resp.text().await.ok()
+                    } else if let Ok(resp) = reqwest::get(LIVE_TRACKERS_CDN_URL).await
+                        && resp.status().is_success()
+                    {
                         resp.text().await.ok()
                     } else {
                         None

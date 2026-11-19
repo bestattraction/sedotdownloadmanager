@@ -1265,22 +1265,24 @@ fn merge_step(was: Option<f64>, now: f64) -> f64 {
 /// where, or said it in a form that names no file (#79). Its subtitles (`<stem>.<lang>.srt`) and
 /// unfinished parts don't count; the newest one wins.
 fn saved_by_name(ours: &[String]) -> Option<PathBuf> {
-    if ours.iter().any(|arg| arg == "--skip-download")
-        && let Some((dir, stem)) = template_of(ours)
-        && let Ok(rd) = std::fs::read_dir(&dir)
-    {
-        let prefix = format!("{stem}.");
-        return rd
-            .filter_map(Result::ok)
-            .map(|e| e.path())
-            .filter(|p| {
-                if let Some(name) = p.file_name().and_then(|n| n.to_str()) {
-                    name.starts_with(&prefix) && (name.ends_with(".srt") || name.ends_with(".vtt"))
-                } else {
-                    false
-                }
-            })
-            .max_by_key(|p| std::fs::metadata(p).and_then(|m| m.modified()).ok());
+    if ours.iter().any(|arg| arg == "--skip-download") {
+        if let Some((dir, stem)) = template_of(ours) {
+            if let Ok(rd) = std::fs::read_dir(&dir) {
+                let prefix = format!("{stem}.");
+                return rd
+                    .filter_map(Result::ok)
+                    .map(|e| e.path())
+                    .filter(|p| {
+                        if let Some(name) = p.file_name().and_then(|n| n.to_str()) {
+                            name.starts_with(&prefix)
+                                && (name.ends_with(".srt") || name.ends_with(".vtt"))
+                        } else {
+                            false
+                        }
+                    })
+                    .max_by_key(|p| std::fs::metadata(p).and_then(|m| m.modified()).ok());
+            }
+        }
     }
     const MEDIA: [&str; 15] = [
         "mp4", "mkv", "webm", "mov", "m4v", "m4a", "mp3", "opus", "ogg", "oga", "flac", "wav",
