@@ -427,15 +427,29 @@ fn title_of<'a>(v: &'a Video, address: &str, context: &'a mdm_ipc::Command) -> &
     crate::videodlg::page_title(context, v, address).unwrap_or(&v.title)
 }
 
+/// Normalize resolution labels for vertical videos: in standard video notation, portrait videos
+/// (e.g. 1080x1920 or 2160x3840) are known by their standard tier (1080p, 2160p/4K, 720p),
+/// not by their vertical pixel count (1920p, 3840p, 1280p).
+fn normalize_vertical_label(label: &str, height: Option<u32>) -> (String, Option<u32>) {
+    match height {
+        Some(1920) => (label.replacen("1920p", "1080p", 1), Some(1080)),
+        Some(1280) => (label.replacen("1280p", "720p", 1), Some(720)),
+        Some(3840) => (label.replacen("3840p", "2160p", 1), Some(2160)),
+        _ => (label.to_owned(), height),
+    }
+}
+
 /// Choice `c` as the browser's quality menu shows it: its label in MDM's language, and what the
 /// menu's line says beside it (#755: height, codec, frame rate, range; #801: an about size).
 fn menu_choice(c: &Choice) -> VideoChoice {
+    let (label, height) =
+        normalize_vertical_label(&crate::videodlg::choice_label(&c.label), c.height);
     VideoChoice {
-        label: crate::videodlg::choice_label(&c.label),
+        label,
         ext: c.ext.clone(),
         size: c.size,
         audio: mdm_tools::resolve::is_audio(c),
-        height: c.height,
+        height,
         fps: c.fps,
         kbps: c.kbps,
         original: mdm_tools::resolve::original_sound(&c.selector),
@@ -1495,5 +1509,25 @@ mod tests {
             (lookup::FAILED, Some(lookup::NO_CHOICES))
         );
         assert!(none.notice.is_some());
+    }
+
+    #[test]
+    fn vertical_video_labels_are_normalized() {
+        assert_eq!(
+            normalize_vertical_label("1920p · MP4 · 60 fps", Some(1920)),
+            ("1080p · MP4 · 60 fps".to_string(), Some(1080))
+        );
+        assert_eq!(
+            normalize_vertical_label("1280p · MP4", Some(1280)),
+            ("720p · MP4".to_string(), Some(720))
+        );
+        assert_eq!(
+            normalize_vertical_label("3840p · VP9", Some(3840)),
+            ("2160p · VP9".to_string(), Some(2160))
+        );
+        assert_eq!(
+            normalize_vertical_label("1080p · MP4", Some(1080)),
+            ("1080p · MP4".to_string(), Some(1080))
+        );
     }
 }

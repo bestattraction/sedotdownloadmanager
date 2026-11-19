@@ -972,8 +972,16 @@ function parseHls(text, base) {
     const l = lines[i];
     const value = l.slice(l.indexOf(":") + 1);
     if (l.startsWith("#EXT-X-STREAM-INF:")) {
-      const h = Number((/x(\d+)$/.exec(hlsAttrs(value).RESOLUTION || "") || [])[1]);
-      if (h) info.heights.push(h);
+      const res = /(\d+)x(\d+)/i.exec(hlsAttrs(value).RESOLUTION || "");
+      if (res) {
+        const w = Number(res[1]);
+        const h = Number(res[2]);
+        const resH = w > 0 && h > 0 ? Math.min(w, h) : h;
+        if (resH) info.heights.push(resH);
+      } else {
+        const h = Number((/x(\d+)$/.exec(hlsAttrs(value).RESOLUTION || "") || [])[1]);
+        if (h) info.heights.push(h === 1920 ? 1080 : h === 1280 ? 720 : h === 3840 ? 2160 : h);
+      }
       const uri = lines.slice(i + 1).find((x) => x && !x.startsWith("#"));
       if (uri) child(uri);
     } else if (l.startsWith("#EXT-X-MEDIA:") || l.startsWith("#EXT-X-I-FRAME-STREAM-INF:")) {
@@ -1006,8 +1014,13 @@ function parseDash(text) {
   const mpd = (/<(?:\w+:)?MPD\b[^>]*>/.exec(text) || [""])[0];
   const heights = [];
   for (const [tag] of text.matchAll(/<(?:\w+:)?(?:Representation|AdaptationSet)\b[^>]*>/g)) {
+    const w = Number(attr(tag, "width"));
     const h = Number(attr(tag, "height"));
-    if (h) heights.push(h);
+    let resH = w > 0 && h > 0 ? Math.min(w, h) : h;
+    if (resH === 1920) resH = 1080;
+    else if (resH === 1280) resH = 720;
+    else if (resH === 3840) resH = 2160;
+    if (resH) heights.push(resH);
   }
   return {
     heights,
@@ -1107,7 +1120,7 @@ async function mediaList(tabId) {
       mime: it.mime,
       ...(named ? { name: named, ext: splitExtension(named)[1].toLowerCase() } : {}),
       size: it.size || 0,
-      heights: info ? [...new Set(info.heights)].sort((a, b) => b - a) : player && player.h ? [player.h] : [],
+      heights: info ? [...new Set(info.heights)].sort((a, b) => b - a) : player && player.h ? [player.w > 0 && player.h > 0 ? Math.min(player.w, player.h) : player.h] : [],
       width: (!info && player && player.w) || 0,
       duration: (info ? info.duration : player && player.duration) || 0,
       live: Boolean(info && info.live),
@@ -1247,7 +1260,11 @@ async function mp4Head(read) {
       for await (const t of kids(b)) {
         if (t.type === "tkhd") {
           const h = await at(t.pos + t.hdr, 96);
-          if (h) height = h[0] === 1 ? u32(h, 92) / 65536 : u32(h, 80) / 65536;
+          if (h) {
+            const w = h[0] === 1 ? u32(h, 88) / 65536 : u32(h, 76) / 65536;
+            const ph = h[0] === 1 ? u32(h, 92) / 65536 : u32(h, 80) / 65536;
+            height = w > 0 && ph > 0 ? Math.min(w, ph) : ph === 1920 ? 1080 : ph === 1280 ? 720 : ph === 3840 ? 2160 : ph;
+          }
         } else if (t.type === "mdia") {
           for await (const m of kids(t)) {
             if (m.type !== "hdlr") continue;

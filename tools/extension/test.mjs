@@ -2830,6 +2830,13 @@ function videoButton({ stored = {} } = {}) {
     const mp3 = { label: "Audio only MP3 320 kbps", ext: "mp3", audio: true };
     const older = { label: "720p MP4", ext: "mp4", size: 1 };
     assert.deepEqual([hd, k4, { height: 4320 }, { height: 480 }, sound, older, null].map((c) => w.qualityName(c, tt)), ["1080p", "4K", "8K", "480p", "video_tab_audio", "720p MP4", ""]);
+    // Vertical videos (1080x1920 -> 1080p, 720x1280 -> 720p, 2160x3840 -> 4K)
+    assert.equal(w.qualityName({ width: 1080, height: 1920 }, tt), "1080p");
+    assert.equal(w.qualityName({ height: 1920 }, tt), "1080p");
+    assert.equal(w.qualityName({ width: 720, height: 1280 }, tt), "720p");
+    assert.equal(w.qualityName({ height: 1280 }, tt), "720p");
+    assert.equal(w.qualityName({ width: 2160, height: 3840 }, tt), "4K");
+    assert.equal(w.qualityName({ height: 3840 }, tt), "4K");
     assert.equal(w.qualityName({ file: true, ext: "webm" }, tt), "WEBM");
     assert.equal(w.qualityMeta(hd, tt), "MP4 · 60 fps");
     assert.equal(w.qualityMeta(sound, tt), "128 kbps");

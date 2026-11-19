@@ -705,7 +705,17 @@
   function qualityName(c, t) {
     if (!c || typeof c !== "object") return "";
     if (c.audio === true) return t("video_tab_audio");
-    const h = Number(c.height) || 0;
+    let h = Number(c.height) || 0;
+    const w = Number(c.width) || 0;
+    if (w > 0 && h > 0) {
+      h = Math.min(w, h);
+    } else if (h === 1920) {
+      h = 1080;
+    } else if (h === 1280) {
+      h = 720;
+    } else if (h === 3840) {
+      h = 2160;
+    }
     if (h >= 4000) return "8K";
     if (h >= 2000) return "4K";
     if (h > 0) return `${h}p`;
@@ -1241,7 +1251,12 @@ button:focus-visible { outline: none; }
   // one asked, or null.
   function lookOf(c) {
     if (!c || c.d.drm) return null;
-    if (c.d.src && !STREAM.test(c.d.src)) return { file: true, height: c.v.videoHeight || 0, ext: fileType(c.d.src) };
+    if (c.d.src && !STREAM.test(c.d.src)) {
+      const w = c.v.videoWidth || 0;
+      const h = c.v.videoHeight || 0;
+      const resH = w > 0 && h > 0 ? Math.min(w, h) : h;
+      return { file: true, height: resH, width: w, ext: fileType(c.d.src) };
+    }
     return (c.key && looks.get(c.key)) || null;
   }
   // A look-up worth keeping: one under way, or one that found the video (and wasn't picked from:
@@ -1314,10 +1329,14 @@ button:focus-visible { outline: none; }
     const at = began.get(v) || 0;
     const next = at ? others.map((o) => began.get(o) || 0).filter((x) => x > at) : [];
     const d = v.duration;
+    const w = v.videoWidth || 0;
+    const h = v.videoHeight || 0;
+    const resH = w > 0 && h > 0 ? Math.min(w, h) : h;
     return {
       duration: Number.isFinite(d) && d > 0 ? d : 0,
       live: d === Infinity,
-      height: v.videoHeight || 0,
+      height: resH,
+      width: w,
       audio: v.localName === "audio",
       began: at,
       nextBegan: next.length ? Math.min(...next) : 0,
@@ -1336,13 +1355,17 @@ button:focus-visible { outline: none; }
     const p = r && r.played;
     if (!p || typeof p.url !== "string" || !/^https?:/i.test(p.url) || !alive()) return null;
     if (!p.stream) {
+      const pw = Number(p.width) || v.videoWidth || 0;
+      const ph = Number(p.height) || v.videoHeight || 0;
+      const resH = pw > 0 && ph > 0 ? Math.min(pw, ph) : ph;
       return {
         state: "ready",
         file: true,
         src: p.url,
         played: p.url,
         ext: String(p.ext || "").slice(0, 8),
-        height: Number(p.height) || v.videoHeight || 0,
+        height: resH,
+        width: pw,
         size: Number(p.size) || 0,
       };
     }
