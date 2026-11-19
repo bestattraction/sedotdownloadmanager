@@ -169,6 +169,73 @@ pub fn torrent_file(hash: &str) -> Option<PathBuf> {
     state_dir().map(|d| d.join("files").join(format!("{hash}.torrent")))
 }
 
+/// URL of the live public tracker list (trackers_best).
+pub const LIVE_TRACKERS_URL: &str =
+    "https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_best.txt";
+pub const LIVE_TRACKERS_FALLBACK_URL: &str =
+    "https://ngosang.github.io/trackerslist/trackers_best.txt";
+
+/// Path to the cached trackers list.
+pub fn trackers_cache_file() -> Option<PathBuf> {
+    state_dir().map(|d| d.join("trackers_best.txt"))
+}
+
+/// Retrieve currently available public trackers from cache or defaults.
+pub fn current_public_trackers() -> Vec<String> {
+    if let Some(path) = trackers_cache_file()
+        && let Ok(content) = std::fs::read_to_string(&path)
+    {
+        let list: Vec<String> = content
+            .lines()
+            .map(|l| l.trim().to_owned())
+            .filter(|l| !l.is_empty() && !l.starts_with('#'))
+            .collect();
+        if !list.is_empty() {
+            return list;
+        }
+    }
+    mdm_torrent::trackers::DEFAULT_TRACKERS
+        .iter()
+        .map(|&s| s.to_owned())
+        .collect()
+}
+
+/// Check if cached trackers need refresh (older than 7 days or missing), and fetch in background.
+pub fn refresh_public_trackers_if_stale() {
+    let Some(path) = trackers_cache_file() else { return };
+    let is_stale = match std::fs::metadata(&path) {
+        Ok(meta) => {
+            if let Ok(mtime) = meta.modified() {
+                mtime.elapsed().map(|d| d.as_secs() > 7 * 86400).unwrap_or(true)
+            } else {
+                true
+            }
+        }
+        Err(_) => true,
+    };
+    if is_stale {
+        tokio::spawn(async move {
+            let res = reqwest::get(LIVE_TRACKERS_URL).await;
+            let text = match res {
+                Ok(resp) if resp.status().is_success() => resp.text().await.ok(),
+                _ => {
+                    if let Ok(resp) = reqwest::get(LIVE_TRACKERS_FALLBACK_URL).await {
+                        resp.text().await.ok()
+                    } else {
+                        None
+                    }
+                }
+            };
+            if let Some(content) = text && !content.trim().is_empty() {
+                if let Some(parent) = path.parent() {
+                    let _ = std::fs::create_dir_all(parent);
+                }
+                let _ = std::fs::write(&path, content);
+            }
+        });
+    }
+}
+
 pub fn save_torrent(hash: &str, bytes: &[u8]) -> std::io::Result<()> {
     let path = torrent_file(hash)
         // i18n: an error: the app has no folder for its own data
@@ -822,7 +889,9 @@ impl Host {
             )
             .to_owned()
         })?;
-        cfg.bind = bind;
+        if cfg.bind.is_none() {
+            cfg.bind = bind;
+        }
         let t = Torrents::start(cfg.clone()).await.map_err(|e| {
             crate::i18n::fmt(
                 // i18n: an error, with the reason

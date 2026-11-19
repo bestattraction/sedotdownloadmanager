@@ -96,6 +96,8 @@ pub struct TorrentDialog {
     clip: crate::clipboard::Prefill,
     /// Remember the folder as the default for this category.
     pub remember: bool,
+    /// The user clicked the Search button to find torrents.
+    pub want_search: bool,
 }
 
 /// The category of a torrent: its largest file's.
@@ -318,6 +320,7 @@ impl TorrentDialog {
             rename: Default::default(),
             clip,
             remember,
+            want_search: false,
         };
         if !d.source.is_empty() {
             d.look_up(rt, ctx);
@@ -401,6 +404,18 @@ impl TorrentDialog {
                     }
                 },
             };
+            let mut src = src;
+            let public_trackers = crate::torrents::current_public_trackers();
+            match &mut src {
+                Source::Magnet(mag) => {
+                    *mag = mdm_torrent::trackers::append_to_magnet(mag, &public_trackers);
+                }
+                Source::File(bytes) => {
+                    if let Some(with_tr) = mdm_torrent::trackers::add(bytes, &public_trackers) {
+                        *bytes = with_tr;
+                    }
+                }
+            }
             let res = match host.session(known).await {
                 Ok(t) => t
                     .metadata(&src, METADATA_WAIT, Some(&watch))
@@ -539,7 +554,7 @@ impl TorrentDialog {
         text(&p, o.x + 11.0, o.y + 23.0, source_label, winui::TEXT());
         let edit = winui::edit(
             ui,
-            r(o, fx, 9.0, 480.0 - fx, 21.0),
+            r(o, fx, 9.0, 425.0 - fx, 21.0),
             &mut self.source,
             !busy,
             false,
@@ -550,7 +565,7 @@ impl TorrentDialog {
         }
         let browse = winui::button(
             ui,
-            r(o, 486.0, 9.0, 22.0, 21.0),
+            r(o, 431.0, 9.0, 22.0, 21.0),
             "...",
             kind(!busy, false),
             false,
@@ -575,7 +590,7 @@ impl TorrentDialog {
         // While it looks up, the button stops it (a magnet with no peers took up to 3 minutes).
         let look = winui::button(
             ui,
-            r(o, 514.0, 9.0, 75.0, 21.0),
+            r(o, 459.0, 9.0, 65.0, 21.0),
             // i18n: button: stop looking the torrent up
             if busy {
                 crate::i18n::mark("Stop")
@@ -591,6 +606,19 @@ impl TorrentDialog {
                 && can_look
                 && winui::enter_pressed(ui)
                 && winui::take_key(ui, egui::Key::Enter));
+        let search_clicked = winui::button(
+            ui,
+            r(o, 530.0, 9.0, 59.0, 21.0),
+            // i18n: button to search public torrents
+            crate::i18n::mark("Search"),
+            kind(!busy, false),
+            false,
+            None,
+        )
+        .clicked();
+        if search_clicked && !busy {
+            self.want_search = true;
+        }
         if look && busy {
             if let Some(t) = self.lookup_task.take() {
                 t.abort();
@@ -1130,6 +1158,8 @@ pub struct TorrentSettings {
     stop_ratio: String,
     stop_min_on: bool,
     stop_min: String,
+    adapters: Vec<mdm_engine::net::Adapter>,
+    adapter_index: usize,
 }
 
 /// Torrent settings' seeding limits as OK gives them (`Settings::torrent_stop_*`).
@@ -1161,6 +1191,9 @@ pub struct Net {
     pub proxy: bool,
     pub blocklist: String,
     pub stop_idle: bool,
+    pub auto_trackers: bool,
+    pub encryption: u8,
+    pub net_adapter: String,
 }
 
 impl Net {
@@ -1175,6 +1208,9 @@ impl Net {
             proxy: s.torrent_proxy,
             blocklist: s.torrent_blocklist.clone(),
             stop_idle: s.torrent_stop_idle,
+            auto_trackers: s.torrent_auto_trackers,
+            encryption: s.torrent_encryption,
+            net_adapter: s.torrent_net_adapter.clone(),
         }
     }
 
@@ -1188,6 +1224,9 @@ impl Net {
         s.torrent_proxy = self.proxy;
         s.torrent_blocklist = self.blocklist.trim().to_owned();
         s.torrent_stop_idle = self.stop_idle;
+        s.torrent_auto_trackers = self.auto_trackers;
+        s.torrent_encryption = self.encryption;
+        s.torrent_net_adapter = self.net_adapter;
     }
 }
 
@@ -1203,6 +1242,16 @@ pub struct TorrentChoice {
 impl TorrentSettings {
     pub fn new(s: &crate::settings::Settings) -> Self {
         let net = Net::of(s);
+        let adapters = mdm_engine::net::adapters();
+        let adapter_index = if net.net_adapter.is_empty() {
+            0
+        } else {
+            adapters
+                .iter()
+                .position(|a| a.name.eq_ignore_ascii_case(&net.net_adapter))
+                .map(|p| p + 1)
+                .unwrap_or(0)
+        };
         TorrentSettings {
             share: s.torrent_keep_sharing,
             assoc: s.torrent_associations == Some(true),
@@ -1219,6 +1268,8 @@ impl TorrentSettings {
             stop_ratio: format!("{:.2}", f64::from(s.torrent_stop_ratio.max(1)) / 100.0),
             stop_min_on: s.torrent_stop_minutes_on,
             stop_min: s.torrent_stop_minutes.max(1).to_string(),
+            adapters,
+            adapter_index,
         }
     }
 
@@ -1227,7 +1278,7 @@ impl TorrentSettings {
             ctx,
             "torrent-settings",
             "Torrent settings",
-            [470.0, 516.0],
+            [470.0, 596.0],
             false,
             winui::BG(),
             |ui, o| {
@@ -1492,7 +1543,7 @@ impl TorrentSettings {
                     ui,
                     &p,
                     o.x + 14.0,
-                    o.y + 448.0,
+                    o.y + 438.0,
                     // i18n: Torrent settings, at the bottom
                     crate::i18n::t(
                         "Fetched again every 7 days. Changes apply when no torrent is running.",
@@ -1501,9 +1552,60 @@ impl TorrentSettings {
                     o.x + 456.0,
                     ("torrent-settings", 6),
                 );
+                winui::checkbox(
+                    ui,
+                    pos2(o.x + 14.0, o.y + 456.0),
+                    &mut n.auto_trackers,
+                    "Automatically append live public trackers to new torrents",
+                    true,
+                );
+                let mut pref_enc = n.encryption == 0;
+                if winui::checkbox(
+                    ui,
+                    pos2(o.x + 14.0, o.y + 480.0),
+                    &mut pref_enc,
+                    "Prefer protocol encryption (anti-throttling)",
+                    true,
+                ).changed() {
+                    n.encryption = if pref_enc { 0 } else { 2 };
+                }
+                winui::fit(
+                    ui,
+                    &p,
+                    o.x + 14.0,
+                    o.y + 506.0,
+                    crate::i18n::t("Bind to network adapter (VPN Kill Switch):"),
+                    winui::TEXT(),
+                    o.x + 456.0,
+                    ("torrent-settings", 8),
+                );
+                let adapter_label = if self.adapter_index == 0 {
+                    crate::i18n::t("Any interface (Default)").to_owned()
+                } else if let Some(a) = self.adapters.get(self.adapter_index - 1) {
+                    a.name.clone()
+                } else {
+                    crate::i18n::t("Any interface (Default)").to_owned()
+                };
+                if winui::button(
+                    ui,
+                    r(o, 14.0, 524.0, 442.0, 22.0),
+                    &adapter_label,
+                    ButtonKind::Normal,
+                    false,
+                    None,
+                )
+                .clicked()
+                {
+                    self.adapter_index = (self.adapter_index + 1) % (self.adapters.len() + 1);
+                    n.net_adapter = if self.adapter_index == 0 {
+                        String::new()
+                    } else {
+                        self.adapters[self.adapter_index - 1].name.clone()
+                    };
+                }
                 let ok = winui::button(
                     ui,
-                    r(o, 298.0, 484.0, 77.0, 21.0),
+                    r(o, 298.0, 560.0, 77.0, 21.0),
                     "OK",
                     ButtonKind::Default,
                     false,
@@ -1512,7 +1614,7 @@ impl TorrentSettings {
                 .clicked();
                 let cancel = winui::button(
                     ui,
-                    r(o, 381.0, 484.0, 77.0, 21.0),
+                    r(o, 381.0, 560.0, 77.0, 21.0),
                     "Cancel",
                     ButtonKind::Normal,
                     false,

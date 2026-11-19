@@ -73,6 +73,20 @@ pub(crate) fn public(ip: IpAddr) -> bool {
     }
 }
 
+/// Reliable, fast public trackers bundled as defaults when dynamic list has not yet been fetched.
+pub const DEFAULT_TRACKERS: &[&str] = &[
+    "udp://tracker.opentrackr.org:1337/announce",
+    "udp://open.demonii.com:1337/announce",
+    "udp://open.stealth.si:80/announce",
+    "udp://tracker.torrent.eu.org:451/announce",
+    "udp://explodie.org:6969/announce",
+    "udp://tracker.bittor.pw:1337/announce",
+    "udp://tracker.coppersurfer.tk:6969/announce",
+    "udp://opentracker.i2p.rocks:6969/announce",
+    "udp://tracker.internetwarriors.net:1337/announce",
+    "http://tracker.openbittorrent.com:80/announce",
+];
+
 /// A magnet link's trackers (`tr=`), each once, in its order.
 pub fn in_magnet(magnet: &str) -> Vec<String> {
     let Some((_, query)) = magnet.split_once('?') else {
@@ -84,6 +98,33 @@ pub fn in_magnet(magnet: &str) -> Vec<String> {
         if k.eq_ignore_ascii_case("tr") && !v.is_empty() && !out.iter().any(|t| t == v) {
             out.push(v.to_owned());
         }
+    }
+    out
+}
+
+/// A magnet link with additional trackers appended (`tr=`), skipping any tracker already present.
+pub fn append_to_magnet(magnet: &str, more: &[String]) -> String {
+    let have = in_magnet(magnet);
+    let mut to_add: Vec<&str> = Vec::new();
+    for u in more.iter().map(|u| u.trim()) {
+        if !u.is_empty() && !have.iter().any(|h| h == u) && !to_add.contains(&u) {
+            to_add.push(u);
+        }
+    }
+    if to_add.is_empty() {
+        return magnet.to_owned();
+    }
+    let mut out = magnet.to_owned();
+    if !out.contains('?') {
+        out.push('?');
+    }
+    for tr in to_add {
+        if !out.ends_with('?') && !out.ends_with('&') {
+            out.push('&');
+        }
+        out.push_str("tr=");
+        let encoded: String = url::form_urlencoded::byte_serialize(tr.as_bytes()).collect();
+        out.push_str(&encoded);
     }
     out
 }
@@ -483,5 +524,20 @@ mod tests {
         assert_eq!(filter_torrent(&t, true).unwrap(), bare);
         assert_eq!(filter_torrent(b"not bencode", false), None);
         assert_eq!(filter_torrent(b"d4:infoi1e", false), None, "unterminated");
+    }
+
+    #[test]
+    fn test_append_to_magnet() {
+        let m = "magnet:?xt=urn:btih:0123456789abcdef0123456789abcdef01234567&dn=test";
+        let more = vec![
+            "udp://tracker.opentrackr.org:1337/announce".to_string(),
+            "http://tracker.openbittorrent.com:80/announce".to_string(),
+        ];
+        let res = append_to_magnet(m, &more);
+        assert!(res.contains("tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce"));
+        assert!(res.contains("tr=http%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce"));
+        // Appending again should not duplicate
+        let res2 = append_to_magnet(&res, &more);
+        assert_eq!(res, res2);
     }
 }

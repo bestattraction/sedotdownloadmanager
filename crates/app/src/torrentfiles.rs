@@ -144,16 +144,18 @@ impl TorrentFiles {
                             f.path.display().to_string(),
                             crate::model::size(f.size),
                             if !on {
-                                // i18n: status of a torrent file the user chose not to download
-                                crate::i18n::t("Skipped").into()
+                                crate::i18n::t("Do Not Download (Skip)").into()
                             } else {
-                                crate::i18n::percent(
-                                    if f.size == 0 {
-                                        1.0
-                                    } else {
-                                        *done as f64 / f.size as f64
-                                    },
-                                    1,
+                                format!(
+                                    "Normal ({})",
+                                    crate::i18n::percent(
+                                        if f.size == 0 {
+                                            1.0
+                                        } else {
+                                            *done as f64 / f.size as f64
+                                        },
+                                        1,
+                                    )
                                 )
                             },
                         ]

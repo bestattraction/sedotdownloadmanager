@@ -418,6 +418,8 @@ enum Cmd {
     TorrentAddTrackers,
     TorrentFiles,
     TorrentCopyMagnet,
+    /// Search public torrent indexers directly within SDM.
+    TorrentSearch,
     /// Tasks → RSS feeds… (also the Add Torrent button's arrow), #39: true opens it on its
     /// Download rules tab.
     RssFeeds(bool),
@@ -1184,6 +1186,8 @@ pub struct App {
     /// Download a gallery (#58).
     gallery_dlg: Option<crate::gallerydlg::GalleryDialog>,
     torrent_dlg: Option<crate::torrentdlg::TorrentDialog>,
+    torrent_search: Option<crate::torrentsearch::TorrentSearch>,
+    last_alt_speed_active: bool,
     /// Magnet links and .torrents handed over while Add torrent was open (#507), oldest first:
     /// each opens in Add torrent when the one before it closes.
     torrent_waiting: std::collections::VecDeque<(String, Option<crate::torrents::Remote>)>,
@@ -1447,6 +1451,41 @@ fn page_data_for(link: &str, page: Option<&str>, data: Option<&str>) -> Option<S
     (same_host && !downgrade)
         .then(|| data.map(str::to_owned))
         .flatten()
+}
+
+/// Scan a folder (such as a multi-file torrent) for the largest video file to preview or play.
+pub(crate) fn find_primary_video_in_dir(dir: &std::path::Path) -> Option<std::path::PathBuf> {
+    let mut largest: Option<(std::path::PathBuf, u64)> = None;
+    let is_video = |p: &std::path::Path| {
+        let ext = p
+            .extension()
+            .and_then(|e| e.to_str())
+            .unwrap_or("")
+            .to_ascii_lowercase();
+        matches!(
+            ext.as_str(),
+            "mp4" | "mkv" | "avi" | "mov" | "wmv" | "flv" | "webm" | "m4v" | "ts" | "mpg" | "mpeg"
+        )
+    };
+    if let Ok(entries) = std::fs::read_dir(dir) {
+        for entry in entries.flatten() {
+            let path = entry.path();
+            if path.is_file() && is_video(&path) {
+                let len = entry.metadata().map(|m| m.len()).unwrap_or(0);
+                if largest.as_ref().is_none_or(|(_, max)| len > *max) {
+                    largest = Some((path, len));
+                }
+            } else if path.is_dir() {
+                if let Some(sub) = find_primary_video_in_dir(&path) {
+                    let len = std::fs::metadata(&sub).map(|m| m.len()).unwrap_or(0);
+                    if largest.as_ref().is_none_or(|(_, max)| len > *max) {
+                        largest = Some((sub, len));
+                    }
+                }
+            }
+        }
+    }
+    largest.map(|(p, _)| p)
 }
 
 /// Marks each file the engine starts writing as downloaded from the web (Mark-of-the-Web, macOS'
@@ -1724,6 +1763,7 @@ impl App {
         if settings.proxy_mode == 2 {
             crate::pacfetch::refresh(&settings.proxy_script, &rt);
         }
+        crate::torrents::refresh_public_trackers_if_stale();
         // "Launch on startup" is whatever the Run key says (the installer may have set it); on
         // Linux and macOS, the autostart entry / LaunchAgent.
         // An entry written before #226 (by versions before 0.5.0, or by their installer) starts MDM
@@ -1928,6 +1968,8 @@ impl App {
             lookups: Default::default(),
             gallery_dlg: None,
             torrent_dlg: None,
+            torrent_search: None,
+            last_alt_speed_active: false,
             torrent_waiting: Default::default(),
             torrent_closed: false,
             torrent_settings: None,
@@ -5962,7 +6004,13 @@ impl App {
     /// Add torrent → Download Now / Later. Through the debrid account when torrents go there
     /// (#44): the .torrent's magnet link (its hash, name and trackers), all its files. The
     /// download added, if one was (not when the debrid account takes it).
-    fn add_torrent(&mut self, add: crate::torrentdlg::TorrentAdd) -> Option<u64> {
+    fn add_torrent(&mut self, mut add: crate::torrentdlg::TorrentAdd) -> Option<u64> {
+        if self.settings.torrent_auto_trackers {
+            let public_trackers = crate::torrents::current_public_trackers();
+            if let Some(with_tr) = mdm_torrent::trackers::add(&add.meta.torrent, &public_trackers) {
+                add.meta.torrent = with_tr;
+            }
+        }
         let meta = &add.meta;
         // MDM's own files for it (the record of its new name, the .torrent kept): written after
         // the changes under way beside the window (a Delete's, perhaps of this very torrent:
@@ -7651,8 +7699,18 @@ impl App {
                 }
             }
             Cmd::PlayMedia => {
+                if let Some(id) = target {
+                    if let Some(item) = self.item(id) && item.torrent.is_some() {
+                        self.toggle_torrent_order(id, true);
+                    }
+                }
                 if let Some(d) = dest {
-                    dialogs::open_download(&d, moved_away);
+                    let target_file = if d.is_dir() {
+                        find_primary_video_in_dir(&d).unwrap_or(d)
+                    } else {
+                        d
+                    };
+                    dialogs::open_download(&target_file, moved_away);
                 }
             }
             Cmd::OpenWith => {
@@ -7719,6 +7777,11 @@ impl App {
                 if self.torrent_settings.is_none() {
                     self.torrent_settings =
                         Some(crate::torrentdlg::TorrentSettings::new(&self.settings));
+                }
+            }
+            Cmd::TorrentSearch => {
+                if self.torrent_search.is_none() {
+                    self.torrent_search = Some(crate::torrentsearch::TorrentSearch::new(None));
                 }
             }
             Cmd::RssFeeds(rules) => {
@@ -8339,6 +8402,7 @@ impl App {
                 Sep,
                 I("Find (Ctrl-F)", Cmd::Find, true, false),
                 I("Find Next (F3)", Cmd::FindNext, true, false),
+                I("Search torrents... (Ctrl+Shift+F)", Cmd::TorrentSearch, true, false),
                 I(
                     "Select &all",
                     Cmd::SelectAll,
@@ -9056,7 +9120,7 @@ impl App {
                         Sep,
                         // i18n: right-click → Torrent: read every piece of the torrent's files again and check it
                         I(
-                            "Recheck files",
+                            "Force recheck",
                             Cmd::TorrentRecheck,
                             !busy && i.status != Status::Queued,
                             false,
@@ -9087,6 +9151,7 @@ impl App {
                         ),
                         Sep,
                         I("Copy magnet link", Cmd::TorrentCopyMagnet, true, false),
+                        I("Search torrents...", Cmd::TorrentSearch, true, false),
                     ],
                 ),
             );
@@ -9859,12 +9924,14 @@ impl App {
         // windowing library answers the paste keys by reading the clipboard on the window's
         // thread (#418). The full list: Help → Keyboard shortcuts (`help.rs`).
         if chosen.is_none() && self.popup.is_none() && self.open_menu.is_none() {
-            let (find, next, add, clip) = ctx.input_mut(|i| {
+            let (find, next, add, clip, search_torrents, recheck_torrent) = ctx.input_mut(|i| {
                 (
                     i.consume_key(egui::Modifiers::COMMAND, egui::Key::F),
                     i.consume_key(egui::Modifiers::NONE, egui::Key::F3),
                     i.consume_key(egui::Modifiers::COMMAND, egui::Key::N),
                     i.consume_key(egui::Modifiers::COMMAND, egui::Key::B),
+                    i.consume_key(egui::Modifiers::COMMAND | egui::Modifiers::SHIFT, egui::Key::F),
+                    i.consume_key(egui::Modifiers::COMMAND, egui::Key::R),
                 )
             });
             // Ctrl+M as IDM; F2 as renaming in Explorer.
@@ -9882,6 +9949,14 @@ impl App {
                 chosen = Some((Cmd::AddUrl, None));
             } else if clip {
                 chosen = Some((Cmd::BatchClipboard, None));
+            } else if search_torrents {
+                chosen = Some((Cmd::TorrentSearch, None));
+            } else if recheck_torrent {
+                if let Some(target) = self.selection.one() {
+                    if let Some(item) = self.item(target) && item.torrent.is_some() {
+                        chosen = Some((Cmd::TorrentRecheck, Some(target)));
+                    }
+                }
             }
         }
         // Delete removes the selected downloads, Shift+Delete with their files (both ask first);
@@ -11691,30 +11766,56 @@ impl App {
             }
         }
         if let Some(t) = &mut self.torrent_dlg {
-            let closed = match t.show(ctx, &self.rt) {
-                Outcome::Open => false,
-                Outcome::Closed => true,
-                Outcome::Done(add) => {
-                    crate::settings::remember(
-                        &mut self.settings.folder_history,
-                        &add.dir.display().to_string(),
-                    );
-                    if (add.remember || self.settings.change_folder_on_last)
-                        && self
-                            .settings
-                            .keep_category_dir(add.category, &add.dir, &self.downloads)
-                    {
-                        self.dirty = true;
-                    }
-                    self.torrent_dlg = None;
-                    self.add_torrent(add);
-                    true
-                }
-            };
-            if closed {
+            let res = t.show(ctx, &self.rt);
+            if t.want_search {
+                let initial = if !t.source().trim().is_empty()
+                    && !t.source().trim().starts_with("magnet:")
+                    && !t.source().trim().ends_with(".torrent")
+                {
+                    Some(t.source().trim().to_owned())
+                } else {
+                    None
+                };
+                self.torrent_search = Some(crate::torrentsearch::TorrentSearch::new(initial));
                 self.torrent_dlg = None;
                 self.torrent_closed = true;
                 ctx.request_repaint();
+            } else {
+                let closed = match res {
+                    Outcome::Open => false,
+                    Outcome::Closed => true,
+                    Outcome::Done(add) => {
+                        crate::settings::remember(
+                            &mut self.settings.folder_history,
+                            &add.dir.display().to_string(),
+                        );
+                        if (add.remember || self.settings.change_folder_on_last)
+                            && self
+                                .settings
+                                .keep_category_dir(add.category, &add.dir, &self.downloads)
+                        {
+                            self.dirty = true;
+                        }
+                        self.torrent_dlg = None;
+                        self.add_torrent(add);
+                        true
+                    }
+                };
+                if closed {
+                    self.torrent_dlg = None;
+                    self.torrent_closed = true;
+                    ctx.request_repaint();
+                }
+            }
+        }
+        if let Some(mut s) = self.torrent_search.take() {
+            match s.show(ctx, &self.rt) {
+                Outcome::Open => self.torrent_search = Some(s),
+                Outcome::Closed => self.torrent_search = None,
+                Outcome::Done(magnet) => {
+                    self.torrent_search = None;
+                    self.open_torrent_dialog_with(Some(magnet), None, ctx);
+                }
             }
         }
         if let Some(g) = &mut self.gallery_dlg {
@@ -11830,6 +11931,10 @@ impl App {
                     self.settings.global_limit_on = c.global_on;
                     self.settings.global_limit_kb = c.global_kb;
                     self.settings.global_only_active = c.only_active;
+                    self.settings.speed_alt_on = c.alt_on;
+                    self.settings.speed_alt_kb = c.alt_kb;
+                    self.settings.speed_alt_from = c.alt_from;
+                    self.settings.speed_alt_to = c.alt_to;
                     self.speed_settings = None;
                     self.apply_speed_limit();
                     self.dirty = true;
@@ -12290,6 +12395,13 @@ impl App {
             );
             crate::crash::step(crate::crash::Step::Torrents);
             self.torrent_tick();
+            if self.settings.speed_alt_on {
+                let is_alt = self.settings.is_alt_speed_active_now();
+                if is_alt != self.last_alt_speed_active {
+                    self.last_alt_speed_active = is_alt;
+                    self.apply_speed_limit();
+                }
+            }
             // Minimized, the windows these open (Download complete, a limit's notice, Download
             // File Info for a copied link, an update) are made by a pass of the main window's
             // UI, which egui runs then only when asked: every 2 s, as the clock repaints.

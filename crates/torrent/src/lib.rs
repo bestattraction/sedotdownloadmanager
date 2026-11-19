@@ -414,6 +414,8 @@ pub struct Config {
     /// session to the adapter. UPnP and local peer discovery are off then: they speak to the
     /// local network, not through the adapter.
     pub bind: Option<Bind>,
+    /// Live public trackers automatically appended to every torrent in the session.
+    pub default_trackers: Vec<String>,
 }
 
 /// How a session is held to the chosen network adapter (`Config::bind`).
@@ -455,6 +457,7 @@ impl Config {
             offline: false,
             dht_bootstrap: None,
             bind: None,
+            default_trackers: Vec::new(),
         }
     }
 }
@@ -692,7 +695,17 @@ impl Torrents {
             .filter(|p| p.is_file())
             .and_then(|p| url::Url::from_file_path(p).ok())
             .map(|u| u.to_string());
+        let default_trackers: std::collections::HashSet<url::Url> = if cfg.offline {
+            std::collections::HashSet::new()
+        } else {
+            cfg.default_trackers
+                .iter()
+                .filter(|t| trackers::allowed(t, proxied))
+                .filter_map(|t| url::Url::parse(t).ok())
+                .collect()
+        };
         let opts = |port: u16| SessionOptions {
+            trackers: default_trackers.clone(),
             dht: dht(),
             listen: listening.then(|| listen(port)),
             connect: cfg.proxy.clone().map(|proxy| ConnectionOptions {
@@ -729,7 +742,7 @@ impl Torrents {
             }),
             // Major and minor only: the exact build would help someone aiming at one (#40).
             client_name_and_version: Some(format!(
-                "MisterDownloadManager/{}.{}",
+                "SedotDownloadManager/{}.{}",
                 env!("CARGO_PKG_VERSION_MAJOR"),
                 env!("CARGO_PKG_VERSION_MINOR")
             )),

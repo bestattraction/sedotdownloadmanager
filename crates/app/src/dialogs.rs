@@ -2610,6 +2610,10 @@ pub struct SpeedSettings {
     pub global_on: bool,
     pub global_kb: String,
     pub only_active: bool,
+    pub alt_on: bool,
+    pub alt_kb: String,
+    pub alt_from: String,
+    pub alt_to: String,
     /// How much taller the note is than IDM's three lines (a longer translation): the rows
     /// below it and the window move down by this much (from the frame before).
     note_extra: f32,
@@ -2622,6 +2626,10 @@ pub struct SpeedChoice {
     pub global_on: bool,
     pub global_kb: u64,
     pub only_active: bool,
+    pub alt_on: bool,
+    pub alt_kb: u64,
+    pub alt_from: String,
+    pub alt_to: String,
 }
 
 impl SpeedSettings {
@@ -2632,6 +2640,10 @@ impl SpeedSettings {
             global_on: s.global_limit_on,
             global_kb: s.global_limit_kb.to_string(),
             only_active: s.global_only_active,
+            alt_on: s.speed_alt_on,
+            alt_kb: s.speed_alt_kb.to_string(),
+            alt_from: s.speed_alt_from.clone(),
+            alt_to: s.speed_alt_to.clone(),
             note_extra: 0.0,
         }
     }
@@ -2642,7 +2654,7 @@ impl SpeedSettings {
             ctx,
             "speed-settings",
             "Speed Limiter settings",
-            [453.0, 197.0 + extra],
+            [453.0, 275.0 + extra],
             false,
             winui::LIGHT_BG(),
             |ui, o| {
@@ -2727,9 +2739,71 @@ impl SpeedSettings {
                     "Only while I'm using the computer",
                     on,
                 );
+                winui::etched_h(&p, o.x + 11.0, o.y + 168.0, 431.0);
+                winui::checkbox_light_until(
+                    ui,
+                    o + vec2(11.0, 178.0),
+                    &mut self.alt_on,
+                    "Alternative speed limits schedule (Turtle mode)",
+                    true,
+                    Some(o.x + 360.0),
+                );
+                let alt = self.alt_on;
+                let c_alt = if alt { black } else { winui::LIGHT_DISABLED() };
+                winui::text(
+                    &p,
+                    o.x + 29.0,
+                    o.y + 215.0,
+                    crate::i18n::t("From"),
+                    c_alt,
+                );
+                winui::edit_light(
+                    ui,
+                    r(o, 65.0, 201.0, 50.0, 21.0),
+                    &mut self.alt_from,
+                    alt,
+                    false,
+                );
+                winui::text(
+                    &p,
+                    o.x + 122.0,
+                    o.y + 215.0,
+                    crate::i18n::t("to"),
+                    c_alt,
+                );
+                winui::edit_light(
+                    ui,
+                    r(o, 140.0, 201.0, 50.0, 21.0),
+                    &mut self.alt_to,
+                    alt,
+                    false,
+                );
+                winui::text(
+                    &p,
+                    o.x + 198.0,
+                    o.y + 215.0,
+                    crate::i18n::t("Speed:"),
+                    c_alt,
+                );
+                winui::number_field(
+                    ui,
+                    r(o, 245.0, 201.0, 55.0, 21.0),
+                    &mut self.alt_kb,
+                    1,
+                    9_999_999,
+                    alt,
+                    winui::LIGHT_BG(),
+                );
+                winui::text(
+                    &p,
+                    o.x + 308.0,
+                    o.y + 215.0,
+                    crate::i18n::t("KBytes/sec"),
+                    c_alt,
+                );
                 let ok = winui::button_light(
                     ui,
-                    r(o, 285.0, 164.0, 73.0, 21.0),
+                    r(o, 285.0, 240.0, 73.0, 21.0),
                     "OK",
                     ButtonKind::Default,
                     true,
@@ -2737,7 +2811,7 @@ impl SpeedSettings {
                 .clicked();
                 let cancel = winui::button_light(
                     ui,
-                    r(o, 369.0, 164.0, 73.0, 21.0),
+                    r(o, 369.0, 240.0, 73.0, 21.0),
                     "Cancel",
                     ButtonKind::Normal,
                     false,
@@ -2752,6 +2826,10 @@ impl SpeedSettings {
                         global_on: self.global_on,
                         global_kb: winui::number_in(&self.global_kb, 1, 9_999_999),
                         only_active: self.only_active,
+                        alt_on: self.alt_on,
+                        alt_kb: winui::number_in(&self.alt_kb, 1, 9_999_999),
+                        alt_from: self.alt_from.trim().to_owned(),
+                        alt_to: self.alt_to.trim().to_owned(),
                     })
                 } else {
                     Outcome::Open

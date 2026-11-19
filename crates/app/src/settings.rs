@@ -333,6 +333,17 @@ pub struct Settings {
     pub torrent_stop_ratio: u32,
     pub torrent_stop_minutes_on: bool,
     pub torrent_stop_minutes: u32,
+    /// Automatically append live public trackers to new torrents.
+    pub torrent_auto_trackers: bool,
+    /// Protocol anti-throttling / encryption setting: 0 Prefer, 1 Require, 2 Disable.
+    pub torrent_encryption: u8,
+    /// Dedicated network interface binding for torrents (VPN Kill Switch).
+    pub torrent_net_adapter: String,
+    /// Speed limits scheduler (Turtle Mode): Alternative rate limits on schedule.
+    pub speed_alt_on: bool,
+    pub speed_alt_kb: u64,
+    pub speed_alt_from: String,
+    pub speed_alt_to: String,
     /// Help: look for a newer release once a week (D-020; its switch is in Check for updates:
     /// Options → General has no free row in IDM's layout).
     pub update_check: bool,
@@ -531,6 +542,13 @@ impl Default for Settings {
             torrent_stop_ratio: 200,
             torrent_stop_minutes_on: false,
             torrent_stop_minutes: 1440,
+            torrent_auto_trackers: true,
+            torrent_encryption: 0,
+            torrent_net_adapter: String::new(),
+            speed_alt_on: false,
+            speed_alt_kb: 500,
+            speed_alt_from: "08:00".to_string(),
+            speed_alt_to: "20:00".to_string(),
             update_check: true,
             update_checked: 0,
             helpers_checked: 0,
@@ -785,6 +803,18 @@ impl Settings {
         };
         let blocklist = (!self.torrent_blocklist.trim().is_empty())
             .then(|| state_dir.join(crate::torrents::BLOCKLIST_FILE));
+        let bind = if !self.torrent_net_adapter.trim().is_empty() {
+            let adapters = mdm_engine::net::adapters();
+            let route = mdm_engine::net::route_for(&self.torrent_net_adapter, &adapters);
+            crate::torrents::route_bind(&route).ok().flatten()
+        } else {
+            crate::torrents::route_bind(&own_route()).ok().flatten()
+        };
+        let default_trackers = if self.torrent_auto_trackers {
+            crate::torrents::current_public_trackers()
+        } else {
+            Vec::new()
+        };
         Some(mdm_torrent::Config {
             listen: self.torrent_incoming,
             utp: self.torrent_utp,
@@ -795,7 +825,8 @@ impl Settings {
             proxy,
             blocklist,
             // The chosen network adapter (#35, #143); the session takes it again when it starts.
-            bind: crate::torrents::route_bind(&own_route()).ok().flatten(),
+            bind,
+            default_trackers,
             ..mdm_torrent::Config::new(state_dir)
         })
     }
@@ -971,8 +1002,30 @@ impl Settings {
         crate::model::set_builtin(&self.builtin_categories);
     }
 
+    /// Whether alternative speed limit schedule (Turtle Mode) is currently active.
+    pub fn is_alt_speed_active_now(&self) -> bool {
+        if !self.speed_alt_on {
+            return false;
+        }
+        let now = chrono::Local::now().time();
+        let parse_time = |s: &str| -> Option<chrono::NaiveTime> {
+            chrono::NaiveTime::parse_from_str(s.trim(), "%H:%M").ok()
+        };
+        let (Some(from), Some(to)) = (parse_time(&self.speed_alt_from), parse_time(&self.speed_alt_to)) else {
+            return false;
+        };
+        if from <= to {
+            now >= from && now < to
+        } else {
+            now >= from || now < to
+        }
+    }
+
     /// The per-download limit new downloads start with, bytes/s.
     pub fn speed_limit(&self) -> Option<u64> {
+        if self.is_alt_speed_active_now() {
+            return Some(self.speed_alt_kb.max(1) * 1024);
+        }
         self.speed_limit_on
             .then_some(self.speed_limit_kb.max(1) * 1024)
     }

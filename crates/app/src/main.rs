@@ -69,6 +69,7 @@ mod themeicons;
 mod torrent_rename;
 mod torrentdlg;
 mod torrentfiles;
+mod torrentsearch;
 mod torrents;
 mod transfer;
 mod tray;
