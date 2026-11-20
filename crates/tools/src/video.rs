@@ -1264,6 +1264,7 @@ fn merge_step(was: Option<f64>, now: f64) -> f64 {
 /// The media file yt-dlp saved under our output name (`<dir>/<stem>.%(ext)s`), when it didn't say
 /// where, or said it in a form that names no file (#79). Its subtitles (`<stem>.<lang>.srt`) and
 /// unfinished parts don't count; the newest one wins.
+#[allow(clippy::collapsible_if)]
 fn saved_by_name(ours: &[String]) -> Option<PathBuf> {
     if ours.iter().any(|arg| arg == "--skip-download") {
         if let Some((dir, stem)) = template_of(ours) {

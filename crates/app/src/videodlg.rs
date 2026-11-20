@@ -975,15 +975,17 @@ impl VideoDialog {
             }
             if let Some(i) = picked {
                 self.chosen = i;
-                if let Some((_, choices)) = &self.video {
-                    if let Some(c) = choices.get(self.chosen) {
-                        if mdm_tools::resolve::is_subs_only(&c.selector)
+                if self
+                    .video
+                    .as_ref()
+                    .and_then(|(_, choices)| choices.get(self.chosen))
+                    .is_some_and(|c| {
+                        mdm_tools::resolve::is_subs_only(&c.selector)
                             && self.sub_pick == 0
                             && !self.subs.is_empty()
-                        {
-                            self.sub_pick = 1;
-                        }
-                    }
+                    })
+                {
+                    self.sub_pick = 1;
                 }
                 self.name_from_choice();
             }
