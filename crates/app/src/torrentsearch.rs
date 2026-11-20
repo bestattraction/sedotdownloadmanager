@@ -432,6 +432,7 @@ impl TorrentSearch {
         *self.status_text.lock().unwrap() =
             crate::i18n::t("Searching public indexers...").to_owned();
         self.selected = None;
+        self.results.lock().unwrap().clear();
         let results_cell = self.results.clone();
         let searching_cell = self.searching.clone();
         let status_cell = self.status_text.clone();
@@ -501,13 +502,6 @@ impl TorrentSearch {
     }
 
     pub fn show(&mut self, ctx: &egui::Context, rt: &tokio::runtime::Handle) -> Outcome<String> {
-        let is_searching = self.searching.load(Ordering::Relaxed);
-        let items_len = self.results.lock().unwrap().len();
-        let status_empty = self.status_text.lock().unwrap().is_empty();
-
-        if !self.query.trim().is_empty() && !is_searching && items_len == 0 && status_empty {
-            self.search(rt, ctx.clone());
-        }
         let mut download_magnet = None;
 
         window(
