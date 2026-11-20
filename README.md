@@ -10,7 +10,6 @@
 
 <p align="center">
   <a href="https://github.com/bestattraction/sedotdownloadmanager/releases/latest"><img src="https://img.shields.io/badge/Download%20for-Windows-2a78d6?style=flat-square&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiPjxwYXRoIGQ9Ik0yIDMuNWw4LjUtMS4ydjguMkgyek0xMS41IDIuMkwyMiAuOHY5LjdIMTEuNXpNMiAxMS41aDguNXY4LjJMMiAxOC41ek0xMS41IDExLjVIMjJ2OS43bC0xMC41LTEuNHoiLz48L3N2Zz4%3D" alt="Download for Windows" height="34"></a>
-  <a href="https://github.com/bestattraction/sedotdownloadmanager/releases/latest"><img src="https://img.shields.io/badge/Download%20for-macOS-2a78d6?style=flat-square&logo=apple&logoColor=white" alt="Download for macOS" height="34"></a>
   <a href="https://github.com/bestattraction/sedotdownloadmanager/releases/latest"><img src="https://img.shields.io/badge/Download%20for-Linux-2a78d6?style=flat-square&logo=linux&logoColor=white" alt="Download for Linux" height="34"></a>
 </p>
 
@@ -25,7 +24,7 @@
 </p>
 
 <p align="center">
-  Windows 10 and 11 (x64, ARM64, 32-bit) · Linux (Ubuntu, Debian, Mint, Fedora, Arch) · macOS<br>
+  Windows 10 and 11 (x64, ARM64, 32-bit) · Linux (Ubuntu, Debian, Mint, Fedora, Arch)<br>
   86 languages · modern readable typography (Inter & Segoe UI) · no ads, no trial, no sign-up
 </p>
 
@@ -99,6 +98,7 @@ The **Sedot Download Manager Extension** integrates seamlessly with your web bro
 - **Auto-Hide in Fullscreen**: Whenever you enter fullscreen mode, the download button automatically hides so your video viewing is completely uninterrupted.
 - **Draggable Position**: Prefer the button in another corner? Simply click and drag the handle of the button to any position on your screen. SDM remembers your preferred position across all websites.
 - **Quality & Audio Selector**: Click the dropdown arrow on the button to choose from available video resolutions (e.g., 4K, 1440p, 1080p, 720p, 480p) or download audio-only (MP3 / M4A).
+- **Subtitle-Only Download**: Download subtitles alone directly without fetching video streams, or choose to embed them into video downloads.
 - **Categorization**: When capturing a video, you can specify the target category (Video, Music, General) directly from the dialog.
 
 #### ⚡ Intercepting Downloads & Alt + Click
@@ -109,8 +109,11 @@ The **Sedot Download Manager Extension** integrates seamlessly with your web bro
 - **Download Link**: Right-click any link, image, or audio/video to select **Download with Sedot Download Manager**.
 - **Download All Links**: Right-click anywhere on a webpage and choose **Download all links with SDM** to batch grab multiple files, images, or media items in a single pass.
 
-#### 🧲 Torrent & Magnet Links
-- Clicking `magnet:` links or `.torrent` files sends them directly to SDM's built-in BitTorrent engine without requiring external torrent clients.
+#### 🧲 BitTorrent & Multi-Indexer Search
+- **Built-in Torrent Search**: Search across 6 major public indexers in parallel (**The Pirate Bay, BitSearch, Nyaa.si, Torrents-csv, SolidTorrents, EZTV**) directly inside SDM without opening a browser.
+- **Deduplication & Top Seeds**: Results are automatically deduplicated by infohash, keeping the highest seeder/leecher counts across all providers.
+- **Auto Public Trackers**: Enhanced with 23 verified high-stability public trackers automatically appended to magnet links and downloads for maximum peer connectivity and download speeds.
+- **Direct Magnet Interception**: Clicking `magnet:` links or `.torrent` files sends them directly to SDM's built-in BitTorrent engine without requiring external torrent clients.
 
 ---
 
@@ -274,8 +277,9 @@ Built with Rust, egui, librqbit, yt-dlp, and ffmpeg. Bundled icons and artwork r
   extension is on Firefox Add-ons and the Chrome Web Store), and gives them back to the browser
   when MDM isn't running.
 - **Downloads videos** from web pages (a button appears over the video; playlists, subtitles,
-  the sound alone), **image galleries** with gallery-dl, and **torrents and magnet links**
-  (sequential order, RSS feeds, sharing limits).
+  subtitle-only downloads, embed in video, the sound alone), **image galleries** with gallery-dl,
+  and **torrents and magnet links** (built-in multi-indexer search across 6 public providers,
+  23 bundled high-stability public trackers with CDN fallback, sequential order, RSS feeds, sharing limits).
 - **Many links at once**: the Link grabber sorts them into packages and extracts the archives
   (zip, 7z, rar) when they're in. It takes Click'n'Load from link sites, asking once per site. Debrid accounts (Real-Debrid, AllDebrid, Premiumize, TorBox, Mega-Debrid; experimental) download
   file-host links through your own account.
@@ -440,18 +444,6 @@ Bug reports and feature requests are welcome in
 
 Sedot Download Manager is free software under the
 [GNU General Public License, version 3](LICENSE) or (at your option) any later version.
-
-Built on [egui](https://github.com/emilk/egui) through
-[storytold's forks](https://github.com/storytold/egui) and
-[storytold/craft-libs](https://github.com/storytold/craft-libs) (MIT OR Apache-2.0),
-[librqbit](https://github.com/ikatson/rqbit) (Apache-2.0),
-[zip](https://github.com/zip-rs/zip2) (MIT), and [yt-dlp](https://github.com/yt-dlp/yt-dlp)
-(Unlicense, run as a separate program; as are 7-Zip for 7z and RAR archives, and
-[HatchZip](https://github.com/xevrion/hatchzip) (MIT OR Apache-2.0) when installed). Flags from
-[flag-icons](https://github.com/lipis/flag-icons) (MIT); pictures drawn with
-[rough.js](https://roughjs.com/) (MIT) in [Patrick Hand](https://fonts.google.com/specimen/Patrick+Hand)
-(SIL OFL) and [Vega-Lite](https://vega.github.io/vega-lite/) (BSD-3). Bundled icons and artwork
-keep their own licences, listed in [ATTRIBUTION.md](ATTRIBUTION.md).
 
 Built on [egui](https://github.com/emilk/egui) through
 [storytold's forks](https://github.com/storytold/egui) and
