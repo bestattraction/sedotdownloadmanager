@@ -5,6 +5,15 @@ Each release's notes on GitHub come from its section here (`## [X.Y.Z]`, see
 
 ## [Unreleased]
 
+## [0.6.11] - 2026-11-20
+
+### Fixed
+
+- **Torrent Search Selection Contrast**:
+  - Switched Seeds and Peers numbers to selection text color (`winui::SELECTION_TEXT()` / crisp white) when a row is highlighted, resolving unreadable dark green and dark blue text on the blue selection bar.
+- **Browser Extension Version Alignment**:
+  - Synchronized the version number across all browser extension manifests (`manifest.json`, `manifest.firefox.json`, `manifest.safari.json`) with the main application release version.
+
 ## [0.6.10] - 2026-11-20
 
 ### Added

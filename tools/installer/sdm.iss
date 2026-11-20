@@ -10,7 +10,7 @@
 ; Windows Credential Manager (misterdownloadmanager --forget-sign-ins).
 
 #ifndef AppVersion
-  #define AppVersion "0.6.10"
+  #define AppVersion "0.6.11"
 #endif
 #define AppName "Sedot Download Manager"
 #define AppExe "sdm.exe"
