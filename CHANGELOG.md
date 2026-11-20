@@ -5,6 +5,27 @@ Each release's notes on GitHub come from its section here (`## [X.Y.Z]`, see
 
 ## [Unreleased]
 
+## [0.6.8] - 2026-11-20
+
+### Added
+
+- **Multi-Indexer BitTorrent Search Engine**:
+  - Upgraded torrent search from single-indexer (The Pirate Bay) to an asynchronous multi-indexer engine querying major public indexers in parallel:
+    - **The Pirate Bay** (`apibay.org`)
+    - **BitSearch** (`bitsearch.to`)
+    - **Nyaa.si** (`nyaa.si` via RSS XML) for anime, manga, and Asian media
+    - **Torrents-csv** (`torrents-csv.com`)
+    - **SolidTorrents** (`solidtorrents.to`)
+  - Automatic deduplication across indexers using 40-character infohash matching, merging and preserving the highest seeder/leecher counts and non-empty sizes/dates.
+  - Automatically appends popular public trackers to magnet links upon copying or downloading to maximize peer connectivity and download speeds.
+
+### Fixed
+
+- **Torrent Search Responsiveness**:
+  - Non-blocking search execution and status messaging preventing search UI freezes or stuck states.
+- **Video Dialog Choice Selection**:
+  - Streamlined option selection conditions avoiding nested clippy collapsible-if warnings.
+
 ## [0.6.7] - 2026-11-20
 
 ### Added
