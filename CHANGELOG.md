@@ -5,6 +5,14 @@ Each release's notes on GitHub come from its section here (`## [X.Y.Z]`, see
 
 ## [Unreleased]
 
+## [0.6.9] - 2026-11-20
+
+### Fixed
+
+- **Torrent Search Input Trigger**:
+  - Prevented premature auto-search upon typing the first character; search is now strictly initiated upon pressing Enter or clicking the Search button.
+  - Clears previous search results immediately upon triggering a new search.
+
 ## [0.6.8] - 2026-11-20
 
 ### Added
