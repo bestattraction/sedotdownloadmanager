@@ -2339,10 +2339,16 @@ function videoButton({ stored = {} } = {}) {
     },
   };
   class HTMLAudioElement {}
+  class DOMParser {
+    parseFromString() {
+      return { body: { firstChild: null } };
+    }
+  }
   vm.runInNewContext(source, {
     browser: api,
     location: { hostname: "vid.test", href: "https://vid.test/watch" },
     document: doc,
+    DOMParser,
     matchMedia: () => ({ matches: false, addEventListener() {} }),
     getComputedStyle: () => ({ visibility: "visible", display: "block", opacity: "1" }),
     requestAnimationFrame: (f) => (frames.set(++frameId, f), frameId),
@@ -2689,8 +2695,7 @@ function videoButton({ stored = {} } = {}) {
   const keys = source.slice(source.indexOf('shadow.addEventListener("keydown"'), source.indexOf("// The main part: a click downloads"));
   assert.equal(keys.match(/e\.stopPropagation\(\)/g).length, 5, "Escape (the menu, the button), Enter and Space, the arrows, ↓ on the button: not the page's too");
   assert.ok(fn("spot").includes("if (menuOpen && auto.v === video && auto.at) return auto.at;"), "spot: still while its menu is open");
-  assert.equal(source.match(/innerHTML/g).length, 1, "markup only for the fixed parts");
-  assert.ok(!/insertAdjacentHTML|outerHTML|setInterval/.test(source));
+  assert.ok(!/innerHTML|insertAdjacentHTML|outerHTML|setInterval/.test(source));
   assert.ok(/send\(\{ type: "video-pick", token: l\.token, choice: i \}\)/.test(fn("pick")), "a pick: the token and the row's number");
   assert.equal(source.split('"video-lookup"').length, 2, "one lookup message");
   // #703: asked as the button shows, once it stayed a moment over the same video (previews the

@@ -1122,7 +1122,7 @@ button:focus-visible { outline: none; }
   }
   // Its markup, fixed (the words go in as text): the tab, its tip, the drag's guide, its list.
   const ICON = 'fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"';
-  shadow.innerHTML += `
+  const markup = `
 <div class="guide"></div>
 <div class="pill" part="pill" data-state="ready">
   <button class="go" type="button">
@@ -1163,6 +1163,8 @@ button:focus-visible { outline: none; }
   <button role="menuitem" data-act="never"><span class="mi"><svg viewBox="0 0 16 16" ${ICON} stroke-width="1.4"><circle cx="8" cy="8" r="5.5"/><path d="M2.5 8h11M8 2.5c2 2 2 9 0 11M8 2.5c-2 2-2 9 0 11"/></svg></span><span></span></button>
   <button role="menuitem" data-act="settings"><span class="mi"><svg viewBox="0 0 16 16" ${ICON} stroke-width="1.4"><circle cx="8" cy="8" r="2"/><path d="M8 1.8v2M8 12.2v2M1.8 8h2M12.2 8h2M3.6 3.6l1.4 1.4M11 11l1.4 1.4M3.6 12.4 5 11M11 5l1.4-1.4"/></svg></span><span></span></button>
 </div>`;
+  const parsed = new DOMParser().parseFromString(markup, "text/html");
+  while (parsed.body.firstChild) shadow.appendChild(parsed.body.firstChild);
   const $ = (sel) => shadow.querySelector(sel);
   const pill = $(".pill");
   const go = $(".go");
