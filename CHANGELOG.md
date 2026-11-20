@@ -5,6 +5,23 @@ Each release's notes on GitHub come from its section here (`## [X.Y.Z]`, see
 
 ## [Unreleased]
 
+## [0.6.12] - 2026-11-20
+
+### Fixed
+
+- **Torrent Search Query Matching**:
+  - Implemented tokenized query matching (`matches_query`) across all search providers to eliminate mismatched/irrelevant search results (filtering EZTV general dumps and fuzzy indexer returns so results strictly match the user's search query).
+
+### Added
+
+- **Resizable Torrent Search Window**:
+  - Added native window border and corner drag-to-resize support and Maximize/Restore button support via `resizable_window` dialog mode.
+  - Added a quick-toggle window size preset button (`780×520` Standard ↔ `1020×660` Large) directly in the search toolbar for 1-click window resizing.
+- **Draggable Table Column Resizing**:
+  - Enabled interactive drag-to-resize handles on results table column dividers with dynamic `ResizeColumn` mouse cursor to customize column widths (Name, Size, Seeds, Peers, Date).
+- **Full Torrent Name Tooltips**:
+  - When a torrent title is truncated with ellipsis, hovering over the name or row now reveals the full text in a clean native tooltip via `winui::full_on_hover`.
+
 ## [0.6.11] - 2026-11-20
 
 ### Fixed

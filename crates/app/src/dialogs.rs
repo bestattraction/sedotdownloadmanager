@@ -381,9 +381,9 @@ pub(crate) fn window<T>(
     client: [f32; 2],
     minimize: bool,
     bg: egui::Color32,
-    body: impl FnMut(&mut Ui, Pos2) -> Outcome<T>,
+    mut body: impl FnMut(&mut Ui, Pos2) -> Outcome<T>,
 ) -> Outcome<T> {
-    dialog_window(ctx, id, title, client, minimize, bg, Kind::Plain, body)
+    dialog_window(ctx, id, title, client, minimize, bg, Kind::Plain, |ui, o, _| body(ui, o))
 }
 
 /// A question that must be answered (Yes / No, a countdown): a `window` that stays above the
@@ -397,9 +397,9 @@ pub(crate) fn question<T>(
     client: [f32; 2],
     minimize: bool,
     bg: egui::Color32,
-    body: impl FnMut(&mut Ui, Pos2) -> Outcome<T>,
+    mut body: impl FnMut(&mut Ui, Pos2) -> Outcome<T>,
 ) -> Outcome<T> {
-    dialog_window(ctx, id, title, client, minimize, bg, Kind::Question, body)
+    dialog_window(ctx, id, title, client, minimize, bg, Kind::Question, |ui, o, _| body(ui, o))
 }
 
 /// News that must not go unseen (Download complete, as IDM shows it): a `window` shown above
@@ -414,7 +414,7 @@ pub(crate) fn notice<T>(
     minimize: bool,
     bg: egui::Color32,
     on_top: bool,
-    body: impl FnMut(&mut Ui, Pos2) -> Outcome<T>,
+    mut body: impl FnMut(&mut Ui, Pos2) -> Outcome<T>,
 ) -> Outcome<T> {
     dialog_window(
         ctx,
@@ -424,6 +424,31 @@ pub(crate) fn notice<T>(
         minimize,
         bg,
         Kind::Notice { on_top },
+        |ui, o, _| body(ui, o),
+    )
+}
+
+/// A resizable dialog window whose initial client area is `client` pixels; `body` gets the
+/// client origin and the current client size [width, height].
+#[allow(clippy::too_many_arguments)]
+pub(crate) fn resizable_window<T>(
+    ctx: &egui::Context,
+    id: &str,
+    title: &str,
+    client: [f32; 2],
+    min_client: [f32; 2],
+    minimize: bool,
+    bg: egui::Color32,
+    body: impl FnMut(&mut Ui, Pos2, [f32; 2]) -> Outcome<T>,
+) -> Outcome<T> {
+    dialog_window(
+        ctx,
+        id,
+        title,
+        client,
+        minimize,
+        bg,
+        Kind::Resizable { min_client },
         body,
     )
 }
@@ -434,7 +459,7 @@ pub(crate) fn notice_seen(ctx: &egui::Context, id: &str) -> bool {
 }
 
 /// How a dialog's window behaves towards the others.
-#[derive(Clone, Copy, PartialEq, Eq)]
+#[derive(Clone, Copy, PartialEq)]
 enum Kind {
     Plain,
     /// Above the app's windows, taking the focus when it opens (`question`).
@@ -442,6 +467,10 @@ enum Kind {
     /// Never takes the focus by itself; above every program's windows while `on_top` (`notice`).
     Notice {
         on_top: bool,
+    },
+    /// A resizable window that can be resized by the user.
+    Resizable {
+        min_client: [f32; 2],
     },
 }
 
@@ -461,9 +490,10 @@ fn dialog_window<T>(
     minimize: bool,
     bg: egui::Color32,
     kind: Kind,
-    mut body: impl FnMut(&mut Ui, Pos2) -> Outcome<T>,
+    mut body: impl FnMut(&mut Ui, Pos2, [f32; 2]) -> Outcome<T>,
 ) -> Outcome<T> {
     let modal = kind == Kind::Question;
+    let is_resizable = matches!(kind, Kind::Resizable { .. });
     let key = egui::Id::unique(("dialog-pos", id));
     // The title in the interface language (Win32 finds the window by it, so it is used as is
     // from here on).
@@ -490,9 +520,12 @@ fn dialog_window<T>(
         .with_title(crate::i18n::os_text(title))
         .with_inner_size(shown)
         // The thin frame trims the sizing borders and keeps the size fixed.
-        .with_resizable(drawn)
+        .with_resizable(is_resizable || drawn)
         .with_minimize_button(minimize)
-        .with_maximize_button(false);
+        .with_maximize_button(is_resizable);
+    if let Kind::Resizable { min_client } = kind {
+        builder = builder.with_min_inner_size([min_client[0], min_client[1] + caption_h]);
+    }
     // Every dialog carries the app icon: without one Windows draws its generic placeholder.
     builder = crate::quiet(builder.with_icon(crate::app_icon()));
     if modal {
@@ -518,22 +551,46 @@ fn dialog_window<T>(
             .frame(egui::Frame::new().fill(bg))
             .show(ui, |ui| {
                 let origin = ui.max_rect().min;
+                let cur_w = if is_resizable { ui.max_rect().width() } else { shown[0] };
+                let cur_h = if is_resizable {
+                    (ui.max_rect().height() - caption_h).max(0.0)
+                } else {
+                    client[1]
+                };
+                let cur_client = [cur_w, cur_h];
                 // The window's width, laid out from the right in a right-to-left interface (the
                 // title bar; the layout under it has its own, scrolled with it).
-                let _surface = winui::Surface::enter(origin.x, origin.x + shown[0]);
+                let _surface = winui::Surface::enter(origin.x, origin.x + cur_client[0]);
                 // Our title bar's ×: like the window manager's, the window is painted in its
                 // closing pass too (#207), then closes.
                 let mut caption_close = false;
                 if drawn {
                     use crate::winui::caption::CaptionButton;
                     let mut buttons = vec![(CaptionButton::Close, true)];
+                    if is_resizable {
+                        buttons.push((CaptionButton::Maximize, true));
+                    }
                     if minimize {
                         buttons.push((CaptionButton::Minimize, true));
                     }
                     let hwnd = ui.ctx().data(|d| d.get_temp::<isize>(key.with("hwnd")));
-                    match drawn_title(ui, origin, shown[0], title, &buttons, hwnd) {
+                    match drawn_title(ui, origin, cur_client[0], title, &buttons, hwnd) {
                         Some(CaptionButton::Close) => caption_close = true,
                         Some(CaptionButton::Minimize) => crate::dialogs::minimize(ui.ctx(), hwnd),
+                        Some(CaptionButton::Maximize) => {
+                            #[cfg(windows)]
+                            if let Some(h) = hwnd {
+                                crate::win32::toggle_maximized(h);
+                            } else {
+                                let max = ui.ctx().input(|i| i.viewport().maximized) == Some(true);
+                                ui.ctx().send_viewport_cmd_to(vid, egui::ViewportCommand::Maximized(!max));
+                            }
+                            #[cfg(not(windows))]
+                            {
+                                let max = ui.ctx().input(|i| i.viewport().maximized) == Some(true);
+                                ui.ctx().send_viewport_cmd_to(vid, egui::ViewportCommand::Maximized(!max));
+                            }
+                        }
                         _ => {}
                     }
                 }
@@ -543,10 +600,16 @@ fn dialog_window<T>(
                     ui.max_rect().max,
                 );
                 let mut rest = ui.new_child(egui::UiBuilder::new().max_rect(below));
-                let out = scroll(&mut rest, key, client, |ui, o| {
-                    let _surface = winui::Surface::enter(o.x, o.x + client[0]);
-                    body(ui, o)
-                });
+                let out = if is_resizable {
+                    let o = below.min;
+                    let _surface = winui::Surface::enter(o.x, o.x + cur_client[0]);
+                    body(&mut rest, o, cur_client)
+                } else {
+                    scroll(&mut rest, key, client, |ui, o| {
+                        let _surface = winui::Surface::enter(o.x, o.x + client[0]);
+                        body(ui, o, client)
+                    })
+                };
                 if caption_close { Outcome::Closed } else { out }
             })
             .inner;
@@ -568,7 +631,14 @@ fn dialog_window<T>(
         // scale (the interface size, #262; another monitor's).
         let want = [shown[0], shown[1] + if drawn { 1e6 } else { 0.0 }];
         if rescaled || ctx.data(|d| d.get_temp::<[f32; 2]>(framed)) != Some(want) {
-            if drawn {
+            if is_resizable {
+                if let Some(h) = crate::win32::drawn_frame(title, true) {
+                    ctx.data_mut(|d| {
+                        d.insert_temp(framed, want);
+                        d.insert_temp(key.with("hwnd"), h);
+                    });
+                }
+            } else if drawn {
                 if let Some(h) = crate::win32::thin_frame(title, shown, scale, None) {
                     ctx.data_mut(|d| {
                         d.insert_temp(framed, want);
@@ -5026,6 +5096,7 @@ mod tests {
     fn passive_notices_never_activate_on_open() {
         assert!(dialog_activates_on_open(Kind::Plain));
         assert!(dialog_activates_on_open(Kind::Question));
+        assert!(dialog_activates_on_open(Kind::Resizable { min_client: [400.0, 300.0] }));
         assert!(!dialog_activates_on_open(Kind::Notice { on_top: true }));
         assert!(!dialog_activates_on_open(Kind::Notice { on_top: false }));
     }

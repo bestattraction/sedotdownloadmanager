@@ -7,7 +7,7 @@ use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::{Arc, Mutex};
 use std::time::Duration;
 
-use crate::dialogs::{Outcome, window};
+use crate::dialogs::{Outcome, resizable_window};
 use crate::winui::{self, BG, ButtonKind, MUTED, TEXT, r, text};
 
 #[derive(Clone, Debug, Deserialize)]
@@ -397,6 +397,24 @@ pub fn parse_eztv_torrents(data: EztvResponse) -> Vec<TorrentSearchResult> {
     results
 }
 
+pub fn matches_query(name: &str, query: &str) -> bool {
+    let q = query.trim().to_lowercase();
+    if q.is_empty() {
+        return true;
+    }
+    // Normalize punctuation/delimiters commonly found in torrent release names to spaces
+    let clean_name = name
+        .to_lowercase()
+        .replace(['.', '_', '-', '+', '[', ']', '(', ')', '{', '}', ':', ';', ',', '!', '?', '\'', '"', '/'], " ");
+    let q_normalized = q
+        .replace(['.', '_', '-', '+', '[', ']', '(', ')', '{', '}', ':', ';', ',', '!', '?', '\'', '"', '/'], " ");
+    let tokens: Vec<&str> = q_normalized.split_whitespace().collect();
+    if tokens.is_empty() {
+        return true;
+    }
+    tokens.iter().all(|&tok| clean_name.contains(tok))
+}
+
 async fn search_eztv(client: &reqwest::Client, query: &str) -> Vec<TorrentSearchResult> {
     let encoded: String = url::form_urlencoded::byte_serialize(query.as_bytes()).collect();
     let url = format!("https://eztv.re/api/get-torrents?limit=100&query={encoded}");
@@ -409,7 +427,9 @@ async fn search_eztv(client: &reqwest::Client, query: &str) -> Vec<TorrentSearch
     let Ok(data) = resp.json::<EztvResponse>().await else {
         return Vec::new();
     };
-    parse_eztv_torrents(data)
+    let mut results = parse_eztv_torrents(data);
+    results.retain(|it| matches_query(&it.name, query));
+    results
 }
 
 async fn search_nyaa(client: &reqwest::Client, query: &str) -> Vec<TorrentSearchResult> {
@@ -438,6 +458,7 @@ pub struct TorrentSearch {
     pub scroll_offset: f32,
     pub sort_col: SortColumn,
     pub sort_dir: SortDirection,
+    pub col_widths: [f32; 4],
 }
 
 impl Default for TorrentSearch {
@@ -458,6 +479,7 @@ impl TorrentSearch {
             scroll_offset: 0.0,
             sort_col: SortColumn::Seeds,
             sort_dir: SortDirection::Descending,
+            col_widths: [380.0, 90.0, 75.0, 75.0],
         }
     }
 
@@ -522,6 +544,9 @@ impl TorrentSearch {
                 .chain(r_solid)
                 .chain(r_eztv)
             {
+                if !matches_query(&it.name, &q) {
+                    continue;
+                }
                 let key = it.info_hash.to_ascii_lowercase();
                 if key.len() != 40 || key == "0000000000000000000000000000000000000000" {
                     continue;
@@ -567,22 +592,29 @@ impl TorrentSearch {
     pub fn show(&mut self, ctx: &egui::Context, rt: &tokio::runtime::Handle) -> Outcome<String> {
         let mut download_magnet = None;
 
-        window(
+        resizable_window(
             ctx,
             "torrent-search",
             "Torrent Search",
             [780.0, 520.0],
-            false,
+            [680.0, 440.0],
+            true,
             BG(),
-            |ui, o| {
+            |ui, o, client_size| {
                 let p = ui.painter().clone();
                 let is_searching = self.searching.load(Ordering::Relaxed);
                 let can_search = !self.query.trim().is_empty() && !is_searching;
+                let cur_w = client_size[0];
+                let cur_h = client_size[1];
 
-                // Search bar input
+                // Search bar input & buttons
+                let search_btn_w = 95.0;
+                let size_btn_w = 110.0;
+                let edit_w = (cur_w - 14.0 * 2.0 - search_btn_w - size_btn_w - 16.0).max(180.0);
+
                 let edit = winui::edit(
                     ui,
-                    r(o, 14.0, 14.0, 630.0, 24.0),
+                    r(o, 14.0, 14.0, edit_w, 24.0),
                     &mut self.query,
                     !is_searching,
                     false,
@@ -598,7 +630,7 @@ impl TorrentSearch {
                     && winui::take_key(ui, egui::Key::Enter);
                 let btn = winui::button(
                     ui,
-                    r(o, 654.0, 14.0, 112.0, 24.0),
+                    r(o, 14.0 + edit_w + 8.0, 14.0, search_btn_w, 24.0),
                     if is_searching {
                         crate::i18n::mark("Searching...")
                     } else {
@@ -618,14 +650,39 @@ impl TorrentSearch {
                     self.search(rt, ui.ctx().clone());
                 }
 
+                // Window Size preset button: toggle between Standard and Large
+                let (target_w, target_h, size_label) = if cur_w < 950.0 {
+                    (1020.0, 660.0, "⛶ 1020×660")
+                } else {
+                    (780.0, 520.0, "⛶ 780×520")
+                };
+                let size_btn = winui::button(
+                    ui,
+                    r(o, 14.0 + edit_w + 8.0 + search_btn_w + 8.0, 14.0, size_btn_w, 24.0),
+                    size_label,
+                    ButtonKind::Normal,
+                    false,
+                    None,
+                );
+                if size_btn.clicked() {
+                    ui.ctx().send_viewport_cmd(egui::ViewportCommand::InnerSize(vec2(target_w, target_h)));
+                }
+
                 // Update search status text
                 let items = self.results.lock().unwrap().clone();
                 let status_str = self.status_text.lock().unwrap().clone();
                 text(&p, o.x + 14.0, o.y + 57.0, &status_str, MUTED());
 
-                // Sort By Toolbar (Explicit buttons)
-                let sort_label = crate::i18n::t("Sort by:");
-                text(&p, o.x + 270.0, o.y + 57.0, sort_label, MUTED());
+                // Sort By Toolbar (Explicit buttons on the right side)
+                let sort_right_x = cur_w - 14.0;
+                let btn_w = 76.0;
+                let btn_gap = 6.0;
+                let date_x = sort_right_x - btn_w;
+                let peers_x = date_x - btn_gap - btn_w;
+                let seeds_x = peers_x - btn_gap - btn_w;
+                let size_x = seeds_x - btn_gap - btn_w;
+                let name_x = size_x - btn_gap - btn_w;
+                let sort_label_x = name_x - 55.0;
 
                 let arrow = |dir: SortDirection| {
                     if dir == SortDirection::Ascending {
@@ -643,6 +700,11 @@ impl TorrentSearch {
                     }
                 };
 
+                if sort_label_x > o.x + 160.0 {
+                    let sort_label = crate::i18n::t("Sort by:");
+                    text(&p, sort_label_x, o.y + 57.0, sort_label, MUTED());
+                }
+
                 let sort_name_btn = format!(
                     "Name{}",
                     if self.sort_col == SortColumn::Name {
@@ -653,7 +715,7 @@ impl TorrentSearch {
                 );
                 if winui::button(
                     ui,
-                    r(o, 320.0, 44.0, 80.0, 22.0),
+                    Rect::from_min_size(pos2(name_x, o.y + 44.0), vec2(btn_w, 22.0)),
                     &sort_name_btn,
                     col_kind(SortColumn::Name, self.sort_col),
                     false,
@@ -674,7 +736,7 @@ impl TorrentSearch {
                 );
                 if winui::button(
                     ui,
-                    r(o, 404.0, 44.0, 80.0, 22.0),
+                    Rect::from_min_size(pos2(size_x, o.y + 44.0), vec2(btn_w, 22.0)),
                     &sort_size_btn,
                     col_kind(SortColumn::Size, self.sort_col),
                     false,
@@ -695,7 +757,7 @@ impl TorrentSearch {
                 );
                 if winui::button(
                     ui,
-                    r(o, 488.0, 44.0, 84.0, 22.0),
+                    Rect::from_min_size(pos2(seeds_x, o.y + 44.0), vec2(btn_w, 22.0)),
                     &sort_seeds_btn,
                     col_kind(SortColumn::Seeds, self.sort_col),
                     false,
@@ -716,7 +778,7 @@ impl TorrentSearch {
                 );
                 if winui::button(
                     ui,
-                    r(o, 576.0, 44.0, 84.0, 22.0),
+                    Rect::from_min_size(pos2(peers_x, o.y + 44.0), vec2(btn_w, 22.0)),
                     &sort_peers_btn,
                     col_kind(SortColumn::Peers, self.sort_col),
                     false,
@@ -737,7 +799,7 @@ impl TorrentSearch {
                 );
                 if winui::button(
                     ui,
-                    r(o, 664.0, 44.0, 80.0, 22.0),
+                    Rect::from_min_size(pos2(date_x, o.y + 44.0), vec2(btn_w, 22.0)),
                     &sort_date_btn,
                     col_kind(SortColumn::Date, self.sort_col),
                     false,
@@ -749,63 +811,88 @@ impl TorrentSearch {
                 }
 
                 // Table outer container
-                let table_rect = r(o, 14.0, 72.0, 752.0, 396.0);
+                let table_w = (cur_w - 28.0).max(100.0);
+                let table_h = (cur_h - 124.0).max(100.0);
+                let table_rect = Rect::from_min_size(pos2(o.x + 14.0, o.y + 72.0), vec2(table_w, table_h));
                 winui::solid(&p, table_rect, winui::FIELD_EDGE());
                 let header_h = 24.0;
                 let head_rect =
                     Rect::from_min_size(table_rect.min, vec2(table_rect.width(), header_h));
                 p.rect_filled(head_rect, 0.0, winui::LIST_HEADER());
 
-                // Interactive column headers
+                // Column boundary calculations
+                let x0 = table_rect.min.x;
+                let x1 = x0 + self.col_widths[0];
+                let x2 = x1 + self.col_widths[1];
+                let x3 = x2 + self.col_widths[2];
+                let x4 = x3 + self.col_widths[3];
+                let x_end = table_rect.max.x;
+
+                // Drag handles between columns
+                for i in 0..4 {
+                    let div_x = match i {
+                        0 => x1,
+                        1 => x2,
+                        2 => x3,
+                        3 => x4,
+                        _ => unreachable!(),
+                    };
+                    let div_rect = Rect::from_min_max(
+                        pos2(div_x - 4.0, table_rect.min.y),
+                        pos2(div_x + 4.0, table_rect.max.y),
+                    );
+                    let div_resp = ui.allocate_rect(div_rect, egui::Sense::click_and_drag());
+                    if div_resp.hovered() || div_resp.dragged() {
+                        ui.output_mut(|o| o.cursor_icon = egui::CursorIcon::ResizeColumn);
+                    }
+                    if div_resp.dragged() {
+                        let delta = div_resp.drag_delta().x;
+                        let min_w = if i == 0 { 140.0 } else if i == 1 { 60.0 } else { 50.0 };
+                        let max_w = if i == 0 { table_rect.width() - 240.0 } else { 240.0 };
+                        self.col_widths[i] = (self.col_widths[i] + delta).clamp(min_w, max_w);
+                    }
+                    // Divider line in the header
+                    p.line_segment(
+                        [pos2(div_x, table_rect.min.y + 3.0), pos2(div_x, table_rect.min.y + header_h - 3.0)],
+                        egui::Stroke::new(1.0, winui::MUTED().linear_multiply(0.4)),
+                    );
+                }
+
+                // Interactive column headers (clicking to sort)
                 let col_name_rect = Rect::from_min_max(
-                    pos2(table_rect.min.x, table_rect.min.y),
-                    pos2(table_rect.min.x + 400.0, table_rect.min.y + header_h),
+                    pos2(x0, table_rect.min.y),
+                    pos2(x1, table_rect.min.y + header_h),
                 );
                 let col_size_rect = Rect::from_min_max(
-                    pos2(table_rect.min.x + 400.0, table_rect.min.y),
-                    pos2(table_rect.min.x + 490.0, table_rect.min.y + header_h),
+                    pos2(x1, table_rect.min.y),
+                    pos2(x2, table_rect.min.y + header_h),
                 );
                 let col_seeds_rect = Rect::from_min_max(
-                    pos2(table_rect.min.x + 490.0, table_rect.min.y),
-                    pos2(table_rect.min.x + 570.0, table_rect.min.y + header_h),
+                    pos2(x2, table_rect.min.y),
+                    pos2(x3, table_rect.min.y + header_h),
                 );
                 let col_peers_rect = Rect::from_min_max(
-                    pos2(table_rect.min.x + 570.0, table_rect.min.y),
-                    pos2(table_rect.min.x + 650.0, table_rect.min.y + header_h),
+                    pos2(x3, table_rect.min.y),
+                    pos2(x4, table_rect.min.y + header_h),
                 );
                 let col_date_rect = Rect::from_min_max(
-                    pos2(table_rect.min.x + 650.0, table_rect.min.y),
-                    pos2(table_rect.max.x, table_rect.min.y + header_h),
+                    pos2(x4, table_rect.min.y),
+                    pos2(x_end, table_rect.min.y + header_h),
                 );
 
-                if ui
-                    .allocate_rect(col_name_rect, egui::Sense::click())
-                    .clicked()
-                {
+                if ui.allocate_rect(col_name_rect, egui::Sense::click()).clicked() {
                     self.toggle_sort(SortColumn::Name);
                 }
-                if ui
-                    .allocate_rect(col_size_rect, egui::Sense::click())
-                    .clicked()
-                {
+                if ui.allocate_rect(col_size_rect, egui::Sense::click()).clicked() {
                     self.toggle_sort(SortColumn::Size);
                 }
-                if ui
-                    .allocate_rect(col_seeds_rect, egui::Sense::click())
-                    .clicked()
-                {
+                if ui.allocate_rect(col_seeds_rect, egui::Sense::click()).clicked() {
                     self.toggle_sort(SortColumn::Seeds);
                 }
-                if ui
-                    .allocate_rect(col_peers_rect, egui::Sense::click())
-                    .clicked()
-                {
+                if ui.allocate_rect(col_peers_rect, egui::Sense::click()).clicked() {
                     self.toggle_sort(SortColumn::Peers);
                 }
-                if ui
-                    .allocate_rect(col_date_rect, egui::Sense::click())
-                    .clicked()
-                {
+                if ui.allocate_rect(col_date_rect, egui::Sense::click()).clicked() {
                     self.toggle_sort(SortColumn::Date);
                 }
 
@@ -856,27 +943,29 @@ impl TorrentSearch {
                     }
                 );
 
-                text(&p, o.x + 22.0, o.y + 88.0, &name_hdr, TEXT());
-                text(&p, o.x + 420.0, o.y + 88.0, &size_hdr, TEXT());
-                text(
+                winui::text_fit(&p, x0 + 8.0, o.y + 88.0, &name_hdr, TEXT(), x1 - 4.0);
+                winui::text_fit(&p, x1 + 8.0, o.y + 88.0, &size_hdr, TEXT(), x2 - 4.0);
+                winui::text_fit(
                     &p,
-                    o.x + 510.0,
+                    x2 + 8.0,
                     o.y + 88.0,
                     &seeds_hdr,
                     Color32::from_rgb(0, 180, 0),
+                    x3 - 4.0,
                 );
-                text(
+                winui::text_fit(
                     &p,
-                    o.x + 590.0,
+                    x3 + 8.0,
                     o.y + 88.0,
                     &peers_hdr,
                     Color32::from_rgb(60, 140, 220),
+                    x4 - 4.0,
                 );
-                text(&p, o.x + 670.0, o.y + 88.0, &date_hdr, TEXT());
+                winui::text_fit(&p, x4 + 8.0, o.y + 88.0, &date_hdr, TEXT(), x_end - 4.0);
 
                 // Scrollable rows
                 let row_h = 22.0;
-                let visible_rows = 16;
+                let visible_rows = ((table_rect.height() - header_h) / row_h).floor() as usize;
                 let total_rows = items.len();
                 let max_scroll = (total_rows.saturating_sub(visible_rows) as f32 * row_h).max(0.0);
 
@@ -889,7 +978,7 @@ impl TorrentSearch {
                 }
 
                 let first_idx = (self.scroll_offset / row_h).floor() as usize;
-                let last_idx = (first_idx + visible_rows + 1).min(total_rows);
+                let last_idx = (first_idx + visible_rows + 2).min(total_rows);
 
                 let body_rect = Rect::from_min_size(
                     pos2(table_rect.min.x, table_rect.min.y + header_h),
@@ -910,7 +999,7 @@ impl TorrentSearch {
                         );
                         let is_sel = self.selected == Some(i);
 
-                        let resp = ui.allocate_rect(row_rc, egui::Sense::click());
+                        let mut resp = ui.allocate_rect(row_rc, egui::Sense::click());
                         if resp.clicked() {
                             self.selected = Some(i);
                         }
@@ -938,52 +1027,75 @@ impl TorrentSearch {
                         } else {
                             Color32::from_rgb(60, 140, 220)
                         };
-                        let (fit_name, _) = winui::text_fit(
+                        let (name_rc, is_cut) = winui::text_fit(
                             &p,
-                            o.x + 22.0,
+                            x0 + 8.0,
                             y + 16.0,
                             &item.name,
                             text_color,
-                            o.x + 400.0,
+                            x1 - 8.0,
                         );
-                        let _ = fit_name;
-                        text(
+                        if is_cut {
+                            winui::full_on_hover(ui, name_rc, ("torrent-name", i), &item.name);
+                            resp = resp.on_hover_text(&item.name);
+                        }
+                        winui::text_fit(
                             &p,
-                            o.x + 420.0,
+                            x1 + 8.0,
                             y + 16.0,
                             &crate::model::size(item.size),
                             text_color,
+                            x2 - 8.0,
                         );
-                        text(
+                        winui::text_fit(
                             &p,
-                            o.x + 510.0,
+                            x2 + 8.0,
                             y + 16.0,
                             &item.seeders.to_string(),
                             seeds_color,
+                            x3 - 8.0,
                         );
-                        text(
+                        winui::text_fit(
                             &p,
-                            o.x + 590.0,
+                            x3 + 8.0,
                             y + 16.0,
                             &item.leechers.to_string(),
                             peers_color,
+                            x4 - 8.0,
                         );
-                        text(
+                        winui::text_fit(
                             &p,
-                            o.x + 670.0,
+                            x4 + 8.0,
                             y + 16.0,
                             &format_date(item.added),
                             text_color,
+                            x_end - 8.0,
                         );
                     }
                 }
 
                 // Bottom Action buttons
                 let has_sel = self.selected.is_some_and(|idx| idx < items.len());
+                let btn_y = cur_h - 38.0;
+
+                text(
+                    &p,
+                    o.x + 14.0,
+                    o.y + btn_y + 17.0,
+                    crate::i18n::t("Drag table columns or window edges to resize"),
+                    MUTED(),
+                );
+
+                let close_w = 100.0;
+                let dl_w = 110.0;
+                let copy_w = 120.0;
+                let close_x = cur_w - 14.0 - close_w;
+                let dl_x = close_x - 10.0 - dl_w;
+                let copy_x = dl_x - 10.0 - copy_w;
 
                 let copy_magnet = winui::button(
                     ui,
-                    r(o, 410.0, 480.0, 120.0, 26.0),
+                    Rect::from_min_size(pos2(o.x + copy_x, o.y + btn_y), vec2(copy_w, 26.0)),
                     crate::i18n::mark("Copy Magnet"),
                     if has_sel {
                         ButtonKind::Normal
@@ -997,7 +1109,7 @@ impl TorrentSearch {
 
                 let download = winui::button(
                     ui,
-                    r(o, 540.0, 480.0, 110.0, 26.0),
+                    Rect::from_min_size(pos2(o.x + dl_x, o.y + btn_y), vec2(dl_w, 26.0)),
                     crate::i18n::mark("Download"),
                     if has_sel {
                         ButtonKind::Default
@@ -1011,7 +1123,7 @@ impl TorrentSearch {
 
                 let close = winui::button(
                     ui,
-                    r(o, 660.0, 480.0, 106.0, 26.0),
+                    Rect::from_min_size(pos2(o.x + close_x, o.y + btn_y), vec2(close_w, 26.0)),
                     crate::i18n::mark("Close"),
                     ButtonKind::Normal,
                     false,
@@ -1148,5 +1260,15 @@ mod tests {
         assert_eq!(items[0].seeders, 150);
         assert_eq!(items[0].leechers, 80);
         assert_eq!(items[0].added, 1720000000);
+    }
+
+    #[test]
+    fn test_matches_query() {
+        assert!(matches_query("Overgeared - 01 [1080p].mkv", "overgeared"));
+        assert!(matches_query("Overgeared.S01E02.1080p.WEB-DL", "overgeared 1080p"));
+        assert!(!matches_query("Greys.Anatomy.S18E01.720p.HDTV", "overgeared"));
+        assert!(matches_query("[Blender Foundation] Big Buck Bunny - Open Movie", "blender open movie"));
+        assert!(!matches_query("Tears of Steel", "big buck bunny"));
+        assert!(matches_query("Any Torrent Name", ""));
     }
 }
