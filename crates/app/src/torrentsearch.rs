@@ -923,7 +923,21 @@ impl TorrentSearch {
                             p.rect_filled(row_rc, 0.0, winui::SELECTION());
                         }
 
-                        let text_color = if is_sel { Color32::WHITE } else { TEXT() };
+                        let text_color = if is_sel {
+                            winui::SELECTION_TEXT()
+                        } else {
+                            TEXT()
+                        };
+                        let seeds_color = if is_sel {
+                            winui::SELECTION_TEXT()
+                        } else {
+                            Color32::from_rgb(0, 180, 0)
+                        };
+                        let peers_color = if is_sel {
+                            winui::SELECTION_TEXT()
+                        } else {
+                            Color32::from_rgb(60, 140, 220)
+                        };
                         let (fit_name, _) = winui::text_fit(
                             &p,
                             o.x + 22.0,
@@ -945,14 +959,14 @@ impl TorrentSearch {
                             o.x + 510.0,
                             y + 16.0,
                             &item.seeders.to_string(),
-                            Color32::from_rgb(0, 180, 0),
+                            seeds_color,
                         );
                         text(
                             &p,
                             o.x + 590.0,
                             y + 16.0,
                             &item.leechers.to_string(),
-                            Color32::from_rgb(60, 140, 220),
+                            peers_color,
                         );
                         text(
                             &p,
