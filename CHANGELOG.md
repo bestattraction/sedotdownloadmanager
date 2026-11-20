@@ -7,6 +7,11 @@ Each release's notes on GitHub come from its section here (`## [X.Y.Z]`, see
 
 ## [0.6.9] - 2026-11-20
 
+### Added
+
+- **EZTV Indexer Integration**:
+  - Integrated EZTV's official public API (`eztv.re`) into the parallel torrent search engine, enriching results for TV series, dramas, and episodic releases.
+
 ### Fixed
 
 - **Torrent Search Input Trigger**:

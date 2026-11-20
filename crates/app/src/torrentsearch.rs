@@ -69,6 +69,28 @@ pub struct TorrentsCsvResponse {
     pub torrents: Vec<TorrentsCsvItem>,
 }
 
+#[derive(Clone, Debug, Deserialize)]
+pub struct EztvItem {
+    #[serde(default)]
+    pub title: String,
+    #[serde(default)]
+    pub hash: String,
+    #[serde(default)]
+    pub size_bytes: serde_json::Value,
+    #[serde(default)]
+    pub seeds: u32,
+    #[serde(default)]
+    pub peers: u32,
+    #[serde(default)]
+    pub date_released_unix: u64,
+}
+
+#[derive(Clone, Debug, Deserialize)]
+pub struct EztvResponse {
+    #[serde(default)]
+    pub torrents: Vec<EztvItem>,
+}
+
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum SortColumn {
     Name,
@@ -351,6 +373,45 @@ async fn search_torrents_csv(client: &reqwest::Client, query: &str) -> Vec<Torre
     results
 }
 
+pub fn parse_eztv_torrents(data: EztvResponse) -> Vec<TorrentSearchResult> {
+    let mut results = Vec::new();
+    for it in data.torrents {
+        let hash = it.hash.trim().to_ascii_lowercase();
+        if hash.len() != 40 || it.title.is_empty() {
+            continue;
+        }
+        let size = match &it.size_bytes {
+            serde_json::Value::Number(n) => n.as_u64().unwrap_or(0),
+            serde_json::Value::String(s) => s.parse::<u64>().unwrap_or(0),
+            _ => 0,
+        };
+        results.push(TorrentSearchResult {
+            name: it.title,
+            info_hash: hash,
+            size,
+            seeders: it.seeds,
+            leechers: it.peers,
+            added: it.date_released_unix,
+        });
+    }
+    results
+}
+
+async fn search_eztv(client: &reqwest::Client, query: &str) -> Vec<TorrentSearchResult> {
+    let encoded: String = url::form_urlencoded::byte_serialize(query.as_bytes()).collect();
+    let url = format!("https://eztv.re/api/get-torrents?limit=100&query={encoded}");
+    let Ok(resp) = client.get(&url).send().await else {
+        return Vec::new();
+    };
+    if !resp.status().is_success() {
+        return Vec::new();
+    }
+    let Ok(data) = resp.json::<EztvResponse>().await else {
+        return Vec::new();
+    };
+    parse_eztv_torrents(data)
+}
+
 async fn search_nyaa(client: &reqwest::Client, query: &str) -> Vec<TorrentSearchResult> {
     let encoded: String = url::form_urlencoded::byte_serialize(query.as_bytes()).collect();
     let url = format!("https://nyaa.si/?page=rss&q={encoded}&s=seeders&o=desc");
@@ -442,12 +503,13 @@ impl TorrentSearch {
         rt.spawn(async move {
             let client = build_client();
 
-            let (r_apibay, r_bitsearch, r_nyaa, r_torrents_csv, r_solid) = tokio::join!(
+            let (r_apibay, r_bitsearch, r_nyaa, r_torrents_csv, r_solid, r_eztv) = tokio::join!(
                 search_apibay(&client, &q),
                 search_bitsearch(&client, &q),
                 search_nyaa(&client, &q),
                 search_torrents_csv(&client, &q),
                 search_solidtorrents(&client, &q),
+                search_eztv(&client, &q),
             );
 
             let mut map: HashMap<String, TorrentSearchResult> = HashMap::new();
@@ -458,6 +520,7 @@ impl TorrentSearch {
                 .chain(r_nyaa)
                 .chain(r_torrents_csv)
                 .chain(r_solid)
+                .chain(r_eztv)
             {
                 let key = it.info_hash.to_ascii_lowercase();
                 if key.len() != 40 || key == "0000000000000000000000000000000000000000" {
@@ -1043,5 +1106,33 @@ mod tests {
             r1.compare(&r2, SortColumn::Size, SortDirection::Descending),
             std::cmp::Ordering::Greater
         );
+    }
+
+    #[test]
+    fn test_parse_eztv_json() {
+        let json_str = r#"{
+            "torrents": [
+                {
+                    "title": "House of the Dragon S02E08 1080p EZTV",
+                    "hash": "abcdef1234567890abcdef1234567890abcdef12",
+                    "size_bytes": "123456789",
+                    "seeds": 150,
+                    "peers": 80,
+                    "date_released_unix": 1720000000
+                }
+            ]
+        }"#;
+        let resp: EztvResponse = serde_json::from_str(json_str).unwrap();
+        let items = parse_eztv_torrents(resp);
+        assert_eq!(items.len(), 1);
+        assert_eq!(items[0].name, "House of the Dragon S02E08 1080p EZTV");
+        assert_eq!(
+            items[0].info_hash,
+            "abcdef1234567890abcdef1234567890abcdef12"
+        );
+        assert_eq!(items[0].size, 123456789);
+        assert_eq!(items[0].seeders, 150);
+        assert_eq!(items[0].leechers, 80);
+        assert_eq!(items[0].added, 1720000000);
     }
 }
