@@ -104,7 +104,7 @@ const proxyLog = [];
 const PAC = `function FindProxyForURL(url, host) { return host === "${PROXY_HOST}" ? "PROXY 127.0.0.1:${PROXY_PORT}" : "DIRECT"; }`;
 // The extension's own address in Firefox (moz-extension://UUID/), fixed in the test profile so
 // its pages (the popup) can be opened in a tab.
-const FIREFOX_ID = "integration@misterdownloadmanager.com";
+const FIREFOX_ID = "integration@sedotdownloadmanager.com";
 // The extensions the browsers load: pack.ps1's, or their copies for E2E_HOST_NAME (testHost).
 let chromiumExtension = path.join(root, "target", "extension", "chromium");
 let firefoxExtension = { type: "archivePath", path: path.join(root, "target", "extension", "mdm-firefox.xpi") };

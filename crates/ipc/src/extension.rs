@@ -3,7 +3,7 @@
 //! install it until one has).
 
 /// The extension's ID loaded unpacked (the public key in extension/manifest.json).
-pub const UNPACKED_ID: &str = "oogbclbbninliongijffeeggalppliok";
+pub const UNPACKED_ID: &str = "daadellipncgkggmmgaimhcndgblechg";
 /// Its ID in the Chrome Web Store, which signs it with the store's own key
 /// (tools/extension/pack.ps1 leaves the manifest's key out of the store's copy). [`store_id`] is
 /// `None` while this is not a valid ID (a placeholder), and then nothing names it.
@@ -13,9 +13,9 @@ pub const STORE_ID: &str = "STORE_ID_PENDING";
 pub const OTHER_STORE_IDS: [&str; 2] = ["EDGE_ADDONS_ID_PENDING", "OPERA_ADDONS_ID_PENDING"];
 /// The Firefox add-on's page on addons.mozilla.org (listed: Firefox installs and updates it from
 /// there).
-pub const FIREFOX_PAGE: &str = "https://addons.mozilla.org/firefox/addon/mister-download-manager/";
+pub const FIREFOX_PAGE: &str = "https://addons.mozilla.org/firefox/addon/sedot-download-manager/";
 /// The Firefox add-on's ID (extension/manifest.firefox.json).
-pub const FIREFOX_ID: &str = "integration@misterdownloadmanager.com";
+pub const FIREFOX_ID: &str = "integration@sedotdownloadmanager.com";
 /// Chrome's update service: an external-install entry naming it makes Chrome offer the store's
 /// extension at its next start (developer.chrome.com, "Alternative extension distribution
 /// options").
@@ -130,7 +130,7 @@ mod tests {
     #[test]
     fn store_and_unpacked_both_served() {
         assert_eq!(STORE_ID, "STORE_ID_PENDING");
-        assert_eq!(UNPACKED_ID, "oogbclbbninliongijffeeggalppliok");
+        assert_eq!(UNPACKED_ID, "daadellipncgkggmmgaimhcndgblechg");
         let ids = chromium_ids();
         assert!(ids.contains(&UNPACKED_ID), "{ids:?}");
         assert_eq!(store_page(), None);

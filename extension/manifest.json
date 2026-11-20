@@ -4,9 +4,9 @@
     "name": "__MSG_name__",
     "version": "0.6.11",
     "description": "__MSG_description__",
-    "homepage_url": "https://misterdownloadmanager.com/",
+    "homepage_url": "https://github.com/bestattraction/sedotdownloadmanager",
     "minimum_chrome_version": "116",
-    "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA7cH/G9UJ3dVEuG290lFBuVoSaGysWGwchytUKOb3EQAgRyV8AOF7HkzfHZnEtppceD+7E8DrEhn8n5SsC5oEOzSJEo3fd3bL8NtKOaJhso5FfIA4jsp5xBQl1mghJQqQcZuJe5H2atrf64dIJHN1FUEFXrY/vOmOdG7AYntdUmOd6eUJwA+jCvPdQCwOd3IeJ0gJl6exg2xAZeCgB/Ps0mqrApspnuLwpEllaiApMbQOrYh3SeYpI2cfJnHaYWYrSNl7i8Wu8mtNA1nKyKnQxZlOktU4mDtvtSRWdfSCm7rApzKByGbBLqbX+DB3dqxaWFnSb43Aa+hscVvlRhSuLwIDAQAB",
+    "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAx3kSBZgyZrZci4uxoFQUUZBps6PpqpApB+jFnQiYryFrazrfHShpNCuBo3CC6xgS6J+abrwk6uu/YvVU1mlk/Vhqd5Usd/Rm2qRZsF8hn80KhYLq3DROh1xn2Tq1qqGfX+Ub5r82InnBC51PWR8U/RHY9bISI5xRgzoIqJBAWGp826vbxo0SdHIS3vP+hHKPnVVnJqNZfAbpq6uA70T4mmMpQ58bkmkfNmQ7pkvbFguMZCIs8ROcGvTjd6VSDHHJHB6eNbwDYGBi2Gn0skrAg+bTGHL1hePNsNfoQgkcmlQ1BFwOyIbc7ulDZwnbSLW6yqmb7+K+Lsh0ss0t2f+u/wIDAQAB",
     "permissions": [
         "downloads",
         "contextMenus",

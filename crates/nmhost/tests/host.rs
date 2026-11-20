@@ -10,7 +10,7 @@ use std::sync::mpsc;
 use std::time::Duration;
 
 const HOST: &str = env!("CARGO_BIN_EXE_misterdownloadmanager-nmhost");
-const CALLER: &str = "chrome-extension://oogbclbbninliongijffeeggalppliok/";
+const CALLER: &str = "chrome-extension://daadellipncgkggmmgaimhcndgblechg/";
 const UA: &str = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/141.0.0.0 Safari/537.36";
 
 /// A data folder of its own, with the app's Options as `settings` (downloads.json).
@@ -308,7 +308,7 @@ fn zen_and_helium_alone_are_registered() {
     let origins = manifest(&helium_hosts)["allowed_origins"].clone();
     for id in [
         "ejoleppdfgjdndddcjoehopknmlglojp",
-        "oogbclbbninliongijffeeggalppliok",
+        "daadellipncgkggmmgaimhcndgblechg",
     ] {
         let origin = serde_json::json!(format!("chrome-extension://{id}/"));
         assert!(origins.as_array().unwrap().contains(&origin), "{origins}");

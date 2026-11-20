@@ -377,7 +377,7 @@ on GitHub Actions and publishes the release.
 Browser integration from a build: register the native messaging host with
 `target\release\misterdownloadmanager-nmhost.exe --register` (undo with `--unregister`), then in
 `chrome://extensions` or `edge://extensions` turn on Developer mode, **Load unpacked** and pick
-the `extension/` folder (its ID is always `oogbclbbninliongijffeeggalppliok`).
+the `extension/` folder (its ID is always `daadellipncgkggmmgaimhcndgblechg`).
 
 </details>
 
