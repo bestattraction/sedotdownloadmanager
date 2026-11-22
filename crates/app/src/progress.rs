@@ -328,6 +328,8 @@ pub struct Progress {
     pub limit: Option<crate::model::Limit>,
     /// Last known torrent details, cached so tabs remain accessible when paused/stopped.
     pub last_torrent_details: Option<crate::torrents::Details>,
+    /// When a torrent last had peers connected or received wire traffic (prevents rapid status flickering).
+    pub(crate) torrent_active_at: Option<std::time::Instant>,
     /// Options on completion, used when "Show download complete dialog" is off.
     hang_up: bool,
     exit: bool,
@@ -412,6 +414,7 @@ impl Progress {
             main_shown: true,
             limit: None,
             last_torrent_details: None,
+            torrent_active_at: None,
             hang_up: false,
             exit: false,
             turn_off_on: false,
@@ -1375,29 +1378,14 @@ fn hide_tab(ui: &mut Ui, o: Pos2) -> bool {
 const PAGE_TEXT_RIGHT: f32 = 520.0;
 
 impl Progress {
-    // The rows sit 7 px inside the page's frame at the top and at the bottom (with Rename right
-    // below Server), with a slightly wider break after Status, as before.
-    fn status_page(
-        &mut self,
-        ui: &mut Ui,
-        o: Pos2,
-        item: &Item,
-        snap: Option<&Snapshot>,
-        frac: Option<f64>,
-    ) {
-        let p = &ui.painter().clone();
-        // Long values are cut with "..." at the page edge and shown whole on hover.
-        let fit = |ui: &Ui, key: &str, x: f32, base: f32, s: &str, color| {
-            let (rect, cut) =
-                winui::text_fit(p, o.x + x, o.y + base, s, color, o.x + PAGE_TEXT_RIGHT);
-            winui::copyable(ui, rect, key, s, cut);
-        };
+    /// The formatted status text shown on the Download status tab.
+    pub(crate) fn status_text_for(&mut self, item: &Item, snap: Option<&Snapshot>) -> String {
         let web_page = item.got_web_page();
-        // A failure that takes a paragraph to explain: the reason under "Error", in the rows of
-        // the sizes and times, which say nothing then (a site's page, #701; a video's failed
-        // merge, what stays for Resume).
         let explained = web_page || item.merge_failed();
-        let status = match item.status {
+        if item.status != Status::Downloading {
+            self.torrent_active_at = None;
+        }
+        match item.status {
             // A torrent reading and checking its files says so, not "Receiving data" (#39).
             _ if let Some(checking) = item.torrent_checking() => checking,
             // After the last byte: the file checked, a video's streams joined (#736), as the
@@ -1408,13 +1396,42 @@ impl Progress {
                 item.at_service().unwrap_or_default()
             }
             Status::Downloading => {
+                let torrent_peers = item
+                    .torrent
+                    .as_ref()
+                    .map_or(0, |t| t.peers)
+                    .max(
+                        self.last_torrent_details
+                            .as_ref()
+                            .and_then(|d| d.stats.as_ref().map(|s| s.peers_live))
+                            .unwrap_or(0),
+                    )
+                    .max(
+                        self.last_torrent_details
+                            .as_ref()
+                            .map_or(0, |d| d.peers.len()),
+                    );
+                let now = std::time::Instant::now();
+                let torrent_has_traffic = item.torrent.as_ref().is_some_and(|t| t.down_speed > 0.0)
+                    || item.rate() > 0.0;
+                let torrent_connected = torrent_peers > 0 || torrent_has_traffic;
+                if torrent_connected {
+                    self.torrent_active_at = Some(now);
+                }
+                let torrent_receiving = item.torrent.is_some()
+                    && (torrent_connected
+                        || self.torrent_active_at.is_some_and(|t| {
+                            now.saturating_duration_since(t).as_secs() < 3
+                        }));
+
                 // A video (yt-dlp) has no engine connections: data arriving is the sign.
                 let receiving = snap.is_some_and(|s| {
                     s.connections
                         .iter()
                         .any(|c| matches!(c.status, ConnStatus::Receiving))
-                }) || ((item.video.is_some() || item.torrent.is_some())
-                    && item.rate() > 0.0);
+                }) || (item.video.is_some() && item.rate() > 0.0)
+                    || torrent_receiving;
+
                 // Every byte in and none on its way (#736): the last of it written out, the
                 // file named; nothing is connecting.
                 let completing = item.torrent.is_none()
@@ -1453,7 +1470,28 @@ impl Progress {
                     item.error.as_deref().unwrap_or(crate::i18n::t("unknown")),
                 )],
             ),
+        }
+    }
+
+    // The rows sit 7 px inside the page's frame at the top and at the bottom (with Rename right
+    // below Server), with a slightly wider break after Status, as before.
+    fn status_page(
+        &mut self,
+        ui: &mut Ui,
+        o: Pos2,
+        item: &Item,
+        snap: Option<&Snapshot>,
+        frac: Option<f64>,
+    ) {
+        let p = &ui.painter().clone();
+        // Long values are cut with "..." at the page edge and shown whole on hover.
+        let fit = |ui: &Ui, key: &str, x: f32, base: f32, s: &str, color| {
+            let (rect, cut) =
+                winui::text_fit(p, o.x + x, o.y + base, s, color, o.x + PAGE_TEXT_RIGHT);
+            winui::copyable(ui, rect, key, s, cut);
         };
+        let explained = item.got_web_page() || item.merge_failed();
+        let status = self.status_text_for(item, snap);
         fit(
             ui,
             "url",
@@ -2704,6 +2742,59 @@ mod tests {
         assert_eq!(p.status_drop(), RENAME_DROP);
         p.tab = Tab::Completion;
         assert_eq!(p.status_drop(), RENAME_DROP);
+    }
+
+    #[test]
+    fn torrent_status_does_not_flicker_between_connecting_and_receiving() {
+        let mut item = Item::new(
+            1,
+            "magnet:?xt=urn:btih:0123456789abcdef0123456789abcdef01234567".parse().unwrap(),
+            std::path::PathBuf::from("/tmp/game"),
+            crate::model::Category::General,
+        );
+        item.status = Status::Downloading;
+        item.torrent = Some(crate::torrents::TorrentSpec {
+            hash: "0123456789abcdef0123456789abcdef01234567".into(),
+            files: None,
+            folder: std::path::PathBuf::from("/tmp/game"),
+            uploaded: 0,
+            seeded_secs: 0,
+            peers: 0,
+            up_speed: 0.0,
+            down_speed: 0.0,
+            upload_limit: None,
+            in_order: false,
+            ends_first: false,
+        });
+
+        let mut p = Progress::new(1, true);
+
+        // 1. Initial state with 0 peers and 0 speed -> "Connecting..."
+        assert_eq!(p.status_text_for(&item, None), "Connecting...");
+
+        // 2. Peers connect (e.g. 63 peers) even with 0 transfer rate -> "Receiving data..."
+        if let Some(t) = item.torrent.as_mut() {
+            t.peers = 63;
+        }
+        assert_eq!(p.status_text_for(&item, None), "Receiving data...");
+
+        // 3. Rate momentarily dips to 0 with peers connected -> still "Receiving data..."
+        assert_eq!(p.status_text_for(&item, None), "Receiving data...");
+
+        // 4. Peers drop to 0 for a moment -> grace period keeps it "Receiving data..."
+        if let Some(t) = item.torrent.as_mut() {
+            t.peers = 0;
+        }
+        assert_eq!(p.status_text_for(&item, None), "Receiving data...");
+
+        // 5. If inactive for > 3s -> reverts to "Connecting..."
+        p.torrent_active_at = Some(std::time::Instant::now() - std::time::Duration::from_secs(4));
+        assert_eq!(p.status_text_for(&item, None), "Connecting...");
+
+        // 6. When paused -> "Paused" and clears active timestamp
+        item.status = Status::Stopped;
+        assert_eq!(p.status_text_for(&item, None), "Paused");
+        assert!(p.torrent_active_at.is_none());
     }
 }
 

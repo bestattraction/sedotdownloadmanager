@@ -41,6 +41,10 @@ pub struct TorrentSpec {
     /// Live only, like [`peers`](Self::peers): never saved, zero without a session or stats.
     #[serde(skip)]
     pub up_speed: f64,
+    /// What it receives from peers right now, bytes/s (#357).
+    /// Live only, like [`peers`](Self::peers): never saved, zero without a session or stats.
+    #[serde(skip)]
+    pub down_speed: f64,
     /// Its own upload limit, bytes/s (None: only Torrent settings' limit for all torrents).
     #[serde(default)]
     pub upload_limit: Option<u64>,
@@ -117,6 +121,7 @@ pub fn clear_live<'a>(specs: impl Iterator<Item = &'a mut TorrentSpec>) {
     specs.for_each(|t| {
         t.peers = 0;
         t.up_speed = 0.0;
+        t.down_speed = 0.0;
     });
 }
 
@@ -1558,6 +1563,7 @@ mod tests {
             seeded_secs: 0,
             peers: 0,
             up_speed: 0.0,
+            down_speed: 0.0,
             upload_limit: None,
             in_order: false,
             ends_first: true,
@@ -1587,19 +1593,23 @@ mod tests {
         let mut t = a_spec();
         t.peers = 7;
         t.up_speed = 4096.0;
+        t.down_speed = 8192.0;
         let saved = serde_json::to_value(&t).unwrap();
         assert!(saved.get("peers").is_none(), "the count isn't written");
         assert!(saved.get("up_speed").is_none(), "the rate isn't written");
+        assert!(saved.get("down_speed").is_none(), "the down rate isn't written");
         let mut with_old = saved.clone();
         with_old["peers"] = 9.into();
         with_old["seeders"] = 9.into();
         with_old["up_speed"] = 999.0.into();
+        with_old["down_speed"] = 888.0.into();
         let loaded: TorrentSpec = serde_json::from_value(with_old).unwrap();
         assert_eq!(
             loaded.peers, 0,
             "an old value in the file doesn't come back"
         );
         assert_eq!(loaded.up_speed, 0.0, "nor does an old rate");
+        assert_eq!(loaded.down_speed, 0.0, "nor does an old down rate");
     }
 
     /// #357: with no session running, the columns say nobody is connected and nothing is moving.
@@ -1608,11 +1618,14 @@ mod tests {
         let mut specs = [a_spec(), a_spec()];
         specs[0].peers = 3;
         specs[0].up_speed = 4096.0;
+        specs[0].down_speed = 2048.0;
         specs[1].peers = 12;
         specs[1].up_speed = 1024.0;
+        specs[1].down_speed = 512.0;
         clear_live(specs.iter_mut());
         assert_eq!([specs[0].peers, specs[1].peers], [0, 0]);
         assert_eq!([specs[0].up_speed, specs[1].up_speed], [0.0, 0.0]);
+        assert_eq!([specs[0].down_speed, specs[1].down_speed], [0.0, 0.0]);
     }
 
     /// #39: what a torrent sent adds up across its runs: librqbit's count is 0 while paused
@@ -1671,6 +1684,7 @@ mod tests {
             seeded_secs,
             peers: 0,
             up_speed: 0.0,
+            down_speed: 0.0,
             upload_limit: None,
             in_order: false,
             ends_first: true,

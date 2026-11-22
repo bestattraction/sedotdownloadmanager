@@ -1462,6 +1462,11 @@ impl Item {
     /// The speed shown (bytes a second): the list's Transfer rate, the progress window's, the
     /// total in the status strip and the tray's tip all show this one ([`Speed`]).
     pub fn rate(&self) -> f64 {
+        if let Some(t) = &self.torrent {
+            if t.down_speed > 0.0 {
+                return t.down_speed;
+            }
+        }
         self.live.as_ref().map_or(0.0, |l| l.speed.shown())
     }
 
@@ -1471,7 +1476,12 @@ impl Item {
             return None;
         }
         let size = self.size?;
-        self.live.as_ref()?.speed.seconds_left(size)
+        let rate = self.rate();
+        if rate > 1.0 {
+            Some(size.saturating_sub(self.downloaded) as f64 / rate)
+        } else {
+            self.live.as_ref()?.speed.seconds_left(size)
+        }
     }
 
     /// How much has come, 0 to 1, or None without a size to take a share of (a live stream,

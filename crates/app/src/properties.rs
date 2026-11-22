@@ -568,6 +568,7 @@ mod tests {
             seeded_secs: 0,
             peers: 0,
             up_speed: 0.0,
+            down_speed: 0.0,
             upload_limit: None,
             in_order: false,
             ends_first: false,

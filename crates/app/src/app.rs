@@ -2852,6 +2852,7 @@ impl App {
                 i.torrent_check = None;
                 spec.peers = 0;
                 spec.up_speed = 0.0;
+                spec.down_speed = 0.0;
                 continue;
             };
             // Keep the session's in-memory checking progress visible for stopped/complete
@@ -2867,6 +2868,7 @@ impl App {
             // it changes as peers come and go, and the next tick brings the list up to date.
             spec.peers = st.peers_live;
             spec.up_speed = st.up_speed;
+            spec.down_speed = st.down_speed;
             if st.phase == mdm_torrent::Phase::Finished && dt > 0 {
                 spec.seeded_secs += dt;
                 changed = true;
@@ -6132,6 +6134,7 @@ impl App {
                 seeded_secs: 0,
                 peers: 0,
                 up_speed: 0.0,
+                down_speed: 0.0,
                 upload_limit: None,
                 in_order: add.in_order,
                 ends_first: true,
@@ -14044,6 +14047,7 @@ mod deferred_rename_guard_tests {
             seeded_secs: 0,
             peers: 0,
             up_speed: 0.0,
+            down_speed: 0.0,
             upload_limit: None,
             in_order: false,
             ends_first: false,
@@ -14060,6 +14064,7 @@ mod deferred_rename_guard_tests {
             seeded_secs: 0,
             peers: 0,
             up_speed: 0.0,
+            down_speed: 0.0,
             upload_limit: None,
             in_order: false,
             ends_first: false,

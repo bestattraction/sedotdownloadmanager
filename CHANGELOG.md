@@ -53,6 +53,10 @@ Each release's notes on GitHub come from its section here (`## [X.Y.Z]`, see
   - Prevented the `Tasks` menu bar from popping open when switching between the main app and other windows using Alt+Tab.
 - **Dialog Combobox Dropdown Auto-Close Fix**:
   - Fixed an issue where combo dropdown menus in dialog windows (e.g. "Save to" folder history and "Category" dropdowns in Add Torrent and Download File Info) would spontaneously close after 0.4 seconds due to root-only viewport focus checks.
+- **Torrent Status Fluttering & Speed Reporting Fix**:
+  - Fixed an issue where the download progress window would rapidly flicker back and forth between "Receiving data..." and "Connecting..." whenever instantaneous transfer rate dipped between piece verifications.
+  - Active peer count (`spec.peers` / `st.peers_live`) and real-time wire transfer rate (`st.down_speed`) are now tracked, keeping the status solidly on "Receiving data..." while peers remain connected.
+  - Added a 3-second grace period for momentary peer fluctuations and accurate remaining time (`Time left`) calculation during active torrent downloads.
 - **Legacy Namespace and AppData Migration**:
   - Cleaned up obsolete debug binaries and references, updated crash reporting repo targets, and automatically migrated data from `%APPDATA%\misterdownloadmanager` to `%APPDATA%\sedotdownloadmanager`.
 
