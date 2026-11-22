@@ -45,6 +45,14 @@ Each release's notes on GitHub come from its section here (`## [X.Y.Z]`, see
   - Updated the "Tell a friend" share message link to point directly to the official Sedot Download Manager repository (`https://github.com/bestattraction/sedotdownloadmanager`).
 - **Custom Trackers Remote List Support**:
   - Custom Trackers now support remote tracker list URLs (e.g. raw GitHub links like `raw.githubusercontent.com` and `.txt` tracker lists), automatically fetching and caching active tracker endpoints in the background.
+- **Foreground Window Z-Order for Active Downloads**:
+  - Allowed the main application window to be brought to the foreground over download progress windows by configuring them as independent top-level windows.
+- **Menu Bar Dismissal on Window Handle & Non-Client Click**:
+  - Clicking the title bar handle, caption buttons, or non-client area now immediately closes any open menu dropdowns.
+- **Alt+Tab Menu Bar Activation Prevention**:
+  - Prevented the `Tasks` menu bar from popping open when switching between the main app and other windows using Alt+Tab.
+- **Legacy Namespace and AppData Migration**:
+  - Cleaned up obsolete debug binaries and references, updated crash reporting repo targets, and automatically migrated data from `%APPDATA%\misterdownloadmanager` to `%APPDATA%\sedotdownloadmanager`.
 
 ## [0.6.12] - 2026-11-20
 
