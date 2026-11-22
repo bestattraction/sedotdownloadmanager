@@ -9628,10 +9628,6 @@ impl App {
             crate::win32::hide_menu_popups();
             ctx.request_repaint();
         }
-        #[cfg(windows)]
-        if self.open_menu.is_none() && self.popup.is_none() {
-            crate::win32::hide_menu_popups();
-        }
 
         // Menu bar and its popups: which menu is open is chrome::menubar_next's to say.
         if let Some(event) = chrome::menu_bar(ui, o, w, self.open_menu) {
@@ -9674,6 +9670,8 @@ impl App {
                         ui.input(|x| x.pointer.press_origin().filter(|_| x.pointer.any_pressed()));
                     let press_on_title = press
                         .is_some_and(|at| chrome::menubar_title_at(ui.painter(), o, at).is_some());
+                    #[cfg(windows)]
+                    crate::win32::hide_menu_popups();
                     Some(MenuBarEvent::Dismissed { press_on_title })
                 }
             };
@@ -11737,10 +11735,7 @@ impl App {
                     self.alt_alone = false;
                     self.suppress_alt_menu = 3;
                     #[cfg(windows)]
-                    {
-                        crate::win32::hide_menu_popups();
-                        crate::win32::restore_if_minimized(crate::MAIN_TITLE);
-                    }
+                    crate::win32::restore_if_minimized(crate::MAIN_TITLE);
                 }
                 Outcome::Done(crate::torrentdlg::TorrentChoice {
                     share,
@@ -11755,10 +11750,7 @@ impl App {
                     self.alt_alone = false;
                     self.suppress_alt_menu = 3;
                     #[cfg(windows)]
-                    {
-                        crate::win32::hide_menu_popups();
-                        crate::win32::restore_if_minimized(crate::MAIN_TITLE);
-                    }
+                    crate::win32::restore_if_minimized(crate::MAIN_TITLE);
                     // The network: the next torrent session takes it (torrent_tick).
                     crate::torrents::fetch_custom_tracker_urls_if_any(&self.rt);
                     net.apply(&mut self.settings);

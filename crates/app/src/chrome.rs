@@ -1125,9 +1125,10 @@ pub fn popup<C: Clone>(
         && ctx.input_for(parent_vid, |i| {
             i.key_pressed(egui::Key::Escape) || i.pointer.any_pressed()
         });
-    let root_press = ctx.input_for(egui::ViewportId::ROOT, |i| {
-        i.key_pressed(egui::Key::Escape) || i.pointer.any_pressed()
-    });
+    let root_press = parent_vid == egui::ViewportId::ROOT
+        && ctx.input_for(egui::ViewportId::ROOT, |i| {
+            i.key_pressed(egui::Key::Escape) || i.pointer.any_pressed()
+        });
     if !first && (lost_focus || nonclient || parent_press || root_press) {
         // Closed by a press: where it was, so the control that opened it doesn't take that
         // press's click (on release) as opening it again (winui::opener_click). Read before
@@ -1360,7 +1361,7 @@ pub fn popup_viewport(title: &str) -> egui::ViewportBuilder {
 /// old frame (black until something made it draw again). True on the pass that styled it: show
 /// it then ([`show_popup`]). Elsewhere nothing to do (false).
 #[cfg_attr(not(windows), allow(unused_variables))]
-pub fn style_popup(title: &str, look: PopupLook) -> bool {
+pub fn style_popup(title: &str, look: PopupLook, track_for_dismissal: bool) -> bool {
     #[cfg(windows)]
     {
         use crate::win32::Popup;
@@ -1372,6 +1373,7 @@ pub fn style_popup(title: &str, look: PopupLook) -> bool {
                     POPUP_BORDER().b(),
                     0,
                 ]),
+                track_for_dismissal,
             },
             PopupLook::Floating => Popup::Floating,
         };
@@ -1550,7 +1552,7 @@ fn popup_level<C: Clone>(
     let mut styled = false;
     ctx.show_viewport_immediate(vid, builder, |ui, _| {
         // Made a menu window in its own pass, before anything is drawn in it (style_popup).
-        styled = style_popup(&title, PopupLook::Menu);
+        styled = style_popup(&title, PopupLook::Menu, kind == MenuKind::Bar);
         // What happens in this window, for popup() and keyboard(), which run in the parent's
         // pass: they must not ask egui about a menu window by its id, which creates one when it
         // isn't open (a submenu, mostly): an untitled copy of the main window, opened and closed

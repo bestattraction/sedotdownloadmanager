@@ -2676,7 +2676,10 @@ pub enum Popup {
     /// A menu (chrome.rs): never activated, so the main window keeps the focus and the
     /// keyboard; Windows 11's small rounded corners and a 1 px border in this colour
     /// (0x00BBGGRR); no window-open animation (menus just appear).
-    Menu { border: u32 },
+    Menu {
+        border: u32,
+        track_for_dismissal: bool,
+    },
     /// A small floating window (the drop target, droptarget.rs): activated when clicked, as
     /// any window; Windows 11's rounded corners, border and shadow, as it had with its caption
     /// style.
@@ -2810,6 +2813,7 @@ mod popup_style_tests {
             Popup::Floating,
             Popup::Menu {
                 border: 0x00ff_0000,
+                track_for_dismissal: false,
             },
         ]
         .into_iter()
@@ -2874,6 +2878,79 @@ mod popup_style_tests {
             }
         }
     }
+
+    #[test]
+    fn hide_menu_popups_does_not_hide_untracked_menus() {
+        use windows_sys::Win32::UI::WindowsAndMessaging::{
+            CreateWindowExW, DestroyWindow, IsWindowVisible, ShowWindow, SW_SHOW,
+        };
+        let title_tracked = format!("mdm tracked menu {}", std::process::id());
+        let wide_tracked: Vec<u16> = title_tracked.encode_utf16().chain(Some(0)).collect();
+        let class: Vec<u16> = "STATIC\0".encode_utf16().collect();
+        let title_untracked = format!("mdm untracked menu {}", std::process::id());
+        let wide_untracked: Vec<u16> = title_untracked.encode_utf16().chain(Some(0)).collect();
+        unsafe {
+            let hwnd_t = CreateWindowExW(
+                0,
+                class.as_ptr(),
+                wide_tracked.as_ptr(),
+                0,
+                0,
+                0,
+                100,
+                100,
+                std::ptr::null_mut(),
+                std::ptr::null_mut(),
+                std::ptr::null_mut(),
+                std::ptr::null(),
+            );
+            let hwnd_u = CreateWindowExW(
+                0,
+                class.as_ptr(),
+                wide_untracked.as_ptr(),
+                0,
+                0,
+                0,
+                100,
+                100,
+                std::ptr::null_mut(),
+                std::ptr::null_mut(),
+                std::ptr::null_mut(),
+                std::ptr::null(),
+            );
+            ShowWindow(hwnd_t, SW_SHOW);
+            ShowWindow(hwnd_u, SW_SHOW);
+            popup_window(
+                &title_tracked,
+                Popup::Menu {
+                    border: 0,
+                    track_for_dismissal: true,
+                },
+            );
+            popup_window(
+                &title_untracked,
+                Popup::Menu {
+                    border: 0,
+                    track_for_dismissal: false,
+                },
+            );
+            assert_ne!(IsWindowVisible(hwnd_t), 0);
+            assert_ne!(IsWindowVisible(hwnd_u), 0);
+            hide_menu_popups();
+            assert_eq!(
+                IsWindowVisible(hwnd_t),
+                0,
+                "Tracked menu bar popup should be hidden"
+            );
+            assert_ne!(
+                IsWindowVisible(hwnd_u),
+                0,
+                "Untracked dropdown list should remain visible"
+            );
+            DestroyWindow(hwnd_t);
+            DestroyWindow(hwnd_u);
+        }
+    }
 }
 
 /// Every borderless window of ours: it keeps its popup styles when winit sets the styles again
@@ -2934,7 +3011,11 @@ pub fn popup_window(title: &str, kind: Popup) -> bool {
         return false;
     };
     let no_activate = matches!(kind, Popup::Menu { .. });
-    if no_activate {
+    if let Popup::Menu {
+        track_for_dismissal: true,
+        ..
+    } = kind
+    {
         register_menu_hwnd(hwnd as isize);
     }
     // SAFETY: our own window, on its thread; the subclass proc lives as long as the program;
@@ -2983,7 +3064,7 @@ pub fn popup_window(title: &str, kind: Popup) -> bool {
             &corner as *const _ as *const c_void,
             size_of::<i32>() as u32,
         );
-        if let Popup::Menu { border } = kind {
+        if let Popup::Menu { border, .. } = kind {
             DwmSetWindowAttribute(
                 hwnd,
                 DWMWA_BORDER_COLOR as u32,
