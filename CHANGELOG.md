@@ -52,7 +52,8 @@ Each release's notes on GitHub come from its section here (`## [X.Y.Z]`, see
 - **Alt+Tab Menu Bar Activation Prevention**:
   - Prevented the `Tasks` menu bar from popping open when switching between the main app and other windows using Alt+Tab.
 - **Dialog Combobox Dropdown Auto-Close Fix**:
-  - Fixed an issue where combo dropdown menus in dialog windows (e.g. "Save to" folder history and "Category" dropdowns in Add Torrent and Download File Info) would spontaneously close after 0.4 seconds due to root-only viewport focus checks.
+  - Fixed an issue where combo dropdown menus and history lists across all dialogs (including "Save As" / "Save to" folder history, "Category", "URL" history, "Network Adapter", and quality selectors in Download File Info, Add Torrent, Add URL, Video Download, Checksum, and Options) would spontaneously close in less than 1 second (0.4s).
+  - Combobox drop lists (`MenuKind::List`) and dialog popups are now exempt from root-level OS foreground loss timers (`FOCUS_GRACE`), remaining open reliably until an item is selected, Escape is pressed, or an outside click occurs.
 - **Torrent Status Fluttering & Speed Reporting Fix**:
   - Fixed an issue where the download progress window would rapidly flicker back and forth between "Receiving data..." and "Connecting..." whenever instantaneous transfer rate dipped between piece verifications.
   - Active peer count (`spec.peers` / `st.peers_live`) and real-time wire transfer rate (`st.down_speed`) are now tracked, keeping the status solidly on "Receiving data..." while peers remain connected.

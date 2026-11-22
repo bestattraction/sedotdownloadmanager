@@ -6067,7 +6067,7 @@ pub fn menu_button(ui: &mut Ui, rc: Rect, label: &str, items: &[&str], id: &str)
         };
         match crate::chrome::popup(
             ui.ctx(),
-            crate::chrome::MenuKind::Context,
+            crate::chrome::MenuKind::List,
             &popup_id,
             at,
             &entries,

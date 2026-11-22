@@ -428,6 +428,7 @@ pub fn bar_titles() -> Vec<&'static str> {
     MENUS.iter().map(|m| m.0).collect()
 }
 
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum PopupResult<C> {
     Open,
     Chosen(C),
@@ -1106,11 +1107,16 @@ pub fn popup<C: Clone>(
         d.insert_temp(shown, (first, pass, seen));
         (first == pass, verdict)
     });
-    if let FocusVerdict::Away { wait } = verdict {
+    // Combobox drop lists (MenuKind::List) and popups within child dialogs must not be dismissed
+    // by lost_focus or FOCUS_GRACE timers (e.g. 0.4s grace when another application held the OS
+    // foreground when the dialog opened). They stay open until an item is chosen, Escape is pressed,
+    // or a click outside lands on the parent dialog or main window.
+    let checks_focus = kind != MenuKind::List && parent_vid == egui::ViewportId::ROOT;
+    if checks_focus && let FocusVerdict::Away { wait } = verdict {
         // No event may come to look again (the pointer resting on the menu).
         ctx.request_repaint_after(std::time::Duration::from_secs_f64(wait));
     }
-    let lost_focus = verdict == FocusVerdict::Left;
+    let lost_focus = checks_focus && verdict == FocusVerdict::Left;
     #[cfg(windows)]
     let nonclient = crate::win32::take_nonclient_click();
     #[cfg(not(windows))]
@@ -1119,7 +1125,9 @@ pub fn popup<C: Clone>(
         && ctx.input_for(parent_vid, |i| {
             i.key_pressed(egui::Key::Escape) || i.pointer.any_pressed()
         });
-    let root_press = ctx.input(|i| i.key_pressed(egui::Key::Escape) || i.pointer.any_pressed());
+    let root_press = ctx.input_for(egui::ViewportId::ROOT, |i| {
+        i.key_pressed(egui::Key::Escape) || i.pointer.any_pressed()
+    });
     if !first && (lost_focus || nonclient || parent_press || root_press) {
         // Closed by a press: where it was, so the control that opened it doesn't take that
         // press's click (on release) as opening it again (winui::opener_click). Read before
@@ -1129,7 +1137,9 @@ pub fn popup<C: Clone>(
                 i.pointer.press_origin().filter(|_| i.pointer.any_pressed())
             })
             .or_else(|| {
-                ctx.input(|i| i.pointer.press_origin().filter(|_| i.pointer.any_pressed()))
+                ctx.input_for(egui::ViewportId::ROOT, |i| {
+                    i.pointer.press_origin().filter(|_| i.pointer.any_pressed())
+                })
             });
         let dismissed = dismissed_at_key(ctx);
         ctx.data_mut(|d| {
@@ -2816,10 +2826,10 @@ fn chevron(p: &egui::Painter, ox: f32, top: f32, open: bool, bright: bool) {
 #[cfg(test)]
 mod tests {
     use super::{
-        FOCUS_GRACE, FocusVerdict, MenuBarEvent, MenuEntry, MenuFocus, MenuKind, heading_into,
-        item_at, menu_viewport, menubar_next,
+        FOCUS_GRACE, FocusVerdict, MenuBarEvent, MenuEntry, MenuFocus, MenuKind, PopupResult,
+        heading_into, item_at, menu_viewport, menubar_next, popup,
     };
-    use egui::{Rect, pos2};
+    use egui::{Pos2, Rect, pos2};
 
     /// #277: on X11 the menu bar's menus share one window per level, so going from title to
     /// title moves it (a compositor has no new window to fade in); elsewhere, and for every
@@ -3389,6 +3399,43 @@ mod tests {
             run(&[MenuBarEvent::Open(0), MenuBarEvent::Open(4)]),
             [Some(0), Some(4)]
         );
+    }
+
+    #[test]
+    fn drop_list_does_not_close_on_focus_loss() {
+        let entries: Vec<MenuEntry<usize>> = vec![
+            MenuEntry::Item("item 0", 0, true, false),
+            MenuEntry::Item("item 1", 1, true, false),
+        ];
+        let ctx = egui::Context::default();
+        let mut t = 0.0;
+        let mut pass = |dt: f64| {
+            t += dt;
+            let raw = egui::RawInput {
+                time: Some(t),
+                screen_rect: Some(Rect::from_min_size(Pos2::ZERO, egui::vec2(600.0, 400.0))),
+                ..Default::default()
+            };
+            let mut res = PopupResult::Open;
+            let mut out = ctx.run_ui(raw, |ui| {
+                res = popup(
+                    ui.ctx(),
+                    MenuKind::List,
+                    "t-droplist-focus",
+                    pos2(100.0, 100.0),
+                    &entries,
+                    &|_| None,
+                );
+            });
+            out.textures_delta.clear();
+            res
+        };
+        // Initial frame: open.
+        assert_eq!(pass(0.0), PopupResult::Open);
+        // After 1.0 second (well beyond FOCUS_GRACE 0.4s) with no focus / another app in front:
+        // MenuKind::List remains Open.
+        assert_eq!(pass(1.0), PopupResult::Open);
+        assert_eq!(pass(0.5), PopupResult::Open);
     }
 
     /// #328: a menu opened from the keyboard is said to screen readers. Its windows never take
