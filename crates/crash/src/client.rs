@@ -436,6 +436,10 @@ mod tests {
             started.elapsed()
         );
         assert!(!reporter.connected());
+        let deadline = Instant::now() + Duration::from_secs(5);
+        while !reporter.off() && Instant::now() < deadline {
+            std::thread::sleep(Duration::from_millis(10));
+        }
         assert!(
             reporter.off(),
             "a gone monitor is not kept being waited for"

@@ -483,7 +483,7 @@ pub fn come_forward(title: &str) -> Option<bool> {
 
 /// Restore window titled `title` if it is currently minimized.
 pub fn restore_if_minimized(title: &str) {
-    use windows_sys::Win32::UI::WindowsAndMessaging::{IsIconic, ShowWindow, SW_RESTORE};
+    use windows_sys::Win32::UI::WindowsAndMessaging::{IsIconic, SW_RESTORE, ShowWindow};
     if let Some(hwnd) = find_own_window(title) {
         // SAFETY: our own window; query and window restoration only.
         unsafe {
@@ -671,10 +671,10 @@ pub fn take_nonclient_click() -> bool {
 }
 
 pub fn register_menu_hwnd(hwnd: isize) {
-    if let Ok(mut list) = MENU_HWNDS.lock() {
-        if !list.contains(&hwnd) {
-            list.push(hwnd);
-        }
+    if let Ok(mut list) = MENU_HWNDS.lock()
+        && !list.contains(&hwnd)
+    {
+        list.push(hwnd);
     }
 }
 
@@ -683,7 +683,7 @@ pub fn hide_menu_popups() {
         list.retain(|&h| {
             let hwnd = h as HWND;
             unsafe {
-                use windows_sys::Win32::UI::WindowsAndMessaging::{IsWindow, ShowWindow, SW_HIDE};
+                use windows_sys::Win32::UI::WindowsAndMessaging::{IsWindow, SW_HIDE, ShowWindow};
                 if IsWindow(hwnd) != 0 {
                     ShowWindow(hwnd, SW_HIDE);
                     true
@@ -820,13 +820,13 @@ pub fn thin_frame_on(
     // during the calls.
     unsafe {
         caption_less(hwnd, kind);
-        if let Some(main) = find_own_window(crate::MAIN_TITLE) {
-            if main != hwnd {
-                use windows_sys::Win32::UI::WindowsAndMessaging::{GWLP_HWNDPARENT, WS_EX_APPWINDOW};
-                SetWindowLongPtrW(hwnd, GWLP_HWNDPARENT, main as isize);
-                let ex = GetWindowLongPtrW(hwnd, GWL_EXSTYLE) as u32 & !WS_EX_APPWINDOW;
-                SetWindowLongPtrW(hwnd, GWL_EXSTYLE, ex as isize);
-            }
+        if let Some(main) = find_own_window(crate::MAIN_TITLE)
+            && main != hwnd
+        {
+            use windows_sys::Win32::UI::WindowsAndMessaging::{GWLP_HWNDPARENT, WS_EX_APPWINDOW};
+            SetWindowLongPtrW(hwnd, GWLP_HWNDPARENT, main as isize);
+            let ex = GetWindowLongPtrW(hwnd, GWL_EXSTYLE) as u32 & !WS_EX_APPWINDOW;
+            SetWindowLongPtrW(hwnd, GWL_EXSTYLE, ex as isize);
         }
         let menu = GetSystemMenu(hwnd, 0);
         if !menu.is_null() {
@@ -1364,10 +1364,7 @@ unsafe extern "system" fn caption_less_proc(
         WM_NCRBUTTONUP, WM_STYLECHANGING, WM_SYSCOMMAND, WM_WINDOWPOSCHANGED, WM_WINDOWPOSCHANGING,
         WS_CAPTION, WS_MINIMIZE,
     };
-    if matches!(
-        msg,
-        WM_NCLBUTTONDOWN | WM_NCRBUTTONDOWN | WM_NCMBUTTONDOWN
-    ) {
+    if matches!(msg, WM_NCLBUTTONDOWN | WM_NCRBUTTONDOWN | WM_NCMBUTTONDOWN) {
         notify_nonclient_click();
         hide_menu_popups();
     }

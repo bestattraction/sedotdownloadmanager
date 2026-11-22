@@ -650,7 +650,9 @@ impl Progress {
             }
         });
         let focused = ctx.input_for(vid, |i| i.focused);
-        let was_focused = ctx.data(|d| d.get_temp::<bool>(key.with("was-focused"))).unwrap_or(false);
+        let was_focused = ctx
+            .data(|d| d.get_temp::<bool>(key.with("was-focused")))
+            .unwrap_or(false);
         if focused && !was_focused {
             ctx.request_repaint();
             ctx.request_ui_pass(egui::ViewportId::ROOT);
@@ -1755,7 +1757,10 @@ impl Progress {
                 .enumerate()
                 .filter(|(_, f)| !f.padding)
                 .map(|(idx, f)| {
-                    let on = spec.files.as_ref().is_none_or(|chosen| chosen.contains(&idx));
+                    let on = spec
+                        .files
+                        .as_ref()
+                        .is_none_or(|chosen| chosen.contains(&idx));
                     (idx, f, on, 0)
                 })
                 .collect();
@@ -2022,7 +2027,7 @@ fn piece_bar(p: &egui::Painter, o: Pos2, pieces: &[bool]) {
 
     let total = pieces.len();
     let have = pieces.iter().filter(|&&x| x).count();
-    let filled_cols = if total > 0 { (have * 511 / total).min(511) } else { 0 };
+    let filled_cols = (have * 511).checked_div(total).unwrap_or(0).min(511);
 
     if filled_cols > 0 {
         for (row, cols) in seg_rows().enumerate() {

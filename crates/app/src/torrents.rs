@@ -172,8 +172,7 @@ pub fn torrent_file(hash: &str) -> Option<PathBuf> {
 /// URLs of the live public tracker lists (XIU2 best.txt and ngosang trackers_best.txt).
 pub const LIVE_TRACKERS_XIU2_URL: &str =
     "https://raw.githubusercontent.com/XIU2/TrackersListCollection/refs/heads/master/best.txt";
-pub const LIVE_TRACKERS_XIU2_FALLBACK: &str =
-    "https://trackerslist.com/best.txt";
+pub const LIVE_TRACKERS_XIU2_FALLBACK: &str = "https://trackerslist.com/best.txt";
 pub const LIVE_TRACKERS_NGOSANG_URL: &str =
     "https://raw.githubusercontent.com/ngosang/trackerslist/refs/heads/master/trackers_best.txt";
 pub const LIVE_TRACKERS_NGOSANG_FALLBACK: &str =
@@ -341,7 +340,9 @@ pub fn fetch_custom_tracker_urls_if_any(rt: &tokio::runtime::Handle) {
                 }
             }
         }
-        if !combined.is_empty() && let Some(cpath) = custom_trackers_cache_file() {
+        if !combined.is_empty()
+            && let Some(cpath) = custom_trackers_cache_file()
+        {
             if let Some(parent) = cpath.parent() {
                 let _ = std::fs::create_dir_all(parent);
             }
@@ -371,8 +372,11 @@ pub fn refresh_public_trackers_if_stale(rt: &tokio::runtime::Handle) {
     };
     if is_stale {
         rt.spawn(async move {
-            let xiu2 = fetch_trackers_text(LIVE_TRACKERS_XIU2_URL, LIVE_TRACKERS_XIU2_FALLBACK).await;
-            let ngosang = fetch_trackers_text(LIVE_TRACKERS_NGOSANG_URL, LIVE_TRACKERS_NGOSANG_FALLBACK).await;
+            let xiu2 =
+                fetch_trackers_text(LIVE_TRACKERS_XIU2_URL, LIVE_TRACKERS_XIU2_FALLBACK).await;
+            let ngosang =
+                fetch_trackers_text(LIVE_TRACKERS_NGOSANG_URL, LIVE_TRACKERS_NGOSANG_FALLBACK)
+                    .await;
 
             let mut combined = Vec::new();
             let mut seen = std::collections::HashSet::new();
@@ -380,7 +384,10 @@ pub fn refresh_public_trackers_if_stale(rt: &tokio::runtime::Handle) {
             let mut append_content = |text: String| {
                 for line in text.lines() {
                     let trimmed = line.trim();
-                    if !trimmed.is_empty() && !trimmed.starts_with('#') && seen.insert(trimmed.to_owned()) {
+                    if !trimmed.is_empty()
+                        && !trimmed.starts_with('#')
+                        && seen.insert(trimmed.to_owned())
+                    {
                         combined.push(trimmed.to_owned());
                     }
                 }
@@ -1836,11 +1843,19 @@ mod kept_files_tests {
 
     #[test]
     fn tracker_list_url_detection() {
-        assert!(is_tracker_list_url("https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt"));
-        assert!(is_tracker_list_url("https://ngosang.github.io/trackerslist/trackers_all.txt"));
+        assert!(is_tracker_list_url(
+            "https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt"
+        ));
+        assert!(is_tracker_list_url(
+            "https://ngosang.github.io/trackerslist/trackers_all.txt"
+        ));
         assert!(is_tracker_list_url("http://example.com/raw/trackers"));
-        assert!(!is_tracker_list_url("udp://tracker.opentrackr.org:1337/announce"));
-        assert!(!is_tracker_list_url("http://tracker.example.com:8080/announce"));
+        assert!(!is_tracker_list_url(
+            "udp://tracker.opentrackr.org:1337/announce"
+        ));
+        assert!(!is_tracker_list_url(
+            "http://tracker.example.com:8080/announce"
+        ));
         assert!(!is_tracker_list_url("wss://tracker.openwebtorrent.com"));
     }
 }

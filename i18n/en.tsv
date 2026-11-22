@@ -937,6 +937,8 @@
 #. text in countries.rs
 #. a country's name (where a download's server is)
 	Curaçao	Curaçao
+#. text in the Add torrent window
+	Custom Trackers (appended to new torrents, one per line):	Custom Trackers (appended to new torrents, one per line):
 #. text in the Options window
 	Customize "Download progress" dialog	Customize "Download progress" dialog
 #. text in the Options window
@@ -1204,6 +1206,8 @@
 	Drag .torrent files or lists of addresses here	Drag .torrent files or lists of addresses here
 #. text in droptarget.rs
 	Drag links here to download them	Drag links here to download them
+#. text in torrentsearch.rs
+	Drag table columns or window edges to resize	Drag table columns or window edges to resize
 #. text in a dialog box
 #. tooltip of the handle in Download complete: drag it to drop the downloaded file somewhere
 	Drag the file into a folder or an app	Drag the file into a folder or an app
@@ -3997,13 +4001,15 @@
 #. the kind of file the Open dialog lists
 #. title of the separate window listing a torrent's files
 	Torrent files	Torrent files
-#. window title in torrentsearch.rs
+#. text in torrentsearch.rs
 	Torrent Search	Torrent Search
 #. message or event log entry in the main window; window title in the Add torrent window
 	Torrent settings	Torrent settings
 #. text in torrent downloads
 #. an error: Torrent settings ask for the proxy, and Options → Proxy / Socks has no SOCKS5 one
 	Torrent settings say to use the proxy, but Proxy / Socks has no SOCKS5 proxy	Torrent settings say to use the proxy, but Proxy / Socks has no SOCKS5 proxy
+#. window title in the Add torrent window
+	Torrent Trackers	Torrent Trackers
 #. text in the download list (sizes, speeds, status)
 #. category name: torrent downloads (BitTorrent)
 	Torrents	Torrents
@@ -4021,6 +4027,9 @@
 #. Add trackers: above the box; {name} is the torrent's name
 #. {name} = a file name (keep the braces as they are)
 	Trackers to add to {name}, one address a line:	Trackers to add to {name}, one address a line:
+#. button in the Add torrent window
+#. the trailing ... means it opens a window: keep it
+	Trackers...	Trackers...
 #. text in a download's progress window
 	Transfer rate	Transfer rate
 #. text in countries.rs

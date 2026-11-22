@@ -1621,16 +1621,9 @@ impl TorrentSettings {
                 }
 
                 // Refresh button: re-scans system adapters
-                if winui::button(
-                    ui,
-                    refresh_rc,
-                    "⟳",
-                    ButtonKind::Normal,
-                    false,
-                    None,
-                )
-                .on_hover_text("Rescan network adapters")
-                .clicked()
+                if winui::button(ui, refresh_rc, "⟳", ButtonKind::Normal, false, None)
+                    .on_hover_text("Rescan network adapters")
+                    .clicked()
                 {
                     self.adapters = mdm_engine::net::adapters();
                     self.adapter_index = if n.net_adapter.is_empty() {
@@ -1897,10 +1890,17 @@ impl TrackersDialog {
                 let mut dummy = self.default_list.clone();
                 winui::multiline_light(ui, def_rect, &mut dummy, "def-trackers-box", false);
 
-                let hdr2 = crate::i18n::t("Custom Trackers (appended to new torrents, one per line):");
+                let hdr2 =
+                    crate::i18n::t("Custom Trackers (appended to new torrents, one per line):");
                 text(&p, o.x + 14.0, o.y + 184.0, hdr2, winui::TEXT());
                 let custom_rect = r(o, 14.0, 192.0, 452.0, 160.0);
-                winui::multiline_light(ui, custom_rect, &mut self.custom_text, "custom-trackers-box", true);
+                winui::multiline_light(
+                    ui,
+                    custom_rect,
+                    &mut self.custom_text,
+                    "custom-trackers-box",
+                    true,
+                );
 
                 let ok = winui::button(
                     ui,

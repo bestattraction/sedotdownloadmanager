@@ -12374,11 +12374,7 @@ fn alt_alone_released(events: &[egui::Event], down: &mut bool, alone: &mut bool)
             _ => {}
         }
     }
-    if just_focused {
-        false
-    } else {
-        released
-    }
+    if just_focused { false } else { released }
 }
 
 impl eframe::App for App {

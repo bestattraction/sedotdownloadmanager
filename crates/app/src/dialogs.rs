@@ -385,7 +385,16 @@ pub(crate) fn window<T>(
     bg: egui::Color32,
     mut body: impl FnMut(&mut Ui, Pos2) -> Outcome<T>,
 ) -> Outcome<T> {
-    dialog_window(ctx, id, title, client, minimize, bg, Kind::Plain, |ui, o, _| body(ui, o))
+    dialog_window(
+        ctx,
+        id,
+        title,
+        client,
+        minimize,
+        bg,
+        Kind::Plain,
+        |ui, o, _| body(ui, o),
+    )
 }
 
 /// A question that must be answered (Yes / No, a countdown): a `window` that stays above the
@@ -401,7 +410,16 @@ pub(crate) fn question<T>(
     bg: egui::Color32,
     mut body: impl FnMut(&mut Ui, Pos2) -> Outcome<T>,
 ) -> Outcome<T> {
-    dialog_window(ctx, id, title, client, minimize, bg, Kind::Question, |ui, o, _| body(ui, o))
+    dialog_window(
+        ctx,
+        id,
+        title,
+        client,
+        minimize,
+        bg,
+        Kind::Question,
+        |ui, o, _| body(ui, o),
+    )
 }
 
 /// News that must not go unseen (Download complete, as IDM shows it): a `window` shown above
@@ -553,7 +571,11 @@ fn dialog_window<T>(
             .frame(egui::Frame::new().fill(bg))
             .show(ui, |ui| {
                 let origin = ui.max_rect().min;
-                let cur_w = if is_resizable { ui.max_rect().width() } else { shown[0] };
+                let cur_w = if is_resizable {
+                    ui.max_rect().width()
+                } else {
+                    shown[0]
+                };
                 let cur_h = if is_resizable {
                     (ui.max_rect().height() - caption_h).max(0.0)
                 } else {
@@ -585,12 +607,18 @@ fn dialog_window<T>(
                                 crate::win32::toggle_maximized(h);
                             } else {
                                 let max = ui.ctx().input(|i| i.viewport().maximized) == Some(true);
-                                ui.ctx().send_viewport_cmd_to(vid, egui::ViewportCommand::Maximized(!max));
+                                ui.ctx().send_viewport_cmd_to(
+                                    vid,
+                                    egui::ViewportCommand::Maximized(!max),
+                                );
                             }
                             #[cfg(not(windows))]
                             {
                                 let max = ui.ctx().input(|i| i.viewport().maximized) == Some(true);
-                                ui.ctx().send_viewport_cmd_to(vid, egui::ViewportCommand::Maximized(!max));
+                                ui.ctx().send_viewport_cmd_to(
+                                    vid,
+                                    egui::ViewportCommand::Maximized(!max),
+                                );
                             }
                         }
                         _ => {}
@@ -620,7 +648,9 @@ fn dialog_window<T>(
         if close { Outcome::Closed } else { out }
     });
     let focused = ctx.input_for(vid, |i| i.focused);
-    let was_focused = ctx.data(|d| d.get_temp::<bool>(key.with("was-focused"))).unwrap_or(false);
+    let was_focused = ctx
+        .data(|d| d.get_temp::<bool>(key.with("was-focused")))
+        .unwrap_or(false);
     if focused && !was_focused {
         ctx.request_repaint();
         ctx.request_ui_pass(egui::ViewportId::ROOT);
@@ -5110,7 +5140,9 @@ mod tests {
     fn passive_notices_never_activate_on_open() {
         assert!(dialog_activates_on_open(Kind::Plain));
         assert!(dialog_activates_on_open(Kind::Question));
-        assert!(dialog_activates_on_open(Kind::Resizable { min_client: [400.0, 300.0] }));
+        assert!(dialog_activates_on_open(Kind::Resizable {
+            min_client: [400.0, 300.0]
+        }));
         assert!(!dialog_activates_on_open(Kind::Notice { on_top: true }));
         assert!(!dialog_activates_on_open(Kind::Notice { on_top: false }));
     }

@@ -403,11 +403,20 @@ pub fn matches_query(name: &str, query: &str) -> bool {
         return true;
     }
     // Normalize punctuation/delimiters commonly found in torrent release names to spaces
-    let clean_name = name
-        .to_lowercase()
-        .replace(['.', '_', '-', '+', '[', ']', '(', ')', '{', '}', ':', ';', ',', '!', '?', '\'', '"', '/'], " ");
-    let q_normalized = q
-        .replace(['.', '_', '-', '+', '[', ']', '(', ')', '{', '}', ':', ';', ',', '!', '?', '\'', '"', '/'], " ");
+    let clean_name = name.to_lowercase().replace(
+        [
+            '.', '_', '-', '+', '[', ']', '(', ')', '{', '}', ':', ';', ',', '!', '?', '\'', '"',
+            '/',
+        ],
+        " ",
+    );
+    let q_normalized = q.replace(
+        [
+            '.', '_', '-', '+', '[', ']', '(', ')', '{', '}', ':', ';', ',', '!', '?', '\'', '"',
+            '/',
+        ],
+        " ",
+    );
     let tokens: Vec<&str> = q_normalized.split_whitespace().collect();
     if tokens.is_empty() {
         return true;
@@ -794,7 +803,8 @@ impl TorrentSearch {
                 // Table outer container
                 let table_w = (cur_w - 28.0).max(100.0);
                 let table_h = (cur_h - 124.0).max(100.0);
-                let table_rect = Rect::from_min_size(pos2(o.x + 14.0, o.y + 72.0), vec2(table_w, table_h));
+                let table_rect =
+                    Rect::from_min_size(pos2(o.x + 14.0, o.y + 72.0), vec2(table_w, table_h));
                 winui::solid(&p, table_rect, winui::FIELD_EDGE());
                 let header_h = 24.0;
                 let head_rect =
@@ -805,7 +815,11 @@ impl TorrentSearch {
                 let visible_rows = ((table_rect.height() - header_h) / row_h).floor() as usize;
                 let total_rows = items.len();
                 let has_vbar = total_rows > visible_rows;
-                let vbar_w = if has_vbar { crate::scrollbar::THICK } else { 0.0 };
+                let vbar_w = if has_vbar {
+                    crate::scrollbar::THICK
+                } else {
+                    0.0
+                };
 
                 // Column boundary calculations
                 let x0 = table_rect.min.x;
@@ -834,13 +848,26 @@ impl TorrentSearch {
                     }
                     if div_resp.dragged() {
                         let delta = div_resp.drag_delta().x;
-                        let min_w = if i == 0 { 140.0 } else if i == 1 { 60.0 } else { 50.0 };
-                        let max_w = if i == 0 { (table_rect.width() - vbar_w) - 240.0 } else { 240.0 };
+                        let min_w = if i == 0 {
+                            140.0
+                        } else if i == 1 {
+                            60.0
+                        } else {
+                            50.0
+                        };
+                        let max_w = if i == 0 {
+                            (table_rect.width() - vbar_w) - 240.0
+                        } else {
+                            240.0
+                        };
                         self.col_widths[i] = (self.col_widths[i] + delta).clamp(min_w, max_w);
                     }
                     // Divider line in the header
                     p.line_segment(
-                        [pos2(div_x, table_rect.min.y + 3.0), pos2(div_x, table_rect.min.y + header_h - 3.0)],
+                        [
+                            pos2(div_x, table_rect.min.y + 3.0),
+                            pos2(div_x, table_rect.min.y + header_h - 3.0),
+                        ],
                         egui::Stroke::new(1.0, winui::MUTED().linear_multiply(0.4)),
                     );
                 }
@@ -867,19 +894,34 @@ impl TorrentSearch {
                     pos2(x_end, table_rect.min.y + header_h),
                 );
 
-                if ui.allocate_rect(col_name_rect, egui::Sense::click()).clicked() {
+                if ui
+                    .allocate_rect(col_name_rect, egui::Sense::click())
+                    .clicked()
+                {
                     self.toggle_sort(SortColumn::Name);
                 }
-                if ui.allocate_rect(col_size_rect, egui::Sense::click()).clicked() {
+                if ui
+                    .allocate_rect(col_size_rect, egui::Sense::click())
+                    .clicked()
+                {
                     self.toggle_sort(SortColumn::Size);
                 }
-                if ui.allocate_rect(col_seeds_rect, egui::Sense::click()).clicked() {
+                if ui
+                    .allocate_rect(col_seeds_rect, egui::Sense::click())
+                    .clicked()
+                {
                     self.toggle_sort(SortColumn::Seeds);
                 }
-                if ui.allocate_rect(col_peers_rect, egui::Sense::click()).clicked() {
+                if ui
+                    .allocate_rect(col_peers_rect, egui::Sense::click())
+                    .clicked()
+                {
                     self.toggle_sort(SortColumn::Peers);
                 }
-                if ui.allocate_rect(col_date_rect, egui::Sense::click()).clicked() {
+                if ui
+                    .allocate_rect(col_date_rect, egui::Sense::click())
+                    .clicked()
+                {
                     self.toggle_sort(SortColumn::Date);
                 }
 
@@ -1060,7 +1102,10 @@ impl TorrentSearch {
 
                 if has_vbar {
                     let bar_rect = Rect::from_min_max(
-                        pos2(table_rect.max.x - crate::scrollbar::THICK, table_rect.min.y + header_h),
+                        pos2(
+                            table_rect.max.x - crate::scrollbar::THICK,
+                            table_rect.min.y + header_h,
+                        ),
                         pos2(table_rect.max.x, table_rect.max.y),
                     );
                     let mut bar_pos = self.scroll_offset / row_h;
@@ -1269,9 +1314,18 @@ mod tests {
     #[test]
     fn test_matches_query() {
         assert!(matches_query("Overgeared - 01 [1080p].mkv", "overgeared"));
-        assert!(matches_query("Overgeared.S01E02.1080p.WEB-DL", "overgeared 1080p"));
-        assert!(!matches_query("Greys.Anatomy.S18E01.720p.HDTV", "overgeared"));
-        assert!(matches_query("[Blender Foundation] Big Buck Bunny - Open Movie", "blender open movie"));
+        assert!(matches_query(
+            "Overgeared.S01E02.1080p.WEB-DL",
+            "overgeared 1080p"
+        ));
+        assert!(!matches_query(
+            "Greys.Anatomy.S18E01.720p.HDTV",
+            "overgeared"
+        ));
+        assert!(matches_query(
+            "[Blender Foundation] Big Buck Bunny - Open Movie",
+            "blender open movie"
+        ));
         assert!(!matches_query("Tears of Steel", "big buck bunny"));
         assert!(matches_query("Any Torrent Name", ""));
     }
