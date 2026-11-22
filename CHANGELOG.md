@@ -51,6 +51,8 @@ Each release's notes on GitHub come from its section here (`## [X.Y.Z]`, see
   - Clicking the title bar handle, caption buttons, or non-client area now immediately closes any open menu dropdowns.
 - **Alt+Tab Menu Bar Activation Prevention**:
   - Prevented the `Tasks` menu bar from popping open when switching between the main app and other windows using Alt+Tab.
+- **Dialog Combobox Dropdown Auto-Close Fix**:
+  - Fixed an issue where combo dropdown menus in dialog windows (e.g. "Save to" folder history and "Category" dropdowns in Add Torrent and Download File Info) would spontaneously close after 0.4 seconds due to root-only viewport focus checks.
 - **Legacy Namespace and AppData Migration**:
   - Cleaned up obsolete debug binaries and references, updated crash reporting repo targets, and automatically migrated data from `%APPDATA%\misterdownloadmanager` to `%APPDATA%\sedotdownloadmanager`.
 

@@ -1072,7 +1072,18 @@ pub fn popup<C: Clone>(
     let shown = sub_key.with("shown");
     // Focus in the menu's own windows is still ours: on macOS and Linux a click in a menu window
     // gives that window the focus, and must not count as clicking away.
-    let focused = ctx.input(|i| i.viewport().focused) == Some(true)
+    let parent_vid = ctx.viewport_id();
+    #[cfg(windows)]
+    let in_front = !crate::win32::foreground_is_another_program();
+    #[cfg(not(windows))]
+    let in_front = false;
+    let focused = in_front
+        || ctx.input(|i| {
+            i.viewport().focused == Some(true)
+                || i.raw.viewports.values().any(|v| v.focused == Some(true))
+        })
+        || (parent_vid != egui::ViewportId::ROOT
+            && ctx.input_for(parent_vid, |i| i.viewport().focused == Some(true)))
         || ctx.data(|d| d.get_temp::<bool>(window_focus).unwrap_or(false));
     // Away from our windows, the system may say who has it now: another program (#859).
     let elsewhere = !focused && another_program_in_front();
@@ -1101,18 +1112,25 @@ pub fn popup<C: Clone>(
     }
     let lost_focus = verdict == FocusVerdict::Left;
     #[cfg(windows)]
-    let nonclient = crate::win32::has_nonclient_click();
+    let nonclient = crate::win32::take_nonclient_click();
     #[cfg(not(windows))]
     let nonclient = false;
-    if !first
-        && (lost_focus
-            || nonclient
-            || ctx.input(|i| i.key_pressed(egui::Key::Escape) || i.pointer.any_pressed()))
-    {
+    let parent_press = parent_vid != egui::ViewportId::ROOT
+        && ctx.input_for(parent_vid, |i| {
+            i.key_pressed(egui::Key::Escape) || i.pointer.any_pressed()
+        });
+    let root_press = ctx.input(|i| i.key_pressed(egui::Key::Escape) || i.pointer.any_pressed());
+    if !first && (lost_focus || nonclient || parent_press || root_press) {
         // Closed by a press: where it was, so the control that opened it doesn't take that
         // press's click (on release) as opening it again (winui::opener_click). Read before
         // the data lock (asking the context inside it deadlocks).
-        let press = ctx.input(|i| i.pointer.press_origin().filter(|_| i.pointer.any_pressed()));
+        let press = ctx
+            .input_for(parent_vid, |i| {
+                i.pointer.press_origin().filter(|_| i.pointer.any_pressed())
+            })
+            .or_else(|| {
+                ctx.input(|i| i.pointer.press_origin().filter(|_| i.pointer.any_pressed()))
+            });
         let dismissed = dismissed_at_key(ctx);
         ctx.data_mut(|d| {
             d.remove::<usize>(sub_key);
