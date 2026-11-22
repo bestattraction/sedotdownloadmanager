@@ -9537,10 +9537,21 @@ impl App {
         // Alt keys, Ctrl+F2 (the system's key for the menu bar).
         // A focused button or list (Tab, a screen reader, #328) leaves these keys to the menu bar;
         // only a text box keeps them.
+        let is_focused = ctx.input(|i| i.viewport().focused.unwrap_or(true));
+        let focus_changed = ctx.input(|i| {
+            i.events
+                .iter()
+                .any(|e| matches!(e, egui::Event::WindowFocused(_)))
+        });
+        if focus_changed || !is_focused {
+            self.alt_down = false;
+            self.alt_alone = false;
+            self.suppress_alt_menu = 5;
+        }
         let typing = ctx
             .memory(|m| m.focused())
             .is_some_and(|id| egui::TextEdit::load_state(&ctx, id).is_some());
-        if self.open_menu.is_none() && self.popup.is_none() && !typing {
+        if is_focused && self.open_menu.is_none() && self.popup.is_none() && !typing {
             let labels: Vec<String> = chrome::menus(ui.painter())
                 .iter()
                 .map(|(l, ..)| chrome::menu_letter(l))
@@ -12355,7 +12366,7 @@ fn finished_windows(
 /// event (egui names AltLeft and AltRight too) isn't another key.
 fn alt_alone_released(events: &[egui::Event], down: &mut bool, alone: &mut bool) -> bool {
     let mut released = false;
-    let mut just_focused = false;
+    let mut focus_changed = false;
     for e in events {
         match e {
             egui::Event::ModifiersChanged(m) => {
@@ -12379,17 +12390,15 @@ fn alt_alone_released(events: &[egui::Event], down: &mut bool, alone: &mut bool)
             | egui::Event::PointerButton { pressed: true, .. } => {
                 *alone = false;
             }
-            egui::Event::WindowFocused(focused) => {
+            egui::Event::WindowFocused(_) => {
                 *down = false;
                 *alone = false;
-                if *focused {
-                    just_focused = true;
-                }
+                focus_changed = true;
             }
             _ => {}
         }
     }
-    if just_focused { false } else { released }
+    if focus_changed { false } else { released }
 }
 
 impl eframe::App for App {
