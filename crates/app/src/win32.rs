@@ -481,18 +481,17 @@ pub fn come_forward(title: &str) -> Option<bool> {
     Some(lift)
 }
 
-/// Restore the main window if minimized and bring it forward without taking keyboard focus if already active.
-pub fn raise_main_window() {
+/// Restore window titled `title` if it is currently minimized.
+pub fn restore_if_minimized(title: &str) {
     use windows_sys::Win32::UI::WindowsAndMessaging::{IsIconic, ShowWindow, SW_RESTORE};
-    if let Some(main) = find_own_window(crate::MAIN_TITLE) {
+    if let Some(hwnd) = find_own_window(title) {
         // SAFETY: our own window; query and window restoration only.
         unsafe {
-            if IsIconic(main) != 0 {
-                ShowWindow(main, SW_RESTORE);
+            if IsIconic(hwnd) != 0 {
+                ShowWindow(hwnd, SW_RESTORE);
             }
         }
     }
-    come_forward(crate::MAIN_TITLE);
 }
 
 /// Whether our window titled `title` exists and is not on the screen: hidden and not minimized

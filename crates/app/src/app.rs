@@ -11695,7 +11695,11 @@ impl App {
                 Outcome::Open => {}
                 Outcome::Closed => {
                     self.torrent_settings = None;
-                    dialogs::raise(ctx, egui::ViewportId::ROOT);
+                    self.alt_down = false;
+                    self.alt_alone = false;
+                    #[cfg(windows)]
+                    crate::win32::restore_if_minimized(crate::MAIN_TITLE);
+                    ctx.send_viewport_cmd(egui::ViewportCommand::Focus);
                 }
                 Outcome::Done(crate::torrentdlg::TorrentChoice {
                     share,
@@ -11705,7 +11709,11 @@ impl App {
                     seeding,
                 }) => {
                     self.torrent_settings = None;
-                    dialogs::raise(ctx, egui::ViewportId::ROOT);
+                    self.alt_down = false;
+                    self.alt_alone = false;
+                    #[cfg(windows)]
+                    crate::win32::restore_if_minimized(crate::MAIN_TITLE);
+                    ctx.send_viewport_cmd(egui::ViewportCommand::Focus);
                     // The network: the next torrent session takes it (torrent_tick).
                     net.apply(&mut self.settings);
                     // The upload limit: at once (torrent_tick sets it on the session).

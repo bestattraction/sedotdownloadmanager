@@ -694,9 +694,6 @@ fn dialog_window<T>(
     }
     if !matches!(out, Outcome::Open) {
         forget_window(ctx, vid, key);
-        if !crate::offscreen() && vid != ViewportId::ROOT && id != "trackers-manage" {
-            raise(ctx, ViewportId::ROOT);
-        }
     }
     out
 }
@@ -3368,10 +3365,6 @@ pub fn raise(ctx: &egui::Context, viewport: ViewportId) {
         #[cfg(target_os = "macos")]
         crate::unix::macos_activate_app();
         ctx.send_viewport_cmd_to(viewport, egui::ViewportCommand::Focus);
-        #[cfg(windows)]
-        if viewport == ViewportId::ROOT {
-            crate::win32::raise_main_window();
-        }
     }
 }
 
