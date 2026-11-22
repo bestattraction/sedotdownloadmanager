@@ -11715,6 +11715,7 @@ impl App {
                     crate::win32::restore_if_minimized(crate::MAIN_TITLE);
                     ctx.send_viewport_cmd(egui::ViewportCommand::Focus);
                     // The network: the next torrent session takes it (torrent_tick).
+                    crate::torrents::fetch_custom_tracker_urls_if_any(&self.rt);
                     net.apply(&mut self.settings);
                     // The upload limit: at once (torrent_tick sets it on the session).
                     (

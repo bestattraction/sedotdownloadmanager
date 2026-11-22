@@ -967,7 +967,7 @@ impl TellFriend {
             crate::i18n::t(
                 "I download with Sedot Download Manager: fast, free, and it looks like the download manager you already know. {link}",
             ),
-            &[("link", SITE)],
+            &[("link", REPO)],
         )
     }
 

@@ -39,6 +39,12 @@ Each release's notes on GitHub come from its section here (`## [X.Y.Z]`, see
   - Dynamically auto-fits dialog height and repositioned buttons for multi-line wrapped text across different font metrics and translations.
 - **Main App Minimization on Dialog Close**:
   - Fixed an issue where closing Torrent Settings via the `[x]` caption button or `Cancel` button could unexpectedly cause the main application window to minimize or lose foreground focus to background apps.
+- **Spurious Main Window Elevation & Menu Activation**:
+  - Fixed an issue where dialog window transitions could trigger spurious Alt modifier releases, popping open the `Tasks` menu bar and obscuring active child dialogs.
+- **Tell a Friend Official Link**:
+  - Updated the "Tell a friend" share message link to point directly to the official Sedot Download Manager repository (`https://github.com/bestattraction/sedotdownloadmanager`).
+- **Custom Trackers Remote List Support**:
+  - Custom Trackers now support remote tracker list URLs (e.g. raw GitHub links like `raw.githubusercontent.com` and `.txt` tracker lists), automatically fetching and caching active tracker endpoints in the background.
 
 ## [0.6.12] - 2026-11-20
 

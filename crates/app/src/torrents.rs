@@ -189,18 +189,53 @@ pub fn custom_trackers_file() -> Option<PathBuf> {
     state_dir().map(|d| d.join("custom_trackers.txt"))
 }
 
+/// Path to user's custom tracker list cache (fetched from remote tracker list URLs).
+pub fn custom_trackers_cache_file() -> Option<PathBuf> {
+    state_dir().map(|d| d.join("custom_trackers_cache.txt"))
+}
+
+/// Whether a line in custom trackers is an HTTP/HTTPS URL that serves a tracker list (e.g. raw GitHub or text list).
+pub fn is_tracker_list_url(line: &str) -> bool {
+    let lower = line.trim().to_ascii_lowercase();
+    (lower.starts_with("http://") || lower.starts_with("https://"))
+        && (lower.ends_with(".txt")
+            || lower.contains("raw.githubusercontent.com")
+            || lower.contains("/raw/")
+            || lower.ends_with(".list"))
+}
+
 /// Retrieve user's custom trackers.
+/// If any line is a remote tracker list URL (like raw GitHub), the cached trackers from that list
+/// are included instead of the raw web page URL itself.
 pub fn custom_trackers() -> Vec<String> {
+    let mut list = Vec::new();
+    let mut seen = std::collections::HashSet::new();
+
     if let Some(path) = custom_trackers_file()
         && let Ok(content) = std::fs::read_to_string(&path)
     {
-        return content
-            .lines()
-            .map(|l| l.trim().to_owned())
-            .filter(|l| !l.is_empty() && !l.starts_with('#'))
-            .collect();
+        for l in content.lines() {
+            let t = l.trim();
+            if t.is_empty() || t.starts_with('#') {
+                continue;
+            }
+            if is_tracker_list_url(t) {
+                if let Some(cpath) = custom_trackers_cache_file()
+                    && let Ok(cached) = std::fs::read_to_string(&cpath)
+                {
+                    for cl in cached.lines() {
+                        let ct = cl.trim();
+                        if !ct.is_empty() && !ct.starts_with('#') && seen.insert(ct.to_owned()) {
+                            list.push(ct.to_owned());
+                        }
+                    }
+                }
+            } else if seen.insert(t.to_owned()) {
+                list.push(t.to_owned());
+            }
+        }
     }
-    Vec::new()
+    list
 }
 
 /// Save user's custom trackers to disk.
@@ -264,8 +299,60 @@ async fn fetch_trackers_text(primary: &str, fallback: &str) -> Option<String> {
     None
 }
 
+/// Fetch any remote tracker list URLs in custom trackers (e.g. raw GitHub links) and cache their tracker lines.
+pub fn fetch_custom_tracker_urls_if_any(rt: &tokio::runtime::Handle) {
+    let urls: Vec<String> = if let Some(path) = custom_trackers_file()
+        && let Ok(content) = std::fs::read_to_string(&path)
+    {
+        content
+            .lines()
+            .map(|l| l.trim().to_owned())
+            .filter(|l| is_tracker_list_url(l))
+            .collect()
+    } else {
+        Vec::new()
+    };
+
+    if urls.is_empty() {
+        return;
+    }
+
+    rt.spawn(async move {
+        let mut combined = Vec::new();
+        let mut seen = std::collections::HashSet::new();
+        for url in urls {
+            if let Ok(resp) = reqwest::get(&url).await
+                && resp.status().is_success()
+                && let Ok(text) = resp.text().await
+            {
+                for line in text.lines() {
+                    let trimmed = line.trim();
+                    if !trimmed.is_empty()
+                        && !trimmed.starts_with('#')
+                        && (trimmed.starts_with("udp://")
+                            || trimmed.starts_with("http://")
+                            || trimmed.starts_with("https://")
+                            || trimmed.starts_with("wss://")
+                            || trimmed.starts_with("ws://"))
+                        && seen.insert(trimmed.to_owned())
+                    {
+                        combined.push(trimmed.to_owned());
+                    }
+                }
+            }
+        }
+        if !combined.is_empty() && let Some(cpath) = custom_trackers_cache_file() {
+            if let Some(parent) = cpath.parent() {
+                let _ = std::fs::create_dir_all(parent);
+            }
+            let _ = std::fs::write(&cpath, combined.join("\n"));
+        }
+    });
+}
+
 /// Check if cached trackers need refresh (older than 24 hours / 1 day or missing), and fetch in background.
 pub fn refresh_public_trackers_if_stale(rt: &tokio::runtime::Handle) {
+    fetch_custom_tracker_urls_if_any(rt);
     let Some(path) = trackers_cache_file() else {
         return;
     };
@@ -1745,5 +1832,15 @@ mod kept_files_tests {
         rx.recv_timeout(Duration::from_secs(10)).unwrap();
         assert_eq!(*order.lock().unwrap(), [0, 1, 2]);
         assert!(!kept.changing());
+    }
+
+    #[test]
+    fn tracker_list_url_detection() {
+        assert!(is_tracker_list_url("https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/all.txt"));
+        assert!(is_tracker_list_url("https://ngosang.github.io/trackerslist/trackers_all.txt"));
+        assert!(is_tracker_list_url("http://example.com/raw/trackers"));
+        assert!(!is_tracker_list_url("udp://tracker.opentrackr.org:1337/announce"));
+        assert!(!is_tracker_list_url("http://tracker.example.com:8080/announce"));
+        assert!(!is_tracker_list_url("wss://tracker.openwebtorrent.com"));
     }
 }
