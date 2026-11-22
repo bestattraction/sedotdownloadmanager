@@ -159,6 +159,29 @@ pub fn files_from_bytes(torrent: &[u8]) -> Result<Vec<FileEntry>, TorrentError> 
     Ok(entries)
 }
 
+/// Read safe files, piece length, total pieces, and trackers from a saved torrent without starting a session.
+pub fn details_from_bytes(
+    torrent: &[u8],
+) -> Result<(Vec<FileEntry>, u32, usize, Vec<String>), TorrentError> {
+    check_bytes(torrent)?;
+    let meta = librqbit::torrent_from_bytes(torrent).map_err(|_| TorrentError::NotATorrent)?;
+    let hash = meta.info_hash.as_string();
+    let info = meta.info.data.validate().map_err(engine)?;
+    let piece_length = info.lengths().default_piece_length();
+    let total_pieces = info.lengths().total_pieces() as usize;
+    let trackers = trackers::listed(torrent);
+    let mut entries: Vec<FileEntry> = info
+        .iter_file_details()
+        .map(|f| FileEntry {
+            path: f.filename.to_pathbuf(),
+            size: f.len,
+            padding: f.attrs().padding,
+        })
+        .collect();
+    rename_plugin::apply_from_memory(&hash, &mut entries);
+    Ok((entries, piece_length, total_pieces, trackers))
+}
+
 /// Before librqbit restores its saved torrents (`session.json` and a `<hash>.torrent` for each,
 /// in `dir`), take out the ones the name check refuses, and those saved without their .torrent
 /// (whose names it can't check): the app adds those again itself, through `add` and its own

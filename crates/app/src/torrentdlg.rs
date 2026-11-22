@@ -786,7 +786,7 @@ impl TorrentDialog {
         {
             let from = self.folder.clone();
             winui::start_pick(ui.ctx(), "torrent-folder", move || {
-                rfd::FileDialog::new().set_directory(from).pick_folder()
+                winui::folder_dialog(from).pick_folder()
             });
         }
         if let Some(d) = winui::picked(ui.ctx(), "torrent-folder") {
@@ -1164,6 +1164,8 @@ pub struct TorrentSettings {
     stop_min: String,
     adapters: Vec<mdm_engine::net::Adapter>,
     adapter_index: usize,
+    adapters_open: bool,
+    trackers_dlg: Option<TrackersDialog>,
 }
 
 /// Torrent settings' seeding limits as OK gives them (`Settings::torrent_stop_*`).
@@ -1274,6 +1276,8 @@ impl TorrentSettings {
             stop_min: s.torrent_stop_minutes.max(1).to_string(),
             adapters,
             adapter_index,
+            adapters_open: false,
+            trackers_dlg: None,
         }
     }
 
@@ -1556,13 +1560,27 @@ impl TorrentSettings {
                     o.x + 456.0,
                     ("torrent-settings", 6),
                 );
-                winui::checkbox(
+                winui::checkbox_until(
                     ui,
                     pos2(o.x + 14.0, o.y + 456.0),
                     &mut n.auto_trackers,
                     "Automatically append live public trackers to new torrents",
                     true,
+                    Some(o.x + 365.0),
                 );
+                if winui::button(
+                    ui,
+                    r(o, 370.0, 452.0, 86.0, 22.0),
+                    "Trackers...",
+                    ButtonKind::Normal,
+                    false,
+                    None,
+                )
+                .on_hover_text("View default trackers and manage custom trackers")
+                .clicked()
+                {
+                    self.trackers_dlg = Some(TrackersDialog::new());
+                }
                 let mut pref_enc = n.encryption == 0;
                 if winui::checkbox(
                     ui,
@@ -1592,22 +1610,60 @@ impl TorrentSettings {
                 } else {
                     crate::i18n::t("Any interface (Default)").to_owned()
                 };
+                let combo_w = 412.0;
+                let refresh_w = 26.0;
+                let combo_rc = r(o, 14.0, 524.0, combo_w, 22.0);
+                let refresh_rc = r(o, 14.0 + combo_w + 4.0, 524.0, refresh_w, 22.0);
+
+                let combo = winui::combo(ui, combo_rc, &adapter_label, "torrent-adapter-combo");
+                if combo.clicked() || winui::combo_keys(ui, &combo) {
+                    self.adapters_open = !self.adapters_open;
+                }
+
+                // Refresh button: re-scans system adapters
                 if winui::button(
                     ui,
-                    r(o, 14.0, 524.0, 442.0, 22.0),
-                    &adapter_label,
+                    refresh_rc,
+                    "⟳",
                     ButtonKind::Normal,
                     false,
                     None,
                 )
+                .on_hover_text("Rescan network adapters")
                 .clicked()
                 {
-                    self.adapter_index = (self.adapter_index + 1) % (self.adapters.len() + 1);
-                    n.net_adapter = if self.adapter_index == 0 {
-                        String::new()
+                    self.adapters = mdm_engine::net::adapters();
+                    self.adapter_index = if n.net_adapter.is_empty() {
+                        0
                     } else {
-                        self.adapters[self.adapter_index - 1].name.clone()
+                        self.adapters
+                            .iter()
+                            .position(|a| a.name.eq_ignore_ascii_case(&n.net_adapter))
+                            .map(|p| p + 1)
+                            .unwrap_or(0)
                     };
+                }
+
+                if self.adapters_open {
+                    let mut labels = vec![crate::i18n::t("Any interface (Default)").to_owned()];
+                    for a in &self.adapters {
+                        labels.push(a.name.clone());
+                    }
+                    if let Some(i) = winui::drop_list(
+                        ui,
+                        "torrent-adapter-drop",
+                        combo_rc,
+                        &labels,
+                        "",
+                        &mut self.adapters_open,
+                    ) {
+                        self.adapter_index = i;
+                        n.net_adapter = if i == 0 {
+                            String::new()
+                        } else {
+                            self.adapters[i - 1].name.clone()
+                        };
+                    }
                 }
                 let ok = winui::button(
                     ui,
@@ -1627,6 +1683,12 @@ impl TorrentSettings {
                     None,
                 )
                 .clicked();
+                if let Some(dlg) = &mut self.trackers_dlg {
+                    match dlg.show(ui.ctx()) {
+                        Outcome::Open => {}
+                        _ => self.trackers_dlg = None,
+                    }
+                }
                 if cancel || winui::escape_pressed(ui) {
                     Outcome::Closed
                 } else if ok || winui::enter_pressed(ui) {
@@ -1789,6 +1851,81 @@ impl AddTrackers {
                             Outcome::Open
                         }
                     }
+                } else {
+                    Outcome::Open
+                }
+            },
+        )
+    }
+}
+
+pub struct TrackersDialog {
+    pub default_list: String,
+    pub count: usize,
+    pub custom_text: String,
+}
+
+impl TrackersDialog {
+    pub fn new() -> Self {
+        let defaults = crate::torrents::current_public_trackers();
+        let custom = crate::torrents::custom_trackers().join("\n");
+        let count = defaults.len();
+        let default_list = defaults.join("\n");
+        TrackersDialog {
+            default_list,
+            count,
+            custom_text: custom,
+        }
+    }
+
+    pub fn show(&mut self, ctx: &egui::Context) -> Outcome<bool> {
+        window(
+            ctx,
+            "trackers-manage",
+            "Torrent Trackers",
+            [480.0, 420.0],
+            false,
+            winui::BG(),
+            |ui, o| {
+                let p = ui.painter().clone();
+                let hdr1 = format!(
+                    "Default Trackers ({} active from XIU2 & ngosang best):",
+                    self.count
+                );
+                text(&p, o.x + 14.0, o.y + 24.0, &hdr1, winui::TEXT());
+                let def_rect = r(o, 14.0, 32.0, 452.0, 130.0);
+                let mut dummy = self.default_list.clone();
+                winui::multiline_light(ui, def_rect, &mut dummy, "def-trackers-box", false);
+
+                let hdr2 = crate::i18n::t("Custom Trackers (appended to new torrents, one per line):");
+                text(&p, o.x + 14.0, o.y + 184.0, hdr2, winui::TEXT());
+                let custom_rect = r(o, 14.0, 192.0, 452.0, 160.0);
+                winui::multiline_light(ui, custom_rect, &mut self.custom_text, "custom-trackers-box", true);
+
+                let ok = winui::button(
+                    ui,
+                    r(o, 308.0, 380.0, 77.0, 21.0),
+                    "OK",
+                    ButtonKind::Default,
+                    false,
+                    None,
+                )
+                .clicked();
+                let cancel = winui::button(
+                    ui,
+                    r(o, 391.0, 380.0, 77.0, 21.0),
+                    "Cancel",
+                    ButtonKind::Normal,
+                    false,
+                    None,
+                )
+                .clicked();
+
+                if cancel || winui::escape_pressed(ui) {
+                    Outcome::Closed
+                } else if ok || winui::enter_pressed(ui) {
+                    crate::torrents::save_custom_trackers(&self.custom_text);
+                    Outcome::Done(true)
                 } else {
                     Outcome::Open
                 }

@@ -293,19 +293,31 @@ pub async fn tcp_connect(
 ) -> std::io::Result<tokio::net::TcpStream> {
     let refused = |e: NetError| std::io::Error::new(std::io::ErrorKind::NetworkUnreachable, e);
     route.check(addr.ip()).map_err(refused)?;
-    let b = match route {
-        Route::Bound(b) if !b.exempt(addr.ip()) => b,
-        _ => return tokio::net::TcpStream::connect(addr).await,
-    };
-    let socket = socket2::Socket::new(
-        socket2::Domain::for_address(addr),
-        socket2::Type::STREAM,
-        Some(socket2::Protocol::TCP),
-    )?;
-    b.pin(&socket, addr)?;
-    socket.set_nonblocking(true)?;
-    let socket = tokio::net::TcpSocket::from_std_stream(socket.into());
-    socket.connect(addr).await
+    match route {
+        Route::Bound(b) if !b.exempt(addr.ip()) => {
+            let socket = socket2::Socket::new(
+                socket2::Domain::for_address(addr),
+                socket2::Type::STREAM,
+                Some(socket2::Protocol::TCP),
+            )?;
+            let _ = socket.set_tcp_nodelay(true);
+            let _ = socket.set_recv_buffer_size(512 * 1024);
+            b.pin(&socket, addr)?;
+            socket.set_nonblocking(true)?;
+            let socket = tokio::net::TcpSocket::from_std_stream(socket.into());
+            socket.connect(addr).await
+        }
+        _ => {
+            let socket = if addr.is_ipv4() {
+                tokio::net::TcpSocket::new_v4()?
+            } else {
+                tokio::net::TcpSocket::new_v6()?
+            };
+            let _ = socket.set_nodelay(true);
+            let _ = socket.set_recv_buffer_size(512 * 1024);
+            socket.connect(addr).await
+        }
+    }
 }
 
 /// [`tcp_connect`] for code without a runtime (a reachability check), within `timeout`.

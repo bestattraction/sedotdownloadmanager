@@ -283,7 +283,7 @@ impl Properties {
             let from = item.dest.parent().unwrap_or(Path::new(".")).to_path_buf();
             winui::start_pick(ui.ctx(), &format!("move-to-{}", self.id), move || {
                 crate::winui::file_dialog(&title)
-                    .set_directory(from)
+                    .set_directory(crate::winui::resolve_existing_dir(from))
                     .pick_folder()
             });
         }

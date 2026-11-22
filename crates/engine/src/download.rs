@@ -37,7 +37,7 @@ use crate::state::{ResumeState, Validators, state_path};
 /// Bytes buffered per connection before claiming and writing them. Each batch is one buffer of
 /// exactly this capacity, filled and never grown (`Writer::push`): what a connection holds in
 /// memory is what it counts (`Writer::in_memory`).
-const BATCH: usize = 256 * 1024;
+const BATCH: usize = 512 * 1024;
 /// Written batches a connection keeps for the next ones rather than freeing them and asking
 /// the allocator again (`Writer::spare`): one write's worth.
 const SPARE_MAX: usize = WRITE_MAX / BATCH;
@@ -53,7 +53,7 @@ const FLUSH_EVERY: Duration = Duration::from_secs(1);
 const HOLD_MAX: u64 = 256 << 20;
 /// The most one write of a connection carries (`Writer::send`): what waited in memory goes to
 /// a disk that sets the pace in steps this small, so the waits stay short and even.
-const WRITE_MAX: usize = 4 << 20;
+const WRITE_MAX: usize = 8 << 20;
 /// A connection that stood still this long for the disk tells the others the disk sets the
 /// pace (`too_slow`).
 const DISK_HELD: Duration = Duration::from_millis(50);
@@ -75,7 +75,7 @@ const SHED_GRACE: Duration = Duration::from_secs(2);
 const SHED_RATIO: u64 = 4;
 const SHED_LEFT: Duration = Duration::from_secs(2);
 /// A download starts with one connection per this many bytes (at most `max_connections`).
-const INITIAL_PIECE: u64 = 64 * 1024;
+const INITIAL_PIECE: u64 = 128 * 1024;
 /// A pending connection is taken over after this many first-byte times of the probe (and never
 /// sooner than PREEMPT_MIN).
 const PREEMPT_TTFB: u32 = 2;
@@ -264,7 +264,7 @@ impl Default for Options {
             automatic_agent: true,
             agent_fallback: None,
             browser_final: None,
-            save_interval: Duration::from_secs(2),
+            save_interval: Duration::from_secs(1),
             speed_limit: None,
             verify_overlap: 64,
             hosts: Vec::new(),

@@ -1063,7 +1063,7 @@ impl VideoDialog {
         {
             let from = self.folder.clone();
             winui::start_pick(ui.ctx(), "video-folder", move || {
-                rfd::FileDialog::new().set_directory(from).pick_folder()
+                crate::winui::folder_dialog(from).pick_folder()
             });
         }
         if let Some(d) = winui::picked(ui.ctx(), "video-folder") {

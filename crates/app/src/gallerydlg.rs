@@ -320,7 +320,7 @@ impl GalleryDialog {
         {
             let from = self.folder.clone();
             winui::start_pick(ui.ctx(), "gallery-folder", move || {
-                rfd::FileDialog::new().set_directory(from).pick_folder()
+                crate::winui::folder_dialog(from).pick_folder()
             });
         }
         if let Some(d) = winui::picked(ui.ctx(), "gallery-folder") {

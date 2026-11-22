@@ -8085,6 +8085,10 @@ impl App {
         for id in close {
             self.close_finished(id, early);
         }
+        if !self.complete.is_empty() {
+            ctx.request_ui_pass(egui::ViewportId::ROOT);
+            ctx.request_repaint();
+        }
         self.settle_groups();
         // A snooze over (#741): Download complete shows again.
         if self.snooze.expire(unix_now()) {
@@ -11013,7 +11017,7 @@ impl App {
         self.move_rename_for = Some(id);
         winui::start_pick(&self.ui_ctx, "app-move-rename", move || {
             crate::winui::file_dialog(&title)
-                .set_directory(from)
+                .set_directory(crate::winui::resolve_existing_dir(from))
                 .set_file_name(name)
                 .save_file()
         });
@@ -11043,7 +11047,7 @@ impl App {
                 return Some(PathBuf::from(dir));
             }
             crate::winui::file_dialog(&title)
-                .set_directory(from)
+                .set_directory(crate::winui::resolve_existing_dir(from))
                 .pick_folder()
         });
     }

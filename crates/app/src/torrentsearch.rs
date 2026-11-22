@@ -607,10 +607,9 @@ impl TorrentSearch {
                 let cur_w = client_size[0];
                 let cur_h = client_size[1];
 
-                // Search bar input & buttons
-                let search_btn_w = 95.0;
-                let size_btn_w = 110.0;
-                let edit_w = (cur_w - 14.0 * 2.0 - search_btn_w - size_btn_w - 16.0).max(180.0);
+                // Search bar input & button
+                let search_btn_w = 100.0;
+                let edit_w = (cur_w - 14.0 * 2.0 - search_btn_w - 8.0).max(180.0);
 
                 let edit = winui::edit(
                     ui,
@@ -648,24 +647,6 @@ impl TorrentSearch {
 
                 if (btn || enter) && can_search {
                     self.search(rt, ui.ctx().clone());
-                }
-
-                // Window Size preset button: toggle between Standard and Large
-                let (target_w, target_h, size_label) = if cur_w < 950.0 {
-                    (1020.0, 660.0, "⛶ 1020×660")
-                } else {
-                    (780.0, 520.0, "⛶ 780×520")
-                };
-                let size_btn = winui::button(
-                    ui,
-                    r(o, 14.0 + edit_w + 8.0 + search_btn_w + 8.0, 14.0, size_btn_w, 24.0),
-                    size_label,
-                    ButtonKind::Normal,
-                    false,
-                    None,
-                );
-                if size_btn.clicked() {
-                    ui.ctx().send_viewport_cmd(egui::ViewportCommand::InnerSize(vec2(target_w, target_h)));
                 }
 
                 // Update search status text
@@ -820,13 +801,19 @@ impl TorrentSearch {
                     Rect::from_min_size(table_rect.min, vec2(table_rect.width(), header_h));
                 p.rect_filled(head_rect, 0.0, winui::LIST_HEADER());
 
+                let row_h = 22.0;
+                let visible_rows = ((table_rect.height() - header_h) / row_h).floor() as usize;
+                let total_rows = items.len();
+                let has_vbar = total_rows > visible_rows;
+                let vbar_w = if has_vbar { crate::scrollbar::THICK } else { 0.0 };
+
                 // Column boundary calculations
                 let x0 = table_rect.min.x;
                 let x1 = x0 + self.col_widths[0];
                 let x2 = x1 + self.col_widths[1];
                 let x3 = x2 + self.col_widths[2];
                 let x4 = x3 + self.col_widths[3];
-                let x_end = table_rect.max.x;
+                let x_end = table_rect.max.x - vbar_w;
 
                 // Drag handles between columns
                 for i in 0..4 {
@@ -848,7 +835,7 @@ impl TorrentSearch {
                     if div_resp.dragged() {
                         let delta = div_resp.drag_delta().x;
                         let min_w = if i == 0 { 140.0 } else if i == 1 { 60.0 } else { 50.0 };
-                        let max_w = if i == 0 { table_rect.width() - 240.0 } else { 240.0 };
+                        let max_w = if i == 0 { (table_rect.width() - vbar_w) - 240.0 } else { 240.0 };
                         self.col_widths[i] = (self.col_widths[i] + delta).clamp(min_w, max_w);
                     }
                     // Divider line in the header
@@ -964,9 +951,6 @@ impl TorrentSearch {
                 winui::text_fit(&p, x4 + 8.0, o.y + 88.0, &date_hdr, TEXT(), x_end - 4.0);
 
                 // Scrollable rows
-                let row_h = 22.0;
-                let visible_rows = ((table_rect.height() - header_h) / row_h).floor() as usize;
-                let total_rows = items.len();
                 let max_scroll = (total_rows.saturating_sub(visible_rows) as f32 * row_h).max(0.0);
 
                 // Handle mouse scroll
@@ -995,7 +979,7 @@ impl TorrentSearch {
                         }
                         let row_rc = Rect::from_min_size(
                             pos2(body_rect.min.x, y),
-                            vec2(body_rect.width(), row_h),
+                            vec2(body_rect.width() - vbar_w, row_h),
                         );
                         let is_sel = self.selected == Some(i);
 
@@ -1071,6 +1055,26 @@ impl TorrentSearch {
                             text_color,
                             x_end - 8.0,
                         );
+                    }
+                }
+
+                if has_vbar {
+                    let bar_rect = Rect::from_min_max(
+                        pos2(table_rect.max.x - crate::scrollbar::THICK, table_rect.min.y + header_h),
+                        pos2(table_rect.max.x, table_rect.max.y),
+                    );
+                    let mut bar_pos = self.scroll_offset / row_h;
+                    if crate::scrollbar::bar(
+                        ui,
+                        egui::Id::unique("torrent-search-vbar"),
+                        bar_rect,
+                        true,
+                        total_rows as f32,
+                        visible_rows as f32,
+                        1.0,
+                        &mut bar_pos,
+                    ) {
+                        self.scroll_offset = (bar_pos * row_h).clamp(0.0, max_scroll);
                     }
                 }
 

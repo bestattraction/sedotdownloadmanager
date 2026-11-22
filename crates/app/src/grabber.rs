@@ -1252,7 +1252,7 @@ impl Grabber {
         if browse {
             let from = folder.clone();
             winui::start_pick(ui.ctx(), "grabber-folder", move || {
-                rfd::FileDialog::new().set_directory(from).pick_folder()
+                crate::winui::folder_dialog(from).pick_folder()
             });
         }
         let mut chose = false;

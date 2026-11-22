@@ -169,40 +169,102 @@ pub fn torrent_file(hash: &str) -> Option<PathBuf> {
     state_dir().map(|d| d.join("files").join(format!("{hash}.torrent")))
 }
 
-/// URL of the live public tracker list (trackers_best).
-pub const LIVE_TRACKERS_URL: &str =
-    "https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_best.txt";
-pub const LIVE_TRACKERS_FALLBACK_URL: &str =
+/// URLs of the live public tracker lists (XIU2 best.txt and ngosang trackers_best.txt).
+pub const LIVE_TRACKERS_XIU2_URL: &str =
+    "https://raw.githubusercontent.com/XIU2/TrackersListCollection/refs/heads/master/best.txt";
+pub const LIVE_TRACKERS_XIU2_FALLBACK: &str =
+    "https://trackerslist.com/best.txt";
+pub const LIVE_TRACKERS_NGOSANG_URL: &str =
+    "https://raw.githubusercontent.com/ngosang/trackerslist/refs/heads/master/trackers_best.txt";
+pub const LIVE_TRACKERS_NGOSANG_FALLBACK: &str =
     "https://ngosang.github.io/trackerslist/trackers_best.txt";
-pub const LIVE_TRACKERS_CDN_URL: &str =
-    "https://cdn.jsdelivr.net/gh/ngosang/trackerslist@master/trackers_best.txt";
 
 /// Path to the cached trackers list.
 pub fn trackers_cache_file() -> Option<PathBuf> {
     state_dir().map(|d| d.join("trackers_best.txt"))
 }
 
-/// Retrieve currently available public trackers from cache or defaults.
-pub fn current_public_trackers() -> Vec<String> {
-    if let Some(path) = trackers_cache_file()
+/// Path to user's custom trackers list.
+pub fn custom_trackers_file() -> Option<PathBuf> {
+    state_dir().map(|d| d.join("custom_trackers.txt"))
+}
+
+/// Retrieve user's custom trackers.
+pub fn custom_trackers() -> Vec<String> {
+    if let Some(path) = custom_trackers_file()
         && let Ok(content) = std::fs::read_to_string(&path)
     {
-        let list: Vec<String> = content
+        return content
             .lines()
             .map(|l| l.trim().to_owned())
             .filter(|l| !l.is_empty() && !l.starts_with('#'))
             .collect();
-        if !list.is_empty() {
-            return list;
-        }
     }
-    mdm_torrent::trackers::DEFAULT_TRACKERS
-        .iter()
-        .map(|&s| s.to_owned())
-        .collect()
+    Vec::new()
 }
 
-/// Check if cached trackers need refresh (older than 7 days or missing), and fetch in background.
+/// Save user's custom trackers to disk.
+pub fn save_custom_trackers(text: &str) {
+    if let Some(path) = custom_trackers_file() {
+        if let Some(parent) = path.parent() {
+            let _ = std::fs::create_dir_all(parent);
+        }
+        let _ = std::fs::write(&path, text);
+    }
+}
+
+/// Retrieve currently available public trackers from cache or defaults, deduplicated,
+/// along with any user-defined custom trackers.
+pub fn current_public_trackers() -> Vec<String> {
+    let mut list = Vec::new();
+    let mut seen = std::collections::HashSet::new();
+
+    if let Some(path) = trackers_cache_file()
+        && let Ok(content) = std::fs::read_to_string(&path)
+    {
+        for l in content.lines() {
+            let trimmed = l.trim();
+            if !trimmed.is_empty() && !trimmed.starts_with('#') && seen.insert(trimmed.to_owned()) {
+                list.push(trimmed.to_owned());
+            }
+        }
+    }
+
+    if list.is_empty() {
+        for &s in mdm_torrent::trackers::DEFAULT_TRACKERS {
+            if seen.insert(s.to_owned()) {
+                list.push(s.to_owned());
+            }
+        }
+    }
+
+    for custom in custom_trackers() {
+        if seen.insert(custom.clone()) {
+            list.push(custom);
+        }
+    }
+
+    list
+}
+
+/// Helper to fetch tracker content from primary URL with fallback.
+async fn fetch_trackers_text(primary: &str, fallback: &str) -> Option<String> {
+    if let Ok(resp) = reqwest::get(primary).await
+        && resp.status().is_success()
+        && let Ok(text) = resp.text().await
+    {
+        return Some(text);
+    }
+    if let Ok(resp) = reqwest::get(fallback).await
+        && resp.status().is_success()
+        && let Ok(text) = resp.text().await
+    {
+        return Some(text);
+    }
+    None
+}
+
+/// Check if cached trackers need refresh (older than 24 hours / 1 day or missing), and fetch in background.
 pub fn refresh_public_trackers_if_stale(rt: &tokio::runtime::Handle) {
     let Some(path) = trackers_cache_file() else {
         return;
@@ -212,7 +274,7 @@ pub fn refresh_public_trackers_if_stale(rt: &tokio::runtime::Handle) {
             if let Ok(mtime) = meta.modified() {
                 mtime
                     .elapsed()
-                    .map(|d| d.as_secs() > 7 * 86400)
+                    .map(|d| d.as_secs() > 86400) // 24 hours daily update
                     .unwrap_or(true)
             } else {
                 true
@@ -222,29 +284,33 @@ pub fn refresh_public_trackers_if_stale(rt: &tokio::runtime::Handle) {
     };
     if is_stale {
         rt.spawn(async move {
-            let res = reqwest::get(LIVE_TRACKERS_URL).await;
-            let text = match res {
-                Ok(resp) if resp.status().is_success() => resp.text().await.ok(),
-                _ => {
-                    if let Ok(resp) = reqwest::get(LIVE_TRACKERS_FALLBACK_URL).await
-                        && resp.status().is_success()
-                    {
-                        resp.text().await.ok()
-                    } else if let Ok(resp) = reqwest::get(LIVE_TRACKERS_CDN_URL).await
-                        && resp.status().is_success()
-                    {
-                        resp.text().await.ok()
-                    } else {
-                        None
+            let xiu2 = fetch_trackers_text(LIVE_TRACKERS_XIU2_URL, LIVE_TRACKERS_XIU2_FALLBACK).await;
+            let ngosang = fetch_trackers_text(LIVE_TRACKERS_NGOSANG_URL, LIVE_TRACKERS_NGOSANG_FALLBACK).await;
+
+            let mut combined = Vec::new();
+            let mut seen = std::collections::HashSet::new();
+
+            let mut append_content = |text: String| {
+                for line in text.lines() {
+                    let trimmed = line.trim();
+                    if !trimmed.is_empty() && !trimmed.starts_with('#') && seen.insert(trimmed.to_owned()) {
+                        combined.push(trimmed.to_owned());
                     }
                 }
             };
-            if let Some(content) = text
-                && !content.trim().is_empty()
-            {
+
+            if let Some(t) = xiu2 {
+                append_content(t);
+            }
+            if let Some(t) = ngosang {
+                append_content(t);
+            }
+
+            if !combined.is_empty() {
                 if let Some(parent) = path.parent() {
                     let _ = std::fs::create_dir_all(parent);
                 }
+                let content = combined.join("\n");
                 let _ = std::fs::write(&path, content);
             }
         });
@@ -1066,6 +1132,7 @@ fn mark_files(folder: &Path, files: &[mdm_torrent::FileEntry]) {
 }
 
 /// What the progress window's torrent tabs show.
+#[derive(Clone)]
 pub struct Details {
     /// Each file (padding left out): its index in the torrent's list, its entry, chosen?,
     /// bytes there.

@@ -335,6 +335,9 @@ pub struct Settings {
     pub torrent_stop_minutes: u32,
     /// Automatically append live public trackers to new torrents.
     pub torrent_auto_trackers: bool,
+    /// Custom extra trackers to append to new torrents.
+    #[serde(default)]
+    pub torrent_extra_trackers: String,
     /// Protocol anti-throttling / encryption setting: 0 Prefer, 1 Require, 2 Disable.
     pub torrent_encryption: u8,
     /// Dedicated network interface binding for torrents (VPN Kill Switch).
@@ -434,7 +437,7 @@ impl Default for Settings {
             global_limit_on: false,
             global_limit_kb: 500,
             global_only_active: false,
-            max_connections: 8,
+            max_connections: 16,
             many_connections: false,
             show_complete: true,
             complete_snoozed_until: None,
@@ -543,6 +546,7 @@ impl Default for Settings {
             torrent_stop_minutes_on: false,
             torrent_stop_minutes: 1440,
             torrent_auto_trackers: true,
+            torrent_extra_trackers: String::new(),
             torrent_encryption: 0,
             torrent_net_adapter: String::new(),
             speed_alt_on: false,
@@ -1517,7 +1521,7 @@ mod tests {
         };
         let url = |u: &str| url::Url::parse(u).unwrap();
         assert_eq!(s.connections_for(&url("ftp://ftp.slow.org/a")), 1);
-        assert_eq!(s.connections_for(&url("https://fast.org/a")), 8);
+        assert_eq!(s.connections_for(&url("https://fast.org/a")), 16);
         // Beyond 32 only once allowed (issue #12), and never beyond 128.
         s.max_connections = 100;
         s.conn_exceptions.push(("big.org".into(), 500));

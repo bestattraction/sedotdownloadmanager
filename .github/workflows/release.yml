@@ -446,17 +446,8 @@ jobs:
               "the first? Give them a go and tell us how it went in an " +
               "[issue](https://github.com/${{ github.repository }}/issues).`n`n"
           }
-          # Last, "Thanks to": everyone who opened a pull request or an issue, or commented, on
-          # GitHub since the previous release (by version) was published, with their avatars and
-          # @-mentions (tools/contributors.py thanks; the maintainer, Claude and bots aren't
-          # counted). Nobody, or GitHub not answering, leaves it out; it never stops the release.
-          $thanks = ""
-          try {
-            $thanks = (python3 tools/contributors.py thanks "${{ github.ref_name }}" | Out-String).Trim()
-          } catch {
-            Write-Warning "The contributors couldn't be listed: $_"
-          }
-          if ($thanks) { $thanks = "`n`n" + $thanks }
+          # Attribution to MDM foundation
+          $thanks = "`n`n*Sedot Download Manager is made possible thanks to the foundation and open-source codebase of Mister Download Manager (MDM).*"
           $all = (Get-ChildItem dist -File).FullName
           $relExists = $false
           try {

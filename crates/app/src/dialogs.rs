@@ -249,6 +249,7 @@ pub fn keep_theme(
         );
         ctx.data_mut(|d| d.insert_temp(theme_key, dark));
         // The window is revealed on the next frame: make sure there is one.
+        ctx.request_ui_pass(egui::ViewportId::ROOT);
         ctx.request_repaint();
     }
     // The theme went out in an earlier frame: show the window now.
@@ -260,6 +261,7 @@ pub fn keep_theme(
         ctx.send_viewport_cmd_to(vid, egui::ViewportCommand::Visible(true));
         ctx.data_mut(|d| d.insert_temp(shown_key, true));
         // The next frame sees where it went (below).
+        ctx.request_ui_pass(egui::ViewportId::ROOT);
         ctx.request_repaint();
     }
     // Shown (in an earlier frame), once: in front of the other programs' windows, where Windows
@@ -617,6 +619,13 @@ fn dialog_window<T>(
         crate::chrome::tell_screen_readers(ui.ctx());
         if close { Outcome::Closed } else { out }
     });
+    let focused = ctx.input_for(vid, |i| i.focused);
+    let was_focused = ctx.data(|d| d.get_temp::<bool>(key.with("was-focused"))).unwrap_or(false);
+    if focused && !was_focused {
+        ctx.request_repaint();
+        ctx.request_ui_pass(egui::ViewportId::ROOT);
+    }
+    ctx.data_mut(|d| d.insert_temp(key.with("was-focused"), focused));
     let rescaled = follow_scale(ctx, vid, key, shown);
     // Elsewhere follow_scale asked the window manager itself.
     #[cfg(not(windows))]
@@ -632,11 +641,15 @@ fn dialog_window<T>(
         let want = [shown[0], shown[1] + if drawn { 1e6 } else { 0.0 }];
         if rescaled || ctx.data(|d| d.get_temp::<[f32; 2]>(framed)) != Some(want) {
             if is_resizable {
-                if let Some(h) = crate::win32::drawn_frame(title, true) {
-                    ctx.data_mut(|d| {
-                        d.insert_temp(framed, want);
-                        d.insert_temp(key.with("hwnd"), h);
-                    });
+                if drawn {
+                    if let Some(h) = crate::win32::drawn_frame(title, true) {
+                        ctx.data_mut(|d| {
+                            d.insert_temp(framed, want);
+                            d.insert_temp(key.with("hwnd"), h);
+                        });
+                    }
+                } else {
+                    ctx.data_mut(|d| d.insert_temp(framed, want));
                 }
             } else if drawn {
                 if let Some(h) = crate::win32::thin_frame(title, shown, scale, None) {

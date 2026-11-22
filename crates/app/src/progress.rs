@@ -326,6 +326,8 @@ pub struct Progress {
     /// The speed limit holding the download back (set by the app each frame, #1191): its
     /// Transfer rate names it.
     pub limit: Option<crate::model::Limit>,
+    /// Last known torrent details, cached so tabs remain accessible when paused/stopped.
+    pub last_torrent_details: Option<crate::torrents::Details>,
     /// Options on completion, used when "Show download complete dialog" is off.
     hang_up: bool,
     exit: bool,
@@ -409,6 +411,7 @@ impl Progress {
             minimize_to_tray: false,
             main_shown: true,
             limit: None,
+            last_torrent_details: None,
             hang_up: false,
             exit: false,
             turn_off_on: false,
@@ -646,6 +649,13 @@ impl Progress {
                 action
             }
         });
+        let focused = ctx.input_for(vid, |i| i.focused);
+        let was_focused = ctx.data(|d| d.get_temp::<bool>(key.with("was-focused"))).unwrap_or(false);
+        if focused && !was_focused {
+            ctx.request_repaint();
+            ctx.request_ui_pass(egui::ViewportId::ROOT);
+        }
+        ctx.data_mut(|d| d.insert_temp(key.with("was-focused"), focused));
         // Elsewhere the window manager is asked for its size at a new interface size (#262).
         crate::dialogs::follow_scale(ctx, vid, key, shown);
         // The glide's frames: while the download runs, its figures move and the window can be
@@ -1716,7 +1726,7 @@ impl Progress {
     /// A torrent's details: a tab strip where the connections caption is, the piece map in
     /// the segment bar, and the tab's table below.
     fn torrent_details(&mut self, ui: &mut Ui, p: &egui::Painter, o: Pos2, item: &Item) {
-        let d = match &item.live {
+        let mut d = match &item.live {
             Some(crate::model::Live {
                 dl: crate::model::Job::Torrent(run),
                 ..
@@ -1730,6 +1740,37 @@ impl Progress {
                 .zip(item.torrent.as_ref())
                 .and_then(|(t, spec)| crate::torrents::details_of(&t, &spec.hash)),
         };
+        if let Some(details) = d.as_ref() {
+            self.last_torrent_details = Some(details.clone());
+        } else if self.last_torrent_details.is_some() {
+            d = self.last_torrent_details.clone();
+        } else if let Some(spec) = item.torrent.as_ref()
+            && let Some(file) = crate::torrents::torrent_file(&spec.hash)
+            && let Ok(bytes) = std::fs::read(&file)
+            && let Ok((entries, piece_length, total_pieces, trackers)) =
+                mdm_torrent::details_from_bytes(&bytes)
+        {
+            let files: Vec<(usize, mdm_torrent::FileEntry, bool, u64)> = entries
+                .into_iter()
+                .enumerate()
+                .filter(|(_, f)| !f.padding)
+                .map(|(idx, f)| {
+                    let on = spec.files.as_ref().is_none_or(|chosen| chosen.contains(&idx));
+                    (idx, f, on, 0)
+                })
+                .collect();
+            let pieces = vec![false; total_pieces];
+            let constructed = crate::torrents::Details {
+                files,
+                piece_length,
+                peers: Vec::new(),
+                trackers,
+                pieces,
+                stats: None,
+            };
+            self.last_torrent_details = Some(constructed.clone());
+            d = Some(constructed);
+        }
         let tabs = [
             // i18n: tab title: the torrent's files
             (TTab::Files, crate::i18n::mark("Files")),
@@ -1969,7 +2010,7 @@ impl Progress {
     }
 }
 
-/// The segment bar as a piece map: a column is filled when the pieces under it are there.
+/// The segment bar: shows total cumulative progress filled proportionally from left to right.
 fn piece_bar(p: &egui::Painter, o: Pos2, pieces: &[bool]) {
     let (x0, y0) = (o.x + 17.0, o.y + 249.0);
     let border = crate::theme::colors().segment_border;
@@ -1978,28 +2019,22 @@ fn piece_bar(p: &egui::Painter, o: Pos2, pieces: &[bool]) {
     fill(p, x0, y0, x0, y0 + 14.0, border);
     fill(p, x0 + 512.0, y0, x0 + 512.0, y0 + 14.0, border);
     let ix = o.x + 18.0;
-    // Runs of equal columns, painted as one rectangle per row.
-    let have = |c: usize| {
-        if pieces.is_empty() {
-            return false;
-        }
-        let a = c * pieces.len() / 511;
-        let b = ((c + 1) * pieces.len() / 511).max(a + 1).min(pieces.len());
-        pieces[a..b].iter().all(|x| *x)
-    };
-    let mut c = 0usize;
-    while c < 511 {
-        let on = have(c);
-        let mut e = c;
-        while e + 1 < 511 && have(e + 1) == on {
-            e += 1;
-        }
+
+    let total = pieces.len();
+    let have = pieces.iter().filter(|&&x| x).count();
+    let filled_cols = if total > 0 { (have * 511 / total).min(511) } else { 0 };
+
+    if filled_cols > 0 {
         for (row, cols) in seg_rows().enumerate() {
-            let v = if on { cols.1 } else { cols.0 };
             let y = y0 + 1.0 + row as f32;
-            fill(p, ix + c as f32, y, ix + e as f32, y, v);
+            fill(p, ix, y, ix + filled_cols as f32, y, cols.1);
         }
-        c = e + 1;
+    }
+    if filled_cols < 511 {
+        for (row, cols) in seg_rows().enumerate() {
+            let y = y0 + 1.0 + row as f32;
+            fill(p, ix + filled_cols as f32, y, ix + 511.0, y, cols.0);
+        }
     }
 }
 

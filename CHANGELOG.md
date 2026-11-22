@@ -5,6 +5,34 @@ Each release's notes on GitHub come from its section here (`## [X.Y.Z]`, see
 
 ## [Unreleased]
 
+## [0.6.13] - 2026-11-22
+
+### Added
+- **Torrent Settings Network Adapter Dropdown & Rescan**:
+  - Replaced adapter cycling button with a native combobox dropdown menu for easy selection.
+  - Added a dedicated rescan button (`[ ⟳ ]`) to refresh network adapters dynamically (e.g. for newly connected VPN tunnels).
+- **Dual Tracker Collection with Daily Updates**:
+  - Integrated dual best tracker sources from XIU2 (`best.txt`) and ngosang (`trackers_best.txt`) with automatic deduplication.
+  - Switched public tracker refresh cycle to 24 hours daily.
+  - Added a "Trackers..." manager dialog in Torrent Settings to view active default public trackers and manage custom extra trackers.
+- **Scrollbar Handle in Torrent Search**:
+  - Added a native vertical scrollbar handle to the right side of the results table when results exceed the visible frame.
+
+### Improved
+- **Download Speed Optimization**:
+  - Non-torrent: Increased default concurrent connections to 16, increased chunk write buffer to 512 KiB / 8 MiB max write buffer, and tuned TCP socket buffer sizes (`SO_RCVBUF`).
+  - Torrent: Configured default DHT bootstrap routers and optimized piece downloading.
+- **Total Progress Bar for Torrents**:
+  - Torrent status blue progress bar now continuously displays total proportional downloaded progress from left to right instead of sparse piece-map gaps.
+- **Torrent Details Tab Availability**:
+  - Torrent tabs (`Files`, `Trackers`, `Pieces`, `General`) remain fully visible and inspectable even when paused or stopped.
+- **Folder Picker Resolution**:
+  - "Save to" browse button (`[...]`) across all dialogs now automatically resolves to the specified folder or its nearest existing ancestor on disk rather than falling back to Explorer's last-opened folder.
+- **Taskbar Thumbnail & Window Activation**:
+  - Eliminated delayed thumbnail preview and black window redraw lag when switching back to download windows by triggering immediate UI passes and focus-activation repaints.
+- **Scheduler UI**:
+  - Repositioned `Auto-extract ZIP/RAR/7z` checkbox to eliminate text overlap with simultaneous file download options.
+
 ## [0.6.12] - 2026-11-20
 
 ### Fixed

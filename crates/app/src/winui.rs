@@ -5239,6 +5239,30 @@ pub fn file_dialog(title: &str) -> rfd::FileDialog {
     rfd::FileDialog::new().set_title(crate::i18n::os_text(title))
 }
 
+/// Resolves `path` to the nearest existing ancestor directory on disk. If `path` does not exist,
+/// walks up its parents until an existing directory is found, falling back to user's downloads folder.
+pub fn resolve_existing_dir(path: impl AsRef<std::path::Path>) -> std::path::PathBuf {
+    let p = path.as_ref();
+    let mut cur = p.to_path_buf();
+    while !cur.as_os_str().is_empty() && !cur.is_dir() {
+        if let Some(parent) = cur.parent() {
+            cur = parent.to_path_buf();
+        } else {
+            break;
+        }
+    }
+    if cur.is_dir() {
+        cur
+    } else {
+        dirs::download_dir().unwrap_or_else(|| std::path::PathBuf::from("C:\\"))
+    }
+}
+
+/// A system folder picker dialog initialized to `dir` or its nearest existing parent.
+pub fn folder_dialog(dir: impl AsRef<std::path::Path>) -> rfd::FileDialog {
+    rfd::FileDialog::new().set_directory(resolve_existing_dir(dir))
+}
+
 /// The system Save dialog for a download's file (Download File Info's Save As, #1088): `name`
 /// filled in, in `dir` when it is there, and the download's own file type. Built on
 /// [`start_pick`]'s thread (it looks at the disk); its answer goes through [`saved_name`].

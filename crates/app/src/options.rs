@@ -1106,7 +1106,7 @@ impl OptionsDialog {
             let (title, from) = (dir_line.clone(), self.cat_dir.clone());
             winui::start_pick(ui.ctx(), "options-category-folder", move || {
                 crate::winui::file_dialog(&title)
-                    .set_directory(from)
+                    .set_directory(crate::winui::resolve_existing_dir(from))
                     .pick_folder()
             });
         }

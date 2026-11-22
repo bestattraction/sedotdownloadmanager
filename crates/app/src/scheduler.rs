@@ -1006,13 +1006,6 @@ impl Scheduler {
             true,
             "files-at-once",
         );
-        winui::checkbox_light(
-            ui,
-            o + vec2(420.0, 56.0),
-            &mut f.auto_extract,
-            "Auto-extract ZIP/RAR/7z",
-            true,
-        );
 
         // The queue's files: File Name, Size, Status, Time left.
         let list = r(o, 229.0, 82.0, 396.0, 294.0 + DY);
@@ -1200,6 +1193,13 @@ impl Scheduler {
                 }
             }
         }
+        winui::checkbox_light(
+            ui,
+            o + vec2(330.0, 390.0 + DY),
+            &mut self.forms[self.selected].auto_extract,
+            "Auto-extract ZIP/RAR/7z",
+            true,
+        );
     }
 
     fn limits_page(&mut self, ui: &mut Ui, o: Pos2) {
