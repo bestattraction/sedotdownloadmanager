@@ -1376,6 +1376,7 @@ pub struct App {
     /// Alt is down, and was pressed alone so far (releasing it opens the menu bar).
     alt_down: bool,
     alt_alone: bool,
+    suppress_alt_menu: u32,
     /// The open context / drop-down menu, and its top-left.
     popup: Option<(Popup, Pos2, u64)>,
     /// Counts menu opens: each open is a new menu window, even at the same place.
@@ -2065,6 +2066,7 @@ impl App {
             open_menu: None,
             alt_down: false,
             alt_alone: false,
+            suppress_alt_menu: 0,
             popup: None,
             popup_serial: 0,
             last_layout: None,
@@ -9581,7 +9583,7 @@ impl App {
                     // The keyboard is in use: access letters show (light mode too).
                     crate::chrome::show_cues(&ctx);
                 }
-                if alt_alone || f10 {
+                if (alt_alone || f10) && self.suppress_alt_menu == 0 {
                     open = Some(0);
                 }
                 if let Some(l) = letter {
@@ -9596,6 +9598,20 @@ impl App {
         } else {
             self.alt_down = false;
             self.alt_alone = false;
+        }
+
+        #[cfg(windows)]
+        if crate::win32::has_nonclient_click() {
+            if self.open_menu.is_some() {
+                self.open_menu = chrome::menubar_next(
+                    self.open_menu,
+                    MenuBarEvent::Dismissed {
+                        press_on_title: false,
+                    },
+                );
+            }
+            self.popup = None;
+            ctx.request_repaint();
         }
 
         // Menu bar and its popups: which menu is open is chrome::menubar_next's to say.
@@ -11697,9 +11713,9 @@ impl App {
                     self.torrent_settings = None;
                     self.alt_down = false;
                     self.alt_alone = false;
+                    self.suppress_alt_menu = 3;
                     #[cfg(windows)]
                     crate::win32::restore_if_minimized(crate::MAIN_TITLE);
-                    ctx.send_viewport_cmd(egui::ViewportCommand::Focus);
                 }
                 Outcome::Done(crate::torrentdlg::TorrentChoice {
                     share,
@@ -11711,9 +11727,9 @@ impl App {
                     self.torrent_settings = None;
                     self.alt_down = false;
                     self.alt_alone = false;
+                    self.suppress_alt_menu = 3;
                     #[cfg(windows)]
                     crate::win32::restore_if_minimized(crate::MAIN_TITLE);
-                    ctx.send_viewport_cmd(egui::ViewportCommand::Focus);
                     // The network: the next torrent session takes it (torrent_tick).
                     crate::torrents::fetch_custom_tracker_urls_if_any(&self.rt);
                     net.apply(&mut self.settings);
@@ -12275,6 +12291,8 @@ impl App {
             }
         }
         self.summaries = keep;
+        #[cfg(windows)]
+        let _ = crate::win32::take_nonclient_click();
     }
 }
 
@@ -12322,6 +12340,7 @@ fn finished_windows(
 /// event (egui names AltLeft and AltRight too) isn't another key.
 fn alt_alone_released(events: &[egui::Event], down: &mut bool, alone: &mut bool) -> bool {
     let mut released = false;
+    let mut just_focused = false;
     for e in events {
         match e {
             egui::Event::ModifiersChanged(m) => {
@@ -12345,14 +12364,21 @@ fn alt_alone_released(events: &[egui::Event], down: &mut bool, alone: &mut bool)
             | egui::Event::PointerButton { pressed: true, .. } => {
                 *alone = false;
             }
-            egui::Event::WindowFocused(false) => {
+            egui::Event::WindowFocused(focused) => {
                 *down = false;
                 *alone = false;
+                if *focused {
+                    just_focused = true;
+                }
             }
             _ => {}
         }
     }
-    released
+    if just_focused {
+        false
+    } else {
+        released
+    }
 }
 
 impl eframe::App for App {
@@ -12497,6 +12523,7 @@ impl App {
     }
 
     fn paint_frame(&mut self, ui: &mut Ui, _frame: &mut eframe::Frame) {
+        self.suppress_alt_menu = self.suppress_alt_menu.saturating_sub(1);
         // The freeze watchdog times every frame's drawing, as it times its logic (crash.rs).
         crate::crash::frame_begin();
         // A lost graphics device is noticed before this frame paints (renderer.rs).

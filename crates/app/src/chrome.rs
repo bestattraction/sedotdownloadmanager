@@ -1100,8 +1100,13 @@ pub fn popup<C: Clone>(
         ctx.request_repaint_after(std::time::Duration::from_secs_f64(wait));
     }
     let lost_focus = verdict == FocusVerdict::Left;
+    #[cfg(windows)]
+    let nonclient = crate::win32::has_nonclient_click();
+    #[cfg(not(windows))]
+    let nonclient = false;
     if !first
         && (lost_focus
+            || nonclient
             || ctx.input(|i| i.key_pressed(egui::Key::Escape) || i.pointer.any_pressed()))
     {
         // Closed by a press: where it was, so the control that opened it doesn't take that

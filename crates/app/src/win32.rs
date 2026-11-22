@@ -655,6 +655,46 @@ pub fn take_hide_asked(hwnd: isize) -> bool {
     HIDE_ASKED.with(|s| s.try_borrow_mut().is_ok_and(|mut s| s.remove(&hwnd)))
 }
 
+static NONCLIENT_CLICKED: std::sync::atomic::AtomicBool = std::sync::atomic::AtomicBool::new(false);
+static MENU_HWNDS: std::sync::Mutex<Vec<isize>> = std::sync::Mutex::new(Vec::new());
+
+pub fn notify_nonclient_click() {
+    NONCLIENT_CLICKED.store(true, std::sync::atomic::Ordering::Relaxed);
+}
+
+pub fn has_nonclient_click() -> bool {
+    NONCLIENT_CLICKED.load(std::sync::atomic::Ordering::Relaxed)
+}
+
+pub fn take_nonclient_click() -> bool {
+    NONCLIENT_CLICKED.swap(false, std::sync::atomic::Ordering::Relaxed)
+}
+
+pub fn register_menu_hwnd(hwnd: isize) {
+    if let Ok(mut list) = MENU_HWNDS.lock() {
+        if !list.contains(&hwnd) {
+            list.push(hwnd);
+        }
+    }
+}
+
+pub fn hide_menu_popups() {
+    if let Ok(mut list) = MENU_HWNDS.lock() {
+        list.retain(|&h| {
+            let hwnd = h as HWND;
+            unsafe {
+                use windows_sys::Win32::UI::WindowsAndMessaging::{IsWindow, ShowWindow, SW_HIDE};
+                if IsWindow(hwnd) != 0 {
+                    ShowWindow(hwnd, SW_HIDE);
+                    true
+                } else {
+                    false
+                }
+            }
+        });
+    }
+}
+
 fn inside(r: &[i32; 4], x: i32, y: i32) -> bool {
     x >= r[0] && x < r[2] && y >= r[1] && y < r[3]
 }
@@ -780,6 +820,14 @@ pub fn thin_frame_on(
     // during the calls.
     unsafe {
         caption_less(hwnd, kind);
+        if let Some(main) = find_own_window(crate::MAIN_TITLE) {
+            if main != hwnd {
+                use windows_sys::Win32::UI::WindowsAndMessaging::{GWLP_HWNDPARENT, WS_EX_APPWINDOW};
+                SetWindowLongPtrW(hwnd, GWLP_HWNDPARENT, main as isize);
+                let ex = GetWindowLongPtrW(hwnd, GWL_EXSTYLE) as u32 & !WS_EX_APPWINDOW;
+                SetWindowLongPtrW(hwnd, GWL_EXSTYLE, ex as isize);
+            }
+        }
         let menu = GetSystemMenu(hwnd, 0);
         if !menu.is_null() {
             DeleteMenu(menu, SC_HIDE_TO_TRAY as u32, MF_BYCOMMAND);
@@ -1312,9 +1360,17 @@ unsafe extern "system" fn caption_less_proc(
         DefWindowProcW, HTMAXBUTTON, IsIconic, IsZoomed, NCCALCSIZE_PARAMS, PostMessageW, SC_CLOSE,
         SC_MAXIMIZE, SC_MINIMIZE, SC_RESTORE, STYLESTRUCT, SWP_HIDEWINDOW, SendMessageW, WINDOWPOS,
         WM_GETMINMAXINFO, WM_NCACTIVATE, WM_NCDESTROY, WM_NCLBUTTONDBLCLK, WM_NCLBUTTONDOWN,
-        WM_NCLBUTTONUP, WM_NCMOUSELEAVE, WM_NCMOUSEMOVE, WM_NCRBUTTONUP, WM_STYLECHANGING,
-        WM_SYSCOMMAND, WM_WINDOWPOSCHANGED, WM_WINDOWPOSCHANGING, WS_CAPTION, WS_MINIMIZE,
+        WM_NCLBUTTONUP, WM_NCMBUTTONDOWN, WM_NCMOUSELEAVE, WM_NCMOUSEMOVE, WM_NCRBUTTONDOWN,
+        WM_NCRBUTTONUP, WM_STYLECHANGING, WM_SYSCOMMAND, WM_WINDOWPOSCHANGED, WM_WINDOWPOSCHANGING,
+        WS_CAPTION, WS_MINIMIZE,
     };
+    if matches!(
+        msg,
+        WM_NCLBUTTONDOWN | WM_NCRBUTTONDOWN | WM_NCMBUTTONDOWN
+    ) {
+        notify_nonclient_click();
+        hide_menu_popups();
+    }
     const HT_MAX: LRESULT = HTMAXBUTTON as LRESULT;
     let kind = Drawn::of(data);
     let sizable = kind == Drawn::Sizable;
@@ -2876,6 +2932,9 @@ pub fn popup_window(title: &str, kind: Popup) -> bool {
         return false;
     };
     let no_activate = matches!(kind, Popup::Menu { .. });
+    if no_activate {
+        register_menu_hwnd(hwnd as isize);
+    }
     // SAFETY: our own window, on its thread; the subclass proc lives as long as the program;
     // the DWM attributes are read from locals during the calls.
     unsafe {
