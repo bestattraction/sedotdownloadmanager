@@ -54,6 +54,7 @@ Each release's notes on GitHub come from its section here (`## [X.Y.Z]`, see
 - **Dialog Combobox Dropdown Auto-Close Fix**:
   - Fixed an issue where combo dropdown menus and history lists across all dialogs (including "Save As" / "Save to" folder history, "Category", "URL" history, "Network Adapter", and quality selectors in Download File Info, Add Torrent, Add URL, Video Download, Checksum, and Options) would spontaneously close in less than 1 second (0.4s).
   - Combobox drop lists (`MenuKind::List`) and dialog popups are now exempt from root-level OS foreground loss timers (`FOCUS_GRACE`), remaining open reliably until an item is selected, Escape is pressed, or an outside click occurs.
+  - Eliminated unconditional idle popup hiding (`hide_menu_popups`) in the main window loop and isolated combobox popups from Win32 non-client dismissal tracking.
 - **Torrent Status Fluttering & Speed Reporting Fix**:
   - Fixed an issue where the download progress window would rapidly flicker back and forth between "Receiving data..." and "Connecting..." whenever instantaneous transfer rate dipped between piece verifications.
   - Active peer count (`spec.peers` / `st.peers_live`) and real-time wire transfer rate (`st.down_speed`) are now tracked, keeping the status solidly on "Receiving data..." while peers remain connected.
