@@ -3438,6 +3438,55 @@ mod tests {
         assert_eq!(pass(0.5), PopupResult::Open);
     }
 
+    #[test]
+    fn drop_list_in_child_viewport() {
+        let entries: Vec<MenuEntry<usize>> = vec![
+            MenuEntry::Item("item 0", 0, true, false),
+            MenuEntry::Item("item 1", 1, true, false),
+        ];
+        let ctx = egui::Context::default();
+        let dialog_vid = egui::ViewportId::from_hash_of("test-dialog");
+        let mut t = 0.0;
+        let mut pass = |dt: f64, events: Vec<egui::Event>| {
+            t += dt;
+            let raw = egui::RawInput {
+                time: Some(t),
+                screen_rect: Some(Rect::from_min_size(Pos2::ZERO, egui::vec2(600.0, 400.0))),
+                events,
+                ..Default::default()
+            };
+            let mut res = PopupResult::Open;
+            let mut out = ctx.run_ui(raw, |ui| {
+                ui.ctx().show_viewport_immediate(
+                    dialog_vid,
+                    egui::ViewportBuilder::default(),
+                    |dui, _| {
+                        res = popup(
+                            dui.ctx(),
+                            MenuKind::List,
+                            "t-droplist-child",
+                            pos2(100.0, 100.0),
+                            &entries,
+                            &|_| None,
+                        );
+                    },
+                );
+            });
+            out.textures_delta.clear();
+            res
+        };
+        // Frame 1: opens (e.g. click happened on dialog or root).
+        assert_eq!(pass(0.05, vec![]), PopupResult::Open);
+        // Frame 2:
+        assert_eq!(pass(0.05, vec![]), PopupResult::Open);
+        // Frame 3..15:
+        for _ in 0..10 {
+            assert_eq!(pass(0.05, vec![]), PopupResult::Open);
+        }
+        // After 1 second:
+        assert_eq!(pass(1.0, vec![]), PopupResult::Open);
+    }
+
     /// #328: a menu opened from the keyboard is said to screen readers. Its windows never take
     /// the focus, so the window that has it shows the menu too, with the lit item as its focus's
     /// active descendant; the arrows move it, and once the menu closes the focus is the control's
