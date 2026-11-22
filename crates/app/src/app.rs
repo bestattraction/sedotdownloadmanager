@@ -9611,7 +9611,12 @@ impl App {
                 );
             }
             self.popup = None;
+            crate::win32::hide_menu_popups();
             ctx.request_repaint();
+        }
+        #[cfg(windows)]
+        if self.open_menu.is_none() && self.popup.is_none() {
+            crate::win32::hide_menu_popups();
         }
 
         // Menu bar and its popups: which menu is open is chrome::menubar_next's to say.
@@ -9644,6 +9649,8 @@ impl App {
                 }
                 PopupResult::Chosen(c) => {
                     chosen = Some((c, None));
+                    #[cfg(windows)]
+                    crate::win32::hide_menu_popups();
                     Some(MenuBarEvent::Chosen)
                 }
                 PopupResult::Dismissed => {
@@ -11711,11 +11718,15 @@ impl App {
                 Outcome::Open => {}
                 Outcome::Closed => {
                     self.torrent_settings = None;
+                    self.open_menu = None;
                     self.alt_down = false;
                     self.alt_alone = false;
                     self.suppress_alt_menu = 3;
                     #[cfg(windows)]
-                    crate::win32::restore_if_minimized(crate::MAIN_TITLE);
+                    {
+                        crate::win32::hide_menu_popups();
+                        crate::win32::restore_if_minimized(crate::MAIN_TITLE);
+                    }
                 }
                 Outcome::Done(crate::torrentdlg::TorrentChoice {
                     share,
@@ -11725,11 +11736,15 @@ impl App {
                     seeding,
                 }) => {
                     self.torrent_settings = None;
+                    self.open_menu = None;
                     self.alt_down = false;
                     self.alt_alone = false;
                     self.suppress_alt_menu = 3;
                     #[cfg(windows)]
-                    crate::win32::restore_if_minimized(crate::MAIN_TITLE);
+                    {
+                        crate::win32::hide_menu_popups();
+                        crate::win32::restore_if_minimized(crate::MAIN_TITLE);
+                    }
                     // The network: the next torrent session takes it (torrent_tick).
                     crate::torrents::fetch_custom_tracker_urls_if_any(&self.rt);
                     net.apply(&mut self.settings);

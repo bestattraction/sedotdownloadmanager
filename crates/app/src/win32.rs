@@ -820,14 +820,6 @@ pub fn thin_frame_on(
     // during the calls.
     unsafe {
         caption_less(hwnd, kind);
-        if let Some(main) = find_own_window(crate::MAIN_TITLE)
-            && main != hwnd
-        {
-            use windows_sys::Win32::UI::WindowsAndMessaging::{GWLP_HWNDPARENT, WS_EX_APPWINDOW};
-            SetWindowLongPtrW(hwnd, GWLP_HWNDPARENT, main as isize);
-            let ex = GetWindowLongPtrW(hwnd, GWL_EXSTYLE) as u32 & !WS_EX_APPWINDOW;
-            SetWindowLongPtrW(hwnd, GWL_EXSTYLE, ex as isize);
-        }
         let menu = GetSystemMenu(hwnd, 0);
         if !menu.is_null() {
             DeleteMenu(menu, SC_HIDE_TO_TRAY as u32, MF_BYCOMMAND);
@@ -2312,7 +2304,20 @@ unsafe extern "system" fn main_minimize_proc(
     _id: usize,
     _data: usize,
 ) -> LRESULT {
-    use windows_sys::Win32::UI::WindowsAndMessaging::WM_SYSCOMMAND;
+    use windows_sys::Win32::UI::WindowsAndMessaging::{
+        WM_NCLBUTTONDOWN, WM_NCMBUTTONDOWN, WM_NCRBUTTONDOWN, WM_SYSCOMMAND,
+    };
+    if matches!(msg, WM_NCLBUTTONDOWN | WM_NCRBUTTONDOWN | WM_NCMBUTTONDOWN) {
+        notify_nonclient_click();
+        hide_menu_popups();
+        MAIN_MINIMIZE.with(|m| {
+            if let Ok(m) = m.try_borrow()
+                && let Some(ctx) = &m.ctx
+            {
+                ctx.request_repaint();
+            }
+        });
+    }
     const SC_MINIMIZE: usize = 0xF020;
     if msg == WM_SYSCOMMAND && (wparam & 0xFFF0) == SC_MINIMIZE {
         let caught = MAIN_MINIMIZE.with(|m| {

@@ -3312,7 +3312,7 @@ it from Sedot Download Manager list of downloads?",
                         &[("n", &crate::i18n::integer(n))],
                     )
                 };
-                let text = text.replace('\n', " ");
+                let text = text.replace('\r', "").replace('\n', " ");
                 let lines =
                     winui::paragraph(&p, o.x + 11.0, o.y + 21.0, &text, black, o.x + 362.0, 13.0);
                 grow_to(ui.ctx(), "confirm-delete", lines, 2);
