@@ -6952,10 +6952,12 @@ pub mod ole {
 /// with the process.
 pub fn mark_running() {
     use windows_sys::Win32::System::Threading::CreateMutexW;
-    let name: Vec<u16> = "MisterDownloadManager.Running\0".encode_utf16().collect();
+    let name_sdm: Vec<u16> = "SedotDownloadManager.Running\0".encode_utf16().collect();
+    let name_mdm: Vec<u16> = "MisterDownloadManager.Running\0".encode_utf16().collect();
     // SAFETY: NUL-terminated name; the handle is deliberately kept for the process's life.
     unsafe {
-        CreateMutexW(std::ptr::null(), 0, name.as_ptr());
+        CreateMutexW(std::ptr::null(), 0, name_sdm.as_ptr());
+        CreateMutexW(std::ptr::null(), 0, name_mdm.as_ptr());
     }
 }
 

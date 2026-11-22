@@ -367,7 +367,11 @@ pub fn data_dir() -> Option<PathBuf> {
         if sdm.exists() {
             Some(sdm)
         } else if mdm.exists() {
-            Some(mdm)
+            if std::fs::rename(&mdm, &sdm).is_ok() {
+                Some(sdm)
+            } else {
+                Some(mdm)
+            }
         } else if legacy.is_dir() {
             let _ = std::fs::rename(&legacy, &sdm);
             Some(sdm)

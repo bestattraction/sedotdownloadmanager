@@ -39,9 +39,9 @@ const RELEASES: &str = "https://codeberg.org/api/v1/repos/mikf/gallery-dl/releas
 /// MDM as sites see it: gallery-dl's own name is refused by some (Wikimedia's servers answer
 /// 429 to unnamed tools); this one says who asks and where to read about it.
 pub const USER_AGENT: &str = concat!(
-    "MisterDownloadManager/",
+    "SedotDownloadManager/",
     env!("CARGO_PKG_VERSION"),
-    " (+https://misterdownloadmanager.com) gallery-dl"
+    " (+https://github.com/bestattraction/sedotdownloadmanager) gallery-dl"
 );
 
 /// gallery-dl's program for this system and processor in its releases: see [`asset_for`].

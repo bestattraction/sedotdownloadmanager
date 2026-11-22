@@ -6683,7 +6683,7 @@ impl App {
         }
         if !cmd.remote && cmd.api.is_none() && !self.settings.automation_api {
             return line(&ErrorAnswer {
-                error: "the automation API is off (misterdownloadmanager-cli api on)".into(),
+                error: "the automation API is off (sdm-cli api on)".into(),
                 code: Some(ipc::api::API_OFF.into()),
             });
         }

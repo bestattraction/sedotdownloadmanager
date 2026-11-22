@@ -251,7 +251,9 @@ var
   Value, Data: String;
   Code: Integer;
 begin
-  Data := ExpandConstant('{userappdata}\misterdownloadmanager');
+  Data := ExpandConstant('{userappdata}\sedotdownloadmanager');
+  if not DirExists(Data) then
+    Data := ExpandConstant('{userappdata}\misterdownloadmanager');
   if CurUninstallStep = usUninstall then
   begin
     ForgetIfOurs('Software\Classes\magnet', ExpandConstant('{app}\{#AppExe}'));
