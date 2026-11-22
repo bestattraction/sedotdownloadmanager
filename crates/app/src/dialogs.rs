@@ -694,6 +694,9 @@ fn dialog_window<T>(
     }
     if !matches!(out, Outcome::Open) {
         forget_window(ctx, vid, key);
+        if !crate::offscreen() && vid != ViewportId::ROOT && id != "trackers-manage" {
+            raise(ctx, ViewportId::ROOT);
+        }
     }
     out
 }
@@ -3282,9 +3285,10 @@ it from Sedot Download Manager list of downloads?",
                         &[("n", &crate::i18n::integer(n))],
                     )
                 };
+                let text = text.replace('\n', " ");
                 let lines =
                     winui::paragraph(&p, o.x + 11.0, o.y + 21.0, &text, black, o.x + 362.0, 13.0);
-                grow_to(ui.ctx(), "confirm-delete", lines, 3);
+                grow_to(ui.ctx(), "confirm-delete", lines, 2);
                 let o = o + vec2(0.0, extra);
                 let files = if n == 1 {
                     crate::i18n::t("Also delete the file from disk").to_owned()
@@ -3300,7 +3304,7 @@ it from Sedot Download Manager list of downloads?",
                     )
                 };
                 if self.allow_files {
-                    winui::checkbox_light(ui, o + vec2(24.0, 60.0), &mut self.files, &files, true);
+                    winui::checkbox_light(ui, o + vec2(24.0, 58.0), &mut self.files, &files, true);
                 }
                 let yes = winui::button_light(
                     ui,
@@ -3364,6 +3368,10 @@ pub fn raise(ctx: &egui::Context, viewport: ViewportId) {
         #[cfg(target_os = "macos")]
         crate::unix::macos_activate_app();
         ctx.send_viewport_cmd_to(viewport, egui::ViewportCommand::Focus);
+        #[cfg(windows)]
+        if viewport == ViewportId::ROOT {
+            crate::win32::raise_main_window();
+        }
     }
 }
 

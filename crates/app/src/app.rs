@@ -11693,7 +11693,10 @@ impl App {
         if let Some(t) = &mut self.torrent_settings {
             match t.show(ctx) {
                 Outcome::Open => {}
-                Outcome::Closed => self.torrent_settings = None,
+                Outcome::Closed => {
+                    self.torrent_settings = None;
+                    dialogs::raise(ctx, egui::ViewportId::ROOT);
+                }
                 Outcome::Done(crate::torrentdlg::TorrentChoice {
                     share,
                     assoc,
@@ -11702,6 +11705,7 @@ impl App {
                     seeding,
                 }) => {
                     self.torrent_settings = None;
+                    dialogs::raise(ctx, egui::ViewportId::ROOT);
                     // The network: the next torrent session takes it (torrent_tick).
                     net.apply(&mut self.settings);
                     // The upload limit: at once (torrent_tick sets it on the session).

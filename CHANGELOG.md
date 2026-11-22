@@ -33,6 +33,13 @@ Each release's notes on GitHub come from its section here (`## [X.Y.Z]`, see
 - **Scheduler UI**:
   - Repositioned `Auto-extract ZIP/RAR/7z` checkbox to eliminate text overlap with simultaneous file download options.
 
+### Fixed
+- **Confirm Deletion Dialog Layout & Auto-Fit**:
+  - Restored compact 374.0 px dialog width while joining hardcoded line breaks into naturally flowed, left-aligned paragraph text to eliminate awkward stranded words.
+  - Dynamically auto-fits dialog height and repositioned buttons for multi-line wrapped text across different font metrics and translations.
+- **Main App Minimization on Dialog Close**:
+  - Fixed an issue where closing Torrent Settings via the `[x]` caption button or `Cancel` button could unexpectedly cause the main application window to minimize or lose foreground focus to background apps.
+
 ## [0.6.12] - 2026-11-20
 
 ### Fixed

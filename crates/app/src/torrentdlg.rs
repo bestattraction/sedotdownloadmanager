@@ -1686,7 +1686,10 @@ impl TorrentSettings {
                 if let Some(dlg) = &mut self.trackers_dlg {
                     match dlg.show(ui.ctx()) {
                         Outcome::Open => {}
-                        _ => self.trackers_dlg = None,
+                        _ => {
+                            self.trackers_dlg = None;
+                            crate::dialogs::raise(ui.ctx(), crate::dialogs::dialog_viewport("torrent-settings"));
+                        }
                     }
                 }
                 if cancel || winui::escape_pressed(ui) {
