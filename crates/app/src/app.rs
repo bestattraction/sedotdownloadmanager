@@ -1377,6 +1377,7 @@ pub struct App {
     alt_down: bool,
     alt_alone: bool,
     suppress_alt_menu: u32,
+    restore_main_frames: u32,
     /// The open context / drop-down menu, and its top-left.
     popup: Option<(Popup, Pos2, u64)>,
     /// Counts menu opens: each open is a new menu window, even at the same place.
@@ -2067,6 +2068,7 @@ impl App {
             alt_down: false,
             alt_alone: false,
             suppress_alt_menu: 0,
+            restore_main_frames: 0,
             popup: None,
             popup_serial: 0,
             last_layout: None,
@@ -11361,6 +11363,17 @@ impl App {
         }
     }
 
+    fn on_dialog_closed(&mut self, ctx: &egui::Context) {
+        self.open_menu = None;
+        self.alt_down = false;
+        self.alt_alone = false;
+        self.suppress_alt_menu = 3;
+        self.restore_main_frames = 3;
+        #[cfg(windows)]
+        crate::win32::restore_if_minimized(crate::MAIN_TITLE);
+        ctx.send_viewport_cmd(egui::ViewportCommand::Focus);
+    }
+
     fn dialogs(&mut self, ctx: &egui::Context) {
         self.help_dialogs(ctx);
         // The next question in turn; one about a download that has left the list meanwhile is
@@ -11730,12 +11743,7 @@ impl App {
                 Outcome::Open => {}
                 Outcome::Closed => {
                     self.torrent_settings = None;
-                    self.open_menu = None;
-                    self.alt_down = false;
-                    self.alt_alone = false;
-                    self.suppress_alt_menu = 3;
-                    #[cfg(windows)]
-                    crate::win32::restore_if_minimized(crate::MAIN_TITLE);
+                    self.on_dialog_closed(ctx);
                 }
                 Outcome::Done(crate::torrentdlg::TorrentChoice {
                     share,
@@ -11745,12 +11753,7 @@ impl App {
                     seeding,
                 }) => {
                     self.torrent_settings = None;
-                    self.open_menu = None;
-                    self.alt_down = false;
-                    self.alt_alone = false;
-                    self.suppress_alt_menu = 3;
-                    #[cfg(windows)]
-                    crate::win32::restore_if_minimized(crate::MAIN_TITLE);
+                    self.on_dialog_closed(ctx);
                     // The network: the next torrent session takes it (torrent_tick).
                     crate::torrents::fetch_custom_tracker_urls_if_any(&self.rt);
                     net.apply(&mut self.settings);
@@ -12016,10 +12019,12 @@ impl App {
                         r.apply(crate::remote::config(&self.settings));
                     }
                     self.options = None;
+                    self.on_dialog_closed(ctx);
                 }
                 Outcome::Done(new) => {
                     let new = Settings::merge_changes(&self.settings, &d.from, &new);
                     self.options = None;
+                    self.on_dialog_closed(ctx);
                     self.apply_options(new);
                 }
             }
@@ -12039,13 +12044,20 @@ impl App {
             }
             if open {
                 self.scheduler = Some(s);
+            } else {
+                self.on_dialog_closed(ctx);
             }
         }
         if let Some(d) = &mut self.speed_settings {
             match d.show(ctx) {
                 Outcome::Open => {}
-                Outcome::Closed => self.speed_settings = None,
+                Outcome::Closed => {
+                    self.speed_settings = None;
+                    self.on_dialog_closed(ctx);
+                }
                 Outcome::Done(c) => {
+                    self.speed_settings = None;
+                    self.on_dialog_closed(ctx);
                     self.settings.speed_limit_kb = c.kb;
                     self.settings.limiter_on_startup = c.on_startup;
                     self.settings.global_limit_on = c.global_on;
@@ -12539,6 +12551,12 @@ impl App {
 
     fn paint_frame(&mut self, ui: &mut Ui, _frame: &mut eframe::Frame) {
         self.suppress_alt_menu = self.suppress_alt_menu.saturating_sub(1);
+        #[cfg(windows)]
+        if self.restore_main_frames > 0 {
+            self.restore_main_frames -= 1;
+            crate::win32::restore_if_minimized(crate::MAIN_TITLE);
+            ui.ctx().send_viewport_cmd(egui::ViewportCommand::Focus);
+        }
         // The freeze watchdog times every frame's drawing, as it times its logic (crash.rs).
         crate::crash::frame_begin();
         // A lost graphics device is noticed before this frame paints (renderer.rs).

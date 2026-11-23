@@ -539,17 +539,46 @@ unsafe fn above_others(hwnd: HWND) {
     }
 }
 
+/// Set owner window for `hwnd` (supporting arbitrary-depth dialog ownership hierarchy).
+pub fn set_window_owner(hwnd: isize, owner: Option<isize>) {
+    use windows_sys::Win32::UI::WindowsAndMessaging::{
+        GetWindowLongPtrW, IsWindow, SetWindowLongPtrW, GWL_EXSTYLE, GWLP_HWNDPARENT,
+        WS_EX_APPWINDOW,
+    };
+    let hwnd = hwnd as HWND;
+    if hwnd.is_null() || unsafe { IsWindow(hwnd) } == 0 {
+        return;
+    }
+    let owner_hwnd = owner
+        .filter(|&h| h != 0 && unsafe { IsWindow(h as HWND) } != 0)
+        .or_else(|| find_own_window(crate::MAIN_TITLE).map(|h| h as isize));
+    if let Some(owner) = owner_hwnd {
+        if owner != hwnd as isize {
+            unsafe {
+                SetWindowLongPtrW(hwnd, GWLP_HWNDPARENT, owner);
+                let ex = GetWindowLongPtrW(hwnd, GWL_EXSTYLE) as u32 & !WS_EX_APPWINDOW;
+                SetWindowLongPtrW(hwnd, GWL_EXSTYLE, ex as isize);
+            }
+        }
+    }
+}
+
 /// Give our window titled `title` IDM's modal-dialog frame (WS_EX_DLGMODALFRAME, no sizing
 /// frame: 3 px borders, 26 px caption) and resize it so the client stays `client` points, at
 /// `scale` pixels per point (the display's scaling times any zoom), with the frame measured for
-/// the window's own DPI. `light` dialogs get a light caption.
-/// Returns true once applied (call again each frame until it is).
-pub fn dialog_frame(title: &str, client: [f32; 2], light: bool, scale: f32) -> bool {
+/// the window's own DPI. `light` dialogs get a light caption. `owner` sets the Win32 owner window
+/// handle (falling back to the main window if None).
+/// Returns Some(hwnd as isize) once applied (call again each frame until it is).
+pub fn dialog_frame(
+    title: &str,
+    client: [f32; 2],
+    light: bool,
+    scale: f32,
+    owner: Option<isize>,
+) -> Option<isize> {
     use windows_sys::Win32::Graphics::Dwm::{DWMWA_USE_IMMERSIVE_DARK_MODE, DwmSetWindowAttribute};
     use windows_sys::Win32::UI::HiDpi::{AdjustWindowRectExForDpi, GetDpiForWindow};
-    let Some(hwnd) = find_own_window(title) else {
-        return false;
-    };
+    let hwnd = find_own_window(title)?;
     unsafe {
         // IDM's light dialogs keep a light caption even in dark mode.
         let dark: i32 = (!light).into();
@@ -559,13 +588,8 @@ pub fn dialog_frame(title: &str, client: [f32; 2], light: bool, scale: f32) -> b
             &dark as *const i32 as *const c_void,
             size_of::<i32>() as u32,
         );
-        // Owned by the main window, as IDM's dialogs are: no taskbar button, kept above it.
-        if let Some(main) = find_own_window(crate::MAIN_TITLE) {
-            use windows_sys::Win32::UI::WindowsAndMessaging::{GWLP_HWNDPARENT, WS_EX_APPWINDOW};
-            SetWindowLongPtrW(hwnd, GWLP_HWNDPARENT, main as isize);
-            let ex = GetWindowLongPtrW(hwnd, GWL_EXSTYLE) as u32 & !WS_EX_APPWINDOW;
-            SetWindowLongPtrW(hwnd, GWL_EXSTYLE, ex as isize);
-        }
+        // Owned by the parent/owner window (or main window): no taskbar button, kept above it.
+        set_window_owner(hwnd as isize, owner);
         let style = GetWindowLongPtrW(hwnd, GWL_STYLE) as u32 & !WS_THICKFRAME;
         let ex = GetWindowLongPtrW(hwnd, GWL_EXSTYLE) as u32 | WS_EX_DLGMODALFRAME;
         SetWindowLongPtrW(hwnd, GWL_STYLE, style as isize);
@@ -587,7 +611,7 @@ pub fn dialog_frame(title: &str, client: [f32; 2], light: bool, scale: f32) -> b
             SWP_FRAMECHANGED | SWP_NOMOVE | SWP_NOZORDER | SWP_NOACTIVATE,
         );
     }
-    true
+    Some(hwnd as isize)
 }
 
 /// Hit-test results (winuser.h).

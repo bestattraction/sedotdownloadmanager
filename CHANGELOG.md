@@ -5,7 +5,15 @@ Each release's notes on GitHub come from its section here (`## [X.Y.Z]`, see
 
 ## [Unreleased]
 
-## [0.6.13] - 2026-11-22
+## [0.6.14] - 2026-11-23
+
+### Fixed
+- **Hierarchical Window Ownership & Multi-Level Dialog Minimization Fix**:
+  - Fixed an issue where opening nested dialog windows (e.g. Main Window -> Window 2 [Options / Torrent Settings] -> Window 3 [Keys, Panels, Trackers, etc.] -> Window 4 / 5) and closing them caused the main application window to unexpectedly minimize to the taskbar.
+  - Implemented dynamic Win32 hierarchical window ownership (`GWLP_HWNDPARENT` linked directly to the parent viewport's HWND) so closing any child dialog returns focus cleanly to its immediate parent dialog without disturbing the main window.
+  - Added multi-frame restore guard upon top-level dialog destruction ensuring the main application window is reliably preserved in the foreground and restored from any OS shell deactivation.
+- **Combobox Dropdown Spontaneous Auto-Close Fix**:
+  - Fixed an issue where combobox dropdown lists (e.g. "Save to" path history, category selector, network adapter dropdown) closed spontaneously in under 1 second due to unconditional idle menu popup dismissals. Dropdown list menus are now properly differentiated from top-level menu bar popups.
 
 ### Added
 - **Torrent Settings Network Adapter Dropdown & Rescan**:

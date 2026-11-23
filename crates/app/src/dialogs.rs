@@ -512,6 +512,14 @@ fn dialog_window<T>(
     kind: Kind,
     mut body: impl FnMut(&mut Ui, Pos2, [f32; 2]) -> Outcome<T>,
 ) -> Outcome<T> {
+    let caller_vid = ctx.viewport_id();
+    #[cfg(windows)]
+    let parent_hwnd = if caller_vid == ViewportId::ROOT {
+        crate::win32::find_own_window(crate::MAIN_TITLE).map(|h| h as isize)
+    } else {
+        ctx.data(|d| d.get_temp::<isize>(egui::Id::unique(("viewport-hwnd", caller_vid))))
+            .or_else(|| crate::win32::find_own_window(crate::MAIN_TITLE).map(|h| h as isize))
+    };
     let modal = kind == Kind::Question;
     let is_resizable = matches!(kind, Kind::Resizable { .. });
     let key = egui::Id::unique(("dialog-pos", id));
@@ -673,9 +681,11 @@ fn dialog_window<T>(
             if is_resizable {
                 if drawn {
                     if let Some(h) = crate::win32::drawn_frame(title, true) {
+                        crate::win32::set_window_owner(h, parent_hwnd);
                         ctx.data_mut(|d| {
                             d.insert_temp(framed, want);
                             d.insert_temp(key.with("hwnd"), h);
+                            d.insert_temp(egui::Id::unique(("viewport-hwnd", vid)), h);
                         });
                     }
                 } else {
@@ -683,14 +693,25 @@ fn dialog_window<T>(
                 }
             } else if drawn {
                 if let Some(h) = crate::win32::thin_frame(title, shown, scale, None) {
+                    crate::win32::set_window_owner(h, parent_hwnd);
                     ctx.data_mut(|d| {
                         d.insert_temp(framed, want);
                         d.insert_temp(key.with("hwnd"), h);
+                        d.insert_temp(egui::Id::unique(("viewport-hwnd", vid)), h);
                     });
                 }
-            } else if crate::win32::dialog_frame(title, shown, !crate::theme::dark_surface(), scale)
-            {
-                ctx.data_mut(|d| d.insert_temp(framed, want));
+            } else if let Some(h) = crate::win32::dialog_frame(
+                title,
+                shown,
+                !crate::theme::dark_surface(),
+                scale,
+                parent_hwnd,
+            ) {
+                ctx.data_mut(|d| {
+                    d.insert_temp(framed, want);
+                    d.insert_temp(key.with("hwnd"), h);
+                    d.insert_temp(egui::Id::unique(("viewport-hwnd", vid)), h);
+                });
             }
         }
     }
@@ -724,6 +745,9 @@ fn dialog_window<T>(
     }
     if !matches!(out, Outcome::Open) {
         forget_window(ctx, vid, key);
+        if caller_vid != ViewportId::ROOT {
+            ctx.send_viewport_cmd_to(caller_vid, egui::ViewportCommand::Focus);
+        }
     }
     out
 }
@@ -742,6 +766,7 @@ fn forget_window(ctx: &egui::Context, vid: ViewportId, key: egui::Id) {
     ctx.data_mut(|d| {
         d.remove::<[f32; 2]>(key.with("framed"));
         d.remove::<isize>(key.with("hwnd"));
+        d.remove::<isize>(egui::Id::unique(("viewport-hwnd", vid)));
     });
 }
 
