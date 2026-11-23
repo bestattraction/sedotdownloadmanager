@@ -3461,7 +3461,7 @@ mod tests {
             let mut out = ctx.run_ui(raw, |ui| {
                 ui.ctx().show_viewport_immediate(
                     dialog_vid,
-                    egui::ViewportBuilder::default(),
+                    crate::window_builder(),
                     |dui, _| {
                         res = popup(
                             dui.ctx(),
