@@ -4439,10 +4439,8 @@ impl App {
     /// Before a handoff's dialog: the main window stays where it is (hidden, minimized) and
     /// only the dialog opens, as dialogs are windows of their own.
     fn show_for_dialog(&mut self, ctx: &egui::Context) {
-        let minimized = ctx.input(|i| i.viewport().minimized == Some(true));
-        if !self.hidden && !minimized {
-            self.show_window(ctx);
-        }
+        ctx.request_ui_pass(egui::ViewportId::ROOT);
+        ctx.request_repaint();
     }
 
     /// What the shell says of the tray icon (Linux: there when a tray host is, asked each time:

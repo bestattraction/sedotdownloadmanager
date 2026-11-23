@@ -501,6 +501,13 @@ fn dialog_activates_on_open(kind: Kind) -> bool {
     !matches!(kind, Kind::Notice { .. })
 }
 
+/// Dialogs that are autonomous / triggered externally from the browser or CLI: they must not
+/// be owned by the main window in Win32 so that Windows DWM does not pull the main app to the front
+/// behind them, nor hide them when the main window is minimized, and returns focus to the browser on close.
+pub(crate) fn is_autonomous_dialog(id: &str) -> bool {
+    matches!(id, "file-info" | "video" | "duplicate" | "add-torrent")
+}
+
 #[allow(clippy::too_many_arguments)]
 fn dialog_window<T>(
     ctx: &egui::Context,
@@ -514,7 +521,9 @@ fn dialog_window<T>(
 ) -> Outcome<T> {
     let caller_vid = ctx.viewport_id();
     #[cfg(windows)]
-    let parent_hwnd = if caller_vid == ViewportId::ROOT {
+    let parent_hwnd = if is_autonomous_dialog(id) {
+        None
+    } else if caller_vid == ViewportId::ROOT {
         crate::win32::find_own_window(crate::MAIN_TITLE).map(|h| h as isize)
     } else {
         ctx.data(|d| d.get_temp::<isize>(egui::Id::unique(("viewport-hwnd", caller_vid))))

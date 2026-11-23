@@ -20,8 +20,8 @@ use windows_sys::Win32::UI::WindowsAndMessaging::SetWindowLongPtrW;
 use windows_sys::Win32::UI::WindowsAndMessaging::{
     DestroyIcon, EnumWindows, GWL_EXSTYLE, GWL_STYLE, GetIconInfo, GetWindowLongPtrW,
     GetWindowThreadProcessId, ICONINFO, InternalGetWindowText, SWP_FRAMECHANGED, SWP_NOACTIVATE,
-    SWP_NOMOVE, SWP_NOZORDER, SetWindowPos, WM_NCCALCSIZE, WM_NCHITTEST, WS_EX_DLGMODALFRAME,
-    WS_THICKFRAME,
+    SWP_NOMOVE, SWP_NOZORDER, SetWindowPos, WM_NCCALCSIZE, WM_NCHITTEST, WS_EX_APPWINDOW,
+    WS_EX_DLGMODALFRAME, WS_THICKFRAME,
 };
 
 /// 32-bit Windows: `SetWindowLongPtrW` is `SetWindowLongW` there, whose value is 32 bits (all a
@@ -540,6 +540,7 @@ unsafe fn above_others(hwnd: HWND) {
 }
 
 /// Set owner window for `hwnd` (supporting arbitrary-depth dialog ownership hierarchy).
+/// If `owner` is None or 0, the window has no owner and operates as an independent top-level window.
 pub fn set_window_owner(hwnd: isize, owner: Option<isize>) {
     use windows_sys::Win32::UI::WindowsAndMessaging::{
         GetWindowLongPtrW, IsWindow, SetWindowLongPtrW, GWL_EXSTYLE, GWLP_HWNDPARENT,
@@ -549,16 +550,18 @@ pub fn set_window_owner(hwnd: isize, owner: Option<isize>) {
     if hwnd.is_null() || unsafe { IsWindow(hwnd) } == 0 {
         return;
     }
-    let owner_hwnd = owner
-        .filter(|&h| h != 0 && unsafe { IsWindow(h as HWND) } != 0)
-        .or_else(|| find_own_window(crate::MAIN_TITLE).map(|h| h as isize));
-    if let Some(owner) = owner_hwnd {
-        if owner != hwnd as isize {
-            unsafe {
+    let owner_hwnd = owner.filter(|&h| h != 0 && unsafe { IsWindow(h as HWND) } != 0);
+    unsafe {
+        if let Some(owner) = owner_hwnd {
+            if owner != hwnd as isize {
                 SetWindowLongPtrW(hwnd, GWLP_HWNDPARENT, owner);
                 let ex = GetWindowLongPtrW(hwnd, GWL_EXSTYLE) as u32 & !WS_EX_APPWINDOW;
                 SetWindowLongPtrW(hwnd, GWL_EXSTYLE, ex as isize);
             }
+        } else {
+            SetWindowLongPtrW(hwnd, GWLP_HWNDPARENT, 0);
+            let ex = GetWindowLongPtrW(hwnd, GWL_EXSTYLE) as u32 | WS_EX_APPWINDOW;
+            SetWindowLongPtrW(hwnd, GWL_EXSTYLE, ex as isize);
         }
     }
 }
@@ -567,7 +570,7 @@ pub fn set_window_owner(hwnd: isize, owner: Option<isize>) {
 /// frame: 3 px borders, 26 px caption) and resize it so the client stays `client` points, at
 /// `scale` pixels per point (the display's scaling times any zoom), with the frame measured for
 /// the window's own DPI. `light` dialogs get a light caption. `owner` sets the Win32 owner window
-/// handle (falling back to the main window if None).
+/// handle (falling back to independent if None).
 /// Returns Some(hwnd as isize) once applied (call again each frame until it is).
 pub fn dialog_frame(
     title: &str,
@@ -588,10 +591,15 @@ pub fn dialog_frame(
             &dark as *const i32 as *const c_void,
             size_of::<i32>() as u32,
         );
-        // Owned by the parent/owner window (or main window): no taskbar button, kept above it.
+        // Owned by the parent/owner window (or independent if None).
         set_window_owner(hwnd as isize, owner);
         let style = GetWindowLongPtrW(hwnd, GWL_STYLE) as u32 & !WS_THICKFRAME;
-        let ex = GetWindowLongPtrW(hwnd, GWL_EXSTYLE) as u32 | WS_EX_DLGMODALFRAME;
+        let mut ex = GetWindowLongPtrW(hwnd, GWL_EXSTYLE) as u32 | WS_EX_DLGMODALFRAME;
+        if owner.is_some_and(|h| h != 0) {
+            ex &= !WS_EX_APPWINDOW;
+        } else {
+            ex |= WS_EX_APPWINDOW;
+        }
         SetWindowLongPtrW(hwnd, GWL_STYLE, style as isize);
         SetWindowLongPtrW(hwnd, GWL_EXSTYLE, ex as isize);
         let mut rc = RECT {

@@ -5,6 +5,15 @@ Each release's notes on GitHub come from its section here (`## [X.Y.Z]`, see
 
 ## [Unreleased]
 
+## [0.6.15] - 2026-11-23
+
+### Fixed
+- **Browser Download Dialog Independence**:
+  - Fixed an issue where downloading a file from the browser sometimes pulled the main application window to the foreground behind the "Download File Info" window.
+  - Made browser-triggered and autonomous dialogs (`Download File Info`, `Download video`, `Duplicate download link`, and browser-opened `Add torrent`) independent top-level windows without Win32 main window ownership (`GWLP_HWNDPARENT = 0`).
+  - Dismissing the download dialog now smoothly returns focus directly back to the user's browser without bringing the main application to the front or stealing focus.
+  - Fixed `show_for_dialog` so it no longer raises or focuses the main application window when a browser download is initiated.
+
 ## [0.6.14] - 2026-11-23
 
 ### Fixed
