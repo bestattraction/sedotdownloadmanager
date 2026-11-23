@@ -543,8 +543,7 @@ unsafe fn above_others(hwnd: HWND) {
 /// If `owner` is None or 0, the window has no owner and operates as an independent top-level window.
 pub fn set_window_owner(hwnd: isize, owner: Option<isize>) {
     use windows_sys::Win32::UI::WindowsAndMessaging::{
-        GetWindowLongPtrW, IsWindow, SetWindowLongPtrW, GWL_EXSTYLE, GWLP_HWNDPARENT,
-        WS_EX_APPWINDOW,
+        GetWindowLongPtrW, IsWindow, GWL_EXSTYLE, GWLP_HWNDPARENT, WS_EX_APPWINDOW,
     };
     let hwnd = hwnd as HWND;
     if hwnd.is_null() || unsafe { IsWindow(hwnd) } == 0 {
