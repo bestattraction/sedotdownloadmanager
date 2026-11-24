@@ -590,6 +590,52 @@ fn log_line(message: &str) {
 /// The Download video window's command for a video message: the page, or the video's own file
 /// or its stream's manifest (`src`) fetched as from its page; or why it is refused (the reply's
 /// `why` and `error`).
+/// Whether `url` is on a known video platform where yt-dlp has a dedicated extractor.
+/// For these sites, the page URL should always be used rather than an ephemeral CDN stream URL.
+fn is_known_video_page(url: &str) -> bool {
+    let lower = url.to_ascii_lowercase();
+    let host = lower
+        .strip_prefix("https://")
+        .or_else(|| lower.strip_prefix("http://"))
+        .unwrap_or(&lower);
+    let host = host.split(['/', '?', '#']).next().unwrap_or(host);
+    let host = host
+        .strip_prefix("www.")
+        .or_else(|| host.strip_prefix("m."))
+        .unwrap_or(host);
+    matches!(
+        host,
+        "youtube.com"
+            | "music.youtube.com"
+            | "youtube-nocookie.com"
+            | "youtu.be"
+            | "pornhub.com"
+            | "xvideos.com"
+            | "xnxx.com"
+            | "youporn.com"
+            | "redtube.com"
+            | "vimeo.com"
+            | "player.vimeo.com"
+            | "dailymotion.com"
+            | "geo.dailymotion.com"
+            | "dai.ly"
+            | "twitch.tv"
+            | "clips.twitch.tv"
+            | "tiktok.com"
+            | "x.com"
+            | "twitter.com"
+            | "instagram.com"
+            | "facebook.com"
+            | "fb.watch"
+            | "reddit.com"
+            | "old.reddit.com"
+            | "v.redd.it"
+            | "soundcloud.com"
+            | "bilibili.com"
+            | "rumble.com"
+    )
+}
+
 fn video_command(
     m: &Message,
     rules: &mdm_ipc::capture::CaptureRules,
@@ -618,12 +664,19 @@ fn video_command(
     let origin = m.fetched_with.origin(src.as_deref());
     // The button over a plain file (#703): that file, as a file.
     let direct = m.direct && src.is_some();
+    let video_page = if direct {
+        src.unwrap_or_else(|| m.url.clone())
+    } else if is_known_video_page(&m.url) {
+        m.url.clone()
+    } else {
+        src.unwrap_or_else(|| m.url.clone())
+    };
     Ok(mdm_ipc::Command {
         video_direct: direct,
         video_subs_only: m.subs_only,
         // The type the plain file's server said when the tab loaded it (#800).
         mime: m.mime.clone().filter(|t| direct && !t.trim().is_empty()),
-        video_page: Some(src.unwrap_or_else(|| m.url.clone())),
+        video_page: Some(video_page),
         video_title: m.title.clone().filter(|t| !t.trim().is_empty()),
         referer,
         origin,
@@ -702,9 +755,14 @@ fn menu_command(
                 .map(str::trim)
                 .filter(|t| !t.is_empty())
                 .map(|t| t.chars().take(TITLE_MAX).collect());
+            let address = if is_known_video_page(&l.page) {
+                l.page.clone()
+            } else {
+                src.unwrap_or_else(|| l.page.clone())
+            };
             mdm_ipc::Command {
                 video_lookup: Some(mdm_ipc::VideoLookup {
-                    address: src.unwrap_or_else(|| l.page.clone()),
+                    address,
                     title,
                     store_id: store(&l.store_id),
                 }),

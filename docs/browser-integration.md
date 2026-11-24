@@ -20,7 +20,7 @@ Browser integration has two parts: a small helper program that the browser talks
 
 ### Firefox
 
-Firefox 140 or later is needed. Install the add-on from its page on addons.mozilla.org, [Mister Download Manager](https://addons.mozilla.org/firefox/addon/mister-download-manager/): click **Add to Firefox**. Firefox keeps it updated. Zen and LibreWolf install it from the same page. (MDM's **Add Mister Download Manager to your browser** window opens that page for you.)
+Firefox 140 or later is needed. Install the add-on from its page on addons.mozilla.org, [Sedot Download Manager](https://addons.mozilla.org/firefox/addon/sedot-download-manager/): click **Add to Firefox**. Firefox keeps it updated. Zen and LibreWolf install it from the same page. (MDM's **Add Mister Download Manager to your browser** window opens that page for you.)
 
 ### Chrome, Edge, Brave, Opera and Vivaldi
 

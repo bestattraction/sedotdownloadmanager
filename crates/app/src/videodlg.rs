@@ -119,6 +119,11 @@ pub struct VideoDialog {
     category_open: bool,
     /// Known folders for each category.
     category_dirs: HashMap<Category, String>,
+    /// Preloaded format from the browser's quality menu.
+    preloaded: Option<mdm_tools::video::Preloaded>,
+    /// The folders downloads were saved to before, newest first (the Save to drop list).
+    pub folders: Vec<String>,
+    folders_open: bool,
 }
 
 /// The top of the window's bottom row of buttons (Helpers..., Download Now, Later, Cancel),
@@ -219,6 +224,9 @@ impl VideoDialog {
             chosen_category: None,
             category_open: false,
             category_dirs: HashMap::new(),
+            preloaded: None,
+            folders: Vec::new(),
+            folders_open: false,
         }
     }
 
@@ -239,6 +247,7 @@ impl VideoDialog {
     /// chosen (#611); None (the Music category was deleted): sound goes as video does.
     pub fn with_music_folder(mut self, dir: Option<PathBuf>) -> Self {
         self.music_dir = dir.map(|d| d.display().to_string());
+        self.follow_sound();
         self
     }
 
@@ -246,6 +255,41 @@ impl VideoDialog {
     pub fn with_category_dirs(mut self, dirs: HashMap<Category, String>) -> Self {
         self.category_dirs = dirs;
         self
+    }
+
+    /// Provide recently used folders for the Save to history drop list.
+    pub fn with_folders(mut self, folders: Vec<String>) -> Self {
+        self.folders = folders;
+        self
+    }
+
+    /// A video picked from the browser's quality menu (when "Show start download dialog" is on),
+    /// preloaded with the choice already made so yt-dlp does not look it up again.
+    pub fn for_picked(folder: PathBuf, picked: crate::videolookup::Picked) -> Self {
+        let preloaded = Some(mdm_tools::video::Preloaded {
+            slot: picked.info,
+            selector: picked.choice.selector.clone(),
+            label: picked.choice.label.clone(),
+            merge: picked.merge,
+        });
+        let target_selector = picked.choice.selector.clone();
+        let mut d = VideoDialog {
+            page: picked.address.clone(),
+            from_browser: picked.address.clone(),
+            context: picked.context,
+            looked_up: picked.address,
+            auto_look: false,
+            preloaded,
+            ..Self::blank(folder)
+        };
+        d.set_video(picked.video);
+        if let Some((_, choices)) = &d.video {
+            if let Some(pos) = choices.iter().position(|c| c.selector == target_selector) {
+                d.chosen = pos;
+                d.name_from_choice();
+            }
+        }
+        d
     }
 
     /// Set category and update the save folder accordingly.
@@ -565,7 +609,7 @@ impl VideoDialog {
             context,
             subs: subs_for_choice(c, &chosen),
             remember: (!self.subs.is_empty()).then_some(chosen),
-            preloaded: None,
+            preloaded: self.preloaded.as_ref().filter(|p| p.selector == c.selector).cloned(),
             named,
         }))
     }
@@ -1044,13 +1088,24 @@ impl VideoDialog {
         let category_was_open = self.category_open;
 
         label(ui, 294.0, labels[1], winui::TEXT());
-        winui::edit(
-            ui,
-            r(o, bx, 281.0, 459.0 - bx, 21.0),
-            &mut self.folder,
-            true,
-            false,
-        );
+        let save_rc = r(o, bx, 281.0, 459.0 - bx, 21.0);
+        let save = winui::combo_edit(ui, save_rc, &mut self.folder);
+        if winui::combo_arrow(ui, save_rc, "video-save-as", self.folders_open).clicked()
+            || winui::combo_keys(ui, &save)
+        {
+            self.folders_open = !self.folders_open;
+        }
+        let at = self
+            .folders
+            .iter()
+            .position(|f| crate::dialogs::resolve_path(f).as_path() == crate::dialogs::resolve_path(&self.folder).as_path());
+        if !self.folders_open
+            && let Some(i) = winui::history_keys(ui, &save, self.folders.len(), at)
+        {
+            self.folder = crate::dialogs::resolve_path(&self.folders[i]).display().to_string();
+        }
+        winui::keep_edit_keys(ui, &save, self.folders_open);
+        let folders_were_open = self.folders_open;
         if winui::button(
             ui,
             r(o, 467.0, 281.0, 22.0, 21.0),
@@ -1179,6 +1234,23 @@ impl VideoDialog {
                 self.set_category(*c);
             }
         }
+        if self.folders_open {
+            let shown: Vec<String> = self
+                .folders
+                .iter()
+                .map(|f| crate::dialogs::display_path(std::path::Path::new(f)))
+                .collect();
+            if let Some(i) = winui::drop_list(
+                ui,
+                "video-save-as-history",
+                save_rc,
+                &shown,
+                crate::i18n::t("No folders yet"),
+                &mut self.folders_open,
+            ) {
+                self.folder = crate::dialogs::resolve_path(&self.folders[i]).display().to_string();
+            }
+        }
 
         let cancel = winui::button(
             ui,
@@ -1191,7 +1263,7 @@ impl VideoDialog {
         .clicked();
         // Escape answers the playlist's question first, when it's asked.
         let asking = self.list.as_ref().is_some_and(|l| l.asking());
-        if cancel || (winui::escape_pressed(ui) && !asking && !category_was_open) {
+        if cancel || (winui::escape_pressed(ui) && !asking && !category_was_open && !folders_were_open) {
             return Outcome::Closed;
         }
         if ready && (now || later) {

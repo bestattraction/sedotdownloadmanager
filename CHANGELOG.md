@@ -5,6 +5,22 @@ Each release's notes on GitHub come from its section here (`## [X.Y.Z]`, see
 
 ## [Unreleased]
 
+## [0.6.16] - 2026-11-24
+
+### Fixed
+- **Download Complete Dialog Decoupled from Main Window Ownership**:
+  - Fixed an issue where clicking Close on the "Download complete" or group summary window caused the main application window to flash on screen for a split second before minimizing back to the tray.
+  - Added `complete-*` and `group-done-*` dialogs (and all `Notice` dialogs) to autonomous dialogs, ensuring they operate as independent top-level windows without Win32 main window ownership.
+  - Added a visibility and non-minimized check (`find_own_visible_owner`) so child dialogs never take a hidden or minimized main window as their Win32 owner.
+- **Video Sniffing & Stream Resolution Extraction**:
+  - Fixed an issue where ephemeral CDN tokens (e.g. HLS `.m3u8` manifests) on popular platforms (such as YouTube, Pornhub, Vimeo, and TikTok) returned `HTTP Error 410: Gone` or restricted yt-dlp to a single video resolution. The native host now passes canonical page addresses so all video qualities (1080p, 720p, etc.) are detected properly.
+  - Added support for Firefox Total Cookie Protection (`partitionKey: {}`) and Multi-Account Containers in the extension, ensuring authenticated video sessions reliably detect high-resolution formats.
+- **Connection Progress Bar & Resume Visuals**:
+  - Replaced glitching red vertical segment stripes with a clean, solid blue connection bar for video downloads and downloads with numerous connections/segments.
+  - Preserved downloaded byte counts and progress percentages during download resume handshake (`Connecting...`), preventing temporary resets to 0%.
+- **Download Video Dialog Folder History**:
+  - Replaced the single-line text input for "Save to" in the "Download video from a page" dialog with an editable combobox featuring recently used save folder history and shortcut navigation (Alt+Down / F4).
+
 ## [0.6.15] - 2026-11-23
 
 ### Fixed

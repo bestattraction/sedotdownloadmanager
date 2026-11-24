@@ -235,16 +235,45 @@ fn build_client() -> reqwest::Client {
         .unwrap_or_default()
 }
 
+async fn fetch_json<T: serde::de::DeserializeOwned>(
+    client: &reqwest::Client,
+    url: &str,
+) -> Option<T> {
+    let resp = client.get(url).send().await.ok()?;
+    if !resp.status().is_success() {
+        return None;
+    }
+    resp.json::<T>().await.ok()
+}
+
+fn map_bitsearch_items(items: Vec<BitsearchItem>) -> Vec<TorrentSearchResult> {
+    let mut results = Vec::new();
+    for it in items {
+        let hash = it.infohash.trim().to_ascii_lowercase();
+        if hash.len() != 40 || it.title.is_empty() {
+            continue;
+        }
+        let added = it
+            .created_at
+            .as_deref()
+            .map(parse_rfc3339_date)
+            .unwrap_or(0);
+        results.push(TorrentSearchResult {
+            name: it.title,
+            info_hash: hash,
+            size: it.size,
+            seeders: it.seeders,
+            leechers: it.leechers,
+            added,
+        });
+    }
+    results
+}
+
 async fn search_apibay(client: &reqwest::Client, query: &str) -> Vec<TorrentSearchResult> {
     let encoded: String = url::form_urlencoded::byte_serialize(query.as_bytes()).collect();
     let url = format!("https://apibay.org/q.php?q={encoded}");
-    let Ok(resp) = client.get(&url).send().await else {
-        return Vec::new();
-    };
-    if !resp.status().is_success() {
-        return Vec::new();
-    }
-    let Ok(items) = resp.json::<Vec<ApibayItem>>().await else {
+    let Some(items) = fetch_json::<Vec<ApibayItem>>(client, &url).await else {
         return Vec::new();
     };
 
@@ -273,85 +302,25 @@ async fn search_apibay(client: &reqwest::Client, query: &str) -> Vec<TorrentSear
 async fn search_bitsearch(client: &reqwest::Client, query: &str) -> Vec<TorrentSearchResult> {
     let encoded: String = url::form_urlencoded::byte_serialize(query.as_bytes()).collect();
     let url = format!("https://bitsearch.to/api/v1/search?q={encoded}&limit=100&sort=seeders");
-    let Ok(resp) = client.get(&url).send().await else {
-        return Vec::new();
-    };
-    if !resp.status().is_success() {
-        return Vec::new();
-    }
-    let Ok(data) = resp.json::<BitsearchResponse>().await else {
-        return Vec::new();
-    };
-
-    let mut results = Vec::new();
-    for it in data.results {
-        let hash = it.infohash.trim().to_ascii_lowercase();
-        if hash.len() != 40 || it.title.is_empty() {
-            continue;
-        }
-        let added = it
-            .created_at
-            .as_deref()
-            .map(parse_rfc3339_date)
-            .unwrap_or(0);
-        results.push(TorrentSearchResult {
-            name: it.title,
-            info_hash: hash,
-            size: it.size,
-            seeders: it.seeders,
-            leechers: it.leechers,
-            added,
-        });
-    }
-    results
+    fetch_json::<BitsearchResponse>(client, &url)
+        .await
+        .map(|d| map_bitsearch_items(d.results))
+        .unwrap_or_default()
 }
 
 async fn search_solidtorrents(client: &reqwest::Client, query: &str) -> Vec<TorrentSearchResult> {
     let encoded: String = url::form_urlencoded::byte_serialize(query.as_bytes()).collect();
     let url = format!("https://solidtorrents.to/api/v1/search?q={encoded}&sort=seeders");
-    let Ok(resp) = client.get(&url).send().await else {
-        return Vec::new();
-    };
-    if !resp.status().is_success() {
-        return Vec::new();
-    }
-    let Ok(data) = resp.json::<BitsearchResponse>().await else {
-        return Vec::new();
-    };
-
-    let mut results = Vec::new();
-    for it in data.results {
-        let hash = it.infohash.trim().to_ascii_lowercase();
-        if hash.len() != 40 || it.title.is_empty() {
-            continue;
-        }
-        let added = it
-            .created_at
-            .as_deref()
-            .map(parse_rfc3339_date)
-            .unwrap_or(0);
-        results.push(TorrentSearchResult {
-            name: it.title,
-            info_hash: hash,
-            size: it.size,
-            seeders: it.seeders,
-            leechers: it.leechers,
-            added,
-        });
-    }
-    results
+    fetch_json::<BitsearchResponse>(client, &url)
+        .await
+        .map(|d| map_bitsearch_items(d.results))
+        .unwrap_or_default()
 }
 
 async fn search_torrents_csv(client: &reqwest::Client, query: &str) -> Vec<TorrentSearchResult> {
     let encoded: String = url::form_urlencoded::byte_serialize(query.as_bytes()).collect();
     let url = format!("https://torrents-csv.com/service/search?q={encoded}&size=100");
-    let Ok(resp) = client.get(&url).send().await else {
-        return Vec::new();
-    };
-    if !resp.status().is_success() {
-        return Vec::new();
-    }
-    let Ok(data) = resp.json::<TorrentsCsvResponse>().await else {
+    let Some(data) = fetch_json::<TorrentsCsvResponse>(client, &url).await else {
         return Vec::new();
     };
 
@@ -427,16 +396,10 @@ pub fn matches_query(name: &str, query: &str) -> bool {
 async fn search_eztv(client: &reqwest::Client, query: &str) -> Vec<TorrentSearchResult> {
     let encoded: String = url::form_urlencoded::byte_serialize(query.as_bytes()).collect();
     let url = format!("https://eztv.re/api/get-torrents?limit=100&query={encoded}");
-    let Ok(resp) = client.get(&url).send().await else {
-        return Vec::new();
-    };
-    if !resp.status().is_success() {
-        return Vec::new();
-    }
-    let Ok(data) = resp.json::<EztvResponse>().await else {
-        return Vec::new();
-    };
-    let mut results = parse_eztv_torrents(data);
+    let mut results = fetch_json::<EztvResponse>(client, &url)
+        .await
+        .map(parse_eztv_torrents)
+        .unwrap_or_default();
     results.retain(|it| matches_query(&it.name, query));
     results
 }
@@ -444,17 +407,14 @@ async fn search_eztv(client: &reqwest::Client, query: &str) -> Vec<TorrentSearch
 async fn search_nyaa(client: &reqwest::Client, query: &str) -> Vec<TorrentSearchResult> {
     let encoded: String = url::form_urlencoded::byte_serialize(query.as_bytes()).collect();
     let url = format!("https://nyaa.si/?page=rss&q={encoded}&s=seeders&o=desc");
-    let Ok(resp) = client.get(&url).send().await else {
-        return Vec::new();
+    let resp = match client.get(&url).send().await {
+        Ok(r) if r.status().is_success() => r,
+        _ => return Vec::new(),
     };
-    if !resp.status().is_success() {
-        return Vec::new();
-    }
-    let Ok(xml) = resp.text().await else {
-        return Vec::new();
-    };
-
-    parse_nyaa_rss(&xml)
+    resp.text()
+        .await
+        .map(|xml| parse_nyaa_rss(&xml))
+        .unwrap_or_default()
 }
 
 pub struct TorrentSearch {

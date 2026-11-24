@@ -502,6 +502,20 @@ pub fn window_hidden(title: &str) -> bool {
     find_own_window(title).is_some_and(|h| unsafe { IsWindowVisible(h) == 0 && IsIconic(h) == 0 })
 }
 
+/// Returns the HWND of `title` if it exists, is visible, and is not minimized.
+pub fn find_own_visible_owner(title: &str) -> Option<isize> {
+    use windows_sys::Win32::UI::WindowsAndMessaging::{IsIconic, IsWindowVisible};
+    let h = find_own_window(title)?;
+    // SAFETY: plain queries about our own window.
+    unsafe {
+        if IsWindowVisible(h) != 0 && IsIconic(h) == 0 {
+            Some(h as isize)
+        } else {
+            None
+        }
+    }
+}
+
 /// Our window titled `title` shown (it was hidden behind winit's back), not activated, and above
 /// the other programs' windows ([`come_forward`]) unless off-screen.
 pub fn show_hidden(title: &str) {

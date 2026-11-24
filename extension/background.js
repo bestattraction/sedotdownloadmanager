@@ -1643,13 +1643,24 @@ async function mediaDownload(tabId, url) {
 
 // Cookies from the store the download belongs to, never another: Firefox names it on the
 // download (private windows and containers each have their own); Chrome's incognito store is "1".
-async function cookiesFor(url, { incognito, storeId }) {
+async function cookiesFor(url, { incognito, storeId, partitioned = false } = {}) {
+  const effectiveStoreId = (storeId && storeId !== "firefox-default") ? storeId : incognito ? "1" : null;
+  const query = effectiveStoreId ? { url, storeId: effectiveStoreId } : { url };
+  let list = [];
   try {
-    const query = storeId ? { url, storeId } : incognito ? { url, storeId: "1" } : { url };
-    return (await ext.cookies.getAll(query)) || [];
+    list = (await ext.cookies.getAll(query)) || [];
   } catch {
-    return [];
+    list = [];
   }
+  if (partitioned && (!list || list.length === 0)) {
+    try {
+      // Firefox Total Cookie Protection partitions cookies; partitionKey: {} queries across partitions
+      list = (await ext.cookies.getAll({ ...query, partitionKey: {} })) || [];
+    } catch {
+      // Chromium or environments rejecting partitionKey: {}
+    }
+  }
+  return list;
 }
 
 function header(list) {
@@ -1665,8 +1676,47 @@ async function cookieHeader(url, ctx) {
 // so the app files `.youtube.com`'s sign-in for every host of it and a host's own cookie for
 // that host alone. The header goes too, for an older app.
 async function videoCookies(url, ctx) {
-  const list = await cookiesFor(url, ctx);
-  const cookieJar = list.map((c) => ({
+  const list = await cookiesFor(url, { ...(ctx || {}), partitioned: true });
+  const isYt = isYouTube(url);
+  const extraList = [];
+  if (isYt) {
+    const storeOpts = ctx && ctx.storeId && ctx.storeId !== "firefox-default" ? { storeId: ctx.storeId } : {};
+    const queryAttempts = [
+      { partitionKey: {}, ...storeOpts },
+      { ...storeOpts },
+      {}
+    ];
+    for (const q of queryAttempts) {
+      try {
+        const cookies = await ext.cookies.getAll(q);
+        if (cookies && cookies.length > 0) {
+          for (const c of cookies) {
+            const d = (c.domain || "").toLowerCase().replace(/^\./, "");
+            if (
+              d === "youtube.com" ||
+              d.endsWith(".youtube.com") ||
+              d === "google.com" ||
+              d.endsWith(".google.com") ||
+              d === "youtube-nocookie.com" ||
+              d === "youtu.be"
+            ) {
+              extraList.push(c);
+            }
+          }
+        }
+      } catch {}
+    }
+  }
+  const seen = new Set();
+  const allCookies = [];
+  for (const c of [...list, ...extraList]) {
+    const key = `${c.domain || ""}|${c.path || "/"}|${c.name}`;
+    if (!seen.has(key)) {
+      seen.add(key);
+      allCookies.push(c);
+    }
+  }
+  const cookieJar = allCookies.map((c) => ({
     name: c.name,
     value: c.value,
     domain: c.domain,
@@ -1675,7 +1725,7 @@ async function videoCookies(url, ctx) {
     secure: Boolean(c.secure),
     ...(typeof c.expirationDate === "number" ? { expirationDate: c.expirationDate } : {}),
   }));
-  return { cookies: header(list), cookieJar };
+  return { cookies: header(allCookies), cookieJar };
 }
 
 // The cookies of a tab's stream (`videoCookies`) and what the browser sent with it (#900): the
@@ -2886,6 +2936,20 @@ async function videoTarget(m, page, sender) {
   const src = file || (played ? played.url : "") || (post || feed ? "" : await streamFor(sender));
   if (!named && !src) return null;
   const own = named || page;
+  const cookieCtx = { incognito: tab.incognito, storeId: tab.cookieStoreId };
+  const pageCookies = await videoCookies(own, cookieCtx);
+  const streamCtx = (src && src !== own)
+    ? await streamContext(tab.id, src, cookieCtx)
+    : await streamContext(tab.id, own, cookieCtx);
+  const seenCookies = new Set();
+  const mergedJar = [];
+  for (const c of [...(pageCookies.cookieJar || []), ...(streamCtx.cookieJar || [])]) {
+    const key = `${c.domain}|${c.path || "/"}|${c.name}`;
+    if (!seenCookies.has(key)) {
+      seenCookies.add(key);
+      mergedJar.push(c);
+    }
+  }
   return {
     own,
     src,
@@ -2895,10 +2959,9 @@ async function videoTarget(m, page, sender) {
     file,
     title: played || (!post && !feed) ? shownTitle(m, page, sender) : "",
     referrer: tab.url && tab.url !== own ? tab.url : "",
-    // The cookies of what yt-dlp is given (the app files them under its host): the stream's
-    // own server may not be the page's, and the page's cookies are not for it. With a stream's,
-    // what the browser sent with it (#900).
-    ...(await streamContext(tab.id, src || own, { incognito: tab.incognito, storeId: tab.cookieStoreId })),
+    cookies: (isYouTube(own) ? pageCookies.cookies : streamCtx.cookies) || pageCookies.cookies || streamCtx.cookies || "",
+    cookieJar: mergedJar,
+    ...(streamCtx.fetchedWith ? { fetchedWith: streamCtx.fetchedWith } : {}),
   };
 }
 

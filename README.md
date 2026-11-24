@@ -15,7 +15,7 @@
 
 <p align="center">
   🧩 <b>Browser Extension:</b><br>
-  Available for Chromium (Chrome, Edge, Brave, Opera, Vivaldi) and Firefox. See <a href="#browser-extension-guide">Browser Extension Guide</a> below.
+  Available on <a href="https://addons.mozilla.org/en-US/firefox/addon/sedot-download-manager/">Firefox Add-ons</a> and Chromium (Chrome, Edge, Brave, Opera, Vivaldi). See <a href="#browser-extension-guide">Browser Extension Guide</a> below.
 </p>
 
 <p align="center">
@@ -85,9 +85,11 @@ The **Sedot Download Manager Extension** integrates seamlessly with your web bro
 6. Click the Extensions (puzzle piece) icon in your browser toolbar and pin **Sedot Download Manager**.
 
 #### For Mozilla Firefox:
-1. Download `sdm-firefox.xpi` from [Releases](https://github.com/bestattraction/sedotdownloadmanager/releases).
-2. Open Firefox and go to `about:debugging#/runtime/this-firefox`.
-3. Click **Load Temporary Add-on...** and choose `manifest.json` from the unpacked folder or select `sdm-firefox.xpi`.
+1. **Direct Install (Recommended)**: Install directly from [Firefox Add-ons (AMO)](https://addons.mozilla.org/en-US/firefox/addon/sedot-download-manager/) by clicking **Add to Firefox**. Firefox will handle installation and keep the extension automatically updated.
+2. **Manual / Offline (.xpi)**:
+   - Download `sdm-firefox.xpi` from [Releases](https://github.com/bestattraction/sedotdownloadmanager/releases).
+   - Open Firefox and go to `about:debugging#/runtime/this-firefox`.
+   - Click **Load Temporary Add-on...** and select `sdm-firefox.xpi` (or `manifest.json` from the unpacked extension folder).
 
 ---
 

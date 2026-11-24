@@ -448,6 +448,7 @@ impl InfoSlot {
 /// the look-up, and the choice as the menu offered it (MDM's selector, its label, untranslated,
 /// and whether the menu's list had merged qualities). The page yt-dlp read must offer that very
 /// choice, or the run looks the page up itself.
+#[derive(Clone, Debug)]
 pub struct Preloaded {
     pub slot: InfoSlot,
     pub selector: String,

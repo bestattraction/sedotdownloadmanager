@@ -245,10 +245,18 @@ impl Glide {
             // part of it does: the map's segments together stay what the bar shows.
             self.from_segments = segments
                 .iter()
-                .map(|&(start, d)| {
+                .enumerate()
+                .map(|(idx, &(start, d))| {
                     drawn_segments
                         .iter()
                         .find(|(s, _)| *s == start)
+                        .or_else(|| {
+                            if segments.len() == drawn_segments.len() {
+                                drawn_segments.get(idx)
+                            } else {
+                                None
+                            }
+                        })
                         .map_or(0.0, |&(_, x)| x.min(d as f64))
                 })
                 .collect();
@@ -534,11 +542,12 @@ impl Progress {
                 .collect(),
             _ => vec![(0, item.downloaded)],
         };
+        let running = item.status == Status::Downloading && item.live.is_some();
         let drawn = self.glide.step(
             ctx.input(|i| i.time),
             item.downloaded,
             &segments,
-            item.status == Status::Complete,
+            item.status == Status::Complete || !running,
         );
         // Never past the fraction: a video's bar holds short of the end until it is finished,
         // as its percentage does ([`Item::fraction`]); no size, no fill.
@@ -927,7 +936,7 @@ impl Progress {
                 crate::i18n::t("Start positions and download progress by connections"),
                 winui::TEXT(),
             );
-            segment_bar(&p, lower, item, drawn.1);
+            segment_bar(&p, lower, item, drawn.0, drawn.1);
             connections(ui, &p, lower, snap);
         }
         action
@@ -2362,6 +2371,7 @@ fn finishing_fraction(snap: Option<&Snapshot>) -> Option<f64> {
 /// The columns a segment fills in the segment bar, from its start column's right to its end's
 /// left, `total` bytes across `width` columns: a finished segment reaches the next one's start
 /// column, so a finished download leaves no gap (#736). None when it fills none.
+#[cfg(test)]
 fn segment_columns(start: u64, done: f64, total: u64, width: f64) -> Option<(f32, f32)> {
     let col = |v: f64| (v / total as f64 * width).floor();
     let first = col(start as f64);
@@ -2372,7 +2382,7 @@ fn segment_columns(start: u64, done: f64, total: u64, width: f64) -> Option<(f32
 
 /// The custom-drawn segment bar (spec "Segment bar"): 13-row gradients, red start columns;
 /// `segments`: each one's start and bytes done, as drawn ([`Glide`]).
-fn segment_bar(p: &egui::Painter, o: Pos2, item: &Item, segments: &[(u64, f64)]) {
+fn segment_bar(p: &egui::Painter, o: Pos2, item: &Item, bar: f64, segments: &[(u64, f64)]) {
     let (x0, y0) = (o.x + 17.0, o.y + 249.0);
     let border = crate::theme::colors().segment_border;
     fill(p, x0, y0, x0 + 512.0, y0, border);
@@ -2406,13 +2416,54 @@ fn segment_bar(p: &egui::Painter, o: Pos2, item: &Item, segments: &[(u64, f64)])
     let Some(total) = item.size.filter(|t| *t > 0) else {
         return;
     };
-    let col = |v: f64| (v / total as f64 * 511.0).floor() as f32;
-    for &(start, done) in segments {
-        let sx = ix + col(start as f64);
-        if let Some((a, b)) = segment_columns(start, done, total, 511.0) {
+    // For video streams / piece downloads or when paused/stopped:
+    // The download progress is a solid contiguous block matching the green bar,
+    // without gaps, red stripes, or disappearing chunks.
+    if item.video.is_some()
+        || item.category == crate::model::Category::Video
+        || segments.len() > 32
+        || item.status != Status::Downloading
+    {
+        let frac = if item.status == Status::Downloading {
+            bar
+        } else {
+            (item.downloaded as f64 / total as f64).clamp(0.0, 1.0)
+        };
+        let b = ((frac * 510.0).round() as f32).clamp(0.0, 510.0);
+        if b > 0.0 {
+            run(ix, ix + b, 1);
+        }
+        return;
+    }
+    // For normal multi-connection file downloads (HTTP Range requests <= 32 segments):
+    let mut intervals: Vec<(f64, f64)> = segments
+        .iter()
+        .filter(|&(_, done)| *done > 0.0)
+        .map(|&(start, done)| (start as f64, (start as f64 + done).min(total as f64)))
+        .collect();
+    intervals.sort_by(|a, b| a.0.partial_cmp(&b.0).unwrap());
+    let mut merged: Vec<(f64, f64)> = Vec::new();
+    for (s, e) in intervals {
+        if let Some(last) = merged.last_mut() {
+            if s <= last.1 + 1.0 {
+                last.1 = last.1.max(e);
+                continue;
+            }
+        }
+        merged.push((s, e));
+    }
+    for (s, e) in merged {
+        let a = ((s / total as f64 * 510.0).round() as f32).clamp(0.0, 510.0);
+        let b = ((e / total as f64 * 510.0).round() as f32).clamp(0.0, 510.0);
+        if b >= a {
             run(ix + a, ix + b, 1);
         }
-        run(sx, sx, 2);
+    }
+    for &(start, done) in segments {
+        if done > 0.0 {
+            let sx = ix + ((start as f64 / total as f64 * 510.0).floor() as f32).clamp(0.0, 510.0);
+            run(sx, sx, 2);
+        }
     }
 }
 

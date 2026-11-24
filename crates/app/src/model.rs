@@ -1236,8 +1236,8 @@ impl Item {
             live.addressed = true;
             self.file_url = Some(s.url.clone());
         }
-        self.downloaded = s.downloaded;
-        self.size = size_after(s.state, s.size, s.downloaded, self.size);
+        self.downloaded = self.downloaded.max(s.downloaded);
+        self.size = size_after(s.state, s.size, self.downloaded, self.size);
         self.resumable = s.resumable.or(self.resumable);
         if let Some(f) = &s.file {
             // Named now: a later start from scratch keeps this name, and its file is its own.
@@ -1462,10 +1462,10 @@ impl Item {
     /// The speed shown (bytes a second): the list's Transfer rate, the progress window's, the
     /// total in the status strip and the tray's tip all show this one ([`Speed`]).
     pub fn rate(&self) -> f64 {
-        if let Some(t) = &self.torrent {
-            if t.down_speed > 0.0 {
-                return t.down_speed;
-            }
+        if let Some(t) = &self.torrent
+            && t.down_speed > 0.0
+        {
+            return t.down_speed;
         }
         self.live.as_ref().map_or(0.0, |l| l.speed.shown())
     }

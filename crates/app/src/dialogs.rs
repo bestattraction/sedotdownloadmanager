@@ -506,6 +506,8 @@ fn dialog_activates_on_open(kind: Kind) -> bool {
 /// behind them, nor hide them when the main window is minimized, and returns focus to the browser on close.
 pub(crate) fn is_autonomous_dialog(id: &str) -> bool {
     matches!(id, "file-info" | "video" | "duplicate" | "add-torrent")
+        || id.starts_with("complete-")
+        || id.starts_with("group-done-")
 }
 
 #[allow(clippy::too_many_arguments)]
@@ -521,13 +523,11 @@ fn dialog_window<T>(
 ) -> Outcome<T> {
     let caller_vid = ctx.viewport_id();
     #[cfg(windows)]
-    let parent_hwnd = if is_autonomous_dialog(id) {
+    let parent_hwnd = if is_autonomous_dialog(id) || matches!(kind, Kind::Notice { .. }) {
         None
-    } else if caller_vid == ViewportId::ROOT {
-        crate::win32::find_own_window(crate::MAIN_TITLE).map(|h| h as isize)
     } else {
         ctx.data(|d| d.get_temp::<isize>(egui::Id::unique(("viewport-hwnd", caller_vid))))
-            .or_else(|| crate::win32::find_own_window(crate::MAIN_TITLE).map(|h| h as isize))
+            .or_else(|| crate::win32::find_own_visible_owner(crate::MAIN_TITLE))
     };
     let modal = kind == Kind::Question;
     let is_resizable = matches!(kind, Kind::Resizable { .. });
@@ -687,35 +687,33 @@ fn dialog_window<T>(
         // scale (the interface size, #262; another monitor's).
         let want = [shown[0], shown[1] + if drawn { 1e6 } else { 0.0 }];
         if rescaled || ctx.data(|d| d.get_temp::<[f32; 2]>(framed)) != Some(want) {
-            if is_resizable {
+            let hwnd = if is_resizable {
                 if drawn {
-                    if let Some(h) = crate::win32::drawn_frame(title, true) {
+                    let h = crate::win32::drawn_frame(title, true);
+                    if let Some(h) = h {
                         crate::win32::set_window_owner(h, parent_hwnd);
-                        ctx.data_mut(|d| {
-                            d.insert_temp(framed, want);
-                            d.insert_temp(key.with("hwnd"), h);
-                            d.insert_temp(egui::Id::unique(("viewport-hwnd", vid)), h);
-                        });
                     }
+                    h
                 } else {
                     ctx.data_mut(|d| d.insert_temp(framed, want));
+                    None
                 }
             } else if drawn {
-                if let Some(h) = crate::win32::thin_frame(title, shown, scale, None) {
+                let h = crate::win32::thin_frame(title, shown, scale, None);
+                if let Some(h) = h {
                     crate::win32::set_window_owner(h, parent_hwnd);
-                    ctx.data_mut(|d| {
-                        d.insert_temp(framed, want);
-                        d.insert_temp(key.with("hwnd"), h);
-                        d.insert_temp(egui::Id::unique(("viewport-hwnd", vid)), h);
-                    });
                 }
-            } else if let Some(h) = crate::win32::dialog_frame(
-                title,
-                shown,
-                !crate::theme::dark_surface(),
-                scale,
-                parent_hwnd,
-            ) {
+                h
+            } else {
+                crate::win32::dialog_frame(
+                    title,
+                    shown,
+                    !crate::theme::dark_surface(),
+                    scale,
+                    parent_hwnd,
+                )
+            };
+            if let Some(h) = hwnd {
                 ctx.data_mut(|d| {
                     d.insert_temp(framed, want);
                     d.insert_temp(key.with("hwnd"), h);

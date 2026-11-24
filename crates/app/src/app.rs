@@ -5349,6 +5349,32 @@ impl App {
         .with_chapters(self.settings.video_chapters)
         .with_music_folder(music)
         .with_category_dirs(dirs)
+        .with_folders(self.settings.folder_history.clone())
+    }
+
+    fn video_dialog_picked(
+        &self,
+        picked: crate::videolookup::Picked,
+    ) -> crate::videodlg::VideoDialog {
+        let dir = self.settings.category_dir(Category::Video, &self.downloads);
+        let music = (!Category::Music.deleted())
+            .then(|| self.settings.category_dir(Category::Music, &self.downloads));
+        let mut dirs = std::collections::HashMap::new();
+        for c in Category::all() {
+            dirs.insert(
+                c,
+                self.settings
+                    .category_dir(c, &self.downloads)
+                    .display()
+                    .to_string(),
+            );
+        }
+        crate::videodlg::VideoDialog::for_picked(dir, picked)
+            .with_subs(self.settings.video_subs.clone())
+            .with_chapters(self.settings.video_chapters)
+            .with_music_folder(music)
+            .with_category_dirs(dirs)
+            .with_folders(self.settings.folder_history.clone())
     }
 
     /// Download video from a page → Download Now / Later; or the browser's quality menu's
@@ -5432,7 +5458,7 @@ impl App {
     /// choice made there, added as Download video's Download Now adds it: MDM's window stays
     /// where it is, the download's progress window opens (Options' "only add to the queue":
     /// into the main queue instead, with no queue panel either).
-    fn quality_menu(&mut self, cmd: &ipc::Command) -> ipc::api::VideoLookupAnswer {
+    fn quality_menu(&mut self, cmd: &ipc::Command, ctx: &egui::Context) -> ipc::api::VideoLookupAnswer {
         use ipc::api::{VideoLookupAnswer, lookup};
         if menu_needs_window(cmd, self.headless) {
             return VideoLookupAnswer::of(lookup::USE_WINDOW);
@@ -5454,6 +5480,15 @@ impl App {
         let Some(pick) = &cmd.video_pick else {
             return VideoLookupAnswer::of(lookup::USE_WINDOW);
         };
+        if self.settings.show_start_dialog {
+            if let Some(picked) = self.lookups.pick(pick, cmd.private, now) {
+                let dlg = self.video_dialog_picked(picked);
+                self.show_for_dialog(ctx);
+                self.video_dlg = Some(dlg);
+                return VideoLookupAnswer::of(lookup::STARTED);
+            }
+            return VideoLookupAnswer::of(lookup::USE_WINDOW);
+        }
         let folder = self.settings.category_dir(Category::Video, &self.downloads);
         // A sound-only choice saves in Music, as in the Download video window (#611).
         let music = (!Category::Music.deleted())
@@ -6654,7 +6689,7 @@ impl App {
         if !cmd.remote
             && (cmd.video_lookup.is_some() || cmd.video_poll.is_some() || cmd.video_pick.is_some())
         {
-            return line(&self.quality_menu(cmd));
+            return line(&self.quality_menu(cmd, ctx));
         }
         if cmd.pair && !cmd.remote {
             return self.pair_answer();
@@ -11973,6 +12008,11 @@ impl App {
                         crate::settings::share_video_settings(&self.settings);
                         self.dirty = true;
                     }
+                    crate::settings::remember(
+                        &mut self.settings.folder_history,
+                        &v.save_folder().display().to_string(),
+                    );
+                    self.dirty = true;
                     self.video_dlg = None;
                     match out {
                         crate::videodlg::VideoOut::One(add) => {

@@ -30,6 +30,14 @@ pub fn is_video_page(url: &Url) -> bool {
                 || matches!(segs.as_slice(), ["shorts" | "live" | "embed" | "v", _, ..])
         }
         "youtu.be" => segs.len() == 1,
+        "pornhub.com" => {
+            (path == "/view_video.php" && query("viewkey"))
+                || matches!(segs.as_slice(), ["embed", _])
+        }
+        "xvideos.com" => matches!(segs.as_slice(), ["video" | "video.", _, ..] | [_, ""]),
+        "xnxx.com" => segs.first().is_some_and(|s| s.starts_with("video-")),
+        "youporn.com" => matches!(segs.as_slice(), ["watch", _, ..]),
+        "redtube.com" => segs.iter().any(|s| s.chars().all(|c| c.is_ascii_digit())),
         "vimeo.com" => segs.iter().any(|s| s.chars().all(|c| c.is_ascii_digit())),
         "player.vimeo.com" => matches!(segs.as_slice(), ["video", _, ..]),
         "dailymotion.com" => matches!(segs.as_slice(), ["video", _, ..]),
