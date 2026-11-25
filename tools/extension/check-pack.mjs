@@ -22,7 +22,7 @@ const idOf = (key) =>
     .map((c) => String.fromCharCode(97 + parseInt(c, 16)))
     .join("");
 
-for (const kind of ["chromium", "chrome-store", "firefox", "safari"]) {
+for (const kind of ["chromium", "chrome-store", "firefox"]) {
   const dir = new URL(`${kind}/`, out);
   const m = JSON.parse(readFileSync(new URL("manifest.json", dir), "utf8"));
   assert.equal(m.version, version, `${kind}: the app's version`);

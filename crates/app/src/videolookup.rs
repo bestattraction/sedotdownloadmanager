@@ -45,8 +45,8 @@ const MESSAGE_MAX: usize = 2000;
 pub enum Found {
     #[default]
     Looking,
-    /// A video, with the choices offered for it (none: nothing this can download).
-    Video(Video, Vec<Choice>),
+    /// A video, with the choices offered for it and extractor source (`"rust"` / `"yt-dlp"`).
+    Video(Video, Vec<Choice>, &'static str),
     /// A list of videos (a playlist, a channel): chosen from in MDM's window.
     List,
     /// yt-dlp's error.
@@ -57,10 +57,14 @@ impl Found {
     /// What yt-dlp's look-up found, with the choices the Download video window offers for it
     /// (merged qualities when `merge`: ffmpeg is there).
     pub fn of(res: Result<Looked, String>, merge: bool) -> Found {
+        Self::of_source(res, merge, "yt-dlp")
+    }
+
+    pub fn of_source(res: Result<Looked, String>, merge: bool, source: &'static str) -> Found {
         match res {
             Ok(Looked::Video(v)) => {
                 let choices = mdm_tools::resolve::choices(&v, merge);
-                Found::Video(v, choices)
+                Found::Video(v, choices, source)
             }
             Ok(Looked::List(_)) => Found::List,
             Err(e) => Found::Failed(e),
@@ -360,7 +364,7 @@ impl Lookups {
             return None;
         }
         let (video, choice) = match &*lock(&s.found) {
-            Found::Video(v, choices) => (v.clone(), choices.get(pick.choice)?.clone()),
+            Found::Video(v, choices, _) => (v.clone(), choices.get(pick.choice)?.clone()),
             _ => return None,
         };
         let s = self.searches.remove(&pick.token)?;
@@ -475,15 +479,16 @@ fn notice(v: &Video) -> Option<VideoNotice> {
 fn answer(token: &str, s: &Search) -> VideoLookupAnswer {
     match &*lock(&s.found) {
         Found::Looking => VideoLookupAnswer::pending(token),
-        Found::Video(v, choices) if choices.is_empty() => VideoLookupAnswer {
+        Found::Video(v, choices, _) if choices.is_empty() => VideoLookupAnswer {
             notice: notice(v),
             ..VideoLookupAnswer::failed(lookup::NO_CHOICES, None)
         },
-        Found::Video(v, choices) => VideoLookupAnswer {
+        Found::Video(v, choices, source) => VideoLookupAnswer {
             token: Some(token.to_owned()),
             title: Some(cut(title_of(v, &s.address, &s.context), TITLE_MAX)),
             choices: choices.iter().take(CHOICES).map(menu_choice).collect(),
             notice: notice(v),
+            source: Some((*source).to_owned()),
             ..VideoLookupAnswer::of(lookup::READY)
         },
         Found::List => VideoLookupAnswer::of(lookup::LIST),
@@ -588,11 +593,17 @@ fn settle(
     slow: impl FnOnce() -> Kept,
 ) {
     let mine = found.clone();
+    let started = Instant::now();
     let reading = rt.spawn(async move {
         if let Some(v) = fast.await {
             let mut found = lock(&mine);
             if matches!(*found, Found::Looking) {
-                *found = Found::of(Ok(Looked::Video(v)), merge);
+                tracing::info!(
+                    "video lookup: native fast-path succeeded in {} ms ({} formats)",
+                    started.elapsed().as_millis(),
+                    v.formats.len()
+                );
+                *found = Found::of_source(Ok(Looked::Video(v)), merge, "rust");
             }
         }
     });
@@ -606,6 +617,10 @@ fn settle(
     }
     let mut found = lock(found);
     if matches!(*found, Found::Looking) {
+        tracing::info!(
+            "video lookup: yt-dlp finished in {} ms",
+            started.elapsed().as_millis()
+        );
         *found = Found::of(res, merge);
     }
 }
@@ -1064,7 +1079,7 @@ mod tests {
         };
         let failed = || -> Kept { (Err("yt-dlp failed: no".into()), None) };
         let title = |found: &Shared| match &*lock(found) {
-            Found::Video(v, _) => v.title.clone(),
+            Found::Video(v, _, _) => v.title.clone(),
             Found::Failed(e) => format!("failed: {e}"),
             _ => "other".into(),
         };

@@ -3357,13 +3357,12 @@ impl App {
             // Drive names its file itself; its page's title ("… - Google Drive") doesn't.
             cmd.video_title = None;
         }
-        // The button over a video that plays a plain file (#703): downloaded as any file, at
-        // once and without a window (its page the referrer), as Download File Info's Start would.
+        // The button over a video that plays a plain file (#703): downloaded as any file,
+        // respecting "Show start download dialog" so the user can choose where to save it.
         if cmd.video_direct
             && let Some(file) = cmd.video_page.take()
         {
             cmd.url = Some(file);
-            cmd.silent = true;
         }
         // The browser's download button over a video: the Download video window, looking the
         // page up at once. The main window stays where it is (hidden, minimized): only the
@@ -3497,7 +3496,8 @@ impl App {
         // Options → Downloads → "Show start download dialog" off: start (or only queue) at once.
         let skip_dialog = !self.settings.show_start_dialog;
         if cmd.later || cmd.silent || skip_dialog {
-            let guessed = cmd.name.is_none();
+            let guessed =
+                cmd.name.is_none() && !(cmd.video_direct && cmd.video_title.is_some());
             let name = cmd
                 .name
                 .clone()

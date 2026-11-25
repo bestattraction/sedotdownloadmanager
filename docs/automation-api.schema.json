@@ -858,6 +858,13 @@
             "null"
           ]
         },
+        "source": {
+          "description": "Which extractor produced the choices (`\"rust\"` or `\"yt-dlp\"`).",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
         "state": {
           "default": "",
           "description": "One of [`lookup`]'s states.",

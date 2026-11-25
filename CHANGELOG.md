@@ -5,6 +5,27 @@ Each release's notes on GitHub come from its section here (`## [X.Y.Z]`, see
 
 ## [Unreleased]
 
+## [0.6.17] - 2026-11-25
+
+### Added
+- **Native Rust Fast-Path Video Extractor**:
+  - Added direct native Rust page and HLS extraction (`extract_pornhub`, `extract_xvideos`, `Master::video_with_duration`) so supported sites resolve qualities in under 1–2 seconds without waiting for `yt-dlp` cold-start.
+  - Added extractor source indicator (`Native Rust` vs `yt-dlp`) in the browser extension quality menu and `VideoLookupAnswer`.
+- **Browser Extension UX & Pre-fetching**:
+  - Added automatic background pre-fetching of video qualities on single-video watch pages as soon as the page loads, rather than waiting for pointer hover.
+  - Increased video download button auto-hide idle timeout from 1.5 s to 5 s (`IDLE_MS = 5000`).
+
+### Fixed
+- **Direct Video Downloads (`noodlemagazine.com` & `<video>` files)**:
+  - Respected "Show start download dialog" for direct video downloads instead of forcing silent background download, allowing users to pick the save folder before starting.
+  - Automatically grabbed and preserved the video's page title (with proper extension) as the filename instead of generic CDN hashes or resolution names.
+- **Helper Tools Update & Cleanup**:
+  - Fixed helper tool path resolution (`read_current`) when `current.json` still pointed to a legacy `misterdownloadmanager` folder path, restoring `yt-dlp` and `ffmpeg` update detection.
+  - Automatically removed all previous helper tool version folders upon updating to a newer release.
+- **Alt+Click Bypass & Release Workflow**:
+  - Updated `page.js` synchronous `Alt+Click` handling across Chrome and Firefox to preserve user gesture activation on links and interactive download buttons.
+  - Collapsed release changelog notes in `<details>` on GitHub Releases and streamlined extension packaging by skipping Safari builds.
+
 ## [0.6.16] - 2026-11-24
 
 ### Fixed

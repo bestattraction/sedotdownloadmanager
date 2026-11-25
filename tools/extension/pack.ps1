@@ -19,7 +19,7 @@ $version = [regex]::Match($cargo, '(?m)^version\s*=\s*"([^"]+)"').Groups[1].Valu
 if (-not $version) { throw "no version in Cargo.toml" }
 # The stores take one to four dot-separated numbers only (no "-rc.1").
 if ($version -notmatch '^\d+(\.\d+){0,3}$') { throw "version ${version}: browsers take only numbers like 1.2.3" }
-foreach ($kind in "chromium", "firefox", "safari") {
+foreach ($kind in "chromium", "firefox") {
   $dir = Join-Path $out $kind
   if (Test-Path $dir) { Remove-Item -LiteralPath $dir -Recurse -Force }
   New-Item -ItemType Directory -Force $dir | Out-Null

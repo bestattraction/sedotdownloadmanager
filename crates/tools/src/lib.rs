@@ -299,15 +299,32 @@ pub fn installed(dir: &Path) -> Option<Installed> {
     own.or_else(|| system::installed("yt-dlp"))
 }
 
+pub(crate) fn read_current(dir: &Path, tool: &str) -> Option<Installed> {
+    let text = std::fs::read(dir.join(tool).join("current.json")).ok()?;
+    let mut i: Installed = serde_json::from_slice(&text).ok()?;
+    if i.exe.is_file() {
+        return Some(i);
+    }
+    let comps: Vec<_> = i.exe.components().collect();
+    if let Some(pos) = comps.iter().rposition(|c| c.as_os_str() == tool) {
+        let rel: PathBuf = comps[pos + 1..].iter().collect();
+        let candidate = dir.join(tool).join(rel);
+        if candidate.is_file() {
+            i.exe = candidate;
+            return Some(i);
+        }
+    }
+    None
+}
+
 fn own_ytdlp(dir: &Path) -> Option<Installed> {
-    let text = std::fs::read(dir.join("yt-dlp").join("current.json")).ok()?;
-    let i: Installed = serde_json::from_slice(&text).ok()?;
+    let i = read_current(dir, "yt-dlp")?;
     // macOS: the one-file build earlier versions installed can't run from a downloaded app
     // (`folder`). On Windows it runs, only slower: used until the folder build replaces it.
     if cfg!(target_os = "macos") && folder::one_file_build(&i.exe) {
         return None;
     }
-    i.exe.is_file().then_some(i)
+    Some(i)
 }
 
 /// Versions are release dates (`2026.10.26`, maybe `.1`): numeric parts compare in order.
@@ -464,16 +481,11 @@ pub(crate) fn put(
 }
 
 /// Make `now` (installed in a folder of `root`, `root/<version>/` mostly) the current version of a
-/// tool: `current.json` switched atomically, the previous version kept for rollback, older ones
-/// removed.
+/// tool: `current.json` switched atomically, and all older version folders removed.
 pub(crate) fn make_current(root: &Path, now: Installed) -> Result<Installed, Error> {
-    let previous = std::fs::read(root.join("current.json"))
-        .ok()
-        .and_then(|t| serde_json::from_slice::<Installed>(&t).ok());
     let json = serde_json::to_vec_pretty(&now).map_err(std::io::Error::other)?;
     craft_atomic::atomic_write(&root.join("current.json"), &json)?;
-    // Keep the new and the previous version's folders; older ones go. A version's folder is the
-    // one its program is in, under `root` (its version's name, unless that was taken: `folder`).
+    // Keep only the new version's folder; remove all older ones.
     let folder_of = |i: &Installed| {
         i.exe
             .strip_prefix(root)
@@ -482,15 +494,11 @@ pub(crate) fn make_current(root: &Path, now: Installed) -> Result<Installed, Err
             .map(|c| c.as_os_str().to_string_lossy().into_owned())
             .unwrap_or_else(|| i.version.clone())
     };
-    let keep: Vec<String> = [Some(&now), previous.as_ref()]
-        .into_iter()
-        .flatten()
-        .map(folder_of)
-        .collect();
+    let keep = folder_of(&now);
     if let Ok(entries) = std::fs::read_dir(root) {
         for e in entries.flatten() {
             let name = e.file_name().to_string_lossy().into_owned();
-            if e.path().is_dir() && !keep.contains(&name) {
+            if e.path().is_dir() && name != keep {
                 let _ = std::fs::remove_dir_all(e.path());
             }
         }
@@ -629,8 +637,8 @@ mod tests {
         assert_eq!(std::fs::read(&now.exe).unwrap(), b"three");
         let root = dir.path().join("yt-dlp");
         assert!(
-            root.join("2026.02.01").is_dir(),
-            "the previous version stays"
+            !root.join("2026.02.01").exists(),
+            "the previous version is removed"
         );
         assert!(!root.join("2026.01.01").exists(), "older ones go");
         assert!(put(dir.path(), "yt-dlp", "../evil", name, b"x", "https://x/").is_err());

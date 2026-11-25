@@ -400,19 +400,55 @@ pub fn default_downloads<'a>(
         .unwrap_or(std::borrow::Cow::Borrowed(downloads))
 }
 
+/// Builds a sanitized filename using `title` (stripping any trailing media extension)
+/// and preserving the extension from `fallback_name`, `mime`, or `"mp4"`.
+pub fn title_with_extension(title: &str, fallback_name: &str, mime: Option<&str>) -> String {
+    let cleaned = mdm_engine::naming::clean_title(title);
+    let stem = match cleaned.rsplit_once('.') {
+        Some((s, ext))
+            if !s.trim().is_empty()
+                && mdm_engine::naming::TYPES.iter().any(|(t, e)| {
+                    e.eq_ignore_ascii_case(ext)
+                        && (t.starts_with("video/")
+                            || t.starts_with("audio/")
+                            || *t == "application/ogg")
+                }) =>
+        {
+            s.trim_end()
+        }
+        _ => cleaned.trim(),
+    };
+    if stem.is_empty() {
+        return fallback_name.to_owned();
+    }
+    let ext = fallback_name
+        .rsplit_once('.')
+        .map(|(_, e)| e)
+        .filter(|e| !e.is_empty() && e.len() <= 10 && e.chars().all(|c| c.is_ascii_alphanumeric()))
+        .or_else(|| mime.and_then(mdm_engine::naming::type_extension))
+        .unwrap_or("mp4");
+    mdm_engine::naming::sanitize(&format!("{stem}.{ext}"))
+}
+
 /// The name a download from `context` has before its server answers, when nobody named it: the
 /// address's ([`mdm_engine::naming::answer_name`]), typed by the browser's own type for it and,
 /// for a page's media whose address names nothing (a script, a bare id), its page's title
 /// (#695, #800). The engine names it again from the server's answer as it starts.
 pub fn browser_guess(url: &url::Url, context: &mdm_ipc::Command) -> String {
-    mdm_engine::naming::answer_name(
+    let guess = mdm_engine::naming::answer_name(
         url,
         &mdm_engine::naming::Answer {
             content_type: context.mime.as_deref(),
             title: context.video_title.as_deref(),
             ..Default::default()
         },
-    )
+    );
+    if context.video_direct
+        && let Some(title) = context.video_title.as_deref()
+    {
+        return title_with_extension(title, &guess, context.mime.as_deref());
+    }
+    guess
 }
 
 /// The category's folder: the one chosen in Options → Save to (or remembered from Download

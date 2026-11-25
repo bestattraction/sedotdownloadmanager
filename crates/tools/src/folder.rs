@@ -268,16 +268,14 @@ mod tests {
         assert_eq!(std::fs::read(&now.exe).unwrap(), b"program");
         assert!(!one_file_build(&now.exe));
         assert_eq!(crate::installed(dir.path()).unwrap(), now);
-        assert_eq!(
-            std::fs::read(&old.exe).unwrap(),
-            b"old one-file program",
-            "the one-file build stays as the previous version"
+        assert!(
+            !old.exe.exists(),
+            "the old one-file build is removed when replaced"
         );
-        // The next release: in its own folder; the folder build stays as the previous one, and
-        // the one-file build goes.
+        // The next release: in its own folder; the previous folder build is removed.
         let next = put_folder(dir.path(), "2026.11.02", &good(), "https://x/").unwrap();
         assert_eq!(next.exe, root.join("2026.11.02").join(PROGRAM));
-        assert!(now.exe.is_file(), "the previous version stays");
+        assert!(!now.exe.exists(), "the previous version is removed");
         assert!(!root.join("2026.10.26").exists(), "older ones go");
     }
 

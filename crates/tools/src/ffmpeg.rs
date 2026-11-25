@@ -89,10 +89,7 @@ pub fn installed(dir: &Path) -> Option<Installed> {
 
 /// MDM's own install in `dir`.
 fn own(dir: &Path) -> Option<Installed> {
-    std::fs::read(dir.join("ffmpeg").join("current.json"))
-        .ok()
-        .and_then(|text| serde_json::from_slice::<Installed>(&text).ok())
-        .filter(|i| i.exe.is_file())
+    crate::read_current(dir, "ffmpeg")
 }
 
 /// Check whether a newer version of ffmpeg is available.

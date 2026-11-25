@@ -33,7 +33,8 @@
   const CLIP_S = 15;
   // Shown this long after the pointer last moved over the video, kept while it is on the button
   // (#741: 1.5 s, it was 2.6); gone at once when the pointer leaves the video.
-  const IDLE_MS = 1500;
+  // The button over a video hides after this many ms without movement (5 s).
+  const IDLE_MS = 5000;
   const INSET = 8;
   const DRAG_PX = 4;
   // Our app icon (extension/icons/icon-48.png, as data: no extension file is exposed to pages).
@@ -1500,10 +1501,40 @@ button:focus-visible { outline: none; }
   // while this one plays, and what came in between is this one's (playedFacts). Unknown (0) for
   // one that began before this script ran.
   const began = new WeakMap();
+  function isWatchPage() {
+    const p = location.pathname;
+    if (/^\/(watch|shorts\/|live\/)/i.test(p)) return true;
+    if (/\/view_video\.php/i.test(p)) return true;
+    if (/^\/video[.\-/0-9]/i.test(p)) return true;
+    if (/\/videos?\//i.test(p)) return true;
+    const all = [...videos].filter(eligible);
+    return all.length === 1;
+  }
+
+  let preFetchedFor = "";
+  function preFetchPageVideo() {
+    if (PRIVATE || !isWatchPage()) return;
+    const key = location.href;
+    if (preFetchedFor === key) return;
+    ask().then(() => {
+      if (!allowed || location.href !== key) return;
+      const v = [...videos].find((el) => eligible(el) && (el.currentSrc || el.src));
+      if (!v) return;
+      const c = describeNow(v);
+      if (!c.key || usable(looks.get(c.key))) return;
+      preFetchedFor = key;
+      startLook(c);
+    });
+  }
+
   const onLoadStart = (e) => {
-    if (e.target instanceof HTMLMediaElement) began.set(e.target, Date.now());
+    if (e.target instanceof HTMLMediaElement) {
+      began.set(e.target, Date.now());
+      preFetchPageVideo();
+    }
   };
   addEventListener("loadstart", onLoadStart, true);
+  setTimeout(preFetchPageVideo, 300);
 
   // Videos inside open shadow roots (players built as web components), looked for again every
   // few seconds at most.
@@ -2075,7 +2106,9 @@ button:focus-visible { outline: none; }
     const look = lookOf(c);
     const site = host.replace(/^www\./, "");
     $(".mh .t").textContent = String((look && look.title) || document.title || "").slice(0, 200);
-    $(".mh .s").textContent = headerLine("", video && video.duration, site);
+    const srcLabel = look && look.source ? (look.source === "rust" ? "Native Rust" : look.source) : "";
+    const meta = headerLine("", video && video.duration, site);
+    $(".mh .s").textContent = [meta, srcLabel].filter(Boolean).join(" · ");
     rows.replaceChildren();
     note.hidden = true;
     note.classList.remove("warn");

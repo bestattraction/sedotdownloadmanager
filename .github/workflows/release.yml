@@ -463,7 +463,8 @@ jobs:
             # Links into the repository (docs/x.md) would resolve against the release's page:
             # point them at the tagged files.
             $notes = $m.Groups[1].Value.Trim() -replace '\]\((?![a-z]+:|#)([^)\s]+)\)', '](https://github.com/${{ github.repository }}/blob/${{ github.ref_name }}/$1)'
-            Set-Content -Encoding utf8 notes.md ($invite + $notes + $thanks)
+            $collapsed = "<details>`n<summary>Changelog v$v (Click to expand)</summary>`n`n$notes`n`n</details>"
+            Set-Content -Encoding utf8 notes.md ($invite + $collapsed + $thanks)
             gh release create "${{ github.ref_name }}" --latest --title $title --notes-file notes.md $all
           } else {
             Set-Content -Encoding utf8 notes.md ($invite + $thanks.Trim())

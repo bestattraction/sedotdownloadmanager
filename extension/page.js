@@ -94,33 +94,34 @@
     return a && /^https?:/i.test(a.href) ? a : null;
   };
 
-  // Alt held as the button goes down on a link: said before the click starts any download.
+  // Alt held as the button goes down on a link or button: said before the click starts any download.
   const press = (e) => {
-    if (!e.altKey || e.button > 1) return;
+    if (!e.altKey || e.button > 1 || !e.isTrusted) return;
     const a = linkOf(e);
-    if (a) tell({ type: "bypass", url: a.href });
+    tell({ type: "bypass", url: a ? a.href : location.href });
   };
 
-  // Firefox: an Alt+click on a link the page left alone (no script of its own took it) is
-  // followed as a plain click once the background has it; the browser's own handling of it
-  // (nothing, or a save with browser.altClickSave) is stopped, so it happens once.
+  // Alt+click on a link or button the page left alone: followed as a plain click synchronously
+  // without Alt so the user gesture is preserved and the browser's own Alt+click behavior
+  // (nothing in Firefox, or Save Link As / ignored JS button in Chrome) doesn't block it.
   const follow = (e) => {
-    if (!FIREFOX || !e.altKey || e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey) return;
-    if (e.defaultPrevented) return;
-    const a = linkOf(e);
-    if (!a) return;
+    if (SAFARI || !e.altKey || e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey) return;
+    if (e.defaultPrevented || !e.isTrusted || !(e.target instanceof Element)) return;
+    const target = linkOf(e) || e.target.closest("a[href], button, input[type='button'], input[type='submit'], [role='button']");
+    if (!target) return;
     e.preventDefault();
+    tell({ type: "bypass", url: target.href && /^https?:/i.test(target.href) ? target.href : location.href });
     // Not trusted: `note` and `follow` leave this click alone.
-    tell({ type: "bypass", url: a.href }).then(() => a.click());
+    target.click();
   };
 
   const note = (e) => {
     const a = linkOf(e);
-    if (!a) return;
     if (e.altKey) {
-      tell({ type: "bypass", url: a.href });
+      if (e.isTrusted) tell({ type: "bypass", url: a ? a.href : location.href });
       return;
     }
+    if (!a) return;
     // Safari: a plain click (or Cmd/Shift: a link opened elsewhere is held the same).
     if (SAFARI && e.type === "click" && e.button === 0 && patterns.length) {
       const type = typeOf(a);

@@ -147,9 +147,7 @@ pub fn chosen_too_old(dir: &Path) -> Option<Installed> {
 }
 
 fn own(dir: &Path) -> Option<Installed> {
-    let text = std::fs::read(dir.join("gallery-dl").join("current.json")).ok()?;
-    let i: Installed = serde_json::from_slice(&text).ok()?;
-    i.exe.is_file().then_some(i)
+    crate::read_current(dir, "gallery-dl")
 }
 
 #[derive(Deserialize)]

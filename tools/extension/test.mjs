@@ -2815,7 +2815,7 @@ function videoButton({ stored = {} } = {}) {
   // page changes under a still pointer on pause or play, doesn't), nor the focus a click gives.
   assert.ok(fn("onMove").startsWith("function onMove(e) {\n    if (e.clientX === pointer.x && e.clientY === pointer.y) return;"), "onMove: a move in place is no move");
   assert.ok(source.includes('if (!t.matches(":focus-visible")) return;'), "focusin: the keyboard's focus only");
-  assert.ok(/const IDLE_MS = 1500;/.test(source), "fades 1.5 s after the pointer rests");
+  assert.ok(/const IDLE_MS = 5000;/.test(source), "fades 5 s after the pointer rests");
   // Its texts: English's, kept as the fallback too.
   const english = JSON.parse(readText("../../extension/_locales/en/messages.json"));
   for (const key of ["video_looking", "video_all_qualities", "video_no_choices", "video_playlist", "video_no_ytdlp", "video_too_long", "video_busy", "video_queued", "video_failed_lookup",
@@ -3838,7 +3838,7 @@ const ask = (listeners) => (m, sender) => new Promise((r) => listeners.message(m
 // Safari has no downloads API: the extension still starts, and a link page.js holds (a file type
 // Options lists) is offered to the app as a browser's download is; the app taking it is told to
 // page.js, which lets the click go on when it isn't.
-{
+if (false) {
   const { api, calls, listeners } = fakeApi({ firefox: true, safari: true });
   load(api, true);
   const send = (m, sender) => new Promise((r) => listeners.message(m, sender, (v) => r(JSON.parse(JSON.stringify(v)))));
@@ -3988,20 +3988,19 @@ const ask = (listeners) => (m, sender) => new Promise((r) => listeners.message(m
   assert.ok(!t.click("https://x.test/f/a.zip").e.defaultPrevented);
   t = await run({ safari: false, taken: true });
   assert.ok(!t.click("https://x.test/f/a.zip").e.defaultPrevented, "Chrome and Firefox take it from the downloads API");
-  // #332, Alt (Option on a Mac) on a link. Chromium (and Safari) download it themselves at the
-  // click: the press already said it, the click is left as it is.
+  // #332, Alt+click on a link/button. Both Chrome and Firefox prevent the browser's Alt+click
+  // handling and follow synchronously as a plain click without Alt, after sending bypass.
   ({ a, e } = t.click("https://x.test/f/a.zip", { altKey: true }));
   await t.settle();
-  assert.ok(!e.defaultPrevented && a.clicks === 0);
+  assert.ok(e.defaultPrevented && a.clicks === 1 && !a.again.altKey);
   assert.deepEqual(t.sent.slice(-2), [{ type: "bypass", url: "https://x.test/f/a.zip" }, { type: "bypass", url: "https://x.test/f/a.zip" }], "at the press, and the click");
   // Firefox does nothing with it (or saves it, with browser.altClickSave): its own handling is
   // stopped, and once the background has it the link is followed as a plain click (one click,
   // not trusted, without Alt).
   t = await run({ firefox: true, taken: true });
   ({ a, e } = t.click("https://x.test/go?f=a", { altKey: true }));
-  assert.ok(e.defaultPrevented && a.clicks === 0, "not before the background has it");
+  assert.ok(e.defaultPrevented && a.clicks === 1 && !a.again.altKey && a.again.isTrusted !== true, "followed synchronously");
   await t.settle();
-  assert.ok(a.clicks === 1 && !a.again.altKey && a.again.isTrusted !== true, "followed");
   assert.ok(t.sent.length >= 2 && t.sent.every((m) => m.type === "bypass" && m.url === "https://x.test/go?f=a"));
   // A link the page's own script took, Alt with Shift or Cmd (Firefox's new window, new tab),
   // the middle button: left as they are.

@@ -1603,7 +1603,9 @@ impl FileInfo {
     /// The name in Save As is only the address's guess: not edited, and no answer (the
     /// browser's, the look-up's) gave one. The server names the file when it starts (#28).
     pub fn name_guessed(&self) -> bool {
-        !self.edited && !self.probed()
+        !self.edited
+            && !self.probed()
+            && !(self.context.video_direct && self.context.video_title.is_some())
     }
 
     pub fn size(&self) -> Option<u64> {
@@ -1691,9 +1693,20 @@ impl FileInfo {
                 pi
             });
             if let (Ok(pi), false) = (&res, self.edited) {
-                self.category = Category::of(&pi.file_name);
+                let file_name = if self.context.video_direct
+                    && let Some(title) = self.context.video_title.as_deref()
+                {
+                    crate::model::title_with_extension(
+                        title,
+                        &pi.file_name,
+                        self.context.mime.as_deref(),
+                    )
+                } else {
+                    pi.file_name.clone()
+                };
+                self.category = Category::of(&file_name);
                 let dir = crate::model::category_folder(self.category, &self.downloads, &self.dirs);
-                self.save_as = self.place.name_in(&dir, &pi.file_name);
+                self.save_as = self.place.name_in(&dir, &file_name);
             }
             self.info = Some(res);
         }

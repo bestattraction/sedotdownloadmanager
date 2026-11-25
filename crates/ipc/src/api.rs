@@ -286,6 +286,9 @@ pub struct VideoLookupAnswer {
     /// None from an app older than the field.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub notice: Option<VideoNotice>,
+    /// Which extractor produced the choices (`"rust"` or `"yt-dlp"`).
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub source: Option<String>,
 }
 
 /// A word in the browser's quality menu on what the look-up lacked (#852), in MDM's language.

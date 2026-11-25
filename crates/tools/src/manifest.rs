@@ -256,7 +256,12 @@ impl Master {
                 .filter(|s| *s >= 0.0)?;
             sum += secs;
         }
-        let duration = sum.trunc();
+        self.video_with_duration(sum.trunc())
+    }
+
+    /// Build [`Video`] directly when the video's duration in seconds is already known
+    /// (e.g. extracted from page metadata), avoiding an extra playlist fetch.
+    pub fn video_with_duration(&self, duration: f64) -> Option<Video> {
         if !(duration >= 1.0 && duration.is_finite()) {
             return None;
         }
@@ -716,13 +721,80 @@ async fn fetch_within(
         .flatten()
 }
 
+fn is_native_page(url: &Url) -> bool {
+    let host = url.host_str().unwrap_or_default().to_ascii_lowercase();
+    let host = host.strip_prefix("www.").or_else(|| host.strip_prefix("m.")).unwrap_or(&host);
+    matches!(host, "pornhub.com" | "xvideos.com" | "xnxx.com")
+}
+
+/// Extract `(title, duration_secs, hls_master_url)` from a Pornhub video page's `flashvars_` JSON.
+fn extract_pornhub(html: &str) -> Option<(Option<String>, Option<f64>, Url)> {
+    let idx = html.find("var flashvars_")?;
+    let rest = &html[idx..];
+    let eq = rest.find('=')?;
+    let json_start = rest[eq + 1..].find('{')?;
+    let json_slice = &rest[eq + 1 + json_start..];
+    let mut de = serde_json::Deserializer::from_str(json_slice);
+    let val: serde_json::Value = serde::Deserialize::deserialize(&mut de).ok()?;
+    let title = val
+        .get("video_title")
+        .and_then(|v| v.as_str())
+        .map(|s| s.trim().to_owned())
+        .filter(|s| !s.is_empty());
+    let duration = val.get("video_duration").and_then(|v| {
+        v.as_f64()
+            .or_else(|| v.as_str().and_then(|s| s.trim().parse::<f64>().ok()))
+    }).filter(|&d| d.is_finite() && d >= 1.0);
+    let defs = val.get("mediaDefinitions")?.as_array()?;
+    // Prefer the HLS master playlist (often has quality as an array or defaultQuality: true).
+    let mut best_url: Option<Url> = None;
+    for def in defs {
+        if def.get("format").and_then(|v| v.as_str()) != Some("hls") {
+            continue;
+        }
+        let Some(u) = def
+            .get("videoUrl")
+            .and_then(|v| v.as_str())
+            .and_then(|s| Url::parse(s).ok())
+        else {
+            continue;
+        };
+        let is_master = def.get("quality").is_some_and(|q| q.is_array())
+            || u.path().contains("master.m3u8");
+        if is_master {
+            return Some((title, duration, u));
+        }
+        if best_url.is_none() {
+            best_url = Some(u);
+        }
+    }
+    best_url.map(|u| (title, duration, u))
+}
+
+/// Extract `(title, duration_secs, hls_master_url)` from an XVideos / XNXX page's `html5player` calls.
+fn extract_xvideos(html: &str) -> Option<(Option<String>, Option<f64>, Url)> {
+    let between = |needle: &str| -> Option<String> {
+        let start = html.find(needle)? + needle.len();
+        let end = html[start..].find('\'')?;
+        Some(html[start..start + end].to_owned())
+    };
+    let hls = between("html5player.setVideoHLS('")?;
+    let url = Url::parse(&hls).ok()?;
+    let title = between("html5player.setVideoTitle('")
+        .map(|s| s.trim().to_owned())
+        .filter(|s| !s.is_empty());
+    Some((title, None, url))
+}
+
 async fn read(url: &str, from: &FromBrowser, opts: &mdm_engine::Options) -> Option<Video> {
     // An address yt-dlp and MDM can only read alike: a playlist's on the web, as written.
     let start = Url::parse(url).ok()?;
+    let is_m3u8 = start.path().ends_with(".m3u8");
+    let is_page = !is_m3u8 && is_native_page(&start);
     if !matches!(start.scheme(), "http" | "https")
         || start.as_str() != url
-        || !plain_address(url)
-        || !start.path().ends_with(".m3u8")
+        || (!is_m3u8 && !is_page)
+        || (is_m3u8 && !plain_address(url))
     {
         return None;
     }
@@ -736,10 +808,31 @@ async fn read(url: &str, from: &FromBrowser, opts: &mdm_engine::Options) -> Opti
         from,
         opts: &opts,
     };
-    let (at, text) = hops.get(start).await?;
+    let (at, text, page_title, known_duration) = if is_page {
+        let (_, html) = hops.get(start.clone()).await?;
+        let host = start.host_str().unwrap_or_default().to_ascii_lowercase();
+        let (title, duration, hls_url) = if host.contains("pornhub.com") {
+            extract_pornhub(&html)?
+        } else {
+            extract_xvideos(&html)?
+        };
+        let (at, text) = hops.get(hls_url).await?;
+        (at, text, title, duration)
+    } else {
+        let (at, text) = hops.get(start).await?;
+        (at, text, None, None)
+    };
     let master = Master::parse(&text, &at)?;
-    let (_, text) = hops.get(master.first().clone()).await?;
-    master.video(&text)
+    let mut video = if let Some(d) = known_duration {
+        master.video_with_duration(d)?
+    } else {
+        let (_, text) = hops.get(master.first().clone()).await?;
+        master.video(&text)?
+    };
+    if let Some(t) = page_title {
+        video.title = t;
+    }
+    Some(video)
 }
 
 /// The requests for one stream, each redirect followed by hand.
@@ -1621,5 +1714,36 @@ mod tests {
         assert!(got.is_none());
         assert!(took >= budget, "{took:?}");
         assert!(took < FIRST + budget, "a budget for each request: {took:?}");
+    }
+
+    #[test]
+    fn native_page_extractors_parse_hls_master_and_title() {
+        let ph_html = r#"
+            <script>
+            var flashvars_12345 = {
+                "video_title": "Sample Video Title",
+                "video_duration": 620,
+                "mediaDefinitions": [
+                    {"format": "hls", "quality": "720", "videoUrl": "https://cdn.test/720.m3u8"},
+                    {"format": "hls", "quality": [1080, 720, 480], "videoUrl": "https://cdn.test/master.m3u8"}
+                ]
+            };
+            </script>
+        "#;
+        let (title, dur, url) = extract_pornhub(ph_html).unwrap();
+        assert_eq!(title.as_deref(), Some("Sample Video Title"));
+        assert_eq!(dur, Some(620.0));
+        assert_eq!(url.as_str(), "https://cdn.test/master.m3u8");
+
+        let xv_html = r#"
+            <script>
+            html5player.setVideoTitle('Sample XV Title');
+            html5player.setVideoHLS('https://cdn.test/xv/hls.m3u8');
+            </script>
+        "#;
+        let (title, dur, url) = extract_xvideos(xv_html).unwrap();
+        assert_eq!(title.as_deref(), Some("Sample XV Title"));
+        assert_eq!(dur, None);
+        assert_eq!(url.as_str(), "https://cdn.test/xv/hls.m3u8");
     }
 }
